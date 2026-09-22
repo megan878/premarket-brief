@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-Market Swing Brief</title>
+<style>
+/* ── Tokens (light / dark). Chart colors follow the dataviz palette: blue↔red diverging, gray midpoint. ── */
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --pos: #2a78d6;       /* diverging: up / strong */
+  --neg: #e34948;       /* diverging: down / weak */
+  --mid: #f0efec;
+  --good-text: #006300;
+  --warn: #fab219;
+  --warn-bg: #fff6e0;
+  --warn-ink: #6b4a00;
+  --crit: #d03b3b;
+  --chip: #efeeea;
+  --acc-tech: #2a78d6; --acc-cat: #4a3aa7; --on-acc: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --ink-3: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --pos: #3987e5; --neg: #e66767; --mid: #383835; --good-text: #0ca30c;
+    --warn-bg: #2a2410; --warn-ink: #f3d68a; --crit: #ec6a6a; --chip: #262624; --acc-tech: #3987e5; --acc-cat: #9085e9; --on-acc: #0d0d0d;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --ink-3: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+  --pos: #3987e5; --neg: #e66767; --mid: #383835; --good-text: #0ca30c;
+  --warn-bg: #2a2410; --warn-ink: #f3d68a; --crit: #ec6a6a; --chip: #262624; --acc-tech: #3987e5; --acc-cat: #9085e9; --on-acc: #0d0d0d;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--page); }
+body {
+  margin: 0; padding: 24px 16px 48px; background: var(--page); color: var(--ink);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* ── Shell: header, section, card ── */
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 16px; }
+.top h1 { margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.01em; }
+.top .meta { color: var(--ink-2); font-size: 13px; }
+.meta b { color: var(--ink); font-weight: 600; }
+.section { margin-top: 28px; }
+.section > h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 13px; font-weight: 650; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
+.section > h2 .n { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; background: var(--ink); color: var(--surface); font-size: 12px; letter-spacing: 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+.card h3 { margin: 0 0 2px; font-size: 14px; font-weight: 650; }
+.card .sub { margin: 0 0 12px; color: var(--ink-2); font-size: 12.5px; }
+.grid { display: grid; gap: 12px; }
+.g-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.g-two { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: start; }
+@media (max-width: 900px) { .g-strip { grid-template-columns: repeat(2, minmax(0,1fr)); } .g-two { grid-template-columns: 1fr; } }
+
+/* ── Notice banner ── */
+.notice { display: flex; gap: 10px; padding: 12px 14px; border-radius: 10px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent); font-size: 13px; }
+.notice svg { flex: none; margin-top: 1px; }
+.notice ul { margin: 4px 0 0; padding-left: 18px; }
+.notice li { margin: 2px 0; }
+
+/* ── Index tile ── */
+.tile { position: relative; }
+.tile .sym { font-size: 12px; font-weight: 650; color: var(--ink-2); letter-spacing: .04em; }
+.tile .val { margin: 4px 0 2px; font-size: 24px; font-weight: 650; letter-spacing: -0.02em; }
+.tile .chg { font-size: 13px; font-weight: 600; }
+.up { color: var(--pos); } .dn { color: var(--neg); }
+.tile .chg .arr { margin-right: 2px; }
+.tile.na .val { color: var(--ink-3); font-size: 20px; }
+.rng { margin-top: 12px; }
+.rng .bar { position: relative; height: 4px; border-radius: 2px; background: var(--grid); }
+.rng .dot { position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); transform: translate(-50%,-50%); }
+.rng .lbl { display: flex; justify-content: space-between; margin-top: 4px; font-size: 11px; color: var(--ink-3); }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+.chip { padding: 2px 7px; border-radius: 999px; background: var(--chip); font-size: 11px; color: var(--ink-2); }
+.chip b { font-weight: 650; }
+
+/* ── Regime ── */
+.regime { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 15px; background: var(--chip); }
+.badge.on { color: var(--good-text); }
+.badge.off { color: var(--crit); }
+.badge.mixed { color: var(--warn-ink); }
+.score { font-size: 12.5px; color: var(--ink-2); }
+.checks { margin: 14px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; }
+@media (max-width: 600px) { .checks { grid-template-columns: 1fr; } }
+.checks li { display: flex; gap: 8px; align-items: baseline; font-size: 12.5px; color: var(--ink-2); }
+.checks .ic { flex: none; width: 14px; text-align: center; font-weight: 700; }
+.checks .pass .ic { color: var(--good-text); } .checks .fail .ic { color: var(--crit); }
+.checks li b { color: var(--ink); font-weight: 600; }
+
+/* ── Sector bars ── */
+.sec-row { display: grid; grid-template-columns: 22px 168px minmax(0,1fr) 56px; align-items: center; gap: 8px; height: 30px; }
+.sec-row .rk { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; color: var(--ink-3); }
+.sec-row.top3 .rk { background: var(--ink); color: var(--surface); font-weight: 700; }
+.sec-row .nm { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sec-row.top3 .nm { font-weight: 650; }
+.sec-row .short { display: none; }
+.sec-row .track { position: relative; height: 16px; }
+.sec-row .zero { position: absolute; left: var(--zero); top: -2px; bottom: -2px; width: 1px; background: var(--axis); }
+.sec-row .fill { position: absolute; top: 4px; height: 8px; }
+.sec-row .fill.p { left: var(--zero); background: var(--pos); border-radius: 0 4px 4px 0; }
+.sec-row .fill.n { right: calc(100% - var(--zero)); background: var(--neg); border-radius: 4px 0 0 4px; }
+.sec-row:not(.top3) .fill { opacity: .45; }
+.sec-row .mk { position: absolute; top: 5px; width: 6px; height: 6px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--ink-2); transform: translateX(-50%); }
+.sec-row .mk.ny { border-radius: 1px; transform: translateX(-50%) rotate(45deg); }
+.sec-row .v { font-size: 13px; font-weight: 600; text-align: right; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 10px; font-size: 11.5px; color: var(--ink-2); }
+.legend .k { display: inline-block; width: 8px; height: 8px; margin-right: 5px; vertical-align: baseline; }
+.legend .k.c { border: 1.5px solid var(--ink-2); border-radius: 50%; background: var(--surface); }
+.legend .k.d { border: 1.5px solid var(--ink-2); background: var(--surface); transform: rotate(45deg); width: 7px; height: 7px; }
+.legend .k.b { background: var(--pos); border-radius: 2px; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 5px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .04em; background: var(--ink); color: var(--surface); vertical-align: 1px; }
+@media (max-width: 520px) { .sec-row { grid-template-columns: 20px 118px minmax(0,1fr) 50px; } .sec-row .full { display: none; } .sec-row .short { display: inline; } }
+
+/* ── Industry universe (shell) ── */
+.ind-col + .ind-col { margin-top: 12px; }
+.ind-col h4 { margin: 0 0 6px; font-size: 12.5px; font-weight: 650; }
+.slots { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; }
+.slot { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; justify-content: center; padding: 6px 8px; border: 1px dashed var(--axis); border-radius: 6px; font-size: 12px; color: var(--ink-3); min-height: 30px; }
+.slot .in { font-weight: 600; line-height: 1.25; }
+.slot .pl { display: flex; gap: 6px; align-items: baseline; font-size: 11.5px; color: var(--ink-3); }
+.slot .pl i { font-style: normal; }
+.slot.filled { border-style: solid; border-color: var(--border); color: var(--ink); background: var(--chip); }
+.slot .p { margin-left: auto; font-weight: 600; }
+@media (max-width: 520px) { .slots { grid-template-columns: 1fr 1fr; } }
+.blocked { margin: 0 0 12px; padding: 10px 12px; border-radius: 8px; background: var(--chip); font-size: 12.5px; color: var(--ink-2); }
+
+
+/* ── Picks ── */
+.cov { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.cov li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.cov .st { font-weight: 700; text-align: center; }
+.cov .ok { color: var(--good-text); } .cov .px { color: var(--warn-ink); } .cov .no { color: var(--crit); }
+.cov b { color: var(--ink); font-weight: 600; }
+.picks { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 12px; }
+@media (max-width: 900px) { .picks { grid-template-columns: 1fr; } }
+.pick .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.pick .tk { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+.pick .co { margin-left: 8px; color: var(--ink-2); font-size: 13px; }
+.pick .ind { font-size: 11.5px; color: var(--ink-2); background: var(--chip); border-radius: 999px; padding: 2px 8px; }
+.pick .setup { margin-top: 6px; font-size: 12.5px; }
+.pick .setup b { font-weight: 650; }
+.pick .setup span { color: var(--ink-3); }
+.pick svg.spark { display: block; width: 100%; height: 84px; margin: 10px 0 4px; }
+.spark .ln { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.spark .pv { stroke: var(--pos); stroke-width: 1; stroke-dasharray: 3 3; }
+.spark .sp { stroke: var(--neg); stroke-width: 1; stroke-dasharray: 3 3; }
+.spark text { font-size: 9px; fill: var(--ink-3); }
+.spark .dot { fill: var(--ink); stroke: var(--surface); stroke-width: 2; }
+.lv { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin-top: 10px; }
+@media (max-width: 520px) { .lv { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.lv > div { background: var(--chip); border-radius: 8px; padding: 8px 10px; }
+.lv .k { display: block; font-size: 11px; color: var(--ink-3); }
+.lv .v { display: block; font-size: 15px; font-weight: 650; margin-top: 1px; }
+.lv .s { display: block; font-size: 11px; color: var(--ink-2); margin-top: 1px; }
+.lv .stop .v { color: var(--neg); } .lv .tgt .v { color: var(--pos); }
+.pick .why { margin: 10px 0 0; font-size: 13px; }
+.pick .trim { margin: 4px 0 0; font-size: 12px; color: var(--ink-2); }
+.pick .chk { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+.pick .chk .chip.ok::before { content: "✓ "; color: var(--good-text); font-weight: 700; }
+.pick .chk .chip.px::before { content: "~ "; color: var(--warn-ink); font-weight: 700; }
+.pick .chk .chip.no::before { content: "? "; color: var(--crit); font-weight: 700; }
+
+
+/* ── Catalyst vs technical accents ── */
+.kind { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--on-acc); }
+.kind.tech { background: var(--acc-tech); }
+.kind.cat { background: var(--acc-cat); }
+.pick.tech { border-top: 3px solid var(--acc-tech); }
+.pick.cat { border-top: 3px solid var(--acc-cat); }
+.pick .tags { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.sub-h { display: flex; align-items: center; gap: 8px; margin: 22px 0 0; font-size: 13.5px; font-weight: 650; }
+.sub-h:first-of-type { margin-top: 12px; }
+.catbox { margin-top: 10px; padding: 10px 12px; border-radius: 8px; background: var(--chip); border-left: 3px solid var(--acc-cat); }
+.catbox .ct { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 12px; color: var(--ink-2); }
+.catbox .ct b { color: var(--ink); font-weight: 650; text-transform: uppercase; letter-spacing: .04em; font-size: 11px; }
+.catbox p { margin: 4px 0 0; font-size: 13px; }
+.catbox .src { margin-top: 6px; font-size: 11.5px; color: var(--ink-3); }
+.catbox .src a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+.spark .cm { stroke: var(--acc-cat); stroke-width: 1; stroke-dasharray: 2 3; }
+.spark .en { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; }
+.spark .cmt { fill: var(--acc-cat); }
+.pick .note { margin: 8px 0 0; font-size: 12.5px; color: var(--ink-2); }
+.pick .note b { color: var(--ink); font-weight: 600; }
+details.rej { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); }
+details.rej summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+details.rej ul { margin: 6px 0 0; padding-left: 18px; }
+details.rej li { margin: 2px 0; }
+
+
+/* ── Rates line, background strip, watchlist ── */
+.macro { margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: var(--chip); border-left: 3px solid var(--warn); font-size: 12.5px; color: var(--ink-2); }
+.macro b { color: var(--ink); font-weight: 650; }
+.macro .msrc { display: block; margin-top: 4px; font-size: 11.5px; color: var(--ink-3); }
+.macro a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+.bg { margin-top: 10px; }
+.bg .what { margin: 0 0 8px; font-size: 13px; color: var(--ink); }
+.bgs { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 6px; }
+@media (max-width: 520px) { .bgs { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.bgs > div { border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; }
+.bgs .k { display: block; font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
+.bgs .v { display: block; font-size: 13.5px; font-weight: 650; margin-top: 1px; }
+.bgs .v i { font-style: normal; font-size: 11px; font-weight: 600; margin-left: 4px; }
+.bgs .s { display: block; font-size: 10.5px; color: var(--ink-3); margin-top: 1px; line-height: 1.3; }
+.bgs .warn { border-color: var(--warn); background: var(--warn-bg); }
+.bgs .warn .s { color: var(--warn-ink); font-weight: 600; }
+.bg .deal { margin: 8px 0 0; padding: 0 0 0 16px; font-size: 12px; color: var(--ink-2); }
+.bg .deal li { margin: 1px 0; }
+.pick.cat .bg .deal { border-left: 0; }
+.wl-row { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 8px 12px; padding: 10px 0; border-top: 1px solid var(--grid); }
+.wl-row:first-of-type { border-top: 0; padding-top: 0; }
+@media (max-width: 700px) { .wl-row { grid-template-columns: 1fr; } }
+.wl-h { font-size: 12.5px; font-weight: 650; color: var(--ink-2); padding-top: 6px; }
+.wl-items { display: flex; flex-wrap: wrap; gap: 8px; }
+.wi { display: inline-flex; align-items: baseline; gap: 8px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--chip); color: var(--ink); text-decoration: none; font-size: 13px; }
+a.wi:hover { border-color: var(--ink-3); }
+.wi b { font-weight: 700; }
+.wi .px { color: var(--ink-2); }
+.wi .pc { font-weight: 650; font-size: 12.5px; }
+.wi .fl { font-size: 10.5px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.wi.nm { flex-direction: column; align-items: flex-start; gap: 3px; flex: 1 1 260px; }
+.wi.nm .top { display: flex; gap: 8px; align-items: baseline; }
+.wi.nm small { font-size: 11.5px; color: var(--ink-3); }
+.wl-note { margin: 10px 0 0; font-size: 11.5px; color: var(--ink-3); }
+
+
+/* ── Data health ── */
+.stalechip { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: none; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); vertical-align: 1px; }
+.stalechip.failed { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); border-color: var(--crit); }
+.healthbar { margin-bottom: 12px; padding: 12px 14px; border-radius: 10px; font-size: 13px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); border-left-width: 4px; }
+.healthbar.failed { background: color-mix(in srgb, var(--crit) 12%, transparent); color: var(--ink); border-color: var(--crit); }
+.healthbar b { font-weight: 700; }
+.healthbar ul { margin: 6px 0 0; padding-left: 18px; }
+.healthbar li { margin: 2px 0; }
+.empty { padding: 14px; border: 1px dashed var(--axis); border-radius: 10px; color: var(--ink-2); font-size: 13px; }
+
+.foot { margin-top: 28px; font-size: 12px; color: var(--ink-3); }
+.foot p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<!-- ─────────────  DATA: the only thing the daily routine needs to rewrite  ───────────── -->
+<script id="brief-data" type="application/json">__BRIEF_JSON__</script>
+
+<script>
+(function () {
+  const D = JSON.parse(document.getElementById('brief-data').textContent);
+  const $ = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
+  const fmt = (n, d = 2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const sgn = (n, d = 2) => (n > 0 ? '+' : n < 0 ? '−' : '') + fmt(Math.abs(n), d);
+  const pctCls = (n) => n >= 0 ? 'up' : 'dn';
+  const app = document.getElementById('app');
+
+  /* ── Header ── */
+  const hk = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Hong_Kong', weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+  app.append($(`<header class="top">
+    <h1>Pre-Market Swing Brief</h1>
+    <div class="meta">Data as of <b>${D.asOfLabel}</b> · built ${D.builtLabel} · HK now ${hk} · ${D.source}</div>
+  </header>`));
+
+  /* ── Data health banner (validation + carry-forward results) ── */
+  const H = D.health || { status: 'ok', sections: {}, issues: [] };
+  const stale = (k) => {
+    const h = H.sections[k];
+    return h && h.status !== 'ok' ? `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE · as of ' + h.asOf}</span>` : '';
+  };
+  if (H.status !== 'ok') {
+    const LBL = { indices: 'Index & VIX quotes', macro: 'Rates & Fed', map: 'Sector / industry map', technical: 'Technical picks', catalysts: 'Catalyst picks', nearmiss: 'Near-miss watchlist' };
+    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'showing data from ' + v.asOf}. ${v.msg || ''}</li>`).join('');
+    const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');
+    app.append($(`<div class="healthbar ${H.status === 'failed' ? 'failed' : ''}" role="alert"><b>${H.status === 'failed' ? 'Update failed' : 'Some data is not fresh'}</b> — the page is built from the last good copy where a source could not be reached; treat marked sections with care.<ul>${rows}${extra}</ul>${H.fetch && H.fetch.failed ? `<div style="margin-top:6px;font-size:12px">${H.fetch.failed} of ${H.fetch.calls} data calls failed this run.</div>` : ''}</div>`));
+  }
+
+  /* ── Notices ── */
+  if (D.notices && D.notices.length) {
+    app.append($(`<div class="notice" role="note">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5 18.5 17h-17L10 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 8v4M10 14.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div><b>Data gaps &amp; caveats</b><ul>${D.notices.map(n => `<li>${n}</li>`).join('')}</ul></div>
+    </div>`));
+  }
+
+  /* ── Section 1: Market overview ── */
+  const sec = $(`<section class="section"><h2><span class="n">1</span>Market overview${stale("indices")}${stale("macro")}</h2></section>`);
+  app.append(sec);
+
+  // index / regime strip
+  const strip = $(`<div class="grid g-strip"></div>`);
+  D.indices.forEach(ix => {
+    const q = ix.q, isVix = ix.id === 'VIX';
+    if (!q.yearLow) {  // proxy quote without range / averages (e.g. QQQ standing in for NDX)
+      strip.append($(`<div class="card tile">
+        <div class="sym">${ix.id} · ${ix.name}</div>
+        <div class="val">${fmt(q.price)}</div>
+        <div class="chg ${pctCls(q.pct)}"><span class="arr">${q.pct >= 0 ? '▲' : '▼'}</span>${sgn(q.pct)}% <span style="font-weight:500">(${sgn(q.change)})</span></div>
+        <div class="chips"><span class="chip"><b>${ix.proxyFor} proxy</b> · ${ix.src}</span></div>
+      </div>`));
+      return;
+    }
+    const pos = Math.min(100, Math.max(0, (q.price - q.yearLow) / (q.yearHigh - q.yearLow) * 100));
+    const vs = (ref) => (q.price / ref - 1) * 100;
+    const arrow = q.pct >= 0 ? '▲' : '▼';
+    // For VIX an up move is a risk-off signal, but keep the sign convention (blue=up, red=down) consistent across tiles.
+    strip.append($(`<div class="card tile">
+      <div class="sym">${ix.id} · ${ix.name}</div>
+      <div class="val">${fmt(q.price, isVix ? 2 : 2)}</div>
+      <div class="chg ${pctCls(q.pct)}"><span class="arr">${arrow}</span>${sgn(q.pct)}% <span style="font-weight:500">(${sgn(q.change)})</span></div>
+      <div class="rng" title="Position in 52-week range">
+        <div class="bar"><div class="dot" style="left:${pos}%"></div></div>
+        <div class="lbl"><span>${fmt(q.yearLow, isVix ? 2 : 0)}</span><span>52w</span><span>${fmt(q.yearHigh, isVix ? 2 : 0)}</span></div>
+      </div>
+      <div class="chips">
+        <span class="chip">vs 50d <b>${sgn(vs(q.ma50), 1)}%</b></span>
+        <span class="chip">vs 200d <b>${sgn(vs(q.ma200), 1)}%</b></span>
+      </div>
+    </div>`));
+  });
+  if (D.macro) {
+    const m = D.macro, d10 = m.y10 - m.y10prev;
+    strip.append($(`<div class="card tile">
+      <div class="sym">US10Y · Treasury</div>
+      <div class="val">${m.y10.toFixed(2)}%</div>
+      <div class="chg ${d10 >= 0 ? 'up' : 'dn'}"><span class="arr">${d10 >= 0 ? '▲' : '▼'}</span>${d10 >= 0 ? '+' : '−'}${Math.abs(d10 * 100).toFixed(0)} bp <span style="font-weight:500">on the day</span></div>
+      <div class="chips"><span class="chip">2Y <b>${m.y2.toFixed(2)}%</b></span><span class="chip">30Y <b>${m.y30.toFixed(2)}%</b></span></div>
+      <div class="chips"><span class="chip">Fed funds <b>${m.fed.range}</b></span></div>
+    </div>`));
+  }
+  sec.append(strip);
+  if (D.macro) {
+    const m = D.macro, f = m.fed;
+    const links = f.sources.map(x => `<a href="${x.u}" target="_blank" rel="noopener">${x.t}</a>`).join(' · ');
+    sec.append($(`<div class="macro" role="note"><b>Rates:</b> the Fed raised rates ${f.move} to ${f.range} on ${f.date} (${f.vote} vote; ${f.note}). The 10-year closed at ${m.y10.toFixed(2)}% on ${m.asOfShort || D.asOfLabel.replace(' close', '')} (${m.y10path}); curve 2Y ${m.y2.toFixed(2)}% · 10Y ${m.y10.toFixed(2)}% · 30Y ${m.y30.toFixed(2)}%.<span class="msrc">Fed decision: ${links} · yields: FMP treasury rates. Context only — not part of the regime score.</span></div>`));
+  }
+
+  // regime + sector map
+  const two = $(`<div class="grid g-two" style="margin-top:12px"></div>`);
+  sec.append(two);
+
+  // regime read (rule-based, fully transparent)
+  const by = Object.fromEntries(D.indices.map(i => [i.id, i.q]));
+  const checks = [
+    ['S&P 500 above 50-day', by.SPX.price > by.SPX.ma50, `${sgn((by.SPX.price / by.SPX.ma50 - 1) * 100, 1)}%`],
+    ['S&P 500 above 200-day', by.SPX.price > by.SPX.ma200, `${sgn((by.SPX.price / by.SPX.ma200 - 1) * 100, 1)}%`],
+    ['Dow above 50-day', by.DJI.price > by.DJI.ma50, `${sgn((by.DJI.price / by.DJI.ma50 - 1) * 100, 1)}%`],
+    ['Dow above 200-day', by.DJI.price > by.DJI.ma200, `${sgn((by.DJI.price / by.DJI.ma200 - 1) * 100, 1)}%`],
+    ['Russell 2000 above 50-day', by.RUT.price > by.RUT.ma50, `${sgn((by.RUT.price / by.RUT.ma50 - 1) * 100, 1)}%`],
+    ['Russell 2000 above 200-day', by.RUT.price > by.RUT.ma200, `${sgn((by.RUT.price / by.RUT.ma200 - 1) * 100, 1)}%`],
+    ['VIX below 20', by.VIX.price < 20, fmt(by.VIX.price, 1)],
+    ['VIX below its 50-day avg', by.VIX.price < by.VIX.ma50, `${fmt(by.VIX.price, 1)} vs ${fmt(by.VIX.ma50, 1)}`]
+  ];
+  const score = checks.filter(c => c[1]).length, total = checks.length;
+  const label = score >= 6 ? ['RISK-ON', 'on'] : score >= 4 ? ['MIXED', 'mixed'] : ['RISK-OFF', 'off'];
+  const failed = checks.filter(c => !c[1]).map(c => c[0].toLowerCase().replace('russell 2000', 'Russell 2000').replace('s&p 500', 'S&P 500').replace(/^dow/, 'Dow'));
+  const note = score >= 6 && failed.length ? `Trend intact, but ${failed.length} check${failed.length > 1 ? 's' : ''} failing (✕ below).` : score >= 6 ? 'Broad trend and volatility both supportive.' : '';
+  const regime = $(`<div class="card">
+    <h3>Regime read</h3>
+    <p class="sub">Simple rule-based score: 8 checks, ≥6 risk-on · 4–5 mixed · ≤3 risk-off. QQQ proxy excluded (no averages).</p>
+    <div class="regime"><span class="badge ${label[1]}">${label[0]}</span><span class="score"><b style="color:var(--ink)">${score}/${total}</b> checks pass${note ? ' — ' + note : ''}</span></div>
+    <ul class="checks">${checks.map(c => `<li class="${c[1] ? 'pass' : 'fail'}"><span class="ic">${c[1] ? '✓' : '✕'}</span><span>${c[0]} <b>${c[2]}</b></span></li>`).join('')}</ul>
+  </div>`);
+
+  // sector map
+  const secs = D.sectors.map(s => ({ ...s, avg: s.pct })).sort((a, b) => b.avg - a.avg);
+  const lo = Math.min(...secs.map(s => s.avg), 0), hi = Math.max(...secs.map(s => s.avg), 0);
+  const span = (Math.ceil(hi / 2) * 2) - (Math.floor(lo / 2) * 2), base = Math.floor(lo / 2) * 2;
+  const x = (v) => ((v - base) / span * 100);
+  const zero = x(0);
+  const secCard = $(`<div class="card">
+    <h3>Sector strength · 1-month${stale("map")}</h3>
+    <p class="sub">${D.sectorSource}.</p>
+    <div id="secRows"></div>
+    <div class="legend"><span><i class="k b"></i>1-month performance</span><span><i class="k" style="background:var(--ink);border-radius:50%"></i>Filled rank = top 3 (scan universe)</span></div>
+  </div>`);
+  const rows = secCard.querySelector('#secRows');
+  secs.forEach((s, i) => {
+    const top = i < 3;
+    const w = Math.abs(x(s.avg) - zero);
+    const fill = s.avg >= 0 ? `<div class="fill p" style="width:${w}%"></div>` : `<div class="fill n" style="width:${w}%"></div>`;
+    rows.append($(`<div class="sec-row ${top ? 'top3' : ''}" title="${s.name}: ${sgn(s.avg)}%">
+      <span class="rk">${i + 1}</span>
+      <span class="nm"><span class="full">${s.name}</span><span class="short">${s.name.replace("Communication Services","Comm. Services")}</span></span>
+      <div class="track" style="--zero:${zero}%"><div class="zero"></div>${fill}</div>
+      <span class="v ${pctCls(s.avg)}">${sgn(s.avg, 1)}%</span>
+    </div>`));
+  });
+
+  // Regime left, sectors right on wide screens; regime first on mobile
+  two.append(regime, secCard);
+
+  // industry universe (shell)
+  const top3 = secs.slice(0, 3);
+  const ind = $(`<div class="card" style="margin-top:12px">
+    <h3>Industry strength → scan universe${stale("map")}</h3>
+    <p class="sub">Top 9 industries inside the top 3 sectors (3 per sector) — this list feeds the scanner's Industry filter.</p>
+    <p class="sub" style="margin-top:-6px;color:var(--ink-3)">Finviz groups · Perf Month · market-cap-weighted · stock counts are the whole Finviz group, before your $5B filter.</p>
+    <div id="indCols"></div>
+  </div>`);
+  const cols = ind.querySelector('#indCols');
+  top3.forEach(s => {
+    const got = (D.industries.find(g => g.sector === s.name) || { items: [] }).items;
+    const slots = [0, 1, 2].map(i => got[i]
+      ? `<div class="slot filled"><span class="in">${got[i].name}</span><span class="pl"><b class="${pctCls(got[i].pct)}">${sgn(got[i].pct, 1)}%</b><i>${got[i].n} stocks${got[i].n < 10 ? ' · thin' : ''}</i></span></div>`
+      : `<div class="slot">—</div>`).join('');
+    cols.append($(`<div class="ind-col"><h4>${s.name} <span style="color:var(--ink-3);font-weight:500">${sgn(s.avg, 1)}%</span></h4><div class="slots">${slots}</div></div>`));
+  });
+  sec.append(ind);
+
+
+  /* ── Section 2: Technical picks ── */
+  const sec2 = $(`<section class="section"><h2><span class="n">2</span>Picks</h2></section>`);
+  app.append(sec2);
+  sec2.append($(`<div class="card">
+    <h3>How these were screened</h3>
+    <p class="sub">Universe = the 9 industries above. FMP's screener is blocked, so Finviz was used; it cannot filter or show EMA, ADX or ADR.</p>
+    <ul class="cov">
+      <li><span class="st ok">✓</span><span><b>Market cap &gt; $5B</b> · Finviz has a $2B+ bucket; names under $5B were then dropped using the displayed market cap.</span></li>
+      <li><span class="st ok">✓</span><span><b>Price &gt; $5</b> and <b>avg volume &gt; 500K</b> · direct Finviz filters.</span></li>
+      <li><span class="st px">~</span><span><b>Price between EMA21 and EMA9</b> · not checkable. Proxy: price above SMA20/50/200 (Finviz filter) and only a few % over SMA20, i.e. pulled back but in an uptrend. EMA9 was not verified for any pick.</span></li>
+      ${(D.screenNotes || []).map(n => `<li><span class="st ${n.st}">${n.icon}</span><span>${n.html}</span></li>`).join('')}
+    </ul>
+  </div>`));
+  // compact company snapshot shown on every pick card
+  const bgHtml = (tk) => {
+    const b = (D.bg || {})[tk];
+    if (!b) return '';
+    const g = (v) => v == null ? '' : `<i class="${v >= 0 ? 'up' : 'dn'}">${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(1)}%</i>`;
+    const deal = (b.deal || []).map(x => `<li>${x}</li>`).join('');
+    return `<div class="bg">
+      <p class="what">${b.what}</p>
+      <div class="bgs">
+        <div><span class="k">Mkt cap</span><span class="v">${b.cap}</span></div>
+        <div><span class="k">Revenue TTM</span><span class="v">${b.rev}${g(b.revG)}</span></div>
+        <div><span class="k">EPS TTM</span><span class="v">${b.eps}${g(b.epsG)}</span>${b.epsNote ? `<span class="s">${b.epsNote}</span>` : ''}</div>
+        <div class="${b.nextWarn ? 'warn' : ''}"><span class="k">Next earnings</span><span class="v">${b.next}</span>${b.nextWarn ? '<span class="s">this week — event risk</span>' : ''}</div>
+      </div>
+      ${deal ? `<ul class="deal">${deal}</ul>` : ''}
+    </div>`;
+  };
+  sec2.append($(`<h3 class="sub-h"><span class="kind tech">TECHNICAL</span> Compression setups near a pivot${stale("technical")}</h3>`));
+  const grid = $(`<div class="picks"></div>`);
+  sec2.append(grid);
+  const price2 = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (!(D.picks || []).length) grid.append($(`<div class="empty">No technical setups available this run.</div>`));
+  (D.picks || []).forEach(pk => {
+    const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
+    const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
+    // sparkline of closes with pivot + stop reference lines
+    const W = 300, H = 84, pad = 10, cs = pk.closes;
+    const lo = Math.min(...cs, pk.stop) * 0.996, hi = Math.max(...cs, pk.pivot) * 1.004;
+    const X = (i) => pad + i * (W - 2 * pad - 64) / (cs.length - 1), Y = (v) => H - pad - (v - lo) / (hi - lo) * (H - 2 * pad);
+    const path = cs.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
+    const svg = `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${pk.tk} closes, pivot ${price2(pk.pivot)}, stop ${price2(pk.stop)}">
+      <line class="pv" x1="${pad}" x2="${W - pad}" y1="${Y(pk.pivot).toFixed(1)}" y2="${Y(pk.pivot).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.pivot) - 3).toFixed(1)}" text-anchor="end">pivot ${price2(pk.pivot)}</text>
+      <line class="sp" x1="${pad}" x2="${W - pad}" y1="${Y(pk.stop).toFixed(1)}" y2="${Y(pk.stop).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.stop) - 3).toFixed(1)}" text-anchor="end">stop ${price2(pk.stop)}</text>
+      <path class="ln" d="${path}"/><circle class="dot" cx="${X(cs.length - 1).toFixed(1)}" cy="${Y(cs[cs.length - 1]).toFixed(1)}" r="3.5"/>
+    </svg>`;
+    const chips = [
+      ['ok', `Cap ${pk.cap}`], ['ok', `Avg vol ${pk.avgVol}`],
+      ['ok', `Over SMA20/50/200: +${pk.sma[0].toFixed(1)} / +${pk.sma[1].toFixed(1)} / +${pk.sma[2].toFixed(1)}%`],
+      [pk.volM >= 2 ? 'ok' : 'px', `Volatility W/M ${pk.volW.toFixed(1)} / ${pk.volM.toFixed(1)}% (ADR proxy)`],
+      ['no', 'EMA9 &gt; price &gt; EMA21 not verified'], ['no', 'ADX not verified']
+    ].map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
+    grid.append($(`<article class="card pick tech" id="pick-${pk.tk}">
+      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span><span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+      <div class="setup"><b>${pk.setup}</b> <span>· ${pk.tags}</span></div>
+      ${bgHtml(pk.tk)}
+      ${svg}
+      <div class="lv">
+        <div><span class="k">Entry zone</span><span class="v">${pk.entryZone}</span><span class="s">above pivot ${price2(pk.pivot)}</span></div>
+        <div class="stop"><span class="k">Stop</span><span class="v">${price2(pk.stop)}</span><span class="s">−${riskPct.toFixed(1)}% · ${pk.stopNote}</span></div>
+        <div class="tgt"><span class="k">Target</span><span class="v">${price2(pk.target)}</span><span class="s">+${rewPct.toFixed(1)}% from entry</span></div>
+        <div><span class="k">R:R</span><span class="v">${rr.toFixed(1)} : 1</span><span class="s">from ${price2(pk.entry)}</span></div>
+      </div>
+      <p class="why">${pk.why}</p>
+      <p class="trim">${pk.trim}</p>
+      <div class="chk">${chips}</div>
+    </article>`));
+  });
+  sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (${D.pickWindow}): entry just above the pattern high, stop at the last session's low when it is 4–6% away (otherwise ~5%), target +10%. Not investment advice; nothing here has been checked against a live pre-market quote.</p>`));
+
+
+  /* ── Catalyst picks ── */
+  if (!(D.catalysts || []).length) {
+    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Sourced news from the last 5 trading days${stale("catalysts")}</h3>`));
+    sec2.append($(`<div class="empty" style="margin-top:12px">No qualifying catalyst setups are available this run (none delivered, or the previous ones are older than 5 trading days).</div>`));
+  }
+  if ((D.catalysts || []).length) {
+    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Sourced news from the last 5 trading days${stale("catalysts")}</h3>`));
+    sec2.append($(`<div class="card" style="margin-top:12px">
+      <h3>How these were found</h3>
+      <p class="sub">Same base filters as the technical scan: price &gt; $5, market cap &gt; $5B, avg volume &gt; 500K (Finviz figures). The EMA / ADX / ADR conditions are not applied to catalyst picks. Each catalyst was confirmed by at least two independent sources and each price move by the daily tape (stockanalysis.com). None overlaps the technical picks.</p>
+      ${(D.rejected || []).length ? `<details class="rej"><summary>Considered and rejected</summary><ul>${D.rejected.map(x => `<li>${x}</li>`).join('')}</ul></details>` : ''}
+    </div>`));
+    const cgrid = $(`<div class="picks"></div>`);
+    sec2.append(cgrid);
+    D.catalysts.forEach(pk => {
+      const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
+      const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
+      const W = 300, H = 84, pad = 10, cs = pk.closes;
+      const lo = Math.min(...cs, pk.stop) * 0.996, hi = Math.max(...cs, pk.entry) * 1.004;
+      const X = (i) => pad + i * (W - 2 * pad - 64) / (cs.length - 1), Y = (v) => H - pad - (v - lo) / (hi - lo) * (H - 2 * pad);
+      const path = cs.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
+      const cx = X(pk.catIdx).toFixed(1);
+      const svg = `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${pk.tk} closes, catalyst day marked, entry ${price2(pk.entry)}, stop ${price2(pk.stop)}">
+        <line class="cm" x1="${cx}" x2="${cx}" y1="4" y2="${H - 4}"/><text class="cmt" x="${cx}" y="10" text-anchor="${pk.catIdx > cs.length - 4 ? 'end' : 'middle'}" dx="${pk.catIdx > cs.length - 4 ? -3 : 0}">catalyst</text>
+        <line class="en" x1="${pad}" x2="${W - pad}" y1="${Y(pk.entry).toFixed(1)}" y2="${Y(pk.entry).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.entry) - 3).toFixed(1)}" text-anchor="end">entry ${price2(pk.entry)}</text>
+        <line class="sp" x1="${pad}" x2="${W - pad}" y1="${Y(pk.stop).toFixed(1)}" y2="${Y(pk.stop).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.stop) - 3).toFixed(1)}" text-anchor="end">stop ${price2(pk.stop)}</text>
+        <path class="ln" d="${path}"/><circle class="dot" cx="${X(cs.length - 1).toFixed(1)}" cy="${Y(cs[cs.length - 1]).toFixed(1)}" r="3.5"/>
+      </svg>`;
+      const chips = [
+        ['ok', `Cap ${pk.cap}`], ['ok', `Avg vol ${pk.avgVol}`], ['ok', 'Price &gt; $5'],
+        ['ok', `Volatility W/M ${pk.volW.toFixed(1)} / ${pk.volM.toFixed(1)}%`]
+      ];
+      if (pk.extra) chips.push(['ok', pk.extra]);
+      chips.push([pk.topSector ? 'ok' : 'px', pk.topSector ? 'Top-3 sector (Technology)' : `Outside top-3 sectors (${pk.sector})`]);
+      const chipHtml = chips.map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
+      const src = pk.sources.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
+      cgrid.append($(`<article class="card pick cat" id="pick-${pk.tk}">
+        <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind cat">CATALYST</span><span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+        <div class="catbox">
+          <div class="ct"><b>${pk.ctype}</b><span>${pk.cdate}</span></div>
+          <p>${pk.what}</p>
+          <div class="src">Sources: ${src}</div>
+        </div>
+        ${bgHtml(pk.tk)}
+        ${svg}
+        <div class="lv">
+          <div><span class="k">Entry zone</span><span class="v">${pk.entryZone}</span><span class="s">ref ${price2(pk.entry)}</span></div>
+          <div class="stop"><span class="k">Stop</span><span class="v">${price2(pk.stop)}</span><span class="s">−${riskPct.toFixed(1)}% · ${pk.stopNote}</span></div>
+          <div class="tgt"><span class="k">Target</span><span class="v">${price2(pk.target)}</span><span class="s">+${rewPct.toFixed(1)}% from entry</span></div>
+          <div><span class="k">R:R</span><span class="v">${rr.toFixed(1)} : 1</span><span class="s">from ${price2(pk.entry)}</span></div>
+        </div>
+        <p class="note"><b>Setup:</b> ${pk.setup}</p>
+        <p class="note"><b>Watch:</b> ${pk.risk}</p>
+        <div class="chk">${chipHtml}</div>
+      </article>`));
+    });
+    sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (20 trading days, stockanalysis.com): entry at the current level or the retest/reclaim shown, stop ~5% or beneath the gap/breakout level, target +10%. Facts were read from search summaries and fetched pages; where a primary page could not be opened (e.g. CNBC) it is linked but not independently read. Not investment advice; not checked against a live pre-market quote.</p>`));
+  }
+
+
+  /* ── Section 3: Watchlist ── */
+  if (D.watch) {
+    const sec3 = $(`<section class="section"><h2><span class="n">3</span>Watchlist</h2></section>`);
+    app.append(sec3);
+    const card = $(`<div class="card"></div>`);
+    sec3.append(card);
+    const pc = (v) => `<span class="pc ${v >= 0 ? 'up' : 'dn'}">${v >= 0 ? '▲' : '▼'} ${sgn(v)}%</span>`;
+    const row = (name, html) => `<div class="wl-row"><div class="wl-h">${name}</div><div class="wl-items">${html}</div></div>`;
+    // 1. indexes mirror the strip at the top
+    const idx = D.indices.filter(i => i.q).map(i => `<span class="wi"><b>${i.id}</b><span class="px">${fmt(i.q.price)}</span>${pc(i.q.pct)}</span>`).join('');
+    card.append($(row('Indexes', idx)));
+    // 2-4. picks and near misses
+    D.watch.groups.forEach(gp => {
+      const items = gp.items.map(it => {
+        const fl = it.flag ? `<span class="fl">${it.flag}</span>` : '';
+        const inner = gp.near
+          ? `<span class="top"><b>${it.tk}</b><span class="px">${price2(it.px)}</span>${pc(it.pct)}</span><small>${it.why}</small>`
+          : `<b>${it.tk}</b><span class="px">${price2(it.px)}</span>${pc(it.pct)}${fl}`;
+        const anchor = `#pick-${it.tk}`;
+        return gp.near ? `<span class="wi nm">${inner}</span>` : `<a class="wi" href="${anchor}">${inner}</a>`;
+      }).join('');
+      card.append($(row(gp.name, items)));
+    });
+    card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from Finviz); stock rows are Finviz / stockanalysis.com closes. Near misses come from the technical scan and the catalyst rejects.</p>`));
+  }
+
+  /* ── Footer ── */
+  app.append($(`<footer class="foot">
+    <p>SPX, DJI, RUT, VIX: FMP quotes, ${D.asOf} after the US close; regime read uses each index's own 50/200-day averages as reported by FMP.</p>
+    <p>QQQ, sector and industry performance: Finviz (web), cap-weighted, 1-month. Not investment advice.</p>
+    <p>Pick snapshots: market cap and business description from the FMP company profile; revenue, EPS (TTM growth vs a year earlier) and next-earnings dates from stockanalysis.com — confirm dates before trading; deal and backlog figures from company releases via search results. FMP's financial-statement and earnings-calendar endpoints are blocked on the free plan.</p>
+    <p>Rates: 10-year and curve from FMP treasury-rates (${D.asOfLabel.replace(' close', '')}). Fed decision from CNBC, CNN, Advisor Perspectives and Schwab; those pages could not be opened, so it rests on search-result summaries that agree across the four outlets.</p>
+  </footer>`));
+})();
+</script>
+</body>
+</html>

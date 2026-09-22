@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market-Open Update</title>
+<style>
+/*__STYLE__*/
+
+/* ── Open-update page only ── */
+.g-fut { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .g-fut { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.g-idx { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 900px) { .g-idx { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.tile .prev { margin-top: 8px; font-size: 11.5px; color: var(--ink-3); }
+.sec-sub { display: flex; align-items: baseline; gap: 8px; margin: 18px 0 8px; font-size: 13px; font-weight: 650; }
+.sec-sub small { font-weight: 500; color: var(--ink-3); font-size: 12px; }
+.openline { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--chip); font-size: 13px; }
+.openline .badge { font-size: 14px; }
+.sumbar { display: flex; flex-wrap: wrap; gap: 8px; }
+.sumchip { display: inline-flex; gap: 6px; align-items: baseline; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); font-size: 12.5px; }
+.sumchip b { font-weight: 700; }
+.sumchip.dead { border-color: var(--crit); }
+.sumchip.zone { border-color: var(--good-text); }
+.lr { display: grid; grid-template-columns: 150px 150px minmax(0,1fr) 210px; gap: 8px 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--grid); }
+.lr:first-of-type { border-top: 0; }
+@media (max-width: 900px) { .lr { grid-template-columns: 1fr 1fr; } .lr .lv-bar, .lr .st { grid-column: 1 / -1; } }
+.lr .who .tk { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+.lr .who .kind { margin-left: 6px; }
+.lr .who small { display: block; color: var(--ink-3); font-size: 11.5px; margin-top: 2px; }
+.lr .px { font-size: 18px; font-weight: 650; }
+.lr .sub2 { display: block; font-size: 11.5px; color: var(--ink-3); margin-top: 2px; }
+.lr .gap { font-weight: 600; }
+.lv-bar .track { position: relative; height: 10px; border-radius: 5px; background: var(--grid); margin: 6px 0 4px; }
+.lv-bar .zone { position: absolute; top: 0; bottom: 0; background: color-mix(in srgb, var(--acc-tech) 35%, transparent); border-radius: 2px; }
+.lv-bar .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; }
+.lv-bar .tick.s { background: var(--neg); }
+.lv-bar .tick.t { background: var(--pos); }
+.lv-bar .dot { position: absolute; top: 50%; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--surface); transform: translate(-50%, -50%); }
+.lv-bar .lbls { display: flex; justify-content: space-between; gap: 6px; font-size: 11px; color: var(--ink-3); }
+.lv-bar .lbls .s { color: var(--neg); } .lv-bar .lbls .t { color: var(--pos); }
+.lv-bar.none { font-size: 12px; color: var(--ink-3); }
+.st .chip2 { display: inline-flex; gap: 6px; align-items: center; padding: 3px 9px; border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: .02em; background: var(--chip); }
+.st .chip2.dead { background: color-mix(in srgb, var(--crit) 16%, transparent); color: var(--crit); }
+.st .chip2.zone { background: color-mix(in srgb, var(--good-text) 16%, transparent); color: var(--good-text); }
+.st .chip2.above { background: color-mix(in srgb, var(--pos) 16%, transparent); color: var(--pos); }
+.st .chip2.watch { color: var(--ink-2); }
+.st .chip2.na { color: var(--ink-3); border: 1px dashed var(--axis); background: transparent; }
+.st .flag { display: inline-block; margin-top: 4px; font-size: 10.5px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.st .why { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-2); }
+.newsgrid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+@media (max-width: 900px) { .newsgrid { grid-template-columns: 1fr; } }
+.newsgrid .card h3 { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.newsgrid p { margin: 6px 0 0; font-size: 13px; }
+.newsgrid .src { margin-top: 8px; font-size: 11.5px; color: var(--ink-3); }
+.newsgrid .src a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+.newsgrid .nm { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.tagpill { padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; background: var(--chip); color: var(--ink-2); }
+.tagpill.t3 { background: var(--acc-tech); color: var(--on-acc); }
+.stalechip { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: none; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); vertical-align: 1px; }
+.stalechip.failed { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); border-color: var(--crit); }
+.healthbar { margin-bottom: 12px; padding: 12px 14px; border-radius: 10px; font-size: 13px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); border-left-width: 4px; }
+.healthbar.failed { background: color-mix(in srgb, var(--crit) 12%, transparent); color: var(--ink); border-color: var(--crit); }
+.healthbar ul { margin: 6px 0 0; padding-left: 18px; } .healthbar li { margin: 2px 0; }
+.phase { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; background: var(--ink); color: var(--surface); margin-right: 6px; }
+.empty { padding: 14px; border: 1px dashed var(--axis); border-radius: 10px; color: var(--ink-2); font-size: 13px; }
+.toplink { font-size: 12.5px; }
+.toplink a { color: var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script id="brief-data" type="application/json">__BRIEF_JSON__</script>
+<script id="live-data" type="application/json">__LIVE_JSON__</script>
+
+<script>
+(function () {
+  const B = JSON.parse(document.getElementById('brief-data').textContent);
+  const L = JSON.parse(document.getElementById('live-data').textContent);
+  const H = L.health || { status: 'ok', phase: 'open', sections: {}, issues: [] };
+  const LBL = { indices: 'Index & VIX quotes', futures: 'Index futures', quotes: 'Stock quotes', news: 'Overnight news', levels: 'Trade levels (from the brief)' };
+  const chip = (k) => { const h = H.sections[k]; return h && h.status !== 'ok' ? `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE'}</span>` : ''; };
+  const $ = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
+  const fmt = (n, d = 2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const sgn = (n, d = 2) => (n > 0 ? '+' : n < 0 ? '−' : '') + fmt(Math.abs(n), d);
+  const pctCls = (n) => n >= 0 ? 'up' : 'dn';
+  const arrow = (n) => n >= 0 ? '▲' : '▼';
+  const kfmt = (n) => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(0) + 'K' : String(Math.round(n));
+  const app = document.getElementById('app');
+
+  /* ── Header ── */
+  app.append($(`<header class="top">
+    <h1>Market-Open Update</h1>
+    <div class="meta"><span class="phase">${H.phase === 'pre-open' ? 'PRE-OPEN' : 'AFTER THE OPEN'}</span>Snapshot <b>${L.asOf}</b> · vs the ${B.asOfLabel} · <span class="toplink"><a href="${(L.links && L.links.brief) || 'brief.html'}">full brief →</a></span></div>
+  </header>`));
+  if (H.status !== 'ok') {
+    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'not fresh'}. ${v.msg || ''}</li>`).join('');
+    const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');
+    app.append($(`<div class="healthbar ${H.status === 'failed' ? 'failed' : ''}" role="alert"><b>${H.status === 'failed' ? 'Update failed' : 'Some data is missing or not fresh'}</b> — do not trade off marked numbers without re-checking a live quote.<ul>${rows}${extra}</ul></div>`));
+  }
+  app.append($(`<div class="notice" role="note">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2.5 18.5 17h-17L10 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 8v4M10 14.2v.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <div><b>Read this first</b><ul><li>${L.note}</li><li>This is a point-in-time snapshot, not a live feed. Prices move; re-run the build (or re-check the quote) before acting.</li></ul></div>
+  </div>`));
+
+  /* ── Levels: entry zone, stop, target from the brief ── */
+  const fri = {};
+  B.watch.groups.forEach(g => g.items.forEach(it => { fri[it.tk] = it.px; }));
+  const zone = (z) => z.split('–').map(x => parseFloat(x.replace(/[^0-9.]/g, '')));
+  const rows = [];
+  B.picks.forEach(p => rows.push({ ...p, kind: 'tech' }));
+  B.catalysts.forEach(p => rows.push({ ...p, kind: 'cat' }));
+  const near = (B.watch.groups.find(g => g.near) || { items: [] }).items;
+  near.forEach(n => rows.push({ tk: n.tk, name: '', kind: 'near', why: n.why }));
+
+  rows.forEach(r => {
+    const q = (L.quotes || {})[r.tk];
+    r.q = q; r.fri = fri[r.tk];
+    r.gap = q && q.open ? (q.open / r.fri - 1) * 100 : null;
+    if (!q) { r.status = 'na'; r.label = 'No live price'; r.icon = '–'; return; }
+    if (r.kind === 'near') { r.status = 'ref'; return; }
+    const [zl, zh] = zone(r.entryZone);
+    r.zl = zl; r.zh = zh;
+    const px = q.px;
+    if (px < r.stop) { r.status = 'dead'; r.label = 'Below stop — dead'; r.icon = '✕'; }
+    else if (px >= r.target) { r.status = 'above'; r.label = 'At target'; r.icon = '▲'; }
+    else if (px > zh) { r.status = 'above'; r.label = 'Above entry'; r.icon = '▲'; r.ext = (px / zh - 1) * 100; }
+    else if (px >= zl) { r.status = 'zone'; r.label = 'In zone'; r.icon = '✓'; }
+    else { r.status = 'watch'; r.label = 'Below zone'; r.icon = '◔'; r.away = (zl / px - 1) * 100; }
+    r.openedAbove = !!q.open && q.open > zh;
+  });
+
+  /* ── 3. Regime at the open ── */
+  const sec1 = $(`<section class="section"><h2><span class="n">3</span>Regime at the open${chip('indices')}${chip('futures')}</h2></section>`);
+  app.append(sec1);
+  const inds = L.indices || [], fr = (L.futures && L.futures.rows) || [];
+  if (!inds.length) sec1.append($(`<div class="empty">Index quotes were not available this run.</div>`));
+  const idx = $(`<div class="grid g-idx"></div>`);
+  inds.forEach(i => {
+    idx.append($(`<div class="card tile">
+      <div class="sym">${i.id} · ${i.name}</div>
+      <div class="val">${fmt(i.px)}</div>
+      <div class="chg ${pctCls(i.pct)}"><span class="arr">${arrow(i.pct)}</span>${sgn(i.pct)}%</div>
+      <div class="prev">Prior close ${fmt(i.prev)}${i.proxy ? ' · NDX proxy' : ''}</div>
+    </div>`));
+  });
+  if (inds.length) sec1.append(idx);
+
+  if (!fr.length) sec1.append($(`<div class="empty" style="margin-top:12px">Index futures were not available this run.</div>`));
+  else {
+    sec1.append($(`<div class="sec-sub">Index futures <small>${L.futures.contract || ''} · ${L.futures.asOf || ''} · % vs prior settle</small></div>`));
+    const fut = $(`<div class="grid g-fut"></div>`);
+    fr.forEach(f => {
+      fut.append($(`<div class="card tile" title="Cross-check source: ${f.chk == null ? 'n/a' : sgn(f.chk) + '%'}">
+        <div class="sym">${f.id} · ${f.name}</div>
+        <div class="val">${fmt(f.px)}</div>
+        <div class="chg ${pctCls(f.pct)}"><span class="arr">${arrow(f.pct)}</span>${sgn(f.pct)}%</div>
+      </div>`));
+    });
+    sec1.append(fut);
+  }
+
+  // open read: computed from the data, never canned
+  const B_ix = Object.fromEntries((B.indices || []).filter(i => i.q).map(i => [i.id, i.q]));
+  const li = Object.fromEntries(inds.map(i => [i.id, i.px]));
+  const es = fr.find(f => f.id === 'ES'), vix = inds.find(i => i.id === 'VIX');
+  const parts = [];
+  if (fr.length) {
+    const ups = fr.filter(f => f.pct > 0).length, dns = fr.filter(f => f.pct < 0).length;
+    const lead = [...fr].sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct))[0];
+    parts.push(`Futures: ${ups === fr.length ? 'all higher' : dns === fr.length ? 'all lower' : ups + ' up / ' + dns + ' down'}, biggest move ${lead.id} ${sgn(lead.pct)}%.`);
+  }
+  if (vix) parts.push(`VIX ${fmt(vix.px)} (${sgn(vix.px - vix.prev)} pt) — ${vix.pct >= 10 ? 'fear bid building' : vix.pct <= -10 ? 'volatility collapsing' : 'no big volatility move'}.`);
+  const openLabel = !es ? ['NO FUTURES', 'mixed'] : es.pct >= 0.3 ? ['GAP UP', 'on'] : es.pct <= -0.3 ? ['GAP DOWN', 'off'] : ['FLAT', 'mixed'];
+  let regimeHtml = '';
+  if (['SPX', 'DJI', 'RUT', 'VIX'].every(k => li[k] != null && B_ix[k])) {
+    const checks = [
+      ['S&P 500 > 50-day', li.SPX > B_ix.SPX.ma50], ['S&P 500 > 200-day', li.SPX > B_ix.SPX.ma200],
+      ['Dow > 50-day', li.DJI > B_ix.DJI.ma50], ['Dow > 200-day', li.DJI > B_ix.DJI.ma200],
+      ['Russell 2000 > 50-day', li.RUT > B_ix.RUT.ma50], ['Russell 2000 > 200-day', li.RUT > B_ix.RUT.ma200],
+      ['VIX < 20', li.VIX < 20], ['VIX < its 50-day avg', li.VIX < B_ix.VIX.ma50]
+    ];
+    const score = checks.filter(c => c[1]).length;
+    const rl = score >= 6 ? ['RISK-ON', 'on'] : score >= 4 ? ['MIXED', 'mixed'] : ['RISK-OFF', 'off'];
+    const failing = checks.filter(c => !c[1]).map(c => c[0]).join(', ');
+    regimeHtml = `<span><span class="badge ${rl[1]}" style="font-size:12.5px;padding:3px 8px">${rl[0]}</span> regime score <b>${score}/8</b> at live levels${failing ? ' · failing: ' + failing : ''}</span>`;
+  } else regimeHtml = '<span>Regime score unavailable (missing index data).</span>';
+  if (inds.length || fr.length) sec1.append($(`<div class="openline">
+    <span class="badge ${openLabel[1]}">${openLabel[0]}</span>
+    <span>${parts.join(' ')}</span>${regimeHtml}
+  </div>`));
+
+  /* ── 2. Level check ── */
+  const sec2 = $(`<section class="section"><h2><span class="n">1</span>Movers &amp; level check · ${rows.filter(r => r.kind !== "near").length} picks + ${rows.filter(r => r.kind === "near").length} watchlist${chip("quotes")}${chip("levels")}</h2></section>`);
+  app.append(sec2);
+  const by2 = (s) => rows.filter(r => r.status === s);
+  const names = (arr) => arr.map(r => r.tk).join(' · ') || '—';
+  const sum = $(`<div class="sumbar"></div>`);
+  sum.append($(`<span class="sumchip zone">✓ <b>In zone</b> ${names(by2('zone'))}</span>`));
+  sum.append($(`<span class="sumchip">▲ <b>Above entry</b> ${names(by2('above'))}</span>`));
+  sum.append($(`<span class="sumchip">◔ <b>Waiting</b> ${names(by2('watch'))}</span>`));
+  sum.append($(`<span class="sumchip dead">✕ <b>Dead</b> ${names(by2('dead'))}</span>`));
+  if (by2('na').length) sum.append($(`<span class="sumchip">– <b>No live price</b> ${names(by2('na'))}</span>`));
+  sec2.append(sum);
+
+  const bar = (r) => {
+    if (r.kind === 'near') return `<div class="lv-bar none">No levels — reference only</div>`;
+    if (!r.q) return `<div class="lv-bar none">Levels: stop ${fmt(r.stop)} · zone ${r.entryZone} · target ${fmt(r.target)} (no live price to place)</div>`;
+    const px = r.q.px, vals = [r.stop, r.zl, r.zh, r.target, px];
+    const mn = Math.min(...vals), mx = Math.max(...vals), pad = (mx - mn) * 0.06;
+    const lo = mn - pad, hi = mx + pad, pos = (v) => ((v - lo) / (hi - lo) * 100).toFixed(2);
+    return `<div class="lv-bar">
+      <div class="track"><div class="zone" style="left:${pos(r.zl)}%;width:${(pos(r.zh) - pos(r.zl)).toFixed(2)}%"></div>
+        <i class="tick s" style="left:${pos(r.stop)}%"></i><i class="tick t" style="left:${pos(r.target)}%"></i>
+        <i class="dot" style="left:${pos(px)}%"></i></div>
+      <div class="lbls"><span class="s">stop ${fmt(r.stop)}</span><span>zone ${r.entryZone}</span><span class="t">target ${fmt(r.target)}</span></div>
+    </div>`;
+  };
+  const statusHtml = (r) => {
+    if (r.status === 'na') return `<div class="st"><span class="chip2 na">– No live price</span><span class="why">Quote unavailable or failed validation; check it manually.</span></div>`;
+    if (r.kind === 'near') return `<div class="st"><span class="chip2 watch">— Near miss</span><span class="why">${(L.notes || {})[r.tk] || ''}</span></div>`;
+    let extra = '';
+    if (r.status === 'above' && r.ext != null) extra = ` +${r.ext.toFixed(1)}%`;
+    if (r.status === 'watch') extra = ` ${r.away.toFixed(1)}% to entry`;
+    const flag = r.openedAbove ? `<span class="flag">OPENED ABOVE ZONE</span>` : '';
+    return `<div class="st"><span class="chip2 ${r.status}">${r.icon} ${r.label}${extra}</span>${flag}<span class="why">${(L.notes || {})[r.tk] || ''}</span></div>`;
+  };
+  const rowHtml = (r) => {
+    const q = r.q;
+    if (!q) return `<div class="lr" id="lvl-${r.tk}"><div class="who"><span class="tk">${r.tk}</span><small>${r.name || 'near miss'}</small></div><div><span class="px" style="color:var(--ink-3)">—</span></div>${bar(r)}${statusHtml(r)}</div>`;
+    return `<div class="lr" id="lvl-${r.tk}">
+      <div class="who"><span class="tk">${r.tk}</span><small>${r.name || 'near miss'}</small></div>
+      <div><span class="px">${fmt(q.px)}</span> <span class="${pctCls(q.pct)}" style="font-weight:650">${arrow(q.pct)} ${sgn(q.pct)}%</span>
+        <span class="sub2">${r.gap == null ? 'open print not available yet' : `<span class="gap ${pctCls(r.gap)}">gap ${sgn(r.gap)}%</span> · open ${fmt(q.open)}`}</span>
+        <span class="sub2">vol ${kfmt(q.vol)} · ${(q.vol / q.avgVol * 100).toFixed(0)}% of avg</span></div>
+      ${bar(r)}
+      ${statusHtml(r)}
+    </div>`;
+  };
+  const group = (title, sub, kind) => {
+    const card = $(`<div class="card" style="margin-top:12px"><div class="sec-sub" style="margin-top:0">${title} <small>${sub}</small></div></div>`);
+    rows.filter(r => r.kind === kind).forEach(r => card.append($(rowHtml(r))));
+    sec2.append(card);
+  };
+  group('<span class="kind tech">TECHNICAL</span> Compression setups', 'entry = break of the pivot', 'tech');
+  group('<span class="kind cat">CATALYST</span> News setups', 'entry = hold / retest / reclaim', 'cat');
+  group('Watchlist', 'near misses from the scan — no trade levels', 'near');
+  const deadNote = by2('dead').filter(r => r.q).map(r => `${r.tk} is ${((1 - r.q.px / r.stop) * 100).toFixed(2)}% under its stop`).join('; ');
+  sec2.append($(`<p class="foot" style="margin-top:10px">Status uses the levels from the brief (${B.asOfLabel}, built ${B.builtLabel}). A stop on a setup that has not triggered means "invalidated": trading below it before entry is dead. Opens are the first print; volume is since the open.${deadNote ? ' Early-session caution — ' + deadNote + ', so re-check after the first half hour before removing it.' : ''}</p>`));
+
+  /* ── 3. Overnight news ── */
+  const sec3 = $(`<section class="section"><h2><span class="n">2</span>Overnight news${chip("news")}</h2></section>`);
+  app.append(sec3);
+  const ng = $(`<div class="newsgrid"></div>`);
+  if (!(L.news || []).length) ng.append($(`<div class="empty">No overnight news was available this run.</div>`));
+  (L.news || []).forEach(n => {
+    const src = n.sources.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
+    const nm = (n.names || []).map(t => `<a class="chip" href="#lvl-${t}" style="text-decoration:none"><b>${t}</b></a>`).join('');
+    ng.append($(`<div class="card"><h3><span class="tagpill ${n.top3 ? 't3' : ''}">${n.tag}${n.top3 ? ' · top-3 sector' : ''}</span>${n.title}</h3>
+      <p>${n.text}</p>${nm ? `<div class="nm">${nm}</div>` : ''}<div class="src">Sources: ${src}</div></div>`));
+  });
+  sec3.append(ng);
+
+  // reading order: what to act on, what changed overnight, then the backdrop
+  app.insertBefore(sec2, sec1);
+  app.insertBefore(sec3, sec1);
+
+  /* ── Footer ── */
+  const fs = ((L.futures && L.futures.sources) || []).map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
+  app.append($(`<footer class="foot">
+    <p>Quotes: FMP, snapshot ${L.asOf}; opening prints from stockanalysis.com${fs ? '; futures: ' + fs : ''}. Pre-market prices and volume are not available on free feeds, so the open gap and volume since the open stand in for them. Levels and rules come from the brief. Not investment advice.</p>
+    ${(L.footnotes || []).map(f => `<p>${f}</p>`).join('')}
+  </footer>`));
+})();
+</script>
+</body>
+</html>
