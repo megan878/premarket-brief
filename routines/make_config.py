@@ -12,12 +12,12 @@ ap = argparse.ArgumentParser()
 ap.add_argument('--repo', default='<GITHUB_REPO_URL>')
 ap.add_argument('--brief-url', default='<BRIEF_ARTIFACT_URL>')
 ap.add_argument('--open-url', default='<OPEN_ARTIFACT_URL>')
-ap.add_argument('--connector-url', default='<FMP_CONNECTOR_URL>')
+ap.add_argument('--connector-url', default='https://financialmodelingprep.com/mcp')
 ap.add_argument('--env', default='env_011GEddWgLHigXXVsZaD6hRV')       # the account's default cloud environment
 ap.add_argument('--model', default='claude-sonnet-5')
 a = ap.parse_args()
 
-FMP = {'connector_uuid': '01a07ad1-c7b9-4104-a24b-5718bb62e41a', 'name': 'FMP', 'url': a.connector_url}
+FMP = {'connector_uuid': '887934eb-b7e7-429a-b5e3-3523b9c3d45d', 'name': 'FMP', 'url': a.connector_url}
 TOOLS = ['Bash', 'Read', 'Write', 'Edit', 'Glob', 'Grep', 'WebFetch', 'WebSearch', 'Artifact']
 
 
@@ -38,7 +38,7 @@ def body(name, cron, prompt_file):
 
 for name, cron, pf, out in [
     ('Pre-Market Brief', '0 12 * * 1-5', 'pre-market-brief.prompt.md', 'pre-market-brief.config.json'),
-    ('Market Open Update', '25 13,14 * * 1-5', 'market-open-update.prompt.md', 'market-open-update.config.json'),
+    ('Market Open Update', '40 13,14 * * 1-5', 'market-open-update.prompt.md', 'market-open-update.config.json'),
 ]:
     (here / out).write_text(json.dumps(body(name, cron, pf), indent=1, ensure_ascii=False), encoding='utf-8')
     print('wrote', out)

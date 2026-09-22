@@ -10,9 +10,9 @@ Status: routines **not created**, artifacts **not created**, nothing pushed anyw
    `brief-pipeline/` folder (not the ChartDesk files that share the parent directory). Nothing persists between runs, so **the published artifact is the
    state store**: each run reads the last published page and recovers its data block as the "previous good copy".
 3. **Cron is UTC-only with a 1-hour minimum interval.** No timezone field. HKT has no DST; New York does (section 3).
-4. **Free feeds have no pre-market prices or volume.** At 21:25 HKT (09:25 ET) the page can show futures, overnight news and levels, but stock
-   opening prints only exist after 09:30 ET. The page detects this and labels itself **PRE-OPEN** or **AFTER THE OPEN**; a run that takes ~8 minutes will
-   partly land after the open. See decision D3.
+4. **Free feeds have no pre-market prices or volume.** Stock opening prints only exist after 09:30 ET. The routine now runs at 21:40 HKT
+   (09:40 ET summer), 10 minutes after the open, specifically so opening prints already exist by the time it fetches (decision D3). The page still
+   detects and labels its own phase (**PRE-OPEN** / **AFTER THE OPEN**) in case a run is delayed or manually triggered early.
 
 ## 1. Every external call, and what can fail
 
@@ -40,7 +40,7 @@ Status: routines **not created**, artifacts **not created**, nothing pushed anyw
 | S1 | Recover last page | Artifact `read` | 1 | carry-forward state | first run, outage | continue with no fallback |
 | S2 | Publish | Artifact `publish` | 1-3 | the page | permission, size, conflict | retry x2, then report failure |
 
-### Routine 2 — Market Open Update (21:25 HKT summer / 22:25 HKT winter, about 40-45 calls)
+### Routine 2 — Market Open Update (21:40 HKT summer / 22:40 HKT winter, about 40-45 calls)
 
 | # | Call | Tool | Calls | Feeds | Likely failure | Fallback |
 |---|---|---|---|---|---|---|
@@ -82,14 +82,14 @@ Principle: **never crash, never overwrite good data with garbage, never show old
 
 Facts: HKT is UTC+8 all year. New York is UTC-4 (EDT) from the 2nd Sunday of March to the 1st Sunday of November, UTC-5 (EST) otherwise. The US open (09:30 ET) is therefore:
 
-| Season | US open | 5 min before | UTC cron time | 2026-27 dates |
+| Season | US open | Run time (10 min after) | UTC cron time | 2026-27 dates |
 |---|---|---|---|---|
-| EDT (summer) | 21:30 HKT / 13:30 UTC | **21:25 HKT** | 13:25 | until Sun 1 Nov 2026, again from Sun 14 Mar 2027 |
-| EST (winter) | 22:30 HKT / 14:30 UTC | **22:25 HKT** | 14:25 | Sun 1 Nov 2026 to Sun 14 Mar 2027 |
+| EDT (summer) | 21:30 HKT / 13:30 UTC | **21:40 HKT** | 13:40 | until Sun 1 Nov 2026, again from Sun 14 Mar 2027 |
+| EST (winter) | 22:30 HKT / 14:30 UTC | **22:40 HKT** | 14:40 | Sun 1 Nov 2026 to Sun 14 Mar 2027 |
 
 Design:
-1. **Routine 2 uses one cron that fires at both times:** `25 13,14 * * 1-5` (weekdays, UTC). Two firings per day, one is always wrong.
-2. **A guard decides.** First action of the routine: `python scripts/market_time.py guard open-update`. It converts "now" to ET (own DST rule, no timezone database needed), checks NYSE holidays, and runs only if the US open is between -10 and +20 minutes away. Otherwise exit code 10 and the agent stops in seconds. Result: exactly one real run per trading day, no cron edits twice a year.
+1. **Routine 2 uses one cron that fires at both times:** `40 13,14 * * 1-5` (weekdays, UTC). Two firings per day, one is always wrong.
+2. **A guard decides.** First action of the routine: `python scripts/market_time.py guard open-update`. It converts "now" to ET (own DST rule, no timezone database needed), checks NYSE holidays, and runs only if the US open is between -15 and +20 minutes away. Otherwise exit code 10 and the agent stops in seconds. Result: exactly one real run per trading day, no cron edits twice a year.
 3. **Routine 1 needs no DST logic for timing:** `0 12 * * 1-5` = 20:00 HKT Mon-Fri (12:00 UTC has the same weekday as 20:00 HKT). It still calls the guard so it skips weekends-in-ET and US holidays. 20:00 HKT is 08:00 ET in summer, 07:00 ET in winter: before the open both ways.
 4. **Holidays:** NYSE full closures 2026-27 are hard-coded and match FMP's holiday calendar exactly (test). Early-close days (27 Nov, 24 Dec 2026) still open at 09:30. After 2027 the guard runs anyway and says the table is out of date.
 5. **Last completed session** (used to date every section and to expire catalysts) is computed the same way, so a Monday run correctly targets Friday and a post-holiday run targets the session before it.
@@ -99,7 +99,7 @@ Design:
 
 | | Pre-Market Brief | Market Open Update |
 |---|---|---|
-| Cron (UTC) | `0 12 * * 1-5` = 20:00 HKT Mon-Fri | `25 13,14 * * 1-5` = 21:25 HKT (summer) / 22:25 HKT (winter), guard picks one |
+| Cron (UTC) | `0 12 * * 1-5` = 20:00 HKT Mon-Fri | `40 13,14 * * 1-5` = 21:40 HKT (summer) / 22:40 HKT (winter), guard picks one |
 | Model | claude-sonnet-5 (see D7) | claude-sonnet-5 |
 | Environment | `env_011GEddWgLHigXXVsZaD6hRV` (account default, anthropic_cloud) | same |
 | Repo | `<GITHUB_REPO_URL>` (folder `brief-pipeline/` as repo root) | same |
@@ -127,6 +127,6 @@ Files: `routines/pre-market-brief.config.json`, `routines/market-open-update.con
 3. `create` both routines **disabled**. `run` routine 1 once by hand, read the run log (`get_run_log`) and the published page; fix tool-access issues.
 4. `run` routine 2 once by hand at a chosen time; confirm the guard, the phase label and the levels from the published brief.
 5. Enable both. Watch the first week: check `list_runs` daily; the first no-op firing of routine 2 should end in seconds with "wrong DST slot".
-6. On Sun 1 Nov 2026 the US leaves daylight time: nothing to change, but check Monday 2 Nov's run landed at 22:25 HKT.
+6. On Sun 1 Nov 2026 the US leaves daylight time: nothing to change, but check Monday 2 Nov's run landed at 22:40 HKT.
 
 Confirming this plan authorises unattended publishing of two private artifacts at the two fixed URLs, and nothing else.

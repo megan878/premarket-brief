@@ -2,14 +2,15 @@
 
 Cloud cron is UTC-only. Hong Kong never changes its clock, but New York does, so the US open is
 21:30 HKT while US daylight time is in force (13:30 UTC) and 22:30 HKT in winter (14:30 UTC).
-Instead of trusting one cron time, the routines fire at BOTH candidate UTC times and this guard
-decides whether *this* firing is the right one.
+The open-update routine targets 10 minutes AFTER the open (21:40 / 22:40 HKT) so opening prints
+have usually posted by the time it fetches. Instead of trusting one cron time, it fires at BOTH
+candidate UTC times and this guard decides whether *this* firing is the right one.
 
     python market_time.py guard brief          -> exit 0 = run, exit 10 = skip
     python market_time.py guard open-update    -> exit 0 = run, exit 10 = skip
     python market_time.py info                 -> today's clock facts as JSON
 
-Set MARKET_NOW_UTC=2026-09-21T13:25:00Z to test any moment.
+Set MARKET_NOW_UTC=2026-09-21T13:40:00Z to test any moment.
 """
 import datetime as dt, json, os, sys
 
@@ -114,8 +115,8 @@ def guard(routine, now_utc):
         return False, f"US market closed on {i['etDate']} (weekend/holiday)"
     m = i['minutesToOpen']
     if routine == 'open-update':
-        # target: 5 minutes before the open. Fires at 13:25 UTC and 14:25 UTC; only one is in the window.
-        if -10 <= m <= 20:
+        # target: 10 minutes after the open. Fires at 13:40 UTC and 14:40 UTC; only one is in the window.
+        if -15 <= m <= 20:
             return True, f"{m:+.0f} min to the US open (ET offset {i['etOffset']}h)"
         return False, f"wrong DST slot: open is {i['usOpenHKT']} HKT, {m:.0f} min away"
     if routine == 'brief':
