@@ -1,0 +1,871 @@
+{
+ "source": "FMP + Finviz (web)",
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "q": {
+    "price": 7650.5,
+    "change": 12.74,
+    "pct": 0.1668,
+    "dayLow": 7610.52,
+    "dayHigh": 7657.17,
+    "yearHigh": 7816.7,
+    "yearLow": 6316.91,
+    "ma50": 7617.2373,
+    "ma200": 7183.0537
+   }
+  },
+  {
+   "id": "QQQ",
+   "name": "Nasdaq-100 ETF",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 721.45,
+    "change": 4.53,
+    "pct": 0.63
+   },
+   "src": "Finviz (web)"
+  },
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "q": {
+    "price": 51682.64,
+    "change": -95.4,
+    "pct": -0.18425,
+    "dayLow": 51497.47,
+    "dayHigh": 51826.78,
+    "yearHigh": 54744.33,
+    "yearLow": 45057.28,
+    "ma50": 52881.605,
+    "ma200": 50102.918
+   }
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "q": {
+    "price": 2860.3965,
+    "change": -14.2331,
+    "pct": -0.49513,
+    "dayLow": 2846.7024,
+    "dayHigh": 2861.22497,
+    "yearHigh": 3069.71,
+    "yearLow": 2303.46,
+    "ma50": 2969.249,
+    "ma200": 2766.4045
+   }
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "q": {
+    "price": 14.81,
+    "change": -0.63,
+    "pct": -4.08031,
+    "dayLow": 14.8,
+    "dayHigh": 15.63,
+    "yearHigh": 35.3,
+    "yearLow": 13.38,
+    "ma50": 16.174,
+    "ma200": 18.0893
+   }
+  }
+ ],
+ "sectors": [
+  {
+   "name": "Technology",
+   "pct": 3.37
+  },
+  {
+   "name": "Communication Services",
+   "pct": 2.46
+  },
+  {
+   "name": "Energy",
+   "pct": 0.92
+  },
+  {
+   "name": "Financial",
+   "pct": -1.69
+  },
+  {
+   "name": "Basic Materials",
+   "pct": -3.36
+  },
+  {
+   "name": "Consumer Defensive",
+   "pct": -4.03
+  },
+  {
+   "name": "Healthcare",
+   "pct": -4.61
+  },
+  {
+   "name": "Industrials",
+   "pct": -4.83
+  },
+  {
+   "name": "Consumer Cyclical",
+   "pct": -6.12
+  },
+  {
+   "name": "Utilities",
+   "pct": -6.27
+  },
+  {
+   "name": "Real Estate",
+   "pct": -6.27
+  }
+ ],
+ "sectorSource": "Finviz groups · Perf Month · market-cap-weighted",
+ "industries": [
+  {
+   "sector": "Technology",
+   "items": [
+    {
+     "name": "Computer Hardware",
+     "pct": 7.99,
+     "n": 43
+    },
+    {
+     "name": "Electronics & Computer Distribution",
+     "pct": 6.64,
+     "n": 8
+    },
+    {
+     "name": "Consumer Electronics",
+     "pct": 5.89,
+     "n": 19
+    }
+   ]
+  },
+  {
+   "sector": "Communication Services",
+   "items": [
+    {
+     "name": "Internet Content & Information",
+     "pct": 5.5,
+     "n": 71
+    },
+    {
+     "name": "Publishing",
+     "pct": 0.47,
+     "n": 8
+    },
+    {
+     "name": "Advertising Agencies",
+     "pct": -3.32,
+     "n": 39
+    }
+   ]
+  },
+  {
+   "sector": "Energy",
+   "items": [
+    {
+     "name": "Oil & Gas Refining & Marketing",
+     "pct": 15.93,
+     "n": 19
+    },
+    {
+     "name": "Oil & Gas Integrated",
+     "pct": 1.31,
+     "n": 20
+    },
+    {
+     "name": "Oil & Gas Midstream",
+     "pct": -0.49,
+     "n": 58
+    }
+   ]
+  }
+ ],
+ "picks": [
+  {
+   "tk": "ANET",
+   "name": "Arista Networks",
+   "industry": "Computer Hardware",
+   "sector": "Technology",
+   "setup": "Compression under resistance",
+   "tags": "Finviz: trendline resistance · horizontal S/R",
+   "pivot": 206.13,
+   "entryZone": "206.20 – 207.40",
+   "entry": 206.2,
+   "stop": 196.89,
+   "stopNote": "Fri 18 Sep low",
+   "target": 226.82,
+   "why": "Coiling under a ~$205–206 ceiling (tested 27 Aug and 17 Sep) with higher lows since 14 Sep; 2.9% over SMA20 and 7% under its 52-wk high.",
+   "trim": "Old 52-wk high $214.89 sits on the way — trim 25% there.",
+   "closes": [
+    198.82,
+    201.8,
+    193.18,
+    186.45,
+    183.75,
+    188.65,
+    188.15,
+    190.94,
+    202.25,
+    201.09,
+    195.38,
+    195.69,
+    189.26,
+    186.1,
+    191.44,
+    193.78,
+    194.96,
+    192.93,
+    188.99,
+    199.59,
+    187.81,
+    192.84,
+    197.54,
+    199.53,
+    199.39
+   ],
+   "cap": "$251B",
+   "avgVol": "7.2M",
+   "sma": [
+    2.88,
+    6.32,
+    28.54
+   ],
+   "rsi": 55.8,
+   "volW": 3.28,
+   "volM": 3.42,
+   "px": 199.39,
+   "pct": -0.07
+  },
+  {
+   "tk": "MTCH",
+   "name": "Match Group",
+   "industry": "Internet Content & Information",
+   "sector": "Communication Services",
+   "setup": "Tight flag at 52-wk high",
+   "tags": "Finviz: trendline resistance · horizontal S/R",
+   "pivot": 44.94,
+   "entryZone": "45.05 – 45.50",
+   "entry": 45.05,
+   "stop": 42.65,
+   "stopNote": "Fri 18 Sep low",
+   "target": 49.56,
+   "why": "Four-day pullback flag under $44.94 — the 52-wk high — after a ~19% run since 17 Aug; above rising SMA20/50/200.",
+   "trim": "Breakout = new 52-wk high, so no overhead supply in the 25-day window.",
+   "closes": [
+    37.95,
+    37.22,
+    38.69,
+    39.7,
+    40.35,
+    40.87,
+    41.73,
+    42.18,
+    42.07,
+    41.22,
+    41.58,
+    40.65,
+    41.91,
+    42.44,
+    42.43,
+    41.86,
+    41.15,
+    41.43,
+    41.82,
+    42.39,
+    43.15,
+    44.4,
+    43.58,
+    43.77,
+    43.2
+   ],
+   "cap": "$10.1B",
+   "avgVol": "3.4M",
+   "sma": [
+    2.39,
+    7.92,
+    22.97
+   ],
+   "rsi": 59.97,
+   "volW": 3.09,
+   "volM": 2.85,
+   "px": 43.2,
+   "pct": -1.3
+  },
+  {
+   "tk": "CVX",
+   "name": "Chevron",
+   "industry": "Oil & Gas Integrated",
+   "sector": "Energy",
+   "setup": "Flat-base compression",
+   "tags": "Finviz: trendline resistance · horizontal S/R",
+   "pivot": 217.78,
+   "entryZone": "217.90 – 219.00",
+   "entry": 217.9,
+   "stop": 207.31,
+   "stopNote": "Fri 18 Sep low",
+   "target": 239.69,
+   "why": "Sideways $207–218 range since 1 Sep under its 52-wk high ($217.78); only 0.4% over SMA20, so tightly wound.",
+   "trim": "Watch: month volatility 1.8% is below your 2% ADR line, and Fri volume (44.6M) was likely quad-witching inflated.",
+   "closes": [
+    200.0,
+    202.7,
+    205.74,
+    205.76,
+    205.77,
+    205.27,
+    203.09,
+    199.89,
+    200.21,
+    199.77,
+    201.86,
+    206.14,
+    211.05,
+    211.78,
+    211.32,
+    208.6,
+    209.8,
+    213.81,
+    212.76,
+    214.06,
+    212.17,
+    217.77,
+    211.54,
+    211.57,
+    209.51
+   ],
+   "cap": "$417B",
+   "avgVol": "8.4M",
+   "sma": [
+    0.44,
+    5.4,
+    13.93
+   ],
+   "rsi": 54.92,
+   "volW": 2.23,
+   "volM": 1.8,
+   "px": 209.51,
+   "pct": -0.97
+  },
+  {
+   "tk": "SNX",
+   "name": "TD Synnex",
+   "industry": "Electronics & Computer Distribution",
+   "sector": "Technology",
+   "setup": "Rising-lows wedge",
+   "tags": "Finviz: wedge",
+   "pivot": 269.99,
+   "entryZone": "270.20 – 272.00",
+   "entry": 270.2,
+   "stop": 256.69,
+   "stopNote": "~5% below entry (Fri low only 2% away)",
+   "target": 297.22,
+   "why": "Higher lows (258 → 262 → 264) squeezing under the 11 Sep high of $269.99; 3.3% over SMA20 and ~10% under its 52-wk high.",
+   "trim": "Reports earnings Thu 24 Sep before the open — a binary event inside the trade window. Thin group (8 stocks); avg volume 759K is only modestly above your 500K floor.",
+   "closes": [
+    258.74,
+    263.88,
+    259.8,
+    251.78,
+    250.77,
+    250.14,
+    243.65,
+    251.39,
+    255.17,
+    260.13,
+    253.97,
+    252.85,
+    251.39,
+    253.06,
+    262.53,
+    262.64,
+    258.6,
+    258.23,
+    255.54,
+    269.21,
+    261.12,
+    262.48,
+    260.5,
+    264.41,
+    266.16
+   ],
+   "cap": "$21.3B",
+   "avgVol": "759K",
+   "sma": [
+    3.3,
+    4.62,
+    26.86
+   ],
+   "rsi": 57.49,
+   "volW": 2.27,
+   "volM": 2.61,
+   "px": 266.16,
+   "pct": 0.66,
+   "flag": "reports 24 Sep"
+  }
+ ],
+ "pickWindow": "25 trading days to 18 Sep 2026, stockanalysis.com daily data",
+ "catalysts": [
+  {
+   "tk": "GNRC",
+   "name": "Generac Holdings",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "ctype": "Contract win",
+   "cdate": "Announced 16 Sep after the close · traded 17 Sep",
+   "what": "Amazon signed a long-term deal for up to $8B of Generac backup generators for its data centers (initial deliveries of $2.4B in 2027–28) and received warrants for up to 1.69M shares at $200.93.",
+   "sources": [
+    {
+     "t": "Bloomberg",
+     "u": "https://www.bloomberg.com/news/articles/2026-09-16/generac-shares-jump-on-8-billion-amazon-data-center-supply-pact"
+    },
+    {
+     "t": "SEC 8-K",
+     "u": "https://www.sec.gov/Archives/edgar/data/0001474735/000143774926030550/gnrc20260915_8k.htm"
+    },
+    {
+     "t": "Benzinga",
+     "u": "https://www.benzinga.com/trading-ideas/movers/26/09/61831070/generac-stock-soars-on-8-billion-amazon-data-center-deal"
+    }
+   ],
+   "entryZone": "203.50 – 208.50",
+   "entry": 206.0,
+   "stop": 195.7,
+   "stopNote": "below both days' lows ($201.58) and the $200.93 warrant strike",
+   "target": 226.6,
+   "setup": "Already gapped: +18.3% on 17 Sep (opened $229.50, faded to $207.23), then held a $201.6–214.9 range on 18 Sep at 2.5× average volume. Buy the hold, not a chase.",
+   "risk": "Only $2.4B of the $8B is scheduled. Some sources cite +30–45% after hours; the tape shows +18.3% at the close, which is what is used here. First target sits under the $229.50 gap-open.",
+   "closes": [
+    205.98,
+    203.56,
+    201.78,
+    206.62,
+    197.29,
+    183.8,
+    185.38,
+    181.42,
+    180.76,
+    183.02,
+    187.35,
+    190.21,
+    186.48,
+    181.67,
+    186.99,
+    176.98,
+    175.03,
+    175.11,
+    207.23,
+    207.44
+   ],
+   "catIdx": 18,
+   "cap": "$12.2B",
+   "avgVol": "1.17M",
+   "volW": 6.29,
+   "volM": 4.32,
+   "topSector": false,
+   "extra": null,
+   "px": 207.44,
+   "pct": 0.1,
+   "cdateISO": "2026-09-17"
+  },
+  {
+   "tk": "MTSI",
+   "name": "MACOM Technology Solutions",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "ctype": "Analyst upgrade + product launch",
+   "cdate": "18 Sep (chipset launch the evening of 17 Sep)",
+   "what": "BMO Capital (Harsh Kumar) upgraded to Outperform from Market Perform with a $335 target, citing the valuation reset after a 36% fall from the May peak and solid data-center and defense fundamentals. MACOM also launched a 3.2T optical front-end chipset the night before.",
+   "sources": [
+    {
+     "t": "Investing.com",
+     "u": "https://www.investing.com/news/stock-market-news/macom-stock-rises-after-bmo-upgrades-to-outperform-93CH-4907365"
+    },
+    {
+     "t": "Invezz",
+     "u": "https://invezz.com/news/2026/09/18/bmo-recommends-betting-on-a-recovery-in-this-semiconductor-stock/"
+    }
+   ],
+   "entryZone": "270.00 – 277.50",
+   "entry": 275.0,
+   "stop": 261.25,
+   "stopNote": "−5%; the 17 Sep low ($259.15) sits just below",
+   "target": 302.5,
+   "setup": "Three straight +4–5% days (16, 17 and 18 Sep) have fully recovered the −12.8% drop of 14 Sep. Next resistance is $286–288 (27 Aug and 9 Sep highs), so trim 25% there.",
+   "risk": "Still down ~30% over the quarter — a bounce inside a bigger downtrend. Sits in the top sector (Technology) but outside your 9 industries.",
+   "closes": [
+    266.61,
+    257.43,
+    266.27,
+    272.66,
+    277.15,
+    265.27,
+    263.83,
+    262.01,
+    257.56,
+    259.95,
+    268.95,
+    274.8,
+    286.12,
+    272.43,
+    274.9,
+    239.62,
+    240.02,
+    251.75,
+    263.14,
+    275.86
+   ],
+   "catIdx": 19,
+   "cap": "$21.0B",
+   "avgVol": "1.55M",
+   "volW": 5.01,
+   "volM": 4.18,
+   "topSector": true,
+   "extra": "Target $335 = +21% vs $275.86",
+   "px": 275.86,
+   "pct": 4.83,
+   "cdateISO": "2026-09-18"
+  },
+  {
+   "tk": "VICR",
+   "name": "Vicor",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "ctype": "License / partnership",
+   "cdate": "17 Sep (pre-market release)",
+   "what": "Vicor licensed its Vertical Power Delivery patents to an unnamed \"leading AI OEM\" (non-exclusive; licensee and terms not disclosed). Shares rose 17.7% that day and 2.9% on the next.",
+   "sources": [
+    {
+     "t": "GlobeNewswire (Manila Times)",
+     "u": "https://www.manilatimes.net/2026/09/17/tmt-newswire/globenewswire/vicor-licenses-vpd-to-a-leading-ai-oem/2426987"
+    },
+    {
+     "t": "Benzinga",
+     "u": "https://www.benzinga.com/trading-ideas/movers/26/09/61845797/why-is-vicor-stock-surging-thursday"
+    }
+   ],
+   "entryZone": "214.00 – 220.00",
+   "entry": 218.0,
+   "stop": 206.4,
+   "stopNote": "below the 17 Sep gap-open and low ($206.55)",
+   "target": 239.8,
+   "setup": "Gapped open $206.55, closed 18 Sep at $222.72 — above the gap-day high of $219.02, on 2× average volume. Buy the retest of $214–220.",
+   "risk": "Licensee and revenue are undisclosed; weekly volatility 6.3%, so size down. Cannot confirm the deal's financial size from any source.",
+   "closes": [
+    200.54,
+    189.99,
+    194.62,
+    197.23,
+    203.64,
+    187.75,
+    187.68,
+    175.99,
+    181.59,
+    178.76,
+    188.55,
+    193.32,
+    183.87,
+    178.05,
+    197.91,
+    184.73,
+    183.97,
+    183.91,
+    216.39,
+    222.72
+   ],
+   "catIdx": 18,
+   "cap": "$10.1B",
+   "avgVol": "872K",
+   "volW": 6.26,
+   "volM": 6.06,
+   "topSector": true,
+   "extra": null,
+   "px": 222.72,
+   "pct": 2.93,
+   "cdateISO": "2026-09-17"
+  },
+  {
+   "tk": "ETSY",
+   "name": "Etsy",
+   "industry": "Internet Retail",
+   "sector": "Consumer Cyclical",
+   "ctype": "Analyst upgrade",
+   "cdate": "15 Sep",
+   "what": "Oppenheimer (Jason Helfstein) upgraded to Outperform from Perform with a $90 target — 24% above $72.60 — citing AI-search tailwinds, product improvements and app engagement; BTIG also sits at $90.",
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/15/ai-search-will-boost-online-marketplace-stock-oppenheimer-says.html"
+    },
+    {
+     "t": "Yahoo Finance",
+     "u": "https://finance.yahoo.com/markets/stocks/articles/etsy-shares-rise-2-9-141837777.html"
+    }
+   ],
+   "entryZone": "76.50 – 77.50",
+   "entry": 76.5,
+   "stop": 72.2,
+   "stopNote": "below the 18 Sep low ($72.27)",
+   "target": 84.15,
+   "setup": "Rose 2.9% pre-market on the upgrade, but has faded from $74.00 to $72.60 since — the catalyst is not holding. Wait for a reclaim of the upgrade-day high ($76.44).",
+   "risk": "Lowest conviction of the four: still 17% under its 25 Aug high and down ~10% over the month. Not in a top-3 sector.",
+   "closes": [
+    81.03,
+    87.03,
+    84.43,
+    81.74,
+    82.94,
+    83.59,
+    81.33,
+    81.75,
+    81.72,
+    82.03,
+    76.51,
+    72.82,
+    71.19,
+    71.59,
+    72.76,
+    74.46,
+    74.0,
+    73.46,
+    72.34,
+    72.6
+   ],
+   "catIdx": 16,
+   "cap": "$6.9B",
+   "avgVol": "2.95M",
+   "volW": 3.3,
+   "volM": 3.93,
+   "topSector": false,
+   "extra": "Target $90 = +24% vs $72.60",
+   "px": 72.6,
+   "pct": 0.36,
+   "cdateISO": "2026-09-15"
+  }
+ ],
+ "macro": {
+  "date": "2026-09-18",
+  "y10": 5.01,
+  "y10prev": 4.94,
+  "y2": 4.76,
+  "y30": 5.34,
+  "y10path": "5.00% on 15 Sep, 5.01% on 16 Sep, 4.94% on 17 Sep, 5.01% on 18 Sep",
+  "fed": {
+   "range": "3.75–4.00%",
+   "move": "25 bp",
+   "date": "16 Sep",
+   "vote": "12–0",
+   "note": "first hike since 2023; the committee signaled more to come",
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+    },
+    {
+     "t": "CNN",
+     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+    },
+    {
+     "t": "Advisor Perspectives",
+     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+    },
+    {
+     "t": "Schwab",
+     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+    }
+   ]
+  }
+ },
+ "bg": {
+  "ANET": {
+   "cap": "$251B",
+   "rev": "$10.5B",
+   "revG": 32.6,
+   "eps": "$3.16",
+   "epsG": 23.9,
+   "next": "3 Nov, after close",
+   "nextWarn": false,
+   "what": "Sells the high-speed network switches and software that connect servers inside cloud and AI data centers.",
+   "deal": []
+  },
+  "MTCH": {
+   "cap": "$10.1B",
+   "rev": "$3.51B",
+   "revG": 1.7,
+   "eps": "$2.83",
+   "epsG": 39.3,
+   "next": "3 Nov",
+   "nextWarn": false,
+   "what": "Runs dating apps, mainly Tinder and Hinge, and earns mostly from subscriptions and in-app purchases.",
+   "deal": []
+  },
+  "CVX": {
+   "cap": "$417B",
+   "rev": "$209B",
+   "revG": 10.5,
+   "eps": "$10.41",
+   "epsG": 34.0,
+   "next": "30 Oct",
+   "nextWarn": false,
+   "what": "US oil major: finds and pumps oil and gas, refines it, and sells fuels and chemicals worldwide.",
+   "deal": []
+  },
+  "SNX": {
+   "cap": "$21.3B",
+   "rev": "$69.8B",
+   "revG": 16.3,
+   "eps": "$13.95",
+   "epsG": 63.1,
+   "next": "24 Sep, before open",
+   "nextWarn": true,
+   "what": "Wholesale middleman: buys PCs, phones, servers and software from tech makers and resells them to IT resellers and businesses.",
+   "deal": []
+  },
+  "GNRC": {
+   "cap": "$12.2B",
+   "rev": "$4.44B",
+   "revG": 0.6,
+   "eps": "$4.35",
+   "epsG": -27.8,
+   "next": "28 Oct",
+   "nextWarn": false,
+   "what": "Makes backup and standby generators for homes, businesses and data centers, plus energy storage.",
+   "deal": [
+    "Amazon deal: up to $8B, of which $2.4B is scheduled for 2027–28",
+    "Data-center backlog about $1.6B at Q2 (July), before this deal was announced"
+   ]
+  },
+  "MTSI": {
+   "cap": "$21.0B",
+   "rev": "$1.16B",
+   "revG": 28.4,
+   "eps": "$3.14",
+   "epsG": null,
+   "epsNote": "latest quarter, adj.: $1.40 vs $0.90 (+56%)",
+   "next": "5 Nov",
+   "nextWarn": false,
+   "what": "Designs analog and radio-frequency chips that move data in optical networks, data centers and defense radar.",
+   "deal": [
+    "FQ3 revenue $342M (+36% YoY); FQ4 guided to $415–425M",
+    "FY26 data-center growth outlook raised to more than 60%"
+   ]
+  },
+  "VICR": {
+   "cap": "$10.1B",
+   "rev": "$474M",
+   "revG": 25.0,
+   "eps": "$3.11",
+   "epsG": 114.9,
+   "next": "20 Oct",
+   "nextWarn": false,
+   "what": "Makes compact power modules that convert and deliver electricity to chips, including AI processors.",
+   "deal": [
+    "Record backlog $379.7M at Q2 (+145% YoY)",
+    "Q3 revenue guided up about 10%"
+   ]
+  },
+  "ETSY": {
+   "cap": "$6.9B",
+   "rev": "$2.94B",
+   "revG": 6.7,
+   "eps": "$2.28",
+   "epsG": -83.9,
+   "epsNote": "GAAP; cause of the drop not verified",
+   "next": "28 Oct",
+   "nextWarn": false,
+   "what": "Online marketplace where independent sellers list handmade and vintage goods; also owns the Depop resale app.",
+   "deal": [
+    "Q2 marketplace GMS $2.6B (+7.5% YoY); no order book to cite"
+   ]
+  }
+ },
+ "notices": [
+  "FMP's free plan blocks NDX and QQQ, so the QQQ price, sector and industry data below come from Finviz via web fetch (not FMP). Index/VIX quotes are still FMP.",
+  "The NDX tile shows QQQ (an ETF proxy, not the index itself); it has no 52-week range or moving averages and is not part of the regime score.",
+  "Finviz's industry list has no sector column; sector membership was verified per industry with Finviz sector+industry screener filters. Groups include micro-caps — thin groups (8 stocks) may have few names passing your $5B market-cap filter.",
+  "Web figures were read from fetched Finviz pages and could not be timestamped by the site; the QQQ quote is confirmed as the 18 Sep close."
+ ],
+ "nearmiss": [
+  {
+   "tk": "ARW",
+   "px": 219.31,
+   "pct": 2.0,
+   "why": "Technology · ascending triangle, but a 6.3% reversal on 14 Sep — not tight"
+  },
+  {
+   "tk": "XOM",
+   "px": 163.54,
+   "pct": 0.17,
+   "why": "Energy · flagged on three patterns; volatility 2.3% / 1.9% is borderline vs your 2% ADR"
+  },
+  {
+   "tk": "GOOGL",
+   "px": 349.54,
+   "pct": 0.64,
+   "why": "Comm. Services · trendline + wedge, but 14.5% off its high with a thin SMA200 cushion"
+  }
+ ],
+ "meta": {
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-21T13:00:00+08:00",
+  "targetSession": "2026-09-21",
+  "lastSession": "2026-09-18"
+ },
+ "sections": {
+  "indices": {
+   "asOf": "2026-09-18",
+   "source": "FMP index quotes; QQQ via Finviz"
+  },
+  "macro": {
+   "asOf": "2026-09-18",
+   "source": "FMP treasury-rates + Fed decision (news)"
+  },
+  "sectors": {
+   "asOf": "2026-09-18",
+   "source": "Finviz groups (cap-weighted 1M)"
+  },
+  "industries": {
+   "asOf": "2026-09-18",
+   "source": "Finviz groups (cap-weighted 1M)"
+  },
+  "technical": {
+   "asOf": "2026-09-18",
+   "source": "Finviz screener + stockanalysis OHLC"
+  },
+  "catalysts": {
+   "asOf": "2026-09-18",
+   "source": "web search + stockanalysis tape"
+  },
+  "nearmiss": {
+   "asOf": "2026-09-18",
+   "source": "scan leftovers"
+  }
+ },
+ "fetchlog": [],
+ "screenNotes": [
+  {
+   "st": "no",
+   "icon": "?",
+   "html": "<b>ADX(14) &gt; 20</b> · not available on Finviz. Unverified for all picks."
+  },
+  {
+   "st": "px",
+   "icon": "~",
+   "html": "<b>ADR &gt; 2%</b> · not available. Proxy: Finviz's own Volatility (week / month) shown on each card."
+  },
+  {
+   "st": "px",
+   "icon": "~",
+   "html": "<b>Flag / pennant / compression</b> · Finviz's pattern detector (trendline resistance, ascending triangle, wedge, horizontal S/R), then a read of daily highs and lows. Pattern pages for Technology cover only the largest ~20 names, so a smaller Tech name could be missed."
+  }
+ ],
+ "rejected": [
+  "<b>Amer Sports (AS)</b> · raised Q3 guidance on 16 Sep, but shares fell 3.2% the next day and are down 21% over the month.",
+  "<b>Scholar Rock (SRRK)</b> · FDA approval, but shares fell about 16% over the week (sell-the-news) and sources disagree on the approval date.",
+  "<b>Haemonetics (HAE)</b> · Citi upgrade, $123 target, but market cap is $4.93B (under $5B) and the target is only 13.5% above the price.",
+  "<b>Outside the 5-day window:</b> Corning–Verizon fiber deal (8 Sep), Apple's foldable iPhone (unveiled 9 Sep, ships 23 Oct), Meta's JPMorgan upgrade (10 Sep), Jabil (reports 30 Sep).",
+  "<b>Not verifiable / not clean:</b> Revvity's guidance raise (no primary source found); Skyworks (Qorvo merger progress, up ~35% in three weeks, binary China approval).",
+  "<b>This week's scheduled reports</b> (Accenture, Nike, Costco) are event risk, not catalysts yet. No qualifying names surfaced in Communication Services or Energy."
+ ]
+}

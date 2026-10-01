@@ -10,7 +10,7 @@ OUT = root / 'out' / 'scenarios'
 OUT.mkdir(parents=True, exist_ok=True)
 BRIEF_NOW = '2026-09-21T12:00:00Z'          # Mon 20:00 HKT -> last session = Fri 18 Sep
 OPEN_NOW = '2026-09-21T13:52:00Z'           # 09:52 ET, 22 min after the open
-fresh = json.loads((root / 'data/brief-data.json').read_text(encoding='utf-8'))
+fresh = json.loads((root / 'data/brief-data.example.json').read_text(encoding='utf-8'))
 live0 = json.loads((root / 'data/open-live.json').read_text(encoding='utf-8'))
 results = []
 

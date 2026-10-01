@@ -1,8 +1,9 @@
 # Data contracts
 
 The routine agent writes these two JSON files. Missing sections are allowed (and expected on a bad day): the builders
-validate each section independently, carry the last good copy forward, and flag it. `data/brief-data.json` in the repo
-is a complete, valid example; copy its shape.
+validate each section independently, carry the last good copy forward, and flag it. `data/brief-data.json` is the
+routine's live working file — it gets overwritten every run, including by the stop-hook's auto-commit, so never use
+it as a reference. `data/brief-data.example.json` is the permanent, complete, valid example; copy its shape from there.
 
 ## `data/brief-data.json` (Pre-Market Brief)
 
