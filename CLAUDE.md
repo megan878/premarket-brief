@@ -175,6 +175,35 @@ barchart.com, stooq, fred (garbled dates). Do not use investing.com technical pa
 Re-test the automated routine against these domains occasionally (same test as 2026-10-01) — if the platform bug
 is ever fixed, WebFetch could come back into the automated routine and this whole hybrid split could be revisited.
 
+## 15-minute sector news loop (added 2026-10-01) — standalone, interactive only, NOT part of either routine
+A manual tool you run yourself during a trading session, driven by Claude Code's `/loop`. It does not touch
+`brief.html`, `open-update.html`, `data/brief-data.json`, or either scheduled routine — nothing it does is published.
+
+**To start it:** in an interactive `claude` session with this repo as the working directory, paste:
+
+    /loop 15m /news-sweep
+
+That's the whole invocation — `/news-sweep` is a project slash command (`.claude/commands/news-sweep.md`) with the
+full per-cycle instructions already written out, so `/loop` just re-runs it every 15 minutes until you stop it
+(Ctrl+C, or closing the session). `/loop` with no interval lets the model self-pace instead, if you'd rather not
+pin it to exactly 15 minutes.
+
+**How it works**, split the same way as everywhere else in this repo — the agent fetches, a script renders:
+- `python scripts/news_loop.py context` — reads `data/brief-data.json` (the live file, not the example) and
+  prints today's top-3 sectors plus the full watchlist (technical picks + catalyst-alert tickers + near-misses,
+  ~11 names). Pure local read, no network, always current with whatever the brief last wrote.
+- Each cycle, the agent does 3 WebSearch sweeps (top-3-sector news, watchlist-name news, emerging-sector-strength
+  — a sector *outside* today's top-3 starting to trend) and assembles candidate items as JSON.
+- `python scripts/news_loop.py record --in <file>` — dedupes against everything already shown today (key =
+  normalized scope+headline, exact-ish match — a reworded re-run of the same story is an accepted false negative
+  for a 15-minute cadence), appends the new ones to `out/news-loop/seen-<today>.json`, and prints only what's
+  genuinely new, timestamped, with ticker/sector, headline, source, a bull/bear/neutral tag, and a
+  `⚠ POSSIBLE INVALIDATION` line on anything that could undercut a current pick or catalyst thesis. Prefer `--in`
+  a scratch file over piping JSON through a shell — a shell pipe can mangle non-ASCII characters in headline text
+  on Windows (hit this directly while testing 2026-10-01).
+- The log is scoped to the current HKT date (`seen-<today>.json`, under the already-gitignored `out/`) — closing
+  and reopening the session mid-day keeps the dedup state; a new trading day starts clean automatically.
+
 ## Files
 - `data/brief-data.json` / `data/open-live.json` — what YOU write, every run (schema in `SCHEMA.md`). These get
   overwritten daily (and auto-committed by the stop-hook) — never treat them as a stable reference.
@@ -182,8 +211,11 @@ is ever fixed, WebFetch could come back into the automated routine and this whol
   from the live files above after they collided with the test fixtures `tests/test_pipeline.py` relies on — once from
   the stop-hook's daily auto-commit, once from a manual interactive dry run). Copy their shape; never overwrite them
   from a routine run or a dry run — write to `data/brief-data.json` / `data/open-live.json` instead.
-- `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`.
-- `templates/` — page templates. `out/` — generated pages and reports (never committed).
+- `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`,
+  `news_loop.py` (the standalone 15-minute news loop — not called by either routine).
+- `.claude/commands/news-sweep.md` — the `/loop`-driven news-loop prompt (`/loop 15m /news-sweep` to start it).
+- `templates/` — page templates. `out/` — generated pages and reports (never committed), plus `out/news-loop/` —
+  the news loop's own dedup logs, also never committed.
 - `tests/` — `python tests/test_market_time.py && python tests/test_pipeline.py` must pass before any change to scripts.
   `test_pipeline.py` builds its own `brief_final` fixture rather than reading the ambient `out/last-good/brief-data.json`
   default — that path gets overwritten by any real pipeline run in the same working directory (this once silently
