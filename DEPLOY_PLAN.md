@@ -130,3 +130,37 @@ Files: `routines/pre-market-brief.config.json`, `routines/market-open-update.con
 6. On Sun 1 Nov 2026 the US leaves daylight time: nothing to change, but check Monday 2 Nov's run landed at 22:40 HKT.
 
 Confirming this plan authorises unattended publishing of two private artifacts at the two fixed URLs, and nothing else.
+
+## 7. WebFetch platform bug confirmed → hybrid pivot (2026-10-01)
+
+**What happened.** Step 4's first dry run of Routine 1 (session `cse_...` on 2026-09-21/22) showed every WebFetch call
+failing with `EGRESS_BLOCKED`, while FMP and WebSearch worked. The Default environment's Network access was **Trusted**
+(package-manager/dev domains only — no finance sites), so the first hypothesis was a config gap.
+
+**Test sequence, same day:**
+1. Trusted (default): WebFetch to finviz.com, stockanalysis.com, finance.yahoo.com, cnbc.com, example.com — all `EGRESS_BLOCKED`.
+2. User set Network access to **Custom** with finviz.com/stockanalysis.com/finance.yahoo.com/investing.com/cnbc.com explicitly
+   allowed. Retested (one-off test trigger `trig_01XQsx3axQ87wC8FVLC1a6aq`, session `cse_01DMf4dgGGQHcU1DcruHkinD`): finviz.com
+   and stockanalysis.com still `EGRESS_BLOCKED`.
+3. User set Network access to **Full** (all domains). Retested (same trigger, session `cse_01Xzg91v3GDusbfkVwB1vQo5`):
+   still `EGRESS_BLOCKED` for both domains.
+
+Full access failing rules out a config problem — this is a platform bug in the cloud sandbox's egress proxy (consistent
+with 6 open `anthropics/claude-code` GitHub issues: #87236, #95671, #87691, #93520, #34690, #30112). FMP (MCP connector)
+and WebSearch both route through Anthropic's own backend and bypass this proxy entirely, which is why they kept working
+throughout.
+
+**Decision: hybrid architecture, not a redesign of the whole brief.** Rather than wait on a platform fix:
+- Automated daily (FMP + WebSearch only): index/VIX quotes, rates, regime score, **sector ranking** (WebSearch replaces
+  Finviz groups), **catalyst alerts** (news only — ticker/what/date/2 sources/FMP price+cap, no computed trade levels).
+- Pinned, interactive-only (carried forward verbatim, labelled PINNED not STALE): the technical scan (`picks`), the
+  **industry drill-down** (`industries` — separate from sector ranking), and `nearmiss` (leftovers of the same scan).
+  All three need Finviz/OHLC via WebFetch. Refreshed by hand whenever they feel stale.
+- `health.py`, the templates, `CLAUDE.md` and `SCHEMA.md` were updated accordingly; `scripts/health.py` now has a
+  `PINNED` set and a `'pinned'` section status distinct from `'stale'`/`'failed'` so a normal day reads as healthy
+  rather than permanently "degraded". Test suite extended (25 scenarios) to cover both the sector/industries split
+  and the pinned-carry-forward path.
+- Routine 2 (Market Open Update) is unaffected by this decision for now — it stays disabled and untested; it has its
+  own, separate WebFetch dependency (futures, overnight news) to re-evaluate once Routine 1 is stable.
+- Re-test WebFetch occasionally (same method) — if Anthropic fixes the proxy bug, the pinned sections could move back
+  to automated.

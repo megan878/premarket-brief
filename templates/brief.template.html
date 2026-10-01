@@ -243,6 +243,7 @@ a.wi:hover { border-color: var(--ink-3); }
 /* ── Data health ── */
 .stalechip { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: none; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); vertical-align: 1px; }
 .stalechip.failed { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); border-color: var(--crit); }
+.stalechip.pinned { background: var(--chip); color: var(--ink-2); border: 1px solid var(--border); }
 .healthbar { margin-bottom: 12px; padding: 12px 14px; border-radius: 10px; font-size: 13px; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); border-left-width: 4px; }
 .healthbar.failed { background: color-mix(in srgb, var(--crit) 12%, transparent); color: var(--ink); border-color: var(--crit); }
 .healthbar b { font-weight: 700; }
@@ -280,11 +281,13 @@ a.wi:hover { border-color: var(--ink-3); }
   const H = D.health || { status: 'ok', sections: {}, issues: [] };
   const stale = (k) => {
     const h = H.sections[k];
-    return h && h.status !== 'ok' ? `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE · as of ' + h.asOf}</span>` : '';
+    if (!h || h.status === 'ok') return '';
+    if (h.status === 'pinned') return `<span class="stalechip pinned" title="${(h.msg || '').replace(/"/g, '&quot;')}">PINNED · as of ${h.asOf}</span>`;
+    return `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE · as of ' + h.asOf}</span>`;
   };
   if (H.status !== 'ok') {
-    const LBL = { indices: 'Index & VIX quotes', macro: 'Rates & Fed', map: 'Sector / industry map', technical: 'Technical picks', catalysts: 'Catalyst picks', nearmiss: 'Near-miss watchlist' };
-    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'showing data from ' + v.asOf}. ${v.msg || ''}</li>`).join('');
+    const LBL = { indices: 'Index & VIX quotes', macro: 'Rates & Fed', sectors: 'Sector strength', industries: 'Industry drill-down', technical: 'Technical picks', catalysts: 'Catalyst alerts', nearmiss: 'Near-miss watchlist' };
+    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok' && v.status !== 'pinned').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'showing data from ' + v.asOf}. ${v.msg || ''}</li>`).join('');
     const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');
     app.append($(`<div class="healthbar ${H.status === 'failed' ? 'failed' : ''}" role="alert"><b>${H.status === 'failed' ? 'Update failed' : 'Some data is not fresh'}</b> — the page is built from the last good copy where a source could not be reached; treat marked sections with care.<ul>${rows}${extra}</ul>${H.fetch && H.fetch.failed ? `<div style="margin-top:6px;font-size:12px">${H.fetch.failed} of ${H.fetch.calls} data calls failed this run.</div>` : ''}</div>`));
   }
@@ -383,7 +386,7 @@ a.wi:hover { border-color: var(--ink-3); }
   const x = (v) => ((v - base) / span * 100);
   const zero = x(0);
   const secCard = $(`<div class="card">
-    <h3>Sector strength · 1-month${stale("map")}</h3>
+    <h3>Sector strength · 1-month${stale("sectors")}</h3>
     <p class="sub">${D.sectorSource}.</p>
     <div id="secRows"></div>
     <div class="legend"><span><i class="k b"></i>1-month performance</span><span><i class="k" style="background:var(--ink);border-radius:50%"></i>Filled rank = top 3 (scan universe)</span></div>
@@ -407,9 +410,9 @@ a.wi:hover { border-color: var(--ink-3); }
   // industry universe (shell)
   const top3 = secs.slice(0, 3);
   const ind = $(`<div class="card" style="margin-top:12px">
-    <h3>Industry strength → scan universe${stale("map")}</h3>
+    <h3>Industry strength → scan universe${stale("industries")}</h3>
     <p class="sub">Top 9 industries inside the top 3 sectors (3 per sector) — this list feeds the scanner's Industry filter.</p>
-    <p class="sub" style="margin-top:-6px;color:var(--ink-3)">Finviz groups · Perf Month · market-cap-weighted · stock counts are the whole Finviz group, before your $5B filter.</p>
+    <p class="sub" style="margin-top:-6px;color:var(--ink-3)">Finviz groups · Perf Month · market-cap-weighted · stock counts are the whole Finviz group, before your $5B filter. Pinned to the last interactive refresh — sector ranking above refreshes daily, this drill-down does not.</p>
     <div id="indCols"></div>
   </div>`);
   const cols = ind.querySelector('#indCols');
@@ -442,6 +445,10 @@ a.wi:hover { border-color: var(--ink-3); }
     if (!b) return '';
     const g = (v) => v == null ? '' : `<i class="${v >= 0 ? 'up' : 'dn'}">${v >= 0 ? '+' : '−'}${Math.abs(v).toFixed(1)}%</i>`;
     const deal = (b.deal || []).map(x => `<li>${x}</li>`).join('');
+    if (b.rev == null && b.eps == null && b.next == null) {
+      // light snapshot (catalyst alerts): FMP profile only — revenue/EPS/next-earnings need blocked FMP endpoints
+      return `<div class="bg"><p class="what">${b.what}</p><div class="bgs" style="grid-template-columns:1fr"><div><span class="k">Mkt cap</span><span class="v">${b.cap}</span></div></div></div>`;
+    }
     return `<div class="bg">
       <p class="what">${b.what}</p>
       <div class="bgs">
@@ -496,40 +503,23 @@ a.wi:hover { border-color: var(--ink-3); }
   sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (${D.pickWindow}): entry just above the pattern high, stop at the last session's low when it is 4–6% away (otherwise ~5%), target +10%. Not investment advice; nothing here has been checked against a live pre-market quote.</p>`));
 
 
-  /* ── Catalyst picks ── */
+  /* ── Catalyst alerts (news only — no computed trade levels; see CLAUDE.md) ── */
   if (!(D.catalysts || []).length) {
-    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Sourced news from the last 5 trading days${stale("catalysts")}</h3>`));
-    sec2.append($(`<div class="empty" style="margin-top:12px">No qualifying catalyst setups are available this run (none delivered, or the previous ones are older than 5 trading days).</div>`));
+    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Alerts from the last 5 trading days${stale("catalysts")}</h3>`));
+    sec2.append($(`<div class="empty" style="margin-top:12px">No qualifying catalyst alerts are available this run (none delivered, or the previous ones are older than 5 trading days).</div>`));
   }
   if ((D.catalysts || []).length) {
-    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Sourced news from the last 5 trading days${stale("catalysts")}</h3>`));
+    sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Alerts from the last 5 trading days${stale("catalysts")}</h3>`));
     sec2.append($(`<div class="card" style="margin-top:12px">
       <h3>How these were found</h3>
-      <p class="sub">Same base filters as the technical scan: price &gt; $5, market cap &gt; $5B, avg volume &gt; 500K (Finviz figures). The EMA / ADX / ADR conditions are not applied to catalyst picks. Each catalyst was confirmed by at least two independent sources and each price move by the daily tape (stockanalysis.com). None overlaps the technical picks.</p>
+      <p class="sub">Web search only (two independent sources per event, dated within 5 trading sessions). Price, % change and market cap are FMP's live quote at build time — not a verified reaction on the daily tape, and not a computed entry/stop/target: reading OHLC history needs WebFetch, which the automated routine does not have. These are alerts to look into, not trade-ready levels. None overlaps a pinned technical pick.</p>
       ${(D.rejected || []).length ? `<details class="rej"><summary>Considered and rejected</summary><ul>${D.rejected.map(x => `<li>${x}</li>`).join('')}</ul></details>` : ''}
     </div>`));
     const cgrid = $(`<div class="picks"></div>`);
     sec2.append(cgrid);
     D.catalysts.forEach(pk => {
-      const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
-      const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
-      const W = 300, H = 84, pad = 10, cs = pk.closes;
-      const lo = Math.min(...cs, pk.stop) * 0.996, hi = Math.max(...cs, pk.entry) * 1.004;
-      const X = (i) => pad + i * (W - 2 * pad - 64) / (cs.length - 1), Y = (v) => H - pad - (v - lo) / (hi - lo) * (H - 2 * pad);
-      const path = cs.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
-      const cx = X(pk.catIdx).toFixed(1);
-      const svg = `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${pk.tk} closes, catalyst day marked, entry ${price2(pk.entry)}, stop ${price2(pk.stop)}">
-        <line class="cm" x1="${cx}" x2="${cx}" y1="4" y2="${H - 4}"/><text class="cmt" x="${cx}" y="10" text-anchor="${pk.catIdx > cs.length - 4 ? 'end' : 'middle'}" dx="${pk.catIdx > cs.length - 4 ? -3 : 0}">catalyst</text>
-        <line class="en" x1="${pad}" x2="${W - pad}" y1="${Y(pk.entry).toFixed(1)}" y2="${Y(pk.entry).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.entry) - 3).toFixed(1)}" text-anchor="end">entry ${price2(pk.entry)}</text>
-        <line class="sp" x1="${pad}" x2="${W - pad}" y1="${Y(pk.stop).toFixed(1)}" y2="${Y(pk.stop).toFixed(1)}"/><text x="${W - pad}" y="${(Y(pk.stop) - 3).toFixed(1)}" text-anchor="end">stop ${price2(pk.stop)}</text>
-        <path class="ln" d="${path}"/><circle class="dot" cx="${X(cs.length - 1).toFixed(1)}" cy="${Y(cs[cs.length - 1]).toFixed(1)}" r="3.5"/>
-      </svg>`;
-      const chips = [
-        ['ok', `Cap ${pk.cap}`], ['ok', `Avg vol ${pk.avgVol}`], ['ok', 'Price &gt; $5'],
-        ['ok', `Volatility W/M ${pk.volW.toFixed(1)} / ${pk.volM.toFixed(1)}%`]
-      ];
-      if (pk.extra) chips.push(['ok', pk.extra]);
-      chips.push([pk.topSector ? 'ok' : 'px', pk.topSector ? 'Top-3 sector (Technology)' : `Outside top-3 sectors (${pk.sector})`]);
+      const chips = [['ok', `Cap ${pk.cap}`], ['ok', 'Price &gt; $5']];
+      chips.push([pk.topSector ? 'ok' : 'px', pk.topSector ? 'Top-3 sector' : `Outside top-3 sectors (${pk.sector})`]);
       const chipHtml = chips.map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
       const src = pk.sources.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
       cgrid.append($(`<article class="card pick cat" id="pick-${pk.tk}">
@@ -540,19 +530,14 @@ a.wi:hover { border-color: var(--ink-3); }
           <div class="src">Sources: ${src}</div>
         </div>
         ${bgHtml(pk.tk)}
-        ${svg}
-        <div class="lv">
-          <div><span class="k">Entry zone</span><span class="v">${pk.entryZone}</span><span class="s">ref ${price2(pk.entry)}</span></div>
-          <div class="stop"><span class="k">Stop</span><span class="v">${price2(pk.stop)}</span><span class="s">−${riskPct.toFixed(1)}% · ${pk.stopNote}</span></div>
-          <div class="tgt"><span class="k">Target</span><span class="v">${price2(pk.target)}</span><span class="s">+${rewPct.toFixed(1)}% from entry</span></div>
-          <div><span class="k">R:R</span><span class="v">${rr.toFixed(1)} : 1</span><span class="s">from ${price2(pk.entry)}</span></div>
+        <div class="lv" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div><span class="k">Last price (FMP)</span><span class="v">${price2(pk.px)}</span></div>
+          <div><span class="k">Change</span><span class="v ${pctCls(pk.pct)}">${sgn(pk.pct)}%</span></div>
         </div>
-        <p class="note"><b>Setup:</b> ${pk.setup}</p>
-        <p class="note"><b>Watch:</b> ${pk.risk}</p>
         <div class="chk">${chipHtml}</div>
       </article>`));
     });
-    sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (20 trading days, stockanalysis.com): entry at the current level or the retest/reclaim shown, stop ~5% or beneath the gap/breakout level, target +10%. Facts were read from search summaries and fetched pages; where a primary page could not be opened (e.g. CNBC) it is linked but not independently read. Not investment advice; not checked against a live pre-market quote.</p>`));
+    sec2.append($(`<p class="foot" style="margin-top:10px">Alerts only: price/cap from FMP's live quote at build time, events sourced via web search. No entry/stop/target — compute and verify your own levels (or wait for the next interactive technical-scan refresh) before trading any of these. Not investment advice.</p>`));
   }
 
 
@@ -579,15 +564,15 @@ a.wi:hover { border-color: var(--ink-3); }
       }).join('');
       card.append($(row(gp.name, items)));
     });
-    card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from Finviz); stock rows are Finviz / stockanalysis.com closes. Near misses come from the technical scan and the catalyst rejects.</p>`));
+    card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from web search). Technical-pick rows are pinned Finviz closes; catalyst-alert rows are FMP's live quote. Near misses come from the (pinned) technical scan and the catalyst rejects.</p>`));
   }
 
   /* ── Footer ── */
   app.append($(`<footer class="foot">
     <p>SPX, DJI, RUT, VIX: FMP quotes, ${D.asOf} after the US close; regime read uses each index's own 50/200-day averages as reported by FMP.</p>
-    <p>QQQ, sector and industry performance: Finviz (web), cap-weighted, 1-month. Not investment advice.</p>
-    <p>Pick snapshots: market cap and business description from the FMP company profile; revenue, EPS (TTM growth vs a year earlier) and next-earnings dates from stockanalysis.com — confirm dates before trading; deal and backlog figures from company releases via search results. FMP's financial-statement and earnings-calendar endpoints are blocked on the free plan.</p>
-    <p>Rates: 10-year and curve from FMP treasury-rates (${D.asOfLabel.replace(' close', '')}). Fed decision from CNBC, CNN, Advisor Perspectives and Schwab; those pages could not be opened, so it rests on search-result summaries that agree across the four outlets.</p>
+    <p>QQQ and sector strength (11-sector ranking): web search, cap-weighted, 1-month — refreshed every run. Industry drill-down and technical picks: Finviz, pinned to the last interactive refresh (WebFetch is not available to the automated routine — see the PINNED chips above). Not investment advice.</p>
+    <p>Catalyst alerts: events and dates from web search (two sources each); price, % change and market cap from the FMP company profile at build time — not a verified tape reaction. Company snapshot for catalyst tickers is cap + description only (FMP); revenue/EPS/next-earnings need FMP's statements/earnings-calendar endpoints, blocked on the free plan, or an interactive refresh. Pinned technical picks keep their full snapshot from the last interactive run.</p>
+    <p>Rates: 10-year and curve from FMP treasury-rates (${D.asOfLabel.replace(' close', '')}). Fed decision from web search summaries, confirmed across at least two outlets.</p>
   </footer>`));
 })();
 </script>

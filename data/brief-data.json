@@ -821,7 +821,11 @@
    "asOf": "2026-09-18",
    "source": "FMP treasury-rates + Fed decision (news)"
   },
-  "map": {
+  "sectors": {
+   "asOf": "2026-09-18",
+   "source": "Finviz groups (cap-weighted 1M)"
+  },
+  "industries": {
    "asOf": "2026-09-18",
    "source": "Finviz groups (cap-weighted 1M)"
   },
