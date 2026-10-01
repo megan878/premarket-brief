@@ -80,7 +80,12 @@
   const L = JSON.parse(document.getElementById('live-data').textContent);
   const H = L.health || { status: 'ok', phase: 'open', sections: {}, issues: [] };
   const LBL = { indices: 'Index & VIX quotes', futures: 'Index futures', quotes: 'Stock quotes', news: 'Overnight news', levels: 'Trade levels (from the brief)' };
-  const chip = (k) => { const h = H.sections[k]; return h && h.status !== 'ok' ? `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE'}</span>` : ''; };
+  const chip = (k) => {
+    const h = H.sections[k];
+    if (!h || h.status === 'ok') return '';
+    if (h.status === 'pinned') return `<span class="stalechip pinned" title="${(h.msg || '').replace(/"/g, '&quot;')}">PINNED · as of ${h.asOfUTC || h.asOf || ''}</span>`;
+    return `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE'}</span>`;
+  };
   const $ = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
   const fmt = (n, d = 2) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
   const sgn = (n, d = 2) => (n > 0 ? '+' : n < 0 ? '−' : '') + fmt(Math.abs(n), d);
@@ -95,7 +100,7 @@
     <div class="meta"><span class="phase">${H.phase === 'pre-open' ? 'PRE-OPEN' : 'AFTER THE OPEN'}</span>Snapshot <b>${L.asOf}</b> · vs the ${B.asOfLabel} · <span class="toplink"><a href="${(L.links && L.links.brief) || 'brief.html'}">full brief →</a></span></div>
   </header>`));
   if (H.status !== 'ok') {
-    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'not fresh'}. ${v.msg || ''}</li>`).join('');
+    const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok' && v.status !== 'pinned').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'not fresh'}. ${v.msg || ''}</li>`).join('');
     const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');
     app.append($(`<div class="healthbar ${H.status === 'failed' ? 'failed' : ''}" role="alert"><b>${H.status === 'failed' ? 'Update failed' : 'Some data is missing or not fresh'}</b> — do not trade off marked numbers without re-checking a live quote.<ul>${rows}${extra}</ul></div>`));
   }
@@ -120,6 +125,7 @@
     r.gap = q && q.open ? (q.open / r.fri - 1) * 100 : null;
     if (!q) { r.status = 'na'; r.label = 'No live price'; r.icon = '–'; return; }
     if (r.kind === 'near') { r.status = 'ref'; return; }
+    if (r.kind === 'cat') { r.status = 'alert'; return; }   // catalyst alerts carry no computed entry/stop/target
     const [zl, zh] = zone(r.entryZone);
     r.zl = zl; r.zh = zh;
     const px = q.px;
@@ -192,7 +198,7 @@
   </div>`));
 
   /* ── 2. Level check ── */
-  const sec2 = $(`<section class="section"><h2><span class="n">1</span>Movers &amp; level check · ${rows.filter(r => r.kind !== "near").length} picks + ${rows.filter(r => r.kind === "near").length} watchlist${chip("quotes")}${chip("levels")}</h2></section>`);
+  const sec2 = $(`<section class="section"><h2><span class="n">1</span>Movers &amp; level check · ${rows.filter(r => r.kind === "tech").length} technical + ${rows.filter(r => r.kind === "cat").length} catalyst alerts + ${rows.filter(r => r.kind === "near").length} watchlist${chip("quotes")}${chip("levels")}</h2></section>`);
   app.append(sec2);
   const by2 = (s) => rows.filter(r => r.status === s);
   const names = (arr) => arr.map(r => r.tk).join(' · ') || '—';
@@ -202,10 +208,12 @@
   sum.append($(`<span class="sumchip">◔ <b>Waiting</b> ${names(by2('watch'))}</span>`));
   sum.append($(`<span class="sumchip dead">✕ <b>Dead</b> ${names(by2('dead'))}</span>`));
   if (by2('na').length) sum.append($(`<span class="sumchip">– <b>No live price</b> ${names(by2('na'))}</span>`));
+  if (by2('alert').length) sum.append($(`<span class="sumchip">★ <b>Catalyst alerts</b> ${names(by2('alert'))}</span>`));
   sec2.append(sum);
 
   const bar = (r) => {
     if (r.kind === 'near') return `<div class="lv-bar none">No levels — reference only</div>`;
+    if (r.kind === 'cat') return `<div class="lv-bar none">No computed levels — catalyst alert, not a trade-ready pick. Entry/stop/target need an interactive OHLC refresh.</div>`;
     if (!r.q) return `<div class="lv-bar none">Levels: stop ${fmt(r.stop)} · zone ${r.entryZone} · target ${fmt(r.target)} (no live price to place)</div>`;
     const px = r.q.px, vals = [r.stop, r.zl, r.zh, r.target, px];
     const mn = Math.min(...vals), mx = Math.max(...vals), pad = (mx - mn) * 0.06;
@@ -220,6 +228,7 @@
   const statusHtml = (r) => {
     if (r.status === 'na') return `<div class="st"><span class="chip2 na">– No live price</span><span class="why">Quote unavailable or failed validation; check it manually.</span></div>`;
     if (r.kind === 'near') return `<div class="st"><span class="chip2 watch">— Near miss</span><span class="why">${(L.notes || {})[r.tk] || ''}</span></div>`;
+    if (r.status === 'alert') return `<div class="st"><span class="chip2 watch">★ ${r.ctype || 'Catalyst alert'}</span><span class="why">${r.what || (L.notes || {})[r.tk] || ''}</span></div>`;
     let extra = '';
     if (r.status === 'above' && r.ext != null) extra = ` +${r.ext.toFixed(1)}%`;
     if (r.status === 'watch') extra = ` ${r.away.toFixed(1)}% to entry`;
@@ -244,7 +253,7 @@
     sec2.append(card);
   };
   group('<span class="kind tech">TECHNICAL</span> Compression setups', 'entry = break of the pivot', 'tech');
-  group('<span class="kind cat">CATALYST</span> News setups', 'entry = hold / retest / reclaim', 'cat');
+  group('<span class="kind cat">CATALYST</span> Alerts', 'live price only — no computed levels (see the brief for sources)', 'cat');
   group('Watchlist', 'near misses from the scan — no trade levels', 'near');
   const deadNote = by2('dead').filter(r => r.q).map(r => `${r.tk} is ${((1 - r.q.px / r.stop) * 100).toFixed(2)}% under its stop`).join('; ');
   sec2.append($(`<p class="foot" style="margin-top:10px">Status uses the levels from the brief (${B.asOfLabel}, built ${B.builtLabel}). A stop on a setup that has not triggered means "invalidated": trading below it before entry is dead. Opens are the first print; volume is since the open.${deadNote ? ' Early-session caution — ' + deadNote + ', so re-check after the first half hour before removing it.' : ''}</p>`));

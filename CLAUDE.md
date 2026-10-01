@@ -24,6 +24,26 @@ This splits the page into two kinds of section:
 - Why not fix the proxy instead: it is a platform bug outside this project's control (see the GitHub issues cited
   above); re-test it occasionally, but do not block the dashboard on it.
 
+## Market Open Update — same hybrid treatment (decided 2026-10-01)
+The open-update routine gets the identical no-WebFetch rule, with its own fetch plan:
+- **Indices/VIX**: FMP `indexes/index-quote` for ^GSPC ^DJI ^RUT ^VIX. QQQ: WebSearch (FMP blocks NDX/QQQ on the free
+  plan), labelled approximate, same as the brief.
+- **Stock quotes** (technical picks + catalyst-alert tickers + near-misses — however many the brief currently lists,
+  not a fixed "8"): FMP `company/profile-symbol` per ticker gives a live `price`/`changePercentage`/`volume`/
+  `averageVolume` — use those for `px`/`pct`/`vol`/`avgVol`. It does **not** expose today's regular-session opening
+  print, so `open` stays omitted; the page already renders "open print not available yet" when `open` is missing —
+  that is the correct degraded state, not a bug to work around.
+- **Futures (ES/NQ/YM/RTY)**: FMP has no CME index-futures data on this plan at all (confirmed: both `quote` and
+  `commodity` single-symbol endpoints return ACCESS DENIED) — go straight to WebSearch, cross-checking two sources
+  per contract same as before (`chk` field).
+- **Overnight news**: WebSearch only (was WebFetch + WebSearch). Same sourcing bar: https links, dated, tagged to a
+  top-3 sector or one of the watchlist names.
+- **Level check applies to technical picks only.** Catalyst alerts carry no entry/stop/target (see above) — the open
+  page shows their live price/% only, tagged `★ <ctype>` with the brief's one-line `what`, not a zone/stop/target
+  status. `health_live.py`'s `levels` section is keyed off the brief's `technical` section specifically (not the
+  whole brief), and reads `PINNED` — not `STALE` or a failure — every single day, since technical picks are always
+  pinned under the hybrid design. That's expected; only flag it if `levels` reads `FAILED` (no technical picks at all).
+
 ## Hard rules
 1. **Never invent, estimate or "fill in" a number.** If you cannot fetch or verify something, leave that section out of
    your JSON. The builder carries the last good copy forward and shows a STALE (or PINNED, for map/technical) banner.
@@ -76,8 +96,9 @@ Blocked: ^NDX and QQQ, screener/search, directory, charts/price history, batch q
 calendar, technical indicators, aftermarket quotes. None of these have an automated fallback any more (WebFetch is
 out) — `nextWarn`/earnings-calendar flags and revenue/EPS come from WebSearch when findable, otherwise omitted.
 
-## Web sources — INTERACTIVE SESSIONS ONLY (the automated routine has no WebFetch)
-When you are refreshing the pinned technical scan / industry map by hand with WebFetch available:
+## Web sources — INTERACTIVE SESSIONS ONLY (neither automated routine has WebFetch)
+When you are refreshing the pinned technical scan / industry map by hand with WebFetch available (the open-update
+routine has no pinned sections of its own — it has no WebFetch fetch plan to fall back to at all, only FMP + WebSearch):
 Work: finviz.com (groups.ashx, screener.ashx with `v=111|141|171`, quote.ashx), stockanalysis.com (`/stocks/<t>/`,
 `/stocks/<t>/history/`, `/etf/qqq/`), investing.com futures page, finance.yahoo.com live blogs, investrade.com previews.
 Blocked or unreliable: cnbc.com (403 to fetch; headlines in search results are fine), bloomberg.com, tradingview.com,
@@ -94,3 +115,6 @@ is ever fixed, WebFetch could come back into the automated routine and this whol
 - `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`.
 - `templates/` — page templates. `out/` — generated pages and reports (never committed).
 - `tests/` — `python tests/test_market_time.py && python tests/test_pipeline.py` must pass before any change to scripts.
+  `test_pipeline.py` builds its own `brief_final` fixture rather than reading the ambient `out/last-good/brief-data.json`
+  default — that path gets overwritten by any real pipeline run in the same working directory (this once silently
+  poisoned the test with a different day's tickers). Don't reintroduce a dependency on that path in tests.

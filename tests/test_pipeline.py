@@ -117,7 +117,12 @@ d, _ = brief('B11_small_cap', n, prev)
 check('B11 market cap under $5B is dropped', 'ANET' not in [p['tk'] for p in d['picks']])
 
 # ── open page ────────────────────────────────────────────────────────────
-brief_final = json.loads((root / 'out/last-good/brief-data.json').read_text(encoding='utf-8'))
+# Build brief_final ourselves (never read the ambient out/last-good/brief-data.json default — a real pipeline run
+# in this same working directory overwrites that path, which once silently poisoned this fixture).
+brief_final_path = OUT / 'brief_final.saved.json'
+run(build_brief, ['--data', jw('brief_final.data.json', fresh), '--previous', jw('brief_final.prev.json', prev),
+                   '--out', str(OUT / 'brief_final.html'), '--save-data', str(brief_final_path), '--now', BRIEF_NOW])
+brief_final = json.loads(brief_final_path.read_text(encoding='utf-8'))
 brief_final.pop('fetchlog', None)
 
 
@@ -175,14 +180,18 @@ _, code = opn('L8_yesterdays_quotes', n, expect=3)
 check('L8 yesterday\'s quotes are not presented as today\'s', code == 3)
 
 # L9 the brief the levels come from is older than the last session
-b = copy.deepcopy(brief_final); b['meta']['lastSession'] = '2026-09-17'
-d, _ = opn('L9_old_brief', live0, brief_data=b)
-check('L9 levels from an old brief are flagged', d['health']['sections']['levels']['status'] == 'stale')
+# L9 technical picks are pinned (interactive-only, hybrid design) and dated before today's session -> levels shows
+# PINNED, the expected everyday state, not an error
+b = copy.deepcopy(brief_final)
+b['health']['sections']['technical'] = dict(b['health']['sections']['technical'], asOf='2026-09-10')
+d, _ = opn('L9_pinned_levels', live0, brief_data=b)
+check('L9 pinned technical levels show PINNED, not a failure', d['health']['sections']['levels']['status'] == 'pinned' and d['health']['status'] != 'failed')
 
-# L10 the brief was itself degraded
-b = copy.deepcopy(brief_final); b['health']['sections']['technical'] = {'status': 'stale', 'asOf': '2026-09-17', 'msg': ''}
-d, _ = opn('L10_brief_degraded', live0, brief_data=b)
-check('L10 a degraded brief propagates to the open page', 'technical' in d['health']['sections']['levels']['msg'])
+# L10 the brief's technical section failed outright (no usable picks at all) -> levels FAILED, page still builds
+b = copy.deepcopy(brief_final)
+b['health']['sections']['technical'] = {'status': 'failed', 'asOf': None, 'msg': 'every pick failed validation'}
+d, _ = opn('L10_technical_failed', live0, brief_data=b)
+check('L10 technical failed in the brief -> levels FAILED, page still builds', d['health']['sections']['levels']['status'] == 'failed' and d['health']['status'] == 'degraded')
 
 # L11 news without an https source
 n = copy.deepcopy(live0); n['news'][0]['sources'] = [{'t': 'x', 'u': 'ftp://nope'}]
@@ -193,6 +202,14 @@ check('L11 unsourced news dropped', len(d['news']) == len(live0['news']) - 1)
 out = OUT / 'L12.html'
 code, _ = run(build_open, ['--brief-data', str(OUT / 'nope.json'), '--live', str(root / 'data/open-live.json'), '--out', str(out), '--now', OPEN_NOW])
 check('L12 without brief levels the open page refuses to build', code == 4)
+
+# L13 catalyst alerts (hybrid shape: no entryZone/entry/stop/target) must not crash the open-page build
+b = copy.deepcopy(brief_final)
+b['catalysts'] = [{'tk': 'TEST', 'name': 'Test Co', 'industry': 'Software - Application', 'sector': 'Technology',
+                    'ctype': 'Earnings beat', 'what': 'Beat on EPS.', 'px': 50.0, 'pct': 2.0, 'cap': '$10B', 'topSector': True}]
+n = copy.deepcopy(live0); n['quotes']['TEST'] = {'px': 51.0, 'pct': 2.1, 'vol': 1000000, 'avgVol': 800000}
+d, _ = opn('L13_catalyst_alert_no_levels', n, brief_data=b)
+check('L13 catalyst alerts without computed levels build without crashing', any(c['tk'] == 'TEST' for c in page_json(str(OUT / 'L13_catalyst_alert_no_levels.html'), 'brief-data')['catalysts']))
 
 print(f'{len(results)} scenarios passed')
 for r in results:

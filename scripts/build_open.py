@@ -73,11 +73,12 @@ def main(argv=None):
         print('FAILED: no index or stock quotes; not overwriting the published page', file=sys.stderr)
         return 3
 
-    keep = ['tk', 'name', 'industry', 'sector', 'entryZone', 'entry', 'stop', 'target']
+    pick_keys = ['tk', 'name', 'industry', 'sector', 'entryZone', 'entry', 'stop', 'target']
+    cat_keys = ['tk', 'name', 'industry', 'sector', 'ctype', 'what']    # catalyst alerts carry no computed levels
     subset = {'asOf': brief.get('asOf'), 'asOfLabel': brief.get('asOfLabel'), 'builtLabel': brief.get('builtLabel'),
               'indices': brief['indices'], 'meta': brief.get('meta'), 'watch': brief['watch'],
-              'picks': [{k: p[k] for k in keep} for p in brief['picks']],
-              'catalysts': [{k: p[k] for k in keep} for p in brief.get('catalysts', [])]}
+              'picks': [{k: p[k] for k in pick_keys} for p in brief['picks']],
+              'catalysts': [{k: p.get(k) for k in cat_keys} for p in brief.get('catalysts', [])]}
     style = re.search(r'<style>(.*?)</style>', (root / 'templates/brief.template.html').read_text(encoding='utf-8'), re.S).group(1)
     tpl = (root / 'templates/open-update.template.html').read_text(encoding='utf-8')
     html = tpl.replace('/*__STYLE__*/', style).replace('__BRIEF_JSON__', hl.to_script_json(subset)).replace('__LIVE_JSON__', hl.to_script_json(live))

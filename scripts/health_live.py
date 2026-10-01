@@ -131,18 +131,21 @@ def assemble(new, old, brief, ctx):
             sections[sec] = {'status': 'failed', 'asOfUTC': None, 'source': '', 'msg': f'unavailable ({why})'}
             issues.append(issue(sec, 'failed', sections[sec]['msg']))
 
-    # the trade levels come from the brief; say how old they are
-    bh, bmeta = brief.get('health') or {}, brief.get('meta') or {}
-    blast = iso(bmeta.get('lastSession'))
-    lvl = {'status': 'ok', 'asOf': str(blast), 'msg': ''}
-    if blast is None or blast < ctx['lastSession']:
-        lvl.update(status='stale', msg=f'levels come from the brief for the {blast} close, not the latest session {ctx["lastSession"]}')
-    stale_secs = [k for k, v in (bh.get('sections') or {}).items() if k in ('technical', 'catalysts') and v['status'] != 'ok']
-    if stale_secs:
-        lvl.update(status='stale', msg=(lvl['msg'] + ' ' if lvl['msg'] else '') + 'the brief itself flagged ' + ', '.join(stale_secs) + ' as not fresh')
+    # the trade levels come from the brief's technical picks, which are PINNED (interactive-only) under the hybrid
+    # design — they are *expected* to be dated well before today, every day, until the next interactive refresh.
+    # Catalyst alerts carry no computed levels any more, so they no longer factor into "levels" staleness.
+    bh = brief.get('health') or {}
+    tech = (bh.get('sections') or {}).get('technical') or {}
+    tech_asof = iso(tech.get('asOf'))
+    if tech.get('status') == 'failed' or not brief.get('picks'):
+        lvl = {'status': 'failed', 'asOf': None, 'msg': 'the brief has no usable technical picks right now'}
+    elif tech_asof is None or tech_asof < ctx['lastSession']:
+        lvl = {'status': 'pinned', 'asOf': str(tech_asof), 'msg': f'levels are pinned from the {tech_asof} interactive refresh (expected under the hybrid design, not a bug) — refresh interactively when stale'}
+    else:
+        lvl = {'status': 'ok', 'asOf': str(tech_asof), 'msg': ''}
     sections['levels'] = lvl
-    if lvl['status'] != 'ok':
-        issues.append(issue('levels', 'stale', lvl['msg']))
+    if lvl['status'] == 'failed':
+        issues.append(issue('levels', 'failed', lvl['msg']))
 
     phase = 'open' if now >= ctx['openUTC'] else 'pre-open'
     failed = [k for k, v in sections.items() if v['status'] == 'failed']
