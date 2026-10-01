@@ -142,6 +142,11 @@ def _levels(p, ctx):
         out.append(('hard', f'{tk}: needs >= 15 closes'))
     elif abs(cs[-1] / p['px'] - 1) > 0.03:
         out.append(('warn', f'{tk}: last close and px differ by >3%'))
+    rd = p.get('readiness')
+    if rd is not None:
+        comps = ('composite', 'tightness', 'proximity', 'volumeDryUp', 'timeInBase')
+        if any(not num(rd.get(k)) or not (0 <= rd[k] <= 100) for k in comps):
+            out.append(('warn', f'{tk}: readiness score out of range, ignoring it'))
     return out
 
 

@@ -89,6 +89,11 @@ n = copy.deepcopy(fresh); n['picks'][1]['stop'] = n['picks'][1]['entry'] + 5
 d, _ = brief('B6_one_bad_pick', n, prev)
 check('B6 only the bad pick is dropped', [p['tk'] for p in d['picks']] == ['ANET', 'CVX', 'SNX'] and any('dropped' in i['msg'] for i in d['health']['issues']), [p['tk'] for p in d['picks']])
 
+# B12 a pick's readiness score is out of range -> warned, not dropped (readiness is informational, not a gate)
+n = copy.deepcopy(fresh); n['picks'][0]['readiness'] = {'composite': 150, 'tightness': 25, 'proximity': 25, 'volumeDryUp': 25, 'timeInBase': 25}
+d, _ = brief('B12_bad_readiness', n, prev)
+check('B12 out-of-range readiness warns but keeps the pick', 'ANET' in [p['tk'] for p in d['picks']] and any('readiness' in i['msg'] for i in d['health']['issues']))
+
 # B7 catalysts all older than 5 sessions, and previous copy too
 n = copy.deepcopy(fresh)
 for c in n['catalysts']: c['cdateISO'] = '2026-09-01'

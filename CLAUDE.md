@@ -70,6 +70,43 @@ The open-update routine gets the identical no-WebFetch rule, with its own fetch 
 - Setups wanted: tight bull flag / pennant / compression coiling under a pivot on a good base.
 - Pick 3-4 technical picks. A catalyst pick must not duplicate a technical pick.
 
+## Readiness scoring (added 2026-10-01) — technical picks only, PINNED/interactive
+Ranks the picks by breakout readiness instead of leaving them in filter-pass order. Four components, 0-25 each,
+summed into a 0-100 composite. All four need real daily OHLCV (closes/highs/lows/volume) for a lookback window of
+roughly the last 25 trading days (oldest first) — compute them from the same `stockanalysis.com` history you
+already pull for the sparkline, via its JSON API (see "Web sources" below), not from Finviz.
+
+First compute two reference points shared by all four components:
+- `pivot` = the highest daily High in the lookback window; `pivot_idx` = its index.
+- `time_in_base` = (last index) − `pivot_idx` — trading days since that high (0 if today made a new high).
+- `TR` (true range) per day = `max(high-low, abs(high-prevClose), abs(low-prevClose))` (first day: just `high-low`).
+- `atr14` = mean of the last 14 `TR` values; `atr_pct` = `atr14 / price * 100`.
+
+1. **TIGHTNESS (0-25).** Take the last 10 `TR` values; `early5` = mean of the first 5, `late5` = mean of the last 5.
+   `decline_pct = (early5 - late5) / early5 * 100`. Score via these anchors (piecewise-linear, clamped at the ends):
+   `-20%→0, 0%→5, 20%→15, 40%→25, 60%→25`. A proxy for "declining ATR / Bollinger bandwidth" per the spec — this
+   project does not compute true Bollinger Bands.
+2. **PROXIMITY (0-25).** `x = (price/pivot - 1) * 100` (always ≤ 0 since pivot is the window's own high). Anchors:
+   `-10%→0, -5%→10, -2%→25, +0.5%→25, +atr_pct→10, +(2*atr_pct+1)→0`. The flat 25 between -2% and +0.5% is the
+   "within 1-2% of the pivot" sweet spot; beyond +1 ATR above pivot the score collapses (already broke out, missed
+   it); beyond -5% below it tapers to 0 (not ready yet).
+3. **VOLUME DRY-UP (0-25).** Needs `time_in_base >= 2` (otherwise score 0 — no base exists yet to measure).
+   `base_vol` = mean volume of the days *after* `pivot_idx` (the consolidation). `impulse_vol` = mean volume of the
+   5 days up to and including `pivot_idx` (the move that made the high). `dryup_pct = (impulse_vol - base_vol) /
+   impulse_vol * 100`. Same anchors as tightness: `-20%→0, 0%→5, 20%→15, 40%→25, 60%→25`.
+4. **TIME-IN-BASE (0-25).** Scored directly off `time_in_base` (trading days): anchors `0→0, 3→5, 5→25, 15→25,
+   20→15, 30→5, 40→0` — the 5-15 day plateau is the "clean flag" window from the spec.
+
+Composite = round(sum of the four). Known limitation: `pivot` is just the window's global max High, so a stock
+that spiked once ~20+ sessions ago and has chopped sideways since can still look like it is "near its pivot" even
+though there is no tight recent flag — the tightness/volume-dry-up components usually catch this (both score low
+on a wide chop), but read the four-way breakdown, not just the composite, before trusting a pick. Re-tune the
+anchors if this keeps happening on a cleaner universe.
+
+Write `readiness: {composite, tightness, proximity, volumeDryUp, timeInBase}` on every pick (SCHEMA.md). The page
+sorts by `composite` descending and shows the breakdown on each card — see the Picks section legend on the page
+itself for the trader-facing explanation.
+
 ## Trade levels (arithmetic on daily highs/lows, nothing more) — technical picks only, PINNED/interactive
 - Entry zone: just above the pattern high / pivot.
 - Stop: the last session's low if it is 4-6% below entry, otherwise ~5% below entry (or below the gap/breakout level).
@@ -99,8 +136,14 @@ out) — `nextWarn`/earnings-calendar flags and revenue/EPS come from WebSearch 
 ## Web sources — INTERACTIVE SESSIONS ONLY (neither automated routine has WebFetch)
 When you are refreshing the pinned technical scan / industry map by hand with WebFetch available (the open-update
 routine has no pinned sections of its own — it has no WebFetch fetch plan to fall back to at all, only FMP + WebSearch):
-Work: finviz.com (groups.ashx, screener.ashx with `v=111|141|171`, quote.ashx), stockanalysis.com (`/stocks/<t>/`,
-`/stocks/<t>/history/`, `/etf/qqq/`), investing.com futures page, finance.yahoo.com live blogs, investrade.com previews.
+Work: finviz.com (groups.ashx, screener.ashx with `v=111|141|171`, quote.ashx — `groups.ashx` does NOT support a
+`f=sec_X` sector filter even though the stock screener does; fetch the full ~144-row industry table and pick your
+sectors' industries out of it yourself), stockanalysis.com (`/stocks/<t>/`, `/etf/qqq/`), investing.com futures
+page, finance.yahoo.com live blogs, investrade.com previews.
+**For daily OHLCV, use `stockanalysis.com/api/symbol/s/<TICKER>/history?range=3M&period=Daily` (their own JSON data
+API), not `/stocks/<t>/history/`** — the HTML history page is paginated/JS-rendered and WebFetch's summarizer
+reliably returns a stale, gapped window from it (confirmed 2026-10-01: multiple tickers came back with a ~5-week
+hole between late August and the most recent day). The API URL returns clean, correctly-dated, gap-free rows.
 Blocked or unreliable: cnbc.com (403 to fetch; headlines in search results are fine), bloomberg.com, tradingview.com,
 barchart.com, stooq, fred (garbled dates). Do not use investing.com technical pages (numbers did not reconcile).
 Re-test the automated routine against these domains occasionally (same test as 2026-10-01) — if the platform bug

@@ -2,93 +2,804 @@
  "source": "FMP + WebSearch (hybrid run — WebFetch unavailable to the automated routine; platform bug confirmed 2026-10-01)",
  "notices": [
   "WebFetch is unavailable to this routine: confirmed EGRESS_BLOCKED under Trusted, Custom (explicit allowlist) and Full network access alike on 2026-10-01 — a platform bug, not a config gap. Only FMP and WebSearch work automatically now.",
-  "Technical picks, the industry drill-down and the near-miss list are PINNED — they need Finviz/OHLC via WebFetch, so they are carried forward unchanged from the last interactive refresh (18 Sep 2026). Treat those cards as that date's read, not today's.",
-  "Sector strength (the 11-sector ranking) could NOT be refreshed reliably today either: a cross-check of just one sector (XLK) returned two WebSearch figures 4.6 percentage points apart, which fails this project's own reconciliation rule. Sector strength is therefore also carried forward from 18 Sep, flagged STALE, pending a better automated source for cap-weighted 1-month sector performance.",
   "The QQQ (NDX proxy) tile is WebSearch-sourced and approximate (sources seen ranged $736.53–$739.77) — it is excluded from the regime score as before.",
-  "Catalysts this run are alerts (ticker, what happened, FMP's live price/cap, sources) — not computed trade levels. Reading the daily OHLC tape to set an entry/stop/target needs WebFetch, which this routine does not have."
+  "Catalysts this run are alerts (ticker, what happened, FMP's live price/cap, sources) — not computed trade levels. Reading the daily OHLC tape to set an entry/stop/target needs WebFetch, which this routine does not have.",
+  "Interactive refresh (1 Oct): sectors, industries, technical picks and near-misses are freshly re-scanned via Finviz/stockanalysis (WebFetch) — no longer pinned to 18 Sep. The automated routine still cannot touch these sections; they will pin again at today's values until the next interactive refresh.",
+  "Readiness scoring added: each technical pick now shows a 0-100 composite (tightness, proximity to pivot, volume dry-up, time-in-base) alongside its levels — see the Picks section legend for the methodology."
  ],
  "indices": [
-  {"id": "SPX", "name": "S&P 500", "q": {"price": 7653.56, "change": -17.28, "pct": -0.22527, "dayLow": 7652.9, "dayHigh": 7722.88, "yearHigh": 7816.7, "yearLow": 6316.91, "ma50": 7645.157, "ma200": 7213.3394}},
-  {"id": "DJI", "name": "Dow Jones", "q": {"price": 50906.05, "change": -443.87, "pct": -0.8644, "dayLow": 50906.05, "dayHigh": 51473.93, "yearHigh": 54744.33, "yearLow": 45057.28, "ma50": 52773.465, "ma200": 50237.484}},
-  {"id": "RUT", "name": "Russell 2000", "q": {"price": 2796.86428, "change": -11.05764, "pct": -0.3938, "dayLow": 2796.86077, "dayHigh": 2822.21498, "yearHigh": 3069.71, "yearLow": 2303.46, "ma50": 2952.2825, "ma200": 2777.736}},
-  {"id": "VIX", "name": "Volatility", "q": {"price": 16.34, "change": 0.3, "pct": 1.87032, "dayLow": 15.62, "dayHigh": 16.61, "yearHigh": 35.3, "yearLow": 13.38, "ma50": 15.9016, "ma200": 18.06815}},
-  {"id": "QQQ", "name": "Invesco QQQ", "proxyFor": "NDX", "q": {"price": 739.77, "change": 1.84, "pct": 0.25}, "src": "WebSearch (approximate)"}
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "q": {
+    "price": 7653.56,
+    "change": -17.28,
+    "pct": -0.22527,
+    "dayLow": 7652.9,
+    "dayHigh": 7722.88,
+    "yearHigh": 7816.7,
+    "yearLow": 6316.91,
+    "ma50": 7645.157,
+    "ma200": 7213.3394
+   }
+  },
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "q": {
+    "price": 50906.05,
+    "change": -443.87,
+    "pct": -0.8644,
+    "dayLow": 50906.05,
+    "dayHigh": 51473.93,
+    "yearHigh": 54744.33,
+    "yearLow": 45057.28,
+    "ma50": 52773.465,
+    "ma200": 50237.484
+   }
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "q": {
+    "price": 2796.86428,
+    "change": -11.05764,
+    "pct": -0.3938,
+    "dayLow": 2796.86077,
+    "dayHigh": 2822.21498,
+    "yearHigh": 3069.71,
+    "yearLow": 2303.46,
+    "ma50": 2952.2825,
+    "ma200": 2777.736
+   }
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "q": {
+    "price": 16.34,
+    "change": 0.3,
+    "pct": 1.87032,
+    "dayLow": 15.62,
+    "dayHigh": 16.61,
+    "yearHigh": 35.3,
+    "yearLow": 13.38,
+    "ma50": 15.9016,
+    "ma200": 18.06815
+   }
+  },
+  {
+   "id": "QQQ",
+   "name": "Invesco QQQ",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 739.77,
+    "change": 1.84,
+    "pct": 0.25
+   },
+   "src": "WebSearch (approximate)"
+  }
  ],
  "macro": {
   "date": "2026-09-30",
-  "y10": 5.29, "y10prev": 5.26, "y2": 4.88, "y30": 5.64,
+  "y10": 5.29,
+  "y10prev": 5.26,
+  "y2": 4.88,
+  "y30": 5.64,
   "y10path": "5.17% on 25 Sep, 5.24% on 28 Sep, 5.26% on 29 Sep, 5.29% on 30 Sep",
-  "fed": {"range": "3.75–4.00%", "move": "25 bp", "date": "16 Sep", "vote": "12–0", "note": "first hike since 2023; the committee signaled more to come",
+  "fed": {
+   "range": "3.75–4.00%",
+   "move": "25 bp",
+   "date": "16 Sep",
+   "vote": "12–0",
+   "note": "first hike since 2023; the committee signaled more to come",
    "sources": [
-    {"t": "CNBC", "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"},
-    {"t": "CNN", "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"},
-    {"t": "Advisor Perspectives", "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"},
-    {"t": "Schwab", "u": "https://www.schwab.com/learn/story/fomc-meeting"}
-   ]}
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+    },
+    {
+     "t": "CNN",
+     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+    },
+    {
+     "t": "Advisor Perspectives",
+     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+    },
+    {
+     "t": "Schwab",
+     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+    }
+   ]
+  }
  },
  "catalysts": [
-  {"tk": "CCL", "name": "Carnival Corporation", "industry": "Travel Services", "sector": "Consumer Cyclical",
-   "ctype": "Earnings beat + raised guidance", "cdate": "29 Sep, after the close", "cdateISO": "2026-09-29",
+  {
+   "tk": "CCL",
+   "name": "Carnival Corporation",
+   "industry": "Travel Services",
+   "sector": "Consumer Cyclical",
+   "ctype": "Earnings beat + raised guidance",
+   "cdate": "29 Sep, after the close",
+   "cdateISO": "2026-09-29",
    "what": "Q3 adjusted EPS $1.43 crushed the $0.35 estimate on $8.43B revenue (+3.4% YoY, record net income $1.9B); FY26 EPS guidance raised to $2.24 and debt cut below $24B. Stock rallied about +10.4% the next session.",
    "sources": [
-    {"t": "SEC 8-K", "u": "https://www.sec.gov/Archives/edgar/data/0000815097/000081509726000104/a20263qearningsrelease8-k.htm"},
-    {"t": "Fool.com earnings call transcript", "u": "https://www.fool.com/earnings/call-transcripts/2026/09/30/carnival-ccl-q3-2026-earnings-call-transcript/"}
+    {
+     "t": "SEC 8-K",
+     "u": "https://www.sec.gov/Archives/edgar/data/0000815097/000081509726000104/a20263qearningsrelease8-k.htm"
+    },
+    {
+     "t": "Fool.com earnings call transcript",
+     "u": "https://www.fool.com/earnings/call-transcripts/2026/09/30/carnival-ccl-q3-2026-earnings-call-transcript/"
+    }
    ],
-   "cap": "$33.6B", "px": 24.54, "pct": -2.27, "topSector": false},
-  {"tk": "AKAM", "name": "Akamai Technologies", "industry": "Software - Infrastructure", "sector": "Technology",
-   "ctype": "Major contract / partnership", "cdate": "24 Sep", "cdateISO": "2026-09-24",
+   "cap": "$33.6B",
+   "px": 24.54,
+   "pct": -2.27,
+   "topSector": false
+  },
+  {
+   "tk": "AKAM",
+   "name": "Akamai Technologies",
+   "industry": "Software - Infrastructure",
+   "sector": "Technology",
+   "ctype": "Major contract / partnership",
+   "cdate": "24 Sep",
+   "cdateISO": "2026-09-24",
    "what": "Signed an $11.6B, seven-year cloud-services deal with Anthropic (expandable to about $20B); Anthropic also received a warrant to buy roughly 5% of Akamai at $111.33/share. Shares jumped as much as +16.4% the following session.",
    "sources": [
-    {"t": "TechCrunch", "u": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/"},
-    {"t": "GlobeNewswire (official release)", "u": "https://www.globenewswire.com/news-release/2026/09/24/3368729/0/en/akamai-announces-11-6-billion-multi-year-agreement-with-anthropic-to-support-growing-demand.html"}
+    {
+     "t": "TechCrunch",
+     "u": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/"
+    },
+    {
+     "t": "GlobeNewswire (official release)",
+     "u": "https://www.globenewswire.com/news-release/2026/09/24/3368729/0/en/akamai-announces-11-6-billion-multi-year-agreement-with-anthropic-to-support-growing-demand.html"
+    }
    ],
-   "cap": "$15.5B", "px": 106.35, "pct": -1.94, "topSector": true},
-  {"tk": "BA", "name": "The Boeing Company", "industry": "Aerospace & Defense", "sector": "Industrials",
-   "ctype": "Major contract win", "cdate": "29 Sep", "cdateISO": "2026-09-29",
+   "cap": "$15.5B",
+   "px": 106.35,
+   "pct": -1.94,
+   "topSector": true
+  },
+  {
+   "tk": "BA",
+   "name": "The Boeing Company",
+   "industry": "Aerospace & Defense",
+   "sector": "Industrials",
+   "ctype": "Major contract win",
+   "cdate": "29 Sep",
+   "cdateISO": "2026-09-29",
    "what": "Selected over Northrop Grumman for the US Navy's F/A-XX sixth-generation carrier fighter — a full-scale development contract worth more than $20B. Boeing now holds both of the US military's sixth-gen fighter programs (with the Air Force's F-47).",
    "sources": [
-    {"t": "CNBC", "u": "https://www.cnbc.com/2026/09/29/boeing-fighter-contract-pentagon.html"},
-    {"t": "Boeing newsroom", "u": "https://boeing.mediaroom.com/2026-09-29-U-S-Navy-Selects-Boeing-for-F-A-XX-Program"}
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/29/boeing-fighter-contract-pentagon.html"
+    },
+    {
+     "t": "Boeing newsroom",
+     "u": "https://boeing.mediaroom.com/2026-09-29-U-S-Navy-Selects-Boeing-for-F-A-XX-Program"
+    }
    ],
-   "cap": "$147B", "px": 186.05, "pct": -0.87, "topSector": false},
-  {"tk": "NICE", "name": "NICE Ltd.", "industry": "Software - Application", "sector": "Technology",
-   "ctype": "Analyst upgrade", "cdate": "30 Sep", "cdateISO": "2026-09-30",
+   "cap": "$147B",
+   "px": 186.05,
+   "pct": -0.87,
+   "topSector": false
+  },
+  {
+   "tk": "NICE",
+   "name": "NICE Ltd.",
+   "industry": "Software - Application",
+   "sector": "Technology",
+   "ctype": "Analyst upgrade",
+   "cdate": "30 Sep",
+   "cdateISO": "2026-09-30",
    "what": "Oppenheimer upgraded to Outperform from Perform with a $150 target (about +35% above the current price), citing AI-platform strength, easing AI-disruption fears and the Cognigy acquisition. Thin tape: avg volume (606K) is only just above the 500K floor.",
    "sources": [
-    {"t": "Seeking Alpha", "u": "https://seekingalpha.com/news/4648522-nice-upped-to-outperform-on-improving-financials-as-ai-disruption-fears-ease-oppenheimer"},
-    {"t": "MarketBeat", "u": "https://www.marketbeat.com/instant-alerts/analyst-nice-nasdaq-nice-stock-moved-up-to-outperform-by-oppenheimer-2026-09-30/"}
+    {
+     "t": "Seeking Alpha",
+     "u": "https://seekingalpha.com/news/4648522-nice-upped-to-outperform-on-improving-financials-as-ai-disruption-fears-ease-oppenheimer"
+    },
+    {
+     "t": "MarketBeat",
+     "u": "https://www.marketbeat.com/instant-alerts/analyst-nice-nasdaq-nice-stock-moved-up-to-outperform-by-oppenheimer-2026-09-30/"
+    }
    ],
-   "cap": "$6.5B", "px": 111.27, "pct": 4.18, "topSector": true}
+   "cap": "$6.5B",
+   "px": 111.27,
+   "pct": 4.18,
+   "topSector": true
+  }
  ],
  "bg": {
-  "CCL": {"cap": "$33.6B", "what": "Global cruise operator running Carnival, Princess, Holland America and other brands across roughly 700 ports worldwide."},
-  "AKAM": {"cap": "$15.5B", "what": "Provides cloud security, content delivery and edge-compute services that protect and speed up websites, apps and streaming."},
-  "BA": {"cap": "$147B", "what": "Builds commercial airliners and military aircraft/defense systems; also runs space and global-services divisions."},
-  "NICE": {"cap": "$6.5B", "what": "Sells AI-powered cloud software for customer-service engagement and financial-crime/compliance detection."}
+  "CCL": {
+   "cap": "$33.6B",
+   "what": "Global cruise operator running Carnival, Princess, Holland America and other brands across roughly 700 ports worldwide."
+  },
+  "AKAM": {
+   "cap": "$15.5B",
+   "what": "Provides cloud security, content delivery and edge-compute services that protect and speed up websites, apps and streaming."
+  },
+  "BA": {
+   "cap": "$147B",
+   "what": "Builds commercial airliners and military aircraft/defense systems; also runs space and global-services divisions."
+  },
+  "NICE": {
+   "cap": "$6.5B",
+   "what": "Sells AI-powered cloud software for customer-service engagement and financial-crime/compliance detection."
+  },
+  "GOOGL": {
+   "cap": "$4,211B",
+   "rev": "$445.9B",
+   "revG": 20.1,
+   "eps": "$19.93",
+   "epsG": 112.5,
+   "next": "28 Oct",
+   "nextWarn": false,
+   "what": "Runs Google Search, YouTube, Android and Google Cloud; the largest single holding in the top-3 sectors this run.",
+   "deal": []
+  },
+  "GH": {
+   "cap": "$23.9B",
+   "rev": "$1.18B",
+   "revG": 42.7,
+   "eps": "-$3.50",
+   "epsG": null,
+   "epsNote": "GAAP loss; growth % not meaningful",
+   "next": "28 Oct",
+   "nextWarn": false,
+   "what": "Precision-oncology company selling blood-based (liquid biopsy) and tissue tests for cancer detection and monitoring.",
+   "deal": []
+  },
+  "CRL": {
+   "cap": "$14.1B",
+   "rev": "$4.00B",
+   "revG": -0.7,
+   "eps": "-$4.88",
+   "epsG": null,
+   "epsNote": "GAAP loss (-$238M net income)",
+   "next": "4 Nov",
+   "nextWarn": false,
+   "what": "Runs drug-discovery and pre-clinical safety-testing labs (including research models) for pharma and biotech clients.",
+   "deal": []
+  },
+  "ALAB": {
+   "cap": "$61.8B",
+   "rev": "$1.20B",
+   "revG": 98.5,
+   "eps": "$2.03",
+   "epsG": 240.2,
+   "next": "3 Nov",
+   "nextWarn": false,
+   "what": "Makes semiconductor connectivity chips that move data at high speed inside cloud and AI data-center racks.",
+   "deal": []
+  }
  },
- "screenNotes": [],
+ "screenNotes": [
+  {
+   "st": "ok",
+   "icon": "✓",
+   "html": "Top-3 sectors shifted since the last interactive refresh (18 Sep): Technology, Communication Services, <b>Healthcare</b> (Energy and its old picks CVX/SNX dropped out of the top-3 entirely)."
+  },
+  {
+   "st": "ok",
+   "icon": "✓",
+   "html": "Readiness score added this run (see legend in Picks) — picks are now ranked by composite breakout-readiness, not just filter-pass order."
+  }
+ ],
  "rejected": [
-  "JBL (Jabil) — Q4 EPS $4.40 beat the $4.08 estimate, but shares fell ~6–10% on margin/capex concerns: a sell-the-news reaction, not a buyable catalyst.",
-  "HPE — today's +3.9% move has no fresh, dated catalyst: the Oracle/AI-contract news broke 11–12 Sep and Q3 earnings were reported 2 Sep, both outside the 5-session window.",
-  "VOYG (Voyager Technologies) — +6% on an Anduril partnership (29 Sep) but market cap looks to be under $5B (recent IPO).",
-  "CBOE — +5% on a 25-year S&P Dow Jones licensing extension (29 Sep); a routine renewal rather than a new major catalyst, held back in favor of the four stronger stories above."
+  "ARM — still 14% below its Aug 6 high; a recovery, not a coiling flag (readiness 43, proximity 0/25).",
+  "ACMR — 23-day base is wide and choppy, volume rose rather than dried up (readiness 38, volume dry-up 0/25).",
+  "A (Agilent) — made a new high just 1 day ago; no base has formed yet to score (readiness 23)."
  ],
  "sections": {
-  "indices": {"asOf": "2026-09-30", "source": "FMP index quotes (SPX/DJI/RUT/VIX); QQQ from WebSearch (approximate)"},
-  "macro": {"asOf": "2026-09-30", "source": "FMP treasury-rates; Fed block unchanged (no new FOMC meeting since 16 Sep)"},
-  "catalysts": {"asOf": "2026-09-30", "source": "WebSearch (2+ sources each) + FMP live price/cap"}
+  "indices": {
+   "asOf": "2026-09-30",
+   "source": "FMP index quotes (SPX/DJI/RUT/VIX); QQQ from WebSearch (approximate)"
+  },
+  "macro": {
+   "asOf": "2026-09-30",
+   "source": "FMP treasury-rates; Fed block unchanged (no new FOMC meeting since 16 Sep)"
+  },
+  "catalysts": {
+   "asOf": "2026-09-30",
+   "source": "WebSearch (2+ sources each) + FMP live price/cap"
+  },
+  "sectors": {
+   "asOf": "2026-10-01",
+   "source": "Finviz groups (cap-weighted 1M, interactive refresh)"
+  },
+  "technical": {
+   "asOf": "2026-10-01",
+   "source": "Finviz screener + pattern filters + stockanalysis OHLC (interactive refresh)"
+  },
+  "nearmiss": {
+   "asOf": "2026-10-01",
+   "source": "scan leftovers (interactive refresh)"
+  },
+  "industries": {
+   "asOf": "2026-10-01",
+   "source": "Finviz groups (interactive refresh)"
+  }
  },
  "fetchlog": [
-  {"id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": "price 7653.56, 30 Sep close"},
-  {"id": "fmp.indexes.index-quote.^DJI", "ok": true, "note": "price 50906.05"},
-  {"id": "fmp.indexes.index-quote.^RUT", "ok": true, "note": "price 2796.86"},
-  {"id": "fmp.indexes.index-quote.^VIX", "ok": true, "note": "price 16.34"},
-  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row 2026-09-30"},
-  {"id": "websearch.qqq.price", "ok": true, "note": "approximate, sources ranged $736.53-$739.77"},
-  {"id": "websearch.sector.ranking.xlk-xlf-crosscheck", "ok": false, "note": "XLK 1-month return disagreed by 4.6pp between two sources (-1.38% vs +3.26%) - fails reconciliation, sectors not refreshed this run"},
-  {"id": "fmp.quote.XLK", "ok": false, "note": "ACCESS DENIED - single-symbol quote endpoint requires a higher FMP plan"},
-  {"id": "websearch.catalysts.earnings-contracts-upgrades", "ok": true, "note": "CCL, AKAM, BA, NICE confirmed with 2+ sources each; JBL and HPE rejected (sell-the-news / stale)"},
-  {"id": "fmp.company.profile-symbol.CCL,AKAM,BA,NICE,JBL,HPE", "ok": true, "note": "cap/price/description for catalyst screening"}
+  {
+   "id": "fmp.indexes.index-quote.^GSPC",
+   "ok": true,
+   "note": "price 7653.56, 30 Sep close"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^DJI",
+   "ok": true,
+   "note": "price 50906.05"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^RUT",
+   "ok": true,
+   "note": "price 2796.86"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^VIX",
+   "ok": true,
+   "note": "price 16.34"
+  },
+  {
+   "id": "fmp.economics.treasury-rates",
+   "ok": true,
+   "note": "latest row 2026-09-30"
+  },
+  {
+   "id": "websearch.qqq.price",
+   "ok": true,
+   "note": "approximate, sources ranged $736.53-$739.77"
+  },
+  {
+   "id": "websearch.sector.ranking.xlk-xlf-crosscheck",
+   "ok": false,
+   "note": "XLK 1-month return disagreed by 4.6pp between two sources (-1.38% vs +3.26%) - fails reconciliation, sectors not refreshed this run"
+  },
+  {
+   "id": "fmp.quote.XLK",
+   "ok": false,
+   "note": "ACCESS DENIED - single-symbol quote endpoint requires a higher FMP plan"
+  },
+  {
+   "id": "websearch.catalysts.earnings-contracts-upgrades",
+   "ok": true,
+   "note": "CCL, AKAM, BA, NICE confirmed with 2+ sources each; JBL and HPE rejected (sell-the-news / stale)"
+  },
+  {
+   "id": "fmp.company.profile-symbol.CCL,AKAM,BA,NICE,JBL,HPE",
+   "ok": true,
+   "note": "cap/price/description for catalyst screening"
+  },
+  {
+   "id": "finviz.groups.sector",
+   "ok": true,
+   "note": "11 sectors, interactive WebFetch"
+  },
+  {
+   "id": "finviz.groups.industry",
+   "ok": true,
+   "note": "144 industries; top-3-per-sector selected manually from the full table (groups.ashx does not support a sector filter)"
+  },
+  {
+   "id": "finviz.screener.v111 (9 industries)",
+   "ok": true,
+   "note": "cap_midover,price>5,avgvol>500k per industry"
+  },
+  {
+   "id": "finviz.screener.pattern+sma (3 sectors)",
+   "ok": true,
+   "note": "ta_pattern_tlresistance|wedgeresistance|wedge|horizontal + sma20/50/200 positive"
+  },
+  {
+   "id": "stockanalysis.api.history (8 candidates)",
+   "ok": true,
+   "note": "ANET,ACMR,ALAB,ARM,GOOGL,A,CRL,GH — daily OHLCV via the JSON history API (the HTML history page returned stale cached rows)"
+  },
+  {
+   "id": "stockanalysis.overview (4 picks)",
+   "ok": true,
+   "note": "revenue/EPS/next earnings for GOOGL,GH,CRL,ALAB"
+  },
+  {
+   "id": "finviz.screener.v171+v141 (4 picks)",
+   "ok": true,
+   "note": "SMA distances, RSI, volatility week/month"
+  }
  ],
- "meta": {"schemaVersion": 1, "targetSession": "2026-10-01", "lastSession": "2026-09-30"}
+ "meta": {
+  "schemaVersion": 1,
+  "targetSession": "2026-10-01",
+  "lastSession": "2026-09-30"
+ },
+ "sectors": [
+  {
+   "name": "Technology",
+   "pct": 4.56
+  },
+  {
+   "name": "Communication Services",
+   "pct": 2.8
+  },
+  {
+   "name": "Healthcare",
+   "pct": -1.72
+  },
+  {
+   "name": "Industrials",
+   "pct": -3.0
+  },
+  {
+   "name": "Energy",
+   "pct": -3.34
+  },
+  {
+   "name": "Consumer Defensive",
+   "pct": -3.81
+  },
+  {
+   "name": "Utilities",
+   "pct": -5.76
+  },
+  {
+   "name": "Financial",
+   "pct": -5.95
+  },
+  {
+   "name": "Consumer Cyclical",
+   "pct": -6.33
+  },
+  {
+   "name": "Real Estate",
+   "pct": -7.06
+  },
+  {
+   "name": "Basic Materials",
+   "pct": -8.58
+  }
+ ],
+ "sectorSource": "Finviz groups · Perf Month · cap-weighted (interactive refresh, 1 Oct)",
+ "industries": [
+  {
+   "sector": "Technology",
+   "items": [
+    {
+     "name": "Semiconductor Equipment & Materials",
+     "pct": 9.58,
+     "n": 20
+    },
+    {
+     "name": "Computer Hardware",
+     "pct": 8.98,
+     "n": 12
+    },
+    {
+     "name": "Semiconductors",
+     "pct": 8.07,
+     "n": 41
+    }
+   ]
+  },
+  {
+   "sector": "Communication Services",
+   "items": [
+    {
+     "name": "Internet Content & Information",
+     "pct": 6.95,
+     "n": 20
+    },
+    {
+     "name": "Electronic Gaming & Multimedia",
+     "pct": -1.38,
+     "n": 3
+    },
+    {
+     "name": "Publishing",
+     "pct": -4.69,
+     "n": 3
+    }
+   ]
+  },
+  {
+   "sector": "Healthcare",
+   "items": [
+    {
+     "name": "Diagnostics & Research",
+     "pct": 7.78,
+     "n": 20
+    },
+    {
+     "name": "Pharmaceutical Retailers",
+     "pct": 3.22,
+     "n": 0
+    },
+    {
+     "name": "Health Information Services",
+     "pct": 2.11,
+     "n": 10
+    }
+   ]
+  }
+ ],
+ "picks": [
+  {
+   "tk": "GOOGL",
+   "name": "Alphabet",
+   "industry": "Internet Content & Information",
+   "sector": "Communication Services",
+   "setup": "Pullback under the Sep high",
+   "tags": "Finviz: above SMA20/50/200",
+   "pivot": 364.17,
+   "entryZone": "364.30 – 366.00",
+   "entry": 364.3,
+   "stop": 346.09,
+   "stopNote": "~5% below entry (last low 6.4% away)",
+   "target": 400.73,
+   "why": "Six-day pullback under the $364.17 high after the Sep 22 spike; tightest base of the universe this run (ATR down 38% over the last 10 sessions) with volume already drying up.",
+   "trim": "52-wk-high territory on a breakout — trim 25% on the first extension.",
+   "cap": "$4,211B",
+   "avgVol": "25.3M",
+   "sma": [
+    0.46,
+    0.04,
+    1.62
+   ],
+   "rsi": 50.12,
+   "volW": 1.97,
+   "volM": 2.13,
+   "px": 344.08,
+   "pct": 0.93,
+   "closes": [
+    348.06,
+    346.96,
+    342.0,
+    340.65,
+    346.59,
+    335.02,
+    337.12,
+    342.48,
+    338.46,
+    338.36,
+    330.65,
+    332.6,
+    338.5,
+    349.39,
+    344.98,
+    342.87,
+    347.33,
+    349.54,
+    354.97,
+    351.16,
+    337.83,
+    342.36,
+    343.92,
+    342.75,
+    340.92,
+    344.08
+   ],
+   "readiness": {
+    "composite": 68,
+    "tightness": 24,
+    "proximity": 9,
+    "volumeDryUp": 10,
+    "timeInBase": 25
+   }
+  },
+  {
+   "tk": "GH",
+   "name": "Guardant Health",
+   "industry": "Diagnostics & Research",
+   "sector": "Healthcare",
+   "setup": "Tight flag under the Sep high",
+   "tags": "Finviz: above SMA20/50/200",
+   "pivot": 183.51,
+   "entryZone": "183.60 – 185.50",
+   "entry": 183.6,
+   "stop": 175.33,
+   "stopNote": "last session's low (4.5% away)",
+   "target": 201.96,
+   "why": "Nine-day base under the $183.51 high (Sep 17); tightness improved 22% but volume has picked up during the base, not dried up — watch for a false start.",
+   "trim": "Prior swing high $176.58 (31 Jul) is minor resistance inside the trade — trim lightly there.",
+   "cap": "$23.9B",
+   "avgVol": "1.78M",
+   "sma": [
+    4.27,
+    8.56,
+    44.78
+   ],
+   "rsi": 60.56,
+   "volW": 3.5,
+   "volM": 4.77,
+   "px": 178.36,
+   "pct": 0.35,
+   "closes": [
+    163.18,
+    164.92,
+    170.92,
+    168.52,
+    161.5,
+    159.02,
+    164.41,
+    163.06,
+    161.04,
+    161.41,
+    160.98,
+    162.78,
+    159.03,
+    157.38,
+    167.84,
+    175.65,
+    174.9,
+    183.1,
+    179.38,
+    173.87,
+    177.16,
+    176.31,
+    176.45,
+    177.25,
+    177.33,
+    177.73,
+    178.36
+   ],
+   "readiness": {
+    "composite": 62,
+    "tightness": 16,
+    "proximity": 21,
+    "volumeDryUp": 0,
+    "timeInBase": 25
+   }
+  },
+  {
+   "tk": "CRL",
+   "name": "Charles River Laboratories",
+   "industry": "Diagnostics & Research",
+   "sector": "Healthcare",
+   "setup": "Wide base, retesting the Aug high",
+   "tags": "Finviz: above SMA20/50/200",
+   "pivot": 303.31,
+   "entryZone": "303.40 – 305.50",
+   "entry": 303.4,
+   "stop": 288.23,
+   "stopNote": "~5% below entry (last low only 3.3% away)",
+   "target": 333.74,
+   "why": "23 sessions since the $303.31 high — a wide, choppy base (ATR barely down 1%) rather than a tight coil; lowest tightness/volume-dryup scores of the four. Include with a smaller size.",
+   "trim": "Has chopped in a $273–298 range for 3 weeks — trim 25% back at the prior high if it stalls again.",
+   "cap": "$14.1B",
+   "avgVol": "0.95M",
+   "sma": [
+    3.92,
+    7.87,
+    41.13
+   ],
+   "rsi": 60.78,
+   "volW": 3.63,
+   "volM": 3.24,
+   "px": 295.01,
+   "pct": -0.33,
+   "closes": [
+    295.19,
+    298.58,
+    297.64,
+    295.1,
+    296.41,
+    291.5,
+    288.24,
+    282.34,
+    291.76,
+    293.35,
+    288.5,
+    280.76,
+    278.35,
+    273.0,
+    278.26,
+    273.11,
+    272.88,
+    273.41,
+    281.67,
+    278.06,
+    279.01,
+    285.11,
+    277.33,
+    294.44,
+    292.84,
+    294.59,
+    295.96,
+    295.01
+   ],
+   "readiness": {
+    "composite": 45,
+    "tightness": 6,
+    "proximity": 21,
+    "volumeDryUp": 6,
+    "timeInBase": 12
+   }
+  },
+  {
+   "tk": "ALAB",
+   "name": "Astera Labs",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "setup": "3-day pullback after a breakout spike",
+   "tags": "Finviz: above SMA20/50/200",
+   "pivot": 377.87,
+   "entryZone": "378.00 – 381.00",
+   "entry": 378.0,
+   "stop": 359.1,
+   "stopNote": "~5% below entry (last low 9.2% away — too far, high-beta name)",
+   "target": 415.8,
+   "why": "Sharp Sep 21–25 breakout to $377.87 (from $257 two weeks earlier) now pulling back on lighter volume (-17% vs the breakout week). Base is only 3 days old — thin structure, could still need more time.",
+   "trim": "Round-number resistance near $400 sits inside the trade — trim 25% there.",
+   "cap": "$61.8B",
+   "avgVol": "3.27M",
+   "sma": [
+    13.67,
+    15.69,
+    48.93
+   ],
+   "rsi": 60.68,
+   "volW": 5.99,
+   "volM": 6.57,
+   "px": 355.97,
+   "pct": -2.1,
+   "closes": [
+    277.53,
+    282.65,
+    290.3,
+    304.09,
+    289.47,
+    296.98,
+    279.91,
+    274.13,
+    282.82,
+    310.4,
+    288.85,
+    300.54,
+    284.53,
+    291.22,
+    257.04,
+    252.54,
+    269.18,
+    293.56,
+    303.25,
+    340.74,
+    363.46,
+    360.46,
+    360.51,
+    364.62,
+    351.31,
+    357.84,
+    355.97
+   ],
+   "readiness": {
+    "composite": 43,
+    "tightness": 14,
+    "proximity": 8,
+    "volumeDryUp": 16,
+    "timeInBase": 5
+   }
+  }
+ ],
+ "pickWindow": "20-28 trading days to 30 Sep 2026, stockanalysis.com daily data",
+ "nearmiss": [
+  {
+   "tk": "ARM",
+   "px": 289.66,
+   "pct": -1.39,
+   "why": "Semiconductors · still 14% below its Aug high — recovering from a selloff, not coiling; proximity score 0"
+  },
+  {
+   "tk": "ACMR",
+   "px": 80.92,
+   "pct": 6.97,
+   "why": "Semiconductor Equip. & Materials · 23-day base is too wide and volume rose into it, not dried up; dry-up score 0"
+  },
+  {
+   "tk": "ANET",
+   "px": 203.59,
+   "pct": 0.36,
+   "why": "Computer Hardware · only 3 days into a new base under the $212 Sep 25 high — came close but not enough structure yet"
+  }
+ ]
 }

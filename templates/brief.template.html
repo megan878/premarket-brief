@@ -178,6 +178,17 @@ body {
 .pick .chk .chip.no::before { content: "? "; color: var(--crit); font-weight: 700; }
 
 
+/* ── Readiness score ── */
+.readiness { display: flex; align-items: center; gap: 14px; margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--chip); flex-wrap: wrap; }
+.readiness .score { display: flex; align-items: baseline; gap: 4px; }
+.readiness .num { font-size: 22px; font-weight: 750; letter-spacing: -0.01em; }
+.readiness .num.ok { color: var(--good-text); } .readiness .num.px { color: var(--warn-ink); } .readiness .num.no { color: var(--crit); }
+.readiness .of100 { font-size: 11px; color: var(--ink-3); }
+.readiness .bd { display: flex; gap: 10px; flex-wrap: wrap; }
+.readiness .bdi { display: flex; flex-direction: column; align-items: center; font-size: 10px; color: var(--ink-3); line-height: 1.3; cursor: help; }
+.readiness .bdi b { font-size: 13px; color: var(--ink); font-weight: 650; }
+.readiness .bdi i { font-style: normal; text-transform: uppercase; letter-spacing: .03em; }
+
 /* ── Catalyst vs technical accents ── */
 .kind { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--on-acc); }
 .kind.tech { background: var(--acc-tech); }
@@ -460,12 +471,16 @@ a.wi:hover { border-color: var(--ink-3); }
       ${deal ? `<ul class="deal">${deal}</ul>` : ''}
     </div>`;
   };
-  sec2.append($(`<h3 class="sub-h"><span class="kind tech">TECHNICAL</span> Compression setups near a pivot${stale("technical")}</h3>`));
+  sec2.append($(`<h3 class="sub-h"><span class="kind tech">TECHNICAL</span> Compression setups near a pivot, ranked by readiness${stale("technical")}</h3>`));
+  if ((D.picks || []).some(p => p.readiness)) {
+    sec2.append($(`<p class="sub" style="margin:-4px 0 0">Ranked highest-readiness first. <b>Readiness</b> is a 0-100 score (4 components, 25 pts each): <b>tightness</b> (is volatility contracting into the base?), <b>proximity</b> (how close to the pivot, without having already broken out), <b>volume dry-up</b> (did consolidation volume fade vs. the move that preceded it?), <b>time-in-base</b> (5-15 trading days is the clean-flag window). It ranks relative readiness within this run's universe — not a buy signal on its own.</p>`));
+  }
   const grid = $(`<div class="picks"></div>`);
   sec2.append(grid);
   const price2 = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   if (!(D.picks || []).length) grid.append($(`<div class="empty">No technical setups available this run.</div>`));
-  (D.picks || []).forEach(pk => {
+  const rankedPicks = [...(D.picks || [])].sort((a, b) => (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
+  rankedPicks.forEach(pk => {
     const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
     const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
     // sparkline of closes with pivot + stop reference lines
@@ -484,8 +499,20 @@ a.wi:hover { border-color: var(--ink-3); }
       [pk.volM >= 2 ? 'ok' : 'px', `Volatility W/M ${pk.volW.toFixed(1)} / ${pk.volM.toFixed(1)}% (ADR proxy)`],
       ['no', 'EMA9 &gt; price &gt; EMA21 not verified'], ['no', 'ADX not verified']
     ].map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
+    const rd = pk.readiness;
+    const rdCls = (v) => v >= 70 ? 'ok' : v >= 45 ? 'px' : 'no';
+    const readinessHtml = rd ? `<div class="readiness">
+      <div class="score"><span class="num ${rdCls(rd.composite)}">${rd.composite}</span><span class="of100">/100 readiness</span></div>
+      <div class="bd">
+        <span class="bdi" title="Tightness — is volatility contracting into the base?"><i>Tight</i><b>${rd.tightness}</b></span>
+        <span class="bdi" title="Proximity — distance from the pivot"><i>Prox</i><b>${rd.proximity}</b></span>
+        <span class="bdi" title="Volume dry-up — consolidation volume vs. the prior move"><i>Vol↓</i><b>${rd.volumeDryUp}</b></span>
+        <span class="bdi" title="Time-in-base — trading days forming the pattern"><i>Time</i><b>${rd.timeInBase}</b></span>
+      </div>
+    </div>` : '';
     grid.append($(`<article class="card pick tech" id="pick-${pk.tk}">
       <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span><span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+      ${readinessHtml}
       <div class="setup"><b>${pk.setup}</b> <span>· ${pk.tags}</span></div>
       ${bgHtml(pk.tk)}
       ${svg}
@@ -500,7 +527,7 @@ a.wi:hover { border-color: var(--ink-3); }
       <div class="chk">${chips}</div>
     </article>`));
   });
-  sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (${D.pickWindow}): entry just above the pattern high, stop at the last session's low when it is 4–6% away (otherwise ~5%), target +10%. Not investment advice; nothing here has been checked against a live pre-market quote.</p>`));
+  sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (${D.pickWindow}): entry just above the pattern high, stop at the last session's low when it is 4–6% away (otherwise ~5%), target +10%. Readiness is a relative ranking within this run's universe, computed from the same daily data (tightening volatility, distance from the pivot, volume drying up into the base, days spent basing) — a high score means "closer to a clean breakout setup right now," not a guarantee. Not investment advice; nothing here has been checked against a live pre-market quote.</p>`));
 
 
   /* ── Catalyst alerts (news only — no computed trade levels; see CLAUDE.md) ── */
