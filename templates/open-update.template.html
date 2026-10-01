@@ -278,7 +278,7 @@
   /* ── Footer ── */
   const fs = ((L.futures && L.futures.sources) || []).map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
   app.append($(`<footer class="foot">
-    <p>Quotes: FMP, snapshot ${L.asOf}; opening prints from stockanalysis.com${fs ? '; futures: ' + fs : ''}. Pre-market prices and volume are not available on free feeds, so the open gap and volume since the open stand in for them. Levels and rules come from the brief. Not investment advice.</p>
+    <p>Quotes: FMP company/profile-symbol${fs ? '; futures: ' + fs : ''}. That endpoint has no opening-print field, so the open gap stands in for pre-market data wherever it says "open print not available yet" — this is a known free-plan limit, not a fetch failure. Levels and rules come from the brief; catalyst alerts carry live price/% only, no computed levels. Not investment advice.</p>
     ${(L.footnotes || []).map(f => `<p>${f}</p>`).join('')}
   </footer>`));
 })();

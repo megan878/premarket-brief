@@ -49,12 +49,19 @@ def check_futures(L, fri, ctx):
 
 
 def check_quote(tk, q, friday_px):
+    """`friday_px` is the brief's reference price for this ticker — under the hybrid design that can be weeks old
+    for a PINNED technical pick or near-miss (only catalyst-alert tickers are refreshed same-day), so it is no
+    longer a safe stand-in for "yesterday's close" when sanity-checking today's % move. Use FMP's own `change`
+    field for that instead (price - change = FMP's own implied previous close) — a real self-consistency check
+    that doesn't depend on how old the brief's snapshot is."""
     if not isinstance(q, dict) or not num(q.get('px')) or q['px'] <= 0:
         return 'no valid price'
     if not num(q.get('pct')) or abs(q['pct']) > 40:
         return f'move {q.get("pct")}% implausible'
-    if friday_px and abs((q['px'] / friday_px - 1) * 100 - q['pct']) > 0.6:
-        return f'price {q["px"]} disagrees with its own % vs the brief close {friday_px}'
+    if num(q.get('change')):
+        prev = q['px'] - q['change']
+        if prev > 0 and abs(q['change'] / prev * 100 - q['pct']) > 0.6:
+            return f'price {q["px"]} and its own % change disagree'
     if q.get('open') is not None and (not num(q['open']) or q['open'] <= 0 or (friday_px and abs(q['open'] / friday_px - 1) > 0.4)):
         return 'open print implausible'
     if not num(q.get('vol')) or q['vol'] < 0 or not num(q.get('avgVol')) or q['avgVol'] <= 0:

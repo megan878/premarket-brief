@@ -11,7 +11,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 BRIEF_NOW = '2026-09-21T12:00:00Z'          # Mon 20:00 HKT -> last session = Fri 18 Sep
 OPEN_NOW = '2026-09-21T13:52:00Z'           # 09:52 ET, 22 min after the open
 fresh = json.loads((root / 'data/brief-data.example.json').read_text(encoding='utf-8'))
-live0 = json.loads((root / 'data/open-live.json').read_text(encoding='utf-8'))
+live0 = json.loads((root / 'data/open-live.example.json').read_text(encoding='utf-8'))
 results = []
 
 
@@ -200,8 +200,15 @@ check('L11 unsourced news dropped', len(d['news']) == len(live0['news']) - 1)
 
 # L12 no brief at all -> no levels, cannot build
 out = OUT / 'L12.html'
-code, _ = run(build_open, ['--brief-data', str(OUT / 'nope.json'), '--live', str(root / 'data/open-live.json'), '--out', str(out), '--now', OPEN_NOW])
+code, _ = run(build_open, ['--brief-data', str(OUT / 'nope.json'), '--live', str(root / 'data/open-live.example.json'), '--out', str(out), '--now', OPEN_NOW])
 check('L12 without brief levels the open page refuses to build', code == 4)
+
+# L14 a PINNED technical pick's brief price is weeks old; a valid live quote with a normal daily move must not be
+# rejected just because it has drifted a lot from that stale reference (the bug check_quote used to have)
+n = copy.deepcopy(live0)
+n['quotes']['ANET'] = {'px': 203.59, 'pct': 0.36, 'change': 0.73, 'vol': 4875937, 'avgVol': 7278370}
+d, _ = opn('L14_pinned_reference_drift', n)
+check('L14 a normal live quote is kept even when it has drifted far from a pinned brief price', 'ANET' in d['quotes'])
 
 # L13 catalyst alerts (hybrid shape: no entryZone/entry/stop/target) must not crash the open-page build
 b = copy.deepcopy(brief_final)

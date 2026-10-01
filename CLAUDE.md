@@ -109,9 +109,10 @@ is ever fixed, WebFetch could come back into the automated routine and this whol
 ## Files
 - `data/brief-data.json` / `data/open-live.json` — what YOU write, every run (schema in `SCHEMA.md`). These get
   overwritten daily (and auto-committed by the stop-hook) — never treat them as a stable reference.
-- `data/brief-data.example.json` — the permanent, complete schema example (separated from the live file above after
-  the two collided: the stop-hook's daily auto-commit kept overwriting the fixture `tests/test_pipeline.py` relies on).
-  Copy its shape; never overwrite it from a routine run.
+- `data/brief-data.example.json` / `data/open-live.example.json` — the permanent, complete schema examples (separated
+  from the live files above after they collided with the test fixtures `tests/test_pipeline.py` relies on — once from
+  the stop-hook's daily auto-commit, once from a manual interactive dry run). Copy their shape; never overwrite them
+  from a routine run or a dry run — write to `data/brief-data.json` / `data/open-live.json` instead.
 - `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`.
 - `templates/` — page templates. `out/` — generated pages and reports (never committed).
 - `tests/` — `python tests/test_market_time.py && python tests/test_pipeline.py` must pass before any change to scripts.

@@ -1,0 +1,334 @@
+{
+ "asOf": "Mon 21 Sep 2026 · 09:48 ET · 21:48 HK",
+ "note": "Snapshot taken 18 minutes after the US open. Pre-market volume is not available from any free source, so volume shown is since the open.",
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "px": 7700.2,
+   "pct": 0.65,
+   "prev": 7650.5
+  },
+  {
+   "id": "QQQ",
+   "name": "Nasdaq-100 ETF",
+   "px": 731.45,
+   "pct": 1.39,
+   "prev": 721.45,
+   "proxy": true
+  },
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "px": 51775.24,
+   "pct": 0.18,
+   "prev": 51682.64
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "px": 2872.58,
+   "pct": 0.43,
+   "prev": 2860.4
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "px": 14.92,
+   "pct": 0.74,
+   "prev": 14.81
+  }
+ ],
+ "futures": {
+  "asOf": "09:37 ET",
+  "contract": "Dec-26",
+  "rows": [
+   {
+    "id": "ES",
+    "name": "S&P 500",
+    "px": 7761.75,
+    "pct": 0.64,
+    "chk": 0.64
+   },
+   {
+    "id": "NQ",
+    "name": "Nasdaq-100",
+    "px": 30261.75,
+    "pct": 1.15,
+    "chk": 1.13
+   },
+   {
+    "id": "YM",
+    "name": "Dow",
+    "px": 52285.0,
+    "pct": 0.4,
+    "chk": 0.38
+   },
+   {
+    "id": "RTY",
+    "name": "Russell 2000",
+    "px": 2893.4,
+    "pct": 0.41,
+    "chk": 0.42
+   }
+  ],
+  "sources": [
+   {
+    "t": "Investing.com",
+    "u": "https://www.investing.com/indices/indices-futures"
+   },
+   {
+    "t": "Yahoo Finance (cross-check)",
+    "u": "https://finance.yahoo.com/markets/commodities/"
+   }
+  ]
+ },
+ "quotes": {
+  "ANET": {
+   "px": 203.99,
+   "pct": 2.31,
+   "vol": 418867,
+   "avgVol": 7845611,
+   "open": 203.4,
+   "change": 4.6058
+  },
+  "MTCH": {
+   "px": 43.32,
+   "pct": 0.28,
+   "vol": 80710,
+   "avgVol": 3271998,
+   "open": 43.75,
+   "change": 0.121
+  },
+  "CVX": {
+   "px": 207.185,
+   "pct": -1.11,
+   "vol": 732444,
+   "avgVol": 9048052,
+   "open": 207.98,
+   "change": -2.3256
+  },
+  "SNX": {
+   "px": 273.04,
+   "pct": 2.58,
+   "vol": 82226,
+   "avgVol": 775619,
+   "open": 266.5,
+   "change": 6.8673
+  },
+  "GNRC": {
+   "px": 206.66,
+   "pct": -0.38,
+   "vol": 198315,
+   "avgVol": 1097153,
+   "open": 210.0,
+   "change": -0.7883
+  },
+  "MTSI": {
+   "px": 281.74,
+   "pct": 2.13,
+   "vol": 105829,
+   "avgVol": 1591308,
+   "open": 285.95,
+   "change": 5.8759
+  },
+  "VICR": {
+   "px": 228.68,
+   "pct": 2.68,
+   "vol": 52741,
+   "avgVol": 863230,
+   "open": 230.25,
+   "change": 5.9687
+  },
+  "ETSY": {
+   "px": 73.07,
+   "pct": 0.65,
+   "vol": 67310,
+   "avgVol": 3008685,
+   "open": 73.55,
+   "change": 0.4719
+  },
+  "ARW": {
+   "px": 220.21,
+   "pct": 0.41,
+   "vol": 20698,
+   "avgVol": 620885,
+   "open": 222.84,
+   "change": 0.8992
+  },
+  "XOM": {
+   "px": 160.09,
+   "pct": -2.11,
+   "vol": 920222,
+   "avgVol": 15840260,
+   "open": 161.62,
+   "change": -3.4507
+  },
+  "GOOGL": {
+   "px": 354.6,
+   "pct": 1.45,
+   "vol": 5070558,
+   "avgVol": 30214482,
+   "open": 350.64,
+   "change": 5.0682
+  }
+ },
+ "notes": {
+  "ANET": "Joins the S&P 100 at today's open. Still 1% under its pivot.",
+  "MTCH": "Opened +1.3%, has faded to +0.3%. Needs a move to $45 to trigger.",
+  "CVX": "Oil is down 2%+. Broke Friday's low (the stop) before ever triggering.",
+  "SNX": "Just above the zone. Earnings Thu 24 Sep, before the open.",
+  "GNRC": "Opened at $210.00 (above the zone) and faded back into it.",
+  "MTSI": "Gapped +3.7% into the $286–288 resistance and faded; still above the zone.",
+  "VICR": "Gapped +3.4%; extended. The plan was a retest of $214–220.",
+  "ETSY": "Drifting up but well under the $76.50 reclaim; 1.2% above the stop.",
+  "ARW": "Opened +1.6%, now +0.4%.",
+  "XOM": "Down on oil and through Friday's low ($161.31).",
+  "GOOGL": "Bouncing with the Nasdaq."
+ },
+ "news": [
+  {
+   "tag": "Energy",
+   "top3": true,
+   "title": "Oil slides for a fourth session",
+   "text": "Brent is near $101.5 (−2.3%) and WTI near $97.9 (−2.4%) as Saudi crude exports recover (over 4M b/d in September vs 2.4M in August) and hopes build that US–Iran talks resume. XOM −2.1% and CVX −1.1% at 09:48 ET.",
+   "names": [
+    "CVX",
+    "XOM"
+   ],
+   "sources": [
+    {
+     "t": "HDFC Sky",
+     "u": "https://hdfcsky.com/news/brent-crude-oil-price-today-september-21-2026-brent-crude-falls-to-101-5-wti-at-97-9-as-supply-concerns-ease"
+    },
+    {
+     "t": "Nairametrics",
+     "u": "https://nairametrics.com/2026/09/21/brent-crude-falls-to-101-71-wti-below-100-as-us-iran-diplomacy-hopes-grow/"
+    },
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/21/iran-us-oil-prices-crude-saudi-arabia-.html"
+    }
+   ]
+  },
+  {
+   "tag": "Technology",
+   "top3": true,
+   "title": "US–China talks lift chips ahead of Thursday's summit",
+   "text": "Treasury Secretary Bessent called talks with China's He Lifeng \"very successful\" and proposed an AI incident-alert channel. Trump and Xi meet Thu 24 Sep; chip-export controls are the key swing factor. Pre-market: AMD about +3%, MU +2%, TSM +1%.",
+   "names": [
+    "ANET",
+    "MTSI",
+    "VICR",
+    "SNX"
+   ],
+   "sources": [
+    {
+     "t": "Bloomberg",
+     "u": "https://www.bloomberg.com/news/articles/2026-09-21/bessent-hails-very-successful-china-talks-on-ai-threats-trade"
+    },
+    {
+     "t": "Japan Times",
+     "u": "https://www.japantimes.co.jp/business/2026/09/21/bessent-china-talks-ai-trade/"
+    },
+    {
+     "t": "Benzinga",
+     "u": "https://www.benzinga.com/markets/tech/26/09/61892414/whats-going-on-with-amd-stock-monday-10"
+    },
+    {
+     "t": "FXStreet",
+     "u": "https://www.fxstreet.com/analysis/trump-xi-summit-five-things-investors-should-watch-202609170826"
+    }
+   ]
+  },
+  {
+   "tag": "ANET",
+   "top3": true,
+   "title": "Arista joins the S&P 100 today",
+   "text": "Effective at today's open, Arista replaces Nike in the S&P 100, along with Dell, Palo Alto Networks and SanDisk (announced 4 Sep). Index-tracking flows can add a one-day bid; it is not a change in the business.",
+   "names": [
+    "ANET"
+   ],
+   "sources": [
+    {
+     "t": "Yahoo Finance",
+     "u": "https://finance.yahoo.com/markets/stocks/articles/nike-exits-p-100-index-111450130.html"
+    },
+    {
+     "t": "Vantage Markets",
+     "u": "https://www.vantagemarkets.com/market-news/nike-exits-sp100-tech-stocks-replace-september-7-2026/"
+    }
+   ]
+  },
+  {
+   "tag": "Macro",
+   "top3": false,
+   "title": "Traders price in more Fed hikes, yet yields dipped pre-open",
+   "text": "After Wednesday's 25 bp hike, traders \"rushed to price in\" further increases, while Treasury yields eased ahead of the summit. The 10-year closed Friday at 5.01%.",
+   "names": [],
+   "sources": [
+    {
+     "t": "Yahoo Finance",
+     "u": "https://finance.yahoo.com/markets/live/stock-market-today-monday-september-21-dow-sp-500-nasdaq-080214605.html"
+    },
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/21/stocks-making-the-biggest-moves-premarket-psky-wbd-acn-nvo.html"
+    }
+   ]
+  },
+  {
+   "tag": "Technology",
+   "top3": true,
+   "title": "Accenture +6% on an Anthropic tie-up",
+   "text": "Accenture will partner with Anthropic, with both investing at least $1B to build capacity. IT-services read-through only; none of your names is directly involved.",
+   "names": [],
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/21/stocks-making-the-biggest-moves-premarket-psky-wbd-acn-nvo.html"
+    }
+   ]
+  },
+  {
+   "tag": "Your names",
+   "top3": false,
+   "title": "Nothing new on the rest; one date to remember",
+   "text": "No fresh overnight news found for GNRC, MTSI, VICR, ETSY, MTCH, ARW or GOOGL, and none at sector level for Communication Services. TD Synnex (SNX) reports Thu 24 Sep before the open, call at 9:00 ET.",
+   "names": [
+    "SNX"
+   ],
+   "sources": [
+    {
+     "t": "Nasdaq (SNX release)",
+     "u": "https://www.nasdaq.com/press-release/td-synnex-announce-third-quarter-fiscal-2026-results-september-24-2026-2026-09-03"
+    }
+   ]
+  }
+ ],
+ "sections": {
+  "indices": {
+   "asOfUTC": "2026-09-21T13:48:00Z",
+   "source": "FMP index quotes; QQQ stockanalysis"
+  },
+  "futures": {
+   "asOfUTC": "2026-09-21T13:37:00Z",
+   "source": "Investing.com + Yahoo Finance"
+  },
+  "quotes": {
+   "asOfUTC": "2026-09-21T13:48:00Z",
+   "source": "FMP profile quotes; opens from stockanalysis"
+  },
+  "news": {
+   "asOfUTC": "2026-09-21T13:50:00Z",
+   "source": "web search"
+  }
+ },
+ "footnotes": [
+  "QQQ is measured against the brief's Friday close; stockanalysis itself showed +1.49% off a different prior close.",
+  "Trump–Xi meeting date: one live blog said 26 Sep; other sources and the calendar (Thursday) say 24 Sep."
+ ],
+ "meta": {
+  "schemaVersion": 1
+ }
+}

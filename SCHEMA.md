@@ -1,9 +1,10 @@
 # Data contracts
 
 The routine agent writes these two JSON files. Missing sections are allowed (and expected on a bad day): the builders
-validate each section independently, carry the last good copy forward, and flag it. `data/brief-data.json` is the
-routine's live working file — it gets overwritten every run, including by the stop-hook's auto-commit, so never use
-it as a reference. `data/brief-data.example.json` is the permanent, complete, valid example; copy its shape from there.
+validate each section independently, carry the last good copy forward, and flag it. `data/brief-data.json` and
+`data/open-live.json` are the routines' live working files — they get overwritten every run, including by the
+stop-hook's auto-commit, so never use them as a reference and never let `tests/` read them. `data/brief-data.example.json`
+and `data/open-live.example.json` are the permanent, complete, valid examples; copy their shape from there.
 
 ## `data/brief-data.json` (Pre-Market Brief)
 
@@ -32,7 +33,7 @@ The builder adds `health`, `watch`, `asOf`, `asOfLabel`, `builtLabel`. Do not wr
   "sections": {"indices":{"asOfUTC":"2026-09-21T13:48:00Z","source":"..."}, "futures":{...}, "quotes":{...}, "news":{...}},
   "indices": [{id,name,px,pct,prev[,proxy]}]            // SPX, DJI, RUT, VIX via FMP index-quote; QQQ via WebSearch (approximate)
   "futures": {contract:"Dec-26", asOf:"09:37 ET", rows:[{id:"ES|NQ|YM|RTY",name,px,pct,chk}], sources:[{t,u}]}   // WebSearch only - FMP has no CME index-futures data on this plan; chk = 2nd source's %
-  "quotes":  {TK:{px,pct,vol,avgVol[,open]}}            // every tk in the brief's `watch` groups (technical picks + catalyst-alert tickers + near-misses - not a fixed count); via FMP company/profile-symbol. `open` (today's regular-session print) is NOT available from that endpoint on the free plan - omit it; the page shows "open print not available yet", which is correct, not a bug.
+  "quotes":  {TK:{px,pct,vol,avgVol[,change][,open]}}   // every tk in the brief's `watch` groups (technical picks + catalyst-alert tickers + near-misses - not a fixed count); via FMP company/profile-symbol (which gives `price`/`changePercentage`/`change`/`volume`/`averageVolume`). Pass `change` through - the validator uses price-minus-change as an implied previous close to sanity-check `pct`, since the brief's own reference price can be weeks old for a PINNED ticker and is no longer a safe stand-in for "yesterday's close". `open` (today's regular-session print) is NOT available from that endpoint on the free plan - omit it; the page shows "open print not available yet", which is correct, not a bug.
   "notes":   {TK:"one line"},                           // optional commentary per ticker
   "news":    [{tag,top3,title,text(<=3 lines),names:[TK],sources:[{t,u:https}]}],   // WebSearch only
   "footnotes": ["optional caveats"] }
