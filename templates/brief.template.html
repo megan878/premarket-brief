@@ -251,6 +251,32 @@ a.wi:hover { border-color: var(--ink-3); }
 .wl-note { margin: 10px 0 0; font-size: 11.5px; color: var(--ink-3); }
 
 
+/* ── Catalyst playbook (static reference) ── */
+.playbook { margin-top: 0; }
+.playbook summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 14px; font-weight: 650; }
+.playbook summary::-webkit-details-marker { display: none; }
+.playbook summary::before { content: '▸'; display: inline-block; transition: transform .15s; color: var(--ink-3); font-weight: 700; }
+.playbook[open] summary::before { transform: rotate(90deg); }
+.playbook[open] summary { border-radius: 12px 12px 0 0; border-bottom-color: transparent; }
+.playbook summary .hint { font-weight: 500; font-size: 12.5px; color: var(--ink-3); }
+.pb-body { padding: 18px 16px; border: 1px solid var(--border); border-top: 0; border-radius: 0 0 12px 12px; background: var(--surface); display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px 22px; }
+@media (max-width: 900px) { .pb-body { grid-template-columns: 1fr; } }
+.pb-col h4 { margin: 0 0 10px; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.pb-types { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.pb-types li { font-size: 13px; padding-left: 16px; position: relative; line-height: 1.4; }
+.pb-types li::before { content: '•'; position: absolute; left: 2px; color: var(--acc-cat); font-weight: 700; }
+.pb-rule { display: flex; gap: 10px; margin-bottom: 12px; font-size: 12.5px; line-height: 1.45; }
+.pb-rule:last-child { margin-bottom: 0; }
+.pb-ic { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 700; }
+.pb-ic.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.pb-ic.ok { background: color-mix(in srgb, var(--good-text) 16%, transparent); color: var(--good-text); }
+.pb-ic.crit { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); }
+.pb-sizing { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.pb-sizing td { padding: 7px 0; border-top: 1px solid var(--grid); vertical-align: top; line-height: 1.4; }
+.pb-sizing tr:first-child td { border-top: 0; }
+.pb-sz { font-weight: 700; white-space: nowrap; padding-right: 10px !important; }
+.pb-sz.full { color: var(--good-text); } .pb-sz.half { color: var(--warn-ink); }
+
 /* ── Data health ── */
 .stalechip { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: none; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); vertical-align: 1px; }
 .stalechip.failed { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); border-color: var(--crit); }
@@ -593,6 +619,41 @@ a.wi:hover { border-color: var(--ink-3); }
     });
     card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from web search). Technical-pick rows are pinned Finviz closes; catalyst-alert rows are FMP's live quote. Near misses come from the (pinned) technical scan and the catalyst rejects.</p>`));
   }
+
+  /* ── Section 4: Catalyst Playbook (static reference — not data, never refreshed) ── */
+  const sec4 = $(`<section class="section"><h2><span class="n">4</span>Reference</h2></section>`);
+  app.append(sec4);
+  sec4.append($(`<details class="playbook">
+    <summary>Catalyst Playbook <span class="hint">— how to act on each catalyst type</span></summary>
+    <div class="pb-body">
+      <div class="pb-col">
+        <h4>Catalyst types to trade</h4>
+        <ul class="pb-types">
+          <li>Earnings beat + raised guidance</li>
+          <li>Major contract / deal / backlog win</li>
+          <li>Analyst upgrade, target &gt;15% above price</li>
+          <li>Product launch / regulatory approval</li>
+          <li>Index inclusion (S&amp;P / Nasdaq adds — passive buying pressure)</li>
+          <li>Sympathy moves (sector leader reports, peers run)</li>
+          <li>Short-squeeze setups (high short interest + fresh catalyst)</li>
+        </ul>
+      </div>
+      <div class="pb-col">
+        <h4>Decision rules</h4>
+        <div class="pb-rule"><span class="pb-ic warn">⏱</span><div><b>Scheduled &amp; binary events</b> (earnings, FDA) — trade the <b>reaction</b>, not the anticipation. Don't hold through the print: that's a coin-flip gap.</div></div>
+        <div class="pb-rule"><span class="pb-ic ok">✓</span><div><b>Best lane — the reaction trade:</b> enter once the post-news move <b>holds</b> above a clear level on expanding volume, ideally day 2+ follow-through (gap-and-go continuation / episodic pivot).</div></div>
+        <div class="pb-rule"><span class="pb-ic crit">✕</span><div><b>Always gate on conviction</b> — no catalyst trade in a company facing a bad structural situation, however good the pop looks.</div></div>
+      </div>
+      <div class="pb-col">
+        <h4>Sizing rules</h4>
+        <table class="pb-sizing">
+          <tr><td class="pb-sz half">Half size, max</td><td>Binary event still ahead (earnings/FDA not yet reported)</td></tr>
+          <tr><td class="pb-sz full">Full size</td><td>Post-reaction continuation, confirmed on volume</td></tr>
+          <tr><td class="pb-sz half">Size down</td><td>Unverified or thin catalyst (e.g. an unnamed licensee)</td></tr>
+        </table>
+      </div>
+    </div>
+  </details>`));
 
   /* ── Footer ── */
   app.append($(`<footer class="foot">
