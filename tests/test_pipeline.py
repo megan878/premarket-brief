@@ -84,6 +84,11 @@ check('B4 pinned sections stay pinned even on total fetch failure',
 _, code = brief('B5_nothing_to_show', None, None, expect=3)
 check('B5 no data and no history -> refuses to publish', code == 3 and not (OUT / 'B5_nothing_to_show.html').exists())
 
+# B13 y10hist malformed (wrong length) -> macro section still OK, just warns; rates check has nothing to show
+n = copy.deepcopy(fresh); n['macro']['y10hist'] = n['macro']['y10hist'][:3]
+d, _ = brief('B13_bad_y10hist', n, prev)
+check('B13 malformed y10hist warns but macro stays ok', d['health']['sections']['macro']['status'] == 'ok' and any('y10hist' in i['msg'] for i in d['health']['issues']))
+
 # B6 one pick has stop above entry; the rest survive
 n = copy.deepcopy(fresh); n['picks'][1]['stop'] = n['picks'][1]['entry'] + 5
 d, _ = brief('B6_one_bad_pick', n, prev)

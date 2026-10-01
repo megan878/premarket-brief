@@ -386,7 +386,8 @@ a.wi:hover { border-color: var(--ink-3); }
   if (D.macro) {
     const m = D.macro, f = m.fed;
     const links = f.sources.map(x => `<a href="${x.u}" target="_blank" rel="noopener">${x.t}</a>`).join(' · ');
-    sec.append($(`<div class="macro" role="note"><b>Rates:</b> the Fed raised rates ${f.move} to ${f.range} on ${f.date} (${f.vote} vote; ${f.note}). The 10-year closed at ${m.y10.toFixed(2)}% on ${m.asOfShort || D.asOfLabel.replace(' close', '')} (${m.y10path}); curve 2Y ${m.y2.toFixed(2)}% · 10Y ${m.y10.toFixed(2)}% · 30Y ${m.y30.toFixed(2)}%.<span class="msrc">Fed decision: ${links} · yields: FMP treasury rates. Context only — not part of the regime score.</span></div>`));
+    const rateNote = (m.y10hist || []).length >= 5 ? '10Y direction feeds the regime score\'s rates check (5-day trend).' : 'Fed decision is context only; 10Y direction feeds the regime score when 5 days of history are available (not this run).';
+    sec.append($(`<div class="macro" role="note"><b>Rates:</b> the Fed raised rates ${f.move} to ${f.range} on ${f.date} (${f.vote} vote; ${f.note}). The 10-year closed at ${m.y10.toFixed(2)}% on ${m.asOfShort || D.asOfLabel.replace(' close', '')} (${m.y10path}); curve 2Y ${m.y2.toFixed(2)}% · 10Y ${m.y10.toFixed(2)}% · 30Y ${m.y30.toFixed(2)}%.<span class="msrc">Fed decision: ${links} · yields: FMP treasury rates. ${rateNote}</span></div>`));
   }
 
   // regime + sector map
@@ -405,13 +406,26 @@ a.wi:hover { border-color: var(--ink-3); }
     ['VIX below 20', by.VIX.price < 20, fmt(by.VIX.price, 1)],
     ['VIX below its 50-day avg', by.VIX.price < by.VIX.ma50, `${fmt(by.VIX.price, 1)} vs ${fmt(by.VIX.ma50, 1)}`]
   ];
+  // rates check: 10Y trending UP over the last 5 sessions (latest > 1-day-ago AND latest > 5-day-ago) = FAIL
+  // (headwind); down or flat = PASS (supportive). Skipped entirely if 5 days of history aren't available —
+  // never guessed. See CLAUDE.md "Regime score" for the exact rule.
+  const h = (D.macro && D.macro.y10hist) || [];
+  if (h.length === 5 && h.every(x => typeof x.y10 === 'number' && isFinite(x.y10))) {
+    const latest = h[h.length - 1].y10, oneAgo = h[h.length - 2].y10, fiveAgo = h[0].y10;
+    const ratesUp = latest > oneAgo && latest > fiveAgo;
+    checks.push(['10Y yield down/flat (5d)', !ratesUp, `${sgn(latest - fiveAgo, 2)}% pts vs ${fiveAgo.toFixed(2)}% 5d ago`]);
+  }
   const score = checks.filter(c => c[1]).length, total = checks.length;
-  const label = score >= 6 ? ['RISK-ON', 'on'] : score >= 4 ? ['MIXED', 'mixed'] : ['RISK-OFF', 'off'];
+  const onMin = total >= 9 ? 7 : 6, mixedMin = 4;
+  const label = score >= onMin ? ['RISK-ON', 'on'] : score >= mixedMin ? ['MIXED', 'mixed'] : ['RISK-OFF', 'off'];
   const failed = checks.filter(c => !c[1]).map(c => c[0].toLowerCase().replace('russell 2000', 'Russell 2000').replace('s&p 500', 'S&P 500').replace(/^dow/, 'Dow'));
-  const note = score >= 6 && failed.length ? `Trend intact, but ${failed.length} check${failed.length > 1 ? 's' : ''} failing (✕ below).` : score >= 6 ? 'Broad trend and volatility both supportive.' : '';
+  const note = score >= onMin && failed.length ? `Trend intact, but ${failed.length} check${failed.length > 1 ? 's' : ''} failing (✕ below).` : score >= onMin ? 'Broad trend and volatility both supportive.' : '';
+  const subCopy = total >= 9
+    ? `Simple rule-based score: 9 checks (8 technical + 1 rates), ≥${onMin} risk-on · ${mixedMin}–${onMin - 1} mixed · ≤${mixedMin - 1} risk-off. QQQ proxy excluded (no averages).`
+    : `Simple rule-based score: 8 checks, ≥${onMin} risk-on · ${mixedMin}–${onMin - 1} mixed · ≤${mixedMin - 1} risk-off. QQQ proxy excluded (no averages). Rates check unavailable this run (needs 5 days of 10Y history).`;
   const regime = $(`<div class="card">
     <h3>Regime read</h3>
-    <p class="sub">Simple rule-based score: 8 checks, ≥6 risk-on · 4–5 mixed · ≤3 risk-off. QQQ proxy excluded (no averages).</p>
+    <p class="sub">${subCopy}</p>
     <div class="regime"><span class="badge ${label[1]}">${label[0]}</span><span class="score"><b style="color:var(--ink)">${score}/${total}</b> checks pass${note ? ' — ' + note : ''}</span></div>
     <ul class="checks">${checks.map(c => `<li class="${c[1] ? 'pass' : 'fail'}"><span class="ic">${c[1] ? '✓' : '✕'}</span><span>${c[0]} <b>${c[2]}</b></span></li>`).join('')}</ul>
   </div>`);

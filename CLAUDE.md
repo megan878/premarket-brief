@@ -44,6 +44,32 @@ The open-update routine gets the identical no-WebFetch rule, with its own fetch 
   whole brief), and reads `PINNED` — not `STALE` or a failure — every single day, since technical picks are always
   pinned under the hybrid design. That's expected; only flag it if `levels` reads `FAILED` (no technical picks at all).
 
+## Regime score (9 checks as of 2026-10-01 — added a rates check)
+Rule-based, fully transparent, computed client-side in the template from `indices` + `macro`. 8 original checks, all
+from `indices`:
+1-2. S&P 500 above its 50-day / 200-day average
+3-4. Dow above its 50-day / 200-day average
+5-6. Russell 2000 above its 50-day / 200-day average
+7. VIX below 20
+8. VIX below its own 50-day average
+
+Plus the rates check (9th, automated — FMP works for this, unlike the pinned sections):
+9. **10Y yield down or flat over the last 5 trading days.** Need `macro.y10hist`: exactly 5 `{date, y10}` entries,
+   oldest first, ending at the current session (same source/session as `y10`/`y10prev`). Let `latest` = the last
+   entry, `oneAgo` = the 2nd-to-last, `fiveAgo` = the 1st. `ratesUp = latest > oneAgo && latest > fiveAgo` (both
+   conditions — a sustained move, not a one-day spike). The check PASSES when `!ratesUp` (down or flat — easing,
+   supportive for equities) and FAILS when `ratesUp` (rising — a headwind). If `y10hist` is missing or malformed
+   (not exactly 5 valid entries), the template **skips this check entirely** and falls back to the 8-check score —
+   never guess a direction from partial data.
+
+Thresholds scale with however many checks actually ran: 9 checks → ≥7 RISK-ON, 4-6 MIXED, ≤3 RISK-OFF; 8 checks
+(rates check skipped) → ≥6 RISK-ON, 4-5 MIXED, ≤3 RISK-OFF. The page's "Regime read" card always states which
+threshold band it used and whether the rates check ran.
+
+Fetch for `y10hist` (automated routine): FMP `economics/treasury-rates` already pulled for `y10`/`y10prev` covers
+this — just keep the last 5 distinct trading-day rows instead of only the latest 2, and write all 5 as `y10hist`.
+No extra call needed.
+
 ## Hard rules
 1. **Never invent, estimate or "fill in" a number.** If you cannot fetch or verify something, leave that section out of
    your JSON. The builder carries the last good copy forward and shows a STALE (or PINNED, for map/technical) banner.

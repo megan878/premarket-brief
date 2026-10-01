@@ -79,6 +79,9 @@ def check_macro(d, ctx):
     for k in ('y10', 'y10prev', 'y2', 'y30'):
         if not num(m.get(k)) or not (0 < m[k] < 15):
             out.append(issue('macro', 'hard', f'{k} invalid'))
+    h = m.get('y10hist')
+    if h is not None and (len(h) != 5 or not all(num(x.get('y10')) and 0 < x['y10'] < 15 and x.get('date') for x in h)):
+        out.append(issue('macro', 'warn', 'y10hist malformed (need exactly 5 {date,y10} entries) — regime score will skip the rates check'))
     if not m.get('fed', {}).get('range'):
         out.append(issue('macro', 'hard', 'fed decision text missing'))
     return out

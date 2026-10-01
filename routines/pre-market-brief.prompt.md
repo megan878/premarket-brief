@@ -25,6 +25,9 @@ STEP 2 — Fetch fresh data (FMP + WebSearch only). Log every call in `fetchlog`
      without WebFetch). Label it as a search-sourced quote. Omit the tile if you can't find a reliable number.
   B. Rates: FMP `economics/treasury-rates` (last 8 sessions). Fed decision: WebSearch only if an FOMC decision fell in
      the last 7 days; otherwise keep the previous `macro.fed` block and update the yields only. Require two outlets to agree.
+     Also write `macro.y10hist`: the last 5 distinct trading-day rows from that same call (not 8 — exactly 5),
+     oldest first, as `[{date,y10}]`, ending at the current session. This feeds the regime score's 9th check (rates
+     direction) — see CLAUDE.md "Regime score". No extra call; you already have this data from the same fetch.
   C. Sector ranking (`sectors`/`sectorSource` only — NOT industries): WebSearch for the 11 GICS sectors' 1-month
      performance, cap-weighted (e.g. "S&P 500 sector performance 1 month" or similar). Cross-check against a second
      source if the first is a single blog/aggregator. Note in `sectorSource` that this is search-sourced, not Finviz,
