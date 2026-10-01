@@ -189,9 +189,16 @@ full per-cycle instructions already written out, so `/loop` just re-runs it ever
 pin it to exactly 15 minutes.
 
 **How it works**, split the same way as everywhere else in this repo — the agent fetches, a script renders:
-- `python scripts/news_loop.py context` — reads `data/brief-data.json` (the live file, not the example) and
-  prints today's top-3 sectors plus the full watchlist (technical picks + catalyst-alert tickers + near-misses,
-  ~11 names). Pure local read, no network, always current with whatever the brief last wrote.
+- `python scripts/news_loop.py extract --html <file>` — once per loop (first cycle only), the agent reads the
+  live BRIEF artifact with the Artifact tool and feeds the saved HTML to this command, which pulls the embedded
+  `<script id="brief-data">` JSON into `out/news-loop/live-data.json`. This is the full merged dataset. Do NOT
+  point this step at `data/brief-data.json` in the repo — that file is routinely just the automated routine's
+  own partial, automated-only subset (indices/macro/catalysts), not the full merged picture; confirmed
+  2026-10-01 when the first real automated firing left it with 0 sectors/picks/near-misses, even though the
+  published artifact itself had all of them correctly merged in.
+- `python scripts/news_loop.py context` — reads the extracted cache from the step above and prints today's
+  top-3 sectors plus the full watchlist (technical picks + catalyst-alert tickers + near-misses, ~11 names).
+  Pure local read, no network.
 - Each cycle, the agent does 3 WebSearch sweeps (top-3-sector news, watchlist-name news, emerging-sector-strength
   — a sector *outside* today's top-3 starting to trend) and assembles candidate items as JSON.
 - `python scripts/news_loop.py record --in <file>` — dedupes against everything already shown today (key =
@@ -212,7 +219,8 @@ pin it to exactly 15 minutes.
   the stop-hook's daily auto-commit, once from a manual interactive dry run). Copy their shape; never overwrite them
   from a routine run or a dry run — write to `data/brief-data.json` / `data/open-live.json` instead.
 - `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`,
-  `news_loop.py` (the standalone 15-minute news loop — not called by either routine).
+  `news_loop.py` (the standalone 15-minute news loop — not called by either routine; `extract` pulls the published
+  artifact's embedded data into a local cache, `context` reads that cache, `record` dedupes/formats sweep output).
 - `.claude/commands/news-sweep.md` — the `/loop`-driven news-loop prompt (`/loop 15m /news-sweep` to start it).
 - `templates/` — page templates. `out/` — generated pages and reports (never committed), plus `out/news-loop/` —
   the news loop's own dedup logs, also never committed.

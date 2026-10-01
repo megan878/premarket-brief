@@ -1,12 +1,24 @@
 """15-minute sector/watchlist news sweep — a STANDALONE interactive tool, not part of either routine.
 
 Like every other builder in this repo, this script never calls the network. The agent (you, in an interactive
-`claude` session, driven by `/loop`) does the actual WebSearch sweeps; this script only reads the static context
-to search for and dedupes/formats what you found. See CLAUDE.md "15-minute sector news loop" for the exact
-`/loop` invocation and the WebSearch instructions each cycle follows.
+`claude` session, driven by `/loop`) does the actual fetching — the published artifact via the Artifact tool,
+and the WebSearch sweeps; this script only extracts/reads the static context and dedupes/formats what you
+found. See CLAUDE.md "15-minute sector news loop" for the exact `/loop` invocation and per-cycle instructions.
 
-  python scripts/news_loop.py context [--data data/brief-data.json]
-      Prints JSON: today's top-3 sectors and the full ~11-name watchlist to search for.
+  python scripts/news_loop.py extract --html <path> [--out out/news-loop/live-data.json]
+      Reads a saved copy of the published brief artifact's HTML (the file path the Artifact tool's `read`
+      action reports), pulls out the `<script id="brief-data">` JSON block, and writes it to --out. Run this
+      once at the start of a loop (and again whenever the published brief changes) so `context` always reflects
+      the full merged dataset — sectors, technical picks, catalysts, near-misses — regardless of what the
+      automated routine's own git commit of data/brief-data.json contains (that file is routinely a PARTIAL,
+      automated-only subset; the full picture only exists in the published artifact. Confirmed 2026-10-01: after
+      the first real automated firing, local data/brief-data.json had 0 sectors/picks/near-misses).
+
+  python scripts/news_loop.py context [--data out/news-loop/live-data.json]
+      Prints JSON: today's top-3 sectors and the full ~11-name watchlist to search for. Reads the extracted
+      live-data cache by default (see `extract` above) — pass --data data/brief-data.json to fall back to the
+      local working file instead (only reliable right after an interactive refresh, before the next automated
+      routine firing overwrites it).
 
   python scripts/news_loop.py record [--in items.json] [--log out/news-loop/seen-<date>.json]
       Reads a JSON array of candidate items (see shape below) — from --in if given, else stdin — drops anything
@@ -49,6 +61,39 @@ def today_hkt():
 
 def default_log_path():
     return root / 'out' / 'news-loop' / f'seen-{today_hkt()}.json'
+
+
+def default_live_data_path():
+    return root / 'out' / 'news-loop' / 'live-data.json'
+
+
+DATA_RE = re.compile(
+    r'<script\s+id=["\']brief-data["\']\s+type=["\']application/json["\']\s*>(.*?)</script>',
+    re.DOTALL,
+)
+
+
+def cmd_extract(a):
+    html = pathlib.Path(a.html).read_text(encoding='utf-8')
+    m = DATA_RE.search(html)
+    if not m:
+        print('error: could not find <script id="brief-data"> in the given HTML', file=sys.stderr)
+        return 2
+    try:
+        data = json.loads(m.group(1))
+    except Exception as e:
+        print(f'error: brief-data block was not valid JSON: {e}', file=sys.stderr)
+        return 2
+    out_path = pathlib.Path(a.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding='utf-8')
+    secs = len(data.get('sectors') or [])
+    picks = len(data.get('picks') or [])
+    cats = len(data.get('catalysts') or [])
+    nm = len(data.get('nearmiss') or [])
+    print(f'extracted -> {out_path} (asOf {data.get("asOf", "?")}): '
+          f'{secs} sectors, {picks} picks, {cats} catalysts, {nm} near-misses')
+    return 0
 
 
 def cmd_context(a):
@@ -139,8 +184,12 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='cmd', required=True)
 
+    pe = sub.add_parser('extract')
+    pe.add_argument('--html', required=True)
+    pe.add_argument('--out', default=str(default_live_data_path()))
+
     pc = sub.add_parser('context')
-    pc.add_argument('--data', default=str(root / 'data/brief-data.json'))
+    pc.add_argument('--data', default=str(default_live_data_path()))
 
     pr = sub.add_parser('record')
     pr.add_argument('--log', default=None)
@@ -149,6 +198,8 @@ def main(argv=None):
                           'piping through a shell can mangle non-ASCII characters in the headline text).')
 
     a = ap.parse_args(argv)
+    if a.cmd == 'extract':
+        return cmd_extract(a)
     if a.cmd == 'context':
         return cmd_context(a)
     if a.cmd == 'record':
