@@ -1,50 +1,88 @@
 {
- "asOf": "placeholder",
- "note": "Manual interactive dry run of the hybrid (no-WebFetch) Market Open Update pipeline — fetched by hand to verify the fetch plan and error handling before enabling the routine.",
- "meta": {"schemaVersion": 1},
- "sections": {
-  "indices": {"asOfUTC": "2026-10-01T04:52:00Z", "source": "FMP index quotes; QQQ via WebSearch (approximate)"},
-  "quotes": {"asOfUTC": "2026-10-01T04:52:00Z", "source": "FMP company/profile-symbol"},
-  "news": {"asOfUTC": "2026-10-01T04:52:00Z", "source": "WebSearch"}
- },
- "indices": [
-  {"id": "SPX", "name": "S&P 500", "px": 7651.54, "pct": -0.2516, "prev": 7670.84},
-  {"id": "DJI", "name": "Dow Jones", "px": 50906.05, "pct": -0.8644, "prev": 51349.92},
-  {"id": "RUT", "name": "Russell 2000", "px": 2796.864, "pct": -0.39381, "prev": 2807.92192},
-  {"id": "VIX", "name": "Volatility", "px": 16.34, "pct": 1.87032, "prev": 16.04},
-  {"id": "QQQ", "name": "Invesco QQQ", "px": 739.77, "pct": 0.25, "prev": 737.93, "proxy": true}
- ],
- "quotes": {
-  "ANET": {"px": 203.59, "pct": 0.35985, "change": 0.73, "vol": 4875937, "avgVol": 7278370},
-  "MTCH": {"px": 40.15, "pct": 0.04984, "change": 0.02, "vol": 2914387, "avgVol": 3306167},
-  "CVX": {"px": 204.44, "pct": 0.02936, "change": 0.06, "vol": 6243579, "avgVol": 8912947},
-  "SNX": {"px": 256.74, "pct": -0.5616, "change": -1.45, "vol": 718373, "avgVol": 867596},
-  "CCL": {"px": 24.54, "pct": -2.27001, "change": -0.57, "vol": 35502570, "avgVol": 22300374},
-  "AKAM": {"px": 106.35, "pct": -1.93638, "change": -2.1, "vol": 6184833, "avgVol": 4134849},
-  "BA": {"px": 186.05, "pct": -0.8685, "change": -1.63, "vol": 11505599, "avgVol": 6225508},
-  "NICE": {"px": 111.27, "pct": 4.17564, "change": 4.46, "vol": 541978, "avgVol": 606449},
-  "ARW": {"px": 227.0, "pct": -1.40294, "change": -3.23, "vol": 491107, "avgVol": 588996},
-  "XOM": {"px": 162.88, "pct": 0.94825, "change": 1.53, "vol": 12952608, "avgVol": 15365338},
-  "GOOGL": {"px": 344.08, "pct": 0.9269, "change": 3.16, "vol": 36642402, "avgVol": 30082568}
- },
- "notes": {
-  "ANET": "CEO Ullal sold $13.2M in shares from trusts this week — not necessarily bearish, but worth noting near the pivot."
- },
- "news": [
-  {"tag": "Technology", "top3": true, "title": "Micron guides Q4 gross margin to ~86%, AI-memory demand strong",
-   "text": "Micron's Q4 FY26 outlook calls for gross margin near 86%, up from 85% in Q3, on higher average selling prices across DRAM/NAND/HBM. Analysts remain bullish on AI-driven memory demand into FY27.",
-   "names": [], "sources": [
-    {"t": "Investing.com", "u": "https://www.investing.com/analysis/micron-q4-earnings-outlook-could-signal-where-the-ai-chip-market-is-headed-200688643"},
-    {"t": "SEC 8-K", "u": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000018/a2026q4ex991-pressrelease.htm"}
-   ]},
-  {"tag": "Technology", "top3": true, "title": "Arista Networks CEO sells $13.2M in shares from trusts",
-   "text": "Arista CEO Jayshree Ullal sold $13.2M of ANET shares from trusts this week, with the stock trading near its 52-week high of $214.89. Arista separately guides 2026 AI-fabrics revenue of $3.5-3.6B.",
-   "names": ["ANET"], "sources": [
-    {"t": "Investing.com", "u": "https://investing.com/news/insider-trading-news/arista-networks-ceo-ullal-sells-132m-in-shares-from-trusts-93CH-4923893"}
-   ]}
- ],
- "footnotes": [
-  "Index futures (ES/NQ/YM/RTY) were not available this run: FMP has no CME index-futures data on this plan (confirmed ACCESS DENIED on both `quote` and `commodity` single-symbol endpoints), and WebSearch did not return reliable point-level quotes at the time of this fetch (late morning HKT, well before the US futures session is most actively quoted pre-open). Retry closer to the real 21:40/22:40 HKT firing time.",
-  "This was a manual interactive dry run, not a scheduled firing — the time-guard (STEP 0) was not run."
- ]
+  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. Futures dropped this run — two WebSearch sources disagreed by up to ~0.3pp and the quotes were pre-open, already ~13 minutes stale against the live cash tape.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-10-02T13:41:00Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ via WebSearch (approximate)"},
+    "futures": {"asOfUTC": null, "source": ""},
+    "quotes": {"asOfUTC": "2026-10-02T13:42:00Z", "source": "FMP company/profile-symbol"},
+    "news": {"asOfUTC": "2026-10-02T13:44:00Z", "source": "WebSearch"}
+  },
+  "indices": [
+    {"id": "SPX", "name": "S&P 500", "px": 7732.46, "pct": 0.86102, "prev": 7666.45},
+    {"id": "DJI", "name": "Dow Jones", "px": 51272.24, "pct": 0.67878, "prev": 50926.56},
+    {"id": "RUT", "name": "Russell 2000", "px": 2841.29001, "pct": 1.23511, "prev": 2806.62521},
+    {"id": "VIX", "name": "Volatility", "px": 15.74, "pct": -3.96583, "prev": 16.39},
+    {"id": "QQQ", "name": "Invesco QQQ", "px": 752.16, "pct": 1.37, "prev": 742.03, "proxy": true}
+  ],
+  "futures": {},
+  "quotes": {
+    "NVDA": {"px": 235.90, "pct": 2.18314, "change": 5.04, "vol": 21877113, "avgVol": 136505948},
+    "MPWR": {"px": 1429.95, "pct": 5.06844, "change": 68.98, "vol": 39728, "avgVol": 862528},
+    "TXN": {"px": 295.215, "pct": 4.94295, "change": 13.905, "vol": 345561, "avgVol": 7667577},
+    "DAL": {"px": 84.47, "pct": 0.40414, "change": 0.34, "vol": 557952, "avgVol": 6765676},
+    "ACN": {"px": 205.72, "pct": -3.09939, "change": -6.58, "vol": 917098, "avgVol": 7770785},
+    "MU": {"px": 1095.23999, "pct": -0.19592, "change": -2.15001, "vol": 5094995, "avgVol": 41275811},
+    "SNPS": {"px": 494.195, "pct": 0.7451, "change": 3.655, "vol": 206297, "avgVol": 1999084},
+    "TGT": {"px": 156.275, "pct": -0.27122, "change": -0.425, "vol": 74643, "avgVol": 4246623},
+    "ASML": {"px": 1856.49, "pct": 2.65415, "change": 48.00, "vol": 174148, "avgVol": 1693587},
+    "ASX": {"px": 46.31, "pct": 3.5323, "change": 1.58, "vol": 580198, "avgVol": 9359859},
+    "ETN": {"px": 451.26, "pct": 3.19704, "change": 13.98, "vol": 93877, "avgVol": 2248808},
+    "AMAT": {"px": 543.70, "pct": 2.72057, "change": 14.40, "vol": 617756, "avgVol": 8627352}
+  },
+  "notes": {
+    "DAL": "Elon Musk said on 2 Oct that Delta CEO Ed Bastian 'will lose his job' over picking Amazon's Leo satellite service over Starlink for in-flight Wi-Fi; United is fast-tracking status matches to poach Delta elite flyers. Reputational noise, not yet clearly in the tape, ahead of Delta's 9 Oct earnings."
+  },
+  "news": [
+    {
+      "tag": "Macro",
+      "top3": false,
+      "title": "September jobs report misses badly; stocks rally on Fed-pause bets",
+      "text": "Nonfarm payrolls added just 29,000 vs. ~90,000 expected; unemployment rose to 4.2%. Futures and cash indices extended gains on bets the miss keeps the Fed from tightening further, with the 10Y yield easing.",
+      "names": [],
+      "sources": [{"t": "Investing.com (Reuters)", "u": "https://investing.com/news/economy-news/wall-st-futures-extend-gains-after-nonfarm-payrolls-data-4929820"}]
+    },
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "Morgan Stanley names Nvidia its top semiconductor pick",
+      "text": "Morgan Stanley reiterated NVDA as its top chip pick entering a new product cycle. Separately, Anthropic and xAI have committed up to $84.5B for Nvidia compute through 2029, and the board upsized its buyback authorization by $150B to $235B.",
+      "names": ["NVDA"],
+      "sources": [
+        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9107500/morgan-stanley-names-nvidia-nvda-top-semiconductor-pick-amid-new-product-cycle"},
+        {"t": "StocksToTrade", "u": "https://stockstotrade.com/news/nvidia-corporation-nvda-news-2026_10_02/"}
+      ]
+    },
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "ON Semiconductor sweetens Synaptics bid to all-cash ~$5.7B",
+      "text": "ON Semiconductor restructured its pending Synaptics takeover from a $7B all-stock deal into an all-cash ~$5.7B transaction, immediately accretive to its non-GAAP EPS. ON +6.5% and SYNA +15% pre-market, lifting broader chip sentiment alongside Micron's post-earnings strength.",
+      "names": [],
+      "sources": [
+        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9107504/synaptics-inc-syna-surges-151-premarket-ahead-of-september-jobs-data"},
+        {"t": "Investing.com", "u": "https://ca.investing.com/news/stock-market-news/why-is-on-semiconductor-stock-surging-today-93CH-4863470"}
+      ]
+    },
+    {
+      "tag": "Industrials",
+      "top3": true,
+      "title": "Musk vs. Delta: Starlink snub turns personal",
+      "text": "Elon Musk said Delta CEO Ed Bastian 'will lose his job' over choosing Amazon's Leo satellite service instead of Starlink for in-flight Wi-Fi; United is fast-tracking status matches to poach Delta elite flyers. Noise, not fundamentals, ahead of Delta's 9 Oct earnings.",
+      "names": ["DAL"],
+      "sources": [{"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/10/02/delta-ceo-ignored-elon-musks-warning-that-it-will-get-much-worse-now-musk-predicts-ed-bastian-will-lose-his-job-as-united-and-american-race-to-try-and-poach-deltas-premium-customers"}]
+    },
+    {
+      "tag": "Communication Services",
+      "top3": true,
+      "title": "STARZ pulled from Verizon Fios after renewal talks fail",
+      "text": "STARZ and Verizon failed to reach a renewal agreement, pulling all STARZ channels from Verizon's Fios platform as of 1 Oct. Otherwise a quiet news day for the sector; the FCC opened a fresh comment window on broadband permitting and LUC policy (replies due 19 Oct).",
+      "names": [],
+      "sources": [{"t": "GuruFocus", "u": "https://gurufocus.com/news/9105223/starz-channels-removed-from-verizon-fios-platform-impacting-vz-customers"}]
+    }
+  ],
+  "footnotes": [
+    "Index futures (ES/NQ/YM/RTY) omitted this run: two WebSearch sources gave point-in-time quotes disagreeing by up to ~0.3 percentage points (e.g. S&P E-minis +0.79% vs +0.94%, Nasdaq E-minis +1.01% vs +1.29%), and both were pre-open snapshots already ~13+ minutes stale against the live cash tape (US cash market opened at 13:30 UTC; this fetch ran at ~13:45-13:50 UTC). Rather than publish a reconciled-looking number that isn't, this section is dropped — the live cash indices above are the reliable read on the open.",
+    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each symbol was fetched individually (12 stock quotes + 4 index quotes)."
+  ],
+  "asOf": "Fri 02 Oct 2026 · 09:45 ET · 21:45 HK"
 }
