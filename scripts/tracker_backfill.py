@@ -17,7 +17,7 @@ import market_time as mt  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 SETS = [
-    {'name': '2026-09-21 set', 'git': '43e6df5',
+    {'name': '2026-09-21 set', 'git': '43e6df5', 'approx': True,
      'publishedAt': '2026-09-22T19:55:58+08:00',
      'why': 'first commit holding the set (43e6df5); the real artifact publish time is unknown but not later than this, '
             'so the first replayed session is conservative'},
@@ -62,14 +62,26 @@ def main(argv=None):
     ap.add_argument('--now', required=True)
     ap.add_argument('--ledger', default=str(ROOT / 'data/picks.json'))
     ap.add_argument('--report', default=None)
+    ap.add_argument('--augment', action='store_true',
+                    help='only ADD missing fields (adr20Pct, publishTimeApproximate, series) to the existing ledger; never change one')
     a = ap.parse_args(argv)
 
     ledger = T.load_ledger(a.ledger)
-    if ledger['records']:
-        sys.exit('ledger already has records - the ledger is append-only, refusing to backfill over it')
     now = T.pdt(a.now)
     last = mt.last_completed_session(now.astimezone(mt.UTC)).isoformat()
     ohlc_rows = load_ohlc(a.ohlc)
+    if a.augment:
+        approx = [s['publishedAt'] for s in SETS if s.get('approx')]
+        before = json.loads(json.dumps(ledger))
+        added = T.augment(ledger, {tk: {'rows': rows} for tk, rows in ohlc_rows.items()}, approx_published=approx)
+        for r0, r1 in zip(before['records'], ledger['records']):
+            assert all(r1.get(k) == v for k, v in r0.items()), f'augment changed an existing field of {r0["id"]}'
+        T.save_ledger(a.ledger, ledger)
+        print(json.dumps({'added': len(added), 'byField': {f: sum(1 for _, k in added if k == f) for f in {k for _, k in added}}}))
+        return 0
+    if ledger['records']:
+        sys.exit('ledger already has records - the ledger is append-only, refusing to backfill over it')
+    ohlc_all = {tk: {'rows': rows} for tk, rows in ohlc_rows.items()}
     fmp = json.loads(pathlib.Path(a.fmp_last).read_text(encoding='utf-8'))
     report = {'lastSession': last, 'sets': [], 'readinessCheck': [], 'closesCheck': [], 'ohlc': {}, 'replay': []}
 
@@ -78,7 +90,7 @@ def main(argv=None):
         b = load_block(s)
         blocks[s['name']] = b
         before = {r['id'] for r in ledger['records']}
-        acts = T.ingest(ledger, b, s['publishedAt'])
+        acts = T.ingest(ledger, b, s['publishedAt'], ohlc=ohlc_all, approx=s.get('approx', False))
         new = [r for r in ledger['records'] if r['id'] not in before]
         for r in new:
             r['notes'].append(f'publishedAt: {s["why"]}')

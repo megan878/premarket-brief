@@ -203,10 +203,17 @@ class Validation(unittest.TestCase):
         self.assertTrue(any('missing sessions' in p for p in probs))
 
     def test_weekend_row_fails(self):
-        rs = rows(FLAT) + [{'date': '2026-09-12', 'open': 98, 'high': 99, 'low': 97, 'close': 98, 'volume': 1}]
-        ok, probs, _ = T.validate_rows(rs, START, SESS[0])
+        rs = rows(FLAT, FLAT, FLAT, FLAT, FLAT, FLAT)                    # 8-15 Sep; 12 Sep is a Saturday
+        rs.append({'date': '2026-09-12', 'open': 98, 'high': 99, 'low': 97, 'close': 98, 'volume': 1})
+        ok, probs, _ = T.validate_rows(sorted(rs, key=lambda r: r['date']), START, SESS[5])
         self.assertFalse(ok)
         self.assertTrue(any('non-session' in p for p in probs))
+
+    def test_rows_after_the_last_completed_session_are_ignored(self):
+        rs = rows(FLAT, TRIG, HOLD)                                   # HOLD is dated after the last completed session
+        ok, probs, clean = T.validate_rows(rs, START, SESS[1])
+        self.assertTrue(ok, probs)
+        self.assertEqual([r['date'] for r in clean], [SESS[0], SESS[1]])
 
     def test_stale_last_date_fails(self):
         ok, probs, _ = T.validate_rows(rows(FLAT, TRIG), START, SESS[2])
@@ -537,9 +544,11 @@ class Chips(unittest.TestCase):
         recs = [closed('target', 2.0, i=1, exitDate='2026-10-05'), closed('stopped', -1.0, i=2, exitDate='2026-10-07'),
                 rec(id='o', status='triggered', ticker='LIVE', fillPrice=100.0, lastClose=103.0, startSession='2026-10-01',
                     evaluatedThrough='2026-10-08')]
-        v = T.build_view({'records': recs}, '2026-10-08')
+        recs[2]['basisSession'] = '2026-09-30'
+        v = T.build_view({'records': recs}, '2026-10-08', pick_basis='2026-09-30')
         self.assertEqual([c['exitDate'] for c in v['closed20']], ['2026-10-07', '2026-10-05'])
-        self.assertEqual((v['open'][0]['ticker'], v['open'][0]['openR'], v['chips']['LIVE']['chip']), ('LIVE', 0.6, 'live'))
+        self.assertEqual((v['open'][0]['ticker'], v['open'][0]['openR'], v['picks']['LIVE']['chip']), ('LIVE', 0.6, 'live'))
+        self.assertEqual(set(v['stats']), {'literal', 'disciplined', 'rule'})
 
 
 QRVO = [  # 26 sessions to 30 Sep 2026 (date, open, high, low, close, volume): golden fixture for the v1 recompute
@@ -594,6 +603,170 @@ class Parsing(unittest.TestCase):
         self.assertIsNone(T.parse_pick_window_end('garbage'))
 
 
+def ohlc_rows(n=30, start='2026-08-24', hi=102.0, lo=98.0, close=100.0):
+    days = T.sessions_between(start, '2026-12-31')[:n]
+    return [{'date': d, 'open': 100.0, 'high': hi, 'low': lo, 'close': close + i * 0.01, 'volume': 1000 + i} for i, d in enumerate(days)]
+
+
+class Series(unittest.TestCase):
+    def test_adr20_is_the_mean_high_over_low(self):
+        rs = ohlc_rows(30)
+        self.assertAlmostEqual(T.adr20_pct(rs, rs[24]['date']), 100 * (102.0 / 98.0 - 1), places=3)
+
+    def test_adr20_needs_twenty_validated_sessions(self):
+        rs = ohlc_rows(30)
+        self.assertIsNone(T.adr20_pct(rs[:15], rs[14]['date']))
+        bad = copy.deepcopy(rs)
+        bad[10]['low'] = 103.0                                    # low above high: the validator rejects the row -> a gap
+        self.assertIsNone(T.adr20_pct(bad, bad[24]['date']))
+
+    def test_build_closes_sorts_a_jumbled_fetch(self):
+        rs = ohlc_rows(30)
+        upto = rs[24]['date']
+        jumbled = rs[10:15][::-1] + rs[:10] + rs[15:]             # a chunk newest-first, like the real WebFetch output
+        closes, probs = T.build_closes(jumbled, upto, 25)
+        self.assertEqual(probs, [])
+        self.assertEqual(closes, [r['close'] for r in rs[:25]])
+
+    def test_build_closes_refuses_a_dropped_session(self):
+        rs = ohlc_rows(30)
+        del rs[7]
+        closes, probs = T.build_closes(rs, rs[23]['date'], 25)
+        self.assertIsNone(closes)
+        self.assertTrue(any('missing sessions' in p for p in probs))
+
+    def test_build_closes_ignores_rows_after_the_window_end(self):
+        rs = ohlc_rows(30)
+        closes, probs = T.build_closes(rs, rs[24]['date'], 25)
+        self.assertEqual((len(closes), probs), (25, []))
+
+    def test_sort_rows_collapses_exact_duplicates_but_keeps_conflicting_ones(self):
+        rs = ohlc_rows(3)
+        self.assertEqual(len(T.sort_rows(rs + [dict(rs[1])])), 3)
+        clash = dict(rs[1], close=99.0)
+        self.assertEqual(len(T.sort_rows(rs + [clash])), 4)       # left in, so the validator fails loudly
+
+    def test_evaluate_stores_the_validated_series_and_adr(self):
+        rs = ohlc_rows(40, start='2026-08-24')
+        basis = rs[24]['date']
+        r = rec(id='a', ticker='AAA', basisSession=basis, startSession=rs[25]['date'], entry=105.0, stop=90.0, target=120.0,
+                entryZoneHigh=106.0)
+        led = {'schemaVersion': 1, 'records': [r]}
+        rep = T.evaluate(led, {'AAA': {'rows': rs}}, rs[30]['date'])
+        out = led['records'][0]
+        self.assertEqual(out['series']['from'], rs[0]['date'])
+        self.assertEqual(out['series']['through'], rs[30]['date'])
+        self.assertEqual(out['series']['closes'], [x['close'] for x in rs[:31]])
+        self.assertAlmostEqual(out['adr20Pct'], 100 * (102 / 98 - 1), places=3)
+        self.assertEqual(rep['conflicts'], [])
+
+    def test_card_closes_disagree_detects_a_misordered_card(self):
+        rs = ohlc_rows(40)
+        ser = {'closes': [r['close'] for r in rs[:31]]}                  # basis index 24
+        good = ser['closes'][:25]
+        self.assertFalse(T.card_closes_disagree(good, ser))
+        self.assertFalse(T.card_closes_disagree(good[-20:], ser))        # a shorter card window still lines up at the basis
+        swapped = good[:]
+        swapped[3], swapped[8] = swapped[8], swapped[3]      # 0.05 apart: beyond the 0.011 rounding tolerance
+        self.assertTrue(T.card_closes_disagree(swapped, ser))
+        self.assertFalse(T.card_closes_disagree(good, {'closes': ser['closes'][:10]}))   # series too short to judge
+
+    def test_augment_adds_missing_fields_and_never_changes_existing_ones(self):
+        rs = ohlc_rows(40)
+        basis = rs[24]['date']
+        r = rec(id='a', ticker='AAA', basisSession=basis, publishedAt='2026-09-22T19:55:58+08:00', status='stopped',
+                exitDate=rs[27]['date'], evaluatedThrough=rs[27]['date'], fillPrice=100.0, exitPrice=95.0)
+        led = {'schemaVersion': 1, 'records': [r]}
+        before = copy.deepcopy(r)
+        added = T.augment(led, {'AAA': {'rows': rs}}, approx_published=['2026-09-22T19:55:58+08:00'])
+        out = led['records'][0]
+        self.assertTrue(out['publishTimeApproximate'])
+        self.assertEqual(out['series']['through'], rs[27]['date'])
+        self.assertIsNotNone(out['adr20Pct'])
+        for k, v in before.items():
+            self.assertEqual(out[k], v, k)
+        self.assertEqual({a[1] for a in added}, {'publishTimeApproximate', 'adr20Pct', 'series'})
+        self.assertEqual(T.augment(led, {'AAA': {'rows': rs}}), [])      # idempotent
+
+    def test_ingest_records_adr_and_the_approximate_flag(self):
+        pk = pick('NVDA', 100.0, 95.0, 110.0, entryZone='100.00 – 101.00')
+        led = T.empty_ledger()
+        T.ingest(led, block([pk]), PUB, ohlc={'NVDA': {'rows': ohlc_rows(75, start='2026-07-06')}}, approx=True)
+        r = led['records'][0]
+        self.assertTrue(r['publishTimeApproximate'])
+        self.assertAlmostEqual(r['adr20Pct'], 100 * (102 / 98 - 1), places=3)
+
+
+def filled(fill, zone_hi=101.0, adr=2.5, **kw):
+    d = closed('target', 2.0, i=kw.pop('i', 0), fillPrice=fill, entryZoneHigh=zone_hi, chased=fill > zone_hi, adr20Pct=adr)
+    d.update(kw)
+    return d
+
+
+class Disciplined(unittest.TestCase):
+    def test_excess_is_measured_from_the_zone_top(self):
+        self.assertEqual(T.chase_excess_pct(filled(100.5)), 0.0)
+        self.assertAlmostEqual(T.chase_excess_pct(filled(103.02)), 2.0)
+
+    def test_rule_is_adr_multiple_or_max_pct(self):
+        self.assertFalse(T.is_chase_skip(filled(100.5)))                       # not above the zone
+        self.assertFalse(T.is_chase_skip(filled(102.0, adr=3.0)))              # 0.99% above the zone: below 1 x ADR and below 3%
+        self.assertTrue(T.is_chase_skip(filled(103.03, adr=2.0)))              # 2.0% >= 1 x ADR20 of 2.0%
+        self.assertTrue(T.is_chase_skip(filled(104.2, adr=9.0)))               # 3.2% > 3% even though ADR is huge
+        self.assertFalse(T.is_chase_skip(filled(103.9, adr=9.0)))              # 2.87%: under both
+        self.assertTrue(T.is_chase_skip(filled(104.2, adr=None)))              # unknown ADR: only the 3% leg applies
+        self.assertFalse(T.is_chase_skip(filled(102.9, adr=None)))
+
+    def test_the_rule_is_one_config_value(self):
+        self.assertEqual(set(T.CHASE_RULE), {'adrMultiple', 'maxPct'})
+        self.assertTrue(T.is_chase_skip(filled(102.0, adr=3.0), {'adrMultiple': 0.3, 'maxPct': 3.0}))
+        self.assertFalse(T.is_chase_skip(filled(103.03, adr=2.0), {'adrMultiple': 5.0, 'maxPct': 3.0}))
+
+    def test_disciplined_view_drops_the_chased_trade_and_leaves_the_ledger_alone(self):
+        recs = [filled(100.5, i=1), filled(104.2, i=2)]
+        before = copy.deepcopy(recs)
+        both = T.summarize_both(recs)
+        self.assertEqual(recs, before)
+        self.assertEqual((both['literal']['overall']['closed'], both['literal']['overall']['trades']), (2, 2))
+        d = both['disciplined']['overall']
+        self.assertEqual((d['closed'], d['trades'], d['chaseSkipped'], d['picks']), (1, 1, 1, 2))
+        self.assertEqual(both['rule'], T.CHASE_RULE)
+
+    def test_disciplined_stats_use_the_same_n_threshold(self):
+        recs = [filled(100.5, i=i) for i in range(20)] + [filled(104.2, i=100 + i) for i in range(5)]
+        both = T.summarize_both(recs)
+        self.assertEqual(both['literal']['overall']['closed'], 25)
+        self.assertFalse(both['literal']['overall']['tooSmall'])
+        self.assertEqual(both['disciplined']['overall']['closed'], 20)
+        self.assertFalse(both['disciplined']['overall']['tooSmall'])
+        self.assertTrue(T.summarize_both(recs[:19])['disciplined']['overall']['tooSmall'])
+
+
+class Health(unittest.TestCase):
+    def test_awaiting_data_is_expected_not_a_warning(self):
+        recs = [rec(id='a', status='triggered', startSession='2026-10-01', evaluatedThrough='2026-10-01', fillPrice=100.0,
+                    lastClose=100.0)]
+        v = T.build_view({'records': recs}, '2026-10-02')
+        sec, msgs = T.tracker_health(v)
+        self.assertEqual((sec['status'], msgs), ('pinned', []))
+        self.assertIn('awaiting OHLC', sec['msg'])
+
+    def test_problems_and_extra_warnings_surface(self):
+        recs = [closed('stopped', -1.0, exitDate='2026-10-01', evaluatedThrough='2026-10-01')]
+        v = T.build_view({'records': recs}, '2026-10-02', problems=['AAA: OHLC excluded'])
+        sec, msgs = T.tracker_health(v, ['ledger not pushed'])
+        self.assertEqual(sec['status'], 'ok')
+        self.assertEqual(msgs, ['AAA: OHLC excluded', 'ledger not pushed'])
+
+    def test_load_merged_unions_git_and_page_copies(self):
+        with tempfile.TemporaryDirectory() as td:
+            path = pathlib.Path(td) / 'picks.json'
+            T.save_ledger(path, {'schemaVersion': 1, 'records': [rec(id='a')]})
+            page = {'tracker': {'records': [rec(id='a', status='stopped', exitDate='2026-09-10'), rec(id='b')]}}
+            led, conflicts = T.load_merged(path, page)
+            self.assertEqual(({r['id']: r['status'] for r in led['records']}, conflicts), ({'a': 'stopped', 'b': 'pending'}, []))
+
+
 class EndToEnd(unittest.TestCase):
     def test_update_cli_is_idempotent_and_writes_ledger_and_view(self):
         with tempfile.TemporaryDirectory() as td:
@@ -611,7 +784,8 @@ class EndToEnd(unittest.TestCase):
             led = json.loads(first)
             self.assertEqual((len(led['records']), led['records'][0]['status']), (1, 'triggered'))
             view = json.loads((td / 'view.json').read_text(encoding='utf-8'))
-            self.assertEqual(view['chips']['NVDA']['chip'], 'live')
+            self.assertEqual(view['picks']['NVDA']['chip'], 'live')
+            self.assertEqual(view['stats']['literal']['overall']['open'], 1)
 
     def test_ledger_file_is_one_record_per_line(self):
         led = {'schemaVersion': 1, 'records': [rec(id='a'), rec(id='b')]}

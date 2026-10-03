@@ -29,6 +29,11 @@ MAX_HOLD_SESSIONS = 20          # trigger session = session 1; time-exit at the 
 MIN_N = 20                      # fewer closed trades than this -> "n too small", never a percentage
 HKT = dt.timezone(dt.timedelta(hours=8), 'HKT')
 
+# The ONE definition of the "disciplined" stats view: a fill whose open is above entryZoneHigh by >= adrMultiple x ADR20%
+# (measured at the basis session) or by more than maxPct is a skipped chase, not a trade. The literal ledger never changes.
+CHASE_RULE = {'adrMultiple': 1.0, 'maxPct': 3.0}
+SERIES_SESSIONS = 25            # validated closes kept per record for the sparkline, ending at the basis session
+
 TERMINAL = {'invalidated', 'expired', 'stopped', 'target', 'time-exit', 'skipped', 'replaced'}
 CLOSED = {'stopped', 'target', 'time-exit'}          # trades that were entered and have finished
 NON_TERMINAL = {'pending', 'triggered'}
@@ -107,6 +112,59 @@ def parse_pick_window_end(s):
         return None
 
 
+def sort_rows(rows):
+    """Rows sorted by date (stable). Exact duplicate rows collapse; a repeated date with different values is kept
+    so validate_rows() fails loudly instead of silently picking one."""
+    out, seen = [], set()
+    for r in sorted(rows or [], key=lambda r: str(r.get('date'))):
+        key = json.dumps(r, sort_keys=True, default=str)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(r)
+    return out
+
+
+def build_closes(rows, upto, n=SERIES_SESSIONS, fmp_last=None):
+    """The ONLY way a `closes` array should be built: sort by date, run the same validator as the ledger replay, and
+    return the n closes ending at session `upto` ((closes, problems); closes is None when validation fails)."""
+    upto = pdate(upto).isoformat()
+    srt = [r for r in sort_rows(rows) if str(r.get('date')) <= upto]
+    start = mt.trading_days_back(pdate(upto), n)[-1].isoformat()
+    ok, probs, clean = validate_rows(srt, start, upto, fmp_last)
+    return ([r['close'] for r in clean] if ok else None), probs
+
+
+def adr20_pct(rows, upto):
+    """ADR% = 100 x (mean of High/Low over the 20 sessions ending `upto` - 1); None if 20 validated sessions are not available."""
+    upto = pdate(upto).isoformat()
+    srt = [r for r in sort_rows(rows) if str(r.get('date')) <= upto]
+    start = mt.trading_days_back(pdate(upto), 20)[-1].isoformat()
+    ok, _, clean = validate_rows(srt, start, upto)
+    if not ok or len(clean) != 20:
+        return None
+    return round(100 * (sum(r['high'] / r['low'] for r in clean) / 20 - 1), 3)
+
+
+def card_closes_disagree(card_closes, series, tol=0.011):
+    """True when a card's `closes` (ending at the basis session) differ from the validated ledger series."""
+    ser = series.get('closes') or []
+    if len(ser) < SERIES_SESSIONS or not card_closes:
+        return False
+    m = min(len(card_closes), SERIES_SESSIONS)
+    return any(abs(a - b) > tol for a, b in zip(card_closes[-m:], ser[SERIES_SESSIONS - m:SERIES_SESSIONS]))
+
+
+def make_series(rows, rec, through):
+    """Validated closes for the sparkline: SERIES_SESSIONS sessions ending at the basis session, extended to `through`."""
+    start = mt.trading_days_back(pdate(rec['basisSession']), SERIES_SESSIONS)[-1].isoformat()
+    srt = [r for r in sort_rows(rows) if str(r.get('date')) <= through]
+    ok, probs, clean = validate_rows(srt, start, through)
+    if not ok:
+        return None, probs
+    return {'from': start, 'through': through, 'closes': [r['close'] for r in clean]}, []
+
+
 # ───────────────────────────── regime at publish (port of the page JS) ─────────────────────────────
 def regime_from_block(block):
     """(label, score, total) exactly as brief.template.html computes it; (None, None, None) if inputs are missing."""
@@ -132,6 +190,7 @@ def regime_from_block(block):
 def validate_rows(rows, from_date, last_session, fmp_last=None):
     """Validate daily rows with date >= from_date. Returns (ok, problems, clean_rows).
 
+    Rows dated after last_session (e.g. today's partial row from an intraday fetch) are ignored, never used.
     Hard checks: numeric o/h/l/c, low <= open/close <= high, strictly increasing dates, only trading days, no missing
     session between from_date and last_session, last date == last_session. fmp_last (an independent last price) is a
     sanity check on the final close: >3% apart is a hard failure, >0.5% is reported as a warning in the problems list
@@ -145,7 +204,7 @@ def validate_rows(rows, from_date, last_session, fmp_last=None):
         except Exception:
             probs.append(f'unparseable date {r.get("date")!r}')
             continue
-        if d < from_date:
+        if d < from_date or d > last_session:      # rows after the last completed session are a partial/unfinished day
             continue
         o, h, l, c = (r.get(k) for k in ('open', 'high', 'low', 'close'))
         if not all(num(x) and x > 0 for x in (o, h, l, c)):
@@ -293,7 +352,7 @@ def _new_id(ledger, publish_date, tk):
     return f'{base}-{n}'
 
 
-def build_record(pick, block, published_at, basis, rec_id):
+def build_record(pick, block, published_at, basis, rec_id, adr=None, approx=False):
     zl, zh = parse_zone(pick.get('entryZone'))
     rd = pick.get('readiness') if isinstance(pick.get('readiness'), dict) and num(pick['readiness'].get('composite')) else None
     label, score, total = regime_from_block(block)
@@ -307,13 +366,14 @@ def build_record(pick, block, published_at, basis, rec_id):
         'readiness': ({k: rd[k] for k in ('composite', 'tightness', 'proximity', 'volumeDryUp', 'timeInBase')} if rd else None),
         'scoringVersion': SCORING_VERSION if rd else None,
         'regimeLabel': label, 'regimeScore': score, 'regimeChecks': total, 'nextEarningsDate': nxt,
+        'adr20Pct': adr, 'publishTimeApproximate': bool(approx),
         'status': 'pending', 'triggerDate': None, 'fillPrice': None, 'chased': None, 'exitDate': None,
         'exitPrice': None, 'exitReason': None, 'rMultiple': None, 'daysHeld': None, 'lastClose': None,
         'evaluatedThrough': None, 'repickDates': [], 'evidence': {}, 'notes': [],
     }
 
 
-def ingest(ledger, block, published_at, source='fresh'):
+def ingest(ledger, block, published_at, source='fresh', ohlc=None, approx=False):
     """Add this block's picks to the ledger (in place). Returns a list of human-readable action strings.
 
     Identity is (ticker, basisSession): a carry-forward republish of the same pick set is a no-op. A fresh scan that
@@ -348,7 +408,8 @@ def ingest(ledger, block, published_at, source='fresh'):
         if rec == 'kept':
             continue
         new_id = _new_id(ledger, pdate_hkt, tk)
-        new = build_record(pick, block, pub.isoformat(), basis, new_id)
+        rows = ((ohlc or {}).get(tk) or {}).get('rows')
+        new = build_record(pick, block, pub.isoformat(), basis, new_id, adr=adr20_pct(rows, basis) if rows else None, approx=approx)
         if basis_note:
             new['notes'].append(basis_note)
         if source != 'fresh':
@@ -404,6 +465,13 @@ def evaluate(ledger, ohlc, last_session, verify_terminal=False):
                 continue
             for k in OUTCOME_FIELDS:
                 r[k] = res[k]
+            if r.get('adr20Pct') is None:
+                r['adr20Pct'] = adr20_pct(data['rows'], r['basisSession'])
+            ser, sprobs = make_series(data['rows'], r, r['evaluatedThrough'] or r['basisSession'])
+            if ser:
+                r['series'] = ser
+            elif sprobs:
+                rep['excluded'].setdefault(tk, []).append('warn: sparkline series skipped - ' + '; '.join(sprobs[:2]))
             if res['evaluatedThrough'] and res['evaluatedThrough'] < last_session and res['status'] in NON_TERMINAL:
                 rep['awaiting'].append(r['id'])
             rep['updated'].append(r['id'])
@@ -510,6 +578,30 @@ def closes_match(window, published_closes, tol=0.011):
     return [f'#{i}: {a} vs {b}' for i, (a, b) in enumerate(zip(mine, published_closes)) if abs(a - b) > tol]
 
 
+# ───────────────────────────── augment (add fields to existing records; never change one) ─────────────────────────────
+def augment(ledger, ohlc, approx_published=()):
+    """Add adr20Pct / publishTimeApproximate / series to records that lack them. Existing values are never touched."""
+    added = []
+    for r in ledger['records']:
+        rows = ((ohlc or {}).get(r['ticker']) or {}).get('rows')
+        if 'publishTimeApproximate' not in r:
+            r['publishTimeApproximate'] = r['publishedAt'] in set(approx_published)
+            added.append((r['id'], 'publishTimeApproximate'))
+        if r.get('adr20Pct') is None and rows:
+            v = adr20_pct(rows, r['basisSession'])
+            if v is not None:
+                r['adr20Pct'] = v
+                added.append((r['id'], 'adr20Pct'))
+        elif 'adr20Pct' not in r:
+            r['adr20Pct'] = None
+        if 'series' not in r and rows:
+            ser, _ = make_series(rows, r, r.get('evaluatedThrough') or r['basisSession'])
+            if ser:
+                r['series'] = ser
+                added.append((r['id'], 'series'))
+    return added
+
+
 # ───────────────────────────── stats ─────────────────────────────
 def band(rec):
     rd = rec.get('readiness')
@@ -517,6 +609,37 @@ def band(rec):
         return 'unscored'
     c = rd['composite']
     return '<50' if c < 50 else '50-69' if c < 70 else '>=70'
+
+
+def chase_excess_pct(rec):
+    """How far above entryZoneHigh the fill was, in % of the zone top (0 if the fill was not above the zone)."""
+    if rec.get('fillPrice') is None or not rec.get('chased'):
+        return 0.0
+    return (rec['fillPrice'] / rec['entryZoneHigh'] - 1) * 100
+
+
+def is_chase_skip(rec, rule=None):
+    """True when the fill would be refused under CHASE_RULE (open above the zone by >= adrMultiple x ADR20% or > maxPct)."""
+    rule = rule or CHASE_RULE
+    x = chase_excess_pct(rec)
+    if x <= 0:
+        return False
+    adr = rec.get('adr20Pct')
+    return x > rule['maxPct'] or (adr is not None and x >= rule['adrMultiple'] * adr)
+
+
+def disciplined_records(records, rule=None):
+    """Copies of the records where every skipped-chase fill is a skipped record instead of a trade. The ledger itself is untouched."""
+    out = []
+    for r in records:
+        if r['status'] != 'replaced' and is_chase_skip(r, rule):
+            c = copy.deepcopy(r)
+            c.update(status='skipped', exitReason='chase-skipped', fillPrice=None, exitPrice=None, rMultiple=None,
+                     daysHeld=None, chased=None, chaseSkipped=True)
+            out.append(c)
+        else:
+            out.append(r)
+    return out
 
 
 def _stat(recs):
@@ -533,7 +656,9 @@ def _stat(recs):
     return {
         'picks': len(recs), 'sets': len({r['publishedAt'] for r in recs}), 'closed': len(closed),
         'closedSets': len({r['publishedAt'] for r in closed}), 'open': sum(1 for r in recs if r['status'] in NON_TERMINAL),
-        'skipped': sum(1 for r in recs if r['status'] == 'skipped'),
+        'trades': len(resolved_filled),
+        'skipped': sum(1 for r in recs if r['status'] == 'skipped' and not r.get('chaseSkipped')),
+        'chaseSkipped': sum(1 for r in recs if r.get('chaseSkipped')),
         'invalidated': sum(1 for r in recs if r['status'] == 'invalidated'),
         'expired': sum(1 for r in recs if r['status'] == 'expired'),
         'triggerRate': None if (small or not denom) else len(resolved_filled) / denom,
@@ -549,7 +674,9 @@ def _stat(recs):
 
 
 def summarize(records):
+    """Stats over the literal ledger."""
     recs = [r for r in records if r['status'] != 'replaced']
+
     def split(keyf, order=None):
         groups = {}
         for r in recs:
@@ -568,6 +695,12 @@ def summarize(records):
     }
 
 
+def summarize_both(records, rule=None):
+    """{'literal': summarize(ledger), 'disciplined': summarize(ledger with skipped-chase fills removed), 'rule': ...}."""
+    rule = rule or CHASE_RULE
+    return {'literal': summarize(records), 'disciplined': summarize(disciplined_records(records, rule)), 'rule': dict(rule)}
+
+
 def chip(rec, last_session):
     """Status chip for a pick card: waiting | awaiting | live | stopped | target | expired | invalidated | time-exit | skipped | replaced."""
     s = rec['status']
@@ -582,24 +715,53 @@ def open_r(rec):
     return None
 
 
-def build_view(ledger, last_session, problems=None):
+def build_view(ledger, last_session, problems=None, pick_basis=None):
+    """Everything the page needs: records (also a replicated ledger copy), stats (literal + disciplined), tables, per-pick chips."""
     recs = ledger['records']
-    st = summarize(recs)
-    chips = {}
-    for r in recs:                              # latest record per ticker drives the card chip
-        chips[r['ticker']] = {'chip': chip(r, last_session), 'openR': open_r(r), 'id': r['id'], 'status': r['status']}
+    both = summarize_both(recs)
+    picks = {}
+    for r in recs:                              # the record behind each card currently on the page: same ticker + basis session
+        if pick_basis and r['basisSession'] == pick_basis:
+            picks[r['ticker']] = {'id': r['id'], 'chip': chip(r, last_session), 'openR': open_r(r), 'status': r['status'],
+                                  'fillPrice': r.get('fillPrice'), 'chased': r.get('chased'),
+                                  'chaseSkip': is_chase_skip(r), 'series': r.get('series')}
     closed = sorted((r for r in recs if r['status'] in CLOSED), key=lambda r: (r['exitDate'], r['id']), reverse=True)[:20]
+
+    def row(r):
+        return dict(id=r['id'], ticker=r['ticker'], publishedAt=r['publishedAt'], approx=bool(r.get('publishTimeApproximate')),
+                    readiness=(r.get('readiness') or {}).get('composite'), chased=r.get('chased'), chaseSkip=is_chase_skip(r))
+    awaiting = sorted({r['id'] for r in recs if chip(r, last_session) == 'awaiting'})
     return {
-        'schemaVersion': SCHEMA_VERSION, 'lastSession': last_session, 'records': recs, 'stats': st, 'chips': chips,
-        'open': [dict(id=r['id'], ticker=r['ticker'], publishedAt=r['publishedAt'], status=chip(r, last_session),
-                      readiness=(r.get('readiness') or {}).get('composite'), entry=r['entry'], stop=r['stop'],
-                      target=r['target'], fillPrice=r.get('fillPrice'), lastClose=r.get('lastClose'), openR=open_r(r),
+        'schemaVersion': SCHEMA_VERSION, 'lastSession': last_session, 'records': recs, 'stats': both,
+        'picks': picks, 'awaitingData': awaiting,
+        'open': [dict(row(r), status=chip(r, last_session), entry=r['entry'], stop=r['stop'], target=r['target'],
+                      fillPrice=r.get('fillPrice'), lastClose=r.get('lastClose'), openR=open_r(r),
                       evaluatedThrough=r.get('evaluatedThrough')) for r in recs if r['status'] in NON_TERMINAL],
-        'closed20': [dict(id=r['id'], ticker=r['ticker'], publishedAt=r['publishedAt'], exitDate=r['exitDate'],
-                          readiness=(r.get('readiness') or {}).get('composite'), result=r['status'], r=r['rMultiple'])
-                     for r in closed],
+        'closed20': [dict(row(r), exitDate=r['exitDate'], result=r['status'], r=r['rMultiple']) for r in closed],
         'problems': problems or [],
     }
+
+
+def tracker_health(view, warnings=()):
+    """(section, messages) for the page's health block: awaiting-data is an expected state (shown like PINNED), problems are warnings."""
+    msgs = list(view.get('problems') or []) + list(warnings or [])
+    n = len(view.get('awaitingData') or [])
+    evald = [r['evaluatedThrough'] for r in view['records'] if r.get('evaluatedThrough')]
+    sec = {'status': 'pinned' if n else 'ok', 'asOf': max(evald) if evald else view.get('lastSession'),
+           'source': 'pick ledger (data/picks.json)',
+           'msg': (f'{n} record(s) awaiting OHLC - outcomes refresh in an interactive session (the cloud routine has no price history).'
+                   if n else '')}
+    return sec, msgs
+
+
+def load_merged(ledger_path, previous_block=None):
+    """The git ledger merged with the copy embedded in the previous published page. Returns (ledger, conflicts)."""
+    ledger = load_ledger(ledger_path)
+    conflicts = []
+    prev = ((previous_block or {}).get('tracker') or {}).get('records')
+    if prev:
+        ledger, conflicts = merge_ledgers(ledger, {'schemaVersion': SCHEMA_VERSION, 'records': prev})
+    return ledger, conflicts
 
 
 # ───────────────────────────── CLI ─────────────────────────────
@@ -612,28 +774,26 @@ def _block_from_html(path):
 def cmd_update(a):
     now = pdt(a.now) if a.now else dt.datetime.now(mt.UTC)
     last = mt.last_completed_session(now.astimezone(mt.UTC)).isoformat()
-    ledger = load_ledger(a.ledger)
-    problems, report = [], []
     prev = _block_from_html(a.previous_html) if a.previous_html and pathlib.Path(a.previous_html).exists() else None
-    if prev and (prev.get('tracker') or {}).get('records'):
-        ledger, conflicts = merge_ledgers(ledger, {'schemaVersion': SCHEMA_VERSION, 'records': prev['tracker']['records']})
-        problems += [f'ledger copy conflict: {c}' for c in conflicts]
+    ledger, conflicts = load_merged(a.ledger, prev)
+    problems = [f'ledger copy conflict: {c}' for c in conflicts]
+    report = []
     data = json.loads(pathlib.Path(a.data).read_text(encoding='utf-8')) if a.data and pathlib.Path(a.data).exists() else {}
     pub_at = a.published_at or now.isoformat()
-    if data.get('picks'):
-        report += ingest(ledger, data, pub_at)
-    elif prev and prev.get('picks'):
-        report += ingest(ledger, prev, pub_at, source='previous published page')
     ohlc = {}
     if a.ohlc and pathlib.Path(a.ohlc).exists():
         ohlc = json.loads(pathlib.Path(a.ohlc).read_text(encoding='utf-8')).get('tickers', {})
+    if data.get('picks'):
+        report += ingest(ledger, data, pub_at, ohlc=ohlc)
+    elif prev and prev.get('picks'):
+        report += ingest(ledger, prev, pub_at, source='previous published page', ohlc=ohlc)
     rep = evaluate(ledger, ohlc, last)
     for tk, ps in rep['excluded'].items():
         problems.append(f'{tk}: OHLC excluded/warned - ' + '; '.join(ps))
     problems += [f'conflict: {c}' for c in rep['conflicts']]
     save_ledger(a.ledger, ledger)
-    view = build_view(ledger, last, problems)
-    view['awaitingData'] = sorted(set(rep['awaiting']))
+    basis = parse_pick_window_end((data if data.get('picks') else (prev or {})).get('pickWindow'))
+    view = build_view(ledger, last, problems, pick_basis=basis)
     if a.view:
         p = pathlib.Path(a.view)
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -641,6 +801,13 @@ def cmd_update(a):
     print(json.dumps({'lastSession': last, 'ingest': report, 'updated': rep['updated'], 'awaiting': view['awaitingData'],
                       'problems': problems}, indent=1, ensure_ascii=False))
     return 0
+
+
+def cmd_closes(a):
+    rows = json.loads(pathlib.Path(a.ohlc).read_text(encoding='utf-8')).get('tickers', {}).get(a.ticker, {}).get('rows', [])
+    closes, probs = build_closes(rows, a.upto, a.n)
+    print(json.dumps({'ticker': a.ticker, 'upto': a.upto, 'closes': closes, 'problems': probs}, ensure_ascii=False))
+    return 0 if closes else 2
 
 
 def main(argv=None):
@@ -654,8 +821,13 @@ def main(argv=None):
     u.add_argument('--published-at', default=None)
     u.add_argument('--now', default=None)
     u.add_argument('--view', default=None)
+    c = sub.add_parser('closes', help='print a sorted, validated closes array for a card (the only sanctioned way to build one)')
+    c.add_argument('--ohlc', required=True)
+    c.add_argument('--ticker', required=True)
+    c.add_argument('--upto', required=True, help='last session of the window (the basis session)')
+    c.add_argument('--n', type=int, default=SERIES_SESSIONS)
     a = ap.parse_args(argv)
-    return cmd_update(a)
+    return cmd_update(a) if a.cmd == 'update' else cmd_closes(a)
 
 
 if __name__ == '__main__':
