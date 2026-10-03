@@ -71,7 +71,10 @@ def main(argv=None):
     final, health = hl.assemble(new, old, ctx)
     if a.ledger:
         add_tracker(final, health, a.ledger, old, ctx['lastSession'], a.tracker_warn)
-    final.update(hl.labels(now, ctx['lastSession']))
+    # Label the page by the date of the MARKET DATA it actually carries (the indices section), not by the last completed session:
+    # they are equal on a normal run, but a page republished with older data must not read "Data as of <a newer close>".
+    data_day = hl.iso((final.get('sections', {}).get('indices') or {}).get('asOf'))
+    final.update(hl.labels(now, data_day if data_day and data_day <= ctx['lastSession'] else ctx['lastSession']))
     final['meta'] = {**(new or {}).get('meta', {}), 'generatedAt': now.astimezone(mt.HKT).isoformat(), 'lastSession': ctx['lastSession'].isoformat()}
 
     report = {'status': health['status'], 'sections': {k: v['status'] for k, v in health['sections'].items()},

@@ -345,6 +345,18 @@ d, _ = brief('T8c_stop_exactly_one_atr', n, prev)
 check('T8 exactly 1 ATR is allowed', 'ANET' in [p['tk'] for p in d['picks']])
 check('T8 the floor is one config value in health.py', hl.MIN_STOP_ATR == 1.0)
 
+
+# T9 the page is labelled with the date of the market data it carries, not the last completed session
+import datetime as _dt
+old_day = '2026-09-17'                                        # one session older than the last completed one (18 Sep)
+n = copy.deepcopy(fresh); n['sections']['indices']['asOf'] = old_day
+for q in n['indices']:
+    pass
+d, _ = brief('T9_label_follows_the_data_date', n, prev)
+check('T9 an older-data page is labelled with the data date, not the newer close', d['asOfLabel'] == 'Thu 17 Sep 2026 close' and d['asOf'] == old_day, (d['asOfLabel'], d['asOf']))
+d, _ = brief('T9b_label_normal_run', fresh, prev)
+check('T9 a normal run is labelled with the last completed session', d['asOfLabel'] == 'Fri 18 Sep 2026 close', d['asOfLabel'])
+
 print(f'{len(results)} scenarios passed')
 for r in results:
     print('  ok -', r)
