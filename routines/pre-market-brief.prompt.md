@@ -52,13 +52,33 @@ STEP 3 — Write `data/brief-data.json` following SCHEMA.md. Write only: `indice
   `pickWindow`, or `nearmiss` — omitting them is what keeps them pinned. Rewrite `notices`, `screenNotes` and
   `rejected` from THIS run's facts; don't leave old names or dates in them.
 
-STEP 4 — Build.  `python scripts/build_brief.py --data data/brief-data.json --previous-html out/published-brief.html`
+STEP 3b — Pick tracker. This routine has no price history, so it never evaluates outcomes and never fetches or guesses OHLC;
+  it only records picks and lets unevaluated ones read "awaiting data".
+  `python scripts/tracker.py update --ledger data/picks.json --data data/brief-data.json --previous-html out/published-brief.html`
+  (It merges the git ledger with the copy embedded in the last published page and ingests the picks currently on the page; a
+  pick set that is already recorded is a no-op.) Then persist the ledger BEFORE building, so a failed push can be shown on the page:
+    git add data/picks.json
+    git diff --cached --quiet || git commit -m "Pick ledger: pre-market run"
+    git push origin HEAD:refs/heads/main
+    git ls-remote origin refs/heads/main        # the hash must equal `git rev-parse HEAD`
+  HEAD is a detached checkout, so always spell the push exactly as above (never plain `git push origin HEAD`). If the push fails or the
+  two hashes differ, do NOT try any other way to move `main` (no `git branch -f`, no checkout of main, no force): just remember
+  "ledger not pushed" and pass `--tracker-warn "ledger not pushed"` in STEP 4. Never edit `data/picks.json` by hand.
+
+STEP 4 — Build.  `python scripts/build_brief.py --data data/brief-data.json --previous-html out/published-brief.html --ledger data/picks.json`
+  (add `--tracker-warn "ledger not pushed"` if STEP 3b's push or hash check failed).
   Read `out/build-report.json`. Exit 0 = built (PINNED/STALE banners are fine — PINNED on industries/technical/nearmiss
   is the normal, expected state every day). Exit 3 = nothing publishable: do NOT publish; go to the final message.
 
 STEP 5 — Publish `out/brief.html` with the Artifact tool, action "publish", `url` = BRIEF, file_path = out/brief.html.
   Retry up to twice on failure. Do not create a new artifact URL. Do not change sharing settings.
 
-FINAL MESSAGE (5 lines max): status (ok / degraded / not published), sections that are stale or failed (PINNED sections
-are expected, don't list them as a problem), number of failed data calls, the catalyst alerts published, the artifact URL.
+STEP 6 — Commit the data file. At the end `data/brief-data.json` is uncommitted (the stop hook will say so). Commit it
+  (`git add data/brief-data.json`, `git commit`), push with exactly `git push origin HEAD:refs/heads/main`, and check that
+  `git ls-remote origin refs/heads/main` equals `git rev-parse HEAD`. If it does not, say so in the final message and stop:
+  do not move `main` by any other means.
+
+FINAL MESSAGE (6 lines max): status (ok / degraded / not published), sections that are stale or failed (PINNED sections
+are expected, don't list them as a problem), number of failed data calls, the catalyst alerts published, the artifact URL,
+and a tracker line: records awaiting data, whether the ledger and the data file were pushed (hash check passed: yes/no).
 If you did not publish, say exactly why.
