@@ -23,7 +23,16 @@ and `data/open-live.example.json` are the permanent, complete, valid examples; c
 | `fetchlog` | (meta) | `[{id, ok, note}]` one row per external call. |
 | `meta` | (meta) | `{targetSession, lastSession}` informational; the builder recomputes the last completed session itself. |
 
-The builder adds `health`, `watch`, `asOf`, `asOfLabel`, `builtLabel`. Do not write those.
+The builder adds `health`, `watch`, `asOf`, `asOfLabel`, `builtLabel`, and — when run with `--ledger data/picks.json` — `tracker`
+(the merged pick ledger, stats literal + disciplined, open/closed tables, per-pick chips and validated sparkline series; plus a `tracker`
+health section). Do not write those. Pick cards get their status chip from `tracker.picks[TK]` and draw `tracker.picks[TK].series` when present.
+
+**`closes` on a pick card** must come from `python scripts/tracker.py closes --ohlc out/ohlc.json --ticker TK --upto <basis session>`
+(sorted by date, validated, 25 sessions): never assemble it by hand from fetched output.
+
+## `data/picks.json` (the pick ledger — see CLAUDE.md "Pick tracker")
+`{"schemaVersion": 1, "records": [...]}`, one record per pick per publish, append-only. Never written by hand: `tracker.py update` (or
+`tracker_backfill.py`) is the only writer. Terminal outcomes are immutable; fields are added, never rewritten. Tests use synthetic ledgers, never this file.
 
 ## `data/open-live.json` (Market Open Update) — hybrid, no WebFetch (see CLAUDE.md)
 

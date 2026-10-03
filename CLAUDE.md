@@ -211,6 +211,88 @@ pin it to exactly 15 minutes.
 - The log is scoped to the current HKT date (`seen-<today>.json`, under the already-gitignored `out/`) — closing
   and reopening the session mid-day keeps the dedup state; a new trading day starts clean automatically.
 
+## Pick tracker (added 2026-10-03) — every technical pick recorded, followed to an outcome, summarised
+Purpose: learn whether the readiness score actually predicts better trades. Code: `scripts/tracker.py` (pure, no network),
+tests: `tests/test_tracker.py`. The ledger is `data/picks.json` — **append-only**: never delete or reorder records, never
+hand-edit it, never change a terminal outcome. New information arrives as new fields on the existing record.
+
+**Ledger schema** (`{"schemaVersion": 1, "records": [...]}`, one record per line). One record per pick per publish:
+`id` ("2026-10-02-NVDA", HKT publish date; `-2` suffix if the same ticker is re-picked the same day) · `publishedAt` (ISO, +08:00)
+· `publishTimeApproximate` (true when only an upper bound is known; the page shows "≈") · `basisSession` (last session of the OHLC
+the levels came from) · `startSession` (first session replayed) · `ticker, sector, industry, setup` · `pivot, entryZoneLow,
+entryZoneHigh, entry, stop, target` · `readiness {composite,tightness,proximity,volumeDryUp,timeInBase}` (null if unscored) ·
+`readinessAsPublished` (only when `readiness` was recomputed) · `readinessCheck` · `scoringVersion` · `regimeLabel, regimeScore,
+regimeChecks` at publish · `nextEarningsDate` · `adr20Pct` (ADR over the 20 sessions to the basis session: 100 × (mean High/Low − 1))
+· `status, triggerDate, fillPrice, chased, exitDate, exitPrice, exitReason, rMultiple, daysHeld` · `lastClose, evaluatedThrough`
+· `repickDates` · `evidence` (the OHLC rows that decided the trigger and the exit) · `series` (validated closes for the sparkline:
+`{from, through, closes[]}`, 25 sessions to the basis session extended to `evaluatedThrough`) · `notes`.
+
+**Statuses.** Non-terminal: `pending`, `triggered`. Terminal: `stopped`, `target`, `time-exit` (the trade closed; `rMultiple` set),
+`invalidated`, `expired`, `skipped` ("gapped past target"), `replaced`. Page chips: Waiting / Live / Stopped / Target / Time exit /
+Invalidated / Expired / Skipped / Replaced, plus **Awaiting data** (a record with sessions still to evaluate and no OHLC).
+
+**Outcome rules** (`tracker.replay`, a pure function that always replays from `startSession`, so it is idempotent):
+- First replayed session = the first session whose 09:30 ET open is strictly after `publishedAt` (no lookahead). A pick published
+  after the open starts the next session.
+- pending → **triggered** when a session's high ≥ entry. Fill = max(open, entry). `chased` = fill > `entryZoneHigh`.
+- pending → **invalidated** if the open ≤ stop (the stop broke before any trigger), or if the low ≤ stop while the high never reached
+  the entry. A session that both reaches the entry and touches the stop: open ≤ stop → invalidated; open ≥ entry → triggered at the open,
+  then the stop is checked the same session; opened between stop and entry → triggered at the entry, then stopped (a loss).
+- pending → **skipped** ("gapped-past-target") if the trigger session opens ≥ target. Kept out of win rate and R, but counted.
+- pending → **expired** after 10 evaluable sessions without a trigger (a trigger on session 10 counts).
+- triggered → **stopped** when low ≤ stop (exit = min(open, stop): a gap-down fills at the open). → **target** when high ≥ target (exit =
+  target). Both in one session: the stop is assumed first. → **time-exit** at the close of session 20 (the trigger session is session 1).
+- `rMultiple` = (exit − fill) / (entry − stop). `daysHeld` counts the trigger session as 1.
+- Rows are validated before use (`tracker.validate_rows`): numeric OHLC, low ≤ open/close ≤ high, strictly increasing dates, trading
+  days only, no missing session from the first replayed session to the last completed one, last date = last completed session, last close
+  within 3% of an independent FMP price (a >0.5% gap is a warning). Rows after the last completed session (a partial day) are ignored.
+  A ticker that fails is excluded, logged in health, and its records stay as they were (→ "awaiting data"). Never guess a row.
+
+**Identity, re-picks, merging.** A record's identity is (ticker, `basisSession`): a carry-forward republish of the same pick set is a
+no-op (the pinned picks reappear on the page every day). A fresh scan that re-picks a ticker with new levels closes a still-pending old
+record as `replaced` and opens a new one; if the old record is `triggered`, the live trade is kept and only the date is added to
+`repickDates`. The ledger lives in git (`data/picks.json`) **and** is embedded in every published page (`tracker.records`); `update` and
+`build_brief.py --ledger` merge the two by id: the later `evaluatedThrough` wins for non-terminal fields, a terminal outcome is immutable
+and beats a non-terminal copy, two disagreeing terminal copies keep the git copy and raise a health warning.
+
+**scoringVersion.** `SCORING_VERSION` in `tracker.py` ("v1") must be bumped whenever the formulas in "Readiness scoring" change; every record
+stores the version its `readiness` was computed with and the stats split by it. A set scored by a different formula is NOT labelled v1: it is
+recomputed with the documented formula from validated OHLC (`tracker.readiness_v1`, verification only: the formula itself is unchanged) and the
+published numbers are kept in `readinessAsPublished`. The 2 Oct set (NVDA/MPWR/TXN/DAL) was scored by a reconstructed formula; see
+`data/provenance/2026-10-02/NOTE.md`.
+
+**Stats** (`tracker.summarize*`, computed, never hand-written): picks, trades, closed, trigger rate, win rate (hit target, or exit > fill),
+average R, expectancy, average days held; split by readiness band (<50, 50–69, ≥70, unscored), regime at publish, sector, scoringVersion and
+fill type (clean / chased). A bucket with fewer than 20 closed trades shows "n too small (<20)", never a percentage. Every bucket also shows
+its number of distinct publish sets: three semiconductors published together are one independent sample.
+**Two views, side by side.** *Literal* is the record (every fill). *Disciplined* treats a fill whose open is above `entryZoneHigh` by ≥ 1× ADR20%
+or more than 3% as a skipped chase, not a trade. The definition is the single config value `CHASE_RULE` in `tracker.py`
+(`{'adrMultiple': 1.0, 'maxPct': 3.0}`); if `adr20Pct` is unknown only the 3% leg applies. The ledger is never changed by the disciplined view.
+
+**Where it runs.**
+- *Interactive refresh* (has WebFetch): fetch daily OHLC for every non-terminal record's ticker and for any new pick (stockanalysis.com JSON
+  API, see "Web sources"), write them to `out/ohlc.json` as `{"tickers": {"NVDA": {"rows": [...], "fmpLast": <FMP price>}}}`, then
+  `python scripts/tracker.py update --ledger data/picks.json --data data/brief-data.json --previous-html out/published-brief.html --ohlc out/ohlc.json`,
+  then build with `--ledger data/picks.json`, publish, commit `data/picks.json` and `data/brief-data.json`, push with
+  `git push origin HEAD:refs/heads/main` and confirm `git ls-remote origin refs/heads/main` equals `git rev-parse HEAD`.
+- *Pre-Market Brief routine* (no price history): runs `tracker.py update` without OHLC (records picks, nothing evaluated → "awaiting data"),
+  pushes the ledger before building, and passes `--tracker-warn "ledger not pushed"` to the build if the push or the hash check fails.
+- **Every `closes` array on a pick card must be built with `python scripts/tracker.py closes --ohlc out/ohlc.json --ticker X --upto <basis session>`**
+  (sorted by date, same validator). Hand-assembling `closes` from WebFetch output is how the 1 Oct QRVO-set sparklines got misordered. A tracked
+  pick's card draws the validated ledger `series`; the build warns in health if a card's own `closes` disagree with it.
+- Backfill (one-off, 3 Oct): `scripts/tracker_backfill.py` rebuilt the ledger from git history and the committed artifact-v11 block; evidence
+  in `data/provenance/backfill-2026-10-03/` (OHLC, FMP cross-check, report).
+
+## Known issues
+- **Finviz screener and quote pages now refuse automated fetches** (robots.txt / 404) in interactive sessions too. The 2 Oct scan therefore built its
+  universe from stockanalysis.com industry lists (see `data/provenance/2026-10-02/NOTE.md`). The scan code is deliberately unchanged here; it gets its own task.
+- Interactive WebFetch of stockanalysis.com returns rows through a summarizer: chunks arrive out of order, rows can be dropped (DAL lost 11–31 Aug),
+  and a 1-year range comes back corrupted. Always sort and validate (`tracker.validate_rows` / `build_closes`); use `range=3M`.
+- The routine's git push is fragile: on 2 Oct it ran `git push origin HEAD` from a detached HEAD ("not a full refname") and the day's data never reached
+  `origin/main`. Prompts now pin `git push origin HEAD:refs/heads/main` and verify with `git ls-remote`.
+- The v1 stop rule (entry × 0.95 when the last low is more than 6% away) can put the stop **above the last close**: on 1 Oct GOOGL (stop 346.09 vs
+  close 344.08) and ALAB (359.10 vs 355.97) were already below their own stops at publication and were invalidated in their first session.
+
 ## Files
 - `data/brief-data.json` / `data/open-live.json` — what YOU write, every run (schema in `SCHEMA.md`). These get
   overwritten daily (and auto-committed by the stop-hook) — never treat them as a stable reference.
@@ -221,6 +303,10 @@ pin it to exactly 15 minutes.
 - `scripts/` — `market_time.py` (DST + holiday guard), `health.py`, `health_live.py`, `build_brief.py`, `build_open.py`,
   `news_loop.py` (the standalone 15-minute news loop — not called by either routine; `extract` pulls the published
   artifact's embedded data into a local cache, `context` reads that cache, `record` dedupes/formats sweep output).
+- `data/picks.json` — the pick ledger (append-only; schema in "Pick tracker"). `data/provenance/` — evidence behind pick sets and the backfill
+  (`2026-10-02/` the 2 Oct scan's method + artifact v11 block; `backfill-2026-10-03/` the validated OHLC, FMP cross-check and report).
+- `scripts/tracker.py` (outcome rules, validation, stats, `update`/`closes` commands), `scripts/tracker_backfill.py` (one-off backfill),
+  `tests/test_tracker.py` (unit tests), `tests/shoot_brief.py` (Chromium render check: console errors, overflow, 1200/390 × light/dark).
 - `.claude/commands/news-sweep.md` — the `/loop`-driven news-loop prompt (`/loop 15m /news-sweep` to start it).
 - `templates/` — page templates. `out/` — generated pages and reports (never committed), plus `out/news-loop/` —
   the news loop's own dedup logs, also never committed.
