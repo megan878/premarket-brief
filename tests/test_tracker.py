@@ -565,6 +565,9 @@ class Readiness(unittest.TestCase):
         self.assertEqual((r['pivot'], r['timeInBaseDays']), (121.09, 5))
         self.assertEqual((r['tightness'], r['proximity'], r['volumeDryUp'], r['timeInBase'], r['composite']), (5, 9, 1, 25, 41))
 
+    def test_round_half_up(self):
+        self.assertEqual([T.round_half_up(v) for v in (5.5, 4.5, 5.4999, 5.4999999999999, 0.0, 24.6)], [6, 5, 5, 6, 0, 25])   # last tie-ish value is inside the 1e-9 float epsilon
+
     def test_new_high_today_has_no_base(self):
         rs = [dict(r) for r in QRVO_ROWS]
         rs[-1].update(high=125.0, close=124.0, low=116.0, open=117.0)
@@ -584,6 +587,8 @@ class Parsing(unittest.TestCase):
         self.assertEqual(T.parse_zone('364.30 – 366.00'), (364.3, 366.0))
         self.assertEqual(T.parse_next_earnings('28 Oct', '2026-10-02'), '2026-10-28')
         self.assertEqual(T.parse_next_earnings('3 Jan', '2026-12-20'), '2027-01-03')
+        self.assertEqual(T.parse_next_earnings('3 Nov, after close', '2026-09-22'), '2026-11-03')
+        self.assertEqual(T.parse_next_earnings('24 Sep, before open', '2026-09-22'), '2026-09-24')
         self.assertIsNone(T.parse_next_earnings('reports 24 Sep', '2026-09-20'))
         self.assertEqual(T.parse_pick_window_end('25 trading days to 1 Oct 2026, stockanalysis.com'), '2026-10-01')
         self.assertIsNone(T.parse_pick_window_end('garbage'))

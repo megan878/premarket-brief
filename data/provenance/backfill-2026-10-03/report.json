@@ -1,0 +1,868 @@
+{
+ "lastSession": "2026-10-02",
+ "sets": [
+  {
+   "set": "2026-09-21 set",
+   "publishedAt": "2026-09-22T19:55:58+08:00",
+   "actions": [
+    "ANET: new record 2026-09-22-ANET (basis 2026-09-18, first session 2026-09-22)",
+    "MTCH: new record 2026-09-22-MTCH (basis 2026-09-18, first session 2026-09-22)",
+    "CVX: new record 2026-09-22-CVX (basis 2026-09-18, first session 2026-09-22)",
+    "SNX: new record 2026-09-22-SNX (basis 2026-09-18, first session 2026-09-22)"
+   ]
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "publishedAt": "2026-10-01T14:43:26+08:00",
+   "actions": [
+    "GOOGL: new record 2026-10-01-GOOGL (basis 2026-09-30, first session 2026-10-01)",
+    "GH: new record 2026-10-01-GH (basis 2026-09-30, first session 2026-10-01)",
+    "CRL: new record 2026-10-01-CRL (basis 2026-09-30, first session 2026-10-01)",
+    "ALAB: new record 2026-10-01-ALAB (basis 2026-09-30, first session 2026-10-01)"
+   ]
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "publishedAt": "2026-10-01T22:15:33+08:00",
+   "actions": [
+    "QRVO: new record 2026-10-01-QRVO (basis 2026-09-30, first session 2026-10-02)",
+    "ACMR: new record 2026-10-01-ACMR (basis 2026-09-30, first session 2026-10-02)",
+    "NVT: new record 2026-10-01-NVT (basis 2026-09-30, first session 2026-10-02)",
+    "ONTO: new record 2026-10-01-ONTO (basis 2026-09-30, first session 2026-10-02)"
+   ]
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "publishedAt": "2026-10-02T19:46:23+08:00",
+   "actions": [
+    "NVDA: new record 2026-10-02-NVDA (basis 2026-10-01, first session 2026-10-02)",
+    "MPWR: new record 2026-10-02-MPWR (basis 2026-10-01, first session 2026-10-02)",
+    "TXN: new record 2026-10-02-TXN (basis 2026-10-01, first session 2026-10-02)",
+    "DAL: new record 2026-10-02-DAL (basis 2026-10-01, first session 2026-10-02)"
+   ]
+  }
+ ],
+ "readinessCheck": [
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "GOOGL",
+   "basis": "2026-09-30",
+   "window": 26,
+   "closesMismatch": [
+    "#0: 346.96 vs 348.06",
+    "#1: 342.0 vs 346.96",
+    "#2: 340.65 vs 342.0",
+    "#3: 346.59 vs 340.65",
+    "#4: 339.35 vs 346.59"
+   ],
+   "published": {
+    "composite": 68,
+    "tightness": 24,
+    "proximity": 9,
+    "volumeDryUp": 10,
+    "timeInBase": 25
+   },
+   "recomputed": {
+    "composite": 68,
+    "tightness": 24,
+    "proximity": 9,
+    "volumeDryUp": 10,
+    "timeInBase": 25
+   },
+   "recomputedUnrounded": {
+    "tightness": 24.18,
+    "proximity": 8.97,
+    "volumeDryUp": 9.67,
+    "timeInBase": 25.0
+   },
+   "pivot": 364.17,
+   "timeInBaseDays": 6,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "GH",
+   "basis": "2026-09-30",
+   "window": 27,
+   "closesMismatch": [],
+   "published": {
+    "composite": 62,
+    "tightness": 16,
+    "proximity": 21,
+    "volumeDryUp": 0,
+    "timeInBase": 25
+   },
+   "recomputed": {
+    "composite": 62,
+    "tightness": 16,
+    "proximity": 21,
+    "volumeDryUp": 0,
+    "timeInBase": 25
+   },
+   "recomputedUnrounded": {
+    "tightness": 16.02,
+    "proximity": 20.97,
+    "volumeDryUp": 0.2,
+    "timeInBase": 25.0
+   },
+   "pivot": 183.51,
+   "timeInBaseDays": 9,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "CRL",
+   "basis": "2026-09-30",
+   "window": 28,
+   "closesMismatch": [],
+   "published": {
+    "composite": 45,
+    "tightness": 6,
+    "proximity": 21,
+    "volumeDryUp": 6,
+    "timeInBase": 12
+   },
+   "recomputed": {
+    "composite": 45,
+    "tightness": 5,
+    "proximity": 21,
+    "volumeDryUp": 6,
+    "timeInBase": 12
+   },
+   "recomputedUnrounded": {
+    "tightness": 5.5,
+    "proximity": 21.33,
+    "volumeDryUp": 6.23,
+    "timeInBase": 12.0
+   },
+   "pivot": 303.305,
+   "timeInBaseDays": 23,
+   "match": false,
+   "diff": {
+    "tightness": -1
+   }
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "ALAB",
+   "basis": "2026-09-30",
+   "window": 27,
+   "closesMismatch": [],
+   "published": {
+    "composite": 43,
+    "tightness": 14,
+    "proximity": 8,
+    "volumeDryUp": 16,
+    "timeInBase": 5
+   },
+   "recomputed": {
+    "composite": 43,
+    "tightness": 14,
+    "proximity": 8,
+    "volumeDryUp": 16,
+    "timeInBase": 5
+   },
+   "recomputedUnrounded": {
+    "tightness": 13.58,
+    "proximity": 8.41,
+    "volumeDryUp": 15.95,
+    "timeInBase": 5.0
+   },
+   "pivot": 377.87,
+   "timeInBaseDays": 3,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "QRVO",
+   "basis": "2026-09-30",
+   "window": 26,
+   "closesMismatch": [
+    "#0: 94.34 vs 96.08",
+    "#1: 95.135 vs 94.73",
+    "#3: 94.73 vs 95.135",
+    "#4: 96.08 vs 94.34",
+    "#9: 104.07 vs 105.24",
+    "#10: 105.24 vs 104.07"
+   ],
+   "published": {
+    "composite": 41,
+    "tightness": 5,
+    "proximity": 9,
+    "volumeDryUp": 1,
+    "timeInBase": 25
+   },
+   "recomputed": {
+    "composite": 41,
+    "tightness": 5,
+    "proximity": 9,
+    "volumeDryUp": 1,
+    "timeInBase": 25
+   },
+   "recomputedUnrounded": {
+    "tightness": 5.36,
+    "proximity": 9.08,
+    "volumeDryUp": 1.07,
+    "timeInBase": 25.0
+   },
+   "pivot": 121.09,
+   "timeInBaseDays": 5,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "ACMR",
+   "basis": "2026-09-30",
+   "window": 26,
+   "closesMismatch": [
+    "#0: 79.77 vs 72.82",
+    "#1: 79.11 vs 74.42",
+    "#3: 74.42 vs 79.11",
+    "#4: 72.82 vs 79.77"
+   ],
+   "published": {
+    "composite": 38,
+    "tightness": 8,
+    "proximity": 20,
+    "volumeDryUp": 0,
+    "timeInBase": 11
+   },
+   "recomputed": {
+    "composite": 38,
+    "tightness": 8,
+    "proximity": 20,
+    "volumeDryUp": 0,
+    "timeInBase": 11
+   },
+   "recomputedUnrounded": {
+    "tightness": 7.91,
+    "proximity": 19.55,
+    "volumeDryUp": 0,
+    "timeInBase": 11.0
+   },
+   "pivot": 83.5,
+   "timeInBaseDays": 24,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "NVT",
+   "basis": "2026-09-30",
+   "window": 25,
+   "closesMismatch": [
+    "#0: 155.23 vs 151.48",
+    "#1: 155.55 vs 155.23",
+    "#2: 148.48 vs 155.55",
+    "#3: 150.75 vs 148.48",
+    "#4: 147.3 vs 150.75",
+    "#5: 148.17 vs 147.3",
+    "#6: 152.09 vs 148.17",
+    "#7: 156.03 vs 152.09",
+    "#8: 162.57 vs 156.03",
+    "#9: 158.54 vs 162.57",
+    "#10: 155.17 vs 158.54",
+    "#11: 162.38 vs 155.17",
+    "#12: 146.64 vs 162.38",
+    "#13: 146.8 vs 146.64",
+    "#14: 147.65 vs 146.8",
+    "#15: 151.33 vs 147.65",
+    "#16: 157.88 vs 151.33",
+    "#17: 159.44 vs 157.88",
+    "#18: 162.65 vs 159.44",
+    "#19: 162.85 vs 162.65",
+    "#20: 162.88 vs 162.85",
+    "#21: 164.41 vs 163.14"
+   ],
+   "published": {
+    "composite": 36,
+    "tightness": 8,
+    "proximity": 18,
+    "volumeDryUp": 7,
+    "timeInBase": 3
+   },
+   "recomputed": {
+    "composite": 36,
+    "tightness": 8,
+    "proximity": 18,
+    "volumeDryUp": 7,
+    "timeInBase": 3
+   },
+   "recomputedUnrounded": {
+    "tightness": 7.74,
+    "proximity": 17.5,
+    "volumeDryUp": 6.96,
+    "timeInBase": 3.33
+   },
+   "pivot": 166.185,
+   "timeInBaseDays": 2,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "ONTO",
+   "basis": "2026-09-30",
+   "window": 25,
+   "closesMismatch": [
+    "#0: 291.88 vs 267.21",
+    "#1: 292.62 vs 270.79",
+    "#2: 270.79 vs 292.62",
+    "#3: 267.21 vs 291.88",
+    "#4: 256.37 vs 291.62",
+    "#5: 254.55 vs 256.37",
+    "#6: 252.46 vs 254.55",
+    "#7: 268.01 vs 252.46",
+    "#8: 281.11 vs 268.01",
+    "#9: 278.4 vs 281.11",
+    "#10: 268.92 vs 278.4",
+    "#11: 281.26 vs 268.92",
+    "#12: 250.13 vs 281.26",
+    "#13: 244.16 vs 250.13",
+    "#14: 243.64 vs 244.16",
+    "#15: 250.03 vs 243.64",
+    "#16: 263.43 vs 250.03",
+    "#17: 275.98 vs 263.43",
+    "#18: 283.81 vs 275.98",
+    "#19: 282.31 vs 283.81",
+    "#20: 279.73 vs 282.31",
+    "#21: 287.64 vs 279.73"
+   ],
+   "published": {
+    "composite": 34,
+    "tightness": 9,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "recomputed": {
+    "composite": 34,
+    "tightness": 9,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "recomputedUnrounded": {
+    "tightness": 8.78,
+    "proximity": 25.0,
+    "volumeDryUp": 0.0,
+    "timeInBase": 0
+   },
+   "pivot": 311.0,
+   "timeInBaseDays": 0,
+   "match": true,
+   "diff": {}
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "NVDA",
+   "basis": "2026-10-01",
+   "window": 25,
+   "closesMismatch": [],
+   "published": {
+    "composite": 84,
+    "tightness": 21,
+    "proximity": 23,
+    "volumeDryUp": 22,
+    "timeInBase": 18
+   },
+   "recomputed": {
+    "composite": 61,
+    "tightness": 2,
+    "proximity": 25,
+    "volumeDryUp": 15,
+    "timeInBase": 19
+   },
+   "recomputedUnrounded": {
+    "tightness": 2.39,
+    "proximity": 25.0,
+    "volumeDryUp": 14.63,
+    "timeInBase": 19.0
+   },
+   "pivot": 234.76,
+   "timeInBaseDays": 18,
+   "match": false,
+   "diff": {
+    "composite": -23,
+    "tightness": -19,
+    "proximity": 2,
+    "volumeDryUp": -7,
+    "timeInBase": 1
+   }
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "MPWR",
+   "basis": "2026-10-01",
+   "window": 25,
+   "closesMismatch": [],
+   "published": {
+    "composite": 80,
+    "tightness": 10,
+    "proximity": 22,
+    "volumeDryUp": 23,
+    "timeInBase": 25
+   },
+   "recomputed": {
+    "composite": 100,
+    "tightness": 25,
+    "proximity": 25,
+    "volumeDryUp": 25,
+    "timeInBase": 25
+   },
+   "recomputedUnrounded": {
+    "tightness": 25.0,
+    "proximity": 25.0,
+    "volumeDryUp": 25.0,
+    "timeInBase": 25.0
+   },
+   "pivot": 1387.455,
+   "timeInBaseDays": 7,
+   "match": false,
+   "diff": {
+    "composite": 20,
+    "tightness": 15,
+    "proximity": 3,
+    "volumeDryUp": 2
+   }
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "TXN",
+   "basis": "2026-10-01",
+   "window": 25,
+   "closesMismatch": [],
+   "published": {
+    "composite": 77,
+    "tightness": 17,
+    "proximity": 25,
+    "volumeDryUp": 25,
+    "timeInBase": 10
+   },
+   "recomputed": {
+    "composite": 55,
+    "tightness": 13,
+    "proximity": 25,
+    "volumeDryUp": 14,
+    "timeInBase": 3
+   },
+   "recomputedUnrounded": {
+    "tightness": 12.65,
+    "proximity": 25.0,
+    "volumeDryUp": 13.68,
+    "timeInBase": 3.33
+   },
+   "pivot": 284.39,
+   "timeInBaseDays": 2,
+   "match": false,
+   "diff": {
+    "composite": -22,
+    "tightness": -4,
+    "volumeDryUp": -11,
+    "timeInBase": -7
+   }
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "DAL",
+   "basis": "2026-10-01",
+   "window": 25,
+   "closesMismatch": [],
+   "published": {
+    "composite": 62,
+    "tightness": 7,
+    "proximity": 23,
+    "volumeDryUp": 12,
+    "timeInBase": 20
+   },
+   "recomputed": {
+    "composite": 58,
+    "tightness": 8,
+    "proximity": 25,
+    "volumeDryUp": 11,
+    "timeInBase": 15
+   },
+   "recomputedUnrounded": {
+    "tightness": 7.72,
+    "proximity": 25.0,
+    "volumeDryUp": 10.76,
+    "timeInBase": 15.0
+   },
+   "pivot": 85.47,
+   "timeInBaseDays": 4,
+   "match": false,
+   "diff": {
+    "composite": -4,
+    "tightness": 1,
+    "proximity": 2,
+    "volumeDryUp": -1,
+    "timeInBase": -5
+   }
+  }
+ ],
+ "closesCheck": [
+  {
+   "set": "2026-09-21 set",
+   "ticker": "ANET",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-09-21 set",
+   "ticker": "MTCH",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-09-21 set",
+   "ticker": "CVX",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-09-21 set",
+   "ticker": "SNX",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "GOOGL",
+   "window": 26,
+   "differingPositions": 5,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "GH",
+   "window": 27,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "CRL",
+   "window": 28,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 GOOGL set",
+   "ticker": "ALAB",
+   "window": 27,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "QRVO",
+   "window": 26,
+   "differingPositions": 6,
+   "sameValuesDifferentOrder": true
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "ACMR",
+   "window": 26,
+   "differingPositions": 4,
+   "sameValuesDifferentOrder": true
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "NVT",
+   "window": 25,
+   "differingPositions": 22,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-01 QRVO set",
+   "ticker": "ONTO",
+   "window": 25,
+   "differingPositions": 22,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "NVDA",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "MPWR",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "TXN",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  },
+  {
+   "set": "2026-10-02 NVDA set",
+   "ticker": "DAL",
+   "window": 25,
+   "differingPositions": 0,
+   "sameValuesDifferentOrder": false
+  }
+ ],
+ "ohlc": {
+  "excluded": {},
+  "awaiting": [],
+  "conflicts": []
+ },
+ "replay": [
+  {
+   "id": "2026-09-22-ANET",
+   "status": "triggered",
+   "startSession": "2026-09-22",
+   "triggerDate": "2026-09-22",
+   "fillPrice": 206.2,
+   "chased": false,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 207.35,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-09-22-MTCH",
+   "status": "invalidated",
+   "startSession": "2026-09-22",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-09-22",
+   "exitPrice": null,
+   "exitReason": "stop-before-trigger",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 41.71,
+   "evaluatedThrough": "2026-09-22"
+  },
+  {
+   "id": "2026-09-22-CVX",
+   "status": "invalidated",
+   "startSession": "2026-09-22",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-09-22",
+   "exitPrice": null,
+   "exitReason": "open-at-or-below-stop",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 202.41,
+   "evaluatedThrough": "2026-09-22"
+  },
+  {
+   "id": "2026-09-22-SNX",
+   "status": "target",
+   "startSession": "2026-09-22",
+   "triggerDate": "2026-09-22",
+   "fillPrice": 280.1,
+   "chased": true,
+   "exitDate": "2026-09-23",
+   "exitPrice": 297.22,
+   "exitReason": "target",
+   "rMultiple": 1.2672,
+   "daysHeld": 2,
+   "lastClose": 287.89,
+   "evaluatedThrough": "2026-09-23"
+  },
+  {
+   "id": "2026-10-01-GOOGL",
+   "status": "invalidated",
+   "startSession": "2026-10-01",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-10-01",
+   "exitPrice": null,
+   "exitReason": "stop-before-trigger",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 338.24,
+   "evaluatedThrough": "2026-10-01"
+  },
+  {
+   "id": "2026-10-01-GH",
+   "status": "invalidated",
+   "startSession": "2026-10-01",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-10-01",
+   "exitPrice": null,
+   "exitReason": "stop-before-trigger",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 174.75,
+   "evaluatedThrough": "2026-10-01"
+  },
+  {
+   "id": "2026-10-01-CRL",
+   "status": "invalidated",
+   "startSession": "2026-10-01",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-10-01",
+   "exitPrice": null,
+   "exitReason": "stop-before-trigger",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 286.83,
+   "evaluatedThrough": "2026-10-01"
+  },
+  {
+   "id": "2026-10-01-ALAB",
+   "status": "invalidated",
+   "startSession": "2026-10-01",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-10-01",
+   "exitPrice": null,
+   "exitReason": "stop-before-trigger",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 356.42,
+   "evaluatedThrough": "2026-10-01"
+  },
+  {
+   "id": "2026-10-01-QRVO",
+   "status": "invalidated",
+   "startSession": "2026-10-02",
+   "triggerDate": null,
+   "fillPrice": null,
+   "chased": null,
+   "exitDate": "2026-10-02",
+   "exitPrice": null,
+   "exitReason": "open-at-or-below-stop",
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 114.17,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-01-ACMR",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 86.09,
+   "chased": true,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 83.38,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-01-NVT",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 169.59,
+   "chased": true,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 169.56,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-01-ONTO",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 328.89,
+   "chased": true,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 327.77,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-02-NVDA",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 236.055,
+   "chased": false,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 233.95,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-02-MPWR",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 1406.0,
+   "chased": true,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 1439.73,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-02-TXN",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 290.0,
+   "chased": true,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 293.8,
+   "evaluatedThrough": "2026-10-02"
+  },
+  {
+   "id": "2026-10-02-DAL",
+   "status": "triggered",
+   "startSession": "2026-10-02",
+   "triggerDate": "2026-10-02",
+   "fillPrice": 85.76,
+   "chased": false,
+   "exitDate": null,
+   "exitPrice": null,
+   "exitReason": null,
+   "rMultiple": null,
+   "daysHeld": null,
+   "lastClose": 84.09,
+   "evaluatedThrough": "2026-10-02"
+  }
+ ]
+}

@@ -13,7 +13,7 @@ the stats. See CLAUDE.md "Pick tracker" for the ledger schema and the outcome ru
 
 --ohlc file shape: {"tickers": {"NVDA": {"rows": [{"date","open","high","low","close"[,"volume"]}], "fmpLast": 230.86}}}
 """
-import argparse, copy, datetime as dt, json, pathlib, re, sys
+import argparse, copy, datetime as dt, json, math, pathlib, re, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import market_time as mt  # noqa: E402
@@ -81,8 +81,8 @@ _MONTHS = {m: i + 1 for i, m in enumerate(['jan', 'feb', 'mar', 'apr', 'may', 'j
 
 
 def parse_next_earnings(s, on_or_after):
-    """'28 Oct' -> the first such calendar date on/after the publish date. None if unparseable."""
-    m = re.fullmatch(r'\s*(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?\s*', s or '')
+    """'28 Oct' (also '3 Nov, after close') -> the first such calendar date on/after the publish date. None if unparseable."""
+    m = re.match(r'\s*(\d{1,2})\s+([A-Za-z]{3})[a-z]*\.?(?:\s*,.*)?\s*$', s or '')
     if not m or m.group(2).lower() not in _MONTHS:
         return None
     ref = pdate(on_or_after)
@@ -460,6 +460,11 @@ _LADDER = [(-20, 0), (0, 5), (20, 15), (40, 25), (60, 25)]
 _TIB = [(0, 0), (3, 5), (5, 25), (15, 25), (20, 15), (30, 5), (40, 0)]
 
 
+def round_half_up(v):
+    """5.5 -> 6 and 4.5 -> 5 (Python's round() would send 4.5 to 4); the epsilon absorbs float noise on exact ties."""
+    return int(math.floor(v + 0.5 + 1e-9))
+
+
 def readiness_v1(window):
     """The documented v1 formula (CLAUDE.md "Readiness scoring") over a window of validated rows, oldest first.
 
@@ -494,7 +499,7 @@ def readiness_v1(window):
     tb = _pw(tib, _TIB)
     comps = {'tightness': tight, 'proximity': prox, 'volumeDryUp': dry, 'timeInBase': tb}
     return {'pivot': pivot, 'timeInBaseDays': tib, 'unrounded': comps,
-            **{k: int(round(v)) for k, v in comps.items()}, 'composite': int(round(sum(comps.values())))}
+            **{k: round_half_up(v) for k, v in comps.items()}, 'composite': round_half_up(sum(comps.values()))}
 
 
 def closes_match(window, published_closes, tol=0.011):
