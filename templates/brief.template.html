@@ -277,6 +277,46 @@ a.wi:hover { border-color: var(--ink-3); }
 .pb-sz { font-weight: 700; white-space: nowrap; padding-right: 10px !important; }
 .pb-sz.full { color: var(--good-text); } .pb-sz.half { color: var(--warn-ink); }
 
+/* ── Pick tracker ── */
+.trk { display: inline-flex; align-items: center; gap: 5px; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .02em; background: var(--chip); color: var(--ink-2); border: 1px solid var(--border); white-space: nowrap; }
+.trk .r { font-weight: 750; font-variant-numeric: tabular-nums; }
+.trk.live { color: var(--pos); background: color-mix(in srgb, var(--pos) 12%, transparent); border-color: color-mix(in srgb, var(--pos) 40%, transparent); }
+.trk.target { color: var(--good-text); background: color-mix(in srgb, var(--good-text) 14%, transparent); border-color: color-mix(in srgb, var(--good-text) 40%, transparent); }
+.trk.stopped, .trk.invalidated { color: var(--crit); background: color-mix(in srgb, var(--crit) 12%, transparent); border-color: color-mix(in srgb, var(--crit) 40%, transparent); }
+.trk.awaiting { color: var(--warn-ink); background: var(--warn-bg); border-color: var(--warn); }
+.trk.expired, .trk.time-exit, .trk.skipped, .trk.replaced { color: var(--ink-3); }
+.trk-note { font-size: 10.5px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.tr-sum { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 12px; }
+.tr-sum .sumchip { display: inline-flex; gap: 6px; align-items: baseline; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--chip); font-size: 12.5px; color: var(--ink-2); }
+.tr-sum .sumchip b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.tr-grid { display: grid; gap: 12px; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); margin-top: 12px; align-items: start; }
+@media (max-width: 900px) { .tr-grid { grid-template-columns: 1fr; } }
+.tr-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.tr-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.tr-table th { text-align: left; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-3); padding: 0 8px 6px 0; white-space: nowrap; }
+.tr-table td { padding: 7px 8px 7px 0; border-top: 1px solid var(--grid); vertical-align: baseline; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tr-table th.n, .tr-table td.n { text-align: right; padding-right: 0; padding-left: 8px; }
+.tr-table td.k { font-weight: 650; color: var(--ink); }
+.tr-table tr.grp td { border-top: 0; padding-top: 12px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-3); }
+.tr-small { color: var(--ink-3); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.tr-table th.st, .tr-table td.st { padding-left: 16px; }
+.tr-table td.st { white-space: normal; }
+@media (max-width: 600px) {
+  .hide-m { display: none; }
+  .tr-table td, .tr-table th { padding-right: 6px; }
+  .tr-table th.n, .tr-table td.n { padding-left: 6px; }
+  .tr-table th.st, .tr-table td.st { padding-left: 8px; }
+  .tr-table td.k { white-space: normal; }
+}
+.tr-head { margin: 0 0 8px; font-size: 13px; font-weight: 650; }
+.tr-sub { margin: 0 0 10px; font-size: 12px; color: var(--ink-2); }
+.tr-bars text { font-size: 10.5px; fill: var(--ink-3); }
+.tr-bars .bv { font-size: 12px; font-weight: 700; fill: var(--ink); }
+.tr-bars .bar { fill: var(--pos); }
+.tr-bars .ph { fill: none; stroke: var(--axis); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.tr-bars .ax { stroke: var(--axis); stroke-width: 1; }
+.tr-bars .gl { stroke: var(--grid); stroke-width: 1; }
+
 /* ── Data health ── */
 .stalechip { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: none; background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn); vertical-align: 1px; }
 .stalechip.failed { background: color-mix(in srgb, var(--crit) 14%, transparent); color: var(--crit); border-color: var(--crit); }
@@ -323,7 +363,7 @@ a.wi:hover { border-color: var(--ink-3); }
     return `<span class="stalechip ${h.status === 'failed' ? 'failed' : ''}" title="${(h.msg || '').replace(/"/g, '&quot;')}">${h.status === 'failed' ? 'NO DATA' : 'STALE · as of ' + h.asOf}</span>`;
   };
   if (H.status !== 'ok') {
-    const LBL = { indices: 'Index & VIX quotes', macro: 'Rates & Fed', sectors: 'Sector strength', industries: 'Industry drill-down', technical: 'Technical picks', catalysts: 'Catalyst alerts', nearmiss: 'Near-miss watchlist' };
+    const LBL = { indices: 'Index & VIX quotes', macro: 'Rates & Fed', sectors: 'Sector strength', industries: 'Industry drill-down', technical: 'Technical picks', catalysts: 'Catalyst alerts', nearmiss: 'Near-miss watchlist', tracker: 'Pick tracker' };
     const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok' && v.status !== 'pinned').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'showing data from ' + v.asOf}. ${v.msg || ''}</li>`).join('');
     const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');
     app.append($(`<div class="healthbar ${H.status === 'failed' ? 'failed' : ''}" role="alert"><b>${H.status === 'failed' ? 'Update failed' : 'Some data is not fresh'}</b> — the page is built from the last good copy where a source could not be reached; treat marked sections with care.<ul>${rows}${extra}</ul>${H.fetch && H.fetch.failed ? `<div style="margin-top:6px;font-size:12px">${H.fetch.failed} of ${H.fetch.calls} data calls failed this run.</div>` : ''}</div>`));
@@ -518,13 +558,18 @@ a.wi:hover { border-color: var(--ink-3); }
   const grid = $(`<div class="picks"></div>`);
   sec2.append(grid);
   const price2 = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const TRK_LBL = { waiting: 'Waiting', live: 'Live', stopped: 'Stopped', target: 'Target', expired: 'Expired', invalidated: 'Invalidated', 'time-exit': 'Time exit', skipped: 'Skipped', awaiting: 'Awaiting data', replaced: 'Replaced' };
   if (!(D.picks || []).length) grid.append($(`<div class="empty">No technical setups available this run.</div>`));
   const rankedPicks = [...(D.picks || [])].sort((a, b) => (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
   rankedPicks.forEach(pk => {
     const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
     const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
     // sparkline of closes with pivot + stop reference lines
-    const W = 300, H = 84, pad = 10, cs = pk.closes;
+    // tracked picks draw the validated ledger series (sorted, validated OHLC) - never the card's own hand-assembled `closes`
+    const tref = (D.tracker && D.tracker.picks && D.tracker.picks[pk.tk]) || null;
+    const useSeries = !!(tref && tref.series && (tref.series.closes || []).length >= 15);
+    const W = 300, H = 84, pad = 10, cs = useSeries ? tref.series.closes : pk.closes;
+    const trkHtml = tref ? `<span class="trk ${tref.chip}" title="pick tracker: ${tref.status}">${TRK_LBL[tref.chip] || tref.chip}${tref.openR != null ? ` <span class="r ${tref.openR >= 0 ? 'up' : 'dn'}">${tref.openR >= 0 ? '+' : '−'}${Math.abs(tref.openR).toFixed(2)}R</span>` : ''}</span>${tref.chased ? '<span class="trk-note" title="filled above the entry zone">chased</span>' : ''}` : '';
     const lo = Math.min(...cs, pk.stop) * 0.996, hi = Math.max(...cs, pk.pivot) * 1.004;
     const X = (i) => pad + i * (W - 2 * pad - 64) / (cs.length - 1), Y = (v) => H - pad - (v - lo) / (hi - lo) * (H - 2 * pad);
     const path = cs.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
@@ -551,7 +596,7 @@ a.wi:hover { border-color: var(--ink-3); }
       </div>
     </div>` : '';
     grid.append($(`<article class="card pick tech" id="pick-${pk.tk}">
-      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span><span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span>${trkHtml}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
       ${readinessHtml}
       <div class="setup"><b>${pk.setup}</b> <span>· ${pk.tags}</span></div>
       ${bgHtml(pk.tk)}
@@ -634,8 +679,107 @@ a.wi:hover { border-color: var(--ink-3); }
     card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from web search). Technical-pick rows are pinned Finviz closes; catalyst-alert rows are FMP's live quote. Near misses come from the (pinned) technical scan and the catalyst rejects.</p>`));
   }
 
-  /* ── Section 4: Catalyst Playbook (static reference — not data, never refreshed) ── */
-  const sec4 = $(`<section class="section"><h2><span class="n">4</span>Reference</h2></section>`);
+  /* ── Section 4: Track record (pick tracker). Everything shown is computed in tracker.py from the ledger; nothing hand-written. ── */
+  if (D.tracker && (D.tracker.records || []).length) {
+    const T = D.tracker, SL = T.stats.literal, SD = T.stats.disciplined, RULE = T.stats.rule || {};
+    const trH = (H.sections && H.sections.tracker) || null;
+    const trChip = trH && trH.status === 'pinned' ? `<span class="stalechip pinned" title="${(trH.msg || '').replace(/"/g, '&quot;')}">AWAITING DATA · outcomes as of ${trH.asOf}</span>` : '';
+    const sec4t = $(`<section class="section"><h2><span class="n">4</span>Track record${trChip}</h2></section>`);
+    app.append(sec4t);
+    const fR = (v) => v == null ? '—' : (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2) + 'R';
+    const fP = (v) => v == null ? '—' : (v * 100).toFixed(0) + '%';
+    const small = (s) => `<span class="tr-small">${s.label || 'n too small (<' + (T.stats.literal.minN || 20) + ')'}</span>`;
+    const rcls = (v) => v == null ? '' : v >= 0 ? 'up' : 'dn';
+    const when = (iso, approx) => {
+      const d0 = new Date(iso), tz = { timeZone: 'Asia/Hong_Kong' };
+      const t = d0.toLocaleString('en-GB', { ...tz, day: '2-digit', month: 'short' }) + `<span class="hide-m">, ${d0.toLocaleString('en-GB', { ...tz, hour: '2-digit', minute: '2-digit', hour12: false })}</span>`;
+      return (approx ? `<span title="publish time approximate: the first commit holding this set; the real artifact publish was no later">≈ </span>` : '') + t;
+    };
+    const CHIP = TRK_LBL;
+    const chipHtml = (c, r) => `<span class="trk ${c}">${CHIP[c] || c}${r != null ? ` <span class="r ${rcls(r)}">${fR(r)}</span>` : ''}</span>`;
+    const o = SL.overall, od = SD.overall;
+
+    // summary
+    const live = T.open.filter(x => x.status === 'live').length, wait = T.open.filter(x => x.status === 'waiting').length, awaitN = (T.awaitingData || []).length;
+    sec4t.append($(`<div class="tr-sum">
+      <span class="sumchip"><b>${o.picks}</b> pick${o.picks === 1 ? '' : 's'} · <b>${o.sets}</b> set${o.sets === 1 ? '' : 's'}</span>
+      <span class="sumchip"><b>${o.closed}</b> closed</span>
+      <span class="sumchip"><b>${live}</b> live${wait ? ` · <b>${wait}</b> waiting` : ''}${awaitN ? ` · <b>${awaitN}</b> awaiting data` : ''}</span>
+      <span class="sumchip"><b>${o.invalidated}</b> invalidated · <b>${o.expired}</b> expired${o.skipped ? ` · <b>${o.skipped}</b> skipped` : ''}</span>
+    </div>`));
+
+    // literal vs disciplined
+    const rowLD = (label, a, b) => `<tr><td class="k">${label}</td><td class="n">${a}</td><td class="n">${b}</td></tr>`;
+    const rate = (s, f) => s.tooSmall ? small(s) : f(s);
+    const cmp = $(`<div class="card">
+      <h3 class="tr-head">Literal vs disciplined</h3>
+      <p class="tr-sub"><b>Literal</b> is the record: every fill, including gap-ups above the zone. <b>Disciplined</b> refuses a fill whose open is above the zone top by ≥ ${RULE.adrMultiple}× ADR20% or more than ${RULE.maxPct}% — that counts as a skipped chase, not a trade.</p>
+      <div class="tr-scroll"><table class="tr-table"><thead><tr><th></th><th class="n">Literal</th><th class="n">Disciplined</th></tr></thead><tbody>
+        ${rowLD('Trades (filled)', o.trades, od.trades)}
+        ${rowLD('Skipped chases', '—', od.chaseSkipped)}
+        ${rowLD('Closed', o.closed, od.closed)}
+        ${rowLD('Win rate', o.tooSmall ? small(o) : fP(o.winRate), od.tooSmall ? small(od) : fP(od.winRate))}
+        ${rowLD('Avg R', o.tooSmall ? '—' : fR(o.avgR), od.tooSmall ? '—' : fR(od.avgR))}
+        ${rowLD('Avg days held', o.tooSmall ? '—' : o.avgDaysHeld.toFixed(1), od.tooSmall ? '—' : od.avgDaysHeld.toFixed(1))}
+      </tbody></table></div>
+    </div>`);
+
+    // readiness band vs win rate (literal): small bar chart, n on every bar
+    const bands = ['<50', '50-69', '>=70'], BL = { '<50': '< 50', '50-69': '50–69', '>=70': '≥ 70' };
+    const bw = 64, gap = 22, W = 40 + bands.length * (bw + gap), Hc = 150, base = 108, top = 22, bh = base - top;
+    let bars = '';
+    bands.forEach((b, i) => {
+      const s = SL.byReadinessBand[b] || { picks: 0, closed: 0, sets: 0, tooSmall: true, winRate: null };
+      const x = 34 + i * (bw + gap), cx = x + bw / 2;
+      if (s.tooSmall) bars += `<rect class="ph" x="${x}" y="${base - 26}" width="${bw}" height="26" rx="3"/><text x="${cx}" y="${base - 11}" text-anchor="middle">n/a</text>`;
+      else { const h = Math.max(2, s.winRate * bh); bars += `<rect class="bar" x="${x}" y="${base - h}" width="${bw}" height="${h}" rx="3"/><text class="bv" x="${cx}" y="${base - h - 5}" text-anchor="middle">${fP(s.winRate)}</text>`; }
+      bars += `<text x="${cx}" y="${base + 14}" text-anchor="middle">${BL[b]}</text><text x="${cx}" y="${base + 28}" text-anchor="middle">n=${s.closed} closed</text><text x="${cx}" y="${base + 41}" text-anchor="middle">${s.picks} pick${s.picks === 1 ? '' : 's'}</text>`;
+    });
+    const chart = $(`<div class="card">
+      <h3 class="tr-head">Readiness band vs win rate</h3>
+      <p class="tr-sub">Closed trades only. A dashed bar means fewer than ${SL.minN} closed trades in that band — no rate is shown.</p>
+      <svg class="tr-bars" viewBox="0 0 ${W} ${Hc + 20}" width="100%" role="img" aria-label="Win rate by readiness band, with the number of closed trades behind each bar">
+        <line class="gl" x1="30" x2="${W - 4}" y1="${top}" y2="${top}"/><line class="gl" x1="30" x2="${W - 4}" y1="${(top + base) / 2}" y2="${(top + base) / 2}"/>
+        <line class="ax" x1="30" x2="${W - 4}" y1="${base}" y2="${base}"/>
+        <text x="26" y="${top + 4}" text-anchor="end">100%</text><text x="26" y="${(top + base) / 2 + 4}" text-anchor="end">50%</text><text x="26" y="${base + 4}" text-anchor="end">0</text>
+        ${bars}
+      </svg>
+    </div>`);
+    const g1 = $(`<div class="tr-grid"></div>`);
+    g1.append(cmp, chart);
+    sec4t.append(g1);
+
+    // open trades
+    const openRows = T.open.map(x => `<tr><td class="k">${x.ticker}</td><td>${when(x.publishedAt, x.approx)}</td><td class="n">${x.readiness == null ? '—' : x.readiness}</td>
+      <td class="st">${chipHtml(x.status, x.openR)}${x.chased ? ' <span class="trk-note" title="filled above the entry zone">chased</span>' : ''}${x.chaseSkip ? ' <span class="trk-note" title="the disciplined view skips this fill">skip</span>' : ''}</td>
+      <td class="n">${x.fillPrice == null ? '—' : price2(x.fillPrice)}</td><td class="n hide-m">${x.lastClose == null ? '—' : price2(x.lastClose)}</td><td class="n hide-m">${price2(x.stop)}</td><td class="n hide-m">${price2(x.target)}</td></tr>`).join('');
+    sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Open trades</h3>
+      ${T.open.length ? `<div class="tr-scroll"><table class="tr-table"><thead><tr><th>Ticker</th><th>Published <span class="hide-m">(HKT)</span></th><th class="n">Ready</th><th class="st">Status · open R</th><th class="n">Fill</th><th class="n hide-m">Last</th><th class="n hide-m">Stop</th><th class="n hide-m">Target</th></tr></thead><tbody>${openRows}</tbody></table></div>` : `<div class="empty">No open trades.</div>`}
+    </div>`));
+
+    // last 20 closed
+    const clRows = T.closed20.map(x => `<tr><td class="k">${x.ticker}</td><td>${when(x.publishedAt, x.approx)}</td><td class="n">${x.readiness == null ? '—' : x.readiness}</td>
+      <td class="st">${chipHtml(x.result)}${x.chased ? ' <span class="trk-note" title="filled above the entry zone">chased</span>' : ''}${x.chaseSkip ? ' <span class="trk-note" title="the disciplined view skips this fill">skip</span>' : ''}</td>
+      <td class="n"><span class="${rcls(x.r)}" style="font-weight:700">${fR(x.r)}</span></td></tr>`).join('');
+    sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Last 20 closed <span class="tr-small">· ${T.closed20.length} so far</span></h3>
+      ${T.closed20.length ? `<div class="tr-scroll"><table class="tr-table"><thead><tr><th>Ticker</th><th>Published <span class="hide-m">(HKT)</span></th><th class="n">Ready</th><th class="st">Result</th><th class="n">R</th></tr></thead><tbody>${clRows}</tbody></table></div>` : `<div class="empty">No closed trades yet.</div>`}
+    </div>`));
+
+    // splits
+    const split = (title, obj) => `<tr class="grp"><td colspan="5">${title}</td></tr>` + Object.entries(obj).map(([k, s]) =>
+      `<tr><td class="k">${({ '<50': '< 50', '50-69': '50–69', '>=70': '≥ 70' })[k] || k}</td><td class="n" style="white-space:nowrap">${s.picks} <span class="tr-small">(${s.sets} set${s.sets === 1 ? '' : 's'})</span></td><td class="n">${s.closed}</td>
+       ${s.tooSmall ? `<td class="n" colspan="2">${small(s)}</td>` : `<td class="n">${fP(s.winRate)}</td><td class="n">${fR(s.avgR)}</td>`}</tr>`).join('');
+    sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Splits</h3>
+      <p class="tr-sub">Literal ledger. "Sets" = distinct publishes: three semiconductors from one day are one independent sample, not three. Win = hit target, or exit above the fill.</p>
+      <div class="tr-scroll"><table class="tr-table"><thead><tr><th></th><th class="n">Picks</th><th class="n">Closed</th><th class="n">Win rate</th><th class="n">Avg R</th></tr></thead><tbody>
+        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}
+      </tbody></table></div>
+    </div>`));
+    sec4t.append($(`<p class="foot" style="margin-top:10px">Every pick is recorded once per publish and followed to an outcome by replaying daily OHLC (entry triggers when the day's high reaches the entry, filled at the open if it gaps above; stop and target use the same bar, with the stop assumed first when both are hit; expires after 10 sessions untriggered; time-exit at the close of session 20). The cloud routine has no price history, so outcomes refresh only in an interactive session; until then a record reads "Awaiting data". Percentages appear only once a bucket has ${SL.minN} closed trades. Not investment advice.</p>`));
+  }
+
+  /* ── Section 5: Catalyst Playbook (static reference — not data, never refreshed) ── */
+  const sec4 = $(`<section class="section"><h2><span class="n">5</span>Reference</h2></section>`);
   app.append(sec4);
   sec4.append($(`<details class="playbook">
     <summary>Catalyst Playbook <span class="hint">— how to act on each catalyst type</span></summary>

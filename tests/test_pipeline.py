@@ -228,6 +228,89 @@ n = copy.deepcopy(live0); n['quotes']['TEST'] = {'px': 51.0, 'pct': 2.1, 'vol': 
 d, _ = opn('L13_catalyst_alert_no_levels', n, brief_data=b)
 check('L13 catalyst alerts without computed levels build without crashing', any(c['tk'] == 'TEST' for c in page_json(str(OUT / 'L13_catalyst_alert_no_levels.html'), 'brief-data')['catalysts']))
 
+
+# ───────────── pick tracker integration (build_brief --ledger) ─────────────
+import tracker as tr
+
+def ledger_with(*recs):
+    led = tr.empty_ledger()
+    tr.ingest(led, fresh, '2026-09-21T09:00:00+08:00')          # the example picks: ANET MTCH CVX SNX, basis 18 Sep
+    for r in led['records']:
+        r['status'] = 'pending'
+    led['records'].extend(recs)
+    return led
+
+
+def brief_t(name, ledger, new=None, prev=None, extra=(), now=BRIEF_NOW):
+    out = OUT / f'{name}.html'
+    if out.exists():
+        out.unlink()
+    lp = OUT / f'{name}.ledger.json'
+    tr.save_ledger(lp, ledger)
+    argv = ['--data', jw(f'{name}.data.json', new if new is not None else fresh), '--out', str(out),
+            '--save-data', str(OUT / f'{name}.saved.json'), '--now', now, '--ledger', str(lp), *extra]
+    if prev is not None:
+        argv += ['--previous', jw(f'{name}.prev.json', prev)]
+    code, err = run(build_brief, argv)
+    assert code == 0, f'{name}: exit {code}\n{err}'
+    return page_json(str(out))
+
+
+# T1 --ledger embeds the tracker, adds a clean health section, and leaves a healthy build healthy
+d = brief_t('T1_tracker_embedded', ledger_with(), prev=prev)
+check('T1 the ledger is embedded as the tracker block', len(d['tracker']['records']) == 4 and set(d['tracker']['stats']) == {'literal', 'disciplined', 'rule'})
+check('T1 a waiting-only ledger leaves the build healthy', d['health']['sections']['tracker']['status'] == 'ok' and d['health']['status'] == 'ok', d['health'])
+check('T1 every pick on the page has a tracker chip', {p['tk'] for p in d['picks']} == set(d['tracker']['picks']) and
+      all(v['chip'] == 'waiting' for v in d['tracker']['picks'].values()), d['tracker']['picks'])
+
+# T2 records that cannot be evaluated (the cloud routine has no OHLC) are 'awaiting data': pinned-style, never amber
+led = ledger_with()
+for r in led['records']:
+    r.update(status='triggered', startSession='2026-09-17', evaluatedThrough='2026-09-17', fillPrice=r['entry'], lastClose=r['entry'])
+d = brief_t('T2_tracker_awaiting', led, prev=prev)
+check('T2 awaiting-data is expected, not a warning', d['health']['sections']['tracker']['status'] == 'pinned' and
+      d['health']['status'] == 'ok' and len(d['tracker']['awaitingData']) == 4, d['health'])
+check('T2 the page says the records are awaiting data', all(v['chip'] == 'awaiting' for v in d['tracker']['picks'].values()))
+
+# T3 a conflicting terminal outcome between the git ledger and the page copy is a health warning, never a silent overwrite
+a = ledger_with()
+a['records'][0].update(status='stopped', exitDate='2026-09-22', exitPrice=196.89, fillPrice=206.2)
+pg = copy.deepcopy(prev)
+cp = copy.deepcopy(a['records'][0]); cp.update(status='target', exitPrice=226.82)
+pg['tracker'] = {'records': [cp]}
+d = brief_t('T3_tracker_conflict', a, prev=pg)
+check('T3 conflicting ledger copies warn and degrade the page', d['health']['status'] == 'degraded' and
+      any(i['section'] == 'tracker' and 'conflict' in i['msg'] for i in d['health']['issues']), d['health']['issues'])
+check('T3 the git ledger copy is the one kept', [r for r in d['tracker']['records'] if r['id'] == a['records'][0]['id']][0]['status'] == 'stopped')
+
+# T4 --tracker-warn ("ledger not pushed") reaches the page's health block
+d = brief_t('T4_tracker_warn', ledger_with(), prev=prev, extra=['--tracker-warn', 'ledger not pushed'])
+check('T4 an extra tracker warning is shown in health', d['health']['status'] == 'degraded' and
+      any(i['section'] == 'tracker' and i['msg'] == 'ledger not pushed' for i in d['health']['issues']))
+
+# T5 without --ledger there is no tracker at all (and no health row for it)
+d, _ = brief('T5_no_ledger', fresh, prev)
+check('T5 no --ledger means no tracker block', 'tracker' not in d and 'tracker' not in d['health']['sections'])
+
+# T6 a card whose old `closes` disagree with the validated ledger series is flagged
+led = ledger_with()
+base_closes = [100.0 + i for i in range(25)]
+for r in led['records']:
+    if r['ticker'] == 'ANET':
+        r['series'] = {'from': '2026-08-14', 'through': '2026-09-18', 'closes': base_closes}
+n = copy.deepcopy(fresh)
+for p in n['picks']:
+    if p['tk'] == 'ANET':
+        p['closes'] = base_closes[:5][::-1] + base_closes[5:]          # the first five points out of order
+d = brief_t('T6_card_closes_disagree', led, new=n, prev=prev)
+check('T6 a misordered card is flagged against the validated series', any('card closes disagree' in i['msg'] and 'ANET' in i['msg'] for i in d['health']['issues']), d['health']['issues'])
+n2 = copy.deepcopy(fresh)
+for p in n2['picks']:
+    if p['tk'] == 'ANET':
+        p['closes'] = list(base_closes)
+d = brief_t('T6b_card_closes_agree', led, new=n2, prev=prev)
+check('T6 an agreeing card raises no warning', not any('card closes disagree' in i['msg'] for i in d['health']['issues']))
+
 print(f'{len(results)} scenarios passed')
 for r in results:
     print('  ok -', r)

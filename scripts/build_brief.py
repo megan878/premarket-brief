@@ -2,13 +2,17 @@
 
   python scripts/build_brief.py --data data/brief-data.json [--previous-html out/published-brief.html | --previous data/prev.json]
                                 [--now 2026-09-22T12:07:00Z] [--out out/brief.html]
+                                [--ledger data/picks.json [--tracker-warn "ledger not pushed"]]
+
+--ledger embeds the pick tracker (the ledger merged with the copy in the previous page, stats, tables, validated sparkline
+series) as the `tracker` key and adds a `tracker` health section. Omit it and the page simply has no Track record section.
 
 Exit codes: 0 = built (health ok or degraded, banner shown if not ok) · 3 = nothing publishable (a critical section
 has neither fresh nor previous data). In that case NO html is written, so the previously published page stays untouched.
 """
 import argparse, json, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-import market_time as mt, health as hl
+import market_time as mt, health as hl, tracker as tr
 
 root = pathlib.Path(__file__).resolve().parent.parent
 
@@ -21,6 +25,26 @@ def load(path):
         return None
 
 
+def add_tracker(final, health, ledger_path, old, last, extra_warnings):
+    """Embed the tracker view and its health entry. Awaiting-data is expected (pinned-style); problems are warnings."""
+    ledger, conflicts = tr.load_merged(ledger_path, old)
+    basis = tr.parse_pick_window_end(final.get('pickWindow'))
+    view = tr.build_view(ledger, last.isoformat(), [f'ledger copy conflict: {c}' for c in conflicts], pick_basis=basis)
+    sec, msgs = tr.tracker_health(view, extra_warnings)
+    health['sections']['tracker'] = sec
+    final['sections']['tracker'] = {'asOf': sec['asOf'], 'source': sec['source']}
+    for m in msgs:
+        health['issues'].append(hl.issue('tracker', 'warn', m))
+    if msgs and health['status'] == 'ok':
+        health['status'] = 'degraded'
+    # a card's old `closes` array must agree with the validated ledger series; say so when it does not (the page draws the series)
+    for pk in final.get('picks') or []:
+        ref = view['picks'].get(pk['tk'])
+        if ref and ref.get('series') and pk.get('closes') and tr.card_closes_disagree(pk['closes'], ref['series']):
+            health['issues'].append(hl.issue('technical', 'warn', f"{pk['tk']}: card closes disagree with the validated OHLC series - the page draws the series"))
+    final['tracker'] = view
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--data', default=str(root / 'data/brief-data.json'))
@@ -30,6 +54,8 @@ def main(argv=None):
     ap.add_argument('--out', default=str(root / 'out/brief.html'))
     ap.add_argument('--save-data', default=str(root / 'out/last-good/brief-data.json'))
     ap.add_argument('--now')
+    ap.add_argument('--ledger')
+    ap.add_argument('--tracker-warn', action='append', default=[], help='extra tracker health warning (repeatable)')
     a = ap.parse_args(argv)
 
     now = mt.now_utc() if not a.now else mt.dt.datetime.fromisoformat(a.now.replace('Z', '+00:00'))
@@ -43,6 +69,8 @@ def main(argv=None):
             print(f'note: previous html unreadable: {e}', file=sys.stderr)
 
     final, health = hl.assemble(new, old, ctx)
+    if a.ledger:
+        add_tracker(final, health, a.ledger, old, ctx['lastSession'], a.tracker_warn)
     final.update(hl.labels(now, ctx['lastSession']))
     final['meta'] = {**(new or {}).get('meta', {}), 'generatedAt': now.astimezone(mt.HKT).isoformat(), 'lastSession': ctx['lastSession'].isoformat()}
 
