@@ -96,7 +96,21 @@ No extra call needed.
 - Setups wanted: tight bull flag / pennant / compression coiling under a pivot on a good base.
 - Pick 3-4 technical picks. A catalyst pick must not duplicate a technical pick.
 
-## Readiness scoring (added 2026-10-01) — technical picks only, PINNED/interactive
+## Readiness scoring (v1 added 2026-10-01; **v2 current since 2026-10-03**) — technical picks only, PINNED/interactive
+**v2 (current) fixes one defect in v1.** v1 compared the last 5 true ranges with the 5 before them, and the 5 sessions of volume up to AND INCLUDING
+the pivot day, so a single wide, heavy breakout day inside those windows scored as a contraction: MPWR scored a perfect 100 on 2 Oct (tightness 25,
+dry-up 25) although its 7 base days were only 4.6% quieter than the run-up. v2 measures the **base against the run-up and excludes the pivot day**:
+- run-up = the 10 sessions immediately before the pivot day; base = the sessions after the pivot day through the last session.
+- **TIGHTNESS** = decline of mean true range, base vs run-up (`(runup_TR − base_TR) / runup_TR × 100`), on the same anchor ladder as v1.
+- **DRY-UP** = decline of mean volume, base vs run-up, same ladder.
+- Both need `time_in_base >= 2` and at least 5 run-up sessions, else they score 0 (there is no base / nothing to compare against).
+- PROXIMITY and TIME-IN-BASE are unchanged. Composite = round(sum of the four), ties round up.
+- Regression: MPWR (25 sessions to 1 Oct 2026) is v1 100 (25/25/25/25) and v2 **78 (7/25/21/25)**; `tests/test_tracker.py::ReadinessV2` pins it.
+- **Compute it mechanically, not by hand:** `python scripts/tracker.py score --ohlc out/ohlc.json --ticker X --basis <last session> [--stop S]` prints the
+  validated closes, pivot, readiness (v2), ATR14, ADR20 and the stop-floor verdict. Write `scoringVersion: "v2"` on every pick. A pick block with no
+  `scoringVersion` is read as v1. Records scored under v1 stay v1 (the stats split by version); `tracker.readiness_v1` stays as the reference for them.
+
+The text below is the **v1** definition (still what every record before 3 Oct used, and the source of the shared reference points, PROXIMITY and TIME-IN-BASE).
 Ranks the picks by breakout readiness instead of leaving them in filter-pass order. Four components, 0-25 each,
 summed into a 0-100 composite. All four need real daily OHLCV (closes/highs/lows/volume) for a lookback window of
 roughly the last 25 trading days (oldest first) — compute them from the same `stockanalysis.com` history you
@@ -108,7 +122,7 @@ First compute two reference points shared by all four components:
 - `TR` (true range) per day = `max(high-low, abs(high-prevClose), abs(low-prevClose))` (first day: just `high-low`).
 - `atr14` = mean of the last 14 `TR` values; `atr_pct` = `atr14 / price * 100`.
 
-1. **TIGHTNESS (0-25).** Take the last 10 `TR` values; `early5` = mean of the first 5, `late5` = mean of the last 5.
+1. **TIGHTNESS (0-25) — v1.** Take the last 10 `TR` values; `early5` = mean of the first 5, `late5` = mean of the last 5.
    `decline_pct = (early5 - late5) / early5 * 100`. Score via these anchors (piecewise-linear, clamped at the ends):
    `-20%→0, 0%→5, 20%→15, 40%→25, 60%→25`. A proxy for "declining ATR / Bollinger bandwidth" per the spec — this
    project does not compute true Bollinger Bands.
@@ -136,6 +150,11 @@ itself for the trader-facing explanation.
 ## Trade levels (arithmetic on daily highs/lows, nothing more) — technical picks only, PINNED/interactive
 - Entry zone: just above the pattern high / pivot.
 - Stop: the last session's low if it is 4-6% below entry, otherwise ~5% below entry (or below the gap/breakout level).
+- **Stop floor (since 2026-10-03): the stop must sit at least `MIN_STOP_ATR` (1.0, `scripts/health.py`) × ATR14 below the last close, or the pick is rejected.**
+  Do not widen the stop to make a pick pass; drop the pick and say why (`rejected`/near-misses). The rule above can otherwise put the stop at or above the
+  close when the price is more than 5% under the pivot (1 Oct: GOOGL, ALAB and QRVO were published already below their own stops). Write `atr14` (price
+  units, from `tracker.py score`) on every pick: the build then rejects a pick that breaks the floor, and warns "stop above last close: TICKER" for any pick
+  whose stop is at or above its last close, whether or not `atr14` is present.
 - Target: +10% from entry. R:R = reward / risk. Trim 25% at resistance on the way.
 - Risk band 1.5-8%, R:R 1.4-4: the validator warns outside it.
 - Catalyst **alerts** carry no computed levels at all (see below) — this section no longer applies to them.
@@ -222,7 +241,7 @@ hand-edit it, never change a terminal outcome. New information arrives as new fi
 the levels came from) · `startSession` (first session replayed) · `ticker, sector, industry, setup` · `pivot, entryZoneLow,
 entryZoneHigh, entry, stop, target` · `readiness {composite,tightness,proximity,volumeDryUp,timeInBase}` (null if unscored) ·
 `readinessAsPublished` (only when `readiness` was recomputed) · `readinessCheck` · `scoringVersion` · `regimeLabel, regimeScore,
-regimeChecks` at publish · `nextEarningsDate` · `adr20Pct` (ADR over the 20 sessions to the basis session: 100 × (mean High/Low − 1))
+regimeChecks` at publish · `nextEarningsDate` · `adr20Pct` (ADR over the 20 sessions to the basis session: 100 × (mean High/Low − 1)) · `basisClose` · `levelsInvalidAtPublish` (+ `levelsInvalidReason`: stop ≥ basis close) · `tightStopAtPublish` (stop within 0.5 × ADR20% of the basis close)
 · `status, triggerDate, fillPrice, chased, exitDate, exitPrice, exitReason, rMultiple, daysHeld` · `lastClose, evaluatedThrough`
 · `repickDates` · `evidence` (the OHLC rows that decided the trigger and the exit) · `series` (validated closes for the sparkline:
 `{from, through, closes[]}`, 25 sessions to the basis session extended to `evaluatedThrough`) · `notes`.
@@ -255,8 +274,8 @@ record as `replaced` and opens a new one; if the old record is `triggered`, the 
 `build_brief.py --ledger` merge the two by id: the later `evaluatedThrough` wins for non-terminal fields, a terminal outcome is immutable
 and beats a non-terminal copy, two disagreeing terminal copies keep the git copy and raise a health warning.
 
-**scoringVersion.** `SCORING_VERSION` in `tracker.py` ("v1") must be bumped whenever the formulas in "Readiness scoring" change; every record
-stores the version its `readiness` was computed with and the stats split by it. A set scored by a different formula is NOT labelled v1: it is
+**scoringVersion.** `SCORING_VERSION` in `tracker.py` ("v2" since 3 Oct) is the current formula and must be bumped whenever the formulas in "Readiness scoring" change; every record
+stores the version its `readiness` was computed with (a pick block with no `scoringVersion` is v1) and the stats split by it. A set scored by a different formula is NOT labelled v1: it is
 recomputed with the documented formula from validated OHLC (`tracker.readiness_v1`, verification only: the formula itself is unchanged) and the
 published numbers are kept in `readinessAsPublished`. The 2 Oct set (NVDA/MPWR/TXN/DAL) was scored by a reconstructed formula; see
 `data/provenance/2026-10-02/NOTE.md`.
@@ -265,6 +284,9 @@ published numbers are kept in `readinessAsPublished`. The 2 Oct set (NVDA/MPWR/T
 average R, expectancy, average days held; split by readiness band (<50, 50–69, ≥70, unscored), regime at publish, sector, scoringVersion and
 fill type (clean / chased). A bucket with fewer than 20 closed trades shows "n too small (<20)", never a percentage. Every bucket also shows
 its number of distinct publish sets: three semiconductors published together are one independent sample.
+**Records published with invalid levels** (`levelsInvalidAtPublish`: stop ≥ basis-session close; a scan defect, not a market outcome) are excluded from both
+views and shown on their own line ("published with invalid levels: n"). **Tight-stop records** (`tightStopAtPublish`) stay in, and the splits include a
+"stop distance at publish" group. The two flags are computed at ingest (and filled in by `augment` for older records) from the validated basis close.
 **Two views, side by side.** *Literal* is the record (every fill). *Disciplined* treats a fill whose open is above `entryZoneHigh` by ≥ 1× ADR20%
 or more than 3% as a skipped chase, not a trade. The definition is the single config value `CHASE_RULE` in `tracker.py`
 (`{'adrMultiple': 1.0, 'maxPct': 3.0}`); if `adr20Pct` is unknown only the 3% leg applies. The ledger is never changed by the disciplined view.
@@ -290,8 +312,12 @@ or more than 3% as a skipped chase, not a trade. The definition is the single co
   and a 1-year range comes back corrupted. Always sort and validate (`tracker.validate_rows` / `build_closes`); use `range=3M`.
 - The routine's git push is fragile: on 2 Oct it ran `git push origin HEAD` from a detached HEAD ("not a full refname") and the day's data never reached
   `origin/main`. Prompts now pin `git push origin HEAD:refs/heads/main` and verify with `git ls-remote`.
-- The v1 stop rule (entry × 0.95 when the last low is more than 6% away) can put the stop **above the last close**: on 1 Oct GOOGL (stop 346.09 vs
-  close 344.08) and ALAB (359.10 vs 355.97) were already below their own stops at publication and were invalidated in their first session.
+- **Fixed 2026-10-03 — stop at/above the last close.** The old stop rule (entry × 0.95 when the last low is more than 6% away) put the stop above the
+  close when the price was more than 5% under the pivot: on 1 Oct GOOGL (stop 346.09 vs close 344.08), ALAB (359.10 vs 355.97) and QRVO (115.05 vs 114.48)
+  were already below their own stops at publication and were invalidated in their first session. Now: the 1-ATR stop floor ("Trade levels"), the build-time
+  "stop above last close" warning, and the `levelsInvalidAtPublish` flag that keeps those three out of the stats.
+- **Fixed 2026-10-03 — spike-pivot artifact in tightness / dry-up (MPWR = 100).** Readiness v2 measures the base against the run-up and excludes the
+  pivot day ("Readiness scoring"). Records scored under v1 keep their v1 numbers and label.
 
 ## Files
 - `data/brief-data.json` / `data/open-live.json` — what YOU write, every run (schema in `SCHEMA.md`). These get
