@@ -1,0 +1,996 @@
+{
+ "source": "FMP + WebSearch (automated) + Finviz groups/stockanalysis.com (interactive refresh)",
+ "notices": [
+  "WebFetch is unavailable to the automated routine: confirmed EGRESS_BLOCKED under Trusted, Custom (explicit allowlist) and Full network access alike — a platform bug, not a config gap. Only FMP and WebSearch work automatically; the industry drill-down, technical picks and near-misses are refreshed by hand in an interactive session (which does have WebFetch) and are pinned, carried forward verbatim, between refreshes.",
+  "Sector ranking omitted this run: WebSearch returned materially inconsistent 1-month sector-ETF figures across sources (e.g. XLK +4.7% to +8.4% for Technology, Health Care +3.7% vs -1.2%, Consumer Staples -0.6% vs -3.6% depending on source) and several of the 11 GICS sectors had no usable second source at all. Rather than publish a reconciled-looking number that isn't, the previous sector ranking (2 Oct interactive refresh, data to the 1 Oct close) is carried forward and shown as stale.",
+  "Treasury data: 2 Oct is still pre-market ahead of the US open, so the most recent completed session remains 1 Oct — the rates figures below are unchanged from the prior run, not stale data, there is simply no newer print yet. No FOMC meeting fell in the last 7 days (last decision 16 Sep), so the Fed block is carried forward unchanged and only the yields were refreshed.",
+  "Catalyst alerts (ACN, MU, SNPS, TGT) carry FMP's live price/cap, not a verified tape reaction — the automated routine has no WebFetch to read the daily OHLC tape.",
+  "QQQ (NDX proxy) is a WebSearch-sourced premarket quote and is excluded from the regime score, same as every run."
+ ],
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "q": {
+    "price": 7666.45,
+    "change": 14.91,
+    "pct": 0.19486,
+    "dayLow": 7616.78,
+    "dayHigh": 7684.75,
+    "yearHigh": 7816.7,
+    "yearLow": 6316.91,
+    "ma50": 7651.3535,
+    "ma200": 7221.287
+   }
+  },
+  {
+   "id": "QQQ",
+   "name": "Invesco QQQ Trust",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 748.4,
+    "change": 6.37,
+    "pct": 0.86
+   },
+   "src": "WebSearch (premarket quote, 2 Oct, vs the 1 Oct close of $742.03; approximate — FMP and Finviz both block NDX/QQQ on the free plan without WebFetch)"
+  },
+  {
+   "id": "DJI",
+   "name": "Dow Jones Industrial Average",
+   "q": {
+    "price": 50926.56,
+    "change": 20.51,
+    "pct": 0.04028991,
+    "dayLow": 50546.54,
+    "dayHigh": 51179.78,
+    "yearHigh": 54744.33,
+    "yearLow": 45057.28,
+    "ma50": 52721.254,
+    "ma200": 50260.836
+   }
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "q": {
+    "price": 2806.625,
+    "change": 9.761,
+    "pct": 0.349,
+    "dayLow": 2775.356,
+    "dayHigh": 2820.7732,
+    "yearHigh": 3069.71,
+    "yearLow": 2303.46,
+    "ma50": 2948.4717,
+    "ma200": 2778.7673
+   }
+  },
+  {
+   "id": "VIX",
+   "name": "CBOE Volatility Index",
+   "q": {
+    "price": 16.05,
+    "change": -0.34,
+    "pct": -2.07444,
+    "dayLow": 15.89,
+    "dayHigh": 16.24,
+    "yearHigh": 35.3,
+    "yearLow": 13.38,
+    "ma50": 15.8494,
+    "ma200": 18.0669
+   }
+  }
+ ],
+ "macro": {
+  "date": "2026-10-01",
+  "y10": 5.24,
+  "y10prev": 5.29,
+  "y2": 4.78,
+  "y30": 5.61,
+  "y10path": "5.17% on 25 Sep, 5.24% on 28 Sep, 5.26% on 29 Sep, 5.29% on 30 Sep, 5.24% on 1 Oct — easing back off the multi-year high set mid-week",
+  "fed": {
+   "range": "3.75–4.00%",
+   "move": "25 bp",
+   "date": "16 Sep",
+   "vote": "12–0",
+   "note": "first hike since 2023; the committee signaled more to come",
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+    },
+    {
+     "t": "CNN",
+     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+    },
+    {
+     "t": "Advisor Perspectives",
+     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+    },
+    {
+     "t": "Schwab",
+     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+    }
+   ]
+  },
+  "y10hist": [
+   {
+    "date": "2026-09-25",
+    "y10": 5.17
+   },
+   {
+    "date": "2026-09-28",
+    "y10": 5.24
+   },
+   {
+    "date": "2026-09-29",
+    "y10": 5.26
+   },
+   {
+    "date": "2026-09-30",
+    "y10": 5.29
+   },
+   {
+    "date": "2026-10-01",
+    "y10": 5.24
+   }
+  ]
+ },
+ "sectors": [
+  {
+   "name": "Technology",
+   "pct": 7.31
+  },
+  {
+   "name": "Communication Services",
+   "pct": 1.46
+  },
+  {
+   "name": "Industrials",
+   "pct": -0.53
+  },
+  {
+   "name": "Healthcare",
+   "pct": -4.21
+  },
+  {
+   "name": "Consumer Defensive",
+   "pct": -4.24
+  },
+  {
+   "name": "Energy",
+   "pct": -4.37
+  },
+  {
+   "name": "Consumer Cyclical",
+   "pct": -4.67
+  },
+  {
+   "name": "Utilities",
+   "pct": -5.93
+  },
+  {
+   "name": "Financial",
+   "pct": -6.15
+  },
+  {
+   "name": "Real Estate",
+   "pct": -6.69
+  },
+  {
+   "name": "Basic Materials",
+   "pct": -8.72
+  }
+ ],
+ "sectorSource": "Finviz groups · Perf Month · cap-weighted (interactive refresh, 2 Oct, data to 1 Oct close)",
+ "industries": [
+  {
+   "sector": "Technology",
+   "items": [
+    {
+     "name": "Semiconductor Equipment & Materials",
+     "pct": 16.52,
+     "n": 29
+    },
+    {
+     "name": "Electronic Components",
+     "pct": 11.36,
+     "n": 44
+    },
+    {
+     "name": "Semiconductors",
+     "pct": 10.28,
+     "n": 70
+    }
+   ]
+  },
+  {
+   "sector": "Communication Services",
+   "items": [
+    {
+     "name": "Internet Content & Information",
+     "pct": 5.79,
+     "n": 71
+    },
+    {
+     "name": "Electronic Gaming & Multimedia",
+     "pct": -1.25,
+     "n": 21
+    },
+    {
+     "name": "Publishing",
+     "pct": -3.81,
+     "n": 8
+    }
+   ]
+  },
+  {
+   "sector": "Industrials",
+   "items": [
+    {
+     "name": "Electrical Equipment & Parts",
+     "pct": 8.17,
+     "n": 56
+    },
+    {
+     "name": "Airlines",
+     "pct": 4.36,
+     "n": 18
+    },
+    {
+     "name": "Specialty Industrial Machinery",
+     "pct": 3.53,
+     "n": 79
+    }
+   ]
+  }
+ ],
+ "picks": [
+  {
+   "tk": "NVDA",
+   "name": "NVIDIA",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "setup": "18-day flat base under the 4 Sep high, tightening into the right side",
+   "tags": "above SMA20/50/200 (stockanalysis)",
+   "pivot": 234.76,
+   "entryZone": "234.77 – 237.11",
+   "entry": 234.77,
+   "stop": 223.03,
+   "stopNote": "~5% below entry (last low 2.8% away)",
+   "target": 258.25,
+   "why": "Highest readiness in this scan. NVDA has based for 18 sessions under its $234.76 high (4 Sep); across the base, daily ranges are ~40% narrower and volume ~35% lighter than the run into the pivot, and the last four sessions held a tight $227–233 band. The base is a little longer than the clean 5–15 day window, and as a $5.6T name it tends to move slower — a +10% target may take longer than on a mid-cap.",
+   "trim": "Round number $250 sits about two-thirds of the way to target — trim 25% there.",
+   "cap": "$5.57T",
+   "avgVol": "109.66M",
+   "sma": [
+    3.29,
+    6.01,
+    15.18
+   ],
+   "rsi": 60.1,
+   "volW": 2.03,
+   "volM": 2.02,
+   "px": 230.86,
+   "pct": 1.0859,
+   "closes": [
+    227.98,
+    217.55,
+    220.78,
+    217.44,
+    224.41,
+    228.45,
+    230.36,
+    225.73,
+    223.67,
+    218.36,
+    218.29,
+    210.96,
+    212.17,
+    213.9,
+    219.34,
+    222.27,
+    227.38,
+    228.87,
+    225.51,
+    224.58,
+    225.07,
+    228.86,
+    227.21,
+    228.38,
+    230.86
+   ],
+   "readiness": {
+    "composite": 84,
+    "tightness": 21,
+    "proximity": 23,
+    "volumeDryUp": 22,
+    "timeInBase": 18
+   }
+  },
+  {
+   "tk": "MPWR",
+   "name": "Monolithic Power Systems",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "setup": "7-day high flag after a sharp September run",
+   "tags": "above SMA20/50/200 (stockanalysis)",
+   "pivot": 1387.46,
+   "entryZone": "1,387.47 – 1,401.33",
+   "entry": 1387.47,
+   "stop": 1331.0,
+   "stopNote": "last session's low (4.1% away)",
+   "target": 1526.22,
+   "why": "MPWR ran ~22% off its 15 Sep low into the $1,387.46 high (22 Sep) and has flagged for 7 sessions just under it. Volume dried up well (base volume ~64% of the run-up), but daily ranges have only partly contracted (tightness 10/25) — a flag more than a coil. Close is 1.9% under the pivot. Stop sits at the last session's low.",
+   "trim": "Round number $1,500 is just short of target — trim 25% into it.",
+   "cap": "$66.9B",
+   "avgVol": "723K",
+   "sma": [
+    7.87,
+    4.39,
+    6.25
+   ],
+   "rsi": 58.97,
+   "volW": 2.76,
+   "volM": 3.49,
+   "px": 1360.97,
+   "pct": 1.0206,
+   "closes": [
+    1311.08,
+    1256.26,
+    1267.77,
+    1225.96,
+    1219.36,
+    1213.65,
+    1223.86,
+    1218.5,
+    1203.75,
+    1186.08,
+    1234.46,
+    1143.24,
+    1142.46,
+    1147.61,
+    1169.58,
+    1217.8,
+    1277.68,
+    1380.62,
+    1355.47,
+    1335.55,
+    1367.43,
+    1351.2,
+    1355.99,
+    1347.22,
+    1360.97
+   ],
+   "readiness": {
+    "composite": 80,
+    "tightness": 10,
+    "proximity": 22,
+    "volumeDryUp": 23,
+    "timeInBase": 25
+   }
+  },
+  {
+   "tk": "TXN",
+   "name": "Texas Instruments",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "setup": "2-day pause 1% under a fresh multi-week high",
+   "tags": "above SMA20/50/200 (stockanalysis)",
+   "pivot": 284.39,
+   "entryZone": "284.40 – 287.23",
+   "entry": 284.4,
+   "stop": 270.18,
+   "stopNote": "~5% below entry (last low 2.2% away)",
+   "target": 312.84,
+   "why": "TXN tagged $284.39 on 29 Sep and has paused for two quiet sessions — volume fell to ~57% of the run-up pace and ranges narrowed (tightness 17/25). The base is young (2 days), so it scores low on time; it is the closest to its pivot of the four (1.1%). Earnings land 21 Oct, inside a normal swing hold — plan to be out or reduced before the print.",
+   "trim": "Prior high $286.21 (17 Aug) is the first test right above entry; trim 25% near $300.",
+   "cap": "$256.9B",
+   "avgVol": "5.81M",
+   "sma": [
+    5.01,
+    4.05,
+    13.33
+   ],
+   "rsi": 61.85,
+   "volW": 2.05,
+   "volM": 2.59,
+   "px": 281.31,
+   "pct": 0.4356,
+   "closes": [
+    266.54,
+    258.64,
+    260.91,
+    253.34,
+    254.8,
+    253.83,
+    258.44,
+    258.92,
+    261.59,
+    258.82,
+    268.7,
+    263.42,
+    263.43,
+    260.67,
+    258.14,
+    266.64,
+    270.87,
+    271.41,
+    272.62,
+    270.65,
+    278.07,
+    278.31,
+    281.69,
+    280.09,
+    281.31
+   ],
+   "readiness": {
+    "composite": 77,
+    "tightness": 17,
+    "proximity": 25,
+    "volumeDryUp": 25,
+    "timeInBase": 10
+   }
+  },
+  {
+   "tk": "DAL",
+   "name": "Delta Air Lines",
+   "industry": "Airlines",
+   "sector": "Industrials",
+   "setup": "4-day pause under the 25 Sep high after a +12% run",
+   "tags": "above SMA20/50/200 (stockanalysis)",
+   "pivot": 85.47,
+   "entryZone": "85.48 – 86.32",
+   "entry": 85.48,
+   "stop": 81.21,
+   "stopNote": "~5% below entry (last low 3.4% away)",
+   "target": 94.03,
+   "why": "DAL ran ~12% off its 1 Sep low into the $85.47 high (25 Sep) and has held $82–85 for four sessions, close 1.6% under the pivot. Ranges haven't tightened much (tightness 7/25) and volume only eased to ~80% of the run-up. Biggest caveat: earnings 9 Oct, before the trade has room to work — per the playbook, half size at most into the print, or wait and trade the reaction.",
+   "trim": "August supply at $89–92 (13–14 Aug highs) — trim 25% there.",
+   "cap": "$55.0B",
+   "avgVol": "6.94M",
+   "sma": [
+    3.69,
+    0.11,
+    11.08
+   ],
+   "rsi": 55.12,
+   "volW": 2.64,
+   "volM": 2.54,
+   "px": 84.13,
+   "pct": 0.8028,
+   "closes": [
+    81.14,
+    80.07,
+    78.0,
+    76.38,
+    78.14,
+    78.75,
+    80.17,
+    78.96,
+    78.75,
+    78.24,
+    79.91,
+    79.8,
+    78.89,
+    77.87,
+    79.43,
+    79.62,
+    82.5,
+    83.92,
+    81.75,
+    82.76,
+    84.94,
+    84.03,
+    84.87,
+    83.46,
+    84.13
+   ],
+   "readiness": {
+    "composite": 62,
+    "tightness": 7,
+    "proximity": 23,
+    "volumeDryUp": 12,
+    "timeInBase": 20
+   }
+  }
+ ],
+ "pickWindow": "25 trading days to 1 Oct 2026, stockanalysis.com daily data",
+ "catalysts": [
+  {
+   "tk": "ACN",
+   "name": "Accenture plc",
+   "industry": "Information Technology Services",
+   "sector": "Technology",
+   "ctype": "Earnings beat + raised guidance",
+   "cdate": "1 Oct",
+   "cdateISO": "2026-10-01",
+   "what": "Fiscal Q4 revenue $18.68B (+6% y/y) beat the $18.03B estimate; EPS $3.29 beat the $3.18 estimate. Shares surged as much as ~22% intraday and closed up ~16% — the company's best single trading day on record — on a strong FY2027 outlook and a record $85B of new bookings heading into the new fiscal year.",
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/10/01/accenture-rallies-more-than-20percent-after-earnings-beat-heads-for-best-day-ever.html"
+    },
+    {
+     "t": "The Motley Fool",
+     "u": "https://www.fool.com/investing/2026/10/01/why-accenture-stock-soared-on-thursday/"
+    }
+   ],
+   "cap": "$129.9B",
+   "px": 212.3,
+   "pct": 15.78,
+   "topSector": true
+  },
+  {
+   "tk": "MU",
+   "name": "Micron Technology, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "ctype": "Earnings beat + raised guidance",
+   "cdate": "30 Sep, after the close",
+   "cdateISO": "2026-09-30",
+   "what": "Fiscal Q4 revenue $54.23B (+379% y/y) beat the $51.07B estimate; adjusted EPS $33.42 beat the $31.61 estimate, on surging AI-driven cloud memory demand. Guided fiscal Q1 revenue to ~$61.5B and EPS to ~$38.15, well above the ~$57.0B/$35.40 Street view.",
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/09/30/micron-mu-q4-earnings-report-2026.html"
+    },
+    {
+     "t": "GuruFocus",
+     "u": "https://www.gurufocus.com/news/9104131/micron-technology-mu-shares-rise-after-q4-earnings-beat-wall-street-estimates"
+    }
+   ],
+   "cap": "$1.24T",
+   "px": 1097.39,
+   "pct": 3.03,
+   "topSector": true
+  },
+  {
+   "tk": "SNPS",
+   "name": "Synopsys, Inc.",
+   "industry": "Software - Infrastructure",
+   "sector": "Technology",
+   "ctype": "Major contract + raised guidance",
+   "cdate": "1 Oct",
+   "cdateISO": "2026-10-01",
+   "what": "2026 Investor Day: raised FY2027 revenue guidance to ~$11.15B (~15% y/y growth, ~44% non-GAAP operating margin); disclosed a $1B+ multi-year AWS deal licensing its silicon IP for the Nitro/Graviton/Trainium chip lines, plus a revenue-sharing OpenAI partnership to build an AI model for chip design. Shares jumped as much as ~13% on 1 Oct.",
+   "sources": [
+    {
+     "t": "SEC 8-K",
+     "u": "https://www.sec.gov/Archives/edgar/data/0000883241/000119312526241911/d126227dex991.htm"
+    },
+    {
+     "t": "PR Newswire",
+     "u": "https://www.prnewswire.com/news-releases/synopsys-details-growth-strategy-and-long-term-financial-model-at-2026-investor-day-302894684.html"
+    }
+   ],
+   "cap": "$93.9B",
+   "px": 490.54,
+   "pct": 12.78,
+   "topSector": true
+  },
+  {
+   "tk": "TGT",
+   "name": "Target Corporation",
+   "industry": "Discount Stores",
+   "sector": "Consumer Defensive",
+   "ctype": "Analyst upgrade",
+   "cdate": "30 Sep",
+   "cdateISO": "2026-09-30",
+   "what": "HSBC upgraded to Buy from Hold and raised its price target to $190 from $125 (~21% above the current price), citing a foot-traffic-driven comp-sales recovery (+3.8%) and room for margin expansion toward ~6%. Shares rose about +2% on the upgrade; little follow-through since.",
+   "sources": [
+    {
+     "t": "GuruFocus",
+     "u": "https://www.gurufocus.com/news/9103302/target-tgt-upgraded-to-buy-with-price-target-raised-to-190"
+    },
+    {
+     "t": "Investing.com",
+     "u": "https://www.investing.com/news/analyst-ratings/hsbc-upgrades-target-stock-rating-on-earnings-recovery-potential-93CH-4925668"
+    }
+   ],
+   "cap": "$71.1B",
+   "px": 156.63,
+   "pct": -0.04,
+   "topSector": false
+  }
+ ],
+ "nearmiss": [
+  {
+   "tk": "ASML",
+   "px": 1808.49,
+   "pct": -0.1755,
+   "why": "Semiconductor Equip. & Materials · 2 days under the $1,841.77 high (29 Sep), ranges tight, but volume hasn't dried up (0.91x) — composite 59"
+  },
+  {
+   "tk": "ASX",
+   "px": 44.73,
+   "pct": 0.6073,
+   "why": "Semiconductors · 2 days under $45.75 (29 Sep), 2.2% away, volume still heavy — composite 56"
+  },
+  {
+   "tk": "ETN",
+   "px": 437.28,
+   "pct": 1.7617,
+   "why": "Specialty Industrial Machinery · 4 days under $447.33 (25 Sep) but ranges are as wide as the run-up — composite 52"
+  },
+  {
+   "tk": "AMAT",
+   "px": 529.3,
+   "pct": 3.5042,
+   "why": "Semiconductor Equip. & Materials · one of 17 names that printed a new 25-day high on 1 Oct (also LRCX, KLAC, TER, ENTG, KLIC, ADI, MRVL, TSEM, MTSI, LSCC, VSH, APH, GEV, ROK, NVT, ACMR) — breakout day, no base to buy; watch for a pullback — composite 38"
+  },
+  {
+   "tk": "MU",
+   "px": 1097.39,
+   "pct": 3.0307,
+   "why": "Semiconductors · 1% under the $1,108.72 high (25 Sep) but ranges and volume expanded after earnings — better read as the catalyst alert above — composite 45"
+  }
+ ],
+ "bg": {
+  "NVDA": {
+   "cap": "$5.57T",
+   "rev": "$302.97B",
+   "revG": 83.4,
+   "eps": "$7.91",
+   "epsG": 125.3,
+   "next": "18 Nov",
+   "nextWarn": false,
+   "what": "Data-center AI computing company: GPUs, networking and full accelerated-computing platforms, plus gaming and automotive chips.",
+   "deal": []
+  },
+  "MPWR": {
+   "cap": "$66.9B",
+   "rev": "$3.27B",
+   "revG": 28.7,
+   "eps": "$16.39",
+   "epsG": -52.5,
+   "next": "29 Oct",
+   "nextWarn": false,
+   "what": "Designs power-management chips and modules used in data-center/AI servers, autos, industrial and consumer electronics.",
+   "deal": []
+  },
+  "TXN": {
+   "cap": "$256.9B",
+   "rev": "$19.45B",
+   "revG": 16.7,
+   "eps": "$6.58",
+   "epsG": 20.4,
+   "next": "21 Oct",
+   "nextWarn": false,
+   "what": "Designs and makes analog and embedded-processing chips for industrial, automotive and personal-electronics customers.",
+   "deal": []
+  },
+  "DAL": {
+   "cap": "$55.0B",
+   "rev": "$68.29B",
+   "revG": 10.3,
+   "eps": "$6.03",
+   "epsG": -12.6,
+   "next": "9 Oct",
+   "nextWarn": false,
+   "what": "Major US network airline flying passengers and cargo on domestic and international routes.",
+   "deal": [],
+   "epsNote": "Earnings 9 Oct — inside the trade window"
+  },
+  "ACN": {
+   "cap": "$129.9B",
+   "what": "Global professional-services firm — strategy, consulting, technology and operations — headquartered in Dublin."
+  },
+  "MU": {
+   "cap": "$1.24T",
+   "what": "Global leader in semiconductor memory and storage (DRAM, NAND, NOR) serving data-center, mobile, PC, automotive and industrial markets."
+  },
+  "SNPS": {
+   "cap": "$93.9B",
+   "what": "Leading electronic design automation (EDA) software and semiconductor IP provider used to design and verify chips."
+  },
+  "TGT": {
+   "cap": "$71.1B",
+   "what": "Minneapolis-based general-merchandise retailer operating big-box discount stores nationwide."
+  }
+ },
+ "sections": {
+  "indices": {
+   "asOf": "2026-10-01",
+   "source": "FMP index quotes (SPX/DJI/RUT/VIX); QQQ from WebSearch (approximate, premarket)"
+  },
+  "macro": {
+   "asOf": "2026-10-01",
+   "source": "FMP treasury-rates; Fed block unchanged (no FOMC meeting since 16 Sep)"
+  },
+  "sectors": {
+   "asOf": "2026-10-01",
+   "source": "Finviz groups (cap-weighted 1M, interactive refresh)"
+  },
+  "industries": {
+   "asOf": "2026-10-01",
+   "source": "Finviz groups (interactive refresh)"
+  },
+  "technical": {
+   "asOf": "2026-10-01",
+   "source": "stockanalysis.com industry lists + 50/200-day averages + daily OHLC (interactive refresh)"
+  },
+  "catalysts": {
+   "asOf": "2026-10-01",
+   "source": "WebSearch (2+ sources each) + FMP live price/cap"
+  },
+  "nearmiss": {
+   "asOf": "2026-10-01",
+   "source": "scan leftovers (interactive refresh)"
+  }
+ },
+ "health": {
+  "status": "degraded",
+  "sections": {
+   "indices": {
+    "status": "ok",
+    "asOf": "2026-10-01",
+    "source": "FMP index quotes (SPX/DJI/RUT/VIX); QQQ from WebSearch (approximate, premarket)",
+    "msg": ""
+   },
+   "macro": {
+    "status": "ok",
+    "asOf": "2026-10-01",
+    "source": "FMP treasury-rates; Fed block unchanged (no FOMC meeting since 16 Sep)",
+    "msg": ""
+   },
+   "sectors": {
+    "status": "stale",
+    "asOf": "2026-10-01",
+    "source": "Finviz groups (cap-weighted 1M, interactive refresh)",
+    "msg": "Fresh data failed (not delivered by the fetch step); showing the previous copy from 2026-10-01."
+   },
+   "industries": {
+    "status": "pinned",
+    "asOf": "2026-10-01",
+    "source": "Finviz groups (interactive refresh)",
+    "msg": "Pinned to the last interactive refresh (2026-10-01). Refresh manually in an interactive session when stale."
+   },
+   "technical": {
+    "status": "pinned",
+    "asOf": "2026-10-01",
+    "source": "stockanalysis.com industry lists + 50/200-day averages + daily OHLC (interactive refresh)",
+    "msg": "Pinned to the last interactive refresh (2026-10-01). Refresh manually in an interactive session when stale."
+   },
+   "catalysts": {
+    "status": "ok",
+    "asOf": "2026-10-01",
+    "source": "WebSearch (2+ sources each) + FMP live price/cap",
+    "msg": ""
+   },
+   "nearmiss": {
+    "status": "pinned",
+    "asOf": "2026-10-01",
+    "source": "scan leftovers (interactive refresh)",
+    "msg": "Pinned to the last interactive refresh (2026-10-01). Refresh manually in an interactive session when stale."
+   }
+  },
+  "issues": [
+   {
+    "section": "sectors",
+    "level": "stale",
+    "msg": "Fresh data failed (not delivered by the fetch step); showing the previous copy from 2026-10-01."
+   }
+  ],
+  "fetch": {
+   "calls": 22,
+   "failed": 3,
+   "failures": [
+    "websearch.sectors.1month.attempt1",
+    "websearch.sectors.1month.attempt2",
+    "websearch.sectors.1month.attempt3"
+   ]
+  },
+  "lastSession": "2026-10-01"
+ },
+ "fetchlog": [
+  {
+   "id": "fmp.indexes.index-quote.^GSPC",
+   "ok": true,
+   "note": "price 7666.45, pct +0.19%"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^DJI",
+   "ok": true,
+   "note": "price 50926.56, pct +0.04%"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^RUT",
+   "ok": true,
+   "note": "price 2806.63, pct +0.35%"
+  },
+  {
+   "id": "fmp.indexes.index-quote.^VIX",
+   "ok": true,
+   "note": "price 16.05, pct -2.07%"
+  },
+  {
+   "id": "websearch.qqq.quote",
+   "ok": true,
+   "note": "748.4 +0.86% premarket; reconciles against the 1 Oct close of 742.03"
+  },
+  {
+   "id": "fmp.economics.treasury-rates",
+   "ok": true,
+   "note": "default call only returned through 30 Sep; retried with an explicit from_date/to_date range to pick up the 1 Oct print — last 5 distinct sessions kept for y10hist"
+  },
+  {
+   "id": "websearch.fed.fomc-check",
+   "ok": true,
+   "note": "no FOMC meeting in the last 7 days; fed block carried forward unchanged, yields updated"
+  },
+  {
+   "id": "websearch.sectors.1month.attempt1",
+   "ok": false,
+   "note": "S&P 500 sector performance search returned mostly 6-month/YTD figures, not a clean 1-month set"
+  },
+  {
+   "id": "websearch.sectors.1month.attempt2",
+   "ok": false,
+   "note": "XLK/XLC/XLI/XLY/XLB cross-check disagreed by 1-4 points depending on source (e.g. XLK +4.74% vs +4.86% vs +8.39%)"
+  },
+  {
+   "id": "websearch.sectors.1month.attempt3",
+   "ok": false,
+   "note": "Health Care (+3.70% vs -1.17%) and Consumer Staples (-0.60% vs -3.59%) disagreed by >2 points; several sectors (XLRE, XLU, XLY) had no usable second source at all — whole set dropped per the reconciliation rule"
+  },
+  {
+   "id": "websearch.catalysts.general-sweep",
+   "ok": true,
+   "note": "earnings/upgrade/deal sweep for the last 5 sessions"
+  },
+  {
+   "id": "websearch.catalysts.acn",
+   "ok": true,
+   "note": "Accenture Q4 beat+raise, 1 Oct, 2 sources"
+  },
+  {
+   "id": "fmp.company.profile-symbol.ACN",
+   "ok": true,
+   "note": "price 212.30, cap $129.9B"
+  },
+  {
+   "id": "websearch.catalysts.mu",
+   "ok": true,
+   "note": "Micron Q4 beat+raise, 30 Sep, 2 sources"
+  },
+  {
+   "id": "fmp.company.profile-symbol.MU",
+   "ok": true,
+   "note": "price 1097.39, cap $1.24T"
+  },
+  {
+   "id": "websearch.catalysts.snps",
+   "ok": true,
+   "note": "AWS silicon-IP deal + raised FY27 guidance + OpenAI partnership, 1 Oct, 2 sources"
+  },
+  {
+   "id": "fmp.company.profile-symbol.SNPS",
+   "ok": true,
+   "note": "price 490.54, cap $93.9B"
+  },
+  {
+   "id": "websearch.catalysts.tgt",
+   "ok": true,
+   "note": "HSBC upgrade to Buy, $190 target (+21% above current price), 30 Sep, 2 sources"
+  },
+  {
+   "id": "fmp.company.profile-symbol.TGT",
+   "ok": true,
+   "note": "price 156.63, cap $71.1B"
+  },
+  {
+   "id": "websearch.catalysts.nbis",
+   "ok": true,
+   "note": "BNP Paribas upgrade dated 24 Sep — outside the 5-session window, rejected as stale"
+  },
+  {
+   "id": "fmp.company.profile-symbol.HPE",
+   "ok": true,
+   "note": "price 64.62, cap $85.6B — legitimate but held back for list size/diversity"
+  },
+  {
+   "id": "fmp.company.profile-symbol.VICR",
+   "ok": true,
+   "note": "price 308.59, cap $14.0B — legitimate but extended, held back"
+  }
+ ],
+ "watch": {
+  "groups": [
+   {
+    "name": "Technical setups",
+    "items": [
+     {
+      "tk": "NVDA",
+      "px": 230.86,
+      "pct": 1.0859
+     },
+     {
+      "tk": "MPWR",
+      "px": 1360.97,
+      "pct": 1.0206
+     },
+     {
+      "tk": "TXN",
+      "px": 281.31,
+      "pct": 0.4356
+     },
+     {
+      "tk": "DAL",
+      "px": 84.13,
+      "pct": 0.8028
+     }
+    ]
+   },
+   {
+    "name": "Catalyst setups",
+    "items": [
+     {
+      "tk": "ACN",
+      "px": 212.3,
+      "pct": 15.78
+     },
+     {
+      "tk": "MU",
+      "px": 1097.39,
+      "pct": 3.03
+     },
+     {
+      "tk": "SNPS",
+      "px": 490.54,
+      "pct": 12.78
+     },
+     {
+      "tk": "TGT",
+      "px": 156.63,
+      "pct": -0.04
+     }
+    ]
+   },
+   {
+    "name": "Sector strength — near misses",
+    "near": true,
+    "items": [
+     {
+      "tk": "ASML",
+      "px": 1808.49,
+      "pct": -0.1755,
+      "why": "Semiconductor Equip. & Materials · 2 days under the $1,841.77 high (29 Sep), ranges tight, but volume hasn't dried up (0.91x) — composite 59"
+     },
+     {
+      "tk": "ASX",
+      "px": 44.73,
+      "pct": 0.6073,
+      "why": "Semiconductors · 2 days under $45.75 (29 Sep), 2.2% away, volume still heavy — composite 56"
+     },
+     {
+      "tk": "ETN",
+      "px": 437.28,
+      "pct": 1.7617,
+      "why": "Specialty Industrial Machinery · 4 days under $447.33 (25 Sep) but ranges are as wide as the run-up — composite 52"
+     },
+     {
+      "tk": "AMAT",
+      "px": 529.3,
+      "pct": 3.5042,
+      "why": "Semiconductor Equip. & Materials · one of 17 names that printed a new 25-day high on 1 Oct (also LRCX, KLAC, TER, ENTG, KLIC, ADI, MRVL, TSEM, MTSI, LSCC, VSH, APH, GEV, ROK, NVT, ACMR) — breakout day, no base to buy; watch for a pullback — composite 38"
+     },
+     {
+      "tk": "MU",
+      "px": 1097.39,
+      "pct": 3.0307,
+      "why": "Semiconductors · 1% under the $1,108.72 high (25 Sep) but ranges and volume expanded after earnings — better read as the catalyst alert above — composite 45"
+     }
+    ]
+   }
+  ]
+ },
+ "asOf": "2026-10-01",
+ "asOfLabel": "Thu 01 Oct 2026 close",
+ "builtLabel": "Fri 02 Oct 2026 20:13 HKT",
+ "meta": {
+  "schemaVersion": 1,
+  "targetSession": "2026-10-02",
+  "lastSession": "2026-10-01",
+  "generatedAt": "2026-10-02T20:13:37.655783+08:00"
+ }
+}
