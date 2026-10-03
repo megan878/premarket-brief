@@ -286,6 +286,7 @@ a.wi:hover { border-color: var(--ink-3); }
 .trk.awaiting { color: var(--warn-ink); background: var(--warn-bg); border-color: var(--warn); }
 .trk.expired, .trk.time-exit, .trk.skipped, .trk.replaced { color: var(--ink-3); }
 .trk-note { font-size: 10.5px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.tr-asof { margin-left: 4px; font-size: 11.5px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink-3); }
 .tr-sum { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 12px; }
 .tr-sum .sumchip { display: inline-flex; gap: 6px; align-items: baseline; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--chip); font-size: 12.5px; color: var(--ink-2); }
 .tr-sum .sumchip b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -569,7 +570,7 @@ a.wi:hover { border-color: var(--ink-3); }
     const tref = (D.tracker && D.tracker.picks && D.tracker.picks[pk.tk]) || null;
     const useSeries = !!(tref && tref.series && (tref.series.closes || []).length >= 15);
     const W = 300, H = 84, pad = 10, cs = useSeries ? tref.series.closes : pk.closes;
-    const trkHtml = tref ? `<span class="trk ${tref.chip}" title="pick tracker: ${tref.status}">${TRK_LBL[tref.chip] || tref.chip}${tref.openR != null ? ` <span class="r ${tref.openR >= 0 ? 'up' : 'dn'}">${tref.openR >= 0 ? '+' : '−'}${Math.abs(tref.openR).toFixed(2)}R</span>` : ''}</span>${tref.chased ? '<span class="trk-note" title="filled above the entry zone">chased</span>' : ''}` : '';
+    const trkHtml = tref ? `<span class="trk ${tref.chip}" title="pick tracker: ${tref.status}">${TRK_LBL[tref.chip] || tref.chip}${tref.openR != null ? ` <span class="r ${tref.openR >= 0 ? 'up' : 'dn'}">${tref.openR >= 0 ? '+' : '−'}${Math.abs(tref.openR).toFixed(2)}R</span>` : ''}</span>${tref.chased ? '<span class="trk-note" title="filled above the entry zone">chased</span>' : ''}${tref.levelsInvalid ? '<span class="trk-note" title="published with its stop at or above the last close: a scan defect, excluded from the stats">invalid levels</span>' : ''}${tref.tightStop && !tref.levelsInvalid ? '<span class="trk-note" title="stop within 0.5× ADR20% of the close at publish: a normal day can take it out">tight stop</span>' : ''}` : '';
     const lo = Math.min(...cs, pk.stop) * 0.996, hi = Math.max(...cs, pk.pivot) * 1.004;
     const X = (i) => pad + i * (W - 2 * pad - 64) / (cs.length - 1), Y = (v) => H - pad - (v - lo) / (hi - lo) * (H - 2 * pad);
     const path = cs.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
@@ -684,7 +685,9 @@ a.wi:hover { border-color: var(--ink-3); }
     const T = D.tracker, SL = T.stats.literal, SD = T.stats.disciplined, RULE = T.stats.rule || {};
     const trH = (H.sections && H.sections.tracker) || null;
     const trChip = trH && trH.status === 'pinned' ? `<span class="stalechip pinned" title="${(trH.msg || '').replace(/"/g, '&quot;')}">AWAITING DATA · outcomes as of ${trH.asOf}</span>` : '';
-    const sec4t = $(`<section class="section"><h2><span class="n">4</span>Track record${trChip}</h2></section>`);
+    const evalD = T.evaluatedThrough ? new Date(T.evaluatedThrough + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' }) : null;
+    const evalTxt = evalD ? `<span class="tr-asof">evaluated through ${evalD} close</span>` : `<span class="tr-asof">not evaluated yet</span>`;
+    const sec4t = $(`<section class="section"><h2><span class="n">4</span>Track record${evalTxt}${trChip}</h2></section>`);
     app.append(sec4t);
     const fR = (v) => v == null ? '—' : (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2) + 'R';
     const fP = (v) => v == null ? '—' : (v * 100).toFixed(0) + '%';
@@ -697,7 +700,7 @@ a.wi:hover { border-color: var(--ink-3); }
     };
     const CHIP = TRK_LBL;
     const chipHtml = (c, r) => `<span class="trk ${c}">${CHIP[c] || c}${r != null ? ` <span class="r ${rcls(r)}">${fR(r)}</span>` : ''}</span>`;
-    const o = SL.overall, od = SD.overall;
+    const o = SL.overall, od = SD.overall, IL = T.stats.invalidLevels || { n: 0, ids: [] };
 
     // summary
     const live = T.open.filter(x => x.status === 'live').length, wait = T.open.filter(x => x.status === 'waiting').length, awaitN = (T.awaitingData || []).length;
@@ -706,6 +709,7 @@ a.wi:hover { border-color: var(--ink-3); }
       <span class="sumchip"><b>${o.closed}</b> closed</span>
       <span class="sumchip"><b>${live}</b> live${wait ? ` · <b>${wait}</b> waiting` : ''}${awaitN ? ` · <b>${awaitN}</b> awaiting data` : ''}</span>
       <span class="sumchip"><b>${o.invalidated}</b> invalidated · <b>${o.expired}</b> expired${o.skipped ? ` · <b>${o.skipped}</b> skipped` : ''}</span>
+      ${IL.n ? `<span class="sumchip" title="${Object.entries(IL.reasons || {}).map(([k, v]) => k + ': ' + v).join('; ').replace(/"/g, '&quot;')}">published with invalid levels: <b>${IL.n}</b> <span class="tr-small">(${IL.ids.map(i => i.slice(11)).join(', ')}; excluded from all stats)</span></span>` : ''}
     </div>`));
 
     // literal vs disciplined
@@ -772,7 +776,7 @@ a.wi:hover { border-color: var(--ink-3); }
     sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Splits</h3>
       <p class="tr-sub">Literal ledger. "Sets" = distinct publishes: three semiconductors from one day are one independent sample, not three. Win = hit target, or exit above the fill.</p>
       <div class="tr-scroll"><table class="tr-table"><thead><tr><th></th><th class="n">Picks</th><th class="n">Closed</th><th class="n">Win rate</th><th class="n">Avg R</th></tr></thead><tbody>
-        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}
+        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}${split('Stop distance at publish (tight = within 0.5× ADR20% of the close)', SL.byStopDistance || {})}
       </tbody></table></div>
     </div>`));
     sec4t.append($(`<p class="foot" style="margin-top:10px">Every pick is recorded once per publish and followed to an outcome by replaying daily OHLC (entry triggers when the day's high reaches the entry, filled at the open if it gaps above; stop and target use the same bar, with the stop assumed first when both are hit; expires after 10 sessions untriggered; time-exit at the close of session 20). The cloud routine has no price history, so outcomes refresh only in an interactive session; until then a record reads "Awaiting data". Percentages appear only once a bucket has ${SL.minN} closed trades. Not investment advice.</p>`));

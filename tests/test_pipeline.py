@@ -258,7 +258,7 @@ def brief_t(name, ledger, new=None, prev=None, extra=(), now=BRIEF_NOW):
 
 # T1 --ledger embeds the tracker, adds a clean health section, and leaves a healthy build healthy
 d = brief_t('T1_tracker_embedded', ledger_with(), prev=prev)
-check('T1 the ledger is embedded as the tracker block', len(d['tracker']['records']) == 4 and set(d['tracker']['stats']) == {'literal', 'disciplined', 'rule'})
+check('T1 the ledger is embedded as the tracker block', len(d['tracker']['records']) == 4 and set(d['tracker']['stats']) == {'literal', 'disciplined', 'rule', 'invalidLevels'})
 check('T1 a waiting-only ledger leaves the build healthy', d['health']['sections']['tracker']['status'] == 'ok' and d['health']['status'] == 'ok', d['health'])
 check('T1 every pick on the page has a tracker chip', {p['tk'] for p in d['picks']} == set(d['tracker']['picks']) and
       all(v['chip'] == 'waiting' for v in d['tracker']['picks'].values()), d['tracker']['picks'])
@@ -310,6 +310,40 @@ for p in n2['picks']:
         p['closes'] = list(base_closes)
 d = brief_t('T6b_card_closes_agree', led, new=n2, prev=prev)
 check('T6 an agreeing card raises no warning', not any('card closes disagree' in i['msg'] for i in d['health']['issues']))
+
+
+# ───────────── stop-floor defects caught at build time (no scan involved) ─────────────
+def with_pick(tk, **fields):
+    n = copy.deepcopy(fresh)
+    for p in n['picks']:
+        if p['tk'] == tk:
+            p.update(fields)
+    return n
+
+
+# T7 a pick whose stop is at/above its last close is flagged "stop above last close: TICKER" before anyone publishes it
+last_anet = fresh['picks'][0]['closes'][-1]
+n = with_pick('ANET', stop=round(last_anet + 0.5, 2))
+d, _ = brief('T7_stop_above_last_close', n, prev)
+check('T7 a stop above the last close warns by ticker', any(i['msg'] == 'stop above last close: ANET' and i['level'] == 'warn' for i in d['health']['issues'])
+      and d['health']['status'] == 'degraded', d['health']['issues'])
+check('T7 the pick is still shown (a warning, not a drop, when no ATR is declared)', 'ANET' in [p['tk'] for p in d['picks']])
+d, _ = brief('T7b_stop_below_last_close', fresh, prev)
+check('T7 a healthy stop raises no such warning', not any('stop above last close' in i['msg'] for i in d['health']['issues']))
+
+# T8 a pick that declares atr14 must keep its stop >= 1 ATR below the last close, or it is rejected
+n = with_pick('ANET', atr14=round((last_anet - fresh['picks'][0]['stop']) / 0.5, 2))      # the stop is only 0.5 ATR below the close
+d, _ = brief('T8_stop_within_one_atr', n, prev)
+check('T8 a stop closer than 1 ATR rejects the pick', 'ANET' not in [p['tk'] for p in d['picks']] and
+      any('ANET' in i['msg'] and 'ATR below the last close' in i['msg'] for i in d['health']['issues']), d['health']['issues'])
+n = with_pick('ANET', atr14=round((last_anet - fresh['picks'][0]['stop']) / 1.5, 2))      # 1.5 ATR below: fine
+d, _ = brief('T8b_stop_clears_the_floor', n, prev)
+check('T8 a stop at least 1 ATR below the close is kept', 'ANET' in [p['tk'] for p in d['picks']] and
+      not any('ATR below the last close' in i['msg'] for i in d['health']['issues']))
+n = with_pick('ANET', atr14=round((last_anet - fresh['picks'][0]['stop']) / 1.0, 2))      # exactly 1.0 ATR: allowed
+d, _ = brief('T8c_stop_exactly_one_atr', n, prev)
+check('T8 exactly 1 ATR is allowed', 'ANET' in [p['tk'] for p in d['picks']])
+check('T8 the floor is one config value in health.py', hl.MIN_STOP_ATR == 1.0)
 
 print(f'{len(results)} scenarios passed')
 for r in results:

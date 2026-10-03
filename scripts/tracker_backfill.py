@@ -127,7 +127,7 @@ def main(argv=None):
                 if s.get('recompute') and not cm:
                     rec['readinessAsPublished'] = pk.get('readiness')
                     rec['readiness'] = dict(entry['recomputed'])
-                    rec['scoringVersion'] = T.SCORING_VERSION
+                    rec['scoringVersion'] = T.LEGACY_SCORING_VERSION
                     rec['notes'].append('readiness recomputed with the documented v1 formula (CLAUDE.md "Readiness scoring") from '
                                         'validated OHLC; the published numbers came from the rebuilt formula in score.py of the '
                                         '2026-10-02 scan (provenance zip, not yet committed) and are kept in readinessAsPublished')

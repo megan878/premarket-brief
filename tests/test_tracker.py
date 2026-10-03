@@ -548,7 +548,7 @@ class Chips(unittest.TestCase):
         v = T.build_view({'records': recs}, '2026-10-08', pick_basis='2026-09-30')
         self.assertEqual([c['exitDate'] for c in v['closed20']], ['2026-10-07', '2026-10-05'])
         self.assertEqual((v['open'][0]['ticker'], v['open'][0]['openR'], v['picks']['LIVE']['chip']), ('LIVE', 0.6, 'live'))
-        self.assertEqual(set(v['stats']), {'literal', 'disciplined', 'rule'})
+        self.assertEqual(set(v['stats']), {'literal', 'disciplined', 'rule', 'invalidLevels'})
 
 
 QRVO = [  # 26 sessions to 30 Sep 2026 (date, open, high, low, close, volume): golden fixture for the v1 recompute
@@ -685,7 +685,7 @@ class Series(unittest.TestCase):
         self.assertIsNotNone(out['adr20Pct'])
         for k, v in before.items():
             self.assertEqual(out[k], v, k)
-        self.assertEqual({a[1] for a in added}, {'publishTimeApproximate', 'adr20Pct', 'series'})
+        self.assertEqual({a[1] for a in added}, {'publishTimeApproximate', 'adr20Pct', 'series', 'basisClose', 'levelsInvalidAtPublish'})
         self.assertEqual(T.augment(led, {'AAA': {'rows': rs}}), [])      # idempotent
 
     def test_ingest_records_adr_and_the_approximate_flag(self):
@@ -765,6 +765,200 @@ class Health(unittest.TestCase):
             page = {'tracker': {'records': [rec(id='a', status='stopped', exitDate='2026-09-10'), rec(id='b')]}}
             led, conflicts = T.load_merged(path, page)
             self.assertEqual(({r['id']: r['status'] for r in led['records']}, conflicts), ({'a': 'stopped', 'b': 'pending'}, []))
+
+
+MPWR = [  # 25 validated sessions to 1 Oct 2026 (date, open, high, low, close, volume): the 2 Oct set's perfect-100 pick under v1
+    ('2026-08-27', 1319.75, 1332, 1290.855, 1311.08, 459325),
+    ('2026-08-28', 1306.03, 1306.03, 1254.01, 1256.26, 709349),
+    ('2026-08-31', 1261.9, 1279, 1253, 1267.77, 689203),
+    ('2026-09-01', 1245.11, 1250, 1211.864, 1225.96, 758060),
+    ('2026-09-02', 1224.92, 1245.23, 1211.735, 1219.36, 405205),
+    ('2026-09-03', 1200.7, 1225, 1189.49, 1213.65, 413703),
+    ('2026-09-04', 1239.13, 1239.13, 1206.55, 1223.86, 625898),
+    ('2026-09-08', 1230.64, 1243.09, 1211.22, 1218.5, 763467),
+    ('2026-09-09', 1206.7, 1228.82, 1198.17, 1203.75, 508493),
+    ('2026-09-10', 1184.85, 1205.195, 1175.95, 1186.08, 625369),
+    ('2026-09-11', 1200.8, 1241.035, 1194.474, 1234.46, 555184),
+    ('2026-09-14', 1184.43, 1185.885, 1141.38, 1143.24, 984700),
+    ('2026-09-15', 1164.97, 1171.18, 1136.65, 1142.46, 557090),
+    ('2026-09-16', 1157.42, 1176.05, 1133.83, 1147.61, 625211),
+    ('2026-09-17', 1183.15, 1184.15, 1146.4, 1169.58, 950234),
+    ('2026-09-18', 1185.52, 1221.51, 1176.21, 1217.8, 1427382),
+    ('2026-09-21', 1243.25, 1283.83, 1217.24, 1277.68, 1030120),
+    ('2026-09-22', 1278.08, 1387.455, 1271.03, 1380.62, 1535211),
+    ('2026-09-23', 1367.08, 1371.66, 1302.1, 1355.47, 767407),
+    ('2026-09-24', 1317.09, 1349.64, 1313.09, 1335.55, 492628),
+    ('2026-09-25', 1332.63, 1377.14, 1329.47, 1367.43, 536878),
+    ('2026-09-28', 1353.13, 1359.76, 1320.8, 1351.2, 660021),
+    ('2026-09-29', 1372.05, 1374.32, 1347.85, 1355.99, 450392),
+    ('2026-09-30', 1353.765, 1361.44, 1324.96, 1347.22, 465261),
+    ('2026-10-01', 1359.98, 1368.665, 1331, 1360.97, 492299)]
+MPWR_ROWS = [dict(zip(('date', 'open', 'high', 'low', 'close', 'volume'), t)) for t in MPWR]
+
+
+class ReadinessV2(unittest.TestCase):
+    def test_regression_mpwr_a_wide_pivot_day_no_longer_scores_a_perfect_100(self):
+        v1, v2 = T.readiness_v1(MPWR_ROWS), T.readiness_v2(MPWR_ROWS)
+        # the defect, documented: v1 let the wide, heavy 22 Sep pivot day sit in its "early" window and scored every component 25
+        self.assertEqual((v1['tightness'], v1['volumeDryUp'], v1['composite']), (25, 25, 100))
+        self.assertEqual((v2['pivot'], v2['timeInBaseDays']), (1387.455, 7))
+        self.assertEqual((v2['tightness'], v2['proximity'], v2['volumeDryUp'], v2['timeInBase'], v2['composite']), (7, 25, 21, 25, 78))
+        d = v2['details']
+        self.assertEqual((d['runupSessions'], d['baseSessions']), (10, 7))
+        self.assertAlmostEqual(d['trDeclinePct'], 4.6, places=1)         # the base is barely quieter than the run-up
+        self.assertAlmostEqual(d['volDeclinePct'], 31.2, places=1)
+
+    def test_the_pivot_day_itself_is_excluded_from_both_measurements(self):
+        base = T.readiness_v2(QRVO_ROWS)
+        wide = [dict(r) for r in QRVO_ROWS]
+        i = [r['high'] for r in wide].index(max(r['high'] for r in wide))      # the pivot day (23 Sep)
+        wide[i]['low'] = 100.0                                                 # a far wider range, high untouched
+        wide[i]['volume'] *= 5
+        w = T.readiness_v2(wide)
+        for k in ('tightness', 'volumeDryUp', 'proximity', 'timeInBase', 'composite'):
+            self.assertEqual(w[k], base[k], k)
+        self.assertEqual(w['details']['runupTR'], base['details']['runupTR'])
+        # whereas v1 did read the pivot day: widening it changes v1's tightness
+        self.assertNotEqual(T.readiness_v1(wide)['unrounded']['tightness'], T.readiness_v1(QRVO_ROWS)['unrounded']['tightness'])
+
+    def test_no_base_yet_scores_zero_for_tightness_and_dry_up(self):
+        rs = [dict(r) for r in QRVO_ROWS]
+        rs[-1].update(high=125.0, close=124.0, low=116.0, open=117.0)           # new high today: nothing to measure
+        r = T.readiness_v2(rs)
+        self.assertEqual((r['tightness'], r['volumeDryUp'], r['timeInBase']), (0, 0, 0))
+
+    def test_too_short_a_run_up_is_not_scored(self):
+        r = T.readiness_v2(QRVO_ROWS[-8:])                                      # the pivot is left with < 5 run-up sessions
+        self.assertEqual((r['tightness'], r['volumeDryUp']), (0, 0))
+
+    def test_current_version_and_dispatcher(self):
+        self.assertEqual(T.SCORING_VERSION, 'v2')
+        self.assertEqual(T.readiness(QRVO_ROWS)['composite'], T.readiness_v2(QRVO_ROWS)['composite'])
+        self.assertEqual(T.readiness(QRVO_ROWS, 'v1')['composite'], 41)
+
+    def test_ingest_labels_a_block_without_a_version_v1_and_honours_an_explicit_v2(self):
+        led = T.empty_ledger()
+        T.ingest(led, block([pick('NVDA')]), PUB)
+        self.assertEqual(led['records'][0]['scoringVersion'], 'v1')             # every page before v2 carries no version
+        p2 = pick('MPWR', 1387.47, 1331.0, 1526.22)
+        p2['scoringVersion'] = 'v2'
+        T.ingest(led, block([p2]), PUB)
+        self.assertEqual(led['records'][1]['scoringVersion'], 'v2')
+
+
+class StopFloor(unittest.TestCase):
+    def test_atr14_is_the_mean_of_the_last_14_true_ranges(self):
+        rs = ohlc_rows(30)
+        self.assertAlmostEqual(T.atr14(rs), 4.0, places=3)                    # constant 98-102 range, closes inside it
+        self.assertIsNone(T.atr14(rs[:10]))
+
+    def test_stop_must_sit_at_least_one_atr_below_the_close(self):
+        self.assertTrue(T.stop_check(95.0, 100.0, 4.0)['ok'])                  # 1.25 ATR below
+        self.assertTrue(T.stop_check(96.0, 100.0, 4.0)['ok'])                  # exactly 1.0 ATR: allowed
+        self.assertFalse(T.stop_check(96.5, 100.0, 4.0)['ok'])                 # 0.88 ATR: rejected
+        self.assertFalse(T.stop_check(101.0, 100.0, 4.0)['ok'])                # above the close
+        self.assertFalse(T.stop_check(100.0, 100.0, 4.0)['ok'])                # at the close
+        self.assertEqual(T.stop_check(95.0, 100.0, 4.0)['atrBelow'], 1.25)
+        self.assertFalse(T.stop_check(95.0, 100.0, None)['ok'])                # no ATR, no pass
+
+    def test_the_two_historical_offenders_fail_the_floor(self):
+        # GOOGL and ALAB on 1 Oct 2026 (stop above the 30 Sep close); ATR14 values are from the validated OHLC
+        self.assertFalse(T.stop_check(346.09, 344.08, 7.5)['ok'])
+        self.assertFalse(T.stop_check(359.10, 355.97, 22.0)['ok'])
+
+    def test_score_cli_reports_readiness_atr_and_the_stop_verdict(self):
+        rs = ohlc_rows(40, start='2026-08-24')
+        basis = rs[34]['date']
+        with tempfile.TemporaryDirectory() as td:
+            f = pathlib.Path(td) / 'ohlc.json'
+            f.write_text(json.dumps({'tickers': {'AAA': {'rows': rs[::-1]}}}), encoding='utf-8')   # deliberately newest-first
+            import io, contextlib
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = T.main(['score', '--ohlc', str(f), '--ticker', 'AAA', '--basis', basis, '--stop', '90'])
+            res = json.loads(out.getvalue())
+            self.assertEqual(code, 0)
+            self.assertEqual((res['ok'], res['scoringVersion'], len(res['closes'])), (True, 'v2', 25))
+            self.assertEqual(res['closes'], [r['close'] for r in rs[10:35]])
+            self.assertTrue(res['stopCheck']['ok'])
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = T.main(['score', '--ohlc', str(f), '--ticker', 'AAA', '--basis', basis, '--stop', '99.9'])
+            self.assertEqual(code, 3)                                            # too close: reject the pick
+
+
+class PublishFlags(unittest.TestCase):
+    def test_levels_invalid_when_the_stop_is_at_or_above_the_basis_close(self):
+        self.assertEqual(T.level_flags(346.09, 344.08, 2.176)[:1], (True,))
+        self.assertIn('at/above the basis-session close', T.level_flags(346.09, 344.08, 2.176)[1])
+        self.assertEqual(T.level_flags(100.0, 100.0, 2.0)[0], True)             # exactly at the close counts
+        self.assertEqual(T.level_flags(99.99, 100.0, 2.0)[0], False)
+        self.assertEqual(T.level_flags(90.0, None, 2.0), (None, None, None))      # no close, no verdict
+
+    def test_tight_stop_is_within_half_an_adr_of_the_close(self):
+        self.assertEqual(T.level_flags(175.33, 178.36, 4.713), (False, None, True))    # GH: 1.70% away <= 0.5 x 4.713%
+        self.assertEqual(T.level_flags(288.23, 295.01, 3.23), (False, None, False))    # CRL: 2.30% away > 0.5 x 3.23%
+        self.assertEqual(T.level_flags(98.0, 100.0, 4.0)[2], True)                 # exactly 0.5 x ADR: tight
+        self.assertEqual(T.level_flags(97.9, 100.0, 4.0)[2], False)
+        self.assertEqual(T.level_flags(90.0, 100.0, None)[2], False)               # unknown ADR: not flagged
+
+    def test_ingest_judges_the_stop_at_the_basis_close_from_validated_ohlc(self):
+        rs = ohlc_rows(75, start='2026-07-06')
+        basis_close = [r for r in rs if r['date'] == '2026-10-01'][0]['close']
+        pk = pick('NVDA', 100.0, basis_close + 1.0, 130.0, entryZone='100.00 – 101.00')       # a stop above the close
+        pk['stop'] = round(basis_close + 1.0, 2)
+        pk['entry'] = pk['stop'] + 2
+        pk['entryZone'] = f"{pk['entry']:.2f} – {pk['entry'] + 1:.2f}"
+        pk['target'] = pk['entry'] * 1.1
+        led = T.empty_ledger()
+        T.ingest(led, block([pk]), PUB, ohlc={'NVDA': {'rows': rs}})
+        r = led['records'][0]
+        self.assertEqual((r['basisClose'], r['levelsInvalidAtPublish']), (basis_close, True))
+        self.assertTrue(r['levelsInvalidReason'])
+
+    def test_ingest_falls_back_to_the_picks_last_close_without_ohlc(self):
+        pk = pick('NVDA', 234.77, 223.03, 258.25)
+        pk['closes'] = [230.0] * 24 + [231.0]
+        led = T.empty_ledger()
+        T.ingest(led, block([pk]), PUB)
+        self.assertEqual((led['records'][0]['basisClose'], led['records'][0]['levelsInvalidAtPublish']), (231.0, False))
+
+    def test_augment_fills_the_flags_on_existing_records_without_touching_other_fields(self):
+        rs = ohlc_rows(75, start='2026-07-06')
+        basis = '2026-09-28'
+        bc = [r for r in rs if r['date'] == basis][0]['close']
+        r = rec(id='a', ticker='AAA', basisSession=basis, stop=bc + 0.5, publishedAt='2026-09-29T10:00:00+08:00')
+        led = {'schemaVersion': 1, 'records': [r]}
+        T.augment(led, {'AAA': {'rows': rs}})
+        out = led['records'][0]
+        self.assertEqual((out['levelsInvalidAtPublish'], out['basisClose']), (True, bc))
+        self.assertEqual(out['stop'], bc + 0.5)
+
+    def test_invalid_level_records_are_excluded_from_both_views_and_counted_on_their_own_line(self):
+        good = [filled(100.5, i=i) for i in range(3)]
+        bad = filled(100.5, i=50, levelsInvalidAtPublish=True, levelsInvalidReason='stop above close')
+        both = T.summarize_both(good + [bad])
+        self.assertEqual(both['literal']['overall']['picks'], 3)
+        self.assertEqual(both['disciplined']['overall']['picks'], 3)
+        self.assertEqual(both['literal']['overall']['closed'], 3)
+        self.assertEqual((both['invalidLevels']['n'], both['invalidLevels']['ids']), (1, [bad['id']]))
+        self.assertEqual(sum(s['picks'] for s in both['literal']['byReadinessBand'].values()), 3)
+
+    def test_tight_stop_records_stay_in_but_are_split_by_the_flag(self):
+        a = filled(100.5, i=1, tightStopAtPublish=True)
+        b = filled(100.5, i=2, tightStopAtPublish=False)
+        c = filled(100.5, i=3)                                                   # an old record without the field
+        s = T.summarize([a, b, c])
+        self.assertEqual(s['overall']['picks'], 3)
+        self.assertEqual({k: v['picks'] for k, v in s['byStopDistance'].items()}, {'tight stop': 1, 'normal stop': 2})
+
+    def test_the_view_flags_each_pick_on_the_page(self):
+        recs = [filled(100.5, i=1, levelsInvalidAtPublish=True, basisSession='2026-09-30', ticker='AAA'),
+                filled(100.5, i=2, tightStopAtPublish=True, basisSession='2026-09-30', ticker='BBB')]
+        v = T.build_view({'records': recs}, '2026-10-02', pick_basis='2026-09-30')
+        self.assertEqual((v['picks']['AAA']['levelsInvalid'], v['picks']['BBB']['tightStop']), (True, True))
+        self.assertEqual(v['stats']['invalidLevels']['n'], 1)
+        self.assertEqual(v['evaluatedThrough'], None)
 
 
 class EndToEnd(unittest.TestCase):

@@ -23,6 +23,7 @@ LABEL = {'indices': 'Index & VIX quotes', 'macro': 'Rates & Fed', 'sectors': 'Se
          'industries': 'Industry drill-down', 'technical': 'Technical picks', 'catalysts': 'Catalyst alerts',
          'nearmiss': 'Near-miss watchlist'}
 CATALYST_WINDOW = 5      # trading days
+MIN_STOP_ATR = 1.0       # defect (a): a technical pick's stop must sit at least this many ATR14 below its last close, else the pick is rejected
 
 
 def num(x):
@@ -145,6 +146,12 @@ def _levels(p, ctx):
         out.append(('hard', f'{tk}: needs >= 15 closes'))
     elif abs(cs[-1] / p['px'] - 1) > 0.03:
         out.append(('warn', f'{tk}: last close and px differ by >3%'))
+    last = cs[-1] if (len(cs) >= 15 and all(num(c) for c in cs)) else p['px']
+    if p['stop'] >= last:                                  # caught at build time, whatever the scan did
+        out.append(('warn', f'stop above last close: {tk}'))
+    atr = p.get('atr14')
+    if num(atr) and atr > 0 and last - p['stop'] < MIN_STOP_ATR * atr:
+        out.append(('hard', f'{tk}: stop is {(last - p["stop"]) / atr:.2f} ATR below the last close, needs >= {MIN_STOP_ATR} - pick rejected'))
     rd = p.get('readiness')
     if rd is not None:
         comps = ('composite', 'tightness', 'proximity', 'volumeDryUp', 'timeInBase')

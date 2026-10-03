@@ -17,13 +17,17 @@ import argparse, copy, datetime as dt, json, math, pathlib, re, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import market_time as mt  # noqa: E402
+from health import MIN_STOP_ATR  # noqa: E402  (defect (a): the one stop-floor config value lives in health.py)
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
     sys.stderr.reconfigure(encoding='utf-8')
 
 SCHEMA_VERSION = 1
-SCORING_VERSION = 'v1'          # bump together with the formulas in CLAUDE.md "Readiness scoring"
+SCORING_VERSION = 'v2'          # the CURRENT formula; bump together with CLAUDE.md "Readiness scoring"
+LEGACY_SCORING_VERSION = 'v1'   # what a pick block without a scoringVersion was scored with (every page before 3 Oct 2026)
+RUNUP_SESSIONS = 10             # v2: sessions before the pivot day that the base is measured against
+TIGHT_STOP_ADR = 0.5            # tightStopAtPublish: stop within this x ADR20% of the basis close
 EXPIRY_SESSIONS = 10            # pending -> expired after this many evaluable sessions without a trigger
 MAX_HOLD_SESSIONS = 20          # trigger session = session 1; time-exit at the close of session 20
 MIN_N = 20                      # fewer closed trades than this -> "n too small", never a percentage
@@ -352,21 +356,24 @@ def _new_id(ledger, publish_date, tk):
     return f'{base}-{n}'
 
 
-def build_record(pick, block, published_at, basis, rec_id, adr=None, approx=False):
+def build_record(pick, block, published_at, basis, rec_id, adr=None, approx=False, basis_close=None):
     zl, zh = parse_zone(pick.get('entryZone'))
     rd = pick.get('readiness') if isinstance(pick.get('readiness'), dict) and num(pick['readiness'].get('composite')) else None
     label, score, total = regime_from_block(block)
     pub = pdt(published_at)
     nxt = parse_next_earnings(((block.get('bg') or {}).get(pick['tk']) or {}).get('next'), hkt_date(pub))
+    bc = basis_close if basis_close is not None else (pick['closes'][-1] if pick.get('closes') else None)
+    inv, why, tight = level_flags(pick['stop'], bc, adr)
     return {
         'id': rec_id, 'publishedAt': pub.isoformat(), 'basisSession': basis, 'startSession': first_session_after(pub),
         'ticker': pick['tk'], 'sector': pick.get('sector'), 'industry': pick.get('industry'), 'setup': pick.get('setup'),
         'pivot': pick.get('pivot'), 'entryZoneLow': zl, 'entryZoneHigh': zh, 'entry': pick['entry'],
         'stop': pick['stop'], 'target': pick['target'],
         'readiness': ({k: rd[k] for k in ('composite', 'tightness', 'proximity', 'volumeDryUp', 'timeInBase')} if rd else None),
-        'scoringVersion': SCORING_VERSION if rd else None,
+        'scoringVersion': (pick.get('scoringVersion') or block.get('scoringVersion') or LEGACY_SCORING_VERSION) if rd else None,
         'regimeLabel': label, 'regimeScore': score, 'regimeChecks': total, 'nextEarningsDate': nxt,
         'adr20Pct': adr, 'publishTimeApproximate': bool(approx),
+        'basisClose': bc, 'levelsInvalidAtPublish': inv, 'levelsInvalidReason': why, 'tightStopAtPublish': tight,
         'status': 'pending', 'triggerDate': None, 'fillPrice': None, 'chased': None, 'exitDate': None,
         'exitPrice': None, 'exitReason': None, 'rMultiple': None, 'daysHeld': None, 'lastClose': None,
         'evaluatedThrough': None, 'repickDates': [], 'evidence': {}, 'notes': [],
@@ -409,7 +416,9 @@ def ingest(ledger, block, published_at, source='fresh', ohlc=None, approx=False)
             continue
         new_id = _new_id(ledger, pdate_hkt, tk)
         rows = ((ohlc or {}).get(tk) or {}).get('rows')
-        new = build_record(pick, block, pub.isoformat(), basis, new_id, adr=adr20_pct(rows, basis) if rows else None, approx=approx)
+        bc = next((r['close'] for r in (rows or []) if r.get('date') == basis), None)
+        new = build_record(pick, block, pub.isoformat(), basis, new_id, adr=adr20_pct(rows, basis) if rows else None, approx=approx,
+                           basis_close=bc)
         if basis_note:
             new['notes'].append(basis_note)
         if source != 'fresh':
@@ -578,6 +587,94 @@ def closes_match(window, published_closes, tol=0.011):
     return [f'#{i}: {a} vs {b}' for i, (a, b) in enumerate(zip(mine, published_closes)) if abs(a - b) > tol]
 
 
+# ───────────────────────────── levels sanity: ATR, stop floor, publish-time flags ─────────────────────────────
+def true_ranges(rows):
+    """True range per row (the first row has no previous close, so it is just high - low)."""
+    out = []
+    for i, r in enumerate(rows):
+        if i == 0:
+            out.append(r['high'] - r['low'])
+        else:
+            pc = rows[i - 1]['close']
+            out.append(max(r['high'] - r['low'], abs(r['high'] - pc), abs(r['low'] - pc)))
+    return out
+
+
+def atr14(rows):
+    """Mean of the last 14 true ranges of the given (validated, oldest-first) rows; None if there are fewer than 14."""
+    tr = true_ranges(rows)
+    return round(sum(tr[-14:]) / 14, 4) if len(tr) >= 14 else None
+
+
+def stop_check(stop, last_close, atr, k=None):
+    """Defect (a): the stop must sit at least k x ATR14 below the last close, or the pick is rejected.
+
+    Returns {'ok', 'lastClose', 'atr14', 'atrBelow' (how many ATRs the stop is below the close), 'minAtr'}."""
+    k = MIN_STOP_ATR if k is None else k
+    below = (last_close - stop) / atr if atr else None
+    return {'ok': bool(atr) and stop < last_close and below >= k, 'lastClose': last_close, 'atr14': atr,
+            'atrBelow': None if below is None else round(below, 2), 'minAtr': k}
+
+
+def level_flags(stop, basis_close, adr20):
+    """(levelsInvalidAtPublish, reason, tightStopAtPublish) for a pick, judged at its basis-session close.
+
+    invalid: the stop is at or above the close (the pick was already past its own stop when published: a scan defect, not a market outcome).
+    tight:   the stop is within TIGHT_STOP_ADR x ADR20% of the close (a normal day's range can take it out). None/None/None if unknown."""
+    if basis_close is None or stop is None:
+        return None, None, None
+    if stop >= basis_close:
+        return True, f'stop {stop} is at/above the basis-session close {basis_close}', False
+    dist = (basis_close - stop) / basis_close * 100
+    return False, None, (adr20 is not None and dist <= TIGHT_STOP_ADR * adr20)
+
+
+# ───────────────────────────── readiness v2 (current) ─────────────────────────────
+def readiness_v2(window):
+    """Readiness v2: v1 with tightness and volume dry-up measured against the RUN-UP, excluding the pivot day.
+
+    v1 compared the last 5 true ranges with the 5 before them (and the 5 sessions of volume up to AND INCLUDING the pivot), so one wide,
+    heavy breakout day inside that window scored as a contraction (MPWR scored 100 on 2 Oct). v2:
+      run-up = the RUNUP_SESSIONS sessions immediately before the pivot day (the pivot day itself is excluded);
+      base   = the sessions after the pivot day through the last one (needs >= 2, and >= 5 run-up sessions, else those two score 0).
+      tightness = decline of mean true range, base vs run-up, on the v1 anchor ladder;
+      dry-up    = decline of mean volume, base vs run-up, on the v1 anchor ladder.
+    Proximity and time-in-base are unchanged from v1. Returns the same shape as readiness_v1 plus the intermediates."""
+    hi = [r['high'] for r in window]
+    cl = [r['close'] for r in window]
+    vol = [r.get('volume') or 0 for r in window]
+    pivot = max(hi)
+    pidx = hi.index(pivot)
+    last = len(window) - 1
+    tib = last - pidx
+    tr = true_ranges(window)
+    price = cl[-1]
+    atr_pct = (sum(tr[-14:]) / len(tr[-14:])) / price * 100
+    runup = list(range(max(0, pidx - RUNUP_SESSIONS), pidx))
+    base = list(range(pidx + 1, last + 1))
+    info = {'runupSessions': len(runup), 'baseSessions': len(base)}
+    if tib >= 2 and len(runup) >= 5:
+        ru_tr, b_tr = sum(tr[i] for i in runup) / len(runup), sum(tr[i] for i in base) / len(base)
+        ru_v, b_v = sum(vol[i] for i in runup) / len(runup), sum(vol[i] for i in base) / len(base)
+        decline = (ru_tr - b_tr) / ru_tr * 100 if ru_tr else 0
+        dry_pct = (ru_v - b_v) / ru_v * 100 if ru_v else 0
+        tight, dry = _pw(decline, _LADDER), _pw(dry_pct, _LADDER)
+        info.update(runupTR=ru_tr, baseTR=b_tr, trDeclinePct=decline, runupVol=ru_v, baseVol=b_v, volDeclinePct=dry_pct)
+    else:
+        tight = dry = 0.0
+    x = (price / pivot - 1) * 100
+    prox = _pw(x, sorted({(-10, 0), (-5, 10), (-2, 25), (0.5, 25), (atr_pct, 10), (2 * atr_pct + 1, 0)}))
+    tb = _pw(tib, _TIB)
+    comps = {'tightness': tight, 'proximity': prox, 'volumeDryUp': dry, 'timeInBase': tb}
+    return {'pivot': pivot, 'timeInBaseDays': tib, 'unrounded': comps, 'details': info,
+            **{k: round_half_up(v) for k, v in comps.items()}, 'composite': round_half_up(sum(comps.values()))}
+
+
+def readiness(window, version=None):
+    """The score for a window under the named formula version (default: the current one)."""
+    return readiness_v1(window) if (version or SCORING_VERSION) == 'v1' else readiness_v2(window)
+
+
 # ───────────────────────────── augment (add fields to existing records; never change one) ─────────────────────────────
 def augment(ledger, ohlc, approx_published=()):
     """Add adr20Pct / publishTimeApproximate / series to records that lack them. Existing values are never touched."""
@@ -594,6 +691,20 @@ def augment(ledger, ohlc, approx_published=()):
                 added.append((r['id'], 'adr20Pct'))
         elif 'adr20Pct' not in r:
             r['adr20Pct'] = None
+        if r.get('basisClose') is None and rows:
+            bc = next((x['close'] for x in rows if x.get('date') == r['basisSession']), None)
+            if bc is not None:
+                r['basisClose'] = bc
+                added.append((r['id'], 'basisClose'))
+        elif 'basisClose' not in r:
+            r['basisClose'] = None
+        if r.get('levelsInvalidAtPublish') is None and r.get('basisClose') is not None:
+            inv, why, tight = level_flags(r['stop'], r['basisClose'], r.get('adr20Pct'))
+            r['levelsInvalidAtPublish'], r['levelsInvalidReason'], r['tightStopAtPublish'] = inv, why, tight
+            added.append((r['id'], 'levelsInvalidAtPublish'))
+        else:
+            for k in ('levelsInvalidAtPublish', 'levelsInvalidReason', 'tightStopAtPublish'):
+                r.setdefault(k, None)
         if 'series' not in r and rows:
             ser, _ = make_series(rows, r, r.get('evaluatedThrough') or r['basisSession'])
             if ser:
@@ -674,8 +785,9 @@ def _stat(recs):
 
 
 def summarize(records):
-    """Stats over the literal ledger."""
-    recs = [r for r in records if r['status'] != 'replaced']
+    """Stats over the literal ledger. Records published with invalid levels (stop >= basis close: a scan defect, not a market
+    outcome) are excluded here and reported on their own line by summarize_both."""
+    recs = [r for r in records if r['status'] != 'replaced' and not r.get('levelsInvalidAtPublish')]
 
     def split(keyf, order=None):
         groups = {}
@@ -691,6 +803,7 @@ def summarize(records):
         'byScoringVersion': split(lambda r: r.get('scoringVersion') or 'unscored'),
         'byFill': split(lambda r: 'no fill' if r.get('chased') is None else ('chased fill' if r['chased'] else 'clean fill'),
                         ['clean fill', 'chased fill', 'no fill']),
+        'byStopDistance': split(lambda r: 'tight stop' if r.get('tightStopAtPublish') else 'normal stop', ['tight stop', 'normal stop']),
         'minN': MIN_N,
     }
 
@@ -698,7 +811,10 @@ def summarize(records):
 def summarize_both(records, rule=None):
     """{'literal': summarize(ledger), 'disciplined': summarize(ledger with skipped-chase fills removed), 'rule': ...}."""
     rule = rule or CHASE_RULE
-    return {'literal': summarize(records), 'disciplined': summarize(disciplined_records(records, rule)), 'rule': dict(rule)}
+    bad = [r for r in records if r['status'] != 'replaced' and r.get('levelsInvalidAtPublish')]
+    return {'literal': summarize(records), 'disciplined': summarize(disciplined_records(records, rule)), 'rule': dict(rule),
+            'invalidLevels': {'n': len(bad), 'ids': [r['id'] for r in bad],
+                              'reasons': {r['id']: r.get('levelsInvalidReason') for r in bad}}}
 
 
 def chip(rec, last_session):
@@ -724,7 +840,8 @@ def build_view(ledger, last_session, problems=None, pick_basis=None):
         if pick_basis and r['basisSession'] == pick_basis:
             picks[r['ticker']] = {'id': r['id'], 'chip': chip(r, last_session), 'openR': open_r(r), 'status': r['status'],
                                   'fillPrice': r.get('fillPrice'), 'chased': r.get('chased'),
-                                  'chaseSkip': is_chase_skip(r), 'series': r.get('series')}
+                                  'chaseSkip': is_chase_skip(r), 'series': r.get('series'),
+                                  'levelsInvalid': bool(r.get('levelsInvalidAtPublish')), 'tightStop': bool(r.get('tightStopAtPublish'))}
     closed = sorted((r for r in recs if r['status'] in CLOSED), key=lambda r: (r['exitDate'], r['id']), reverse=True)[:20]
 
     def row(r):
@@ -733,6 +850,7 @@ def build_view(ledger, last_session, problems=None, pick_basis=None):
     awaiting = sorted({r['id'] for r in recs if chip(r, last_session) == 'awaiting'})
     return {
         'schemaVersion': SCHEMA_VERSION, 'lastSession': last_session, 'records': recs, 'stats': both,
+        'evaluatedThrough': max([r['evaluatedThrough'] for r in recs if r.get('evaluatedThrough')] or [None]),
         'picks': picks, 'awaitingData': awaiting,
         'open': [dict(row(r), status=chip(r, last_session), entry=r['entry'], stop=r['stop'], target=r['target'],
                       fillPrice=r.get('fillPrice'), lastClose=r.get('lastClose'), openR=open_r(r),
@@ -810,6 +928,28 @@ def cmd_closes(a):
     return 0 if closes else 2
 
 
+def cmd_score(a):
+    """Mechanical pick metrics from validated OHLC: the scan uses this instead of doing the arithmetic by hand."""
+    rows = json.loads(pathlib.Path(a.ohlc).read_text(encoding='utf-8')).get('tickers', {}).get(a.ticker, {}).get('rows', [])
+    closes, probs = build_closes(rows, a.basis, a.n)
+    if closes is None:
+        print(json.dumps({'ticker': a.ticker, 'basis': a.basis, 'ok': False, 'problems': probs}, ensure_ascii=False))
+        return 2
+    srt = [r for r in sort_rows(rows) if str(r.get('date')) <= a.basis]
+    start = mt.trading_days_back(pdate(a.basis), a.n)[-1].isoformat()
+    _, _, win = validate_rows(srt, start, a.basis)
+    rd = readiness(win, a.version)
+    atr = atr14(srt[-14 - 1:] if len(srt) > 14 else srt)
+    out = {'ticker': a.ticker, 'basis': a.basis, 'ok': True, 'window': a.n, 'scoringVersion': a.version or SCORING_VERSION,
+           'closes': closes, 'pivot': rd['pivot'], 'timeInBaseDays': rd['timeInBaseDays'],
+           'readiness': {k: rd[k] for k in ('composite', 'tightness', 'proximity', 'volumeDryUp', 'timeInBase')},
+           'atr14': atr, 'adr20Pct': adr20_pct(srt, a.basis), 'lastClose': win[-1]['close']}
+    if a.stop is not None:
+        out['stopCheck'] = stop_check(a.stop, win[-1]['close'], atr)
+    print(json.dumps(out, ensure_ascii=False))
+    return 0 if (a.stop is None or out['stopCheck']['ok']) else 3
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='cmd', required=True)
@@ -826,8 +966,15 @@ def main(argv=None):
     c.add_argument('--ticker', required=True)
     c.add_argument('--upto', required=True, help='last session of the window (the basis session)')
     c.add_argument('--n', type=int, default=SERIES_SESSIONS)
+    sc = sub.add_parser('score', help='readiness (current formula), pivot, ATR14, ADR20, validated closes and the stop-floor check for one pick')
+    sc.add_argument('--ohlc', required=True)
+    sc.add_argument('--ticker', required=True)
+    sc.add_argument('--basis', required=True, help='last session of the window (the basis session)')
+    sc.add_argument('--n', type=int, default=SERIES_SESSIONS)
+    sc.add_argument('--stop', type=float, default=None, help='check this stop against the ATR floor (exit 3 = reject the pick)')
+    sc.add_argument('--version', default=None, help='scoring version (default: current)')
     a = ap.parse_args(argv)
-    return cmd_update(a) if a.cmd == 'update' else cmd_closes(a)
+    return {'update': cmd_update, 'closes': cmd_closes, 'score': cmd_score}[a.cmd](a)
 
 
 if __name__ == '__main__':
