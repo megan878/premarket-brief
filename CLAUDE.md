@@ -11,11 +11,10 @@ config problem (matches multiple open `anthropics/claude-code` GitHub issues on 
 Only FMP (MCP connector, bypasses the proxy) and WebSearch (also bypasses it) work automatically.
 
 This splits the page into two kinds of section:
-- **Automated, fresh every run** (FMP + WebSearch only): index/VIX quotes, rates, regime score, sector rankings,
+- **Automated, fresh every run** (FMP + WebSearch only): index/VIX quotes, rates, regime score,
   catalyst **alerts** (news only — ticker, what happened, date, 2 sources, FMP price/cap; no computed trade levels),
   earnings-calendar flags. Written fresh into `data/brief-data.json` every run.
-- **Pinned, interactive-only**: the technical scan (`picks`/`pickWindow`), the industry drill-down (`industries`,
-  separate from the automated `sectors` ranking) and `nearmiss` (leftovers of that same scan) all need Finviz
+- **Pinned, interactive-only** (since 2026-10-05 this includes the **sector ranking**, so it carries the same as-of chip as the industries under it): the sector ranking (`sectors`/`sectorSource`, Finviz groups), the technical scan (`picks`/`pickWindow`/`selection`), the industry drill-down (`industries`) and `nearmiss` (leftovers of that same scan) all need Finviz
   (WebFetch) for OHLC history, EMA/ADX/ADR proxies and the pattern screener. The automated routine **must never
   write these keys** — just omit them entirely. `health.py` then carries the last interactive copy forward
   verbatim, dated, labelled `PINNED` (not `STALE`) in the page. Refresh them yourself by running an interactive
@@ -305,14 +304,17 @@ or more than 3% as a skipped chase, not a trade. The definition is the single co
 - Backfill (one-off, 3 Oct): `scripts/tracker_backfill.py` rebuilt the ledger from git history and the committed artifact-v11 block; evidence
   in `data/provenance/backfill-2026-10-03/` (OHLC, FMP cross-check, report).
 
-## Quality selection, max 10 (added 2026-10-05) - `scripts/selection.py`, config in `selection.CONFIG`
+## Quality selection, max 10 (added 2026-10-05; v2 stop-from-close rules `quality-max10-v2-stop-from-close`) - `scripts/selection.py`, config in `selection.CONFIG`
 A scored name is a technical pick only if it passes ALL of: the universe filters (price > $5, cap > $5B, 20-day volume > 500K, ADR20 > 2%, above SMA20/50/200, not > 20% above SMA50;
-EMA9/EMA21 and ADX(14) are computed and shown but are not gates, as the scan never gated on them) - **readiness >= 55** (`minReadiness`, a tuning guess; v2 scores) -
-**a valid base** (pivot not today, >= 2 sessions since it) - **stop at least 0.5 x ADR20 below the last close** (`stopMinAdr`) AND **at least 1 x ATR14 below it** (`stopMinAtr`, the 3 Oct floor):
-the stricter wins and a failing name is rejected, never re-levelled - **no earnings within 3 trading sessions** (`earningsBlackoutSessions`); the date comes from stockanalysis, then a WebSearch
-second source, and a name with no verifiable date is rejected with the reason "earnings date unverified" (list those names in the run report). Ranked by readiness (ties: proximity, ticker);
-beyond 10 the rest are near-misses with the reason "cut at 10". The page header reads "N of M scored names qualified (readiness >= 55)". Every ledger record stores `selectionVersion`
-(`quality-max10-v1`; the 16 older records are `top4-v1`), `selectionRank`, `selectionQualified`; the stats split by it. Pipeline: `scan_fetch.py` -> `scan_build.py analyse/stats/select` -> `scan_assemble.py`.
+EMA9/EMA21 and ADX(14) are computed and shown but are not gates, as the scan never gated on them) - **readiness >= 55** (`minReadiness`; v2 scores) -
+**a valid base** (pivot not today, >= 2 sessions since it) - **proximity: the last close within 5% of the pivot** (`maxBelowPivotPct`; further below it is not set up yet) -
+**stop below the last close** (hard validity check; the stop is PLACED, not copied: the lowest of 5% below the entry, the last session's low if it is 4-6% below the entry, 1 x ATR14 below the LAST CLOSE and 0.5 x ADR20 below the LAST CLOSE) -
+**risk (entry - stop) <= 8% of the entry** (`maxRiskPct`) - **R:R >= 1.5 at the FIXED +10% target** (`minRR`, `targetPct`; the target definition never changes with risk) -
+**no earnings within 3 trading sessions** (`earningsBlackoutSessions`; the date comes from stockanalysis, then a WebSearch second source, and a name with no verifiable date is rejected with the reason "earnings date unverified"; list those names in the run report).
+Ranked by readiness (ties: proximity, ticker); beyond 10 the rest are near-misses with the reason "cut at 10". Thresholds are not tuned to get a longer list: one pick or none is an acceptable result.
+The page header reads "N of M scored names qualified (readiness >= 55)" and, when short or empty, says which rules stopped the names that reached the readiness bar. Every ledger record stores `selectionVersion`
+(`quality-max10-v2-stop-from-close`; the 16 older records are `top4-v1`; v1 of the quality rules, which rejected instead of widening the stop, never wrote a record), `selectionRank`, `selectionQualified`; the stats split by it.
+Pipeline: `scan_fetch.py` -> `scan_build.py analyse/stats/select` -> `scan_cards.py` (pick cards for the qualifiers) -> `scan_assemble.py`; `scan_funnel.py` prints the sequential funnel and its sensitivity to the readiness and proximity thresholds from stored data.
 
 ## Strength flags (added 2026-10-05) - `scripts/flags.py`, config in `flags.CONFIG`
 A chip only when the evidence is strong; no chip means "not notable", never "bad". The tooltip carries the numbers. Inputs that are unavailable show nothing and are logged in `flagLog` (health), never guessed.

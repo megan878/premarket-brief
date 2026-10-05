@@ -9,15 +9,18 @@ import selection as S, pricedin as P, flags as F, reset_policy as R, health as H
 LAST = '2026-10-02'
 
 
-def cand(tk='AAA', comp=70, tib=5, last=100.0, stop=94.0, atr=3.0, adr=4.0, earn='2026-11-05', prox=20):
+def cand(tk='AAA', comp=70, tib=5, last=100.0, pivot=101.0, entry=101.0, low=98.0, atr=3.0, adr=4.0, earn='2026-11-05', prox=20):
+    """Close 100, pivot 101 (1% below it), entry 101. Default placed stop = 5% below the entry = 95.95 -> risk 5.0%, R:R 2.0."""
     return {'tk': tk, 'readiness': {'composite': comp, 'proximity': prox, 'tightness': 10, 'volumeDryUp': 10, 'timeInBase': 10},
-            'timeInBaseDays': tib, 'lastClose': last, 'stop': stop, 'atr14': atr, 'adr20Pct': adr, 'nextEarnings': earn, 'lastSession': LAST}
+            'timeInBaseDays': tib, 'lastClose': last, 'pivot': pivot, 'entry': entry, 'lastLow': low, 'atr14': atr, 'adr20Pct': adr,
+            'nextEarnings': earn, 'lastSession': LAST}
 
 
 class Selection(unittest.TestCase):
     def test_a_clean_candidate_passes_every_rule(self):
         r = S.check(cand())
         self.assertTrue(r['passed'], r['failed'])
+        self.assertEqual((r['levels']['stop'], r['levels']['riskPct'], r['levels']['rr']), (95.95, 5.0, 2.0))
 
     def test_readiness_threshold_is_a_config_value(self):
         self.assertFalse(S.check(cand(comp=54))['passed'])
@@ -29,20 +32,41 @@ class Selection(unittest.TestCase):
         self.assertIn('base', [f['rule'] for f in S.check(cand(tib=1))['failed']])
         self.assertTrue(S.check(cand(tib=2))['passed'])
 
-    def test_stop_must_be_half_an_adr20_below_the_last_close(self):
-        # ADR20 4% of 100 = 4.0 -> need a gap >= 2.0 ; ATR 1.0 so the ATR floor is not what binds
-        ok = S.check(cand(stop=97.9, atr=1.0))
-        self.assertTrue(ok['passed'], ok['failed'])
-        bad = S.check(cand(stop=98.1, atr=1.0))
-        self.assertEqual([f['rule'] for f in bad['failed']], ['stop-adr'])
+    def test_proximity_gate_is_within_five_percent_of_the_pivot(self):
+        self.assertTrue(S.check(cand(last=95.0, pivot=100.0, entry=100.0, low=None))['rules']['proximity'])      # exactly 5.0% below: allowed
+        r = S.check(cand(last=94.9, pivot=100.0, entry=100.0, low=None))
+        self.assertIn('proximity', [f['rule'] for f in r['failed']])
+        self.assertIn('not set up yet', [f['reason'] for f in r['failed'] if f['rule'] == 'proximity'][0])
+        self.assertTrue(S.check(cand(last=94.9, pivot=100.0, entry=100.0, low=None), {'maxBelowPivotPct': 6})['rules']['proximity'])
+        self.assertEqual(S.CONFIG['maxBelowPivotPct'], 5.0)
 
-    def test_both_stop_floors_apply_and_the_stricter_wins(self):
-        # ADR floor satisfied (gap 3 >= 2) but ATR floor not (needs >= 1 x 4 = 4)
-        r = S.check(cand(stop=97.0, atr=4.0))
-        self.assertEqual([f['rule'] for f in r['failed']], ['stop-atr'])
-        # stop above the close fails both
-        r = S.check(cand(stop=101.0))
-        self.assertEqual({f['rule'] for f in r['failed']}, {'stop-adr', 'stop-atr'})
+    def test_the_stop_is_placed_at_the_lowest_of_the_candidate_stops(self):
+        self.assertEqual(S.place_stop(cand())[0], 95.95)                                                     # 5% below the entry binds
+        self.assertEqual(S.place_stop(cand(atr=6.0)), (94.0, '1x ATR14 below the close'))                    # 1 x ATR14 below the CLOSE
+        self.assertEqual(S.place_stop(cand(atr=1.0, adr=14.0)), (93.0, '0.5x ADR20 below the close'))        # 0.5 x ADR20$ below the close
+        self.assertEqual(S.place_stop(cand(low=95.5)), (95.5, "the last session's low"))                     # a low 5.4% under the entry qualifies and is lowest
+        self.assertEqual(S.place_stop(cand(low=90.0))[0], 95.95)                                             # a low 10.9% under the entry is NOT a qualifying low
+
+    def test_the_stop_is_always_below_the_close_and_unknown_inputs_fail_closed(self):
+        for atr in (0.5, 3.0, 12.0):
+            self.assertLess(S.place_stop(cand(atr=atr))[0], 100.0)
+        self.assertIn('stop-valid', [f['rule'] for f in S.check(cand(atr=None))['failed']])
+        self.assertIn('stop-valid', [f['rule'] for f in S.check({**cand(), 'adr20Pct': None})['failed']])
+
+    def test_risk_over_eight_percent_is_rejected(self):
+        self.assertIn('risk', [f['rule'] for f in S.check(cand(atr=10.5))['failed']])      # stop 89.5 -> risk 11.4%
+        self.assertTrue(S.check(cand(atr=5.0))['rules']['risk'])                          # stop 95 -> 5.94%
+
+    def test_rr_must_reach_one_point_five_at_the_fixed_ten_percent_target(self):
+        # ATR 5.5 -> stop 94.5 -> risk 6.44% -> R:R 1.55 passes ; ATR 6 -> stop 94.0 -> risk 6.93% -> 1.44 fails (risk still <= 8)
+        self.assertTrue(S.check(cand(atr=5.5))['passed'], S.check(cand(atr=5.5))['failed'])
+        r = S.check(cand(atr=6.0))
+        self.assertEqual([f['rule'] for f in r['failed']], ['rr'])
+        self.assertIn('fixed +10% target', r['failed'][0]['reason'])
+
+    def test_the_target_definition_never_changes_with_risk(self):
+        self.assertEqual(S.levels(cand(atr=10.5))['target'], round(101.0 * 1.10, 2))     # 111.10 even when the stop is wide
+        self.assertEqual(S.CONFIG['targetPct'], 10.0)
 
     def test_earnings_inside_three_sessions_is_rejected(self):
         # LAST = Fri 2 Oct; next sessions: Mon 5, Tue 6, Wed 7, Thu 8
@@ -51,24 +75,24 @@ class Selection(unittest.TestCase):
         self.assertTrue(S.check(cand(earn='2026-10-08'))['passed'])                                      # 4 sessions: fine
 
     def test_unverified_earnings_date_rejects_with_the_stated_reason(self):
-        r = S.check(cand(earn=None))
-        self.assertEqual(r['failed'][0]['reason'], 'earnings date unverified')
+        self.assertEqual(S.check(cand(earn=None))['failed'][0]['reason'], 'earnings date unverified')
 
     def test_a_just_reported_date_is_not_a_blackout_but_an_old_stale_one_is_unverified(self):
         self.assertTrue(S.check(cand(earn='2026-09-30'))['passed'])            # reported 2 days ago, next one is a quarter away
-        r = S.check(cand(earn='2026-06-01'))
-        self.assertIn('unverified', r['failed'][0]['reason'])
+        self.assertIn('unverified', S.check(cand(earn='2026-06-01'))['failed'][0]['reason'])
 
     def test_zero_picks_is_a_valid_result(self):
         r = S.select([cand('A', comp=40), cand('B', comp=30)])
         self.assertEqual((r['picks'], r['qualified'], r['scored']), ([], 0, 2))
         self.assertEqual(S.header_line(r), '0 of 2 scored names qualified (readiness ≥ 55)')
 
+    def test_picks_carry_the_placed_levels(self):
+        p = S.select([cand('A')])['picks'][0]
+        self.assertEqual((p['stop'], p['target'], p['riskPct'], p['rr']), (95.95, 111.1, 5.0, 2.0))
+
     def test_at_most_ten_ranked_by_readiness_and_the_rest_are_cut(self):
-        cs = [cand(f'T{i:02d}', comp=60 + i) for i in range(14)]
-        r = S.select(cs)
-        self.assertEqual(len(r['picks']), 10)
-        self.assertEqual(r['qualified'], 14)
+        r = S.select([cand(f'T{i:02d}', comp=60 + i) for i in range(14)])
+        self.assertEqual((len(r['picks']), r['qualified']), (10, 14))
         self.assertEqual([c['tk'] for c in r['picks']][:3], ['T13', 'T12', 'T11'])
         self.assertEqual({c['tk'] for c in r['cut']}, {'T00', 'T01', 'T02', 'T03'})
 
@@ -77,19 +101,23 @@ class Selection(unittest.TestCase):
         self.assertEqual([c['tk'] for c in r['picks']], ['AAA', 'MMM', 'ZZZ'])
 
     def test_threshold_counts_for_tuning(self):
-        cs = [cand('A', comp=46), cand('B', comp=56), cand('C', comp=66)]
-        t = S.threshold_counts(cs)
+        t = S.threshold_counts([cand('A', comp=46), cand('B', comp=56), cand('C', comp=66)])
         self.assertEqual(t['passing'], {'45': 3, '55': 2, '65': 1})
         self.assertEqual(t['scores'], [66, 56, 46])
 
     def test_failure_summary_explains_a_short_list(self):
-        cs = [cand('LOW', comp=40), cand('STOP', comp=80, stop=99.0, atr=3.0), cand('BOTH', comp=70, tib=0, stop=99.0), cand('OK', comp=70)]
+        cs = [cand('LOW', comp=40), cand('LVL', comp=80, atr=10.5), cand('BOTH', comp=70, tib=0, atr=10.5), cand('OK', comp=70)]
         w = S.failure_summary(cs)
         self.assertEqual((w['scored'], w['readinessOk']), (4, 3))
-        self.assertEqual([b['tk'] for b in w['blocked']], ['STOP', 'BOTH'])
-        self.assertEqual([b['tk'] for b in w['blockedOnlyStop']], ['STOP'])          # BOTH also fails the base rule
+        self.assertEqual([b['tk'] for b in w['blocked']], ['LVL', 'BOTH'])
+        self.assertEqual([b['tk'] for b in w['blockedOnlyLevels']], ['LVL'])          # BOTH also fails the base rule
         self.assertEqual(w['byRule']['readiness'], 1)
-        self.assertGreaterEqual(w['byRule']['stop-atr'], 2)
+
+    def test_the_funnel_counts_names_gate_by_gate(self):
+        cs = [cand('A'), cand('B', comp=40), cand('C', tib=0), cand('D', last=90.0), cand('E', atr=6.0), cand('F', earn='2026-10-06')]
+        rows, alive = S.funnel(cs)
+        self.assertEqual([(g, n) for g, n, _ in rows], [('scored', 6), ('readiness', 5), ('base', 4), ('proximity', 3), ('stop-valid', 3), ('risk', 3), ('rr', 2), ('earnings', 1)])
+        self.assertEqual([c['tk'] for c in alive], ['A'])
 
 
 class PricedIn(unittest.TestCase):

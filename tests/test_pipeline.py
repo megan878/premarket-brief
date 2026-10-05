@@ -58,12 +58,15 @@ prev = json.loads((OUT / '00_previous.saved.json').read_text(encoding='utf-8'))
 d, _ = brief('B1_happy', fresh, prev)
 check('B1 happy path is clean', d['health']['status'] == 'ok' and not d['health']['issues'], d['health'])
 
-# B2 sector source down: 'sectors' never delivered -> previous copy, flagged stale. 'industries' is pinned
-# (never fetched automatically), so its absence is normal and it stays 'pinned', not 'stale'.
+# B2 sectors and industries are PINNED with the scan (since 5 Oct the routine never writes them): their absence is normal,
+# the interactive copy is carried forward verbatim and labelled 'pinned', not 'stale'.
 n = copy.deepcopy(fresh); [n.pop(k) for k in ('sectors', 'industries', 'sectorSource')]
 d, _ = brief('B2_sector_source_down', n, prev)
 h = d['health']['sections']['sectors']
-check('B2 sector ranking falls back to previous copy', h['status'] == 'stale' and len(d['sectors']) == 11 and d['health']['status'] == 'degraded', h)
+check('B2 sector ranking is carried forward, pinned with the scan (same chip as the industries)', h['status'] == 'pinned' and len(d['sectors']) == 11 and h['asOf'] == prev['health']['sections']['sectors']['asOf'], h)
+n2 = copy.deepcopy(fresh); n2['sectors'] = n2['sectors'][:9]
+d2, _ = brief('B2b_sectors_delivered_but_bad', n2, prev)
+check('B2b a sector table that IS delivered but invalid still falls back to the previous copy as stale', d2['health']['sections']['sectors']['status'] == 'stale' and len(d2['sectors']) == 11)
 check('B2 industries stay pinned, not marked stale', d['health']['sections']['industries']['status'] == 'pinned' and len(d['industries']) == 3)
 
 # B3 index quote garbage (negative price, VIX 400)
@@ -75,10 +78,10 @@ check('B3 garbage index quotes are rejected', d['health']['sections']['indices']
 # fetched by the automated routine in the first place) stay 'pinned', not 'stale'.
 d, _ = brief('B4_total_fetch_failure', None, prev)
 check('B4 total failure republishes fetched sections as stale',
-      all(d['health']['sections'][s]['status'] == 'stale' for s in ('indices', 'macro', 'sectors', 'catalysts'))
+      all(d['health']['sections'][s]['status'] == 'stale' for s in ('indices', 'macro', 'catalysts'))
       and d['health']['status'] == 'degraded')
 check('B4 pinned sections stay pinned even on total fetch failure',
-      all(d['health']['sections'][s]['status'] == 'pinned' for s in ('industries', 'technical', 'nearmiss')))
+      all(d['health']['sections'][s]['status'] == 'pinned' for s in ('sectors', 'industries', 'technical', 'nearmiss')))
 
 # B5 total failure with no previous copy -> nothing publishable, exit 3, no page written
 _, code = brief('B5_nothing_to_show', None, None, expect=3)

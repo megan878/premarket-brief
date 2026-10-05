@@ -21,6 +21,7 @@ def main(argv=None):
     ap.add_argument('--base', required=True); ap.add_argument('--scan', required=True); ap.add_argument('--market', required=True)
     ap.add_argument('--fmp', required=True, help='json with indices[] / macro{} already in page shape'); ap.add_argument('--out', required=True)
     ap.add_argument('--last-session', required=True)
+    ap.add_argument('--cards', help='scan_cards.py output for the names that qualified')
     a = ap.parse_args(argv)
     scan = pathlib.Path(a.scan)
     base, market, fmp = load(a.base), load(a.market), load(a.fmp)
@@ -35,10 +36,11 @@ def main(argv=None):
     # ── sector ranking / industry drill-down (Finviz groups, read twice) ──
     d['sectors'], d['industries'], d['sectorSource'] = market['sectors'], market['industries'], market['sectorSource']
     # ── picks: quality rules, possibly zero ──
-    picks = []
-    for rank, c in enumerate(sl['picks'], 1):
-        picks.append({**{k: c[k] for k in ('tk', 'name', 'industry', 'sector', 'pivot', 'entry', 'stop', 'target', 'stopNote', 'closes', 'readiness', 'atr14')},
-                      'selectionRank': rank, 'selectionVersion': sel.SELECTION_VERSION, 'scoringVersion': 'v2'})
+    cards = load(a.cards) if a.cards else {'picks': [], 'bg': {}, 'flagLog': []}
+    if len(cards['picks']) != len(sl['picks']):
+        raise SystemExit(f"{len(sl['picks'])} qualified but {len(cards['picks'])} cards: run scan_cards.py first")
+    picks = cards['picks']
+    d.setdefault('bg', {}).update(cards['bg'])
     d['picks'] = picks                                           # (cards for qualifiers are built by scan_cards.py when there are any)
     ld = mt.dt.date.fromisoformat(last)
     d['pickWindow'] = f'25 trading days to {ld.day} {ld.strftime("%b %Y")}, stockanalysis.com daily data'
@@ -56,8 +58,8 @@ def main(argv=None):
     for x in near[:12]:
         c = by_tk[x['tk']]
         why = '; '.join(f['reason'] for f in x['failed'])
-        if x['failed'] and all(f['rule'].startswith('stop') for f in x['failed']) and x['readiness'] >= sl['config']['minReadiness']:
-            why = 'reaches the readiness bar; stopped ONLY by the stop rule: ' + why
+        if x['failed'] and all(f['rule'] in sel.LEVEL_RULES for f in x['failed']) and x['readiness'] >= sl['config']['minReadiness']:
+            why = 'reaches the readiness bar; stopped ONLY by the level rules: ' + why
         d['nearmiss'].append({'tk': x['tk'], 'px': c['lastClose'], 'pct': c['lastDayPct'] if c['lastDayPct'] is not None else 0.0,
                               'why': f"{c['industry']} · readiness {x['readiness']} · {why}"})
     for c in sl['cut']:
@@ -71,8 +73,10 @@ def main(argv=None):
         out_c.append({**c, 'px': u['px'], 'pct': u['pct'], 'pricedIn': u['pricedIn'], 'flags': u['flags']})
     d['catalysts'] = out_c
     flag_log = [f"{tk}: {m}" for tk, u in cats.items() for m in u['flagLog']]
-    flag_log += ['technical picks: none published this run, so no pick flags were computed',
-                 'catalyst flag for technical picks / near-misses: no catalyst search was run (alerts only)',
+    flag_log += cards['flagLog']
+    if not picks:
+        flag_log.append('technical picks: none published this run, so no pick flags were computed')
+    flag_log += ['catalyst flag for near-misses: no catalyst search was run (alerts only)',
                  'financials flags use stockanalysis.com TTM statements (single source, not cross-checked)']
     d['flagLog'] = flag_log
     # ── sections meta ──

@@ -484,6 +484,17 @@
   "TGT": {
    "cap": "$71.1B",
    "what": "Minneapolis-based general-merchandise retailer operating big-box discount stores nationwide."
+  },
+  "SANM": {
+   "cap": "$12.3B",
+   "what": "Contract electronics manufacturer: circuit boards, backplanes, cable assemblies, enclosures and finished-goods assembly, test and logistics for industrial, medical, defense, auto, telecom and cloud customers.",
+   "deal": [],
+   "rev": "12.76B",
+   "revG": 58.56,
+   "eps": "$5.59",
+   "epsG": 19.72,
+   "next": "2 Nov",
+   "nextWarn": false
   }
  },
  "sections": {
@@ -662,25 +673,134 @@
   }
  ],
  "sectorSource": "Finviz groups · Perf Month · interactive refresh 5 Oct (data to the 2 Oct close); read twice, both reads agree",
- "picks": [],
+ "picks": [
+  {
+   "tk": "SANM",
+   "name": "Sanmina Corporation",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "setup": "5-session base under the 25 Sep high, 1.5% below it",
+   "tags": "above SMA20/50/200 (stockanalysis)",
+   "pivot": 232.5,
+   "entryZone": "232.51 – 234.84",
+   "entry": 232.51,
+   "stop": 218.78,
+   "stopNote": "1x ATR14 below the close (last low 223.62)",
+   "target": 255.76,
+   "why": "Readiness 63 (tightness 7, proximity 25, volume dry-up 6, time in base 25). Closed 1.5% under its 25 Sep high after 5 sessions of base. Levels: stop 1x ATR14 below the close (218.78, risk 5.9% of the entry), fixed +10% target, R:R 1.69. Honest caveats: ADX(14) is 12.5 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 587K against the 500K floor. Earnings 2 Nov is 21 sessions away (after the 20-session maximum hold).",
+   "trim": "Round number $250 sits between entry and target — trim 25% there.",
+   "cap": "$12.3B",
+   "avgVol": "587K",
+   "sma": [
+    8.79,
+    13.39,
+    21.53
+   ],
+   "rsi": 62.32,
+   "volW": 5.01,
+   "volM": 4.83,
+   "px": 229.04,
+   "pct": 3.19,
+   "closes": [
+    194.01,
+    196.72,
+    187.3,
+    187.67,
+    195.69,
+    198.47,
+    205.41,
+    206.15,
+    203.31,
+    216.0,
+    196.04,
+    191.61,
+    195.75,
+    196.06,
+    199.56,
+    209.47,
+    215.77,
+    221.89,
+    221.88,
+    224.77,
+    220.06,
+    222.73,
+    214.91,
+    221.96,
+    229.04
+   ],
+   "readiness": {
+    "composite": 63,
+    "tightness": 7,
+    "proximity": 25,
+    "volumeDryUp": 6,
+    "timeInBase": 25
+   },
+   "atr14": 10.2546,
+   "adr20Pct": 4.831,
+   "emaCompression": false,
+   "adx14": 12.5,
+   "scoringVersion": "v2",
+   "flags": [
+    {
+     "key": "sector",
+     "label": "Sector",
+     "tip": "Technology is #1 of the top 3 sectors; Electronic Components is #2 in it (+10.9% 1M); the stock is +22.0% 1M, ahead of its industry.",
+     "inputs": {
+      "sector": "Technology",
+      "sectorRank": 1,
+      "industry": "Electronic Components",
+      "industryRank": 2,
+      "industry1M": 10.93,
+      "stock1M": 22.04
+     }
+    },
+    {
+     "key": "financials",
+     "label": "Financials",
+     "tip": "3 of 4 passed: revenue 58.56% (≥15); op. margin 5.49% vs 4.7% a year ago; free cash flow positive. Not passed: EPS 19.72% (≥20)",
+     "inputs": {
+      "revGrowthPct": 58.56,
+      "epsGrowthPct": 19.72,
+      "epsNote": null,
+      "opMarginPct": 5.49,
+      "opMarginPriorPct": 4.7,
+      "fcf": 594150000.0,
+      "source": "stockanalysis.com TTM income statement",
+      "passed": [
+       "revenue",
+       "margin",
+       "fcf"
+      ],
+      "unknown": []
+     }
+    }
+   ],
+   "selectionRank": 1,
+   "selectionVersion": "quality-max10-v2-stop-from-close"
+  }
+ ],
  "pickWindow": "25 trading days to 2 Oct 2026, stockanalysis.com daily data",
  "selection": {
-  "version": "quality-max10-v1",
+  "version": "quality-max10-v2-stop-from-close",
   "scored": 53,
-  "qualified": 0,
+  "qualified": 1,
   "cut": 0,
   "config": {
    "minReadiness": 55,
    "maxPicks": 10,
    "minSessionsSincePivot": 2,
+   "maxBelowPivotPct": 5.0,
    "stopMinAdr": 0.5,
    "stopMinAtr": 1.0,
+   "maxRiskPct": 8.0,
+   "minRR": 1.5,
+   "targetPct": 10.0,
    "earningsBlackoutSessions": 3
   },
   "thresholds": {
    "passing": {
-    "45": 0,
-    "55": 0,
+    "45": 2,
+    "55": 1,
     "65": 0
    },
    "scores": [
@@ -739,7 +859,7 @@
     13
    ]
   },
-  "headline": "0 of 53 scored names qualified (readiness ≥ 55)",
+  "headline": "1 of 53 scored names qualified (readiness ≥ 55)",
   "universe": {
    "considered": 136,
    "passedFilters": 65,
@@ -751,8 +871,9 @@
    "byRule": {
     "readiness": 47,
     "base": 38,
-    "stop-adr": 16,
-    "stop-atr": 31
+    "risk": 12,
+    "rr": 18,
+    "proximity": 7
    },
    "readinessOk": 6,
    "minReadiness": 55,
@@ -761,94 +882,88 @@
      "tk": "FLEX",
      "readiness": 78,
      "rules": [
-      "stop-atr"
-     ]
-    },
-    {
-     "tk": "SANM",
-     "readiness": 63,
-     "rules": [
-      "stop-atr"
+      "rr"
      ]
     },
     {
      "tk": "INTC",
      "readiness": 61,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "META",
      "readiness": 59,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "ALAB",
      "readiness": 57,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "QRVO",
      "readiness": 56,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     }
    ],
-   "blockedOnlyStop": [
+   "blockedOnlyLevels": [
     {
      "tk": "FLEX",
      "readiness": 78,
      "rules": [
-      "stop-atr"
-     ]
-    },
-    {
-     "tk": "SANM",
-     "readiness": 63,
-     "rules": [
-      "stop-atr"
+      "rr"
      ]
     },
     {
      "tk": "INTC",
      "readiness": 61,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "META",
      "readiness": 59,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "ALAB",
      "readiness": 57,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     },
     {
      "tk": "QRVO",
      "readiness": 56,
      "rules": [
-      "stop-adr",
-      "stop-atr"
+      "proximity",
+      "risk",
+      "rr"
      ]
     }
    ]
@@ -860,78 +975,78 @@
    "tk": "FLEX",
    "px": 116.61,
    "pct": 3.4,
-   "why": "Electronic Components · readiness 78 · reaches the readiness bar; stopped ONLY by the stop rule: stop is 0.54 x ATR14 below the last close (needs 1.0)"
-  },
-  {
-   "tk": "SANM",
-   "px": 229.04,
-   "pct": 3.19,
-   "why": "Electronic Components · readiness 63 · reaches the readiness bar; stopped ONLY by the stop rule: stop is 0.80 x ATR14 below the last close (needs 1.0)"
+   "why": "Electronic Components · readiness 78 · reaches the readiness bar; stopped ONLY by the level rules: R:R 1.34 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "INTC",
    "px": 119.33,
    "pct": -0.56,
-   "why": "Semiconductors · readiness 61 · reaches the readiness bar; stopped ONLY by the stop rule: stop 121.08 is at/above the last close 119.33; stop is -0.26 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 61 · reaches the readiness bar; stopped ONLY by the level rules: close is 6.4% below the pivot (max 5%): not set up yet; risk 11.6% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.86 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "META",
    "px": 728.08,
    "pct": 0.3,
-   "why": "Internet Content & Information · readiness 59 · reaches the readiness bar; stopped ONLY by the stop rule: stop 740.84 is at/above the last close 728.08; stop is -0.44 x ATR14 below the last close (needs 1.0)"
+   "why": "Internet Content & Information · readiness 59 · reaches the readiness bar; stopped ONLY by the level rules: close is 6.6% below the pivot (max 5%): not set up yet; risk 10.3% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.97 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "ALAB",
    "px": 350.33,
    "pct": -1.71,
-   "why": "Semiconductors · readiness 57 · reaches the readiness bar; stopped ONLY by the stop rule: stop 358.99 is at/above the last close 350.33; stop is -0.41 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 57 · reaches the readiness bar; stopped ONLY by the level rules: close is 7.3% below the pivot (max 5%): not set up yet; risk 12.9% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.78 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "QRVO",
    "px": 114.17,
    "pct": 1.75,
-   "why": "Semiconductors · readiness 56 · reaches the readiness bar; stopped ONLY by the stop rule: stop 115.04 is at/above the last close 114.17; stop is -0.19 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 56 · reaches the readiness bar; stopped ONLY by the level rules: close is 5.7% below the pivot (max 5%): not set up yet; risk 9.4% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 1.06 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "ITT",
    "px": 206.17,
    "pct": 2.0,
-   "why": "Specialty Industrial Machinery · readiness 53 · readiness 53 < 55; stop is 0.01 x ADR20 below the last close (needs 0.5); stop is 0.01 x ATR14 below the last close (needs 1.0)"
+   "why": "Specialty Industrial Machinery · readiness 53 · readiness 53 < 55; R:R 1.28 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "MU",
    "px": 1074.89,
    "pct": -2.05,
-   "why": "Semiconductors · readiness 52 · readiness 52 < 55; stop is 0.51 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 52 · readiness 52 < 55; R:R 1.46 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "SIMO",
    "px": 280.5,
    "pct": 1.91,
-   "why": "Semiconductors · readiness 51 · readiness 51 < 55; stop is 0.37 x ADR20 below the last close (needs 0.5); stop is 0.46 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 51 · readiness 51 < 55; risk 8.1% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 1.23 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "GLW",
    "px": 164.19,
    "pct": 2.35,
-   "why": "Electronic Components · readiness 49 · readiness 49 < 55; stop is 0.20 x ADR20 below the last close (needs 0.5); stop is 0.20 x ATR14 below the last close (needs 1.0)"
+   "why": "Electronic Components · readiness 49 · readiness 49 < 55; risk 8.4% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 1.20 at the fixed +10% target (needs 1.5)"
   },
   {
    "tk": "SKHY",
    "px": 195.13,
    "pct": 0.84,
-   "why": "Semiconductors · readiness 49 · readiness 49 < 55; stop is 0.49 x ADR20 below the last close (needs 0.5); stop is 0.48 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 49 · readiness 49 < 55"
   },
   {
    "tk": "ARM",
    "px": 307.49,
    "pct": 5.18,
-   "why": "Semiconductors · readiness 33 · readiness 33 < 55; stop 320.14 is at/above the last close 307.49; stop is -0.62 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 33 · readiness 33 < 55; close is 8.8% below the pivot (max 5%): not set up yet; risk 14.8% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.68 at the fixed +10% target (needs 1.5)"
+  },
+  {
+   "tk": "GNRC",
+   "px": 216.8,
+   "pct": 4.28,
+   "why": "Specialty Industrial Machinery · readiness 32 · readiness 32 < 55; close is 6.5% below the pivot (max 5%): not set up yet; risk 11.5% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.87 at the fixed +10% target (needs 1.5)"
   }
  ],
  "flagLog": [
-  "technical picks: none published this run, so no pick flags were computed",
-  "catalyst flag for technical picks / near-misses: no catalyst search was run (alerts only)",
+  "SANM: catalyst: no catalyst search was run for technical picks",
+  "catalyst flag for near-misses: no catalyst search was run (alerts only)",
   "financials flags use stockanalysis.com TTM statements (single source, not cross-checked)"
  ],
  "screenNotes": [
@@ -948,7 +1063,7 @@
   {
    "st": "ok",
    "icon": "✓",
-   "html": "<b>Selection</b> · 0 of 53 scored names qualified (readiness ≥ 55). Names passing at readiness 45 / 55 / 65: 0 / 0 / 0 (every rule applied)."
+   "html": "<b>Selection</b> · 1 of 53 scored names qualified (readiness ≥ 55). Names passing at readiness 45 / 55 / 65: 2 / 1 / 0 (every rule applied)."
   },
   {
    "st": "px",

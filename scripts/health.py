@@ -13,7 +13,7 @@ import pricedin as pi
 
 SECTIONS = ['indices', 'macro', 'sectors', 'industries', 'technical', 'catalysts', 'nearmiss']
 CRITICAL = ['indices', 'sectors']      # without these the brief is not worth publishing
-PINNED = {'industries', 'technical', 'nearmiss'}  # WebFetch is broken in the cloud sandbox (platform bug, confirmed
+PINNED = {'sectors', 'industries', 'technical', 'nearmiss'}  # WebFetch is broken in the cloud sandbox (platform bug, confirmed
                                         # 2026-10-01 under Trusted/Custom/Full network access alike). The industry
                                         # drill-down needs Finviz's group/screener pages, the technical scan needs
                                         # Finviz + daily OHLC, and near-misses are leftovers of that same scan — none

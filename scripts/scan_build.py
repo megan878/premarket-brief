@@ -107,6 +107,7 @@ def analyse_one(tk, rows, last, meta):
     stop = round(last_low, 2) if 0.04 <= (entry - last_low) / entry <= 0.06 else round(entry * 0.95, 2)
     c.update(entry=entry, stop=stop, target=round(entry * 1.10, 2),
              stopNote=("last session's low (%.1f%% away)" % ((entry - last_low) / entry * 100)) if stop == round(last_low, 2) else '~5% below entry')
+    c['lastLow'] = hist[-1]['low']
     c['closes'] = [r['close'] for r in win]
     c['windowRows'] = len(win)
     return c, probs
@@ -156,10 +157,9 @@ def parse_date(s):
         return None
 
 
-def cmd_select(a):
-    d = json.loads(pathlib.Path(a.cands).read_text(encoding='utf-8'))
-    st = json.loads(pathlib.Path(a.stats).read_text(encoding='utf-8'))['tickers']
-    extra = json.loads(pathlib.Path(a.earnings_extra).read_text(encoding='utf-8')) if a.earnings_extra and pathlib.Path(a.earnings_extra).exists() else {}
+def prepare(d, st, extra=None):
+    """Scored candidates = universe filters passed + SMA200 + earnings date attached. Returns (scored, universe_out)."""
+    extra = extra or {}
     scored, universe_out = [], []
     for c in d['candidates']:
         if c['universeFail']:
@@ -180,6 +180,14 @@ def cmd_select(a):
             c['nextEarnings'] = c.get('nextEarnings') or extra[c['tk']].get('date')
             c['earningsSource'] = (c.get('earningsSource') or '') + ' + ' + extra[c['tk']].get('source', 'web')
         scored.append(c)
+    return scored, universe_out
+
+
+def cmd_select(a):
+    d = json.loads(pathlib.Path(a.cands).read_text(encoding='utf-8'))
+    st = json.loads(pathlib.Path(a.stats).read_text(encoding='utf-8'))['tickers']
+    extra = json.loads(pathlib.Path(a.earnings_extra).read_text(encoding='utf-8')) if a.earnings_extra and pathlib.Path(a.earnings_extra).exists() else {}
+    scored, universe_out = prepare(d, st, extra)
     r = sel.select(scored)
     r['thresholds'] = sel.threshold_counts([c for c in scored if c.get('stats')], cfg=None)
     r['universeOut'] = len(universe_out)

@@ -4,7 +4,7 @@ the scan definition, the data contract and the list of working / blocked data so
 
 **You do not have WebFetch.** It is broken in this sandbox (confirmed platform bug, not a config issue) — only FMP (MCP connector)
 and WebSearch work here. The technical scan, the industry drill-down and near-misses are therefore PINNED: never fetch or write
-`picks`, `pickWindow`, `selection`, `industries`, or `nearmiss`. Never select, score, rank or re-level a pick yourself (you have no price history,
+`picks`, `pickWindow`, `selection`, `industries`, `nearmiss`, `sectors` or `sectorSource` (the sector ranking is pinned with the scan, with the same as-of date as the industry drill-down under it). Never select, score, rank or re-level a pick yourself (you have no price history,
 so it would be built from thin data); an empty `picks` list with a `selection` summary is a valid carried-forward result. Just omit those keys entirely — `build_brief.py` carries the last interactive
 copy forward for you, labelled PINNED, not stale. (Those sections get refreshed by hand in a separate interactive session with
 WebFetch available — not your job today.)
@@ -29,11 +29,8 @@ STEP 2 — Fetch fresh data (FMP + WebSearch only). Log every call in `fetchlog`
      Also write `macro.y10hist`: the last 5 distinct trading-day rows from that same call (not 8 — exactly 5),
      oldest first, as `[{date,y10}]`, ending at the current session. This feeds the regime score's 9th check (rates
      direction) — see CLAUDE.md "Regime score". No extra call; you already have this data from the same fetch.
-  C. Sector ranking (`sectors`/`sectorSource` only — NOT industries): WebSearch for the 11 GICS sectors' 1-month
-     performance, cap-weighted (e.g. "S&P 500 sector performance 1 month" or similar). Cross-check against a second
-     source if the first is a single blog/aggregator. Note in `sectorSource` that this is search-sourced, not Finviz,
-     and that it may disagree slightly with the (pinned, possibly older) industry drill-down below it on the page —
-     that's expected, not a bug.
+  C. Sector ranking: NOT YOURS. `sectors`/`sectorSource` are pinned with the interactive scan (cap-weighted Finviz, same as-of date as
+     the industry drill-down). Do not search for them and do not write them; `build_brief.py` carries them forward labelled PINNED.
   D. Catalyst alerts (last 5 trading sessions): WebSearch for earnings beat+raise, major contract/partnership/deal,
      analyst upgrade with a target >15% above price, or product launch/regulatory approval. For each candidate confirm
      (1) event date inside the last 5 sessions, (2) at least two independent https sources, (3) cap > $5B via FMP
@@ -50,9 +47,9 @@ STEP 2 — Fetch fresh data (FMP + WebSearch only). Log every call in `fetchlog`
      surfaces a clear, dated next-earnings date, you may add `next`/`nextWarn`, but don't block on it.
      Do NOT touch `bg` entries for pinned technical-pick tickers — leave them exactly as carried forward.
 
-STEP 3 — Write `data/brief-data.json` following SCHEMA.md. Write only: `indices`, `macro`, `sectors`, `sectorSource`,
-  `catalysts`, `bg` (catalyst tickers only), `notices`, `screenNotes`, `rejected`, `sections` (indices/macro/sectors/
-  catalysts only — omit industries/technical/nearmiss), `fetchlog`, `meta`. Do NOT write `industries`, `picks`,
+STEP 3 — Write `data/brief-data.json` following SCHEMA.md. Write only: `indices`, `macro`,
+  `catalysts`, `bg` (catalyst tickers only), `notices`, `screenNotes`, `rejected`, `sections` (indices/macro/
+  catalysts only — omit sectors/industries/technical/nearmiss), `fetchlog`, `meta`. Do NOT write `sectors`, `sectorSource`, `industries`, `picks`,
   `pickWindow`, `selection`, or `nearmiss` — omitting them is what keeps them pinned. Rewrite `notices`, `screenNotes` and
   `rejected` from THIS run's facts; don't leave old names or dates in them.
 
