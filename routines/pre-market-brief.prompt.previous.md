@@ -4,12 +4,11 @@ the scan definition, the data contract and the list of working / blocked data so
 
 **You do not have WebFetch.** It is broken in this sandbox (confirmed platform bug, not a config issue) — only FMP (MCP connector)
 and WebSearch work here. The technical scan, the industry drill-down and near-misses are therefore PINNED: never fetch or write
-`picks`, `pickWindow`, `selection`, `industries`, or `nearmiss`. Never select, score, rank or re-level a pick yourself (you have no price history,
-so it would be built from thin data); an empty `picks` list with a `selection` summary is a valid carried-forward result. Just omit those keys entirely — `build_brief.py` carries the last interactive
+`picks`, `pickWindow`, `industries`, or `nearmiss`. Just omit those keys entirely — `build_brief.py` carries the last interactive
 copy forward for you, labelled PINNED, not stale. (Those sections get refreshed by hand in a separate interactive session with
 WebFetch available — not your job today.)
 
-Artifact URLs (fixed, private):  BRIEF = {{BRIEF_URL}}
+Artifact URLs (fixed, private):  BRIEF = https://claude.ai/artifact/PcUJdhaWG6TzP49HB8ML7x
 
 STEP 0 — Guard (no data calls before this).
   Run `python scripts/market_time.py guard brief`. If the exit code is 10 (weekend, US holiday, wrong slot), print the JSON reason and STOP.
@@ -39,10 +38,7 @@ STEP 2 — Fetch fresh data (FMP + WebSearch only). Log every call in `fetchlog`
      (1) event date inside the last 5 sessions, (2) at least two independent https sources, (3) cap > $5B via FMP
      `company/profile-symbol`. Then pull that same FMP profile call for `price`/`changesPercentage`/`mktCap` — this is
      a live quote, not a verified tape reaction (reading the OHLC tape needs WebFetch, which you don't have). Choose
-     3-4. Set `ctype` to one of: Earnings beat + raise, Major contract, Analyst upgrade, Approval / launch, Index add. If two sources
-     agree (within 5%) on the AVERAGE analyst price target, also write it as `analystTarget` (a number); otherwise omit it. The builder
-     turns price + `analystTarget` into a partial "priced-in" score (you have no price history; never write a score yourself).
-     No entry/stop/target/closes fields — see SCHEMA.md's lighter catalyst-alert shape. Must not duplicate a
+     3-4. No entry/stop/target/closes fields — see SCHEMA.md's lighter catalyst-alert shape. Must not duplicate a
      pinned technical pick (check `out/published-brief.html`'s carried-forward `picks` list). Log rejects in `rejected`.
   E. Company snapshot (`bg`) for each catalyst-alert ticker only: FMP `company/profile-symbol` gives `cap` and a
      one-line `what` (description) — write just those two fields (no `rev`/`eps`/`next`; FMP's statements and
@@ -53,23 +49,23 @@ STEP 2 — Fetch fresh data (FMP + WebSearch only). Log every call in `fetchlog`
 STEP 3 — Write `data/brief-data.json` following SCHEMA.md. Write only: `indices`, `macro`, `sectors`, `sectorSource`,
   `catalysts`, `bg` (catalyst tickers only), `notices`, `screenNotes`, `rejected`, `sections` (indices/macro/sectors/
   catalysts only — omit industries/technical/nearmiss), `fetchlog`, `meta`. Do NOT write `industries`, `picks`,
-  `pickWindow`, `selection`, or `nearmiss` — omitting them is what keeps them pinned. Rewrite `notices`, `screenNotes` and
+  `pickWindow`, or `nearmiss` — omitting them is what keeps them pinned. Rewrite `notices`, `screenNotes` and
   `rejected` from THIS run's facts; don't leave old names or dates in them.
 
 STEP 3b — Pick tracker. This routine has no price history, so it never evaluates outcomes and never fetches or guesses OHLC;
   it only records picks and lets unevaluated ones read "awaiting data".
   `python scripts/tracker.py update --ledger data/picks.json --data data/brief-data.json --previous-html out/published-brief.html`
   (It merges the git ledger with the copy embedded in the last published page and ingests the picks currently on the page; a
-  pick set that is already recorded is a no-op.) Then persist the ledger AND today's data file BEFORE building, so a failed push can be shown on the page:
-    git add data/picks.json data/brief-data.json
-    git diff --cached --quiet || git commit -m "Pre-market run: ledger + data"
+  pick set that is already recorded is a no-op.) Then persist the ledger BEFORE building, so a failed push can be shown on the page:
+    git add data/picks.json
+    git diff --cached --quiet || git commit -m "Pick ledger: pre-market run"
     git push origin HEAD:refs/heads/main
     git ls-remote origin refs/heads/main        # the hash must equal `git rev-parse HEAD`
   HEAD is a detached checkout, so always spell the push exactly as above (never plain `git push origin HEAD`). If the push fails or the
   two hashes differ, do NOT try any other way to move `main` (no `git branch -f`, no checkout of main, no force): just remember
-  "ledger not pushed" and pass `--tracker-warn "ledger not pushed"` in STEP 4 (the page header then reads "Last automated run ... status unpushed"). Never edit `data/picks.json` by hand.
+  "ledger not pushed" and pass `--tracker-warn "ledger not pushed"` in STEP 4. Never edit `data/picks.json` by hand.
 
-STEP 4 — Build.  `python scripts/build_brief.py --data data/brief-data.json --previous-html out/published-brief.html --ledger data/picks.json --run-kind automated`
+STEP 4 — Build.  `python scripts/build_brief.py --data data/brief-data.json --previous-html out/published-brief.html --ledger data/picks.json`
   (add `--tracker-warn "ledger not pushed"` if STEP 3b's push or hash check failed).
   Read `out/build-report.json`. Exit 0 = built (PINNED/STALE banners are fine — PINNED on industries/technical/nearmiss
   is the normal, expected state every day). Exit 3 = nothing publishable: do NOT publish; go to the final message.
@@ -77,8 +73,8 @@ STEP 4 — Build.  `python scripts/build_brief.py --data data/brief-data.json --
 STEP 5 — Publish `out/brief.html` with the Artifact tool, action "publish", `url` = BRIEF, file_path = out/brief.html.
   Retry up to twice on failure. Do not create a new artifact URL. Do not change sharing settings.
 
-STEP 6 — Leftovers only. STEP 3b already committed and pushed the ledger and the data file. If `git status --porcelain` shows
-  anything still uncommitted (the stop hook will say so), commit it, push with exactly `git push origin HEAD:refs/heads/main`, and check that
+STEP 6 — Commit the data file. At the end `data/brief-data.json` is uncommitted (the stop hook will say so). Commit it
+  (`git add data/brief-data.json`, `git commit`), push with exactly `git push origin HEAD:refs/heads/main`, and check that
   `git ls-remote origin refs/heads/main` equals `git rev-parse HEAD`. If it does not, say so in the final message and stop:
   do not move `main` by any other means.
 
