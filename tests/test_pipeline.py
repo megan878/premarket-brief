@@ -357,6 +357,63 @@ check('T9 an older-data page is labelled with the data date, not the newer close
 d, _ = brief('T9b_label_normal_run', fresh, prev)
 check('T9 a normal run is labelled with the last completed session', d['asOfLabel'] == 'Fri 18 Sep 2026 close', d['asOfLabel'])
 
+
+# L-zero the open page still builds when the brief's scan found nobody, but only when the scan said so explicitly
+bz = copy.deepcopy(brief_final); bz['picks'] = []; bz['selection'] = {'qualified': 0, 'scored': 40}
+d, _ = opn('L9_zero_pick_brief', live0, brief_data=bz)
+check('L9 an open page builds from a brief with zero qualified picks, levels read ok', d['health']['sections']['levels']['status'] == 'ok', d['health']['sections']['levels'])
+bz2 = copy.deepcopy(brief_final); bz2['picks'] = []
+opn('L9b_empty_without_selection', live0, brief_data=bz2, expect=4)
+check('L9b an empty pick list WITHOUT a selection summary is still a failure (exit 4)', True)
+
+# ───────────── 5 Oct additions: last automated run, catalyst re-score, zero-pick scans ─────────────
+# T10 an automated build records "last automated run"; a failed ledger push reads "unpushed"; an interactive build keeps the old value
+d, _ = brief('T10_interactive', fresh, prev)
+check('T10 an interactive build records no automated run', (d['runs']['lastAutomated'] is None) and d['runs']['thisBuild']['kind'] == 'interactive')
+ledger_empty = tr.empty_ledger()
+d = brief_t('T10_automated_ok', ledger_empty, extra=['--run-kind', 'automated'])
+check('T10 an automated build records its time and status ok', d['runs']['lastAutomated']['status'] == 'ok' and d['runs']['lastAutomated']['at'].endswith('+08:00'), d['runs'])
+d = brief_t('T10_automated_unpushed', ledger_empty, extra=['--run-kind', 'automated', '--tracker-warn', 'ledger not pushed'])
+check('T10 a failed push is recorded as unpushed', d['runs']['lastAutomated']['status'] == 'unpushed')
+d2 = brief_t('T10_then_interactive', ledger_empty, prev=d)
+check('T10 an interactive build after it keeps the automated record', d2['runs']['lastAutomated'] == d['runs']['lastAutomated'])
+check('T10 the page carries the calendar the browser needs to count sessions', '2026-09-07' in d['calendar']['closed'])
+
+# T11 the routine re-scores catalyst alerts without price history
+cat = {**fresh['catalysts'][0]}
+cat['tk'] = 'NEWA'
+n = copy.deepcopy(fresh); n['catalysts'] = [{**cat, 'px': 95.0, 'analystTarget': 100.0}]
+d, _ = brief('T11_new_alert', n, prev)
+pi_ = d['catalysts'][0]['pricedIn']
+check('T11 a new alert is scored from price and target only and is partial', pi_['n'] == 1 and pi_['partial'] and pi_['score'] == 100 and 'partial' in pi_['label'], pi_)
+check('T11 a partial score cannot earn the catalyst flag', not any(f['key'] == 'catalyst' for f in d['catalysts'][0]['flags']))
+prior = {**cat, 'px': 100.0, 'pricedIn': {'inputs': {'movePct': 12, 'adr20Pct': 4, 'eventHigh': 108, 'eventLow': 100, 'last': 101, 'reactionDate': '2026-09-17', 'sessionsSince': 2, 'runUpPct': 0, 'price': 101, 'target': 130}}}
+n = copy.deepcopy(fresh); n['catalysts'] = [{**prior, 'px': 106.0, 'pct': 1.0}]
+d, _ = brief('T11_carried_inputs', n, prev)
+p2 = d['catalysts'][0]['pricedIn']
+check('T11 event-fixed inputs are carried and price-dependent ones re-computed', p2['n'] == 4 and p2['inputs']['price'] == 106.0 and p2['inputs']['sessionsSince'] == 2 and p2['components']['a'] == 25 and p2['components']['d'] == 0, p2)
+
+# T11b the routine lists the same event again (it rewrites `catalysts`): the interactive run's inputs and sector/financials flags survive
+prev_c = copy.deepcopy(prev); prev_c['catalysts'] = [{**prior, 'px': 100.0, 'flags': [{'key': 'financials', 'label': 'Financials', 'tip': 't', 'inputs': {}}]}]
+n = copy.deepcopy(fresh); n['catalysts'] = [{k: v for k, v in {**prior, 'px': 106.0}.items() if k != 'pricedIn'}]
+d, _ = brief('T11b_relisted', n, prev_c)
+check('T11b a re-listed alert keeps its carried inputs and flags', d['catalysts'][0]['pricedIn']['n'] == 4 and [f['key'] for f in d['catalysts'][0]['flags']] == ['financials', 'catalyst'], d['catalysts'][0].get('flags'))      # the catalyst flag is recomputed from the fresh score
+
+# T12 a scan that found nobody is a healthy page, not a failure
+zero = copy.deepcopy(fresh); zero['picks'] = []; zero['selection'] = {'version': 'quality-max10-v1', 'scored': 40, 'qualified': 0, 'cut': 0, 'config': {'minReadiness': 55, 'maxPicks': 10}}
+zero['sections']['technical'] = {'asOf': fresh['sections']['technical']['asOf'], 'source': 'test'}
+d, _ = brief('T12_zero_picks', zero, prev)
+check('T12 zero qualified picks builds and the technical section is ok', d['health']['sections']['technical']['status'] == 'ok' and d['picks'] == [] and d['selection']['qualified'] == 0, d['health']['sections']['technical'])
+d3, _ = brief('T12_zero_then_routine', {k: v for k, v in fresh.items() if k not in ('picks', 'pickWindow', 'industries', 'nearmiss')}, d)
+check('T12 the routine (which omits picks) carries the zero-pick result forward as pinned', d3['health']['sections']['technical']['status'] == 'pinned' and d3['picks'] == [] and d3['selection']['qualified'] == 0, d3['health']['sections']['technical'])
+two = copy.deepcopy(fresh)
+hi = {**fresh['catalysts'][0], 'tk': 'HIGH', 'px': 100.0, 'analystTarget': 100.0}
+lo = {**fresh['catalysts'][0], 'tk': 'LOWW', 'px': 70.0, 'analystTarget': 100.0}
+none = {k: v for k, v in {**fresh['catalysts'][0], 'tk': 'NONE', 'px': 70.0}.items() if k != 'target'}
+two['catalysts'] = [hi, none, lo]
+d, _ = brief('T12_ranking', two, prev)
+check('T12 alerts are ranked lowest priced-in first, unscored last', [c['tk'] for c in d['catalysts']] == ['LOWW', 'HIGH', 'NONE'], [(c['tk'], c['pricedIn']['score']) for c in d['catalysts']])
+
 print(f'{len(results)} scenarios passed')
 for r in results:
     print('  ok -', r)

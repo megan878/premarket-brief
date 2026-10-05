@@ -36,6 +36,7 @@ HKT = dt.timezone(dt.timedelta(hours=8), 'HKT')
 # The ONE definition of the "disciplined" stats view: a fill whose open is above entryZoneHigh by >= adrMultiple x ADR20%
 # (measured at the basis session) or by more than maxPct is a skipped chase, not a trade. The literal ledger never changes.
 CHASE_RULE = {'adrMultiple': 1.0, 'maxPct': 3.0}
+LEGACY_SELECTION_VERSION = 'top4-v1'   # sets published before the quality-not-quota rules (selection.py): 3-4 picks per set
 SERIES_SESSIONS = 25            # validated closes kept per record for the sparkline, ending at the basis session
 
 TERMINAL = {'invalidated', 'expired', 'stopped', 'target', 'time-exit', 'skipped', 'replaced'}
@@ -373,6 +374,10 @@ def build_record(pick, block, published_at, basis, rec_id, adr=None, approx=Fals
         'scoringVersion': (pick.get('scoringVersion') or block.get('scoringVersion') or LEGACY_SCORING_VERSION) if rd else None,
         'regimeLabel': label, 'regimeScore': score, 'regimeChecks': total, 'nextEarningsDate': nxt,
         'adr20Pct': adr, 'publishTimeApproximate': bool(approx),
+        'selectionVersion': pick.get('selectionVersion') or (block.get('selection') or {}).get('version') or LEGACY_SELECTION_VERSION,
+        'selectionRank': pick.get('selectionRank'), 'selectionQualified': (block.get('selection') or {}).get('qualified'),
+        'flags': [f['key'] for f in pick['flags']] if isinstance(pick.get('flags'), list) else None,
+        'flagInputs': {f['key']: f.get('inputs') for f in pick['flags']} if isinstance(pick.get('flags'), list) else None,
         'basisClose': bc, 'levelsInvalidAtPublish': inv, 'levelsInvalidReason': why, 'tightStopAtPublish': tight,
         'status': 'pending', 'triggerDate': None, 'fillPrice': None, 'chased': None, 'exitDate': None,
         'exitPrice': None, 'exitReason': None, 'rMultiple': None, 'daysHeld': None, 'lastClose': None,
@@ -705,6 +710,10 @@ def augment(ledger, ohlc, approx_published=()):
         else:
             for k in ('levelsInvalidAtPublish', 'levelsInvalidReason', 'tightStopAtPublish'):
                 r.setdefault(k, None)
+        for k, v in (('selectionVersion', LEGACY_SELECTION_VERSION), ('selectionRank', None), ('selectionQualified', None), ('flags', None), ('flagInputs', None)):
+            if k not in r:
+                r[k] = v                                  # earlier sets: flags were never evaluated (None), not "no flags"
+                added.append((r['id'], k))
         if 'series' not in r and rows:
             ser, _ = make_series(rows, r, r.get('evaluatedThrough') or r['basisSession'])
             if ser:
@@ -784,6 +793,16 @@ def _stat(recs):
     }
 
 
+def split_flags(recs):
+    """Flagged vs unflagged vs never evaluated, plus one group per flag key (a record can be in several)."""
+    groups = {'not evaluated': [r for r in recs if r.get('flags') is None],
+              'no flags': [r for r in recs if r.get('flags') == []],
+              'any flag': [r for r in recs if r.get('flags')]}
+    for k in sorted({f for r in recs for f in (r.get('flags') or [])}):
+        groups[f'flag: {k}'] = [r for r in recs if k in (r.get('flags') or [])]
+    return {k: _stat(v) for k, v in groups.items() if v}
+
+
 def summarize(records):
     """Stats over the literal ledger. Records published with invalid levels (stop >= basis close: a scan defect, not a market
     outcome) are excluded here and reported on their own line by summarize_both."""
@@ -803,6 +822,8 @@ def summarize(records):
         'byScoringVersion': split(lambda r: r.get('scoringVersion') or 'unscored'),
         'byFill': split(lambda r: 'no fill' if r.get('chased') is None else ('chased fill' if r['chased'] else 'clean fill'),
                         ['clean fill', 'chased fill', 'no fill']),
+        'bySelectionVersion': split(lambda r: r.get('selectionVersion') or LEGACY_SELECTION_VERSION),
+        'byFlags': split_flags(recs),
         'byStopDistance': split(lambda r: 'tight stop' if r.get('tightStopAtPublish') else 'normal stop', ['tight stop', 'normal stop']),
         'minN': MIN_N,
     }

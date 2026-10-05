@@ -23,6 +23,11 @@ and `data/open-live.example.json` are the permanent, complete, valid examples; c
 | `fetchlog` | (meta) | `[{id, ok, note}]` one row per external call. |
 | `meta` | (meta) | `{targetSession, lastSession}` informational; the builder recomputes the last completed session itself. |
 
+**5 Oct 2026 additions.** `selection` (written by `scan_assemble.py`, carried with `picks`): `{version, scored, qualified, cut, config{minReadiness,maxPicks,...}, thresholds, headline, universe{...}}`;
+`picks` may be EMPTY when `selection.qualified == 0` (a valid result). A pick may carry `selectionRank`, `selectionVersion`, `flags:[{key,label,tip,inputs}]`, `emaCompression`, `adx14` (computed, not gates).
+Catalyst alerts may carry `analystTarget` (average analyst price target, two sources within 5%), `pricedIn` (`pricedin.score()` result incl. `inputs`; never hand-written), `flags`. `flagLog`: strings, one per flag input that was unavailable.
+`screenNotes` / `rejected` are now passed through to the page. The builder adds `runs{lastAutomated{at,status,seeded?},thisBuild{kind,at},schedule}`, `calendar{closed[]}`, `resetPolicy{clear[],keep[]}`, `selectionConfig`, and `health.flagLog`.
+
 The builder adds `health`, `watch`, `asOf`, `asOfLabel`, `builtLabel`, and — when run with `--ledger data/picks.json` — `tracker`
 (the merged pick ledger, stats literal + disciplined, open/closed tables, per-pick chips and validated sparkline series; plus a `tracker`
 health section). Do not write those. Pick cards get their status chip from `tracker.picks[TK]` and draw `tracker.picks[TK].series` when present.

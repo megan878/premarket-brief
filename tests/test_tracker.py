@@ -685,7 +685,10 @@ class Series(unittest.TestCase):
         self.assertIsNotNone(out['adr20Pct'])
         for k, v in before.items():
             self.assertEqual(out[k], v, k)
-        self.assertEqual({a[1] for a in added}, {'publishTimeApproximate', 'adr20Pct', 'series', 'basisClose', 'levelsInvalidAtPublish'})
+        self.assertEqual({a[1] for a in added}, {'publishTimeApproximate', 'adr20Pct', 'series', 'basisClose', 'levelsInvalidAtPublish',
+                                                'selectionVersion', 'selectionRank', 'selectionQualified', 'flags', 'flagInputs'})
+        self.assertEqual(out['selectionVersion'], 'top4-v1')            # earlier sets are the legacy 3-4 pick sets
+        self.assertIsNone(out['flags'])                                   # flags were never evaluated for them: None, not []
         self.assertEqual(T.augment(led, {'AAA': {'rows': rs}}), [])      # idempotent
 
     def test_ingest_records_adr_and_the_approximate_flag(self):

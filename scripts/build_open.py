@@ -49,7 +49,8 @@ def main(argv=None):
             print(f'note: brief html unreadable: {e}', file=sys.stderr)
     if brief is None:
         brief = load(a.brief_data)
-    if not brief or not brief.get('picks') or not brief.get('watch'):
+    zero_ok = bool(brief) and not brief.get('picks') and (brief.get('selection') or {}).get('qualified') == 0 and ((brief.get('selection') or {}).get('scored') or 0) > 0
+    if not brief or (not brief.get('picks') and not zero_ok) or not brief.get('watch'):     # zero picks is valid only when the scan said so
         print('FAILED: no usable brief data, so there are no trade levels to check', file=sys.stderr)
         return 4
 

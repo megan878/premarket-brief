@@ -12,7 +12,7 @@ has neither fresh nor previous data). In that case NO html is written, so the pr
 """
 import argparse, json, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-import market_time as mt, health as hl, tracker as tr
+import market_time as mt, health as hl, tracker as tr, reset_policy as rp, selection as sel, pricedin as pi, flags as fl
 
 root = pathlib.Path(__file__).resolve().parent.parent
 
@@ -45,6 +45,38 @@ def add_tracker(final, health, ledger_path, old, last, extra_warnings):
     final['tracker'] = view
 
 
+def rescore_catalysts(final, last, old=None):
+    """Re-price every catalyst alert's priced-in score from what is knowable WITHOUT price history, so the cloud routine can keep it current:
+    event-fixed inputs (a: move vs ADR, d: run-up) are carried from the interactive run that computed them; b and c are recomputed from the
+    alert's current price, the days since its reaction session and an optional fresh average analyst target (`analystTarget`). A new alert with no
+    stored inputs is scored from `price`/`analystTarget` only and is labelled partial. The catalyst flag is recomputed from the new score."""
+    prior = {(o.get('tk'), o.get('cdateISO')): o for o in (old or {}).get('catalysts') or []}
+    for c in final.get('catalysts') or []:
+        o = prior.get((c.get('tk'), c.get('cdateISO')))          # the same event listed again by the routine: keep what the interactive run computed
+        if o:
+            for k in ('pricedIn', 'flags'):
+                if k not in c and k in o:
+                    c[k] = o[k]
+        inp = dict((c.get('pricedIn') or {}).get('inputs') or {})
+        if c.get('px') is not None:
+            inp['price'] = c['px']
+            if inp.get('eventHigh') is not None:
+                inp['last'] = c['px']
+        if c.get('analystTarget') is not None:
+            inp['target'] = c['analystTarget']
+        if inp.get('reactionDate'):
+            n, d = 0, mt.dt.date.fromisoformat(inp['reactionDate'])
+            while d <= last:
+                n += 1 if mt.is_trading_day(d) else 0
+                d += mt.dt.timedelta(days=1)
+            inp['sessionsSince'] = n
+        c['pricedIn'] = pi.score(inp)
+        keep = [f for f in (c.get('flags') or []) if f.get('key') != 'catalyst']
+        f, _ = fl.catalyst_flag(c, c['pricedIn'], last.isoformat())
+        c['flags'] = keep + ([f] if f else [])
+    final['catalysts'] = pi.rank_alerts(final.get('catalysts') or [])
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--data', default=str(root / 'data/brief-data.json'))
@@ -55,6 +87,8 @@ def main(argv=None):
     ap.add_argument('--save-data', default=str(root / 'out/last-good/brief-data.json'))
     ap.add_argument('--now')
     ap.add_argument('--ledger')
+    ap.add_argument('--run-kind', choices=['automated', 'interactive'], default='interactive', help='who is building this page (the cloud routine passes automated)')
+    ap.add_argument('--last-automated', help='seed/override the last automated run as "ISO-time,status" (only for the first build that carries the field)')
     ap.add_argument('--tracker-warn', action='append', default=[], help='extra tracker health warning (repeatable)')
     a = ap.parse_args(argv)
 
@@ -69,12 +103,26 @@ def main(argv=None):
             print(f'note: previous html unreadable: {e}', file=sys.stderr)
 
     final, health = hl.assemble(new, old, ctx)
+    rescore_catalysts(final, ctx['lastSession'], old)
     if a.ledger:
         add_tracker(final, health, a.ledger, old, ctx['lastSession'], a.tracker_warn)
     # Label the page by the date of the MARKET DATA it actually carries (the indices section), not by the last completed session:
     # they are equal on a normal run, but a page republished with older data must not read "Data as of <a newer close>".
     data_day = hl.iso((final.get('sections', {}).get('indices') or {}).get('asOf'))
     final.update(hl.labels(now, data_day if data_day and data_day <= ctx['lastSession'] else ctx['lastSession']))
+    # silent non-runs must be visible: the page shows when the cloud routine last ran and how that run ended
+    gen = now.astimezone(mt.HKT).isoformat()
+    last_auto = ((old or {}).get('runs') or {}).get('lastAutomated')
+    if a.last_automated:
+        at, _, st = a.last_automated.partition(',')
+        last_auto = {'at': at, 'status': st or 'ok', 'seeded': True}
+    if a.run_kind == 'automated':
+        last_auto = {'at': gen, 'status': 'unpushed' if any('not pushed' in w for w in a.tracker_warn) else 'ok'}
+    final['runs'] = {'lastAutomated': last_auto, 'thisBuild': {'kind': a.run_kind, 'at': gen},
+                     'schedule': {'brief': {'fireUtc': '12:00', 'graceMinutes': 30}}}
+    final['calendar'] = {'closed': sorted(d.isoformat() for d in mt.NYSE_CLOSED)}
+    final['resetPolicy'] = {'clear': [c['what'] for c in rp.CLEAR], 'keep': [k['what'] for k in rp.KEEP]}
+    final['selectionConfig'] = sel.CONFIG
     final['meta'] = {**(new or {}).get('meta', {}), 'generatedAt': now.astimezone(mt.HKT).isoformat(), 'lastSession': ctx['lastSession'].isoformat()}
 
     report = {'status': health['status'], 'sections': {k: v['status'] for k, v in health['sections'].items()},

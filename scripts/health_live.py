@@ -144,7 +144,10 @@ def assemble(new, old, brief, ctx):
     bh = brief.get('health') or {}
     tech = (bh.get('sections') or {}).get('technical') or {}
     tech_asof = iso(tech.get('asOf'))
-    if tech.get('status') == 'failed' or not brief.get('picks'):
+    sel = brief.get('selection') or {}
+    if not brief.get('picks') and sel.get('qualified') == 0 and (sel.get('scored') or 0) > 0:
+        lvl = {'status': 'ok', 'asOf': str(tech_asof), 'msg': 'no name passed the pick rules in the last scan (a valid result): there are no levels to check'}
+    elif tech.get('status') == 'failed' or not brief.get('picks'):
         lvl = {'status': 'failed', 'asOf': None, 'msg': 'the brief has no usable technical picks right now'}
     elif tech_asof is None or tech_asof < ctx['lastSession']:
         lvl = {'status': 'pinned', 'asOf': str(tech_asof), 'msg': f'levels are pinned from the {tech_asof} interactive refresh (expected under the hybrid design, not a bug) — refresh interactively when stale'}

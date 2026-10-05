@@ -1,0 +1,3471 @@
+{
+ "picks": [],
+ "cut": [],
+ "rejected": [
+  {
+   "tk": "ACMR",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 19 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.15 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.16 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 19
+  },
+  {
+   "tk": "ADI",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ALAB",
+   "failed": [
+    {
+     "rule": "stop-adr",
+     "reason": "stop 358.99 is at/above the last close 350.33"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.41 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 57
+  },
+  {
+   "tk": "AMAT",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "APH",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ARM",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 33 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop 320.14 is at/above the last close 307.49"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.62 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 33
+  },
+  {
+   "tk": "ASML",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "CLS",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.82 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "CRDO",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 13 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop 228.47 is at/above the last close 218.64"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.80 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 13
+  },
+  {
+   "tk": "EMR",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ENS",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ENTG",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.83 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ETN",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 17 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.20 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.19 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 17
+  },
+  {
+   "tk": "FLEX",
+   "failed": [
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.54 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 78
+  },
+  {
+   "tk": "FPS",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.58 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "GEV",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.87 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "GLW",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 49 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.20 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.20 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 49
+  },
+  {
+   "tk": "GNRC",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 32 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop 220.31 is at/above the last close 216.8"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.30 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 32
+  },
+  {
+   "tk": "GTES",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "INTC",
+   "failed": [
+    {
+     "rule": "stop-adr",
+     "reason": "stop 121.08 is at/above the last close 119.33"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.26 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 61
+  },
+  {
+   "tk": "ITT",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 53 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.01 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.01 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 53
+  },
+  {
+   "tk": "JCI",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "KLAC",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "KLIC",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "LRCX",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.97 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "LSCC",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 24 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.73 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 24
+  },
+  {
+   "tk": "MCHP",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 23 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.75 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 23
+  },
+  {
+   "tk": "META",
+   "failed": [
+    {
+     "rule": "stop-adr",
+     "reason": "stop 740.84 is at/above the last close 728.08"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.44 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 59
+  },
+  {
+   "tk": "MPWR",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.86 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "MTSI",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "MU",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 52 < 55"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.51 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 52
+  },
+  {
+   "tk": "NBIS",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 31 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.05 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.05 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 31
+  },
+  {
+   "tk": "NVDA",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "NVT",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ON",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.52 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ONTO",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 18 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.41 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.41 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 18
+  },
+  {
+   "tk": "Q",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "QRVO",
+   "failed": [
+    {
+     "rule": "stop-adr",
+     "reason": "stop 115.04 is at/above the last close 114.17"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is -0.19 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 56
+  },
+  {
+   "tk": "RAL",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "RMBS",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.77 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "ROK",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "SANM",
+   "failed": [
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.80 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 63
+  },
+  {
+   "tk": "SIMO",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 51 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.37 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.46 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 51
+  },
+  {
+   "tk": "SKHY",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 49 < 55"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.49 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.48 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 49
+  },
+  {
+   "tk": "STM",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TEL",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TER",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TSEM",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 18 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-adr",
+     "reason": "stop is 0.33 x ADR20 below the last close (needs 0.5)"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.30 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 18
+  },
+  {
+   "tk": "TSM",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TT",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TTMI",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.65 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "TXN",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    }
+   ],
+   "readiness": 25
+  },
+  {
+   "tk": "VSH",
+   "failed": [
+    {
+     "rule": "readiness",
+     "reason": "readiness 25 < 55"
+    },
+    {
+     "rule": "base",
+     "reason": "only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout"
+    },
+    {
+     "rule": "stop-atr",
+     "reason": "stop is 0.72 x ATR14 below the last close (needs 1.0)"
+    }
+   ],
+   "readiness": 25
+  }
+ ],
+ "scored": 53,
+ "qualified": 0,
+ "config": {
+  "minReadiness": 55,
+  "maxPicks": 10,
+  "minSessionsSincePivot": 2,
+  "stopMinAdr": 0.5,
+  "stopMinAtr": 1.0,
+  "earningsBlackoutSessions": 3
+ },
+ "thresholds": {
+  "passing": {
+   "45": 0,
+   "55": 0,
+   "65": 0
+  },
+  "scores": [
+   78,
+   63,
+   61,
+   59,
+   57,
+   56,
+   53,
+   52,
+   51,
+   49,
+   49,
+   33,
+   32,
+   31,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   25,
+   24,
+   23,
+   19,
+   18,
+   18,
+   17,
+   13
+  ]
+ },
+ "universeOut": 83,
+ "scoredCandidates": [
+  {
+   "tk": "ACMR",
+   "name": "ACM Research, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 5807349962.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 83.38,
+   "lastDayPct": -0.24,
+   "avgVol20": 1125847.9,
+   "adr20Pct": 5.81,
+   "atr14": 4.6889,
+   "sma20": 74.18149999999999,
+   "sma50": 76.5447,
+   "ema9": 78.71729281289866,
+   "ema21": 76.4080567245091,
+   "emaCompression": false,
+   "adx14": 16.847285641513814,
+   "ret1m": 19.28,
+   "universeFail": [],
+   "readiness": {
+    "composite": 19,
+    "tightness": 0,
+    "proximity": 19,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 86.2,
+   "pivotDate": "2026-10-02",
+   "entry": 86.21,
+   "stop": 82.63,
+   "target": 94.83,
+   "stopNote": "last session's low (4.2% away)",
+   "windowRows": 25,
+   "sma200": 67.03,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "13.29%",
+    "Free Cash Flow": "-118.74M",
+    "Price Target": "$115.88",
+    "Relative Strength Index (RSI)": "60.50",
+    "Revenue": "1.04B",
+    "Earnings Per Share (EPS)": "$2.14",
+    "Analyst Count": "9"
+   }
+  },
+  {
+   "tk": "ADI",
+   "name": "Analog Devices, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 202136483725.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 417.15,
+   "lastDayPct": 3.1,
+   "avgVol20": 3228072.1,
+   "adr20Pct": 2.531,
+   "atr14": 10.8344,
+   "sma20": 380.01250000000005,
+   "sma50": 375.47790000000003,
+   "ema9": 396.814318842741,
+   "ema21": 385.6257888191487,
+   "emaCompression": false,
+   "adx14": 25.342312469253613,
+   "ret1m": 17.27,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 421.7,
+   "pivotDate": "2026-10-02",
+   "entry": 421.71,
+   "stop": 400.62,
+   "target": 463.88,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 359.53,
+   "nextEarnings": "2026-11-24",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "35.67%",
+    "Free Cash Flow": "4.94B",
+    "Price Target": "$470.72",
+    "Relative Strength Index (RSI)": "72.08",
+    "Revenue": "13.88B",
+    "Earnings Per Share (EPS)": "$8.42",
+    "Analyst Count": "34"
+   }
+  },
+  {
+   "tk": "ALAB",
+   "name": "Astera Labs, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 60777036484.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 350.33,
+   "lastDayPct": -1.71,
+   "avgVol20": 4232490.1,
+   "adr20Pct": 6.557,
+   "atr14": 21.1041,
+   "sma20": 320.6385,
+   "sma50": 308.65979999999996,
+   "ema9": 347.8828110695117,
+   "ema21": 330.34756265428905,
+   "emaCompression": false,
+   "adx14": 20.510604582094285,
+   "ret1m": 27.8,
+   "universeFail": [],
+   "readiness": {
+    "composite": 57,
+    "tightness": 12,
+    "proximity": 5,
+    "volumeDryUp": 15,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 5,
+   "pivot": 377.87,
+   "pivotDate": "2026-09-25",
+   "entry": 377.88,
+   "stop": 358.99,
+   "target": 415.67,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 241.08,
+   "nextEarnings": "2026-11-03",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "22.75%",
+    "Free Cash Flow": "276.68M",
+    "Price Target": "$389.95",
+    "Relative Strength Index (RSI)": "58.42",
+    "Revenue": "1.20B",
+    "Earnings Per Share (EPS)": "$2.03",
+    "Analyst Count": "26"
+   }
+  },
+  {
+   "tk": "AMAT",
+   "name": "Applied Materials, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 428574363118.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 540.04,
+   "lastDayPct": 2.03,
+   "avgVol20": 6322131.5,
+   "adr20Pct": 3.231,
+   "atr14": 17.9564,
+   "sma20": 468.9699999999999,
+   "sma50": 487.10299999999995,
+   "ema9": 502.3086227534242,
+   "ema21": 484.38923772355554,
+   "emaCompression": false,
+   "adx14": 19.742016756773378,
+   "ret1m": 23.17,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 547.25,
+   "pivotDate": "2026-10-02",
+   "entry": 547.26,
+   "stop": 519.9,
+   "target": 601.99,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 427.65,
+   "nextEarnings": "2026-11-12",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "31.22%",
+    "Free Cash Flow": "5.62B",
+    "Price Target": "$638.94",
+    "Relative Strength Index (RSI)": "69.18",
+    "Revenue": "30.84B",
+    "Earnings Per Share (EPS)": "$11.59",
+    "Analyst Count": "40"
+   }
+  },
+  {
+   "tk": "APH",
+   "name": "Amphenol Corporation",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 214440482841.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 86.96,
+   "lastDayPct": 1.51,
+   "avgVol20": 12113905.75,
+   "adr20Pct": 2.967,
+   "atr14": 2.6196,
+   "sma20": 81.91199999999999,
+   "sma50": 81.14900000000006,
+   "ema9": 84.206657457138,
+   "ema21": 82.5957834335344,
+   "emaCompression": false,
+   "adx14": 9.974304776029816,
+   "ret1m": 8.65,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 88.02,
+   "pivotDate": "2026-10-02",
+   "entry": 88.03,
+   "stop": 83.63,
+   "target": 96.83,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 74.14,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "28.13%",
+    "Free Cash Flow": "4.71B",
+    "Price Target": "$99.68",
+    "Relative Strength Index (RSI)": "64.15",
+    "Revenue": "29.01B",
+    "Earnings Per Share (EPS)": "$2.00",
+    "Analyst Count": "19"
+   }
+  },
+  {
+   "tk": "ARM",
+   "name": "Arm Holdings plc",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 328423537912.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 307.49,
+   "lastDayPct": 5.18,
+   "avgVol20": 5948233.1,
+   "adr20Pct": 5.312,
+   "atr14": 20.398,
+   "sma20": 281.698,
+   "sma50": 265.7864,
+   "ema9": 296.36714779334017,
+   "ema21": 285.11271976505924,
+   "emaCompression": false,
+   "adx14": 19.774261524479243,
+   "ret1m": 30.92,
+   "universeFail": [],
+   "readiness": {
+    "composite": 33,
+    "tightness": 4,
+    "proximity": 2,
+    "volumeDryUp": 2,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 7,
+   "pivot": 336.98,
+   "pivotDate": "2026-09-23",
+   "entry": 336.99,
+   "stop": 320.14,
+   "target": 370.69,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 215.79,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "17.30%",
+    "Free Cash Flow": "1.51B",
+    "Price Target": "$288.71",
+    "Relative Strength Index (RSI)": "58.52",
+    "Revenue": "5.16B",
+    "Earnings Per Share (EPS)": "$0.98",
+    "Analyst Count": "43"
+   }
+  },
+  {
+   "tk": "ASML",
+   "name": "ASML Holding N.V.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 714504558020.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 1867.31,
+   "lastDayPct": 3.25,
+   "avgVol20": 1362995.85,
+   "adr20Pct": 2.283,
+   "atr14": 45.8618,
+   "sma20": 1721.848,
+   "sma50": 1721.5786000000005,
+   "ema9": 1787.6145669252332,
+   "ema21": 1747.9752907875702,
+   "emaCompression": false,
+   "adx14": 17.641884959227422,
+   "ret1m": 11.0,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 1873.5,
+   "pivotDate": "2026-10-02",
+   "entry": 1873.51,
+   "stop": 1779.83,
+   "target": 2060.86,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 1542.78,
+   "nextEarnings": "2026-10-14",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "35.42%",
+    "Free Cash Flow": "11.30B",
+    "Price Target": "$2,095.05",
+    "Relative Strength Index (RSI)": "64.77",
+    "Revenue": "40.29B",
+    "Earnings Per Share (EPS)": "$31.41",
+    "Analyst Count": "42"
+   }
+  },
+  {
+   "tk": "CLS",
+   "name": "Celestica Inc.",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 44498865025.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 387.32,
+   "lastDayPct": 3.81,
+   "avgVol20": 2179776.05,
+   "adr20Pct": 5.05,
+   "atr14": 18.6711,
+   "sma20": 345.6575,
+   "sma50": 330.19899999999996,
+   "ema9": 364.91635220208553,
+   "ema21": 348.99505411733736,
+   "emaCompression": false,
+   "adx14": 22.179040993917177,
+   "ret1m": 39.44,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 391.5,
+   "pivotDate": "2026-10-02",
+   "entry": 391.51,
+   "stop": 371.93,
+   "target": 430.66,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 330.7,
+   "nextEarnings": "2026-10-26",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "8.88%",
+    "Free Cash Flow": "518.70M",
+    "Price Target": "$473.91",
+    "Relative Strength Index (RSI)": "65.48",
+    "Revenue": "15.59B",
+    "Earnings Per Share (EPS)": "$9.62",
+    "Analyst Count": "22"
+   }
+  },
+  {
+   "tk": "CRDO",
+   "name": "Credo Technology Group Holding Ltd",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 41093807352.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 218.64,
+   "lastDayPct": 4.03,
+   "avgVol20": 8804109.7,
+   "adr20Pct": 5.753,
+   "atr14": 12.3203,
+   "sma20": 181.24349999999998,
+   "sma50": 208.0639,
+   "ema9": 199.61601964790515,
+   "ema21": 194.9463972724801,
+   "emaCompression": false,
+   "adx14": 16.148830987018947,
+   "ret1m": 32.33,
+   "universeFail": [],
+   "readiness": {
+    "composite": 13,
+    "tightness": 0,
+    "proximity": 2,
+    "volumeDryUp": 0,
+    "timeInBase": 11
+   },
+   "timeInBaseDays": 24,
+   "pivot": 240.49,
+   "pivotDate": "2026-08-28",
+   "entry": 240.5,
+   "stop": 228.47,
+   "target": 264.55,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 177.37,
+   "nextEarnings": "2026-09-01",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "31.74%",
+    "Free Cash Flow": "438.60M",
+    "Price Target": "$280.10",
+    "Relative Strength Index (RSI)": "59.89",
+    "Revenue": "1.59B",
+    "Earnings Per Share (EPS)": "$2.83",
+    "Analyst Count": "19"
+   }
+  },
+  {
+   "tk": "EMR",
+   "name": "Emerson Electric Co.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 90146058000.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 161.61,
+   "lastDayPct": 1.92,
+   "avgVol20": 2432426.35,
+   "adr20Pct": 2.21,
+   "atr14": 3.8,
+   "sma20": 153.055,
+   "sma50": 154.64639999999997,
+   "ema9": 157.00112905029835,
+   "ema21": 154.83265347216906,
+   "emaCompression": false,
+   "adx14": 16.67497978935597,
+   "ret1m": 8.48,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 164.13,
+   "pivotDate": "2026-10-02",
+   "entry": 164.14,
+   "stop": 155.93,
+   "target": 180.55,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 144.63,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "25.09%",
+    "Free Cash Flow": "3.46B",
+    "Price Target": "$173.50",
+    "Relative Strength Index (RSI)": "62.89",
+    "Revenue": "18.64B",
+    "Earnings Per Share (EPS)": "$4.57",
+    "Analyst Count": "30"
+   }
+  },
+  {
+   "tk": "ENS",
+   "name": "EnerSys",
+   "industry": "Electrical Equipment & Parts",
+   "sector": "Industrials",
+   "cap": 7079603471.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 196.3,
+   "lastDayPct": 3.54,
+   "avgVol20": 534708.1,
+   "adr20Pct": 2.427,
+   "atr14": 4.91,
+   "sma20": 179.45150000000004,
+   "sma50": 185.30380000000002,
+   "ema9": 184.63440706120252,
+   "ema21": 182.60294583756718,
+   "emaCompression": false,
+   "adx14": 18.292689212571787,
+   "ret1m": 9.01,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 199.14,
+   "pivotDate": "2026-10-02",
+   "entry": 199.15,
+   "stop": 189.19,
+   "target": 219.07,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 189.6,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "13.35%",
+    "Free Cash Flow": "717.31M",
+    "Price Target": "$252.58",
+    "Relative Strength Index (RSI)": "67.45",
+    "Revenue": "3.79B",
+    "Earnings Per Share (EPS)": "$9.35",
+    "Analyst Count": "5"
+   }
+  },
+  {
+   "tk": "ENTG",
+   "name": "Entegris, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 25436616000.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 166.47,
+   "lastDayPct": 5.04,
+   "avgVol20": 2031926.0,
+   "adr20Pct": 3.652,
+   "atr14": 6.3732,
+   "sma20": 144.801,
+   "sma50": 141.53050000000002,
+   "ema9": 154.14442849471254,
+   "ema21": 147.9092231838482,
+   "emaCompression": false,
+   "adx14": 17.405620025211483,
+   "ret1m": 26.78,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 169.63,
+   "pivotDate": "2026-10-02",
+   "entry": 169.64,
+   "stop": 161.16,
+   "target": 186.6,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 132.13,
+   "nextEarnings": "2026-10-29",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.76%",
+    "Free Cash Flow": "575.20M",
+    "Price Target": "$173.36",
+    "Relative Strength Index (RSI)": "69.01",
+    "Revenue": "3.33B",
+    "Earnings Per Share (EPS)": "$2.00",
+    "Analyst Count": "12"
+   }
+  },
+  {
+   "tk": "ETN",
+   "name": "Eaton Corporation plc",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 169385124000.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 436.11,
+   "lastDayPct": -0.27,
+   "avgVol20": 2090053.7,
+   "adr20Pct": 2.791,
+   "atr14": 12.9277,
+   "sma20": 423.2375,
+   "sma50": 421.92939999999993,
+   "ema9": 432.6687672029942,
+   "ema21": 426.4303048922276,
+   "emaCompression": false,
+   "adx14": 11.649190691167835,
+   "ret1m": 11.58,
+   "universeFail": [],
+   "readiness": {
+    "composite": 17,
+    "tightness": 0,
+    "proximity": 17,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 452.0,
+   "pivotDate": "2026-10-02",
+   "entry": 452.01,
+   "stop": 433.65,
+   "target": 497.21,
+   "stopNote": "last session's low (4.1% away)",
+   "windowRows": 25,
+   "sma200": 389.12,
+   "nextEarnings": "2026-11-03",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "18.17%",
+    "Free Cash Flow": "3.93B",
+    "Price Target": "$481.55",
+    "Relative Strength Index (RSI)": "56.28",
+    "Revenue": "30.03B",
+    "Earnings Per Share (EPS)": "$9.82",
+    "Analyst Count": "28"
+   }
+  },
+  {
+   "tk": "FLEX",
+   "name": "Flex Ltd.",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 43076081265.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 116.61,
+   "lastDayPct": 3.4,
+   "avgVol20": 3145441.8,
+   "adr20Pct": 4.264,
+   "atr14": 4.875,
+   "sma20": 111.6865,
+   "sma50": 114.0984,
+   "ema9": 113.06699277474735,
+   "ema21": 112.54614443652139,
+   "emaCompression": false,
+   "adx14": 10.83762923565385,
+   "ret1m": 10.06,
+   "universeFail": [],
+   "readiness": {
+    "composite": 78,
+    "tightness": 12,
+    "proximity": 18,
+    "volumeDryUp": 23,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 5,
+   "pivot": 120.76,
+   "pivotDate": "2026-09-25",
+   "entry": 120.77,
+   "stop": 113.99,
+   "target": 132.85,
+   "stopNote": "last session's low (5.6% away)",
+   "windowRows": 25,
+   "sma200": 99.61,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "5.35%",
+    "Free Cash Flow": "826.00M",
+    "Price Target": "$160.50",
+    "Relative Strength Index (RSI)": "55.16",
+    "Revenue": "29.27B",
+    "Earnings Per Share (EPS)": "$2.59",
+    "Analyst Count": "11"
+   }
+  },
+  {
+   "tk": "FPS",
+   "name": "Forgent Power Solutions, Inc.",
+   "industry": "Electrical Equipment & Parts",
+   "sector": "Industrials",
+   "cap": 12283705671.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 40.35,
+   "lastDayPct": 8.09,
+   "avgVol20": 11083819.45,
+   "adr20Pct": 6.101,
+   "atr14": 2.6284,
+   "sma20": 35.54950000000001,
+   "sma50": 34.94359999999999,
+   "ema9": 37.88690072354527,
+   "ema21": 36.43051010364634,
+   "emaCompression": false,
+   "adx14": 23.031370460720037,
+   "ret1m": 37.15,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 40.56,
+   "pivotDate": "2026-10-02",
+   "entry": 40.57,
+   "stop": 38.83,
+   "target": 44.63,
+   "stopNote": "last session's low (4.3% away)",
+   "windowRows": 25,
+   "sma200": null,
+   "nextEarnings": "2026-09-15",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "12.84%",
+    "Free Cash Flow": "-6.82M",
+    "Price Target": "$56.64",
+    "Relative Strength Index (RSI)": "61.34",
+    "Revenue": "1.42B",
+    "Earnings Per Share (EPS)": "$0.30",
+    "Analyst Count": "11"
+   }
+  },
+  {
+   "tk": "GEV",
+   "name": "GE Vernova Inc.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 263324011535.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 988.7,
+   "lastDayPct": 0.13,
+   "avgVol20": 2136265.8,
+   "adr20Pct": 3.223,
+   "atr14": 32.4274,
+   "sma20": 944.6645000000001,
+   "sma50": 965.0415999999994,
+   "ema9": 963.2088804806252,
+   "ema21": 954.4962021409151,
+   "emaCompression": false,
+   "adx14": 10.19212534170982,
+   "ret1m": 7.24,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 1006.0,
+   "pivotDate": "2026-10-02",
+   "entry": 1006.01,
+   "stop": 960.53,
+   "target": 1106.61,
+   "stopNote": "last session's low (4.5% away)",
+   "windowRows": 25,
+   "sma200": 917.5,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "6.59%",
+    "Free Cash Flow": "12.44B",
+    "Price Target": "$1,230.34",
+    "Relative Strength Index (RSI)": "57.77",
+    "Revenue": "41.37B",
+    "Earnings Per Share (EPS)": "$34.94",
+    "Analyst Count": "37"
+   }
+  },
+  {
+   "tk": "GLW",
+   "name": "Corning Incorporated",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 141431350067.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 164.19,
+   "lastDayPct": 2.35,
+   "avgVol20": 8054028.6,
+   "adr20Pct": 4.424,
+   "atr14": 7.2045,
+   "sma20": 156.01050000000004,
+   "sma50": 152.94619999999998,
+   "ema9": 157.5038216346251,
+   "ema21": 155.72819365032362,
+   "emaCompression": false,
+   "adx14": 9.714541787121169,
+   "ret1m": 13.92,
+   "universeFail": [],
+   "readiness": {
+    "composite": 49,
+    "tightness": 1,
+    "proximity": 14,
+    "volumeDryUp": 13,
+    "timeInBase": 21
+   },
+   "timeInBaseDays": 17,
+   "pivot": 171.3,
+   "pivotDate": "2026-09-09",
+   "entry": 171.31,
+   "stop": 162.74,
+   "target": 188.44,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 150.51,
+   "nextEarnings": "2026-10-27",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "15.62%",
+    "Free Cash Flow": "2.40B",
+    "Price Target": "$189.94",
+    "Relative Strength Index (RSI)": "56.63",
+    "Revenue": "16.96B",
+    "Earnings Per Share (EPS)": "$2.17",
+    "Analyst Count": "17"
+   }
+  },
+  {
+   "tk": "GNRC",
+   "name": "Generac Holdings Inc.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 12805061108.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 216.8,
+   "lastDayPct": 4.28,
+   "avgVol20": 1399671.55,
+   "adr20Pct": 4.139,
+   "atr14": 11.6614,
+   "sma20": 197.016,
+   "sma50": 200.80239999999992,
+   "ema9": 206.96498504354642,
+   "ema21": 201.9030702303665,
+   "emaCompression": false,
+   "adx14": 31.483234488521113,
+   "ret1m": 19.94,
+   "universeFail": [],
+   "readiness": {
+    "composite": 32,
+    "tightness": 0,
+    "proximity": 7,
+    "volumeDryUp": 0,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 11,
+   "pivot": 231.887,
+   "pivotDate": "2026-09-17",
+   "entry": 231.9,
+   "stop": 220.31,
+   "target": 255.09,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 212.59,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "9.50%",
+    "Free Cash Flow": "379.25M",
+    "Price Target": "$289.56",
+    "Relative Strength Index (RSI)": "60.75",
+    "Revenue": "4.44B",
+    "Earnings Per Share (EPS)": "$4.35",
+    "Analyst Count": "21"
+   }
+  },
+  {
+   "tk": "GTES",
+   "name": "Gates Industrial Corporation Ltd.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 6999629851.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 27.65,
+   "lastDayPct": 4.34,
+   "avgVol20": 1761658.5,
+   "adr20Pct": 3.058,
+   "atr14": 0.8211,
+   "sma20": 26.103999999999996,
+   "sma50": 26.6152,
+   "ema9": 26.5950022682962,
+   "ema21": 26.32793441352704,
+   "emaCompression": false,
+   "adx14": 12.449326004879769,
+   "ret1m": 11.0,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 27.93,
+   "pivotDate": "2026-10-02",
+   "entry": 27.94,
+   "stop": 26.54,
+   "target": 30.73,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 25.36,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "14.80%",
+    "Free Cash Flow": "405.30M",
+    "Price Target": "$33.33",
+    "Relative Strength Index (RSI)": "62.47",
+    "Revenue": "3.50B",
+    "Earnings Per Share (EPS)": "$1.41",
+    "Analyst Count": "12"
+   }
+  },
+  {
+   "tk": "INTC",
+   "name": "Intel Corporation",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 627022625169.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 119.33,
+   "lastDayPct": -0.56,
+   "avgVol20": 112079371.15,
+   "adr20Pct": 4.794,
+   "atr14": 6.6126,
+   "sma20": 111.63499999999999,
+   "sma50": 100.87470000000002,
+   "ema9": 118.11835130285382,
+   "ema21": 112.27057241333945,
+   "emaCompression": false,
+   "adx14": 25.92000607091736,
+   "ret1m": 32.52,
+   "universeFail": [],
+   "readiness": {
+    "composite": 61,
+    "tightness": 15,
+    "proximity": 7,
+    "volumeDryUp": 14,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 6,
+   "pivot": 127.44,
+   "pivotDate": "2026-09-24",
+   "entry": 127.45,
+   "stop": 121.08,
+   "target": 140.2,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 81.18,
+   "nextEarnings": "2026-10-22",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "7.82%",
+    "Free Cash Flow": "2.83B",
+    "Price Target": "$116.37",
+    "Relative Strength Index (RSI)": "60.64",
+    "Revenue": "57.03B",
+    "Earnings Per Share (EPS)": null,
+    "Analyst Count": "49"
+   }
+  },
+  {
+   "tk": "ITT",
+   "name": "ITT Inc.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 18432143526.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 206.17,
+   "lastDayPct": 2.0,
+   "avgVol20": 874618.55,
+   "adr20Pct": 2.788,
+   "atr14": 6.1988,
+   "sma20": 203.6035,
+   "sma50": 205.1848,
+   "ema9": 205.04720009187176,
+   "ema21": 204.6984065518172,
+   "emaCompression": false,
+   "adx14": 11.591593621431075,
+   "ret1m": 2.57,
+   "universeFail": [],
+   "readiness": {
+    "composite": 53,
+    "tightness": 10,
+    "proximity": 10,
+    "volumeDryUp": 8,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 5,
+   "pivot": 216.95,
+   "pivotDate": "2026-09-25",
+   "entry": 216.96,
+   "stop": 206.11,
+   "target": 238.66,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 197.04,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.22%",
+    "Free Cash Flow": "508.80M",
+    "Price Target": "$258.46",
+    "Relative Strength Index (RSI)": "51.99",
+    "Revenue": "4.74B",
+    "Earnings Per Share (EPS)": "$5.03",
+    "Analyst Count": "14"
+   }
+  },
+  {
+   "tk": "JCI",
+   "name": "Johnson Controls International plc",
+   "industry": "Building Products & Equipment",
+   "sector": "Industrials",
+   "cap": 94641047273.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 156.24,
+   "lastDayPct": 2.95,
+   "avgVol20": 3334327.05,
+   "adr20Pct": 2.091,
+   "atr14": 3.2987,
+   "sma20": 145.698,
+   "sma50": 145.98760000000001,
+   "ema9": 149.67585431897055,
+   "ema21": 146.97275153669406,
+   "emaCompression": false,
+   "adx14": 15.09479965343547,
+   "ret1m": 12.2,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 156.95,
+   "pivotDate": "2026-10-02",
+   "entry": 156.96,
+   "stop": 149.11,
+   "target": 172.66,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 137.63,
+   "nextEarnings": "2026-10-27",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "14.20%",
+    "Free Cash Flow": "1.66B",
+    "Price Target": "$165.80",
+    "Relative Strength Index (RSI)": "67.88",
+    "Revenue": "25.00B",
+    "Earnings Per Share (EPS)": "$5.79",
+    "Analyst Count": "22"
+   }
+  },
+  {
+   "tk": "KLAC",
+   "name": "KLA Corporation",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 269992793130.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 206.89,
+   "lastDayPct": 3.27,
+   "avgVol20": 9556470.8,
+   "adr20Pct": 3.717,
+   "atr14": 6.8274,
+   "sma20": 184.43900000000002,
+   "sma50": 187.2188,
+   "ema9": 193.9618707226358,
+   "ema21": 188.33117854463387,
+   "emaCompression": false,
+   "adx14": 17.07563299338509,
+   "ret1m": 20.1,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 208.68,
+   "pivotDate": "2026-10-02",
+   "entry": 208.69,
+   "stop": 198.26,
+   "target": 229.56,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 177.81,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "41.69%",
+    "Free Cash Flow": "3.77B",
+    "Price Target": "$233.77",
+    "Relative Strength Index (RSI)": "67.23",
+    "Revenue": "13.58B",
+    "Earnings Per Share (EPS)": "$3.66",
+    "Analyst Count": "29"
+   }
+  },
+  {
+   "tk": "KLIC",
+   "name": "Kulicke and Soffa Industries, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 5273204919.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 100.77,
+   "lastDayPct": 4.94,
+   "avgVol20": 739762.6,
+   "adr20Pct": 3.595,
+   "atr14": 3.7123,
+   "sma20": 87.04925,
+   "sma50": 88.09429999999999,
+   "ema9": 93.15435275061141,
+   "ema21": 89.48959947535913,
+   "emaCompression": false,
+   "adx14": 24.68813299657021,
+   "ret1m": 27.64,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 101.865,
+   "pivotDate": "2026-10-02",
+   "entry": 101.88,
+   "stop": 96.79,
+   "target": 112.07,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 83.06,
+   "nextEarnings": "2026-11-18",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "18.52%",
+    "Free Cash Flow": "41.13M",
+    "Price Target": "$106.67",
+    "Relative Strength Index (RSI)": "69.90",
+    "Revenue": "950.21M",
+    "Earnings Per Share (EPS)": "$2.19",
+    "Analyst Count": "3"
+   }
+  },
+  {
+   "tk": "LRCX",
+   "name": "Lam Research Corporation",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 434857451551.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 347.49,
+   "lastDayPct": 2.17,
+   "avgVol20": 9564164.4,
+   "adr20Pct": 3.747,
+   "atr14": 12.9356,
+   "sma20": 305.4235,
+   "sma50": 306.0498,
+   "ema9": 323.69398645309707,
+   "ema21": 312.5589983564597,
+   "emaCompression": false,
+   "adx14": 16.25826205054492,
+   "ret1m": 20.52,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 352.56,
+   "pivotDate": "2026-10-02",
+   "entry": 352.57,
+   "stop": 334.94,
+   "target": 387.83,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 275.07,
+   "nextEarnings": "2026-10-21",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "35.29%",
+    "Free Cash Flow": "4.89B",
+    "Price Target": "$373.77",
+    "Relative Strength Index (RSI)": "67.63",
+    "Revenue": "23.23B",
+    "Earnings Per Share (EPS)": "$5.76",
+    "Analyst Count": "35"
+   }
+  },
+  {
+   "tk": "LSCC",
+   "name": "Lattice Semiconductor Corporation",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 19032056448.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 134,
+   "lastDayPct": 3.99,
+   "avgVol20": 1782774.35,
+   "adr20Pct": 3.92,
+   "atr14": 5.1989,
+   "sma20": 118.56000000000002,
+   "sma50": 120.95939999999997,
+   "ema9": 125.57872387855693,
+   "ema21": 121.6015737745284,
+   "emaCompression": false,
+   "adx14": 17.361056050957455,
+   "ret1m": 17.67,
+   "universeFail": [],
+   "readiness": {
+    "composite": 24,
+    "tightness": 0,
+    "proximity": 24,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 137.025,
+   "pivotDate": "2026-10-02",
+   "entry": 137.03,
+   "stop": 130.18,
+   "target": 150.73,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 112.42,
+   "nextEarnings": "2026-11-02",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "8.48%",
+    "Free Cash Flow": "199.01M",
+    "Price Target": "$164.54",
+    "Relative Strength Index (RSI)": "65.57",
+    "Revenue": "651.12M",
+    "Earnings Per Share (EPS)": "$0.25",
+    "Analyst Count": "13"
+   }
+  },
+  {
+   "tk": "MCHP",
+   "name": "Microchip Technology Incorporated",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 44157466752.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 81.32,
+   "lastDayPct": 3.59,
+   "avgVol20": 8377965.3,
+   "adr20Pct": 3.062,
+   "atr14": 2.7575,
+   "sma20": 74.842,
+   "sma50": 75.79500000000002,
+   "ema9": 77.76880098130572,
+   "ema21": 76.16186645571801,
+   "emaCompression": false,
+   "adx14": 18.646160763916754,
+   "ret1m": 11.76,
+   "universeFail": [],
+   "readiness": {
+    "composite": 23,
+    "tightness": 0,
+    "proximity": 23,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 83.395,
+   "pivotDate": "2026-10-02",
+   "entry": 83.41,
+   "stop": 79.24,
+   "target": 91.75,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 78.89,
+   "nextEarnings": "2026-11-05",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.23%",
+    "Free Cash Flow": "1.11B",
+    "Price Target": "$107.84",
+    "Relative Strength Index (RSI)": "63.17",
+    "Revenue": "5.12B",
+    "Earnings Per Share (EPS)": "$0.68",
+    "Analyst Count": "26"
+   }
+  },
+  {
+   "tk": "META",
+   "name": "Meta Platforms, Inc.",
+   "industry": "Internet Content & Information",
+   "sector": "Communication Services",
+   "cap": 1854788332298.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 728.08,
+   "lastDayPct": 0.3,
+   "avgVol20": 23635225.15,
+   "adr20Pct": 3.502,
+   "atr14": 28.8755,
+   "sma20": 695.9175,
+   "sma50": 625.0394,
+   "ema9": 725.052301199893,
+   "ema21": 694.6547547921759,
+   "emaCompression": false,
+   "adx14": 39.68416986647408,
+   "ret1m": 22.81,
+   "universeFail": [],
+   "readiness": {
+    "composite": 59,
+    "tightness": 14,
+    "proximity": 7,
+    "volumeDryUp": 14,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 6,
+   "pivot": 779.819,
+   "pivotDate": "2026-09-24",
+   "entry": 779.83,
+   "stop": 740.84,
+   "target": 857.81,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 628.38,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "38.08%",
+    "Free Cash Flow": "40.98B",
+    "Price Target": "$793.91",
+    "Relative Strength Index (RSI)": "61.49",
+    "Revenue": "228.25B",
+    "Earnings Per Share (EPS)": "$26.54",
+    "Analyst Count": "62"
+   }
+  },
+  {
+   "tk": "MPWR",
+   "name": "Monolithic Power Systems, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 70752651390.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 1439.73,
+   "lastDayPct": 5.79,
+   "avgVol20": 737158.55,
+   "adr20Pct": 3.672,
+   "atr14": 54.3057,
+   "sma20": 1272.9600000000003,
+   "sma50": 1304.5331,
+   "ema9": 1352.6677834807274,
+   "ema21": 1311.3601109593947,
+   "emaCompression": false,
+   "adx14": 24.62868856690299,
+   "ret1m": 18.07,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 1455.99,
+   "pivotDate": "2026-10-02",
+   "entry": 1456.0,
+   "stop": 1393.13,
+   "target": 1601.6,
+   "stopNote": "last session's low (4.3% away)",
+   "windowRows": 25,
+   "sma200": 1283.31,
+   "nextEarnings": "2026-10-29",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "28.72%",
+    "Free Cash Flow": "585.54M",
+    "Price Target": "$1,839.80",
+    "Relative Strength Index (RSI)": "66.33",
+    "Revenue": "3.27B",
+    "Earnings Per Share (EPS)": "$16.39",
+    "Analyst Count": "17"
+   }
+  },
+  {
+   "tk": "MTSI",
+   "name": "MACOM Technology Solutions Holdings, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 24560891410.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 321.6,
+   "lastDayPct": 6.62,
+   "avgVol20": 1356355.1,
+   "adr20Pct": 4.397,
+   "atr14": 13.5489,
+   "sma20": 276.181,
+   "sma50": 275.4725,
+   "ema9": 291.3078432877747,
+   "ema21": 281.61151703972473,
+   "emaCompression": false,
+   "adx14": 13.806940011204343,
+   "ret1m": 24.86,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 326.73,
+   "pivotDate": "2026-10-02",
+   "entry": 326.74,
+   "stop": 307.87,
+   "target": 359.41,
+   "stopNote": "last session's low (5.8% away)",
+   "windowRows": 25,
+   "sma200": 273.27,
+   "nextEarnings": "2026-11-05",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "18.19%",
+    "Free Cash Flow": "204.08M",
+    "Price Target": "$395.33",
+    "Relative Strength Index (RSI)": "67.70",
+    "Revenue": "1.16B",
+    "Earnings Per Share (EPS)": "$3.14",
+    "Analyst Count": "16"
+   }
+  },
+  {
+   "tk": "MU",
+   "name": "Micron Technology, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 1213973404078.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 1074.89,
+   "lastDayPct": -2.05,
+   "avgVol20": 26254812.5,
+   "adr20Pct": 3.827,
+   "atr14": 42.2511,
+   "sma20": 1025.0014999999999,
+   "sma50": 956.0457000000001,
+   "ema9": 1063.7438272114316,
+   "ema21": 1029.5934958201567,
+   "emaCompression": false,
+   "adx14": 15.292528536747128,
+   "ret1m": 12.43,
+   "universeFail": [],
+   "readiness": {
+    "composite": 52,
+    "tightness": 6,
+    "proximity": 20,
+    "volumeDryUp": 1,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 5,
+   "pivot": 1108.72,
+   "pivotDate": "2026-09-25",
+   "entry": 1108.73,
+   "stop": 1053.29,
+   "target": 1219.6,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 681.61,
+   "nextEarnings": "2026-09-30",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "74.59%",
+    "Free Cash Flow": "58.96B",
+    "Price Target": "$1,521.76",
+    "Relative Strength Index (RSI)": "59.26",
+    "Revenue": "133.19B",
+    "Earnings Per Share (EPS)": "$74.33",
+    "Analyst Count": "49"
+   }
+  },
+  {
+   "tk": "NBIS",
+   "name": "Nebius Group N.V.",
+   "industry": "Internet Content & Information",
+   "sector": "Communication Services",
+   "cap": 66553939098.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 242.81,
+   "lastDayPct": 4.53,
+   "avgVol20": 15582347.05,
+   "adr20Pct": 6.478,
+   "atr14": 15.0826,
+   "sma20": 229.51425000000003,
+   "sma50": 218.8515,
+   "ema9": 234.70086453042882,
+   "ema21": 229.40973123890035,
+   "emaCompression": false,
+   "adx14": 15.28666443077241,
+   "ret1m": 18.97,
+   "universeFail": [],
+   "readiness": {
+    "composite": 31,
+    "tightness": 0,
+    "proximity": 12,
+    "volumeDryUp": 0,
+    "timeInBase": 19
+   },
+   "timeInBaseDays": 18,
+   "pivot": 254.74,
+   "pivotDate": "2026-09-08",
+   "entry": 254.75,
+   "stop": 242.01,
+   "target": 280.23,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 167.74,
+   "nextEarnings": "2026-11-10",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "-37.44%",
+    "Free Cash Flow": "-5.88B",
+    "Price Target": "$283.58",
+    "Relative Strength Index (RSI)": "57.15",
+    "Revenue": "1.36B",
+    "Earnings Per Share (EPS)": "$0.16",
+    "Analyst Count": "9"
+   }
+  },
+  {
+   "tk": "NVDA",
+   "name": "NVIDIA Corporation",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 5649190650000.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 233.95,
+   "lastDayPct": 1.34,
+   "avgVol20": 109640538.1,
+   "adr20Pct": 2.005,
+   "atr14": 5.1494,
+   "sma20": 223.786,
+   "sma50": 218.27819999999997,
+   "ema9": 228.20907926768078,
+   "ema21": 224.6510770720888,
+   "emaCompression": false,
+   "adx14": 17.07956508064279,
+   "ret1m": 4.25,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 237.88,
+   "pivotDate": "2026-10-02",
+   "entry": 237.89,
+   "stop": 226.0,
+   "target": 261.68,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 200.72,
+   "nextEarnings": "2026-11-18",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "65.21%",
+    "Free Cash Flow": "127.01B",
+    "Price Target": "$327.70",
+    "Relative Strength Index (RSI)": "62.90",
+    "Revenue": "302.97B",
+    "Earnings Per Share (EPS)": "$7.91",
+    "Analyst Count": "61"
+   }
+  },
+  {
+   "tk": "NVT",
+   "name": "nVent Electric plc",
+   "industry": "Electrical Equipment & Parts",
+   "sector": "Industrials",
+   "cap": 27444632137.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 169.56,
+   "lastDayPct": 2.29,
+   "avgVol20": 1912866.9,
+   "adr20Pct": 3.408,
+   "atr14": 5.5669,
+   "sma20": 158.75499999999997,
+   "sma50": 157.42600000000002,
+   "ema9": 162.9906615905325,
+   "ema21": 159.93367205418178,
+   "emaCompression": false,
+   "adx14": 9.930531383772047,
+   "ret1m": 14.44,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 171.95,
+   "pivotDate": "2026-10-02",
+   "entry": 171.96,
+   "stop": 163.36,
+   "target": 189.16,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 140.5,
+   "nextEarnings": "2026-10-30",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.92%",
+    "Free Cash Flow": "577.70M",
+    "Price Target": "$204.44",
+    "Relative Strength Index (RSI)": "61.68",
+    "Revenue": "4.83B",
+    "Earnings Per Share (EPS)": "$3.65",
+    "Analyst Count": "18"
+   }
+  },
+  {
+   "tk": "ON",
+   "name": "ON Semiconductor Corporation",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 33048671996.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 84.89,
+   "lastDayPct": 6.01,
+   "avgVol20": 12317417.5,
+   "adr20Pct": 4.534,
+   "atr14": 3.7082,
+   "sma20": 73.78450000000001,
+   "sma50": 76.64519999999999,
+   "ema9": 77.60105114803918,
+   "ema21": 75.6201302891869,
+   "emaCompression": false,
+   "adx14": 21.917058417842004,
+   "ret1m": 17.35,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 86.45,
+   "pivotDate": "2026-10-02",
+   "entry": 86.46,
+   "stop": 82.96,
+   "target": 95.11,
+   "stopNote": "last session's low (4.0% away)",
+   "windowRows": 25,
+   "sma200": 80.46,
+   "nextEarnings": "2026-11-02",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "23.19%",
+    "Free Cash Flow": "1.50B",
+    "Price Target": "$103.69",
+    "Relative Strength Index (RSI)": "65.49",
+    "Revenue": "6.20B",
+    "Earnings Per Share (EPS)": "$1.56",
+    "Analyst Count": "30"
+   }
+  },
+  {
+   "tk": "ONTO",
+   "name": "Onto Innovation Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 16085065939.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 327.77,
+   "lastDayPct": 4.09,
+   "avgVol20": 815973.65,
+   "adr20Pct": 4.202,
+   "atr14": 13.7782,
+   "sma20": 279.12299999999993,
+   "sma50": 282.6495999999999,
+   "ema9": 300.32214815509116,
+   "ema21": 287.9426299902884,
+   "emaCompression": false,
+   "adx14": 16.791155165486487,
+   "ret1m": 28.76,
+   "universeFail": [],
+   "readiness": {
+    "composite": 18,
+    "tightness": 0,
+    "proximity": 18,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 339.035,
+   "pivotDate": "2026-10-02",
+   "entry": 339.05,
+   "stop": 322.1,
+   "target": 372.96,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 253.61,
+   "nextEarnings": "2026-11-05",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "20.06%",
+    "Free Cash Flow": "252.47M",
+    "Price Target": "$386.36",
+    "Relative Strength Index (RSI)": "67.56",
+    "Revenue": "1.12B",
+    "Earnings Per Share (EPS)": "$2.68",
+    "Analyst Count": "11"
+   }
+  },
+  {
+   "tk": "Q",
+   "name": "Qnity Electronics, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 27506739234.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 131.48,
+   "lastDayPct": 2.36,
+   "avgVol20": 1458803.1,
+   "adr20Pct": 3.361,
+   "atr14": 4.3073,
+   "sma20": 122.85849999999998,
+   "sma50": 127.58539999999992,
+   "ema9": 126.10829790536857,
+   "ema21": 124.70769912821137,
+   "emaCompression": false,
+   "adx14": 18.50634737512844,
+   "ret1m": 11.72,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 132.41,
+   "pivotDate": "2026-10-02",
+   "entry": 132.42,
+   "stop": 125.8,
+   "target": 145.66,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 125.7,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "21.90%",
+    "Free Cash Flow": "825.00M",
+    "Price Target": "$176.75",
+    "Relative Strength Index (RSI)": "60.52",
+    "Revenue": "5.21B",
+    "Earnings Per Share (EPS)": "$2.79",
+    "Analyst Count": "8"
+   }
+  },
+  {
+   "tk": "QRVO",
+   "name": "Qorvo, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 10072263840.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 114.17,
+   "lastDayPct": 1.75,
+   "avgVol20": 2046574.25,
+   "adr20Pct": 4.347,
+   "atr14": 4.4972,
+   "sma20": 114.066,
+   "sma50": 102.6496,
+   "ema9": 114.99722735748698,
+   "ema21": 112.25181423418388,
+   "emaCompression": true,
+   "adx14": 32.835137625666654,
+   "ret1m": 13.46,
+   "universeFail": [],
+   "readiness": {
+    "composite": 56,
+    "tightness": 23,
+    "proximity": 9,
+    "volumeDryUp": 0,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 7,
+   "pivot": 121.09,
+   "pivotDate": "2026-09-23",
+   "entry": 121.1,
+   "stop": 115.04,
+   "target": 133.21,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 90.54,
+   "nextEarnings": "2026-11-02",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "17.57%",
+    "Free Cash Flow": "649.51M",
+    "Price Target": "$90.17",
+    "Relative Strength Index (RSI)": "55.86",
+    "Revenue": "3.64B",
+    "Earnings Per Share (EPS)": "$4.32",
+    "Analyst Count": "19"
+   }
+  },
+  {
+   "tk": "RAL",
+   "name": "Ralliant Corporation",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 8098848586.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 73.2,
+   "lastDayPct": 3.39,
+   "avgVol20": 1413273.85,
+   "adr20Pct": 3.124,
+   "atr14": 2.0001,
+   "sma20": 68.07950000000001,
+   "sma50": 67.06519999999999,
+   "ema9": 70.19613892519433,
+   "ema21": 68.56237540233526,
+   "emaCompression": false,
+   "adx14": 19.002426549791096,
+   "ret1m": 18.73,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 74.36,
+   "pivotDate": "2026-10-02",
+   "entry": 74.37,
+   "stop": 70.65,
+   "target": 81.81,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 56.73,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "12.64%",
+    "Free Cash Flow": "327.70M",
+    "Price Target": "$78.10",
+    "Relative Strength Index (RSI)": "69.01",
+    "Revenue": "2.19B",
+    "Earnings Per Share (EPS)": null,
+    "Analyst Count": "11"
+   }
+  },
+  {
+   "tk": "RMBS",
+   "name": "Rambus Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 12144445688.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 111.97,
+   "lastDayPct": 4.36,
+   "avgVol20": 2643524.0,
+   "adr20Pct": 4.684,
+   "atr14": 5.6106,
+   "sma20": 94.867,
+   "sma50": 93.5248,
+   "ema9": 104.1463713903748,
+   "ema21": 98.43226307724987,
+   "emaCompression": false,
+   "adx14": 30.61886598567525,
+   "ret1m": 32.16,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 113.28,
+   "pivotDate": "2026-10-02",
+   "entry": 113.29,
+   "stop": 107.63,
+   "target": 124.62,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 107.89,
+   "nextEarnings": "2026-10-26",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "35.95%",
+    "Free Cash Flow": "299.54M",
+    "Price Target": "$147.86",
+    "Relative Strength Index (RSI)": "69.52",
+    "Revenue": "756.33M",
+    "Earnings Per Share (EPS)": "$2.18",
+    "Analyst Count": "8"
+   }
+  },
+  {
+   "tk": "ROK",
+   "name": "Rockwell Automation, Inc.",
+   "industry": "Specialty Industrial Machinery",
+   "sector": "Industrials",
+   "cap": 50454965941.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 454.35,
+   "lastDayPct": 2.69,
+   "avgVol20": 672158.95,
+   "adr20Pct": 2.169,
+   "atr14": 9.9369,
+   "sma20": 428.10749999999996,
+   "sma50": 437.7984,
+   "ema9": 436.92837269267363,
+   "ema21": 432.4994778323183,
+   "emaCompression": false,
+   "adx14": 19.99362280600209,
+   "ret1m": 6.82,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 455.13,
+   "pivotDate": "2026-10-02",
+   "entry": 455.14,
+   "stop": 432.38,
+   "target": 500.65,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 423.81,
+   "nextEarnings": "2026-11-05",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "19.85%",
+    "Free Cash Flow": "1.50B",
+    "Price Target": "$478.08",
+    "Relative Strength Index (RSI)": "66.81",
+    "Revenue": "8.97B",
+    "Earnings Per Share (EPS)": "$10.67",
+    "Analyst Count": "28"
+   }
+  },
+  {
+   "tk": "SANM",
+   "name": "Sanmina Corporation",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 12275938418.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 229.04,
+   "lastDayPct": 3.19,
+   "avgVol20": 587434.8,
+   "adr20Pct": 4.831,
+   "atr14": 10.2546,
+   "sma20": 210.54199999999997,
+   "sma50": 201.9858,
+   "ema9": 219.51226136702434,
+   "ema21": 212.42339637949877,
+   "emaCompression": false,
+   "adx14": 12.4661794482277,
+   "ret1m": 22.04,
+   "universeFail": [],
+   "readiness": {
+    "composite": 63,
+    "tightness": 7,
+    "proximity": 25,
+    "volumeDryUp": 6,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 5,
+   "pivot": 232.5,
+   "pivotDate": "2026-09-25",
+   "entry": 232.51,
+   "stop": 220.88,
+   "target": 255.76,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 188.47,
+   "nextEarnings": "2026-11-02",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "5.49%",
+    "Free Cash Flow": "594.15M",
+    "Price Target": "$260.00",
+    "Relative Strength Index (RSI)": "62.32",
+    "Revenue": "12.76B",
+    "Earnings Per Share (EPS)": "$5.59",
+    "Analyst Count": "4"
+   }
+  },
+  {
+   "tk": "SIMO",
+   "name": "Silicon Motion Technology Corporation",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 9511147718.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 280.5,
+   "lastDayPct": 1.91,
+   "avgVol20": 734106.0,
+   "adr20Pct": 5.721,
+   "atr14": 12.9776,
+   "sma20": 268.41549999999995,
+   "sma50": 256.285,
+   "ema9": 275.3923651584159,
+   "ema21": 268.7731870055127,
+   "emaCompression": false,
+   "adx14": 15.478902742421406,
+   "ret1m": 15.67,
+   "universeFail": [],
+   "readiness": {
+    "composite": 51,
+    "tightness": 4,
+    "proximity": 17,
+    "volumeDryUp": 5,
+    "timeInBase": 25
+   },
+   "timeInBaseDays": 15,
+   "pivot": 291.16,
+   "pivotDate": "2026-09-11",
+   "entry": 291.17,
+   "stop": 274.54,
+   "target": 320.29,
+   "stopNote": "last session's low (5.7% away)",
+   "windowRows": 25,
+   "sma200": 201.47,
+   "nextEarnings": "2026-10-29",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.31%",
+    "Free Cash Flow": "-120.45M",
+    "Price Target": "$369.70",
+    "Relative Strength Index (RSI)": "56.07",
+    "Revenue": "1.31B",
+    "Earnings Per Share (EPS)": "$8.54",
+    "Analyst Count": "12"
+   }
+  },
+  {
+   "tk": "SKHY",
+   "name": "SK hynix Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 996348091086.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 195.13,
+   "lastDayPct": 0.84,
+   "avgVol20": 19973898.3,
+   "adr20Pct": 3.913,
+   "atr14": 7.7966,
+   "sma20": 186.40949999999998,
+   "sma50": 166.55259999999998,
+   "ema9": 188.84314335703493,
+   "ema21": 183.383095333959,
+   "emaCompression": false,
+   "adx14": 23.83706896881059,
+   "ret1m": 18.27,
+   "universeFail": [],
+   "readiness": {
+    "composite": 49,
+    "tightness": 4,
+    "proximity": 23,
+    "volumeDryUp": 0,
+    "timeInBase": 21
+   },
+   "timeInBaseDays": 17,
+   "pivot": 199.865,
+   "pivotDate": "2026-09-09",
+   "entry": 199.88,
+   "stop": 191.39,
+   "target": 219.87,
+   "stopNote": "last session's low (4.2% away)",
+   "windowRows": 25,
+   "sma200": null,
+   "nextEarnings": "2026-11-13",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "68.04%",
+    "Free Cash Flow": "68.23B",
+    "Price Target": "$252.21",
+    "Relative Strength Index (RSI)": "59.90",
+    "Revenue": "122.16B",
+    "Earnings Per Share (EPS)": "$20.48",
+    "Analyst Count": "15"
+   }
+  },
+  {
+   "tk": "STM",
+   "name": "STMicroelectronics N.V.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 50544204709.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 57.26,
+   "lastDayPct": 7.03,
+   "avgVol20": 8607249.35,
+   "adr20Pct": 2.337,
+   "atr14": 1.6318,
+   "sma20": 51.5835,
+   "sma50": 51.81279999999999,
+   "ema9": 53.421993130057615,
+   "ema21": 52.341004366181174,
+   "emaCompression": false,
+   "adx14": 19.362779950430898,
+   "ret1m": 12.92,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 57.43,
+   "pivotDate": "2026-10-02",
+   "entry": 57.44,
+   "stop": 54.57,
+   "target": 63.18,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 47.9,
+   "nextEarnings": "2026-10-29",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "6.70%",
+    "Free Cash Flow": "309.00M",
+    "Price Target": "$75.04",
+    "Relative Strength Index (RSI)": "66.53",
+    "Revenue": "13.10B",
+    "Earnings Per Share (EPS)": "$0.50",
+    "Analyst Count": "14"
+   }
+  },
+  {
+   "tk": "TEL",
+   "name": "TE Connectivity plc",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 63797134922.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 220.36,
+   "lastDayPct": 1.19,
+   "avgVol20": 1806249.9,
+   "adr20Pct": 2.606,
+   "atr14": 5.7098,
+   "sma20": 210.02799999999996,
+   "sma50": 209.2662,
+   "ema9": 214.63063376899117,
+   "ema21": 211.4892892213937,
+   "emaCompression": false,
+   "adx14": 19.199941306457667,
+   "ret1m": 8.98,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 222.541,
+   "pivotDate": "2026-10-02",
+   "entry": 222.55,
+   "stop": 211.42,
+   "target": 244.81,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 214.36,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "20.44%",
+    "Free Cash Flow": "3.32B",
+    "Price Target": "$248.58",
+    "Relative Strength Index (RSI)": "61.74",
+    "Revenue": "19.32B",
+    "Earnings Per Share (EPS)": "$10.21",
+    "Analyst Count": "19"
+   }
+  },
+  {
+   "tk": "TER",
+   "name": "Teradyne, Inc.",
+   "industry": "Semiconductor Equipment & Materials",
+   "sector": "Technology",
+   "cap": 70203250380.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 449.04,
+   "lastDayPct": 8.0,
+   "avgVol20": 2545121.8,
+   "adr20Pct": 4.202,
+   "atr14": 18.0966,
+   "sma20": 380.8,
+   "sma50": 374.9304,
+   "ema9": 406.39115419859365,
+   "ema21": 388.84009378448013,
+   "emaCompression": false,
+   "adx14": 17.55040854938096,
+   "ret1m": 31.44,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 451.86,
+   "pivotDate": "2026-10-02",
+   "entry": 451.87,
+   "stop": 427.03,
+   "target": 497.06,
+   "stopNote": "last session's low (5.5% away)",
+   "windowRows": 25,
+   "sma200": 335.06,
+   "nextEarnings": "2026-10-27",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "30.74%",
+    "Free Cash Flow": "799.93M",
+    "Price Target": "$446.47",
+    "Relative Strength Index (RSI)": "69.59",
+    "Revenue": "4.46B",
+    "Earnings Per Share (EPS)": "$7.29",
+    "Analyst Count": "17"
+   }
+  },
+  {
+   "tk": "TSEM",
+   "name": "Tower Semiconductor Ltd.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 27224646660.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 240.86,
+   "lastDayPct": -0.18,
+   "avgVol20": 2005499.85,
+   "adr20Pct": 4.85,
+   "atr14": 12.8032,
+   "sma20": 221.41674999999995,
+   "sma50": 224.35430000000008,
+   "ema9": 231.4752570716948,
+   "ema21": 225.65928582067713,
+   "emaCompression": false,
+   "adx14": 15.309158982177717,
+   "ret1m": 16.46,
+   "universeFail": [],
+   "readiness": {
+    "composite": 18,
+    "tightness": 0,
+    "proximity": 18,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 249.49,
+   "pivotDate": "2026-10-02",
+   "entry": 249.5,
+   "stop": 237.02,
+   "target": 274.45,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 196.69,
+   "nextEarnings": "2026-11-09",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "16.16%",
+    "Free Cash Flow": "300.61M",
+    "Price Target": "$312.93",
+    "Relative Strength Index (RSI)": "57.38",
+    "Revenue": "1.71B",
+    "Earnings Per Share (EPS)": "$2.53",
+    "Analyst Count": "9"
+   }
+  },
+  {
+   "tk": "TSM",
+   "name": "Taiwan Semiconductor Manufacturing Company Limited",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 2035188346008.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 472.78,
+   "lastDayPct": 2.96,
+   "avgVol20": 9991874.8,
+   "adr20Pct": 2.017,
+   "atr14": 9.8581,
+   "sma20": 441.1205,
+   "sma50": 424.89560000000006,
+   "ema9": 455.0795033757376,
+   "ema21": 443.54297018040114,
+   "emaCompression": false,
+   "adx14": 18.08715980109311,
+   "ret1m": 13.79,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 474.79,
+   "pivotDate": "2026-10-02",
+   "entry": 474.8,
+   "stop": 451.06,
+   "target": 522.28,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 387.17,
+   "nextEarnings": "2026-10-15",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "56.08%",
+    "Free Cash Flow": "36.00B",
+    "Price Target": "$552.26",
+    "Relative Strength Index (RSI)": "71.49",
+    "Revenue": "139.57B",
+    "Earnings Per Share (EPS)": "$13.44",
+    "Analyst Count": "21"
+   }
+  },
+  {
+   "tk": "TT",
+   "name": "Trane Technologies plc",
+   "industry": "Building Products & Equipment",
+   "sector": "Industrials",
+   "cap": 102070952042.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 463.91,
+   "lastDayPct": 1.08,
+   "avgVol20": 1110413.85,
+   "adr20Pct": 2.174,
+   "atr14": 11.0296,
+   "sma20": 441.34849999999994,
+   "sma50": 454.4217999999999,
+   "ema9": 451.518857338261,
+   "ema21": 447.30130346087407,
+   "emaCompression": false,
+   "adx14": 20.503605933431395,
+   "ret1m": 5.67,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 466.31,
+   "pivotDate": "2026-10-02",
+   "entry": 466.32,
+   "stop": 443.0,
+   "target": 512.95,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 447.7,
+   "nextEarnings": "2026-10-29",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "17.80%",
+    "Free Cash Flow": "3.55B",
+    "Price Target": "$526.67",
+    "Relative Strength Index (RSI)": "62.56",
+    "Revenue": "22.21B",
+    "Earnings Per Share (EPS)": "$13.19",
+    "Analyst Count": "25"
+   }
+  },
+  {
+   "tk": "TTMI",
+   "name": "TTM Technologies, Inc.",
+   "industry": "Electronic Components",
+   "sector": "Technology",
+   "cap": 13892354696.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 131.87,
+   "lastDayPct": 4.25,
+   "avgVol20": 1895673.4,
+   "adr20Pct": 5.617,
+   "atr14": 6.9511,
+   "sma20": 123.10300000000002,
+   "sma50": 123.0587,
+   "ema9": 125.7196038981946,
+   "ema21": 123.8965101380562,
+   "emaCompression": false,
+   "adx14": 9.392477500215268,
+   "ret1m": 14.07,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 134.57,
+   "pivotDate": "2026-10-02",
+   "entry": 134.58,
+   "stop": 127.32,
+   "target": 148.04,
+   "stopNote": "last session's low (5.4% away)",
+   "windowRows": 25,
+   "sma200": 125.24,
+   "nextEarnings": "2026-10-28",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "9.94%",
+    "Free Cash Flow": "-15.14M",
+    "Price Target": "$203.00",
+    "Relative Strength Index (RSI)": "58.21",
+    "Revenue": "3.38B",
+    "Earnings Per Share (EPS)": "$2.22",
+    "Analyst Count": "4"
+   }
+  },
+  {
+   "tk": "TXN",
+   "name": "Texas Instruments Incorporated",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 268312170147.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 293.8,
+   "lastDayPct": 4.44,
+   "avgVol20": 5843088.35,
+   "adr20Pct": 2.664,
+   "atr14": 7.6654,
+   "sma20": 269.8795,
+   "sma50": 270.5396,
+   "ema9": 279.6399978725888,
+   "ema21": 273.456041896368,
+   "emaCompression": false,
+   "adx14": 19.355235527736802,
+   "ret1m": 15.31,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 297.064,
+   "pivotDate": "2026-10-02",
+   "entry": 297.07,
+   "stop": 282.22,
+   "target": 326.78,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 248.81,
+   "nextEarnings": "2026-10-21",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "38.03%",
+    "Free Cash Flow": "5.36B",
+    "Price Target": "$324.71",
+    "Relative Strength Index (RSI)": "70.37",
+    "Revenue": "19.45B",
+    "Earnings Per Share (EPS)": "$6.58",
+    "Analyst Count": "36"
+   }
+  },
+  {
+   "tk": "VSH",
+   "name": "Vishay Intertechnology, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
+   "cap": 5856016596.0,
+   "lastSession": "2026-10-02",
+   "lastClose": 38.18,
+   "lastDayPct": 11.41,
+   "avgVol20": 3022192.2,
+   "adr20Pct": 4.65,
+   "atr14": 1.639,
+   "sma20": 32.4885,
+   "sma50": 32.803799999999995,
+   "ema9": 33.810889595820406,
+   "ema21": 32.950653789647006,
+   "emaCompression": false,
+   "adx14": 12.32671682585312,
+   "ret1m": 24.73,
+   "universeFail": [],
+   "readiness": {
+    "composite": 25,
+    "tightness": 0,
+    "proximity": 25,
+    "volumeDryUp": 0,
+    "timeInBase": 0
+   },
+   "timeInBaseDays": 0,
+   "pivot": 38.94,
+   "pivotDate": "2026-10-02",
+   "entry": 38.95,
+   "stop": 37.0,
+   "target": 42.85,
+   "stopNote": "~5% below entry",
+   "windowRows": 25,
+   "sma200": 30.61,
+   "nextEarnings": "2026-11-04",
+   "earningsSource": "stockanalysis statistics",
+   "stats": {
+    "Operating Margin": "1.81%",
+    "Free Cash Flow": "-6.96M",
+    "Price Target": "$40.00",
+    "Relative Strength Index (RSI)": "69.36",
+    "Revenue": "3.32B",
+    "Earnings Per Share (EPS)": "$0.21",
+    "Analyst Count": "7"
+   }
+  }
+ ]
+}

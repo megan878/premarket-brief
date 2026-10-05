@@ -1,0 +1,260 @@
+{
+ "ACN": {
+  "tk": "ACN",
+  "px": 198.9,
+  "pct": -6.31,
+  "pricedIn": {
+   "score": 58,
+   "band": "partly priced in",
+   "n": 4,
+   "partial": false,
+   "label": "Priced-in 58/100 \u2014 partly priced in",
+   "components": {
+    "a": 25.0,
+    "b": 15.0,
+    "c": 17.7,
+    "d": 0.0
+   },
+   "inputs": {
+    "movePct": 15.78,
+    "adr20Pct": 3.414,
+    "eventHigh": 227.63,
+    "eventLow": 211.035,
+    "last": 198.9,
+    "sessionsSince": 2,
+    "runUpPct": -2.51,
+    "price": 198.9,
+    "target": 223.03,
+    "reactionDate": "2026-10-01",
+    "targetSource": "stockanalysis.com consensus (single source)"
+   }
+  },
+  "flags": [
+   {
+    "key": "catalyst",
+    "label": "Catalyst",
+    "tip": "earnings beat + raise on 2026-10-01 (2 sources); Priced-in 58/100 \u2014 partly priced in.",
+    "inputs": {
+     "class": "earnings beat + raise",
+     "date": "2026-10-01",
+     "sources": 2,
+     "pricedIn": 58,
+     "components": 4
+    }
+   }
+  ],
+  "flagLog": [],
+  "financials": {
+   "revGrowthPct": 6.47,
+   "epsGrowthPct": 11.6,
+   "opMarginPct": 15.79,
+   "opMarginPriorPct": 15.58,
+   "period": "Q4 2026",
+   "source": "stockanalysis.com TTM income statement",
+   "fcf": 11620000000.0
+  },
+  "ret1m": 5.98
+ },
+ "MU": {
+  "tk": "MU",
+  "px": 1074.89,
+  "pct": -2.05,
+  "pricedIn": {
+   "score": 22,
+   "band": "room left",
+   "n": 4,
+   "partial": false,
+   "label": "Priced-in 22/100 \u2014 room left",
+   "components": {
+    "a": 0.0,
+    "b": 4.7,
+    "c": 0.0,
+    "d": 17.6
+   },
+   "inputs": {
+    "movePct": 3.03,
+    "adr20Pct": 3.677,
+    "eventHigh": 1098.9,
+    "eventLow": 1022.9,
+    "last": 1074.89,
+    "sessionsSince": 2,
+    "runUpPct": 14.11,
+    "price": 1074.89,
+    "target": 1521.76,
+    "reactionDate": "2026-10-01",
+    "targetSource": "stockanalysis.com consensus (single source)"
+   }
+  },
+  "flags": [
+   {
+    "key": "sector",
+    "label": "Sector",
+    "tip": "Technology is #1 of the top 3 sectors; Semiconductors is #3 in it (+10.8% 1M); the stock is +12.4% 1M, ahead of its industry.",
+    "inputs": {
+     "sector": "Technology",
+     "sectorRank": 1,
+     "industry": "Semiconductors",
+     "industryRank": 3,
+     "industry1M": 10.82,
+     "stock1M": 12.43
+    }
+   },
+   {
+    "key": "financials",
+    "label": "Financials",
+    "tip": "4 of 4 passed: revenue 256.33% (\u226515); EPS 879.32% (\u226520); op. margin 74.59% vs 26.24% a year ago; free cash flow positive",
+    "inputs": {
+     "revGrowthPct": 256.33,
+     "epsGrowthPct": 879.32,
+     "epsNote": null,
+     "opMarginPct": 74.59,
+     "opMarginPriorPct": 26.24,
+     "fcf": 58960000000.0,
+     "source": "stockanalysis.com TTM income statement",
+     "passed": [
+      "revenue",
+      "eps",
+      "margin",
+      "fcf"
+     ],
+     "unknown": []
+    }
+   },
+   {
+    "key": "catalyst",
+    "label": "Catalyst",
+    "tip": "earnings beat + raise on 2026-09-30 (2 sources); Priced-in 22/100 \u2014 room left.",
+    "inputs": {
+     "class": "earnings beat + raise",
+     "date": "2026-09-30",
+     "sources": 2,
+     "pricedIn": 22,
+     "components": 4
+    }
+   }
+  ],
+  "flagLog": [],
+  "financials": {
+   "revGrowthPct": 256.33,
+   "epsGrowthPct": 879.32,
+   "opMarginPct": 74.59,
+   "opMarginPriorPct": 26.24,
+   "period": "Q4 2026",
+   "source": "stockanalysis.com TTM income statement",
+   "fcf": 58960000000.0
+  },
+  "ret1m": 12.43
+ },
+ "SNPS": {
+  "tk": "SNPS",
+  "px": 489.9,
+  "pct": -0.13,
+  "pricedIn": {
+   "score": 51,
+   "band": "partly priced in",
+   "n": 4,
+   "partial": false,
+   "label": "Priced-in 51/100 \u2014 partly priced in",
+   "components": {
+    "a": 25.0,
+    "b": 3.0,
+    "c": 16.8,
+    "d": 6.1
+   },
+   "inputs": {
+    "movePct": 12.78,
+    "adr20Pct": 3.738,
+    "eventHigh": 496.95,
+    "eventLow": 462,
+    "last": 489.9,
+    "sessionsSince": 2,
+    "runUpPct": 4.85,
+    "price": 489.9,
+    "target": 553.77,
+    "reactionDate": "2026-10-01",
+    "targetSource": "stockanalysis.com consensus (single source)"
+   }
+  },
+  "flags": [
+   {
+    "key": "catalyst",
+    "label": "Catalyst",
+    "tip": "earnings beat + raise on 2026-10-01 (2 sources); Priced-in 51/100 \u2014 partly priced in.",
+    "inputs": {
+     "class": "earnings beat + raise",
+     "date": "2026-10-01",
+     "sources": 2,
+     "pricedIn": 51,
+     "components": 4
+    }
+   }
+  ],
+  "flagLog": [],
+  "financials": {
+   "revGrowthPct": 46.33,
+   "epsGrowthPct": -55.49,
+   "opMarginPct": 11.03,
+   "opMarginPriorPct": 17.99,
+   "period": "Q3 2026",
+   "source": "stockanalysis.com TTM income statement",
+   "fcf": 2750000000.0
+  },
+  "ret1m": 17.77
+ },
+ "TGT": {
+  "tk": "TGT",
+  "px": 156,
+  "pct": -0.45,
+  "pricedIn": {
+   "score": 40,
+   "band": "partly priced in",
+   "n": 4,
+   "partial": false,
+   "label": "Priced-in 40/100 \u2014 partly priced in",
+   "components": {
+    "a": 0.0,
+    "b": 14.8,
+    "c": 24.7,
+    "d": 0.0
+   },
+   "inputs": {
+    "movePct": 0.17,
+    "adr20Pct": 2.177,
+    "eventHigh": 159.92,
+    "eventLow": 155.96,
+    "last": 156,
+    "sessionsSince": 3,
+    "runUpPct": -2.77,
+    "price": 156,
+    "target": 164.68,
+    "reactionDate": "2026-09-30",
+    "targetSource": "stockanalysis.com consensus (single source)"
+   }
+  },
+  "flags": [
+   {
+    "key": "catalyst",
+    "label": "Catalyst",
+    "tip": "analyst upgrade on 2026-09-30 (2 sources); Priced-in 40/100 \u2014 partly priced in.",
+    "inputs": {
+     "class": "analyst upgrade",
+     "date": "2026-09-30",
+     "sources": 2,
+     "pricedIn": 40,
+     "components": 4
+    }
+   }
+  ],
+  "flagLog": [],
+  "financials": {
+   "revGrowthPct": 1.96,
+   "epsGrowthPct": 12.4,
+   "opMarginPct": 5.03,
+   "opMarginPriorPct": 4.74,
+   "period": "Q2 2027",
+   "source": "stockanalysis.com TTM income statement",
+   "fcf": 4460000000.0
+  },
+  "ret1m": -4.51
+ }
+}

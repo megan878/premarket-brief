@@ -286,6 +286,35 @@ a.wi:hover { border-color: var(--ink-3); }
 .trk.awaiting { color: var(--warn-ink); background: var(--warn-bg); border-color: var(--warn); }
 .trk.expired, .trk.time-exit, .trk.skipped, .trk.replaced { color: var(--ink-3); }
 .trk-note { font-size: 10.5px; font-weight: 700; color: var(--warn-ink); background: var(--warn-bg); border-radius: 4px; padding: 0 5px; }
+.ageRow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+.agechip { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line, #8884); color: var(--ink-3); background: transparent; }
+.agechip.amber { color: var(--warn-ink); background: var(--warn-bg); border-color: var(--warn); }
+.agechip.red { color: #fff; background: #c0392b; border-color: #c0392b; }
+.agechip.big { font-size: 12.5px; padding: 4px 11px; }
+.runline { margin-top: 8px; font-size: 12.5px; color: var(--ink-3); }
+.runline b.ok { color: inherit; } .runline b.amber { color: var(--warn-ink); } .runline b.red { color: #c0392b; }
+.resetbtn { margin-left: 8px; font: inherit; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line, #8886); background: transparent; color: inherit; cursor: pointer; }
+.resetpanel { margin-top: 10px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line, #8886); font-size: 13px; }
+.resetpanel[hidden] { display: none; }
+.resetpanel ul { margin: 4px 0 8px; padding-left: 18px; }
+.resetpanel textarea { width: 100%; min-height: 150px; font: 12px/1.45 ui-monospace, Consolas, monospace; box-sizing: border-box; background: transparent; color: inherit; border: 1px solid var(--line, #8886); border-radius: 8px; padding: 8px; }
+.selbar { margin: 4px 0 10px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line, #8886); font-size: 13.5px; }
+.selbar b { font-weight: 700; }
+.rank { width: 100%; border-collapse: collapse; font-size: 13px; margin: 6px 0 12px; }
+.rank th, .rank td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line, #8883); white-space: nowrap; }
+.rank th { font-size: 11.5px; color: var(--ink-3); font-weight: 600; }
+.rank td.r, .rank th.r { text-align: right; }
+.rank tr.clk { cursor: pointer; }
+.flag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-left: 4px; background: color-mix(in srgb, var(--ok, #2e8b57) 18%, transparent); border: 1px solid var(--ok, #2e8b57); cursor: help; }
+.pricedin { margin: 8px 0 4px; }
+.pricedin .num { font-size: 22px; font-weight: 800; }
+.pricedin .num.ok { color: var(--ok, #2e8b57); } .pricedin .num.px { color: var(--warn-ink); } .pricedin .num.no { color: #c0392b; }
+.pricedin .lab { font-size: 13px; font-weight: 600; margin-left: 6px; }
+.pricedin .bd { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+.pricedin .conf { font-size: 11.5px; color: var(--ink-3); margin-left: 6px; }
+.pick.fold:not(.open) > :not(.hd):not(.readiness):not(.pricedin):not(.foldbtn) { display: none; }
+.foldbtn { font: inherit; font-size: 12px; background: transparent; border: 0; color: var(--ink-3); cursor: pointer; padding: 4px 0 0; text-align: left; }
+@media (max-width: 640px) { .rank .hide-m { display: none; } }
 .tr-asof { margin-left: 4px; font-size: 11.5px; font-weight: 600; text-transform: none; letter-spacing: 0; color: var(--ink-3); }
 .tr-sum { display: flex; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 12px; }
 .tr-sum .sumchip { display: inline-flex; gap: 6px; align-items: baseline; padding: 5px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--chip); font-size: 12.5px; color: var(--ink-2); }
@@ -350,10 +379,58 @@ a.wi:hover { border-color: var(--ink-3); }
 
   /* ── Header ── */
   const hk = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Hong_Kong', weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+  /* ── Data age (computed HERE, at view time: a static page cannot age itself at build time) ── */
+  const CLOSED = new Set((D.calendar && D.calendar.closed) || []);
+  const isTD = (d) => { const w = d.getUTCDay(); return w !== 0 && w !== 6 && !CLOSED.has(d.toISOString().slice(0, 10)); };
+  const addDays = (d, n) => new Date(d.getTime() + n * 86400000);
+  const etNow = (() => { const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()); const g = (t) => f.find(x => x.type === t).value; return { date: new Date(g('year') + '-' + g('month') + '-' + g('day') + 'T00:00:00Z'), mins: (+g('hour') % 24) * 60 + +g('minute') }; })();
+  const lastSessionNow = (() => { let d = etNow.date; if (isTD(d) && etNow.mins >= 16 * 60) return d; d = addDays(d, -1); while (!isTD(d)) d = addDays(d, -1); return d; })();
+  const ageOf = (asOf) => { if (!asOf) return null; let d = new Date(asOf + 'T00:00:00Z'), n = 0; while (d < lastSessionNow) { d = addDays(d, 1); if (isTD(d)) n++; } return n; };
+  const ageCls = (n) => n == null ? 'amber' : n >= 3 ? 'red' : n >= 2 ? 'amber' : '';
+  const ageTxt = (n) => n == null ? 'age unknown' : n === 0 ? 'current' : n + (n === 1 ? ' session old' : ' sessions old');
+  window.__briefAge = { ageOf, lastSession: lastSessionNow.toISOString().slice(0, 10) };       // exposed for the parity test
+  const AGE_SECS = [['indices', 'Indices'], ['macro', 'Rates'], ['sectors', 'Sectors'], ['industries', 'Industries'], ['technical', 'Picks'], ['nearmiss', 'Near-miss'], ['catalysts', 'Catalysts']];
+  const HS = (D.health && D.health.sections) || {};
+  const ages = AGE_SECS.map(([k, l]) => ({ k, l, n: HS[k] ? ageOf(HS[k].asOf) : null })).filter(a => HS[a.k]);
+  const scanAges = ages.filter(a => ['industries', 'technical', 'nearmiss'].includes(a.k)).map(a => a.n).filter(n => n != null);
+  const scanN = scanAges.length ? Math.max(...scanAges) : null;
+  const ageRow = `<div class="ageRow" id="ageRow"><span class="agechip big ${ageCls(scanN)}" title="Industry drill-down, technical picks and near-misses come from the last full scan; amber at 2+ sessions old, red at 3+">Scan: ${ageTxt(scanN)}</span>${ages.map(a => `<span class="agechip ${ageCls(a.n)}" title="${a.l} data as of ${HS[a.k].asOf}">${a.l}: ${ageTxt(a.n)}</span>`).join('')}</div>`;
+  /* ── Last automated run: silent non-runs must be visible ── */
+  const fmtHK = (iso) => new Date(iso).toLocaleString('en-GB', { timeZone: 'Asia/Hong_Kong', weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false }) + ' HKT';
+  const runLine = (() => {
+    const la = D.runs && D.runs.lastAutomated;
+    const grace = (D.runs && D.runs.schedule && D.runs.schedule.brief && D.runs.schedule.brief.graceMinutes) || 30;
+    let exp = null;                                           // the most recent scheduled fire (12:00 UTC on a US trading day) that is more than `grace` minutes ago
+    for (let i = 0; i < 10 && !exp; i++) { const d = addDays(new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00Z'), -i); const fire = new Date(d.getTime() + 12 * 3600000); if (isTD(d) && fire.getTime() + grace * 60000 <= Date.now()) exp = fire; }
+    const missed = !la || !exp ? !la && !!exp : new Date(la.at).getTime() < exp.getTime();
+    const st = la ? la.status : 'unknown';
+    const cls = missed || st === 'failed' ? 'red' : st === 'ok' ? 'ok' : 'amber';
+    return `<div class="runline" id="runLine">Last automated run: <b class="${cls}">${la ? fmtHK(la.at) + ', status ' + st : 'not recorded yet'}</b>${la && la.seeded ? ' <span title="read from the routine run log, not written by the run itself">(from the run log)</span>' : ''}${missed ? ` · <b class="red">MISSED: the run due ${fmtHK(exp.toISOString())} has not been seen</b>` : ''}</div>`;
+  })();
+  const resetTxt = () => {
+    const rp = D.resetPolicy || { clear: [], keep: [] };
+    return 'Run a full "Reset scan" for the Pre-Market Swing Brief (repo megan878/premarket-brief, working folder brief-pipeline). Follow CLAUDE.md "Reset scan".\n\nCLEAR and rebuild:\n' + rp.clear.map(x => '- ' + x).join('\n') + '\n\nKEEP (never wiped by a reset):\n' + rp.keep.map(x => '- ' + x).join('\n') + '\n\nUse scripts/scan_fetch.py and scripts/scan_build.py, run the same validation and health checks as a normal run, show me the qualifying count, flags and priced-in scores, and ask before publishing. If a source fails, keep its last good data marked STALE. Never delete or rewrite data/picks.json records.\n\nShortcut: in a Claude Code session opened in that folder, just send /reset-scan';
+  };
   app.append($(`<header class="top">
     <h1>Pre-Market Swing Brief</h1>
-    <div class="meta">Data as of <b>${D.asOfLabel}</b> · built ${D.builtLabel} · HK now ${hk} · ${D.source}</div>
+    <div class="meta">Data as of <b>${D.asOfLabel}</b> · built ${D.builtLabel} · HK now ${hk} · ${D.source}<button class="resetbtn" id="resetBtn" aria-expanded="false" aria-controls="resetPanel">Reset scan</button></div>
+    ${ageRow}
+    ${runLine}
+    <div class="resetpanel" id="resetPanel" hidden>
+      <b>This page cannot start a run.</b> Starting a scan needs a secret (a token) that must never be embedded in a shareable page, and the cloud routine has no WebFetch, so it can only refresh the automated sections anyway. A full scan runs in an interactive Claude Code session. Clicking "Copy" only copies the instruction below; nothing is sent or started.
+      <p style="margin:8px 0 4px"><b>A reset clears and rebuilds:</b></p><ul>${((D.resetPolicy || {}).clear || []).map(x => `<li>${x}</li>`).join('')}</ul>
+      <p style="margin:8px 0 4px"><b>and never touches:</b></p><ul>${((D.resetPolicy || {}).keep || []).map(x => `<li>${x}</li>`).join('')}</ul>
+      <textarea id="resetText" readonly></textarea>
+      <div style="margin-top:6px"><button class="resetbtn" id="resetCopy" style="margin-left:0">Copy instruction</button> <span id="resetMsg" style="font-size:12px"></span></div>
+    </div>
   </header>`));
+  document.getElementById('resetText').value = resetTxt();
+  document.getElementById('resetBtn').addEventListener('click', () => { const pn = document.getElementById('resetPanel'); pn.hidden = !pn.hidden; document.getElementById('resetBtn').setAttribute('aria-expanded', String(!pn.hidden)); });
+  document.getElementById('resetCopy').addEventListener('click', async () => {
+    const ta = document.getElementById('resetText'), msg = document.getElementById('resetMsg');
+    try { await navigator.clipboard.writeText(ta.value); msg.textContent = 'Copied. Paste it into a new Claude Code session.'; }
+    catch (e) { ta.select(); msg.textContent = 'Select-all done: press Ctrl+C to copy.'; }
+  });
 
   /* ── Data health banner (validation + carry-forward results) ── */
   const H = D.health || { status: 'ok', sections: {}, issues: [] };
@@ -521,16 +598,22 @@ a.wi:hover { border-color: var(--ink-3); }
   /* ── Section 2: Technical picks ── */
   const sec2 = $(`<section class="section"><h2><span class="n">2</span>Picks</h2></section>`);
   app.append(sec2);
+  const SEL = D.selection || null;
+  if (SEL) {
+    const c = SEL.config || {};
+    sec2.append($(`<div class="selbar" id="selBar"><b>${SEL.qualified} of ${SEL.scored} scored names qualified (readiness ≥ ${c.minReadiness})</b> · showing ${(D.picks || []).length}${SEL.cut ? ` (${SEL.cut} more cut at ${c.maxPicks})` : ''}. A name must pass all of: universe filters · readiness ≥ ${c.minReadiness} · a valid base (≥ ${c.minSessionsSincePivot} sessions since the pivot) · stop ≥ ${c.stopMinAdr}× ADR20 and ≥ ${c.stopMinAtr}× ATR14 below the last close · no earnings within ${c.earningsBlackoutSessions} sessions (a date that cannot be verified rejects the name). Zero is a valid result; the max is ${c.maxPicks}. Your cap is 5 open positions.</div>`));
+  }
   sec2.append($(`<div class="card">
     <h3>How these were screened</h3>
-    <p class="sub">Universe = the 9 industries above. FMP's screener is blocked, so Finviz was used; it cannot filter or show EMA, ADX or ADR.</p>
+    ${(D.screenNotes || []).length ? '' : `<p class="sub">Universe = the 9 industries above. FMP's screener is blocked, so Finviz was used; it cannot filter or show EMA, ADX or ADR.</p>`}
     <ul class="cov">
-      <li><span class="st ok">✓</span><span><b>Market cap &gt; $5B</b> · Finviz has a $2B+ bucket; names under $5B were then dropped using the displayed market cap.</span></li>
+      ${(D.screenNotes || []).length ? '' : `<li><span class="st ok">✓</span><span><b>Market cap &gt; $5B</b> · Finviz has a $2B+ bucket; names under $5B were then dropped using the displayed market cap.</span></li>
       <li><span class="st ok">✓</span><span><b>Price &gt; $5</b> and <b>avg volume &gt; 500K</b> · direct Finviz filters.</span></li>
-      <li><span class="st px">~</span><span><b>Price between EMA21 and EMA9</b> · not checkable. Proxy: price above SMA20/50/200 (Finviz filter) and only a few % over SMA20, i.e. pulled back but in an uptrend. EMA9 was not verified for any pick.</span></li>
+      <li><span class="st px">~</span><span><b>Price between EMA21 and EMA9</b> · not checkable. Proxy: price above SMA20/50/200 (Finviz filter) and only a few % over SMA20, i.e. pulled back but in an uptrend. EMA9 was not verified for any pick.</span></li>`}
       ${(D.screenNotes || []).map(n => `<li><span class="st ${n.st}">${n.icon}</span><span>${n.html}</span></li>`).join('')}
     </ul>
   </div>`));
+  const flagHtml = (fl) => (fl || []).map(f => `<span class="flag ${f.key}" title="${String(f.tip || '').replace(/"/g, '&quot;')}">${f.label}</span>`).join('');
   // compact company snapshot shown on every pick card
   const bgHtml = (tk) => {
     const b = (D.bg || {})[tk];
@@ -560,9 +643,17 @@ a.wi:hover { border-color: var(--ink-3); }
   sec2.append(grid);
   const price2 = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const TRK_LBL = { waiting: 'Waiting', live: 'Live', stopped: 'Stopped', target: 'Target', expired: 'Expired', invalidated: 'Invalidated', 'time-exit': 'Time exit', skipped: 'Skipped', awaiting: 'Awaiting data', replaced: 'Replaced' };
-  if (!(D.picks || []).length) grid.append($(`<div class="empty">No technical setups available this run.</div>`));
+  if (!(D.picks || []).length) grid.append($(SEL ? `<div class="empty">No name passed every rule this run, which is a valid result. The closest names and the rule that stopped each one are in "Near misses" below.</div>` : `<div class="empty">No technical setups available this run.</div>`));
   const rankedPicks = [...(D.picks || [])].sort((a, b) => (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
-  rankedPicks.forEach(pk => {
+  if (rankedPicks.length > 1) {
+    const rows = rankedPicks.map((pk, i) => { const rr = (pk.target - pk.entry) / (pk.entry - pk.stop); return `<tr class="clk" data-tk="${pk.tk}"><td>${i + 1}</td><td><b>${pk.tk}</b></td><td class="hide-m">${pk.industry}</td><td class="r">${pk.readiness ? pk.readiness.composite : '–'}</td><td class="r">${pk.px.toFixed(2)}</td><td class="r hide-m">${pk.entry.toFixed(2)}</td><td class="r">${pk.stop.toFixed(2)}</td><td class="r">${rr.toFixed(1)}</td><td class="hide-m">${(D.bg && D.bg[pk.tk] && D.bg[pk.tk].next) || '–'}</td><td>${flagHtml(pk.flags)}</td></tr>`; }).join('');
+    sec2.insertBefore($(`<div class="rankwrap" style="overflow-x:auto;max-width:100%"><table class="rank" id="rankTable"><thead><tr><th>#</th><th>Ticker</th><th class="hide-m">Industry</th><th class="r">Ready</th><th class="r">Price</th><th class="r hide-m">Entry</th><th class="r">Stop</th><th class="r">R:R</th><th class="hide-m">Earnings</th><th>Flags</th></tr></thead><tbody>${rows}</tbody></table></div>`), grid);
+    sec2.querySelectorAll('#rankTable tr.clk').forEach(tr => tr.addEventListener('click', () => { const el = document.getElementById('pick-' + tr.dataset.tk); if (el) { el.classList.add('open'); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }));
+  }
+  if (!rankedPicks.length && (D.nearmiss || []).length) {
+    sec2.insertBefore($(`<div class="card" id="nearCard"><h3>Near misses: closest names and the rule that stopped each</h3><div style="overflow-x:auto;max-width:100%"><table class="rank"><thead><tr><th>Ticker</th><th class="r">Price</th><th>Why it did not qualify</th></tr></thead><tbody>${D.nearmiss.map(n => `<tr><td><b>${n.tk}</b></td><td class="r">${n.px.toFixed(2)}</td><td style="white-space:normal">${n.why}</td></tr>`).join('')}</tbody></table></div></div>`), grid);
+  }
+  rankedPicks.forEach((pk, idx) => {
     const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;
     const rr = reward / risk, riskPct = risk / pk.entry * 100, rewPct = reward / pk.entry * 100;
     // sparkline of closes with pivot + stop reference lines
@@ -583,7 +674,8 @@ a.wi:hover { border-color: var(--ink-3); }
       ['ok', `Cap ${pk.cap}`], ['ok', `Avg vol ${pk.avgVol}`],
       ['ok', `Over SMA20/50/200: +${pk.sma[0].toFixed(1)} / +${pk.sma[1].toFixed(1)} / +${pk.sma[2].toFixed(1)}%`],
       [pk.volM >= 2 ? 'ok' : 'px', `Volatility W/M ${pk.volW.toFixed(1)} / ${pk.volM.toFixed(1)}% (ADR proxy)`],
-      ['no', 'EMA9 &gt; price &gt; EMA21 not verified'], ['no', 'ADX not verified']
+      ...(pk.emaCompression === undefined ? [['no', 'EMA9 &gt; price &gt; EMA21 not verified'], ['no', 'ADX not verified']]
+        : [[pk.emaCompression ? 'ok' : 'px', pk.emaCompression ? 'EMA9 &gt; price &gt; EMA21 (computed)' : 'Not in the EMA9/EMA21 zone (computed; the scan does not gate on it)'], [pk.adx14 > 20 ? 'ok' : 'px', `ADX(14) ${pk.adx14 == null ? 'n/a' : pk.adx14.toFixed(0)} (computed)`]])
     ].map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
     const rd = pk.readiness;
     const rdCls = (v) => v >= 70 ? 'ok' : v >= 45 ? 'px' : 'no';
@@ -596,8 +688,9 @@ a.wi:hover { border-color: var(--ink-3); }
         <span class="bdi" title="Time-in-base — trading days forming the pattern"><i>Time</i><b>${rd.timeInBase}</b></span>
       </div>
     </div>` : '';
-    grid.append($(`<article class="card pick tech" id="pick-${pk.tk}">
-      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span>${trkHtml}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+    const foldable = rankedPicks.length > 4;
+    grid.append($(`<article class="card pick tech${foldable ? ' fold' + (idx < 3 ? ' open' : '') : ''}" id="pick-${pk.tk}">
+      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span>${flagHtml(pk.flags)}${trkHtml}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
       ${readinessHtml}
       <div class="setup"><b>${pk.setup}</b> <span>· ${pk.tags}</span></div>
       ${bgHtml(pk.tk)}
@@ -611,8 +704,10 @@ a.wi:hover { border-color: var(--ink-3); }
       <p class="why">${pk.why}</p>
       <p class="trim">${pk.trim}</p>
       <div class="chk">${chips}</div>
+      ${foldable ? '<button class="foldbtn" type="button">Show / hide details</button>' : ''}
     </article>`));
   });
+  grid.querySelectorAll('.foldbtn').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
   sec2.append($(`<p class="foot" style="margin-top:10px">Levels are arithmetic on the ${D.asOfLabel.replace(' close', '')} daily highs/lows (${D.pickWindow}): entry just above the pattern high, stop at the last session's low when it is 4–6% away (otherwise ~5%), target +10%. Readiness is a relative ranking within this run's universe, computed from the same daily data (tightening volatility, distance from the pivot, volume drying up into the base, days spent basing) — a high score means "closer to a clean breakout setup right now," not a guarantee. Not investment advice; nothing here has been checked against a live pre-market quote.</p>`));
 
 
@@ -625,18 +720,27 @@ a.wi:hover { border-color: var(--ink-3); }
     sec2.append($(`<h3 class="sub-h"><span class="kind cat">CATALYST</span> Alerts from the last 5 trading days${stale("catalysts")}</h3>`));
     sec2.append($(`<div class="card" style="margin-top:12px">
       <h3>How these were found</h3>
-      <p class="sub">Web search only (two independent sources per event, dated within 5 trading sessions). Price, % change and market cap are FMP's live quote at build time — not a verified reaction on the daily tape, and not a computed entry/stop/target: reading OHLC history needs WebFetch, which the automated routine does not have. These are alerts to look into, not trade-ready levels. None overlaps a pinned technical pick.</p>
+      <p class="sub"><b>Priced-in score</b> (0 = not priced in, 100 = the move is done): four 0-25 components (event move vs normal range · did price hold the event-day range and how stale is it · distance to the average analyst target · run-up before the event), rescaled when a component is missing. Alerts are ranked lowest score first. Bands: 0-30 room left · 31-60 partly priced in · 61-100 mostly or fully priced in. Events: web search only (two independent sources per event, dated within 5 trading sessions). Price and % change are the latest close or live quote at build time (stockanalysis.com closes in an interactive run, FMP's live quote in the routine) — not a computed entry/stop/target. These are alerts to look into, not trade-ready levels. None overlaps a pinned technical pick.</p>
       ${(D.rejected || []).length ? `<details class="rej"><summary>Considered and rejected</summary><ul>${D.rejected.map(x => `<li>${x}</li>`).join('')}</ul></details>` : ''}
     </div>`));
     const cgrid = $(`<div class="picks"></div>`);
     sec2.append(cgrid);
+    const PI_NAMES = { a: ['Move', 'Event-day move vs normal daily range (ADR20)'], b: ['Hold', 'Follow-through: did price hold the event-day range, and how many sessions ago'], c: ['Target', 'Distance to the updated average analyst target'], d: ['Run-up', 'Gain in the 20 sessions before the event'] };
+    const pricedHtml = (pk) => {
+      const p = pk.pricedIn;
+      if (!p || p.score == null) return `<div class="pricedin"><span class="lab">Priced-in: not scored (inputs unavailable)</span></div>`;
+      const cls = p.score <= 30 ? 'ok' : p.score <= 60 ? 'px' : 'no';
+      return `<div class="pricedin"><span class="num ${cls}">${p.score}</span><span class="lab">${p.label.replace(/ \(\d\/4 components, partial\)$/, '')}</span><span class="conf" title="${p.partial ? 'partial: some inputs are not available (the cloud routine has no price history)' : 'all four components scored'}">${p.n}/4 components${p.partial ? ' · partial' : ''}</span>
+        <div class="bd">${['a', 'b', 'c', 'd'].map(k => `<span class="bdi" title="${PI_NAMES[k][1]}"><i>${PI_NAMES[k][0]}</i><b>${p.components[k] == null ? '–' : Math.round(p.components[k])}</b></span>`).join('')}</div></div>`;
+    };
     D.catalysts.forEach(pk => {
       const chips = [['ok', `Cap ${pk.cap}`], ['ok', 'Price &gt; $5']];
       chips.push([pk.topSector ? 'ok' : 'px', pk.topSector ? 'Top-3 sector' : `Outside top-3 sectors (${pk.sector})`]);
       const chipHtml = chips.map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
       const src = pk.sources.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
       cgrid.append($(`<article class="card pick cat" id="pick-${pk.tk}">
-        <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind cat">CATALYST</span><span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+        <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind cat">CATALYST</span>${flagHtml(pk.flags)}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+        ${pricedHtml(pk)}
         <div class="catbox">
           <div class="ct"><b>${pk.ctype}</b><span>${pk.cdate}</span></div>
           <p>${pk.what}</p>
@@ -644,7 +748,7 @@ a.wi:hover { border-color: var(--ink-3); }
         </div>
         ${bgHtml(pk.tk)}
         <div class="lv" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-          <div><span class="k">Last price (FMP)</span><span class="v">${price2(pk.px)}</span></div>
+          <div><span class="k">Last price</span><span class="v">${price2(pk.px)}</span></div>
           <div><span class="k">Change</span><span class="v ${pctCls(pk.pct)}">${sgn(pk.pct)}%</span></div>
         </div>
         <div class="chk">${chipHtml}</div>
@@ -776,7 +880,7 @@ a.wi:hover { border-color: var(--ink-3); }
     sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Splits</h3>
       <p class="tr-sub">Literal ledger. "Sets" = distinct publishes: three semiconductors from one day are one independent sample, not three. Win = hit target, or exit above the fill.</p>
       <div class="tr-scroll"><table class="tr-table"><thead><tr><th></th><th class="n">Picks</th><th class="n">Closed</th><th class="n">Win rate</th><th class="n">Avg R</th></tr></thead><tbody>
-        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}${split('Stop distance at publish (tight = within 0.5× ADR20% of the close)', SL.byStopDistance || {})}
+        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}${split('Selection rules', SL.bySelectionVersion || {})}${split('Strength flags', SL.byFlags || {})}${split('Stop distance at publish (tight = within 0.5× ADR20% of the close)', SL.byStopDistance || {})}
       </tbody></table></div>
     </div>`));
     sec4t.append($(`<p class="foot" style="margin-top:10px">Every pick is recorded once per publish and followed to an outcome by replaying daily OHLC (entry triggers when the day's high reaches the entry, filled at the open if it gaps above; stop and target use the same bar, with the stop assumed first when both are hit; expires after 10 sessions untriggered; time-exit at the close of session 20). The cloud routine has no price history, so outcomes refresh only in an interactive session; until then a record reads "Awaiting data". Percentages appear only once a bucket has ${SL.minN} closed trades. Not investment advice.</p>`));

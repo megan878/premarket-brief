@@ -1,0 +1,112 @@
+{
+ "sectors": [
+  {
+   "name": "Technology",
+   "pct": 6.67
+  },
+  {
+   "name": "Communication Services",
+   "pct": 0.39
+  },
+  {
+   "name": "Industrials",
+   "pct": -0.57
+  },
+  {
+   "name": "Energy",
+   "pct": -2.59
+  },
+  {
+   "name": "Consumer Defensive",
+   "pct": -4.32
+  },
+  {
+   "name": "Healthcare",
+   "pct": -4.78
+  },
+  {
+   "name": "Consumer Cyclical",
+   "pct": -5.04
+  },
+  {
+   "name": "Utilities",
+   "pct": -5.64
+  },
+  {
+   "name": "Real Estate",
+   "pct": -7.51
+  },
+  {
+   "name": "Financial",
+   "pct": -7.7
+  },
+  {
+   "name": "Basic Materials",
+   "pct": -8.16
+  }
+ ],
+ "industries": [
+  {
+   "sector": "Technology",
+   "items": [
+    {
+     "name": "Semiconductor Equipment & Materials",
+     "pct": 18.07,
+     "n": 29
+    },
+    {
+     "name": "Electronic Components",
+     "pct": 10.93,
+     "n": 44
+    },
+    {
+     "name": "Semiconductors",
+     "pct": 10.82,
+     "n": 70
+    }
+   ]
+  },
+  {
+   "sector": "Communication Services",
+   "items": [
+    {
+     "name": "Internet Content & Information",
+     "pct": 4.25,
+     "n": 69
+    },
+    {
+     "name": "Electronic Gaming & Multimedia",
+     "pct": -0.49,
+     "n": 21
+    },
+    {
+     "name": "Publishing",
+     "pct": -3.0,
+     "n": 8
+    }
+   ]
+  },
+  {
+   "sector": "Industrials",
+   "items": [
+    {
+     "name": "Electrical Equipment & Parts",
+     "pct": 5.53,
+     "n": 56
+    },
+    {
+     "name": "Specialty Industrial Machinery",
+     "pct": 3.57,
+     "n": 79
+    },
+    {
+     "name": "Building Products & Equipment",
+     "pct": 3.53,
+     "n": 36
+    }
+   ]
+  }
+ ],
+ "sectorSource": "Finviz groups \u00b7 Perf Month \u00b7 interactive refresh 5 Oct (data to the 2 Oct close); read twice, both reads agree",
+ "asOf": "2026-10-02"
+}

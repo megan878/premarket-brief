@@ -9,6 +9,7 @@ Philosophy
 """
 import copy, datetime as dt, json, math, re
 import market_time as mt
+import pricedin as pi
 
 SECTIONS = ['indices', 'macro', 'sectors', 'industries', 'technical', 'catalysts', 'nearmiss']
 CRITICAL = ['indices', 'sectors']      # without these the brief is not worth publishing
@@ -178,6 +179,10 @@ def _alert(p, ctx):
 
 
 def check_technical(d, ctx):
+    # Zero picks is a valid result of the quality rules (selection.py) - but only when the scan says so explicitly.
+    sel = d.get('selection')
+    if not (d.get('picks') or []) and isinstance(sel, dict) and sel.get('qualified') == 0 and (sel.get('scored') or 0) > 0:
+        return []
     return _check_items(d, ctx, 'technical', 'picks', _levels)
 
 
@@ -214,16 +219,18 @@ def check_nearmiss(d, ctx):
 
 CHECKS = {'indices': check_indices, 'macro': check_macro, 'sectors': check_sectors, 'industries': check_industries,
           'technical': check_technical, 'catalysts': check_catalysts, 'nearmiss': check_nearmiss}
+OPTIONAL_KEYS = {'sectorSource', 'pickWindow', 'selection'}      # carried along when present, never required
 KEYS = {'indices': ['indices'], 'macro': ['macro'], 'sectors': ['sectors', 'sectorSource'], 'industries': ['industries'],
-        'technical': ['picks', 'pickWindow'], 'catalysts': ['catalysts'], 'nearmiss': ['nearmiss']}
+        'technical': ['picks', 'pickWindow', 'selection'], 'catalysts': ['catalysts'], 'nearmiss': ['nearmiss']}
 
 
 # ───────────────────────── assembly with carry-forward ─────────────────────────
 def assemble(new, old, ctx):
     """Merge fresh data with the previous good copy. Returns (final_data, health)."""
     new, old = copy.deepcopy(new or {}), copy.deepcopy(old or {})
-    final = {k: v for k, v in (old or {}).items() if k in ('source', 'notices')}
-    final.update({k: v for k, v in new.items() if k in ('source', 'notices')})
+    PASS = ('source', 'notices', 'screenNotes', 'rejected')        # free-text blocks the page renders; a fresh run rewrites them
+    final = {k: v for k, v in (old or {}).items() if k in PASS}
+    final.update({k: v for k, v in new.items() if k in PASS})
     final.setdefault('notices', [])
     sections, issues = {}, []
     last = ctx['lastSession']
@@ -231,11 +238,12 @@ def assemble(new, old, ctx):
         if sec in PINNED and not any(k in new for k in KEYS[sec]):
             # Not fetched by design (no WebFetch in the automated routine) — carry the last interactive copy forward
             # verbatim, dated, and labelled 'pinned' rather than 'stale' so a clean run still reads as healthy.
-            prev_ok = old and all(k in old for k in KEYS[sec]) and \
+            prev_ok = old and all(k in old for k in KEYS[sec] if k not in OPTIONAL_KEYS) and \
                       not [i for i in CHECKS[sec](old, ctx) if i['level'] == 'hard']
             if prev_ok:
                 for k in KEYS[sec]:
-                    final[k] = old[k]
+                    if k in old:
+                        final[k] = old[k]
                 pas = (old.get('sections', {}).get(sec) or {}).get('asOf', '?')
                 sections[sec] = {'status': 'pinned', 'asOf': pas,
                                   'source': (old.get('sections', {}).get(sec) or {}).get('source', ''),
@@ -273,7 +281,7 @@ def assemble(new, old, ctx):
                              'msg': f'delivered data is from {asof}, older than the last session {last}' if stale else ''}
             continue
         reason = '; '.join(i['msg'] for i in hard[:2])
-        prev_ok = all(k in old for k in KEYS[sec] if k != 'sectorSource' and k != 'pickWindow') and \
+        prev_ok = all(k in old for k in KEYS[sec] if k not in OPTIONAL_KEYS) and \
                   not [i for i in CHECKS[sec](old, ctx) if i['level'] == 'hard'] if old else False
         if prev_ok:
             for k in KEYS[sec]:
@@ -320,6 +328,13 @@ def assemble(new, old, ctx):
     health = {'status': status, 'sections': sections, 'issues': issues,
               'fetch': {'calls': len(fl), 'failed': len(failed_calls), 'failures': [f.get('id') for f in failed_calls][:25]},
               'lastSession': last.isoformat()}
+    for k in ('flagLog',):                                   # strength-flag inputs that were unavailable (logged, never guessed)
+        if k in new:
+            final[k] = new[k]
+        elif k in old:
+            final[k] = old[k]
+    health['flagLog'] = list(final.get('flagLog') or [])
+    final['catalysts'] = pi.rank_alerts(final.get('catalysts') or [])      # lowest priced-in score first; unscored last
     final['sections'] = {s: {'asOf': v['asOf'], 'source': v['source']} for s, v in sections.items()}
     final['health'] = health
     final['fetchlog'] = fl

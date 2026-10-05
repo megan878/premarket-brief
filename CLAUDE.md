@@ -94,7 +94,7 @@ No extra call needed.
   plus a read of daily OHLC. Say on the page which conditions are unverified (EMA9/EMA21, ADX).
 - Market cap: Finviz's smallest bucket is `cap_midover` ($2B+); drop names under $5B using the displayed cap.
 - Setups wanted: tight bull flag / pennant / compression coiling under a pivot on a good base.
-- Pick 3-4 technical picks. A catalyst pick must not duplicate a technical pick.
+- **Picks (since 2026-10-05): quality, not quota** - every name that passes ALL the rules in "Quality selection" below, at most 10, zero is valid (it was 3-4 picks before; those sets are `selectionVersion` `top4-v1`). A catalyst pick must not duplicate a technical pick.
 
 ## Readiness scoring (v1 added 2026-10-01; **v2 current since 2026-10-03**) — technical picks only, PINNED/interactive
 **v2 (current) fixes one defect in v1.** v1 compared the last 5 true ranges with the 5 before them, and the 5 sessions of volume up to AND INCLUDING
@@ -305,6 +305,54 @@ or more than 3% as a skipped chase, not a trade. The definition is the single co
 - Backfill (one-off, 3 Oct): `scripts/tracker_backfill.py` rebuilt the ledger from git history and the committed artifact-v11 block; evidence
   in `data/provenance/backfill-2026-10-03/` (OHLC, FMP cross-check, report).
 
+## Quality selection, max 10 (added 2026-10-05) - `scripts/selection.py`, config in `selection.CONFIG`
+A scored name is a technical pick only if it passes ALL of: the universe filters (price > $5, cap > $5B, 20-day volume > 500K, ADR20 > 2%, above SMA20/50/200, not > 20% above SMA50;
+EMA9/EMA21 and ADX(14) are computed and shown but are not gates, as the scan never gated on them) - **readiness >= 55** (`minReadiness`, a tuning guess; v2 scores) -
+**a valid base** (pivot not today, >= 2 sessions since it) - **stop at least 0.5 x ADR20 below the last close** (`stopMinAdr`) AND **at least 1 x ATR14 below it** (`stopMinAtr`, the 3 Oct floor):
+the stricter wins and a failing name is rejected, never re-levelled - **no earnings within 3 trading sessions** (`earningsBlackoutSessions`); the date comes from stockanalysis, then a WebSearch
+second source, and a name with no verifiable date is rejected with the reason "earnings date unverified" (list those names in the run report). Ranked by readiness (ties: proximity, ticker);
+beyond 10 the rest are near-misses with the reason "cut at 10". The page header reads "N of M scored names qualified (readiness >= 55)". Every ledger record stores `selectionVersion`
+(`quality-max10-v1`; the 16 older records are `top4-v1`), `selectionRank`, `selectionQualified`; the stats split by it. Pipeline: `scan_fetch.py` -> `scan_build.py analyse/stats/select` -> `scan_assemble.py`.
+
+## Strength flags (added 2026-10-05) - `scripts/flags.py`, config in `flags.CONFIG`
+A chip only when the evidence is strong; no chip means "not notable", never "bad". The tooltip carries the numbers. Inputs that are unavailable show nothing and are logged in `flagLog` (health), never guessed.
+- **Sector**: sector in today's top 3 AND the industry in that sector's top 3 (1M) AND the stock's 1M return (21 sessions) beats its industry's.
+- **Financials**: >= 3 of 4: TTM revenue growth >= 15%, TTM EPS growth >= 20% (with a note when EPS fell while revenue and margin rose: a one-off in the base year), operating margin stable or expanding y/y (0.5pp tolerance), free cash flow > 0. Source: stockanalysis TTM statements (interactive only; FMP statements are blocked).
+- **Catalyst**: a playbook-type catalyst (earnings beat + raise, major contract, upgrade with a target > 15% above price, approval/launch, index add) within the last 10 sessions, >= 2 independent outlets, priced-in score <= 60 from >= 3 components.
+Flags and their inputs are stored in brief-data and, for picks, in the ledger record (`flags`, `flagInputs`; `null` = never evaluated, `[]` = evaluated, none). The Track record splits flagged vs not.
+
+## Catalyst priced-in score (added 2026-10-05) - `scripts/pricedin.py`, anchors in `pricedin.CONFIG`
+0 = not priced in (room left), 100 = fully priced in. Four components, 0-25 each, more priced in = more points: **a** event-day move / ADR20 (ADR over the 20 sessions BEFORE the event; <= 1x -> 0, >= 3x -> 25) -
+**b** follow-through: `25 x (0.6 x fade + 0.4 x age)`, fade = 0 at/above the event-day high to 1 at/below its low, age = 0 for sessions 1-3 after the event to 1 from session 5 - **c** price vs the average analyst target
+(<= 5% below -> 25, >= 25% below -> 0) - **d** % gain in the 20 sessions before the event (<= 0 -> 0, >= 20% -> 25). Score = sum of the available components rescaled to 0-100; fewer than 4 shows "n/4 components, partial".
+Bands: 0-30 room left, 31-60 partly priced in, 61-100 mostly or fully priced in. Label: "Priced-in 72/100 - mostly priced in". Catalyst alerts are ranked lowest score first.
+Interactive runs compute it from OHLC (`scan_catalysts.py`); the cloud routine has no OHLC, so a new alert there is scored from the available inputs only and labelled partial.
+
+## Reset scan (added 2026-10-05) - `scripts/reset_policy.py` is the single list; this block is checked against it by `tests/test_scan_rules.py`
+The page cannot start a run (a token must never be embedded in a shareable page, and the cloud routine has no WebFetch, so even a routine run could not rebuild the scan). The "Reset scan" button therefore shows a
+copy-ready instruction; the same thing is the project command `/reset-scan`. A reset runs the normal validation and health checks before publishing; a source that fails keeps its last good data marked STALE (never blank);
+it never deletes or rewrites a ledger record (`reset_policy.verify` checks this).
+<!-- RESET:BEGIN -->
+CLEAR and rebuild:
+- sector ranking
+- industry drill-down
+- technical picks (and the selection summary)
+- near-misses and their watchlist rows
+- catalyst alerts older than 5 trading days
+- stale health flags (recomputed by the new build)
+KEEP (never wiped by a reset):
+- the pick ledger and the Track record section
+- provenance files
+- catalyst alerts still inside their 5-day window (re-priced, not dropped)
+- the Catalyst Playbook / Reference section
+- regime-score rules, config values and the design
+<!-- RESET:END -->
+
+## Page header: data age and last automated run (added 2026-10-05)
+Computed in the browser when the page is opened (a static page cannot age itself): per-section "N sessions old" chips and a "Scan: N sessions old" badge (industries/technical/near-miss), neutral below 2, amber at 2+, red at 3+.
+"Last automated run: <time HKT>, status ok/unpushed/failed" comes from `runs.lastAutomated`, written by `build_brief.py --run-kind automated` (the routine passes it; an interactive build keeps the previous value).
+It turns red with "MISSED" when no run newer than the most recent scheduled fire (12:00 UTC on a US trading day, +30 min grace) is recorded.
+
 ## Known issues
 - **Finviz screener and quote pages now refuse automated fetches** (robots.txt / 404) in interactive sessions too. The 2 Oct scan therefore built its
   universe from stockanalysis.com industry lists (see `data/provenance/2026-10-02/NOTE.md`). The scan code is deliberately unchanged here; it gets its own task.
@@ -331,6 +379,7 @@ or more than 3% as a skipped chase, not a trade. The definition is the single co
   artifact's embedded data into a local cache, `context` reads that cache, `record` dedupes/formats sweep output).
 - `data/picks.json` — the pick ledger (append-only; schema in "Pick tracker"). `data/provenance/` — evidence behind pick sets and the backfill
   (`2026-10-02/` the 2 Oct scan's method + artifact v11 block; `backfill-2026-10-03/` the validated OHLC, FMP cross-check and report).
+- `scripts/selection.py`, `flags.py`, `pricedin.py`, `reset_policy.py` (the 5 Oct rules, unit-tested in `tests/test_scan_rules.py`); `scripts/scan_fetch.py` / `scan_build.py` / `scan_catalysts.py` / `scan_assemble.py` (interactive scan pipeline; raw JSON from stockanalysis.com, no summarizer); `.claude/commands/reset-scan.md`.
 - `scripts/tracker.py` (outcome rules, validation, stats, `update`/`closes` commands), `scripts/tracker_backfill.py` (one-off backfill),
   `tests/test_tracker.py` (unit tests), `tests/shoot_brief.py` (Chromium render check: console errors, overflow, 1200/390 × light/dark).
 - `.claude/commands/news-sweep.md` — the `/loop`-driven news-loop prompt (`/loop 15m /news-sweep` to start it).
