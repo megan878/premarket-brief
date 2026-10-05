@@ -930,7 +930,7 @@ a.wi:hover { border-color: var(--ink-3); }
   /* ── Footer ── */
   app.append($(`<footer class="foot">
     <p>SPX, DJI, RUT, VIX: FMP quotes, ${D.asOf} after the US close; regime read uses each index's own 50/200-day averages as reported by FMP.</p>
-    <p>QQQ and sector strength (11-sector ranking): web search, cap-weighted, 1-month — refreshed every run. Industry drill-down and technical picks: Finviz, pinned to the last interactive refresh (WebFetch is not available to the automated routine — see the PINNED chips above). Not investment advice.</p>
+    <p>Sector ranking and industry drill-down: Finviz groups (cap-weighted, 1-month), technical picks and near-misses: stockanalysis.com daily bars; all four are pinned to the last interactive scan and carry the same as-of chip (WebFetch is not available to the automated routine, so the cloud run never rewrites them). QQQ is a web-search quote, labelled with its date. Not investment advice.</p>
     <p>Catalyst alerts: events and dates from web search (two sources each); price, % change and market cap from the FMP company profile at build time — not a verified tape reaction. Company snapshot for catalyst tickers is cap + description only (FMP); revenue/EPS/next-earnings need FMP's statements/earnings-calendar endpoints, blocked on the free plan, or an interactive refresh. Pinned technical picks keep their full snapshot from the last interactive run.</p>
     <p>Rates: 10-year and curve from FMP treasury-rates (${D.asOfLabel.replace(' close', '')}). Fed decision from web search summaries, confirmed across at least two outlets.</p>
   </footer>`));

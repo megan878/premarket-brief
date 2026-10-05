@@ -81,7 +81,7 @@ def main(argv=None):
     d['flagLog'] = flag_log
     # ── sections meta ──
     d['sections'] = {
-        'indices': {'asOf': last, 'source': 'FMP index quotes (SPX/DJI/RUT); VIX = FMP previousClose (the 2 Oct close); QQQ omitted'},
+        'indices': {'asOf': last, 'source': 'FMP index quotes (SPX/DJI/RUT); VIX = FMP previousClose (the 2 Oct close); QQQ = the 1 Oct close from WebSearch, labelled on its tile'},
         'macro': {'asOf': last, 'source': 'FMP treasury-rates; Fed block unchanged (no FOMC meeting since 16 Sep)'},
         'sectors': {'asOf': last, 'source': 'Finviz groups · Perf Month (interactive refresh, 5 Oct)'},
         'industries': {'asOf': last, 'source': 'Finviz groups · Perf Month (interactive refresh, 5 Oct)'},

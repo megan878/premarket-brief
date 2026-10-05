@@ -500,7 +500,7 @@
  "sections": {
   "indices": {
    "asOf": "2026-10-02",
-   "source": "FMP index quotes (SPX/DJI/RUT); VIX = FMP previousClose (the 2 Oct close); QQQ omitted"
+   "source": "FMP index quotes (SPX/DJI/RUT); VIX = FMP previousClose (the 2 Oct close); QQQ = the 1 Oct close from WebSearch, labelled on its tile"
   },
   "macro": {
    "asOf": "2026-10-02",
