@@ -1,88 +1,90 @@
 {
-  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. Futures dropped this run — two WebSearch sources disagreed by up to ~0.3pp and the quotes were pre-open, already ~13 minutes stale against the live cash tape.",
-  "meta": {"schemaVersion": 1},
-  "sections": {
-    "indices": {"asOfUTC": "2026-10-02T13:41:00Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ via WebSearch (approximate)"},
-    "futures": {"asOfUTC": null, "source": ""},
-    "quotes": {"asOfUTC": "2026-10-02T13:42:00Z", "source": "FMP company/profile-symbol"},
-    "news": {"asOfUTC": "2026-10-02T13:44:00Z", "source": "WebSearch"}
+  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. QQQ and index futures both dropped this run — see footnotes.",
+  "notes": {
+    "DAL": "Reports Q3 earnings 9 Oct (4 trading sessions out). A fresh US Travel Association report (5 Oct) projects ~2M fewer international visitors to the US in 2026 vs 2025 — a sector headwind, not yet clearly in the tape.",
+    "QRVO": "A single source (TipRanks) reports QRVO was delisted from Nasdaq today following completion of the Skyworks acquisition/merger; could not be confirmed with a second source this run, so treated as unconfirmed. FMP's quote below is identical to the brief's 2 Oct close (114.17) with no implied move, consistent with either a frozen/stale print or genuinely quiet trading — do not treat this as a live, tradeable quote without checking a broker feed directly."
   },
+  "footnotes": [
+    "QQQ (NDX proxy) omitted this run: WebSearch sources conflated Friday 2 Oct's close ($749.58, +1.02% that day) with \"today's\" price — one source called $749.58 Friday's close, another called the same number the live Oct 5 price with an intraday range. The two readings contradict each other and could not be reconciled, so per the hard rule against guessing the tile is left out rather than published with an ambiguous number.",
+    "Index futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned premarket-session quotes for Nasdaq futures that disagreed by nearly 1 full percentage point across sources (+1.07% vs +0.15%) and for Dow futures (+0.52% vs +0.1%), and all of the futures quotes found were pre-open snapshots already stale — the US cash market opened at 13:30 UTC and this fetch ran at ~13:41-13:50 UTC, 11-20 minutes after the open. Rather than publish a reconciled-looking number that isn't, this section is dropped; the live cash indices below are the reliable read on the open.",
+    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each symbol was fetched individually (16 stock quotes + 4 index quotes)."
+  ],
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7732.46, "pct": 0.86102, "prev": 7666.45},
-    {"id": "DJI", "name": "Dow Jones", "px": 51272.24, "pct": 0.67878, "prev": 50926.56},
-    {"id": "RUT", "name": "Russell 2000", "px": 2841.29001, "pct": 1.23511, "prev": 2806.62521},
-    {"id": "VIX", "name": "Volatility", "px": 15.74, "pct": -3.96583, "prev": 16.39},
-    {"id": "QQQ", "name": "Invesco QQQ", "px": 752.16, "pct": 1.37, "prev": 742.03, "proxy": true}
+    {"id": "SPX", "name": "S&P 500", "px": 7736.23, "pct": 0.17494, "prev": 7722.72},
+    {"id": "DJI", "name": "Dow Jones", "px": 50986.18, "pct": -0.37278, "prev": 51176.96},
+    {"id": "RUT", "name": "Russell 2000", "px": 2829.30597, "pct": -0.12668, "prev": 2832.89467},
+    {"id": "VIX", "name": "Volatility", "px": 15.89, "pct": 3.78837, "prev": 15.31}
   ],
   "futures": {},
   "quotes": {
-    "NVDA": {"px": 235.90, "pct": 2.18314, "change": 5.04, "vol": 21877113, "avgVol": 136505948},
-    "MPWR": {"px": 1429.95, "pct": 5.06844, "change": 68.98, "vol": 39728, "avgVol": 862528},
-    "TXN": {"px": 295.215, "pct": 4.94295, "change": 13.905, "vol": 345561, "avgVol": 7667577},
-    "DAL": {"px": 84.47, "pct": 0.40414, "change": 0.34, "vol": 557952, "avgVol": 6765676},
-    "ACN": {"px": 205.72, "pct": -3.09939, "change": -6.58, "vol": 917098, "avgVol": 7770785},
-    "MU": {"px": 1095.23999, "pct": -0.19592, "change": -2.15001, "vol": 5094995, "avgVol": 41275811},
-    "SNPS": {"px": 494.195, "pct": 0.7451, "change": 3.655, "vol": 206297, "avgVol": 1999084},
-    "TGT": {"px": 156.275, "pct": -0.27122, "change": -0.425, "vol": 74643, "avgVol": 4246623},
-    "ASML": {"px": 1856.49, "pct": 2.65415, "change": 48.00, "vol": 174148, "avgVol": 1693587},
-    "ASX": {"px": 46.31, "pct": 3.5323, "change": 1.58, "vol": 580198, "avgVol": 9359859},
-    "ETN": {"px": 451.26, "pct": 3.19704, "change": 13.98, "vol": 93877, "avgVol": 2248808},
-    "AMAT": {"px": 543.70, "pct": 2.72057, "change": 14.40, "vol": 617756, "avgVol": 8627352}
-  },
-  "notes": {
-    "DAL": "Elon Musk said on 2 Oct that Delta CEO Ed Bastian 'will lose his job' over picking Amazon's Leo satellite service over Starlink for in-flight Wi-Fi; United is fast-tracking status matches to poach Delta elite flyers. Reputational noise, not yet clearly in the tape, ahead of Delta's 9 Oct earnings."
+    "SANM": {"px": 228.4, "pct": -0.27943, "change": -0.64, "vol": 13452.27749, "avgVol": 927498},
+    "ACN": {"px": 195.315, "pct": -1.80241, "change": -3.585, "vol": 501737, "avgVol": 7839820},
+    "MU": {"px": 1065, "pct": -0.92009, "change": -9.89, "vol": 2201490, "avgVol": 40728885},
+    "SNPS": {"px": 503.3198, "pct": 2.73929, "change": 13.4198, "vol": 266067, "avgVol": 2069360},
+    "TGT": {"px": 152.88, "pct": -2, "change": -3.12, "vol": 222822, "avgVol": 4242658},
+    "FLEX": {"px": 119.96, "pct": 2.87282, "change": 3.35, "vol": 391955.56926, "avgVol": 5619571},
+    "INTC": {"px": 117.52, "pct": -1.5168, "change": -1.81, "vol": 15773314, "avgVol": 114212286},
+    "META": {"px": 738.47, "pct": 1.42704, "change": 10.39, "vol": 1665547, "avgVol": 19597352},
+    "ALAB": {"px": 350.68, "pct": 0.0999058, "change": 0.35, "vol": 244567, "avgVol": 4806384},
+    "QRVO": {"px": 114.17, "pct": 1.74672, "change": 1.96, "vol": 8341594, "avgVol": 1435944},
+    "ITT": {"px": 205.255, "pct": -0.44381, "change": -0.915, "vol": 9141, "avgVol": 899869},
+    "SIMO": {"px": 286.2, "pct": 2.03209, "change": 5.7, "vol": 83459.7988, "avgVol": 952482},
+    "GLW": {"px": 160.59, "pct": -2.19258, "change": -3.6, "vol": 562435, "avgVol": 12333327},
+    "SKHY": {"px": 193.12, "pct": -1.03008, "change": -2.01, "vol": 1183942, "avgVol": 29390797},
+    "ARM": {"px": 305.285, "pct": -0.7171, "change": -2.205, "vol": 416668.41756, "avgVol": 7237604},
+    "GNRC": {"px": 213.1, "pct": -1.70664, "change": -3.7, "vol": 58703, "avgVol": 1135734}
   },
   "news": [
     {
-      "tag": "Macro",
-      "top3": false,
-      "title": "September jobs report misses badly; stocks rally on Fed-pause bets",
-      "text": "Nonfarm payrolls added just 29,000 vs. ~90,000 expected; unemployment rose to 4.2%. Futures and cash indices extended gains on bets the miss keeps the Fed from tightening further, with the 10Y yield easing.",
-      "names": [],
-      "sources": [{"t": "Investing.com (Reuters)", "u": "https://investing.com/news/economy-news/wall-st-futures-extend-gains-after-nonfarm-payrolls-data-4929820"}]
-    },
-    {
       "tag": "Technology",
       "top3": true,
-      "title": "Morgan Stanley names Nvidia its top semiconductor pick",
-      "text": "Morgan Stanley reiterated NVDA as its top chip pick entering a new product cycle. Separately, Anthropic and xAI have committed up to $84.5B for Nvidia compute through 2029, and the board upsized its buyback authorization by $150B to $235B.",
-      "names": ["NVDA"],
+      "title": "Intel slides as TSMC explores role in Musk's Terafab venture",
+      "text": "Reports that TSMC is in early talks to join Elon Musk's Terafab chip project in Texas sent Intel shares down as much as ~4% premarket — Intel joined Terafab in April 2026 as the sole named manufacturing partner, and a TSMC role would dilute that position. Musk confirmed the talks are at an early stage.",
+      "names": ["INTC"],
       "sources": [
-        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9107500/morgan-stanley-names-nvidia-nvda-top-semiconductor-pick-amid-new-product-cycle"},
-        {"t": "StocksToTrade", "u": "https://stockstotrade.com/news/nvidia-corporation-nvda-news-2026_10_02/"}
+        {"t": "Investing.com", "u": "https://www.investing.com/news/stock-market-news/intel-stock-slides-as-tsmc-explores-terafab-tieup-analyst-flags-share-losses-4931558"},
+        {"t": "TaiwanPlus", "u": "https://www.taiwanplus.com/news/taiwan-news/technology-and-science/261004007/tsmc-discusses-potential-role-in-musks-texas-terafab"}
       ]
     },
     {
       "tag": "Technology",
       "top3": true,
-      "title": "ON Semiconductor sweetens Synaptics bid to all-cash ~$5.7B",
-      "text": "ON Semiconductor restructured its pending Synaptics takeover from a $7B all-stock deal into an all-cash ~$5.7B transaction, immediately accretive to its non-GAAP EPS. ON +6.5% and SYNA +15% pre-market, lifting broader chip sentiment alongside Micron's post-earnings strength.",
+      "title": "Goldman names tactical chip-sector buys ahead of Q3 earnings",
+      "text": "Goldman Sachs flagged Applied Materials, Seagate and Microchip as tactical buys into earnings season, expecting AMAT to raise margin targets at SEMICON West (13 Oct) on DRAM/advanced-logic strength; flagged Qualcomm, KLA and Western Digital as relative underperformers. Backdrop: Goldman sees ~27% y/y S&P 500 EPS growth this quarter, led by tech and energy.",
       "names": [],
       "sources": [
-        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9107504/synaptics-inc-syna-surges-151-premarket-ahead-of-september-jobs-data"},
-        {"t": "Investing.com", "u": "https://ca.investing.com/news/stock-market-news/why-is-on-semiconductor-stock-surging-today-93CH-4863470"}
+        {"t": "CNBC", "u": "https://www.cnbc.com/2026/10/03/stocks-to-buy-now-ahead-of-their-earnings-according-to-goldman-sachs.html"},
+        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9108857/goldman-sachs-projects-strong-q3-earnings-growth-micron-technology-mu-valuation-under-spotlight"}
+      ]
+    },
+    {
+      "tag": "Macro",
+      "top3": false,
+      "title": "Yields ease off multiyear highs; Fed minutes due Tuesday",
+      "text": "The 10-year Treasury yield eased to ~5.26% (from last week's selloff highs) ahead of Tuesday's FOMC minutes release. WTI crude slipped ~0.5% to $90.68/bbl while Brent rose ~0.6% to $102.90/bbl — oil and yields remain the two forces investors are watching most with earnings season still a week out.",
+      "names": [],
+      "sources": [
+        {"t": "TheStreet", "u": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-05-2026"},
+        {"t": "TradingEconomics", "u": "https://tradingeconomics.com/united-states/government-bond-yield"}
       ]
     },
     {
       "tag": "Industrials",
       "top3": true,
-      "title": "Musk vs. Delta: Starlink snub turns personal",
-      "text": "Elon Musk said Delta CEO Ed Bastian 'will lose his job' over choosing Amazon's Leo satellite service instead of Starlink for in-flight Wi-Fi; United is fast-tracking status matches to poach Delta elite flyers. Noise, not fundamentals, ahead of Delta's 9 Oct earnings.",
+      "title": "Travel headwinds build ahead of Delta's 9 Oct earnings",
+      "text": "A 5 Oct US Travel Association report projects roughly 2 million fewer international visitors to the US in 2026 vs 2025, citing airfare/accommodation costs and visa-processing delays — a sector headwind for Delta heading into its 9 Oct Q3 print. TD Cowen trimmed its DAL price target to $101 from $105 while keeping a Buy rating; shares are still up ~22% YTD on premium-seat demand.",
       "names": ["DAL"],
-      "sources": [{"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/10/02/delta-ceo-ignored-elon-musks-warning-that-it-will-get-much-worse-now-musk-predicts-ed-bastian-will-lose-his-job-as-united-and-american-race-to-try-and-poach-deltas-premium-customers"}]
-    },
-    {
-      "tag": "Communication Services",
-      "top3": true,
-      "title": "STARZ pulled from Verizon Fios after renewal talks fail",
-      "text": "STARZ and Verizon failed to reach a renewal agreement, pulling all STARZ channels from Verizon's Fios platform as of 1 Oct. Otherwise a quiet news day for the sector; the FCC opened a fresh comment window on broadband permitting and LUC policy (replies due 19 Oct).",
-      "names": [],
-      "sources": [{"t": "GuruFocus", "u": "https://gurufocus.com/news/9105223/starz-channels-removed-from-verizon-fios-platform-impacting-vz-customers"}]
+      "sources": [
+        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9109143/us-international-tourism-decline-in-2026-poses-challenges-for-delta-air-lines-dal"},
+        {"t": "TradingKey", "u": "https://tradingkey.com/analysis/stocks/us-stocks/262199038-weekly-preview-fed-september-minutes-pepsi-delta-earnings-tradingkey"}
+      ]
     }
   ],
-  "footnotes": [
-    "Index futures (ES/NQ/YM/RTY) omitted this run: two WebSearch sources gave point-in-time quotes disagreeing by up to ~0.3 percentage points (e.g. S&P E-minis +0.79% vs +0.94%, Nasdaq E-minis +1.01% vs +1.29%), and both were pre-open snapshots already ~13+ minutes stale against the live cash tape (US cash market opened at 13:30 UTC; this fetch ran at ~13:45-13:50 UTC). Rather than publish a reconciled-looking number that isn't, this section is dropped — the live cash indices above are the reliable read on the open.",
-    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each symbol was fetched individually (12 stock quotes + 4 index quotes)."
-  ],
-  "asOf": "Fri 02 Oct 2026 · 09:45 ET · 21:45 HK"
+  "sections": {
+    "indices": {"asOfUTC": "2026-10-05T13:41:50Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ omitted (see footnotes)"},
+    "futures": {"asOfUTC": null, "source": ""},
+    "quotes": {"asOfUTC": "2026-10-05T13:44:00Z", "source": "FMP company/profile-symbol"},
+    "news": {"asOfUTC": "2026-10-05T13:46:00Z", "source": "WebSearch"}
+  },
+  "meta": {"snapshotUTC": "2026-10-05T13:46:00Z", "builtUTC": "2026-10-05T13:46:00Z"}
 }
