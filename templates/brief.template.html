@@ -467,7 +467,7 @@ a.wi:hover { border-color: var(--ink-3); }
       strip.append($(`<div class="card tile">
         <div class="sym">${ix.id} · ${ix.name}</div>
         <div class="val">${fmt(q.price)}</div>
-        <div class="chg ${pctCls(q.pct)}"><span class="arr">${q.pct >= 0 ? '▲' : '▼'}</span>${sgn(q.pct)}% <span style="font-weight:500">(${sgn(q.change)})</span></div>
+        ${typeof q.pct === 'number' ? `<div class="chg ${pctCls(q.pct)}"><span class="arr">${q.pct >= 0 ? '▲' : '▼'}</span>${sgn(q.pct)}% <span style="font-weight:500">(${sgn(q.change)})</span></div>` : ''}
         <div class="chips"><span class="chip"><b>${ix.proxyFor} proxy</b> · ${ix.src}</span></div>
       </div>`));
       return;
@@ -643,7 +643,13 @@ a.wi:hover { border-color: var(--ink-3); }
   sec2.append(grid);
   const price2 = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const TRK_LBL = { waiting: 'Waiting', live: 'Live', stopped: 'Stopped', target: 'Target', expired: 'Expired', invalidated: 'Invalidated', 'time-exit': 'Time exit', skipped: 'Skipped', awaiting: 'Awaiting data', replaced: 'Replaced' };
-  if (!(D.picks || []).length) grid.append($(SEL ? `<div class="empty">No name passed every rule this run, which is a valid result. The closest names and the rule that stopped each one are in "Near misses" below.</div>` : `<div class="empty">No technical setups available this run.</div>`));
+  const WHY = SEL && SEL.why;
+  const whyTxt = WHY ? (() => {
+    const n = WHY.scored, below = n - WHY.readinessOk, st = WHY.blockedOnlyStop || [];
+    const names = (a) => a.map(b => `${b.tk} ${b.readiness}`).join(', ');
+    return `<b>0 of ${n} scored names passed every rule.</b> ${below} are below readiness ${WHY.minReadiness}. The other ${WHY.readinessOk} reach it but fail a later rule: ${st.length} of them fail only the stop rules (${names(st)}), ${WHY.blocked.length - st.length} fail another rule too. The stop floors are measured from the last close (at least ${(D.selectionConfig || {}).stopMinAtr || 1}× ATR14 and ${(D.selectionConfig || {}).stopMinAdr || 0.5}× ADR20 below it), and the rule-based stop (5% below the entry, or the last session's low) is often closer than that when the close is below the pivot. Zero picks is a valid result; the rule behind each name is in the table below.`;
+  })() : '';
+  if (!(D.picks || []).length) grid.append($(SEL ? `<div class="empty">${whyTxt ? 'No technical picks this run (see the explanation and the closest names above).' : 'No name passed every rule this run, which is a valid result. The closest names and the rule that stopped each one are in "Near misses" below.'}</div>` : `<div class="empty">No technical setups available this run.</div>`));
   const rankedPicks = [...(D.picks || [])].sort((a, b) => (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
   if (rankedPicks.length > 1) {
     const rows = rankedPicks.map((pk, i) => { const rr = (pk.target - pk.entry) / (pk.entry - pk.stop); return `<tr class="clk" data-tk="${pk.tk}"><td>${i + 1}</td><td><b>${pk.tk}</b></td><td class="hide-m">${pk.industry}</td><td class="r">${pk.readiness ? pk.readiness.composite : '–'}</td><td class="r">${pk.px.toFixed(2)}</td><td class="r hide-m">${pk.entry.toFixed(2)}</td><td class="r">${pk.stop.toFixed(2)}</td><td class="r">${rr.toFixed(1)}</td><td class="hide-m">${(D.bg && D.bg[pk.tk] && D.bg[pk.tk].next) || '–'}</td><td>${flagHtml(pk.flags)}</td></tr>`; }).join('');
@@ -651,7 +657,7 @@ a.wi:hover { border-color: var(--ink-3); }
     sec2.querySelectorAll('#rankTable tr.clk').forEach(tr => tr.addEventListener('click', () => { const el = document.getElementById('pick-' + tr.dataset.tk); if (el) { el.classList.add('open'); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }));
   }
   if (!rankedPicks.length && (D.nearmiss || []).length) {
-    sec2.insertBefore($(`<div class="card" id="nearCard"><h3>Near misses: closest names and the rule that stopped each</h3><div style="overflow-x:auto;max-width:100%"><table class="rank"><thead><tr><th>Ticker</th><th class="r">Price</th><th>Why it did not qualify</th></tr></thead><tbody>${D.nearmiss.map(n => `<tr><td><b>${n.tk}</b></td><td class="r">${n.px.toFixed(2)}</td><td style="white-space:normal">${n.why}</td></tr>`).join('')}</tbody></table></div></div>`), grid);
+    sec2.insertBefore($(`<div class="card" id="nearCard"><h3>Why the picks list is empty, and the closest names</h3>${whyTxt ? `<p class="sub" id="emptyWhy" style="margin:4px 0 10px">${whyTxt}</p>` : ''}<div style="overflow-x:auto;max-width:100%"><table class="rank"><thead><tr><th>Ticker</th><th class="r">Price</th><th>Why it did not qualify</th></tr></thead><tbody>${D.nearmiss.map(n => `<tr><td><b>${n.tk}</b></td><td class="r">${n.px.toFixed(2)}</td><td style="white-space:normal">${n.why}</td></tr>`).join('')}</tbody></table></div></div>`), grid);
   }
   rankedPicks.forEach((pk, idx) => {
     const risk = pk.entry - pk.stop, reward = pk.target - pk.entry;

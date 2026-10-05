@@ -47,6 +47,7 @@ def main(argv=None):
                       'config': sl['config'], 'thresholds': sl['thresholds'], 'headline': sel.header_line(sl),
                       'universe': {'considered': cand['considered'], 'passedFilters': len(passed),
                                    'emaZone': sum(1 for c in passed if c['emaCompression']), 'adxOver20': sum(1 for c in passed if (c['adx14'] or 0) > 20)},
+                      'why': sel.failure_summary(sl['scoredCandidates'], sl['config']),
                       'earningsUnverified': [x['tk'] for x in sl['rejected'] if any(f['reason'].startswith('earnings date unverified') for f in x['failed'])]}
     # ── near misses: the closest names and the rule that stopped each ──
     near = sorted([x for x in sl['rejected'] if x['readiness'] is not None], key=lambda x: -x['readiness'])
@@ -55,6 +56,8 @@ def main(argv=None):
     for x in near[:12]:
         c = by_tk[x['tk']]
         why = '; '.join(f['reason'] for f in x['failed'])
+        if x['failed'] and all(f['rule'].startswith('stop') for f in x['failed']) and x['readiness'] >= sl['config']['minReadiness']:
+            why = 'reaches the readiness bar; stopped ONLY by the stop rule: ' + why
         d['nearmiss'].append({'tk': x['tk'], 'px': c['lastClose'], 'pct': c['lastDayPct'] if c['lastDayPct'] is not None else 0.0,
                               'why': f"{c['industry']} · readiness {x['readiness']} · {why}"})
     for c in sl['cut']:
@@ -90,7 +93,7 @@ def main(argv=None):
     d['notices'] = [
         "WebFetch is unavailable to the automated routine (platform bug): the scan, industry drill-down and near-misses are refreshed only in interactive sessions and carried forward between them.",
         f"Sector ranking and industry drill-down: Finviz groups (Perf Month), interactive refresh Mon 5 Oct, data to the {last} close; the table was read twice and both reads agree.",
-        "Index quotes are FMP's 2 Oct closes. The VIX uses FMP's previousClose (its live print had already moved to 5 Oct). QQQ is omitted: no reliable 2 Oct close was found.",
+        "Index quotes are FMP's 2 Oct closes. The VIX uses FMP's previousClose (its live print had already moved to 5 Oct). QQQ shows the 1 Oct close ($742.03, WebSearch, recorded in the 2 Oct provenance): no reliable 2 Oct close was found.",
         "Catalyst alerts are the 30 Sep - 1 Oct events from the 1 Oct brief, re-priced with 2 Oct closes; the routine's next run refreshes the alerts and their sources.",
         "Priced-in scores use stockanalysis.com daily bars and its consensus price target (a single source).",
     ]

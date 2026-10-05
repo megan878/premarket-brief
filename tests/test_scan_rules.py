@@ -82,6 +82,15 @@ class Selection(unittest.TestCase):
         self.assertEqual(t['passing'], {'45': 3, '55': 2, '65': 1})
         self.assertEqual(t['scores'], [66, 56, 46])
 
+    def test_failure_summary_explains_a_short_list(self):
+        cs = [cand('LOW', comp=40), cand('STOP', comp=80, stop=99.0, atr=3.0), cand('BOTH', comp=70, tib=0, stop=99.0), cand('OK', comp=70)]
+        w = S.failure_summary(cs)
+        self.assertEqual((w['scored'], w['readinessOk']), (4, 3))
+        self.assertEqual([b['tk'] for b in w['blocked']], ['STOP', 'BOTH'])
+        self.assertEqual([b['tk'] for b in w['blockedOnlyStop']], ['STOP'])          # BOTH also fails the base rule
+        self.assertEqual(w['byRule']['readiness'], 1)
+        self.assertGreaterEqual(w['byRule']['stop-atr'], 2)
+
 
 class PricedIn(unittest.TestCase):
     def test_component_a_anchors(self):

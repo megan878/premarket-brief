@@ -102,6 +102,24 @@ def select(cands, cfg=None):
             'scored': len(cands), 'qualified': len(ok), 'config': cfg}
 
 
+def failure_summary(cands, cfg=None):
+    """Why the list is as short as it is: how many names fail each rule, and which names reach the readiness bar but are stopped by
+    other rules (the page uses this to explain an empty or short picks section)."""
+    cfg = {**CONFIG, **(cfg or {})}
+    by, blocked, ok = {}, [], 0
+    for c in cands:
+        r = check(c, cfg)
+        for f in r['failed']:
+            by[f['rule']] = by.get(f['rule'], 0) + 1
+        if r['rules'].get('readiness'):
+            ok += 1
+            if not r['passed']:
+                blocked.append({'tk': c['tk'], 'readiness': c['readiness']['composite'], 'rules': [f['rule'] for f in r['failed']]})
+    blocked.sort(key=lambda b: (-b['readiness'], b['tk']))
+    return {'scored': len(cands), 'byRule': by, 'readinessOk': ok, 'minReadiness': cfg['minReadiness'], 'blocked': blocked,
+            'blockedOnlyStop': [b for b in blocked if all(x.startswith('stop') for x in b['rules'])]}
+
+
 def threshold_counts(cands, thresholds=(45, 55, 65), cfg=None):
     """How many names pass every rule at each readiness threshold (for tuning minReadiness), plus the score distribution."""
     out = {}

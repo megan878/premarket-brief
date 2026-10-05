@@ -3,7 +3,7 @@
  "notices": [
   "WebFetch is unavailable to the automated routine (platform bug): the scan, industry drill-down and near-misses are refreshed only in interactive sessions and carried forward between them.",
   "Sector ranking and industry drill-down: Finviz groups (Perf Month), interactive refresh Mon 5 Oct, data to the 2026-10-02 close; the table was read twice and both reads agree.",
-  "Index quotes are FMP's 2 Oct closes. The VIX uses FMP's previousClose (its live print had already moved to 5 Oct). QQQ is omitted: no reliable 2 Oct close was found.",
+  "Index quotes are FMP's 2 Oct closes. The VIX uses FMP's previousClose (its live print had already moved to 5 Oct). QQQ shows the 1 Oct close ($742.03, WebSearch, recorded in the 2 Oct provenance): no reliable 2 Oct close was found.",
   "Catalyst alerts are the 30 Sep - 1 Oct events from the 1 Oct brief, re-priced with 2 Oct closes; the routine's next run refreshes the alerts and their sources.",
   "Priced-in scores use stockanalysis.com daily bars and its consensus price target (a single source)."
  ],
@@ -22,6 +22,15 @@
     "ma50": 7657.642,
     "ma200": 7225.8184
    }
+  },
+  {
+   "id": "QQQ",
+   "name": "Invesco QQQ Trust",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 742.03
+   },
+   "src": "WebSearch · this is the 1 Oct CLOSE (the 2 Oct close was not found); source recorded in data/provenance/2026-10-02"
   },
   {
    "id": "DJI",
@@ -737,6 +746,113 @@
    "emaZone": 1,
    "adxOver20": 17
   },
+  "why": {
+   "scored": 53,
+   "byRule": {
+    "readiness": 47,
+    "base": 38,
+    "stop-adr": 16,
+    "stop-atr": 31
+   },
+   "readinessOk": 6,
+   "minReadiness": 55,
+   "blocked": [
+    {
+     "tk": "FLEX",
+     "readiness": 78,
+     "rules": [
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "SANM",
+     "readiness": 63,
+     "rules": [
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "INTC",
+     "readiness": 61,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "META",
+     "readiness": 59,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "ALAB",
+     "readiness": 57,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "QRVO",
+     "readiness": 56,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    }
+   ],
+   "blockedOnlyStop": [
+    {
+     "tk": "FLEX",
+     "readiness": 78,
+     "rules": [
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "SANM",
+     "readiness": 63,
+     "rules": [
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "INTC",
+     "readiness": 61,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "META",
+     "readiness": 59,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "ALAB",
+     "readiness": 57,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    },
+    {
+     "tk": "QRVO",
+     "readiness": 56,
+     "rules": [
+      "stop-adr",
+      "stop-atr"
+     ]
+    }
+   ]
+  },
   "earningsUnverified": []
  },
  "nearmiss": [
@@ -744,37 +860,37 @@
    "tk": "FLEX",
    "px": 116.61,
    "pct": 3.4,
-   "why": "Electronic Components · readiness 78 · stop is 0.54 x ATR14 below the last close (needs 1.0)"
+   "why": "Electronic Components · readiness 78 · reaches the readiness bar; stopped ONLY by the stop rule: stop is 0.54 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "SANM",
    "px": 229.04,
    "pct": 3.19,
-   "why": "Electronic Components · readiness 63 · stop is 0.80 x ATR14 below the last close (needs 1.0)"
+   "why": "Electronic Components · readiness 63 · reaches the readiness bar; stopped ONLY by the stop rule: stop is 0.80 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "INTC",
    "px": 119.33,
    "pct": -0.56,
-   "why": "Semiconductors · readiness 61 · stop 121.08 is at/above the last close 119.33; stop is -0.26 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 61 · reaches the readiness bar; stopped ONLY by the stop rule: stop 121.08 is at/above the last close 119.33; stop is -0.26 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "META",
    "px": 728.08,
    "pct": 0.3,
-   "why": "Internet Content & Information · readiness 59 · stop 740.84 is at/above the last close 728.08; stop is -0.44 x ATR14 below the last close (needs 1.0)"
+   "why": "Internet Content & Information · readiness 59 · reaches the readiness bar; stopped ONLY by the stop rule: stop 740.84 is at/above the last close 728.08; stop is -0.44 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "ALAB",
    "px": 350.33,
    "pct": -1.71,
-   "why": "Semiconductors · readiness 57 · stop 358.99 is at/above the last close 350.33; stop is -0.41 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 57 · reaches the readiness bar; stopped ONLY by the stop rule: stop 358.99 is at/above the last close 350.33; stop is -0.41 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "QRVO",
    "px": 114.17,
    "pct": 1.75,
-   "why": "Semiconductors · readiness 56 · stop 115.04 is at/above the last close 114.17; stop is -0.19 x ATR14 below the last close (needs 1.0)"
+   "why": "Semiconductors · readiness 56 · reaches the readiness bar; stopped ONLY by the stop rule: stop 115.04 is at/above the last close 114.17; stop is -0.19 x ATR14 below the last close (needs 1.0)"
   },
   {
    "tk": "ITT",
