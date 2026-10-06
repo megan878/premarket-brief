@@ -1,90 +1,61 @@
 {
-  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. QQQ and index futures both dropped this run — see footnotes.",
-  "notes": {
-    "DAL": "Reports Q3 earnings 9 Oct (4 trading sessions out). A fresh US Travel Association report (5 Oct) projects ~2M fewer international visitors to the US in 2026 vs 2025 — a sector headwind, not yet clearly in the tape.",
-    "QRVO": "A single source (TipRanks) reports QRVO was delisted from Nasdaq today following completion of the Skyworks acquisition/merger; could not be confirmed with a second source this run, so treated as unconfirmed. FMP's quote below is identical to the brief's 2 Oct close (114.17) with no implied move, consistent with either a frozen/stale print or genuinely quiet trading — do not treat this as a live, tradeable quote without checking a broker feed directly."
+  "asOf": "Tue 06 Oct 2026 · 09:46 ET · 21:46 HK",
+  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. QQQ and index futures both dropped this run; WebSearch results for sector/company news were unusually unreliable (stale or mismatched dates/numbers) so only one well cross-checked item is published.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-10-06T13:41:00Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ omitted (see footnotes)"},
+    "futures": {"asOfUTC": null, "source": ""},
+    "quotes": {"asOfUTC": "2026-10-06T13:44:00Z", "source": "FMP company/profile-symbol"},
+    "news": {"asOfUTC": "2026-10-06T13:46:00Z", "source": "WebSearch"}
   },
-  "footnotes": [
-    "QQQ (NDX proxy) omitted this run: WebSearch sources conflated Friday 2 Oct's close ($749.58, +1.02% that day) with \"today's\" price — one source called $749.58 Friday's close, another called the same number the live Oct 5 price with an intraday range. The two readings contradict each other and could not be reconciled, so per the hard rule against guessing the tile is left out rather than published with an ambiguous number.",
-    "Index futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned premarket-session quotes for Nasdaq futures that disagreed by nearly 1 full percentage point across sources (+1.07% vs +0.15%) and for Dow futures (+0.52% vs +0.1%), and all of the futures quotes found were pre-open snapshots already stale — the US cash market opened at 13:30 UTC and this fetch ran at ~13:41-13:50 UTC, 11-20 minutes after the open. Rather than publish a reconciled-looking number that isn't, this section is dropped; the live cash indices below are the reliable read on the open.",
-    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each symbol was fetched individually (16 stock quotes + 4 index quotes)."
-  ],
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7736.23, "pct": 0.17494, "prev": 7722.72},
-    {"id": "DJI", "name": "Dow Jones", "px": 50986.18, "pct": -0.37278, "prev": 51176.96},
-    {"id": "RUT", "name": "Russell 2000", "px": 2829.30597, "pct": -0.12668, "prev": 2832.89467},
-    {"id": "VIX", "name": "Volatility", "px": 15.89, "pct": 3.78837, "prev": 15.31}
+    {"id": "SPX", "name": "S&P 500", "px": 7814.5, "pct": 0.52161, "prev": 7773.95},
+    {"id": "DJI", "name": "Dow Jones", "px": 51498.33, "pct": 0.44946, "prev": 51267.9},
+    {"id": "RUT", "name": "Russell 2000", "px": 2857.26114, "pct": 0.35564, "prev": 2847.1357},
+    {"id": "VIX", "name": "Volatility", "px": 15.4, "pct": -0.7732, "prev": 15.52}
   ],
   "futures": {},
   "quotes": {
-    "SANM": {"px": 228.4, "pct": -0.27943, "change": -0.64, "vol": 13452.27749, "avgVol": 927498},
-    "ACN": {"px": 195.315, "pct": -1.80241, "change": -3.585, "vol": 501737, "avgVol": 7839820},
-    "MU": {"px": 1065, "pct": -0.92009, "change": -9.89, "vol": 2201490, "avgVol": 40728885},
-    "SNPS": {"px": 503.3198, "pct": 2.73929, "change": 13.4198, "vol": 266067, "avgVol": 2069360},
-    "TGT": {"px": 152.88, "pct": -2, "change": -3.12, "vol": 222822, "avgVol": 4242658},
-    "FLEX": {"px": 119.96, "pct": 2.87282, "change": 3.35, "vol": 391955.56926, "avgVol": 5619571},
-    "INTC": {"px": 117.52, "pct": -1.5168, "change": -1.81, "vol": 15773314, "avgVol": 114212286},
-    "META": {"px": 738.47, "pct": 1.42704, "change": 10.39, "vol": 1665547, "avgVol": 19597352},
-    "ALAB": {"px": 350.68, "pct": 0.0999058, "change": 0.35, "vol": 244567, "avgVol": 4806384},
-    "QRVO": {"px": 114.17, "pct": 1.74672, "change": 1.96, "vol": 8341594, "avgVol": 1435944},
-    "ITT": {"px": 205.255, "pct": -0.44381, "change": -0.915, "vol": 9141, "avgVol": 899869},
-    "SIMO": {"px": 286.2, "pct": 2.03209, "change": 5.7, "vol": 83459.7988, "avgVol": 952482},
-    "GLW": {"px": 160.59, "pct": -2.19258, "change": -3.6, "vol": 562435, "avgVol": 12333327},
-    "SKHY": {"px": 193.12, "pct": -1.03008, "change": -2.01, "vol": 1183942, "avgVol": 29390797},
-    "ARM": {"px": 305.285, "pct": -0.7171, "change": -2.205, "vol": 416668.41756, "avgVol": 7237604},
-    "GNRC": {"px": 213.1, "pct": -1.70664, "change": -3.7, "vol": 58703, "avgVol": 1135734}
+    "SANM": {"px": 226.39, "pct": 0.58202, "change": 1.31, "vol": 15924.24406, "avgVol": 927498},
+    "BA": {"px": 191.96, "pct": -0.39435, "change": -0.76, "vol": 600258, "avgVol": 6456399},
+    "CEG": {"px": 303.22, "pct": 13.30245, "change": 35.60001, "vol": 2664366.9344, "avgVol": 3265359},
+    "MCK": {"px": 920.57, "pct": 0.55929, "change": 5.12, "vol": 20600, "avgVol": 1007628},
+    "SMMT": {"px": 17.39, "pct": 0.69485, "change": 0.12, "vol": 232520, "avgVol": 6001192},
+    "FLEX": {"px": 117.062, "pct": 0.25865, "change": 0.302, "vol": 43483.97272, "avgVol": 5619571},
+    "INTC": {"px": 116.52, "pct": 0.28402, "change": 0.33, "vol": 9393719.83301, "avgVol": 114212286},
+    "META": {"px": 743.095, "pct": 0.16107, "change": 1.195, "vol": 1883620.86544, "avgVol": 19597352},
+    "ALAB": {"px": 392.0776, "pct": 8.2071, "change": 29.7376, "vol": 1022627.31983, "avgVol": 4806384},
+    "QRVO": {"px": 114.17, "pct": 0, "change": 0, "vol": 0, "avgVol": 1435944},
+    "ITT": {"px": 209.34, "pct": 1.52279, "change": 3.14, "vol": 8276, "avgVol": 899869},
+    "MU": {"px": 1065.45, "pct": 0.14004, "change": 1.49, "vol": 3204763, "avgVol": 40128507},
+    "SIMO": {"px": 285.43, "pct": 1.05505, "change": 2.98, "vol": 36083.37635, "avgVol": 951097},
+    "GLW": {"px": 163.73, "pct": 2.73577, "change": 4.36, "vol": 581720, "avgVol": 12333327},
+    "SKHY": {"px": 190.9, "pct": -2.1126, "change": -4.12, "vol": 3115677, "avgVol": 29390797},
+    "ARM": {"px": 305.97, "pct": 1.01354, "change": 3.07, "vol": 436541.02923, "avgVol": 7237604},
+    "GNRC": {"px": 222.94, "pct": 3.59665, "change": 7.74, "vol": 76222, "avgVol": 1135734}
+  },
+  "notes": {
+    "VIX": "FMP's own previousClose for ^VIX (15.52) does not match the brief's recorded Oct 5 VIX close (15.32), even though SPX/DJI/RUT all rolled forward correctly from the brief's closes. Retried once - same value both times, so not a transient glitch. The px (15.40) looks plausible, but the % change above is computed against FMP's 15.52 reference, not the brief's 15.32 - treat the sign/size of VIX's move with caution this run.",
+    "CEG": "Up 13.3% today per FMP, well beyond anything found in WebSearch: only pre-existing analyst target raises (BMO to $379, Morgan Stanley to $369 on 18 Sep) and generic earnings-anticipation chatter turned up, dated before today and not of a size to explain this move. No fresh (last-12h), dated, two-source catalyst could be confirmed this run - flagging the move as unexplained rather than guessing a cause.",
+    "QRVO": "FMP shows no move again today (price identical to the brief's 2 Oct close, volume 0). An SEC filing found via WebSearch (Form 10-Q/425) confirms the Qorvo/Skyworks merger is still pending, anticipated to complete 'early calendar year 2027' - so QRVO should NOT be delisted yet, unlike the single-source claim floated in yesterday's run. The flat/zero print most likely reflects genuinely quiet trading, not a stale post-delisting quote, but a broker feed is the only way to be certain intraday."
   },
   "news": [
     {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Intel slides as TSMC explores role in Musk's Terafab venture",
-      "text": "Reports that TSMC is in early talks to join Elon Musk's Terafab chip project in Texas sent Intel shares down as much as ~4% premarket — Intel joined Terafab in April 2026 as the sole named manufacturing partner, and a TSMC role would dilute that position. Musk confirmed the talks are at an early stage.",
-      "names": ["INTC"],
-      "sources": [
-        {"t": "Investing.com", "u": "https://www.investing.com/news/stock-market-news/intel-stock-slides-as-tsmc-explores-terafab-tieup-analyst-flags-share-losses-4931558"},
-        {"t": "TaiwanPlus", "u": "https://www.taiwanplus.com/news/taiwan-news/technology-and-science/261004007/tsmc-discusses-potential-role-in-musks-texas-terafab"}
-      ]
-    },
-    {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Goldman names tactical chip-sector buys ahead of Q3 earnings",
-      "text": "Goldman Sachs flagged Applied Materials, Seagate and Microchip as tactical buys into earnings season, expecting AMAT to raise margin targets at SEMICON West (13 Oct) on DRAM/advanced-logic strength; flagged Qualcomm, KLA and Western Digital as relative underperformers. Backdrop: Goldman sees ~27% y/y S&P 500 EPS growth this quarter, led by tech and energy.",
-      "names": [],
-      "sources": [
-        {"t": "CNBC", "u": "https://www.cnbc.com/2026/10/03/stocks-to-buy-now-ahead-of-their-earnings-according-to-goldman-sachs.html"},
-        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9108857/goldman-sachs-projects-strong-q3-earnings-growth-micron-technology-mu-valuation-under-spotlight"}
-      ]
-    },
-    {
       "tag": "Macro",
       "top3": false,
-      "title": "Yields ease off multiyear highs; Fed minutes due Tuesday",
-      "text": "The 10-year Treasury yield eased to ~5.26% (from last week's selloff highs) ahead of Tuesday's FOMC minutes release. WTI crude slipped ~0.5% to $90.68/bbl while Brent rose ~0.6% to $102.90/bbl — oil and yields remain the two forces investors are watching most with earnings season still a week out.",
+      "title": "S&P 500 nears record as yields and oil retreat; rally stays tech-led",
+      "text": "The S&P 500 hit a fresh intraday all-time high Tuesday (6 Oct) and the Nasdaq Composite extended Monday's record close, with the Dow up roughly 190 points (~0.4%). Gains were led by megacap tech names as Treasury yields and crude oil both eased back from their recent multi-year highs, giving the market room to focus on strong AI-driven earnings growth expected this quarter.",
       "names": [],
       "sources": [
-        {"t": "TheStreet", "u": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-05-2026"},
-        {"t": "TradingEconomics", "u": "https://tradingeconomics.com/united-states/government-bond-yield"}
-      ]
-    },
-    {
-      "tag": "Industrials",
-      "top3": true,
-      "title": "Travel headwinds build ahead of Delta's 9 Oct earnings",
-      "text": "A 5 Oct US Travel Association report projects roughly 2 million fewer international visitors to the US in 2026 vs 2025, citing airfare/accommodation costs and visa-processing delays — a sector headwind for Delta heading into its 9 Oct Q3 print. TD Cowen trimmed its DAL price target to $101 from $105 while keeping a Buy rating; shares are still up ~22% YTD on premium-seat demand.",
-      "names": ["DAL"],
-      "sources": [
-        {"t": "GuruFocus", "u": "https://www.gurufocus.com/news/9109143/us-international-tourism-decline-in-2026-poses-challenges-for-delta-air-lines-dal"},
-        {"t": "TradingKey", "u": "https://tradingkey.com/analysis/stocks/us-stocks/262199038-weekly-preview-fed-september-minutes-pepsi-delta-earnings-tradingkey"}
+        {"t": "TheStreet", "u": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-06-2026"},
+        {"t": "Bloomberg", "u": "https://www.bloomberg.com/news/articles/2026-10-06/s-p-500-set-for-first-record-since-august-as-bulls-downplay-risk"}
       ]
     }
   ],
-  "sections": {
-    "indices": {"asOfUTC": "2026-10-05T13:41:50Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ omitted (see footnotes)"},
-    "futures": {"asOfUTC": null, "source": ""},
-    "quotes": {"asOfUTC": "2026-10-05T13:44:00Z", "source": "FMP company/profile-symbol"},
-    "news": {"asOfUTC": "2026-10-05T13:46:00Z", "source": "WebSearch"}
-  },
-  "meta": {"snapshotUTC": "2026-10-05T13:46:00Z", "builtUTC": "2026-10-05T13:46:00Z"}
+  "footnotes": [
+    "QQQ (NDX proxy) omitted again this run: one WebSearch result flatly stated 'QQQ closed at $364.70 on Oct 6' (a TradingView notes page) which is wildly inconsistent with FMP's SPX/Nasdaq-adjacent levels and with the brief's own recent QQQ references near $750 - clearly stale or wrong, so left out rather than published with an unreconciled number.",
+    "Index futures (ES/NQ/YM/RTY) omitted this run: WebSearch results were a mix of contradictory premarket snapshots (e.g. one source citing Dow futures -0.03% at 6:44pm EDT 'on October 6' - which is after the US close, not before it) and generic multi-year-old archive pages. The cash market opened at 13:30 UTC and this fetch ran at ~13:40-13:51 UTC, 10-20 minutes after the open, so a reconciled premarket futures read wasn't available or current enough to publish; the live cash indices above are the reliable read on the session.",
+    "Overnight/sector news was unusually hard to pin to today this run: a 'semiconductor sector selloff' story (Samsung/SK Hynix/Western Digital down sharply) contradicts today's live tape (SKHY -2.1%, ALAB +8.2%, GLW +2.7%, GNRC +3.6%, ARM +1.0% per FMP) and was dropped as stale/mismatched; an Intel/Terafab 'surge' story and a China-chip-export-controls story both came back with no reliable current date (mixed in with April 2026 and undated archive pages) and were dropped for the same reason. Only the broad market-wrap item below cross-checked cleanly on two sources both explicitly dated 6 Oct 2026.",
+    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each symbol was fetched individually (17 stock quotes + 4 index quotes)."
+  ]
 }
