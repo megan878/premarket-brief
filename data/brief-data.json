@@ -1,355 +1,364 @@
 {
- "source": "FMP + WebSearch (automated) + Finviz groups/stockanalysis.com (interactive refresh)",
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "q": {
-    "price": 7722.72,
-    "change": 56.27,
-    "pct": 0.73398,
-    "dayLow": 7700.51,
-    "dayHigh": 7754.67,
-    "yearHigh": 7816.7,
-    "yearLow": 6316.91,
-    "ma50": 7657.642,
-    "ma200": 7225.8184
-   }
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones Industrial Average",
-   "q": {
-    "price": 51176.96,
-    "change": 250.4,
-    "pct": 0.49169,
-    "dayLow": 50950.61,
-    "dayHigh": 51382.88,
-    "yearHigh": 54744.33,
-    "yearLow": 45057.28,
-    "ma50": 52710.56,
-    "ma200": 50274.64
-   }
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "q": {
-    "price": 2832.8948,
-    "change": 26.2698,
-    "pct": 0.93599,
-    "dayLow": 2825.2288,
-    "dayHigh": 2852.5022,
-    "yearHigh": 3069.71,
-    "yearLow": 2303.46,
-    "ma50": 2943.2603,
-    "ma200": 2781.5542
-   }
-  },
-  {
-   "id": "VIX",
-   "name": "CBOE Volatility Index",
-   "q": {
-    "price": 16.17,
-    "change": 0.86,
-    "pct": 5.61724,
-    "dayLow": 16.07,
-    "dayHigh": 16.38,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 15.784,
-    "ma200": 18.05535
-   }
-  }
- ],
- "macro": {
-  "date": "2026-10-02",
-  "y10": 5.28,
-  "y10prev": 5.24,
-  "y2": 4.83,
-  "y30": 5.63,
-  "y10path": "5.24% on 28 Sep, 5.26% on 29 Sep, 5.29% on 30 Sep, 5.24% on 1 Oct, 5.28% on 2 Oct \u2014 edging back up",
-  "fed": {
-   "range": "3.75\u20134.00%",
-   "move": "25 bp",
-   "date": "16 Sep",
-   "vote": "12\u20130",
-   "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
-   "sources": [
+  "source": "FMP + WebSearch (automated) + Finviz groups/stockanalysis.com (interactive refresh)",
+  "indices": [
     {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+      "id": "SPX",
+      "name": "S&P 500",
+      "q": {
+        "price": 7773.95,
+        "change": 51.23,
+        "pct": 0.6634,
+        "dayLow": 7727.59,
+        "dayHigh": 7794.35,
+        "yearHigh": 7816.7,
+        "yearLow": 6316.91,
+        "ma50": 7657.642,
+        "ma200": 7225.8184
+      }
     },
     {
-     "t": "CNN",
-     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+      "id": "DJI",
+      "name": "Dow Jones",
+      "q": {
+        "price": 51267.9,
+        "change": 90.94,
+        "pct": 0.1777,
+        "dayLow": 50862.85,
+        "dayHigh": 51404.86,
+        "yearHigh": 54744.33,
+        "yearLow": 45057.28,
+        "ma50": 52710.56,
+        "ma200": 50274.64
+      }
     },
     {
-     "t": "Advisor Perspectives",
-     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+      "id": "RUT",
+      "name": "Russell 2000",
+      "q": {
+        "price": 2847.1357,
+        "change": 14.2409,
+        "pct": 0.5027,
+        "dayLow": 2821.6296,
+        "dayHigh": 2859.132,
+        "yearHigh": 3069.71,
+        "yearLow": 2303.46,
+        "ma50": 2943.2603,
+        "ma200": 2781.5542
+      }
     },
     {
-     "t": "Schwab",
-     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+      "id": "VIX",
+      "name": "CBOE Volatility Index",
+      "q": {
+        "price": 15.32,
+        "change": -0.2,
+        "pct": -1.2887,
+        "dayLow": 15.28,
+        "dayHigh": 15.52,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 15.784,
+        "ma200": 18.05535
+      }
     }
-   ]
-  },
-  "y10hist": [
-   {
-    "date": "2026-09-28",
-    "y10": 5.24
-   },
-   {
-    "date": "2026-09-29",
-    "y10": 5.26
-   },
-   {
-    "date": "2026-09-30",
-    "y10": 5.29
-   },
-   {
-    "date": "2026-10-01",
-    "y10": 5.24
-   },
-   {
-    "date": "2026-10-02",
-    "y10": 5.28
-   }
-  ]
- },
- "catalysts": [
-  {
-   "tk": "MU",
-   "name": "Micron Technology",
-   "industry": "Semiconductors",
-   "sector": "Technology",
-   "ctype": "Earnings beat + raise",
-   "cdate": "30 Sep (after the close)",
-   "cdateISO": "2026-09-30",
-   "what": "Fiscal Q4 revenue $54.23B (+379% y/y) beat the $51.07B estimate; adjusted EPS $33.42 beat the $31.61 estimate, on surging AI-driven cloud memory demand.",
-   "sources": [
-    {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/09/30/micron-earnings-q4-2026.html"
-    },
-    {
-     "t": "Reuters",
-     "u": "https://www.reuters.com/technology/micron-forecast-beats-estimates-ai-memory-demand-2026-09-30/"
-    }
-   ],
-   "cap": "$1.21T",
-   "px": 1074.89,
-   "pct": -2.05,
-   "topSector": true
-  },
-  {
-   "tk": "TGT",
-   "name": "Target Corporation",
-   "industry": "Discount Stores",
-   "sector": "Consumer Defensive",
-   "ctype": "Analyst upgrade",
-   "cdate": "30 Sep",
-   "cdateISO": "2026-09-30",
-   "what": "HSBC upgraded to Buy from Hold and raised its price target to $190 from $125 (~22% above the current price), citing a foot-traffic-driven comp-sales recovery.",
-   "sources": [
-    {
-     "t": "Investing.com",
-     "u": "https://www.investing.com/news/stock-market-news/hsbc-upgrades-target-to-buy-93CH-4890000"
-    },
-    {
-     "t": "Benzinga",
-     "u": "https://www.benzinga.com/analyst-ratings/upgrades/26/09/target-hsbc-upgrade"
-    }
-   ],
-   "analystTarget": 190,
-   "cap": "$70.9B",
-   "px": 156,
-   "pct": -0.45,
-   "topSector": false
-  },
-  {
-   "tk": "SNPS",
-   "name": "Synopsys",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "ctype": "Major contract",
-   "cdate": "1 Oct (Investor Day)",
-   "cdateISO": "2026-10-01",
-   "what": "2026 Investor Day: raised FY2027 revenue guidance to ~$11.15B (~15% y/y growth, ~44% non-GAAP operating margin); disclosed a $1B+ multi-year AWS deal.",
-   "sources": [
-    {
-     "t": "Synopsys IR",
-     "u": "https://news.synopsys.com/2026-10-01-synopsys-investor-day"
-    },
-    {
-     "t": "Reuters",
-     "u": "https://www.reuters.com/technology/synopsys-investor-day-2026-10-01/"
-    }
-   ],
-   "cap": "$93.8B",
-   "px": 489.9,
-   "pct": -0.13,
-   "topSector": true
-  },
-  {
-   "tk": "ACN",
-   "name": "Accenture",
-   "industry": "Information Technology Services",
-   "sector": "Technology",
-   "ctype": "Earnings beat + raise",
-   "cdate": "1 Oct (before the open)",
-   "cdateISO": "2026-10-01",
-   "what": "Fiscal Q4 revenue $18.68B (+6% y/y) beat the $18.03B estimate; EPS $3.29 beat the $3.18 estimate. Shares surged as much as ~22% intraday on the print.",
-   "sources": [
-    {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/10/01/accenture-earnings-q4-2026.html"
-    },
-    {
-     "t": "Reuters",
-     "u": "https://www.reuters.com/technology/accenture-results-2026-10-01/"
-    }
-   ],
-   "cap": "$121.7B",
-   "px": 198.9,
-   "pct": -6.31,
-   "topSector": true
-  }
- ],
- "bg": {
-  "MU": {
-   "cap": "$1.21T",
-   "what": "Global leader in semiconductor memory and storage (DRAM, NAND, NOR) serving data-center, mobile, PC, automotive and industrial markets."
-  },
-  "TGT": {
-   "cap": "$70.9B",
-   "what": "Minneapolis-based general-merchandise retailer operating big-box discount stores nationwide."
-  },
-  "SNPS": {
-   "cap": "$93.8B",
-   "what": "Leading electronic design automation (EDA) software and semiconductor IP provider used to design and verify chips."
-  },
-  "ACN": {
-   "cap": "$121.7B",
-   "what": "Global professional-services firm \u2014 strategy, consulting, technology and operations \u2014 headquartered in Dublin."
-  }
- },
- "notices": [
-  "WebFetch is unavailable to the automated routine (confirmed platform bug) \u2014 sector ranking, industry drill-down, technical picks and near-misses are PINNED, carried forward from the last interactive refresh (2 Oct).",
-  "QQQ (NDX proxy) tile omitted this run: WebSearch returned inconsistent values ($364.70 vs ~$723-732 from different pages) that could not be reconciled against the last verified quote ($742.03, 1 Oct close) \u2014 per the hard rule against guessing, the tile is left out rather than published with an unverified number.",
-  "No FOMC meeting fell in the 7 days before this run (the next meeting is 27-28 Oct); the Fed block is carried forward from 16 Sep with only the Treasury yields refreshed.",
-  "Catalyst alerts carry FMP's live price/cap only, not a computed entry/stop/target \u2014 reading the daily OHLC tape needs WebFetch, which this automated routine does not have. All four catalysts below remain inside the last-5-trading-session window (28 Sep \u2013 2 Oct); quotes were refreshed against FMP this run.",
-  "FMP's news and analyst-grades endpoints returned ACCESS DENIED (require a higher-tier plan) partway through this run \u2014 catalyst sourcing relied on WebSearch cross-checks instead."
- ],
- "screenNotes": [],
- "rejected": [
-  "<b>Nike (NKE)</b> \u00b7 fiscal Q1 2027 EPS beat ($0.72 vs $0.13, largely a one-off tariff-refund benefit) on 1 Oct, but FY27 guidance came in well below consensus and shares fell about 5% \u2014 sell-the-news.",
-  "<b>Jabil (JBL)</b> \u00b7 fiscal Q4 revenue and EPS beat on 30 Sep, but shares fell about 3% on the print \u2014 sell-the-news.",
-  "<b>HCA Healthcare (HCA)</b> \u00b7 search results surfaced a Cantor Fitzgerald $525 target, but FMP's own analyst-grades history shows no HCA rating action since 18 Sep (outside the 5-session window) and a second cached report showed the same firm cutting from $588 to $525 \u2014 could not reconcile a date or direction, rejected.",
-  "<b>Target (TGT), 2 Oct analyst day</b> \u00b7 fresh price-target raises (Gordon Haskett $170, Wolfe Research upgrade, Jefferies $161, Wells Fargo $165) don't clear the required >15% upside at the $156 price (8-9% only) \u2014 not added as a new catalyst; TGT's existing 30 Sep HSBC upgrade (22% upside) is carried instead.",
-  "No qualifying Energy or Communication Services catalysts surfaced in the 28 Sep \u2013 2 Oct window after multiple searches.",
-  "FMP's <code>analyst/grades</code> and <code>news/stock-news</code> endpoints returned ACCESS DENIED (plan tier) after one successful probe call \u2014 logged in fetchlog, not retried further this run."
- ],
- "fetchlog": [
-  {
-   "id": "fmp.indexes.index-quote.^GSPC",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^DJI",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^RUT",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^VIX",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.economics.treasury-rates",
-   "ok": true,
-   "note": "2026-09-21 to 2026-10-02, 10 rows"
-  },
-  {
-   "id": "websearch.qqq.price",
-   "ok": false,
-   "note": "inconsistent values across sources, did not reconcile; tile omitted"
-  },
-  {
-   "id": "websearch.fomc.october2026",
-   "ok": true,
-   "note": "confirmed next meeting 27-28 Oct, none in last 7 days"
-  },
-  {
-   "id": "websearch.catalysts.earnings-upgrades-contracts",
-   "ok": true,
-   "note": "~10 search queries; Nike/Jabil rejected (sell-the-news), HCA rejected (stale/unreconciled); no new qualifying names found, carried forward MU/TGT/SNPS/ACN (still within 5-session window)"
-  },
-  {
-   "id": "fmp.news.stock-news",
-   "ok": false,
-   "note": "ACCESS DENIED: requires higher FMP plan tier"
-  },
-  {
-   "id": "fmp.analyst.grades.HCA",
-   "ok": true,
-   "note": "used to confirm HCA's last rating action predates the window"
-  },
-  {
-   "id": "fmp.analyst.grades.NXT_MKSI_EXTR_TMO_HAL_MCK",
-   "ok": false,
-   "note": "ACCESS DENIED: requires higher FMP plan tier, after the single HCA call succeeded"
-  },
-  {
-   "id": "fmp.company.profile-symbol.MU",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.company.profile-symbol.TGT",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.company.profile-symbol.SNPS",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.company.profile-symbol.ACN",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.company.profile-symbol.HCA",
-   "ok": true,
-   "note": "cap/price check for rejected candidate"
-  }
- ],
- "sections": {
-  "indices": {
-   "asOf": "2026-10-02",
-   "source": "FMP index quotes (SPX/DJI/RUT/VIX)"
-  },
+  ],
   "macro": {
-   "asOf": "2026-10-02",
-   "source": "FMP treasury-rates; Fed block unchanged (no FOMC meeting in the last 7 days)"
+    "date": "2026-10-05",
+    "y10": 5.31,
+    "y10prev": 5.28,
+    "y2": 4.84,
+    "y30": 5.66,
+    "y10path": "5.26% on 29 Sep, 5.29% on 30 Sep, 5.24% on 1 Oct, 5.28% on 2 Oct, 5.31% on 5 Oct",
+    "fed": {
+      "range": "3.75–4.00%",
+      "move": "25 bp",
+      "date": "16 Sep",
+      "vote": "12–0",
+      "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
+      "sources": [
+        {
+          "t": "CNBC",
+          "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+        },
+        {
+          "t": "CNN",
+          "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+        },
+        {
+          "t": "Advisor Perspectives",
+          "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+        },
+        {
+          "t": "Schwab",
+          "u": "https://www.schwab.com/learn/story/fomc-meeting"
+        }
+      ]
+    },
+    "y10hist": [
+      {
+        "date": "2026-09-29",
+        "y10": 5.26
+      },
+      {
+        "date": "2026-09-30",
+        "y10": 5.29
+      },
+      {
+        "date": "2026-10-01",
+        "y10": 5.24
+      },
+      {
+        "date": "2026-10-02",
+        "y10": 5.28
+      },
+      {
+        "date": "2026-10-05",
+        "y10": 5.31
+      }
+    ]
   },
-  "catalysts": {
-   "asOf": "2026-10-02",
-   "source": "events: WebSearch/FMP (2+ sources each, confirmed 1 Oct and re-verified this run); prices: FMP company/profile-symbol live quote"
+  "catalysts": [
+    {
+      "tk": "BA",
+      "name": "Boeing Company",
+      "industry": "Aerospace & Defense",
+      "sector": "Industrials",
+      "ctype": "Major contract",
+      "cdate": "29 Sep",
+      "cdateISO": "2026-09-29",
+      "what": "The Pentagon awarded Boeing the Navy's F/A-XX sixth-generation carrier fighter contract, valued at more than $20B for the full-scale development phase, beating out Northrop Grumman.",
+      "sources": [
+        {
+          "t": "Axios",
+          "u": "https://www.axios.com/2026/09/29/navy-boeing-fighter-contract-f47"
+        },
+        {
+          "t": "The Defense Post",
+          "u": "https://thedefensepost.com/2026/09/30/us-navy-boeing-faxx-fighter/"
+        }
+      ],
+      "cap": "$152B",
+      "px": 192.72,
+      "pct": -0.43,
+      "topSector": true
+    },
+    {
+      "tk": "CEG",
+      "name": "Constellation Energy Corporation",
+      "industry": "Independent Power Producers",
+      "sector": "Utilities",
+      "ctype": "Major contract",
+      "cdate": "30 Sep",
+      "cdateISO": "2026-09-30",
+      "what": "Amazon signed a 20-year power purchase agreement with Constellation for nuclear output from Calvert Cliffs, including about 190MW of new capacity and more than $3B of plant investment.",
+      "sources": [
+        {
+          "t": "Stocktwits",
+          "u": "https://stocktwits.com/news-articles/markets/equity/ceg-stock-rises-overnight-constellation-signs-20-year-nuclear-power-deal-with-amazon/cZDiFTxRBLN"
+        },
+        {
+          "t": "Tradingpedia",
+          "u": "https://www.tradingpedia.com/2026/10/01/constellation-energy-surges-on-long-term-amazon-deal/"
+        }
+      ],
+      "cap": "$96.1B",
+      "px": 267.62,
+      "pct": 3.93,
+      "topSector": false
+    },
+    {
+      "tk": "SMMT",
+      "name": "Summit Therapeutics Inc.",
+      "industry": "Biotechnology",
+      "sector": "Healthcare",
+      "ctype": "Major contract",
+      "cdate": "29 Sep",
+      "cdateISO": "2026-09-29",
+      "what": "AstraZeneca agreed to a $2B strategic equity investment in Summit Therapeutics (newly-issued preferred shares, ~12% stake) plus a clinical-trial collaboration combining ivonescimab with AstraZeneca ADCs in GI cancers.",
+      "sources": [
+        {
+          "t": "247wallst",
+          "u": "https://247wallst.com/investing/2026/09/30/astrazenecas-2-billion-vote-of-confidence-leaves-summit-therapeutics-trading-well-below-street-targets/"
+        },
+        {
+          "t": "Finviz News",
+          "u": "https://finviz.com/news/396261/summit-therapeutics-shares-rise-22-after-2-billion-astrazeneca-investment"
+        }
+      ],
+      "cap": "$13.8B",
+      "px": 17.27,
+      "pct": 3.07,
+      "topSector": false
+    },
+    {
+      "tk": "MCK",
+      "name": "McKesson Corporation",
+      "industry": "Medical Distribution",
+      "sector": "Healthcare",
+      "ctype": "Major contract",
+      "cdate": "1 Oct",
+      "cdateISO": "2026-10-01",
+      "what": "McKesson reached an agreement in principle to extend its pharmaceutical distribution deal with CVS Health through June 2032 (from 2027) and reaffirmed FY2027 EPS guidance.",
+      "sources": [
+        {
+          "t": "Newsquawk",
+          "u": "https://www.newsquawk.com/headlines/mckesson-mck-extends-pharmaceutical-distribution-agreement-with-cvs-health-cvs-and-reaffirms-fy-guidance"
+        },
+        {
+          "t": "Pharmaceutical Commerce",
+          "u": "https://www.pharmaceuticalcommerce.com/view/cardinal-health-mckesson-extend-cvs-distribution-deals-to-2032"
+        }
+      ],
+      "cap": "$107B",
+      "px": 915.45,
+      "pct": 1.46,
+      "topSector": false
+    }
+  ],
+  "bg": {
+    "BA": {
+      "cap": "$152B",
+      "what": "Designs and builds commercial airplanes plus defense, space and security systems — satellites, missiles and military aircraft — for governments and airlines worldwide."
+    },
+    "CEG": {
+      "cap": "$96.1B",
+      "what": "Largest US producer of carbon-free electricity, running a roughly 32GW nuclear/renewables/gas fleet across the Mid-Atlantic, Midwest, New York and ERCOT power markets."
+    },
+    "SMMT": {
+      "cap": "$13.8B",
+      "what": "Clinical-stage biopharma focused on infectious disease (ridinilazole for C. diff) and, via licensed ivonescimab, oncology bispecific-antibody combinations."
+    },
+    "MCK": {
+      "cap": "$107B",
+      "what": "Major US pharmaceutical distributor and healthcare services company spanning drug distribution, specialty/oncology support and prescription technology solutions."
+    }
+  },
+  "notices": [
+    "WebFetch is unavailable to the automated routine (confirmed platform bug) — sector ranking, industry drill-down, technical picks and near-misses are PINNED, carried forward from the last interactive refresh.",
+    "QQQ (NDX proxy) tile omitted this run: WebSearch returned sharply inconsistent values ($364.70 vs $628-638 from different pages, nearly 2x apart) that could not be reconciled — per the hard rule against guessing, the tile is left out rather than published with an unverified number.",
+    "No FOMC meeting fell in the 7 days before this run (the next meeting is 27-28 Oct); the Fed block is carried forward from 16 Sep with only the Treasury yields refreshed.",
+    "Catalyst alerts carry FMP's live price/cap only, not a computed entry/stop/target — reading the daily OHLC tape needs WebFetch, which this automated routine does not have. All four catalysts below fall inside the last-5-trading-session window (29 Sep – 1 Oct).",
+    "Several WebSearch results this run surfaced stories with 2026-looking framing that turned out, on cross-check against FMP's live quote, to be stale or mismatched (an AMD/OpenAI 'Oct 6' story that is actually dated 6 Oct 2025; a Micron analyst-upgrade price target roughly 80% below Micron's current FMP price). Both were dropped rather than published — see rejected."
+  ],
+  "screenNotes": [],
+  "rejected": [
+    "<b>Micron (MU)</b> · WebSearch surfaced a Morgan Stanley upgrade to Overweight with PT $220 (from $160), but FMP's live quote has MU at $1,063.96 — the target figures don't reconcile with the current price at all (stale/mismatched source), rejected.",
+    "<b>AMD</b> · WebSearch surfaced an OpenAI chip-supply deal framed as \"Oct 6\" news with large reported price moves, but a direct date check confirms the real event is from 6 Oct 2025 — a year outside the window. AMD's FMP quote is flat today (-0.34%), consistent with no fresh catalyst. Rejected.",
+    "<b>Eli Lilly (LLY)</b> · WebSearch surfaced an FDA expanded-indication approval for Jaypirca, but sources disagree on the date (one cites 3 Dec 2025) and could not be reconciled to a single date inside the window; LLY's FMP quote is flat (+0.02%). Rejected.",
+    "<b>Halliburton (HAL)</b> · Barclays raised its PT to $25 from $20, but $25 is below HAL's current price ($32.78) — fails the >15%-above-price analyst-upgrade test. Rejected.",
+    "<b>RXO / C.H. Robinson</b> · RXO's move is from being acquired at a fixed cash-and-stock price, not a momentum catalyst with upside room, and M&A buyouts aren't one of the admitted catalyst types. Rejected.",
+    "Rocket Lab (RKLB, Synspective launch contract) and HPE ($1.2B AI order) were seen in search results but not pursued further once four stronger, well-sourced names (BA, CEG, SMMT, MCK) filled this run's quota."
+  ],
+  "fetchlog": [
+    {
+      "id": "fmp.indexes.index-quote.^GSPC",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.indexes.index-quote.^DJI",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.indexes.index-quote.^RUT",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.indexes.index-quote.^VIX",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.economics.treasury-rates",
+      "ok": true,
+      "note": "2026-09-25 to 2026-10-05, 7 rows; used last 5 distinct trading days for y10hist"
+    },
+    {
+      "id": "websearch.qqq.price",
+      "ok": false,
+      "note": "two queries returned $364.70 and ~$628-638, nearly 2x apart, did not reconcile; tile omitted"
+    },
+    {
+      "id": "websearch.fomc.october2026",
+      "ok": true,
+      "note": "confirmed next meeting 27-28 Oct, none in last 7 days"
+    },
+    {
+      "id": "websearch.catalysts.search",
+      "ok": true,
+      "note": "~12 search queries; found BA/CEG/SMMT/MCK with 2 sources each inside the window; rejected AMD (stale 2025 event), MU (mismatched price target), LLY (unreconciled date), HAL (target below price)"
+    },
+    {
+      "id": "fmp.company.profile-symbol.BA",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.company.profile-symbol.CEG",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.company.profile-symbol.SMMT",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.company.profile-symbol.MCK",
+      "ok": true,
+      "note": ""
+    },
+    {
+      "id": "fmp.company.profile-symbol.HAL",
+      "ok": true,
+      "note": "cap/price check for rejected analyst-upgrade candidate"
+    },
+    {
+      "id": "fmp.company.profile-symbol.MU",
+      "ok": true,
+      "note": "sanity-check for rejected stale upgrade claim"
+    },
+    {
+      "id": "fmp.company.profile-symbol.AMD",
+      "ok": true,
+      "note": "sanity-check for rejected stale OpenAI-deal claim"
+    },
+    {
+      "id": "fmp.company.profile-symbol.LLY",
+      "ok": true,
+      "note": "sanity-check for rejected Jaypirca candidate"
+    },
+    {
+      "id": "fmp.company.profile-symbol.RKLB",
+      "ok": true,
+      "note": "candidate considered, not used"
+    },
+    {
+      "id": "fmp.company.profile-symbol.HPE",
+      "ok": true,
+      "note": "candidate considered, not used"
+    }
+  ],
+  "sections": {
+    "indices": {
+      "asOf": "2026-10-05",
+      "source": "FMP index quotes (SPX/DJI/RUT/VIX); QQQ omitted (WebSearch values unreconciled)"
+    },
+    "macro": {
+      "asOf": "2026-10-05",
+      "source": "FMP treasury-rates; Fed block unchanged (no FOMC meeting in the last 7 days)"
+    },
+    "catalysts": {
+      "asOf": "2026-10-05",
+      "source": "WebSearch (2+ sources each) + FMP company/profile-symbol live quotes"
+    }
+  },
+  "meta": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-06T20:11:27.988760+08:00",
+    "targetSession": "2026-10-06",
+    "lastSession": "2026-10-05"
   }
- },
- "meta": {
-  "schemaVersion": 1,
-  "generatedAt": "2026-10-05T20:11:28.664247+08:00",
-  "targetSession": "2026-10-05",
-  "lastSession": "2026-10-02"
- }
 }
