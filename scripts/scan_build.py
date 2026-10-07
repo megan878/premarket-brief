@@ -16,7 +16,9 @@ import market_time as mt, tracker as tr, selection as sel, scan_fetch as sf
 SECTOR_OF = {'Semiconductor Equipment & Materials': 'Technology', 'Electronic Components': 'Technology', 'Semiconductors': 'Technology',
              'Internet Content & Information': 'Communication Services', 'Electronic Gaming & Multimedia': 'Communication Services',
              'Publishing': 'Communication Services', 'Electrical Equipment & Parts': 'Industrials',
-             'Specialty Industrial Machinery': 'Industrials', 'Building Products & Equipment': 'Industrials'}
+             'Specialty Industrial Machinery': 'Industrials', 'Building Products & Equipment': 'Industrials',
+             'Communication Equipment': 'Technology', 'Software - Infrastructure': 'Technology', 'Electronics & Computer Distribution': 'Technology',
+             'Airlines': 'Industrials', 'Marine Shipping': 'Industrials'}      # plus whatever --market names (the scan's own nine industries)
 UNIVERSE = {'minPrice': 5.0, 'minCap': 5e9, 'minAvgVol': 500_000, 'minAdr': 2.0, 'maxAboveSma50Pct': 20.0}
 
 
@@ -114,6 +116,11 @@ def analyse_one(tk, rows, last, meta):
 
 
 def cmd_analyse(a):
+    if getattr(a, 'market', None):
+        mk = json.loads(pathlib.Path(a.market).read_text(encoding='utf-8'))
+        for g in mk['industries']:
+            for it in g['items']:
+                SECTOR_OF[it['name']] = g['sector']
     lists = json.loads(pathlib.Path(a.lists).read_text(encoding='utf-8'))['industries']
     ohlc = json.loads(pathlib.Path(a.ohlc).read_text(encoding='utf-8'))['tickers']
     meta = {}
@@ -188,7 +195,7 @@ def cmd_select(a):
     st = json.loads(pathlib.Path(a.stats).read_text(encoding='utf-8'))['tickers']
     extra = json.loads(pathlib.Path(a.earnings_extra).read_text(encoding='utf-8')) if a.earnings_extra and pathlib.Path(a.earnings_extra).exists() else {}
     scored, universe_out = prepare(d, st, extra)
-    r = sel.select(scored)
+    r = sel.select_tiered(scored)
     r['thresholds'] = sel.threshold_counts([c for c in scored if c.get('stats')], cfg=None)
     r['universeOut'] = len(universe_out)
     r['scoredCandidates'] = scored
@@ -201,7 +208,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='cmd', required=True)
     an = sub.add_parser('analyse'); an.add_argument('--lists', required=True); an.add_argument('--ohlc', required=True)
-    an.add_argument('--last-session', required=True); an.add_argument('--out', required=True)
+    an.add_argument('--last-session', required=True); an.add_argument('--out', required=True); an.add_argument('--market', help='market.json: the scan own industry to sector map')
     s = sub.add_parser('stats'); s.add_argument('--cands', required=True); s.add_argument('--min-readiness', type=int, default=45); s.add_argument('--out', required=True)
     se = sub.add_parser('select'); se.add_argument('--cands', required=True); se.add_argument('--stats', required=True)
     se.add_argument('--earnings-extra'); se.add_argument('--out', required=True)

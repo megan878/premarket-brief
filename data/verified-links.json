@@ -1,0 +1,109 @@
+{
+ "note": "A catalyst link is shown only if its URL is listed here. Add an entry only after loading the page and reading that its text covers the event. CNBC, Reuters, Benzinga and GuruFocus cannot be loaded and are never listed.",
+ "links": [
+  {
+   "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000018/a2026q4ex991-pressrelease.htm",
+   "publisher": "Micron (SEC 8-K, Exhibit 99.1)",
+   "date": "2026-09-30",
+   "covers": {
+    "tk": "MU",
+    "event": "Fiscal Q4 2026 results: revenue $54.23B, Q1 FY27 guidance $61.5B"
+   },
+   "checked": {
+    "at": "2026-10-06",
+    "how": "WebFetch loaded the page; title, date, revenue and guidance read back"
+   }
+  },
+  {
+   "url": "https://www.investing.com/news/analyst-ratings/hsbc-upgrades-target-stock-rating-on-earnings-recovery-potential-93CH-4925668",
+   "publisher": "Investing.com",
+   "date": "2026-09-30",
+   "covers": {
+    "tk": "TGT",
+    "event": "HSBC upgrade to Buy, target $190 from $125 (a single broker target)"
+   },
+   "checked": {
+    "at": "2026-10-06",
+    "how": "WebFetch loaded the page; text states the upgrade and the $190 target"
+   }
+  },
+  {
+   "url": "https://www.prnewswire.com/news-releases/synopsys-details-growth-strategy-and-long-term-financial-model-at-2026-investor-day-302894684.html",
+   "publisher": "PR Newswire (Synopsys)",
+   "date": "2026-09-30",
+   "covers": {
+    "tk": "SNPS",
+    "event": "Investor Day: FY2027 revenue ~$11.15B, Amazon IP agreement"
+   },
+   "checked": {
+    "at": "2026-10-06",
+    "how": "WebFetch loaded the page; guidance and Amazon agreement read back"
+   }
+  },
+  {
+   "url": "https://www.fool.com/investing/2026/10/01/why-accenture-stock-soared-on-thursday/",
+   "publisher": "The Motley Fool",
+   "date": "2026-10-01",
+   "covers": {
+    "tk": "ACN",
+    "event": "Fiscal Q4 beat and the stock move on 1 Oct"
+   },
+   "checked": {
+    "at": "2026-10-06",
+    "how": "WebFetch loaded the page; Q4 EPS/revenue and the move read back"
+   }
+  },
+  {
+   "url": "https://www.constellationenergy.com/news/2026/09/constellation-and-amazon-announce-20-year-power-purchase-agreement-at-calvert-cliffs.html",
+   "publisher": "Constellation (press release)",
+   "date": "2026-09-30",
+   "covers": {
+    "tk": "CEG",
+    "event": "20-year Amazon power purchase agreement at Calvert Cliffs, 190 MW uprate, over $3B investment"
+   },
+   "checked": {
+    "at": "2026-10-07",
+    "how": "WebFetch loaded the page; headline, date and terms read back"
+   }
+  },
+  {
+   "url": "https://press.spglobal.com/2026-10-01-Vylor-Added-to-the-S-P-500-Twilio-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600",
+   "publisher": "S&P Dow Jones Indices (press release)",
+   "date": "2026-10-01",
+   "covers": {
+    "tk": "TWLO",
+    "event": "Twilio replaces Warner Bros. Discovery in the S&P 500, effective before the open on 6 Oct"
+   },
+   "checked": {
+    "at": "2026-10-07",
+    "how": "WebFetch loaded the page; headline, replacement and effective date read back"
+   }
+  },
+  {
+   "url": "https://www.pharmaceuticalcommerce.com/view/cardinal-health-mckesson-extend-cvs-distribution-deals-to-2032",
+   "publisher": "Pharmaceutical Commerce",
+   "date": "2026-10-02",
+   "covers": {
+    "tk": "MCK",
+    "event": "McKesson agreement in principle with CVS Health through June 2032 (definitive contract still to be signed)"
+   },
+   "checked": {
+    "at": "2026-10-07",
+    "how": "WebFetch loaded the page; the agreement and its in-principle status read back. It does not mention guidance"
+   }
+  },
+  {
+   "url": "https://www.newsquawk.com/headlines/mckesson-mck-extends-pharmaceutical-distribution-agreement-with-cvs-health-cvs-and-reaffirms-fy-guidance",
+   "publisher": "Newsquawk",
+   "date": "2026-10-01",
+   "covers": {
+    "tk": "MCK",
+    "event": "McKesson extends CVS distribution agreement and reaffirms FY guidance (headline)"
+   },
+   "checked": {
+    "at": "2026-10-07",
+    "how": "WebFetch loaded the page; headline and date read back; the body is thin and gives no terms"
+   }
+  }
+ ]
+}

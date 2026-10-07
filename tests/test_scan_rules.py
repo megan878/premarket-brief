@@ -120,6 +120,64 @@ class Selection(unittest.TestCase):
         self.assertEqual([c['tk'] for c in alive], ['A'])
 
 
+class Tiered(unittest.TestCase):
+    def test_tier_a_is_unchanged_and_tier_b_fills_up_with_chips(self):
+        cs = [cand('GOOD'),
+              cand('LOWR', comp=48),                                                 # readiness 48: Tier B chip
+              cand('FAR', last=93.0, pivot=100.0, entry=100.0, low=None, comp=70)]   # 7% below the pivot: chip
+        r = S.select_tiered(cs)
+        tiers = {p['tk']: p['tier'] for p in r['picks']}
+        self.assertEqual(tiers, {'GOOD': 'A', 'LOWR': 'B', 'FAR': 'B'})
+        self.assertIn('far from pivot (7.0%)', [c['label'] for p in r['picks'] if p['tk'] == 'FAR' for c in p['chips']])
+        self.assertEqual([p['tk'] for p in r['picks'] if p['tier'] == 'A'], [p['tk'] for p in S.select(cs)['picks']])
+        self.assertEqual([p['selectionRank'] for p in r['picks']], list(range(1, len(r['picks']) + 1)))
+
+    def test_validity_checks_still_exclude_from_tier_b(self):
+        cs = [cand('SPIKE', tib=1, comp=80),                       # no valid base
+              cand('NOEARN', earn=None, comp=80),                  # earnings date unverified
+              cand('BLACKOUT', earn='2026-10-06', comp=80),        # earnings inside the blackout
+              cand('NOSTOP', atr=None, comp=80),                   # the stop cannot be placed
+              cand('DEAD', comp=30),                               # below the Tier B readiness floor
+              cand('GOOD')]
+        r = S.select_tiered(cs)
+        self.assertEqual([p['tk'] for p in r['picks']], ['GOOD'])
+        self.assertTrue({'SPIKE', 'NOEARN', 'BLACKOUT', 'NOSTOP'} <= {x['tk'] for x in r['bRejected']})
+        self.assertNotIn('DEAD', [p['tk'] for p in r['picks']])
+
+    def test_tier_b_stop_is_always_below_the_close(self):
+        r = S.select_tiered([cand('X', comp=50, last=100.0, entry=100.5)])
+        self.assertTrue(r['picks'])
+        for p in r['picks']:
+            self.assertLess(p['stop'], 100.0)
+
+    def test_total_list_is_capped_at_max_picks(self):
+        cs = [cand(f'A{i:02d}', comp=70 + i % 5) for i in range(7)] + [cand(f'B{i:02d}', comp=50) for i in range(8)]
+        r = S.select_tiered(cs)
+        self.assertEqual(len(r['picks']), 10)
+        self.assertEqual((r['tierA'], r['tierB']), (7, 3))
+        self.assertEqual(len(r['tierBCut']), 5)
+        self.assertEqual(S.SELECTION_VERSION, 'tiered-v3')
+
+    def test_rr_chip_is_red_under_one(self):
+        # entry far above the close with a wide ATR: the placed stop gives R:R below 1 at the fixed +10% target
+        r = S.select_tiered([cand('LOWRR', comp=70, last=100.0, entry=101.0, atr=14.0)])
+        p = [x for x in r['picks'] if x['tk'] == 'LOWRR']
+        self.assertTrue(p and p[0]['tier'] == 'B', r['picks'])
+        rr = [c for c in p[0]['chips'] if c['key'] == 'rr']
+        self.assertTrue(rr and rr[0]['tone'] == 'bad' and p[0]['rr'] < 1, p[0]['chips'])
+
+
+class TierBHealth(unittest.TestCase):
+    def _pick(self, **kw):
+        return {'tk': 'XX', 'entryZone': '100.01 – 101.00', 'entry': 100.01, 'stop': 86.0, 'target': 110.01, 'px': 99.0, 'cap': '$12B', **kw}
+
+    def test_a_wide_stop_warns_for_tier_a_but_not_for_tier_b(self):
+        ctx = {'lastSession': dt.date.fromisoformat(LAST)}
+        self.assertTrue([m for lvl, m in H._levels(self._pick(), ctx) if 'outside the 1.5-8% band' in m])
+        self.assertFalse([m for lvl, m in H._levels(self._pick(tier='B'), ctx) if 'outside the 1.5-8% band' in m or 'unusual' in m])
+        self.assertTrue([m for lvl, m in H._levels(self._pick(tier='B', stop=101.0), ctx) if lvl == 'hard'])        # validity checks still apply
+
+
 class PricedIn(unittest.TestCase):
     def test_component_a_anchors(self):
         self.assertEqual(P.comp_a(4.0, 4.0), 0)             # 1x ADR -> 0
@@ -326,6 +384,22 @@ class TrackerFields(unittest.TestCase):
         self.assertEqual({k: v['picks'] for k, v in s['bySelectionVersion'].items()}, {'top4-v1': 1, S.SELECTION_VERSION: 3})
         self.assertEqual({k: v['picks'] for k, v in s['byFlags'].items()},
                          {'any flag': 2, 'flag: financials': 1, 'flag: sector': 2, 'no flags': 1, 'not evaluated': 1})
+
+    def test_ledger_records_the_tier_and_chips_and_old_records_stay_untiered(self):
+        led = T.empty_ledger()
+        T.ingest(led, self._block(tier='B', chips=[{'key': 'rr', 'label': 'R:R 0.80', 'tone': 'bad'}]), '2026-10-05T19:00:00+08:00')
+        r = led['records'][0]
+        self.assertEqual((r['tier'], r['tierChips'], r['selectionVersion']), ('B', ['R:R 0.80'], S.SELECTION_VERSION))
+        self.assertEqual(S.SELECTION_VERSION, 'tiered-v3')
+        led2 = T.empty_ledger()
+        T.ingest(led2, self._block(), '2026-10-05T19:00:00+08:00')
+        self.assertIsNone(led2['records'][0]['tier'])          # a pick that carries no tier is not given one
+
+    def test_stats_split_by_tier_and_old_records_are_not_retagged(self):
+        def rec(i, tier):
+            return {'id': i, 'status': 'pending', 'publishedAt': i, 'tier': tier, 'selectionVersion': 'top4-v1' if tier is None else S.SELECTION_VERSION, 'readiness': None}
+        s = T.summarize([rec('1', None), rec('2', 'A'), rec('3', 'B'), rec('4', 'B')])
+        self.assertEqual({k: v['picks'] for k, v in s['byTier'].items()}, {'Tier A': 1, 'Tier B': 2, 'untiered (before tiered-v3)': 1})
 
 
 class PageLogic(unittest.TestCase):

@@ -99,6 +99,19 @@
     <h1>Market-Open Update</h1>
     <div class="meta"><span class="phase">${H.phase === 'pre-open' ? 'PRE-OPEN' : 'AFTER THE OPEN'}</span>Snapshot <b>${L.asOf}</b> · vs the ${B.asOfLabel} · <span class="toplink"><a href="${(L.links && L.links.brief) || 'brief.html'}">full brief →</a></span></div>
   </header>`));
+  /* ── Last automated brief run (same rule as the brief page: red when no run is recorded since the most recent scheduled fire + grace) ── */
+  (() => {
+    const la = B.runs && B.runs.lastAutomated, closed = new Set((B.calendar && B.calendar.closed) || []);
+    const grace = (B.runs && B.runs.schedule && B.runs.schedule.brief && B.runs.schedule.brief.graceMinutes) || 30;
+    const isTD = (d) => d.getUTCDay() % 6 !== 0 && !closed.has(d.toISOString().slice(0, 10));
+    let exp = null;
+    for (let i = 0; i < 10 && !exp; i++) { const d = new Date(new Date(new Date().toISOString().slice(0, 10) + 'T00:00:00Z').getTime() - i * 86400000); const fire = new Date(d.getTime() + 12 * 3600000); if (isTD(d) && fire.getTime() + grace * 60000 <= Date.now()) exp = fire; }
+    const missed = !la ? !!exp : !!exp && new Date(la.at).getTime() < exp.getTime();
+    const st = la ? la.status : 'unknown';
+    const cls = missed || st === 'failed' ? 'red' : st === 'ok' ? 'ok' : 'amber';
+    const when = la ? new Date(la.at).toLocaleString('en-GB', { timeZone: 'Asia/Hong_Kong', weekday: 'short', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false }) + ' HKT, status ' + st : 'not recorded in the brief this page was built from';
+    app.append($(`<div class="runline" id="runLine" style="margin:-4px 0 10px;font-size:12.5px;color:var(--ink-3)">Brief's last automated run: <b class="${cls}" style="${cls === 'red' ? 'color:#c0392b' : cls === 'amber' ? 'color:var(--warn-ink)' : ''}">${when}</b>${missed ? ' · <b style="color:#c0392b">MISSED: no run recorded since the last scheduled fire</b>' : ''}</div>`));
+  })();
   if (H.status !== 'ok') {
     const rows = Object.entries(H.sections).filter(([, v]) => v.status !== 'ok' && v.status !== 'pinned').map(([k, v]) => `<li><b>${LBL[k] || k}</b> — ${v.status === 'failed' ? 'unavailable' : 'not fresh'}. ${v.msg || ''}</li>`).join('');
     const extra = (H.issues || []).filter(i => i.level === 'warn').map(i => `<li>${i.msg}</li>`).join('');

@@ -88,7 +88,7 @@ def main(argv=None):
     for rank, c in enumerate(sl['picks'], 1):
         fin = sf.fetch_financials(c['tk']) if a.fetch_financials else None
         pk, bg, log = card(c, oh[c['tk']], market, desc.get(c['tk'], ''), fin)
-        pk.update(selectionRank=rank, selectionVersion=sel.SELECTION_VERSION)
+        pk.update(selectionRank=rank, selectionVersion=sel.SELECTION_VERSION, tier=c.get('tier', 'A'), chips=c.get('chips', []))
         out['picks'].append(pk); out['bg'][c['tk']] = bg
         out['flagLog'] += [f"{c['tk']}: {m}" for m in log]
     pathlib.Path(a.out).write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding='utf-8')

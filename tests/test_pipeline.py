@@ -32,7 +32,18 @@ def page_json(path, element='brief-data'):
     return hl.load_json_from_html(path, element)
 
 
-def brief(name, new, prev=None, now=BRIEF_NOW, expect=0):
+def all_links(*datas):
+    """Every catalyst source URL in the fixtures, as a verified-links file (so the link policy stays out of scenarios that are about something else)."""
+    links = {}
+    for d in datas:
+        for c in (d or {}).get('catalysts') or []:
+            for x in c.get('sources') or []:
+                if x.get('u'):
+                    links[x['u']] = {'url': x['u'], 'publisher': x.get('t') or 'src', 'date': '2026-09-18', 'covers': c.get('tk'), 'checked': {'at': '2026-10-06', 'how': 'fixture'}}
+    return {'links': list(links.values())}
+
+
+def brief(name, new, prev=None, now=BRIEF_NOW, expect=0, verified='auto'):
     out = OUT / f'{name}.html'
     if out.exists():
         out.unlink()
@@ -40,6 +51,7 @@ def brief(name, new, prev=None, now=BRIEF_NOW, expect=0):
             '--out', str(out), '--save-data', str(OUT / f'{name}.saved.json'), '--now', now]
     if prev is not None:
         argv += ['--previous', jw(f'{name}.prev.json', prev)]
+    argv += ['--verified-links', jw(f'{name}.links.json', all_links(new, prev) if verified == 'auto' else verified)]
     code, err = run(build_brief, argv)
     assert code == expect, f'{name}: exit {code}, wanted {expect}\n{err}'
     return (page_json(str(out)) if code == 0 else None), code
@@ -134,7 +146,8 @@ check('B11 market cap under $5B is dropped', 'ANET' not in [p['tk'] for p in d['
 # in this same working directory overwrites that path, which once silently poisoned this fixture).
 brief_final_path = OUT / 'brief_final.saved.json'
 run(build_brief, ['--data', jw('brief_final.data.json', fresh), '--previous', jw('brief_final.prev.json', prev),
-                   '--out', str(OUT / 'brief_final.html'), '--save-data', str(brief_final_path), '--now', BRIEF_NOW])
+                   '--out', str(OUT / 'brief_final.html'), '--save-data', str(brief_final_path), '--now', BRIEF_NOW,
+                   '--verified-links', jw('brief_final.links.json', all_links(fresh, prev))])
 brief_final = json.loads(brief_final_path.read_text(encoding='utf-8'))
 brief_final.pop('fetchlog', None)
 
@@ -254,6 +267,7 @@ def brief_t(name, ledger, new=None, prev=None, extra=(), now=BRIEF_NOW):
             '--save-data', str(OUT / f'{name}.saved.json'), '--now', now, '--ledger', str(lp), *extra]
     if prev is not None:
         argv += ['--previous', jw(f'{name}.prev.json', prev)]
+    argv += ['--verified-links', jw(f'{name}.links.json', all_links(new if new is not None else fresh, prev))]
     code, err = run(build_brief, argv)
     assert code == 0, f'{name}: exit {code}\n{err}'
     return page_json(str(out))
@@ -369,6 +383,10 @@ bz2 = copy.deepcopy(brief_final); bz2['picks'] = []
 opn('L9b_empty_without_selection', live0, brief_data=bz2, expect=4)
 check('L9b an empty pick list WITHOUT a selection summary is still a failure (exit 4)', True)
 
+def ct(v):
+    return {'analystTarget': v, 'targetKind': 'consensus average', 'targetSources': [{'t': 'FactSet', 'target': v}, {'t': 'LSEG', 'target': v}]}
+
+
 # ───────────── 5 Oct additions: last automated run, catalyst re-score, zero-pick scans ─────────────
 # T10 an automated build records "last automated run"; a failed ledger push reads "unpushed"; an interactive build keeps the old value
 d, _ = brief('T10_interactive', fresh, prev)
@@ -385,7 +403,7 @@ check('T10 the page carries the calendar the browser needs to count sessions', '
 # T11 the routine re-scores catalyst alerts without price history
 cat = {**fresh['catalysts'][0]}
 cat['tk'] = 'NEWA'
-n = copy.deepcopy(fresh); n['catalysts'] = [{**cat, 'px': 95.0, 'analystTarget': 100.0}]
+n = copy.deepcopy(fresh); n['catalysts'] = [{**cat, 'px': 95.0, **ct(100.0)}]
 d, _ = brief('T11_new_alert', n, prev)
 pi_ = d['catalysts'][0]['pricedIn']
 check('T11 a new alert is scored from price and target only and is partial', pi_['n'] == 1 and pi_['partial'] and pi_['score'] == 100 and 'partial' in pi_['label'], pi_)
@@ -410,12 +428,118 @@ check('T12 zero qualified picks builds and the technical section is ok', d['heal
 d3, _ = brief('T12_zero_then_routine', {k: v for k, v in fresh.items() if k not in ('picks', 'pickWindow', 'industries', 'nearmiss')}, d)
 check('T12 the routine (which omits picks) carries the zero-pick result forward as pinned', d3['health']['sections']['technical']['status'] == 'pinned' and d3['picks'] == [] and d3['selection']['qualified'] == 0, d3['health']['sections']['technical'])
 two = copy.deepcopy(fresh)
-hi = {**fresh['catalysts'][0], 'tk': 'HIGH', 'px': 100.0, 'analystTarget': 100.0}
-lo = {**fresh['catalysts'][0], 'tk': 'LOWW', 'px': 70.0, 'analystTarget': 100.0}
+hi = {**fresh['catalysts'][0], 'tk': 'HIGH', 'px': 100.0, **ct(100.0)}
+lo = {**fresh['catalysts'][0], 'tk': 'LOWW', 'px': 70.0, **ct(100.0)}
 none = {k: v for k, v in {**fresh['catalysts'][0], 'tk': 'NONE', 'px': 70.0}.items() if k != 'target'}
 two['catalysts'] = [hi, none, lo]
 d, _ = brief('T12_ranking', two, prev)
 check('T12 alerts are ranked lowest priced-in first, unscored last', [c['tk'] for c in d['catalysts']] == ['LOWW', 'HIGH', 'NONE'], [(c['tk'], c['pricedIn']['score']) for c in d['catalysts']])
+
+# ───────────── 6 Oct: one as-of for the tiles and the regime score (a live print never sits next to closes) ─────────────
+import datetime as _dt2
+_close = _dt2.datetime(2026, 9, 18, 20, 0, tzinfo=_dt2.timezone.utc)                    # the last completed session at BRIEF_NOW
+_ts_close = int((_close + _dt2.timedelta(hours=1, minutes=19)).timestamp())
+_ts_live = int(_dt2.datetime(2026, 9, 21, 12, 10, tzinfo=_dt2.timezone.utc).timestamp())    # Monday premarket
+n = copy.deepcopy(fresh)
+for ix in n['indices']:
+    ix['ts'] = _ts_close
+vix = [i for i in n['indices'] if i['id'] == 'VIX'][0]
+vix.update(ts=_ts_live, prev=14.81)
+vix['q'].update(price=17.0, change=2.19, pct=14.8)
+d, _ = brief('T13_vix_live_print', n, prev)
+v = [i for i in d['indices'] if i['id'] == 'VIX'][0]
+check('T13 a live print is labelled as the odd one out', v.get('asOfKind') == 'live' and 'live print' in v['asOfNote'], v)
+check('T13 the regime score uses its previous close, not the live print', v.get('inRegime') == 'previous close' and v['regimeQ']['price'] == 14.81 and v['q']['price'] == 17.0, v)
+check('T13 the closes are left alone', all('asOfKind' not in i for i in d['indices'] if i['id'] != 'VIX'))
+check('T13 health says so', any('live print' in i['msg'] and i['section'] == 'indices' for i in d['health']['issues']), d['health']['issues'])
+vix.pop('prev')
+d, _ = brief('T13b_live_without_prev', n, prev)
+v = [i for i in d['indices'] if i['id'] == 'VIX'][0]
+check('T13b a live print with no previous close is kept out of the regime score', v.get('inRegime') is False and 'regimeQ' not in v)
+n2 = copy.deepcopy(fresh)
+for ix in n2['indices']:
+    ix['ts'] = _ts_close
+d, _ = brief('T13c_all_closes', n2, prev)
+check('T13c indices stamped at the close are untouched', not any('asOfKind' in i for i in d['indices']))
+
+# ───────────── 6 Oct: analyst targets are enforced in the builder, not in the prompt ─────────────
+base_c = {k: v for k, v in {**fresh['catalysts'][0], 'tk': 'TGTX', 'px': 156.0}.items() if k != 'target'}
+stored = {**base_c, 'pricedIn': {'inputs': {'movePct': 0.17, 'adr20Pct': 2.177, 'eventHigh': 159.92, 'eventLow': 155.96, 'last': 156.0, 'sessionsSince': 3,
+                                            'runUpPct': -2.77, 'price': 156.0, 'target': 164.68, 'reactionDate': '2026-09-17', 'targetSource': 'stockanalysis.com consensus (single source)'}}}
+prev_t = copy.deepcopy(prev); prev_t['catalysts'] = [stored]
+n = copy.deepcopy(fresh); n['catalysts'] = [{**base_c, 'analystTarget': 190}]        # the routine writes one broker's target for an alert whose target is already stored
+d, _ = brief('T14_stored_target_kept', n, prev_t)
+c0 = d['catalysts'][0]
+check('T14 a stored target is never overwritten by the routine', c0['pricedIn']['inputs']['target'] == 164.68, c0['pricedIn']['inputs'])
+check('T14 the page says it was ignored', any('ignored' in i['msg'] and 'TGTX' in i['msg'] for i in d['health']['issues']), d['health']['issues'])
+n = copy.deepcopy(fresh); n['catalysts'] = [{**base_c, 'analystTarget': 190}]        # a NEW alert, one broker, no sources
+d, _ = brief('T14b_single_broker_rejected', n, prev)
+c0 = d['catalysts'][0]
+check('T14b a single broker target is rejected', c0['pricedIn']['inputs'].get('target') is None and any('rejected' in i['msg'] for i in d['health']['issues']), c0['pricedIn'])
+good = {**base_c, 'analystTarget': 190, 'targetKind': 'consensus average', 'targetSources': [{'t': 'FactSet', 'target': 188.0}, {'t': 'LSEG', 'target': 192.0}]}
+n = copy.deepcopy(fresh); n['catalysts'] = [good]
+d, _ = brief('T14c_two_sources_accepted', n, prev)
+c0 = d['catalysts'][0]
+check('T14c two named sources within 5% on the consensus average are accepted', c0['pricedIn']['inputs']['target'] == 190 and 'FactSet + LSEG' in c0['pricedIn']['inputs']['targetSource'], c0['pricedIn']['inputs'])
+for label, srcs, kind in (('disagree', [{'t': 'FactSet', 'target': 170.0}, {'t': 'LSEG', 'target': 192.0}], 'consensus average'), ('one outlet twice', [{'t': 'FactSet', 'target': 190.0}, {'t': 'FactSet', 'target': 191.0}], 'consensus average'),
+                          ('not a consensus', [{'t': 'FactSet', 'target': 190.0}, {'t': 'LSEG', 'target': 191.0}], 'single broker')):
+    n = copy.deepcopy(fresh); n['catalysts'] = [{**good, 'targetSources': srcs, 'targetKind': kind}]
+    d, _ = brief('T14d_' + label.replace(' ', '_'), n, prev)
+    check(f'T14d sources that {label} are rejected', d['catalysts'][0]['pricedIn']['inputs'].get('target') is None, d['catalysts'][0]['pricedIn']['inputs'])
+
+# ───────────── 6 Oct: a catalyst link is shown only when it is on the verified list ─────────────
+n = copy.deepcopy(fresh)
+c0 = n['catalysts'][0]
+keep_u, drop_u = c0['sources'][0]['u'], c0['sources'][1]['u']
+vl = {'links': [{'url': keep_u, 'publisher': 'Verified Pub', 'date': '2026-09-17', 'covers': c0['tk'], 'checked': {'at': '2026-10-06', 'how': 'WebFetch, text names the event'}}]}
+d, _ = brief('T15_link_policy', n, prev, verified=vl)
+s0 = next(c for c in d['catalysts'] if c['tk'] == c0['tk'])['sources']
+check('T15 a verified link is kept, with the publisher from the verified list', s0[0] == {'t': 'Verified Pub', 'u': keep_u, 'verified': True}, s0)
+check('T15 an unlisted link is dropped to a name, flagged unverified', 'u' not in s0[1] and s0[1]['verified'] is False and s0[1]['t'] == c0['sources'][1]['t'], s0)
+check('T15 health notes which link was not verified, without degrading the page', any('not verified' in i['msg'] and c0['tk'] in i['msg'] and i['level'] == 'info' for i in d['health']['issues']) and d['health']['status'] == 'ok', d['health'])
+d, _ = brief('T15b_no_list', n, prev, verified={'links': []})
+check('T15b with no verified list every URL is gone and the page still builds', all('u' not in s for c in d['catalysts'] for s in c['sources']), d['catalysts'][0]['sources'])
+html_txt = (OUT / 'T15b_no_list.html').read_text(encoding='utf-8')
+check('T15b no routine-written URL appears anywhere in the page source', drop_u not in html_txt and keep_u not in html_txt)
+
+# ───────────── 6 Oct: QQQ is carried (labelled), screenNotes are carried unless the routine delivers non-empty ─────────────
+n = copy.deepcopy(fresh); n['indices'] = [i for i in n['indices'] if i['id'] != 'QQQ']
+pv = copy.deepcopy(prev)
+check('T16 fixture: previous page has a QQQ tile', any(i['id'] == 'QQQ' for i in pv['indices']))
+d, _ = brief('T16_qqq_carry', n, pv)
+qq = [i for i in d['indices'] if i['id'] == 'QQQ']
+check('T16 the last QQQ tile is carried, labelled as an earlier close, outside the regime score',
+      len(qq) == 1 and qq[0]['asOfKind'] == 'carried' and qq[0]['inRegime'] is False and 'not refreshed' in qq[0]['asOfNote'], qq)
+check('T16 the carry is a health warning, and a second carry keeps the original date',
+      any('QQQ carried forward' in i['msg'] for i in d['health']['issues']))
+d2, _ = brief('T16b_qqq_carry_twice', n, d)
+qq2 = [i for i in d2['indices'] if i['id'] == 'QQQ'][0]
+check('T16b carrying a carried tile keeps the original close date', qq2['carried'] == qq[0]['carried'], (qq2, qq))
+d3, _ = brief('T16c_qqq_fresh_wins', fresh, pv)
+check('T16c a fresh QQQ replaces the carried one', [i for i in d3['indices'] if i['id'] == 'QQQ'][0].get('asOfKind') != 'carried')
+pv2 = copy.deepcopy(prev); pv2['screenNotes'] = ['pinned scan note']
+n2 = copy.deepcopy(fresh); n2['screenNotes'] = []
+d, _ = brief('T17_screennotes_carry', n2, pv2)
+check('T17 an empty screenNotes from the routine does not blank the pinned notes', d.get('screenNotes') == ['pinned scan note'], d.get('screenNotes'))
+n3 = copy.deepcopy(fresh); n3.pop('screenNotes', None)
+d, _ = brief('T17b_screennotes_absent', n3, pv2)
+check('T17b an absent screenNotes carries the pinned notes', d.get('screenNotes') == ['pinned scan note'], d.get('screenNotes'))
+n4 = copy.deepcopy(fresh); n4['screenNotes'] = ['new note']
+d, _ = brief('T17c_screennotes_new', n4, pv2)
+check('T17c a non-empty screenNotes replaces them', d.get('screenNotes') == ['new note'], d.get('screenNotes'))
+
+# routine writes names only: two named sources are enough, one is not, a non-https URL is still refused
+n = copy.deepcopy(fresh)
+tk0 = n['catalysts'][0]['tk']
+n['catalysts'][0]['sources'] = [{'t': 'Reuters'}, {'t': 'Bloomberg'}]
+d, _ = brief('T18_names_only', n, prev, verified={'links': []})
+check('T18 an alert with two named sources and no URL is kept', any(c['tk'] == tk0 for c in d['catalysts']), [c['tk'] for c in d['catalysts']])
+n['catalysts'][0]['sources'] = [{'t': 'Reuters'}]
+d, _ = brief('T18b_one_name', n, prev, verified={'links': []})
+check('T18b an alert with one named source is dropped', all(c['tk'] != tk0 for c in d['catalysts']), [c['tk'] for c in d['catalysts']])
+n['catalysts'][0]['sources'] = [{'t': 'Reuters', 'u': 'http://x.test/a'}, {'t': 'Bloomberg'}]
+d, _ = brief('T18c_http', n, prev, verified={'links': []})
+check('T18c a non-https URL is refused', all(c['tk'] != tk0 for c in d['catalysts']), [c['tk'] for c in d['catalysts']])
 
 print(f'{len(results)} scenarios passed')
 for r in results:

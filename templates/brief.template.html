@@ -469,6 +469,7 @@ a.wi:hover { border-color: var(--ink-3); }
         <div class="val">${fmt(q.price)}</div>
         ${typeof q.pct === 'number' ? `<div class="chg ${pctCls(q.pct)}"><span class="arr">${q.pct >= 0 ? '▲' : '▼'}</span>${sgn(q.pct)}% <span style="font-weight:500">(${sgn(q.change)})</span></div>` : ''}
         <div class="chips"><span class="chip"><b>${ix.proxyFor} proxy</b> · ${ix.src}</span></div>
+        ${ix.asOfKind === 'carried' ? `<div class="chips"><span class="chip" style="background:var(--warn-bg);color:var(--warn-ink)" title="${(ix.asOfNote || '').replace(/"/g, '&quot;')}"><b>${(ix.asOfNote || 'not refreshed').split(' (')[0]}</b></span></div>` : ''}
       </div>`));
       return;
     }
@@ -488,6 +489,8 @@ a.wi:hover { border-color: var(--ink-3); }
         <span class="chip">vs 50d <b>${sgn(vs(q.ma50), 1)}%</b></span>
         <span class="chip">vs 200d <b>${sgn(vs(q.ma200), 1)}%</b></span>
       </div>
+      ${ix.asOfKind === 'carried' ? `<div class="chips"><span class="chip" style="background:var(--warn-bg);color:var(--warn-ink)" title="${(ix.asOfNote || '').replace(/"/g, '&quot;')}"><b>${(ix.asOfNote || 'not refreshed').split(' (')[0]}</b></span></div>` : ''}
+      ${ix.asOfKind === 'live' ? `<div class="chips"><span class="chip" style="background:var(--warn-bg);color:var(--warn-ink)" title="${(ix.asOfNote || '').replace(/"/g, '&quot;')}"><b>live print</b>, not a close · ${ix.inRegime === 'previous close' ? 'regime score uses the previous close ' + fmt(ix.prev, 2) : 'kept out of the regime score'}</span></div>` : ''}
     </div>`));
   });
   if (D.macro) {
@@ -513,17 +516,14 @@ a.wi:hover { border-color: var(--ink-3); }
   sec.append(two);
 
   // regime read (rule-based, fully transparent)
-  const by = Object.fromEntries(D.indices.map(i => [i.id, i.q]));
+  const by = Object.fromEntries(D.indices.filter(i => i.inRegime !== false).map(i => [i.id, i.regimeQ || i.q]));
+  const pctCheck = (id, nm, key) => by[id] ? [`${nm} above ${key}-day`, by[id].price > by[id]['ma' + key], `${sgn((by[id].price / by[id]['ma' + key] - 1) * 100, 1)}%`] : null;
   const checks = [
-    ['S&P 500 above 50-day', by.SPX.price > by.SPX.ma50, `${sgn((by.SPX.price / by.SPX.ma50 - 1) * 100, 1)}%`],
-    ['S&P 500 above 200-day', by.SPX.price > by.SPX.ma200, `${sgn((by.SPX.price / by.SPX.ma200 - 1) * 100, 1)}%`],
-    ['Dow above 50-day', by.DJI.price > by.DJI.ma50, `${sgn((by.DJI.price / by.DJI.ma50 - 1) * 100, 1)}%`],
-    ['Dow above 200-day', by.DJI.price > by.DJI.ma200, `${sgn((by.DJI.price / by.DJI.ma200 - 1) * 100, 1)}%`],
-    ['Russell 2000 above 50-day', by.RUT.price > by.RUT.ma50, `${sgn((by.RUT.price / by.RUT.ma50 - 1) * 100, 1)}%`],
-    ['Russell 2000 above 200-day', by.RUT.price > by.RUT.ma200, `${sgn((by.RUT.price / by.RUT.ma200 - 1) * 100, 1)}%`],
-    ['VIX below 20', by.VIX.price < 20, fmt(by.VIX.price, 1)],
-    ['VIX below its 50-day avg', by.VIX.price < by.VIX.ma50, `${fmt(by.VIX.price, 1)} vs ${fmt(by.VIX.ma50, 1)}`]
-  ];
+    pctCheck('SPX', 'S&P 500', 50), pctCheck('SPX', 'S&P 500', 200), pctCheck('DJI', 'Dow', 50), pctCheck('DJI', 'Dow', 200),
+    pctCheck('RUT', 'Russell 2000', 50), pctCheck('RUT', 'Russell 2000', 200),
+    by.VIX ? ['VIX below 20', by.VIX.price < 20, fmt(by.VIX.price, 1)] : null,
+    by.VIX ? ['VIX below its 50-day avg', by.VIX.price < by.VIX.ma50, `${fmt(by.VIX.price, 1)} vs ${fmt(by.VIX.ma50, 1)}`] : null
+  ].filter(Boolean);
   // rates check: 10Y trending UP over the last 5 sessions (latest > 1-day-ago AND latest > 5-day-ago) = FAIL
   // (headwind); down or flat = PASS (supportive). Skipped entirely if 5 days of history aren't available —
   // never guessed. See CLAUDE.md "Regime score" for the exact rule.
@@ -534,7 +534,7 @@ a.wi:hover { border-color: var(--ink-3); }
     checks.push(['10Y yield down/flat (5d)', !ratesUp, `${sgn(latest - fiveAgo, 2)}% pts vs ${fiveAgo.toFixed(2)}% 5d ago`]);
   }
   const score = checks.filter(c => c[1]).length, total = checks.length;
-  const onMin = total >= 9 ? 7 : 6, mixedMin = 4;
+  const onMin = total >= 9 ? 7 : total === 8 ? 6 : Math.ceil(total * 0.75), mixedMin = total >= 8 ? 4 : Math.ceil(total * 0.5);
   const label = score >= onMin ? ['RISK-ON', 'on'] : score >= mixedMin ? ['MIXED', 'mixed'] : ['RISK-OFF', 'off'];
   const failed = checks.filter(c => !c[1]).map(c => c[0].toLowerCase().replace('russell 2000', 'Russell 2000').replace('s&p 500', 'S&P 500').replace(/^dow/, 'Dow'));
   const note = score >= onMin && failed.length ? `Trend intact, but ${failed.length} check${failed.length > 1 ? 's' : ''} failing (✕ below).` : score >= onMin ? 'Broad trend and volatility both supportive.' : '';
@@ -581,7 +581,7 @@ a.wi:hover { border-color: var(--ink-3); }
   const ind = $(`<div class="card" style="margin-top:12px">
     <h3>Industry strength → scan universe${stale("industries")}</h3>
     <p class="sub">Top 9 industries inside the top 3 sectors (3 per sector) — this list feeds the scanner's Industry filter.</p>
-    <p class="sub" style="margin-top:-6px;color:var(--ink-3)">Finviz groups · Perf Month · market-cap-weighted · stock counts are the whole Finviz group, before your $5B filter. Pinned to the last interactive refresh — sector ranking above refreshes daily, this drill-down does not.</p>
+    <p class="sub" style="margin-top:-6px;color:var(--ink-3)">Finviz groups · Perf Month · market-cap-weighted · stock counts are the whole Finviz group, before your $5B filter. Pinned to the last interactive refresh, together with the sector ranking above; the automated run does not change either.</p>
     <div id="indCols"></div>
   </div>`);
   const cols = ind.querySelector('#indCols');
@@ -601,15 +601,12 @@ a.wi:hover { border-color: var(--ink-3); }
   const SEL = D.selection || null;
   if (SEL) {
     const c = SEL.config || {};
-    sec2.append($(`<div class="selbar" id="selBar"><b>${SEL.qualified} of ${SEL.scored} scored names qualified (readiness ≥ ${c.minReadiness})</b> · showing ${(D.picks || []).length}${SEL.cut ? ` (${SEL.cut} more cut at ${c.maxPicks})` : ''}. A name must pass all of: universe filters · readiness ≥ ${c.minReadiness} · a valid base (≥ ${c.minSessionsSincePivot} sessions since the pivot) · last close within ${c.maxBelowPivotPct}% of the pivot · a stop placed at least ${c.stopMinAtr}× ATR14 and ${c.stopMinAdr}× ADR20 below the last close (always below it), risk ≤ ${c.maxRiskPct}% of the entry and R:R ≥ ${c.minRR} at the fixed +${c.targetPct}% target · no earnings within ${c.earningsBlackoutSessions} sessions (a date that cannot be verified rejects the name). Zero is a valid result; the max is ${c.maxPicks}. Your cap is 5 open positions.</div>`));
+    sec2.append($(`<div class="selbar" id="selBar"><b>${SEL.qualified} of ${SEL.scored} scored names qualified (readiness ≥ ${c.minReadiness})</b> · showing ${(D.picks || []).length}${SEL.cut ? ` (${SEL.cut} more cut at ${c.maxPicks})` : ''}. A name must pass all of: universe filters · readiness ≥ ${c.minReadiness} · a valid base (≥ ${c.minSessionsSincePivot} sessions since the pivot) · last close within ${c.maxBelowPivotPct}% of the pivot · a stop placed at least ${c.stopMinAtr}× ATR14 and ${c.stopMinAdr}× ADR20 below the last close (always below it), risk ≤ ${c.maxRiskPct}% of the entry and R:R ≥ ${c.minRR} at the fixed +${c.targetPct}% target · no earnings within ${c.earningsBlackoutSessions} sessions (a date that cannot be verified rejects the name). Zero is a valid result; the max is ${c.maxPicks}. Your cap is 5 open positions.${SEL.tierB ? ` <b>Tier B</b> (${SEL.tierB} shown) fills the list with names that fail only a soft rule (readiness ${c.tierBMinReadiness}-${c.minReadiness - 1}, distance to the pivot, stop width or R:R): they keep a valid base, a stop below the close and a clear earnings date, and carry a chip with the number instead of an exclusion.` : ''}</div>`));
   }
   sec2.append($(`<div class="card">
     <h3>How these were screened</h3>
-    ${(D.screenNotes || []).length ? '' : `<p class="sub">Universe = the 9 industries above. FMP's screener is blocked, so Finviz was used; it cannot filter or show EMA, ADX or ADR.</p>`}
+    ${(D.screenNotes || []).length ? '' : `<p class="sub">The notes for the pinned scan (universe, data sources, which filters were applied or only approximated) were not stored with it. Nothing is claimed here about how it was screened: refresh the scan interactively to get them.</p>`}
     <ul class="cov">
-      ${(D.screenNotes || []).length ? '' : `<li><span class="st ok">✓</span><span><b>Market cap &gt; $5B</b> · Finviz has a $2B+ bucket; names under $5B were then dropped using the displayed market cap.</span></li>
-      <li><span class="st ok">✓</span><span><b>Price &gt; $5</b> and <b>avg volume &gt; 500K</b> · direct Finviz filters.</span></li>
-      <li><span class="st px">~</span><span><b>Price between EMA21 and EMA9</b> · not checkable. Proxy: price above SMA20/50/200 (Finviz filter) and only a few % over SMA20, i.e. pulled back but in an uptrend. EMA9 was not verified for any pick.</span></li>`}
       ${(D.screenNotes || []).map(n => `<li><span class="st ${n.st}">${n.icon}</span><span>${n.html}</span></li>`).join('')}
     </ul>
   </div>`));
@@ -629,8 +626,8 @@ a.wi:hover { border-color: var(--ink-3); }
       <div class="bgs">
         <div><span class="k">Mkt cap</span><span class="v">${b.cap}</span></div>
         <div><span class="k">Revenue TTM</span><span class="v">${b.rev}${g(b.revG)}</span></div>
-        <div><span class="k">EPS TTM</span><span class="v">${b.eps}${g(b.epsG)}</span>${b.epsNote ? `<span class="s">${b.epsNote}</span>` : ''}</div>
-        <div class="${b.nextWarn ? 'warn' : ''}"><span class="k">Next earnings</span><span class="v">${b.next}</span>${b.nextWarn ? '<span class="s">this week — event risk</span>' : ''}</div>
+        <div><span class="k">EPS TTM</span><span class="v">${b.eps == null ? 'n/a' : b.eps}${g(b.epsG)}</span>${b.epsNote ? `<span class="s">${b.epsNote}</span>` : ''}</div>
+        <div class="${b.nextWarn ? 'warn' : ''}"><span class="k">Next earnings</span><span class="v">${b.next}</span>${b.nextWarn ? '<span class="s">inside the 20-session hold — event risk</span>' : ''}</div>
       </div>
       ${deal ? `<ul class="deal">${deal}</ul>` : ''}
     </div>`;
@@ -650,9 +647,11 @@ a.wi:hover { border-color: var(--ink-3); }
     return `<b>0 of ${n} scored names passed every rule.</b> ${below} are below readiness ${WHY.minReadiness}. The other ${WHY.readinessOk} reach it but fail a later rule: ${st.length} of them fail only the level rules (proximity to the pivot, stop, risk, R:R: ${names(st)}), ${WHY.blocked.length - st.length} fail another rule too. The stop is placed at least ${(D.selectionConfig || {}).stopMinAtr || 1}× ATR14 and ${(D.selectionConfig || {}).stopMinAdr || 0.5}× ADR20 below the last close, then judged on risk and R:R. The rule behind each name is in the table below.`;
   })() : '';
   if (!(D.picks || []).length) grid.append($(SEL ? `<div class="empty">${whyTxt ? 'No technical picks this run (see the explanation and the closest names above).' : 'No name passed every rule this run, which is a valid result. The closest names and the rule that stopped each one are in "Near misses" below.'}</div>` : `<div class="empty">No technical setups available this run.</div>`));
-  const rankedPicks = [...(D.picks || [])].sort((a, b) => (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
+  const tierOf = (p) => p.tier === 'B' ? 1 : 0;
+  const rankedPicks = [...(D.picks || [])].sort((a, b) => tierOf(a) - tierOf(b) || (b.readiness ? b.readiness.composite : -1) - (a.readiness ? a.readiness.composite : -1));
+  const nA = rankedPicks.filter(p => tierOf(p) === 0).length, nB = rankedPicks.length - nA;
   if (rankedPicks.length > 1) {
-    const rows = rankedPicks.map((pk, i) => { const rr = (pk.target - pk.entry) / (pk.entry - pk.stop); return `<tr class="clk" data-tk="${pk.tk}"><td>${i + 1}</td><td><b>${pk.tk}</b></td><td class="hide-m">${pk.industry}</td><td class="r">${pk.readiness ? pk.readiness.composite : '–'}</td><td class="r">${pk.px.toFixed(2)}</td><td class="r hide-m">${pk.entry.toFixed(2)}</td><td class="r">${pk.stop.toFixed(2)}</td><td class="r">${rr.toFixed(1)}</td><td class="hide-m">${(D.bg && D.bg[pk.tk] && D.bg[pk.tk].next) || '–'}</td><td>${flagHtml(pk.flags)}</td></tr>`; }).join('');
+    const rows = rankedPicks.map((pk, i) => { const rr = (pk.target - pk.entry) / (pk.entry - pk.stop); return `<tr class="clk" data-tk="${pk.tk}"><td>${i + 1}</td><td><b>${pk.tk}</b>${pk.tier === 'B' ? ' <span class="chip px" title="Tier B: valid but flagged">B</span>' : ''}</td><td class="hide-m">${pk.industry}</td><td class="r">${pk.readiness ? pk.readiness.composite : '–'}</td><td class="r">${pk.px.toFixed(2)}</td><td class="r hide-m">${pk.entry.toFixed(2)}</td><td class="r">${pk.stop.toFixed(2)}</td><td class="r">${rr.toFixed(1)}</td><td class="hide-m">${(D.bg && D.bg[pk.tk] && D.bg[pk.tk].next) || '–'}</td><td>${flagHtml(pk.flags)}</td></tr>`; }).join('');
     sec2.insertBefore($(`<div class="rankwrap" style="overflow-x:auto;max-width:100%"><table class="rank" id="rankTable"><thead><tr><th>#</th><th>Ticker</th><th class="hide-m">Industry</th><th class="r">Ready</th><th class="r">Price</th><th class="r hide-m">Entry</th><th class="r">Stop</th><th class="r">R:R</th><th class="hide-m">Earnings</th><th>Flags</th></tr></thead><tbody>${rows}</tbody></table></div>`), grid);
     sec2.querySelectorAll('#rankTable tr.clk').forEach(tr => tr.addEventListener('click', () => { const el = document.getElementById('pick-' + tr.dataset.tk); if (el) { el.classList.add('open'); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }));
   }
@@ -695,8 +694,12 @@ a.wi:hover { border-color: var(--ink-3); }
       </div>
     </div>` : '';
     const foldable = rankedPicks.length > 4;
+    if (idx === 0 && nA === 0 && nB) grid.append($(`<h4 class="tier-h" style="grid-column:1/-1;margin:4px 0">No Tier A pick this run</h4>`));
+    if (tierOf(pk) === 1 && (idx === 0 || tierOf(rankedPicks[idx - 1]) === 0)) grid.append($(`<h4 class="tier-h" style="grid-column:1/-1;margin:10px 0 2px">Technical setups (flagged) <span class="sub" style="font-weight:400">· Tier B: valid base, stop below the close, earnings clear; a soft rule is flagged on each card</span></h4>`));
+    const tierChips = (pk.chips || []).map(c => `<span class="chip ${c.tone === 'bad' ? 'no' : 'px'}">${c.label}</span>`).join('');
     grid.append($(`<article class="card pick tech${foldable ? ' fold' + (idx < 3 ? ' open' : '') : ''}" id="pick-${pk.tk}">
-      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">TECHNICAL</span>${flagHtml(pk.flags)}${trkHtml}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+      <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind tech">${pk.tier === 'B' ? 'TECHNICAL · B' : 'TECHNICAL'}</span>${flagHtml(pk.flags)}${trkHtml}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
+      ${tierChips ? `<div class="chk" style="margin:0 0 6px">${tierChips}</div>` : ''}
       ${readinessHtml}
       <div class="setup"><b>${pk.setup}</b> <span>· ${pk.tags}</span></div>
       ${bgHtml(pk.tk)}
@@ -743,7 +746,7 @@ a.wi:hover { border-color: var(--ink-3); }
       const chips = [['ok', `Cap ${pk.cap}`], ['ok', 'Price &gt; $5']];
       chips.push([pk.topSector ? 'ok' : 'px', pk.topSector ? 'Top-3 sector' : `Outside top-3 sectors (${pk.sector})`]);
       const chipHtml = chips.map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('');
-      const src = pk.sources.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>`).join(' · ');
+      const src = pk.sources.map(s => s.u ? `<a href="${s.u}" target="_blank" rel="noopener">${s.t}</a>` : `<span title="link not verified">${s.t} <i>(link not verified)</i></span>`).join(' · ');
       cgrid.append($(`<article class="card pick cat" id="pick-${pk.tk}">
         <div class="hd"><div><span class="tk">${pk.tk}</span><span class="co">${pk.name}</span></div><div class="tags"><span class="kind cat">CATALYST</span>${flagHtml(pk.flags)}<span class="ind">${pk.industry} · ${pk.sector}</span></div></div>
         ${pricedHtml(pk)}
@@ -787,7 +790,7 @@ a.wi:hover { border-color: var(--ink-3); }
       }).join('');
       card.append($(row(gp.name, items)));
     });
-    card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from web search). Technical-pick rows are pinned Finviz closes; catalyst-alert rows are FMP's live quote. Near misses come from the (pinned) technical scan and the catalyst rejects.</p>`));
+    card.append($(`<p class="wl-note">Snapshot at the ${D.asOfLabel}; it does not update by itself. Index rows are FMP (QQQ from web search). Technical-pick rows are pinned closes from the last interactive scan; catalyst-alert rows are FMP's live quote. Near misses come from the (pinned) technical scan and the catalyst rejects.</p>`));
   }
 
   /* ── Section 4: Track record (pick tracker). Everything shown is computed in tracker.py from the ledger; nothing hand-written. ── */
@@ -886,7 +889,7 @@ a.wi:hover { border-color: var(--ink-3); }
     sec4t.append($(`<div class="card" style="margin-top:12px"><h3 class="tr-head">Splits</h3>
       <p class="tr-sub">Literal ledger. "Sets" = distinct publishes: three semiconductors from one day are one independent sample, not three. Win = hit target, or exit above the fill.</p>
       <div class="tr-scroll"><table class="tr-table"><thead><tr><th></th><th class="n">Picks</th><th class="n">Closed</th><th class="n">Win rate</th><th class="n">Avg R</th></tr></thead><tbody>
-        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${split('Fill', SL.byFill)}${split('Selection rules', SL.bySelectionVersion || {})}${split('Strength flags', SL.byFlags || {})}${split('Stop distance at publish (tight = within 0.5× ADR20% of the close)', SL.byStopDistance || {})}
+        ${split('Readiness band', SL.byReadinessBand)}${split('Regime at publish', SL.byRegime)}${split('Sector', SL.bySector)}${split('Scoring version', SL.byScoringVersion)}${SL.byTier ? split('Tier', SL.byTier) : ''}${split('Fill', SL.byFill)}${split('Selection rules', SL.bySelectionVersion || {})}${split('Strength flags', SL.byFlags || {})}${split('Stop distance at publish (tight = within 0.5× ADR20% of the close)', SL.byStopDistance || {})}
       </tbody></table></div>
     </div>`));
     sec4t.append($(`<p class="foot" style="margin-top:10px">Every pick is recorded once per publish and followed to an outcome by replaying daily OHLC (entry triggers when the day's high reaches the entry, filled at the open if it gaps above; stop and target use the same bar, with the stop assumed first when both are hit; expires after 10 sessions untriggered; time-exit at the close of session 20). The cloud routine has no price history, so outcomes refresh only in an interactive session; until then a record reads "Awaiting data". Percentages appear only once a bucket has ${SL.minN} closed trades. Not investment advice.</p>`));

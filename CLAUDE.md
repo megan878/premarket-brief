@@ -355,6 +355,19 @@ Computed in the browser when the page is opened (a static page cannot age itself
 "Last automated run: <time HKT>, status ok/unpushed/failed" comes from `runs.lastAutomated`, written by `build_brief.py --run-kind automated` (the routine passes it; an interactive build keeps the previous value).
 It turns red with "MISSED" when no run newer than the most recent scheduled fire (12:00 UTC on a US trading day, +30 min grace) is recorded.
 
+## Source links, analyst targets, QQQ, screenNotes (added 6 Oct, enforced in `build_brief.py`, not in the prompt)
+- **Links**: the routine writes catalyst sources as publisher names only. The builder shows a link only when the URL is in `data/verified-links.json`
+  (url, publisher, date, what it covers, when/how it was checked: the page was loaded and its text covers the event). Anything else renders as the publisher
+  name with "link not verified" and a health warning. Two independent named publishers per alert are still required. cnbc, reuters, benzinga and gurufocus cannot be
+  loaded, so they are never listed. Add an entry only after loading the page.
+- **Analyst target**: `analystTarget` counts only with `targetKind: "consensus average"` and >= 2 named `targetSources` within 5% of each other; a target already
+  stored by an interactive scan is never overwritten by the routine (it is only re-priced). Rejections are health warnings.
+- **Index as-of**: tiles and regime use closes only. A quote whose `ts` is not the last close is labelled "live print" and kept out of the regime score (its `prev` is used).
+- **QQQ** is blocked on the free plan: the last tile is carried forward labelled with the close it is, outside the regime score. **screenNotes** describe the pinned scan: carried unless a run delivers a non-empty list.
+- **Tiered selection `tiered-v3`** (`selection.select_tiered`): Tier A = every quality rule (the v2 list). Tier B fills the list to 10 in total with names that fail only a soft rule
+  (readiness 45-54, distance to the pivot, stop width, R:R) and pass the validity checks (valid base, stop below the close, earnings clear and verified). Each Tier B card carries chips
+  with the numbers instead of an exclusion. The ledger records `tier` and `tierChips`; stats split by tier; records before v3 stay untiered.
+
 ## Known issues
 - **Finviz screener and quote pages now refuse automated fetches** (robots.txt / 404) in interactive sessions too. The 2 Oct scan therefore built its
   universe from stockanalysis.com industry lists (see `data/provenance/2026-10-02/NOTE.md`). The scan code is deliberately unchanged here; it gets its own task.

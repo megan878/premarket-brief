@@ -19,12 +19,14 @@ def load(p):
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--base', required=True); ap.add_argument('--scan', required=True); ap.add_argument('--market', required=True)
-    ap.add_argument('--fmp', required=True, help='json with indices[] / macro{} already in page shape'); ap.add_argument('--out', required=True)
+    ap.add_argument('--fmp', help='json with indices[] / macro{} already in page shape (default: keep the base page\'s)'); ap.add_argument('--out', required=True)
+    ap.add_argument('--refreshed', help='label for the refresh date, e.g. "Wed 7 Oct"')
     ap.add_argument('--last-session', required=True)
     ap.add_argument('--cards', help='scan_cards.py output for the names that qualified')
     a = ap.parse_args(argv)
     scan = pathlib.Path(a.scan)
-    base, market, fmp = load(a.base), load(a.market), load(a.fmp)
+    base, market = load(a.base), load(a.market)
+    fmp = load(a.fmp) if a.fmp else {'indices': base['indices'], 'macro': {}}
     cand, sl, cats = load(scan / 'candidates.json'), load(scan / 'selection.json'), load(scan / 'catalysts.json')
     last = a.last_session
     d = {k: v for k, v in base.items() if k not in DERIVED}
@@ -33,6 +35,7 @@ def main(argv=None):
     # ── fresh automated-type sections from FMP (index closes, rates) ──
     d['indices'] = fmp['indices']
     d['macro'] = {**base['macro'], **fmp['macro']}
+    d.pop('screenNotes', None)
     # ── sector ranking / industry drill-down (Finviz groups, read twice) ──
     d['sectors'], d['industries'], d['sectorSource'] = market['sectors'], market['industries'], market['sectorSource']
     # ── picks: quality rules, possibly zero ──
@@ -45,7 +48,7 @@ def main(argv=None):
     ld = mt.dt.date.fromisoformat(last)
     d['pickWindow'] = f'25 trading days to {ld.day} {ld.strftime("%b %Y")}, stockanalysis.com daily data'
     passed = [c for c in cand['candidates'] if not c['universeFail']]
-    d['selection'] = {'version': sel.SELECTION_VERSION, 'scored': sl['scored'], 'qualified': sl['qualified'], 'cut': len(sl['cut']),
+    d['selection'] = {'version': sel.SELECTION_VERSION, 'scored': sl['scored'], 'qualified': sl['qualified'], 'cut': len(sl['cut']), 'tierA': sl.get('tierA'), 'tierB': sl.get('tierB'),
                       'config': sl['config'], 'thresholds': sl['thresholds'], 'headline': sel.header_line(sl),
                       'universe': {'considered': cand['considered'], 'passedFilters': len(passed),
                                    'emaZone': sum(1 for c in passed if c['emaCompression']), 'adxOver20': sum(1 for c in passed if (c['adx14'] or 0) > 20)},
@@ -80,34 +83,27 @@ def main(argv=None):
                  'financials flags use stockanalysis.com TTM statements (single source, not cross-checked)']
     d['flagLog'] = flag_log
     # ── sections meta ──
-    d['sections'] = {
-        'indices': {'asOf': last, 'source': 'FMP index quotes (SPX/DJI/RUT); VIX = FMP previousClose (the 2 Oct close); QQQ = the 1 Oct close from WebSearch, labelled on its tile'},
-        'macro': {'asOf': last, 'source': 'FMP treasury-rates; Fed block unchanged (no FOMC meeting since 16 Sep)'},
-        'sectors': {'asOf': last, 'source': 'Finviz groups · Perf Month (interactive refresh, 5 Oct)'},
-        'industries': {'asOf': last, 'source': 'Finviz groups · Perf Month (interactive refresh, 5 Oct)'},
-        'technical': {'asOf': last, 'source': 'stockanalysis.com industry lists + daily OHLC API (interactive scan, scripts/scan_build.py)'},
-        'catalysts': {'asOf': last, 'source': 'events: WebSearch (2+ sources each, 1 Oct brief); prices: stockanalysis.com 2 Oct closes; priced-in + flags computed'},
-        'nearmiss': {'asOf': last, 'source': 'scan candidates that failed a selection rule (interactive scan)'}}
+    ld_txt = f"{ld.day} {ld.strftime('%b')}"
+    refreshed = a.refreshed or ld_txt
+    scan_src = {'sectors': f'Finviz groups · Perf Month (interactive refresh {refreshed})', 'industries': f'Finviz groups · Perf Month (interactive refresh {refreshed})',
+                'technical': 'stockanalysis.com industry lists + daily OHLC API (interactive scan, scripts/scan_build.py)',
+                'nearmiss': 'scan candidates that failed a selection rule (interactive scan)'}
+    d['sections'] = {**(base.get('sections') or {}), **{k: {'asOf': last, 'source': v} for k, v in scan_src.items()}}
     d['screenNotes'] = [
         {'st': 'ok', 'icon': '✓', 'html': f"<b>Universe</b> · {cand['considered']} names over $5B in the 9 industries (stockanalysis.com lists); {len(passed)} passed price &gt; $5, 20-day volume &gt; 500K, ADR20 &gt; 2%, above SMA20/50/200 and not &gt; 20% above SMA50."},
         {'st': 'ok', 'icon': '✓', 'html': f"<b>EMA9 / ADX(14)</b> · computed from the daily bars for every candidate, shown on each card, but not gates (the scan has never gated on them): {d['selection']['universe']['emaZone']} of {len(passed)} would pass EMA9 &gt; price &gt; EMA21, {d['selection']['universe']['adxOver20']} would pass ADX &gt; 20."},
         {'st': 'ok', 'icon': '✓', 'html': f"<b>Selection</b> · {sel.header_line(sl)}. Names passing at readiness 45 / 55 / 65: {sl['thresholds']['passing']['45']} / {sl['thresholds']['passing']['55']} / {sl['thresholds']['passing']['65']} (every rule applied)."},
         {'st': 'px', 'icon': '~', 'html': "<b>Earnings dates</b> · stockanalysis.com statistics page; a name with no verifiable date is rejected (\"earnings date unverified\")."}]
-    d['rejected'] = []
-    d['notices'] = [
-        "WebFetch is unavailable to the automated routine (platform bug): the scan, industry drill-down and near-misses are refreshed only in interactive sessions and carried forward between them.",
-        f"Sector ranking and industry drill-down: Finviz groups (Perf Month), interactive refresh Mon 5 Oct, data to the {last} close; the table was read twice and both reads agree.",
-        "Index quotes are FMP's 2 Oct closes. The VIX uses FMP's previousClose (its live print had already moved to 5 Oct). QQQ shows the 1 Oct close ($742.03, WebSearch, recorded in the 2 Oct provenance): no reliable 2 Oct close was found.",
-        "Catalyst alerts are the 30 Sep - 1 Oct events from the 1 Oct brief, re-priced with 2 Oct closes; the routine's next run refreshes the alerts and their sources.",
-        "Priced-in scores use stockanalysis.com daily bars and its consensus price target (a single source).",
-    ]
-    d['fetchlog'] = [{'id': 'stockanalysis.industry-lists', 'ok': True, 'note': f"{cand['considered']} names over $5B"},
-                     {'id': 'stockanalysis.ohlc-api', 'ok': True, 'note': f"{cand['considered']} tickers, {len(cand['excludedBadOhlc'])} excluded for bad bars"},
-                     {'id': 'stockanalysis.statistics', 'ok': True, 'note': 'SMA200, earnings date, price target, margins for candidates'},
-                     {'id': 'finviz.groups sector+industry', 'ok': True, 'note': 'read twice, identical'},
-                     {'id': 'fmp.indexes.index-quote', 'ok': True, 'note': 'SPX, DJI, RUT 2 Oct close; VIX previousClose'},
-                     {'id': 'fmp.economics.treasury-rates', 'ok': True, 'note': 'through 2 Oct'},
-                     {'id': 'websearch.qqq.close', 'ok': False, 'note': 'no reliable 2 Oct close found; tile omitted'}]
+    # the routine's own free-text blocks (notices, rejected) stay: they describe this run's alerts. Add what the interactive scan did.
+    d['notices'] = [n for n in base.get('notices', []) if 'PINNED, carried forward' not in n] + [
+        f"Technical scan, sector ranking and industry drill-down refreshed interactively on {refreshed} with data to the {ld_txt} close (Finviz groups for sectors and industries; stockanalysis.com daily bars for the scan). "
+        f"{d['selection'].get('tierA', 0)} Tier A and {d['selection'].get('tierB', 0)} Tier B setups; the routine carries them forward until the next interactive refresh."]
+    d['rejected'] = list(base.get('rejected', []))
+    d['fetchlog'] = list(base.get('fetchlog', [])) + [
+        {'id': 'stockanalysis.industry-lists', 'ok': True, 'note': f"{cand['considered']} names over $5B"},
+        {'id': 'stockanalysis.ohlc-api', 'ok': True, 'note': f"{cand['considered']} tickers, {len(cand['excludedBadOhlc'])} excluded for bad bars"},
+        {'id': 'stockanalysis.statistics', 'ok': True, 'note': 'SMA200, earnings date, price target, margins for candidates'},
+        {'id': 'finviz.groups sector+industry', 'ok': True, 'note': 'read more than once; see sectorSource'}]
     pathlib.Path(a.out).write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding='utf-8')
     print('wrote', a.out, '| picks', len(picks), '| nearmiss', len(d['nearmiss']), '| catalysts', len(out_c))
     return 0

@@ -133,10 +133,11 @@ def _levels(p, ctx):
         out.append(('hard', f'{tk}: entry outside its own zone'))
     risk = (p['entry'] - p['stop']) / p['entry'] * 100
     rr = (p['target'] - p['entry']) / max(p['entry'] - p['stop'], 1e-9)
-    if not (1.5 <= risk <= 8):
-        out.append(('warn', f'{tk}: risk {risk:.1f}% outside the 1.5-8% band'))
-    if not (1.4 <= rr <= 4):
-        out.append(('warn', f'{tk}: R:R {rr:.1f} unusual'))
+    if p.get('tier') != 'B':                  # a Tier B card already carries its risk / R:R as a chip: no second, page-wide warning for it
+        if not (1.5 <= risk <= 8):
+            out.append(('warn', f'{tk}: risk {risk:.1f}% outside the 1.5-8% band'))
+        if not (1.4 <= rr <= 4):
+            out.append(('warn', f'{tk}: R:R {rr:.1f} unusual'))
     if p['px'] <= 5:
         out.append(('hard', f'{tk}: price <= $5'))
     cap = parse_cap(p.get('cap'))
@@ -203,8 +204,9 @@ def _check_items(d, ctx, sec, key, level_fn):
             if p.get('cdateISO') not in window:
                 out.append(issue(sec, 'item-hard', f"{p.get('tk')}: catalyst dated {p.get('cdateISO')} is outside the last {CATALYST_WINDOW} sessions") | {'tk': p.get('tk')})
             srcs = p.get('sources') or []
-            if not srcs or not all(str(s.get('u', '')).startswith('https://') for s in srcs):
-                out.append(issue(sec, 'item-hard', f"{p.get('tk')}: no https source") | {'tk': p.get('tk')})
+            names = {str(s.get('t', '')).strip().lower() for s in srcs if str(s.get('t', '')).strip()}
+            if len(names) < 2 or any(s.get('u') and not str(s['u']).startswith('https://') for s in srcs):
+                out.append(issue(sec, 'item-hard', f"{p.get('tk')}: needs two independent named sources (a URL, if given, must be https)") | {'tk': p.get('tk')})
             if p.get('tk') in seen_tech:
                 out.append(issue(sec, 'item-hard', f"{p.get('tk')}: already a technical pick") | {'tk': p.get('tk')})
     return out
@@ -224,13 +226,48 @@ KEYS = {'indices': ['indices'], 'macro': ['macro'], 'sectors': ['sectors', 'sect
         'technical': ['picks', 'pickWindow', 'selection'], 'catalysts': ['catalysts'], 'nearmiss': ['nearmiss']}
 
 
+def classify_indices(final, ctx):
+    """One as-of for the tiles and the regime score: the last official close. A quote whose timestamp (`ts`, epoch seconds from the source) is not the
+    close of the last completed session (a premarket or live print) is the odd one out: it is labelled `asOfKind: 'live'`, shown on its tile, and kept OUT
+    of the regime score - the score uses its `prev` (previous official close) when that is supplied, otherwise the checks that need it are skipped.
+    An index with no `ts` is treated as a close (older data). Returns the list of issue messages."""
+    msgs = []
+    last = ctx['lastSession']
+    c0 = mt.close_utc(last)
+    lo, hi = c0 - dt.timedelta(minutes=10), c0 + dt.timedelta(hours=14)
+    for ix in final.get('indices') or []:
+        if ix.get('asOfKind') == 'carried':          # labelled by assemble() as an earlier close; never a live print
+            continue
+        ts = ix.get('ts')
+        live = bool(ix.get('live'))
+        when = None
+        if num(ts):
+            when = dt.datetime.fromtimestamp(ts, dt.timezone.utc)
+            live = live or not (lo <= when <= hi)
+        if not live:
+            ix.pop('asOfKind', None)
+            continue
+        ix['asOfKind'] = 'live'
+        ix['asOfNote'] = (f"live print {when.strftime('%d %b %H:%M')} UTC, not the {last.strftime('%d %b')} close" if when else f"live print, not the {last.strftime('%d %b')} close")
+        if num(ix.get('prev')) and ix['prev'] > 0 and isinstance(ix.get('q'), dict):
+            ix['regimeQ'] = {**ix['q'], 'price': ix['prev']}
+            ix['regimeQ'].pop('change', None)
+            ix['regimeQ'].pop('pct', None)
+            ix['inRegime'] = 'previous close'
+            msgs.append(f"{ix.get('id')} is a live print, not a close: the tile says so and the regime score uses its previous close {ix['prev']}")
+        else:
+            ix['inRegime'] = False
+            msgs.append(f"{ix.get('id')} is a live print, not a close, and has no previous close: it is kept out of the regime score")
+    return msgs
+
+
 # ───────────────────────── assembly with carry-forward ─────────────────────────
 def assemble(new, old, ctx):
     """Merge fresh data with the previous good copy. Returns (final_data, health)."""
     new, old = copy.deepcopy(new or {}), copy.deepcopy(old or {})
     PASS = ('source', 'notices', 'screenNotes', 'rejected')        # free-text blocks the page renders; a fresh run rewrites them
     final = {k: v for k, v in (old or {}).items() if k in PASS}
-    final.update({k: v for k, v in new.items() if k in PASS})
+    final.update({k: v for k, v in new.items() if k in PASS and (k != 'screenNotes' or v)})       # the routine cannot blank the pinned scan's own notes
     final.setdefault('notices', [])
     sections, issues = {}, []
     last = ctx['lastSession']
@@ -296,6 +333,21 @@ def assemble(new, old, ctx):
             for k in KEYS[sec]:
                 final[k] = [] if k in ('picks', 'catalysts', 'nearmiss', 'sectors', 'industries', 'indices') else final.get(k)
             issues.append(issue(sec, 'failed', sections[sec]['msg']))
+    # QQQ is blocked on the free FMP plan: carry the last tile forward, labelled with the close it is, never as a fresh quote
+    if final.get('indices') and not any(i.get('id') == 'QQQ' for i in final['indices']):
+        old_q = next((i for i in (old.get('indices') or []) if i.get('id') == 'QQQ' and (i.get('q') or {}).get('price')), None)
+        if old_q:
+            old_asof = iso((old.get('sections', {}).get('indices') or {}).get('asOf'))
+            q = copy.deepcopy(old_q)
+            if not q.get('carried'):
+                q['carried'] = {'from': old_asof.isoformat() if old_asof else None}
+            q['asOfKind'] = 'carried'
+            frm = q['carried'].get('from')
+            q['asOfNote'] = f"{dt.date.fromisoformat(frm).strftime('%d %b') if frm else 'earlier'} close, not refreshed (QQQ is not available from the automated source)"
+            q['inRegime'] = False
+            pos = 1 if len(final['indices']) > 1 else len(final['indices'])
+            final['indices'] = final['indices'][:pos] + [q] + final['indices'][pos:]
+            issues.append(issue('indices', 'warn', f"QQQ carried forward from {frm or 'an earlier run'}, not refreshed"))
     # expire catalysts that aged out of the window (carried forward copies)
     window = {x.isoformat() for x in mt.trading_days_back(last, CATALYST_WINDOW)}
     cats = final.get('catalysts') or []
@@ -333,6 +385,10 @@ def assemble(new, old, ctx):
             final[k] = new[k]
         elif k in old:
             final[k] = old[k]
+    for m in classify_indices(final, ctx):
+        issues.append(issue('indices', 'warn', m))
+    if any(i['level'] == 'warn' for i in issues) and status == 'ok':
+        health['status'] = 'degraded'
     health['flagLog'] = list(final.get('flagLog') or [])
     final['catalysts'] = pi.rank_alerts(final.get('catalysts') or [])      # lowest priced-in score first; unscored last
     final['sections'] = {s: {'asOf': v['asOf'], 'source': v['source']} for s, v in sections.items()}

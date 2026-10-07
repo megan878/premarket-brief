@@ -30,12 +30,15 @@ CONFIG = {
     'minRR': 1.5,
     'targetPct': 10.0,
     'earningsBlackoutSessions': 3,
+    'tierBMinReadiness': 45,        # Tier B: valid but flagged; fills the list up to maxPicks in total
 }
 EARNINGS_STALE_DAYS = 45
-SELECTION_VERSION = 'quality-max10-v2-stop-from-close'   # stored on every new ledger record
+SELECTION_VERSION = 'tiered-v3'                          # stored on every new ledger record (Tier A = the v2 rules; Tier B adds flagged names)
+TIER_A_VERSION = 'quality-max10-v2-stop-from-close'
 PREVIOUS_SELECTION_VERSION = 'quality-max10-v1'          # the first (reject-on-stop) rules; no ledger records were written under it
 LEGACY_SELECTION_VERSION = 'top4-v1'                     # the 16 earlier records
 LEVEL_RULES = ('proximity', 'stop-valid', 'risk', 'rr')
+TIER_B_SOFT = ('readiness', 'proximity', 'risk', 'rr')       # rules a Tier B name may fail (they become chips; readiness only between the Tier B bar and the Tier A bar); every other rule is a validity check
 
 
 def sessions_until(last_session, d):
@@ -191,3 +194,49 @@ def threshold_counts(cands, thresholds=(45, 55, 65), cfg=None):
 
 def header_line(sel):
     return f"{sel['qualified']} of {sel['scored']} scored names qualified (readiness ≥ {sel['config']['minReadiness']})"
+
+
+def tier_b_chips(c, r, cfg):
+    """Chips for a Tier B name: one per soft rule it failed, carrying the number. Red = tone 'bad'."""
+    lv, chips = r['levels'], []
+    for f in r['failed']:
+        if f['rule'] == 'readiness':
+            chips.append({'key': 'readiness', 'label': f"readiness {c['readiness']['composite']} (< {cfg['minReadiness']})", 'tone': 'warn'})
+        elif f['rule'] == 'proximity':
+            last, pivot = c['lastClose'], c['pivot']
+            chips.append({'key': 'far-from-pivot', 'label': f"far from pivot ({(pivot - last) / pivot * 100:.1f}%)", 'tone': 'warn'})
+        elif f['rule'] == 'risk':
+            chips.append({'key': 'wide-stop', 'label': f"wide stop ({lv['riskPct']:.1f}%)", 'tone': 'warn'})
+        elif f['rule'] == 'rr':
+            chips.append({'key': 'rr', 'label': f"R:R {lv['rr']:.2f}", 'tone': 'bad' if lv['rr'] < 1 else 'warn'})
+    return chips
+
+
+def select_tiered(cands, cfg=None):
+    """Tier A = every rule (the v2 list, at most maxPicks). Tier B = fills the list up to maxPicks in TOTAL with names that fail only soft rules
+    (readiness >= tierBMinReadiness, proximity, risk, R:R) and pass the validity checks (a valid base, a stop below the close from the close-based floors,
+    earnings outside the blackout and verified; the universe filters are applied upstream). A Tier B name carries chips instead of an exclusion; its levels are
+    the same placed stop / fixed +10% target. Returns select()'s dict with `picks` = A then B, each with `tier`, plus `tierA`/`tierB` counts and `bRejected`."""
+    cfg = {**CONFIG, **(cfg or {})}
+    base = select(cands, cfg)
+    a = [{**p, 'tier': 'A', 'chips': []} for p in base['picks']]
+    room = cfg['maxPicks'] - len(a)
+    bcfg = {**cfg, 'minReadiness': cfg['tierBMinReadiness']}
+    b, b_rej = [], []
+    taken = {p['tk'] for p in base['picks']} | {p['tk'] for p in base['cut']}
+    for c in cands:
+        if c['tk'] in taken:
+            continue
+        r = check(c, bcfg)
+        hard = [f for f in r['failed'] if f['rule'] not in TIER_B_SOFT or f['rule'] == 'readiness']      # under the Tier B bar itself = not a candidate
+        if hard:
+            b_rej.append({'tk': c['tk'], 'hardFailed': [f['rule'] for f in hard]})
+            continue
+        r_full = check(c, cfg)
+        b.append((c, {**with_levels(c, cfg), 'tier': 'B', 'chips': tier_b_chips(c, r_full, cfg)}))
+    b.sort(key=lambda t: rank_key(t[0]))
+    chosen = [x for _, x in b[:max(room, 0)]]
+    for i, p in enumerate(a + chosen, 1):
+        p['selectionRank'] = i
+    return {**base, 'picks': a + chosen, 'tierA': len(a), 'tierB': len(chosen), 'tierBCut': [x['tk'] for _, x in b[max(room, 0):]],
+            'bRejected': b_rej, 'rejected': [x for x in base['rejected'] if x['tk'] not in {p['tk'] for p in chosen}]}
