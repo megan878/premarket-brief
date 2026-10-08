@@ -1,29 +1,27 @@
 {
  "source": "FMP + WebSearch (automated) + Finviz groups/stockanalysis.com (interactive refresh)",
  "notices": [
-  "No FOMC meeting fell in the 7 days before this run (the next meeting is 27-28 Oct); the Fed block is carried forward from 16 Sep with only the Treasury yields refreshed.",
-  "Catalyst alerts carry FMP's live price/cap only, not a computed entry/stop/target — reading the daily OHLC tape needs WebFetch, which this automated routine does not have. Boeing and Summit Therapeutics (published 29 Sep) rolled outside the last-5-trading-session window (30 Sep – 6 Oct) and were dropped; Twilio's 6 Oct S&P 500 addition replaces them alongside the still-current Constellation and McKesson contract catalysts.",
-  "A Marvell (MRVL) revenue-guidance-raise story referencing \"6 Oct\" could not be pinned to a single confirmed date across two independent sources — search results conflated it with several earlier 2026 guidance raises (FY27/FY28 targets from different announcements) — so it was dropped rather than published with an uncertain date; see rejected.",
-  "Technical scan, sector ranking and industry drill-down refreshed interactively on Wed 7 Oct with data to the 6 Oct close (Finviz groups for sectors and industries; stockanalysis.com daily bars for the scan). 3 Tier A and 7 Tier B setups; the routine carries them forward until the next interactive refresh.",
-  "QQQ is shown as the 1 Oct close ($742.03, WebSearch, not refreshed): the automated source has no QQQ, and the later search results did not reconcile, so the tile is labelled and kept out of the regime score."
+  "VIX: FMP's live index-quote returned a pre-market print (15.77, timestamp Oct 8 07:50 ET, +4.6% vs Wed's close) rather than a settled close. Per the closes-only rule, the tile and regime check use Wed 7 Oct's official close (15.08, confirmed via FMP's EOD history endpoint) instead of that live print.",
+  "QQQ: Yahoo Finance's labelled '7 Oct close' (757.73, -0.25%) and Macrotrends' latest close (757.97) reconciled within 0.03%, so the tile is refreshed (replacing the stale 1 Oct $742.03 figure carried the last few runs).",
+  "Catalysts: Constellation Energy's 30 Sep Amazon PPA is now 6 trading sessions back and dropped as stale (same treatment as Boeing/Summit on 6 Oct). McKesson (1 Oct) and Twilio (6 Oct) remain inside the last-5-session window and are re-priced below. Searched for new beat-and-raise, contract, upgrade and approval stories dated 1-7 Oct; nothing cleared the two-source / >15%-target bar \u2014 AMD and Dell Technologies analyst-target stories were considered and rejected (see rejected).",
+  "No FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct); the Fed block is unchanged from 16 Sep with only the Treasury yields refreshed (now 5 sessions through 7 Oct).",
+  "Technical scan, sector ranking and industry drill-down remain pinned from the interactive refresh on Wed 7 Oct (data to the 6 Oct close); this routine has no WebFetch and does not touch them."
  ],
  "rejected": [
-  "<b>Boeing (BA)</b> · 29 Sep F/A-XX contract award is now 6 trading sessions back, outside the last-5-session window as of this run. Dropped (stale, not a rejection of the facts).",
-  "<b>Summit Therapeutics (SMMT)</b> · 29 Sep AstraZeneca investment is likewise now outside the 5-session window. Dropped (stale).",
-  "<b>Marvell (MRVL)</b> · WebSearch surfaced an Oct 6 revenue-guidance-raise framing (stock +5.8% on FMP today), but sources did not reconcile to one confirmed Oct 6 event with two independent dated sources — they conflated it with multiple earlier 2026 guidance raises. Rejected for insufficient sourcing, not for being untrue.",
-  "<b>McKesson (MCK) Citi price-target raise</b> · Citi raised its MCK target to $860 from $820, but $860 is below MCK's current FMP price ($921.67) — fails the >15%-above-price analyst-upgrade test. MCK stays in this run's catalysts only via its still-current 1 Oct CVS distribution-extension contract, not this upgrade.",
-  "<b>Halliburton (HAL)</b> · Barclays PT raised to $25 from $20, but $25 remains well below HAL's current price (~$33) — fails the >15%-above-price test. Rejected (recurring from prior runs)."
+  "<b>Constellation Energy (CEG)</b> \u00b7 30 Sep Amazon PPA catalyst is now 6 trading sessions back, outside the last-5-session window as of this run. Dropped (stale, not a rejection of the facts).",
+  "<b>Advanced Micro Devices (AMD)</b> \u00b7 A single source (StockHub/Yonhap Infomax, 6 Oct) reported Citi raising its AMD target from $575 to $800; no second source corroborated this, and it breaks sharply from Citi's own $460 target set in May 2026 \u2014 rejected as unverified/likely garbled rather than published with an uncertain number.",
+  "<b>Dell Technologies (DELL)</b> \u00b7 Mizuho's reported $650 target (Defense World, 7 Oct) is only +12.3% above the $578.96 live price, short of the >15%-above-price analyst-upgrade threshold; a second source for that date could not be found (only a May 2026 $350 Mizuho target reconciled). Rejected."
  ],
  "indices": [
   {
    "id": "SPX",
    "name": "S&P 500",
    "q": {
-    "price": 7818.93,
-    "change": 44.98,
-    "pct": 0.5786,
-    "dayLow": 7805.96,
-    "dayHigh": 7844.52,
+    "price": 7801.77,
+    "change": -17.16,
+    "pct": -0.2195,
+    "dayLow": 7763.34,
+    "dayHigh": 7807.02,
     "yearHigh": 7844.52,
     "yearLow": 6316.91,
     "ma50": 7672.9966,
@@ -31,29 +29,14 @@
    }
   },
   {
-   "id": "QQQ",
-   "name": "Invesco QQQ Trust",
-   "proxyFor": "NDX",
-   "q": {
-    "price": 742.03
-   },
-   "carried": {
-    "from": "2026-10-01"
-   },
-   "asOfKind": "carried",
-   "asOfNote": "1 Oct close, not refreshed (QQQ is not available from the automated source)",
-   "inRegime": false,
-   "src": "WebSearch"
-  },
-  {
    "id": "DJI",
    "name": "Dow Jones Industrial Average",
    "q": {
-    "price": 51521.28,
-    "change": 253.38,
-    "pct": 0.49423,
-    "dayLow": 51422.9,
-    "dayHigh": 51672.25,
+    "price": 51179.87,
+    "change": -341.41,
+    "pct": -0.6627,
+    "dayLow": 50917.42,
+    "dayHigh": 51406.44,
     "yearHigh": 54744.33,
     "yearLow": 45057.28,
     "ma50": 52683.195,
@@ -64,11 +47,11 @@
    "id": "RUT",
    "name": "Russell 2000",
    "q": {
-    "price": 2830.2974,
-    "change": -16.8383,
-    "pct": -0.59141,
-    "dayLow": 2825.98221,
-    "dayHigh": 2864.8254,
+    "price": 2793.204,
+    "change": -37.096,
+    "pct": -1.3107,
+    "dayLow": 2788.426,
+    "dayHigh": 2816.3975,
     "yearHigh": 3069.71,
     "yearLow": 2303.46,
     "ma50": 2939.2483,
@@ -79,30 +62,41 @@
    "id": "VIX",
    "name": "CBOE Volatility Index",
    "q": {
-    "price": 15.98,
-    "change": 0.97,
-    "pct": 6.46236,
-    "dayLow": 15.21,
-    "dayHigh": 16,
+    "price": 15.08,
+    "change": 0.07,
+    "pct": 0.4664,
+    "dayLow": 14.97,
+    "dayHigh": 16.01,
     "yearHigh": 35.3,
     "yearLow": 13.38,
     "ma50": 15.657,
     "ma200": 18.0491
    }
+  },
+  {
+   "id": "QQQ",
+   "name": "Invesco QQQ Trust",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 757.73,
+    "change": -1.93,
+    "pct": -0.25
+   },
+   "src": "WebSearch: Yahoo Finance close 757.73 (-0.25%), cross-checked vs Macrotrends 757.97 (agree within 0.03%) \u2014 approximate, search-sourced"
   }
  ],
  "macro": {
-  "date": "2026-10-06",
-  "y10": 5.27,
-  "y10prev": 5.31,
-  "y2": 4.79,
-  "y30": 5.64,
-  "y10path": "5.29% on 30 Sep, 5.24% on 1 Oct, 5.28% on 2 Oct, 5.31% on 5 Oct, 5.27% on 6 Oct",
+  "date": "2026-10-07",
+  "y10": 5.28,
+  "y10prev": 5.27,
+  "y2": 4.77,
+  "y30": 5.67,
+  "y10path": "5.24% on 1 Oct, 5.28% on 2 Oct, 5.31% on 5 Oct, 5.27% on 6 Oct, 5.28% on 7 Oct",
   "fed": {
-   "range": "3.75–4.00%",
+   "range": "3.75\u20134.00%",
    "move": "25 bp",
    "date": "16 Sep",
-   "vote": "12–0",
+   "vote": "12\u20130",
    "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
    "sources": [
     {
@@ -125,10 +119,6 @@
   },
   "y10hist": [
    {
-    "date": "2026-09-30",
-    "y10": 5.29
-   },
-   {
     "date": "2026-10-01",
     "y10": 5.24
    },
@@ -143,74 +133,14 @@
    {
     "date": "2026-10-06",
     "y10": 5.27
+   },
+   {
+    "date": "2026-10-07",
+    "y10": 5.28
    }
   ]
  },
  "catalysts": [
-  {
-   "tk": "CEG",
-   "name": "Constellation Energy Corporation",
-   "industry": "Independent Power Producers",
-   "sector": "Utilities",
-   "ctype": "Major contract",
-   "cdate": "30 Sep",
-   "cdateISO": "2026-09-30",
-   "what": "Amazon signed a 20-year power purchase agreement with Constellation for nuclear output from Calvert Cliffs, including about 190MW of new capacity and more than $3B of plant investment.",
-   "sources": [
-    {
-     "t": "Constellation (press release)",
-     "u": "https://www.constellationenergy.com/news/2026/09/constellation-and-amazon-announce-20-year-power-purchase-agreement-at-calvert-cliffs.html"
-    },
-    {
-     "t": "Tradingpedia",
-     "u": "https://www.tradingpedia.com/2026/10/01/constellation-energy-surges-on-long-term-amazon-deal/"
-    }
-   ],
-   "cap": "$107.9B",
-   "px": 300.4,
-   "pct": 12.25,
-   "topSector": false,
-   "pricedIn": {
-    "score": 49,
-    "band": "partly priced in",
-    "n": 4,
-    "partial": false,
-    "label": "Priced-in 49/100 — partly priced in",
-    "components": {
-     "a": 25.0,
-     "b": 7.5,
-     "c": 16.2,
-     "d": 0.0
-    },
-    "inputs": {
-     "movePct": 12.25,
-     "adr20Pct": 3.678,
-     "eventHigh": 309.8,
-     "eventLow": 291,
-     "last": 300.4,
-     "sessionsSince": 1,
-     "runUpPct": -10.48,
-     "price": 300.4,
-     "target": 341.53,
-     "reactionDate": "2026-10-06",
-     "targetSource": "stockanalysis.com consensus (single source)"
-    }
-   },
-   "flags": [
-    {
-     "key": "catalyst",
-     "label": "Catalyst",
-     "tip": "major contract on 2026-09-30 (2 sources); Priced-in 49/100 — partly priced in.",
-     "inputs": {
-      "class": "major contract",
-      "date": "2026-09-30",
-      "sources": 2,
-      "pricedIn": 49,
-      "components": 4
-     }
-    }
-   ]
-  },
   {
    "tk": "MCK",
    "name": "McKesson Corporation",
@@ -230,70 +160,10 @@
      "u": "https://www.pharmaceuticalcommerce.com/view/cardinal-health-mckesson-extend-cvs-distribution-deals-to-2032"
     }
    ],
-   "cap": "$107.9B",
-   "px": 921.67,
-   "pct": 0.68,
-   "topSector": false,
-   "pricedIn": {
-    "score": 48,
-    "band": "partly priced in",
-    "n": 4,
-    "partial": false,
-    "label": "Priced-in 48/100 — partly priced in",
-    "components": {
-     "a": 17.8,
-     "b": 5.9,
-     "c": 24.5,
-     "d": 0.0
-    },
-    "inputs": {
-     "movePct": 5.27,
-     "adr20Pct": 2.173,
-     "eventHigh": 924.21,
-     "eventLow": 881.34,
-     "last": 921.67,
-     "sessionsSince": 4,
-     "runUpPct": -5.84,
-     "price": 921.67,
-     "target": 973.92,
-     "reactionDate": "2026-10-01",
-     "targetSource": "stockanalysis.com consensus (single source)"
-    }
-   },
-   "flags": [
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "3 of 4 passed: EPS 50.2% (≥20); op. margin 1.57% vs 1.36% a year ago; free cash flow positive. Not passed: revenue 8.84% (≥15)",
-     "inputs": {
-      "revGrowthPct": 8.84,
-      "epsGrowthPct": 50.2,
-      "epsNote": null,
-      "opMarginPct": 1.57,
-      "opMarginPriorPct": 1.36,
-      "fcf": 6420000000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "eps",
-       "margin",
-       "fcf"
-      ],
-      "unknown": []
-     }
-    },
-    {
-     "key": "catalyst",
-     "label": "Catalyst",
-     "tip": "major contract on 2026-10-01 (2 sources); Priced-in 48/100 — partly priced in.",
-     "inputs": {
-      "class": "major contract",
-      "date": "2026-10-01",
-      "sources": 2,
-      "pricedIn": 48,
-      "components": 4
-     }
-    }
-   ]
+   "cap": "$106.6B",
+   "px": 910.33,
+   "pct": -1.23,
+   "topSector": false
   },
   {
    "tk": "TWLO",
@@ -314,1715 +184,112 @@
      "u": "https://stocktwits.com/news-articles/markets/equity/vylor-takes-corteva-s-s-and-p-500-seat-twilio-set-to-replace-warner-bros-discovery-both-stocks-rise-after-hours/cZD0kNsRB0K"
     }
    ],
-   "cap": "$42.6B",
-   "px": 280.41,
-   "pct": -6.81,
-   "topSector": true,
-   "pricedIn": {
-    "score": 65,
-    "band": "mostly or fully priced in",
-    "n": 4,
-    "partial": false,
-    "label": "Priced-in 65/100 — mostly or fully priced in",
-    "components": {
-     "a": 0.0,
-     "b": 15.0,
-     "c": 25.0,
-     "d": 25.0
-    },
-    "inputs": {
-     "movePct": 2.15,
-     "adr20Pct": 5.288,
-     "eventHigh": 305,
-     "eventLow": 287.1,
-     "last": 280.41,
-     "sessionsSince": 2,
-     "runUpPct": 22.5,
-     "price": 280.41,
-     "target": 263.04,
-     "reactionDate": "2026-10-05",
-     "targetSource": "stockanalysis.com consensus (single source)"
-    }
-   },
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Technology is #1 of the top 3 sectors; Software - Infrastructure is #2 in it (+7.8% 1M); the stock is +20.4% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Technology",
-      "sectorRank": 1,
-      "industry": "Software - Infrastructure",
-      "industryRank": 2,
-      "industry1M": 7.8,
-      "stock1M": 20.36
-     }
-    },
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "4 of 4 passed: revenue 17.82% (≥15); EPS 5608.62% (≥20); op. margin 6.1% vs 1.74% a year ago; free cash flow positive",
-     "inputs": {
-      "revGrowthPct": 17.82,
-      "epsGrowthPct": 5608.62,
-      "epsNote": null,
-      "opMarginPct": 6.1,
-      "opMarginPriorPct": 1.74,
-      "fcf": 1050000000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "revenue",
-       "eps",
-       "margin",
-       "fcf"
-      ],
-      "unknown": []
-     }
-    }
-   ]
+   "cap": "$41.4B",
+   "px": 273.0,
+   "pct": -2.64,
+   "topSector": true
   }
  ],
  "bg": {
-  "SANM": {
-   "cap": "$12.3B",
-   "what": "Contract electronics manufacturer: circuit boards, backplanes, cable assemblies, enclosures and finished-goods assembly, test and logistics for industrial, medical, defense, auto, telecom and cloud customers.",
-   "deal": [],
-   "rev": "12.76B",
-   "revG": 58.56,
-   "eps": "$5.59",
-   "epsG": 19.72,
-   "next": "2 Nov",
-   "nextWarn": false
-  },
-  "TWLO": {
-   "cap": "$42.6B",
-   "what": "Cloud communications platform providing APIs for voice, messaging, video and email that let developers embed customer-engagement features directly into their own software."
-  },
-  "CEG": {
-   "cap": "$107.9B",
-   "what": "Largest US producer of carbon-free electricity, running a roughly 32GW nuclear/renewables/gas fleet across the Mid-Atlantic, Midwest, New York and ERCOT power markets."
-  },
   "MCK": {
-   "cap": "$107.9B",
+   "cap": "$106.6B",
    "what": "Major US pharmaceutical distributor and healthcare services company spanning drug distribution, specialty/oncology support and prescription technology solutions."
   },
-  "AVT": {
-   "cap": "$8.7B",
-   "what": "Global distributor of electronic components and embedded solutions, supplying engineers and manufacturers with semiconductors, passive parts, boards and supply-chain services.",
-   "deal": [],
-   "rev": "27.63B",
-   "revG": 24.47,
-   "eps": "$4.01",
-   "epsG": 45.82,
-   "next": "28 Oct",
-   "nextWarn": true
-  },
-  "ZS": {
-   "cap": "$34.6B",
-   "what": "Cloud security platform (Zero Trust Exchange) that secures users, devices and workloads by connecting them to apps through its own cloud, replacing network firewalls and VPNs.",
-   "deal": [],
-   "rev": "3.35B",
-   "revG": 25.42,
-   "eps": null,
-   "epsG": null,
-   "next": "24 Nov",
-   "nextWarn": false
-  },
-  "ETN": {
-   "cap": "$172.9B",
-   "what": "Power-management company making electrical distribution, data-centre power, aerospace and vehicle components, serving utilities, data centres and industrial customers.",
-   "deal": [],
-   "rev": "30.03B",
-   "revG": 15.53,
-   "eps": "$9.82",
-   "epsG": -1.21,
-   "next": "3 Nov",
-   "nextWarn": true
-  },
-  "META": {
-   "cap": "$1.88T",
-   "what": "Operator of Facebook, Instagram, WhatsApp and Messenger; earns mostly from advertising and is investing heavily in AI and Reality Labs.",
-   "deal": [],
-   "rev": "228.25B",
-   "revG": 27.65,
-   "eps": "$26.54",
-   "epsG": -3.75,
-   "next": "28 Oct",
-   "nextWarn": true
-  },
-  "GDDY": {
-   "cap": "$12.4B",
-   "what": "Domain-name, web-hosting and website-builder provider that sells domains, hosting, security and commerce tools to small businesses and individuals.",
-   "deal": [],
-   "rev": "5.10B",
-   "revG": 7.41,
-   "eps": "$6.74",
-   "epsG": 20.31,
-   "next": "29 Oct",
-   "nextWarn": true
-  },
-  "ITT": {
-   "cap": "$18.5B",
-   "what": "Maker of engineered flow-control, motion-control and connector components for industrial, transportation and energy markets.",
-   "deal": [],
-   "rev": "4.74B",
-   "revG": 28.07,
-   "eps": "$5.03",
-   "epsG": -21.21,
-   "next": "28 Oct",
-   "nextWarn": true
-  },
-  "VRSN": {
-   "cap": "$26.5B",
-   "what": "Operator of the authoritative registry for the .com and .net domains and provider of internet infrastructure and security services.",
-   "deal": [],
-   "rev": "1.71B",
-   "revG": 6.86,
-   "eps": "$9.21",
-   "epsG": 9.9,
-   "next": "22 Oct",
-   "nextWarn": true
-  },
-  "PLTR": {
-   "cap": "$461.6B",
-   "what": "Data-analytics and AI software company whose Gotham, Foundry and AIP platforms serve government, defense and commercial customers.",
-   "deal": [],
-   "rev": "6.16B",
-   "revG": 78.92,
-   "eps": "$1.17",
-   "epsG": 287.57,
-   "next": "2 Nov",
-   "nextWarn": true
-  },
-  "GOOGL": {
-   "cap": "$4.25T",
-   "what": "Parent of Google: search and YouTube advertising, Google Cloud, Android and Waymo, with large AI investments across the stack.",
-   "deal": [],
-   "rev": "445.87B",
-   "revG": 20.05,
-   "eps": "$19.93",
-   "epsG": 112.48,
-   "next": "28 Oct",
-   "nextWarn": true
-  },
-  "SNAP": {
-   "cap": "$9.8B",
-   "what": "Camera and messaging company behind Snapchat, earning mainly from advertising and a growing subscription (Snapchat+) business.",
-   "deal": [],
-   "rev": "6.35B",
-   "revG": 12.65,
-   "eps": null,
-   "epsG": null,
-   "next": "4 Nov",
-   "nextWarn": false
+  "TWLO": {
+   "cap": "$41.4B",
+   "what": "Cloud communications platform providing APIs for voice, messaging, video and email that let developers embed customer-engagement features directly into their own software."
   }
  },
- "flagLog": [
-  "CEG: financials: financials undetermined: no data for margin",
-  "AVT: catalyst: no catalyst search was run for technical picks",
-  "ZS: catalyst: no catalyst search was run for technical picks",
-  "ETN: catalyst: no catalyst search was run for technical picks",
-  "META: catalyst: no catalyst search was run for technical picks",
-  "GDDY: catalyst: no catalyst search was run for technical picks",
-  "ITT: catalyst: no catalyst search was run for technical picks",
-  "VRSN: catalyst: no catalyst search was run for technical picks",
-  "PLTR: catalyst: no catalyst search was run for technical picks",
-  "GOOGL: catalyst: no catalyst search was run for technical picks",
-  "SNAP: financials: financials undetermined: no data for eps",
-  "SNAP: catalyst: no catalyst search was run for technical picks",
-  "catalyst flag for near-misses: no catalyst search was run (alerts only)",
-  "financials flags use stockanalysis.com TTM statements (single source, not cross-checked)"
- ],
  "sections": {
   "indices": {
-   "asOf": "2026-10-06",
-   "source": "FMP index-quote (^GSPC/^DJI/^RUT/^VIX); QQQ omitted, sources did not reconcile"
+   "asOf": "2026-10-07",
+   "source": "FMP index-quote (^GSPC/^DJI/^RUT); VIX via FMP EOD history (live quote was a pre-market print, not the close); QQQ via WebSearch (Yahoo Finance + Macrotrends, cross-checked)"
   },
   "macro": {
-   "asOf": "2026-10-06",
-   "source": "FMP economics/treasury-rates; Fed decision via WebSearch (unchanged, no FOMC in window)"
-  },
-  "sectors": {
-   "asOf": "2026-10-06",
-   "source": "Finviz groups · Perf Month (interactive refresh Wed 7 Oct)"
-  },
-  "industries": {
-   "asOf": "2026-10-06",
-   "source": "Finviz groups · Perf Month (interactive refresh Wed 7 Oct)"
-  },
-  "technical": {
-   "asOf": "2026-10-06",
-   "source": "stockanalysis.com industry lists + daily OHLC API (interactive scan, scripts/scan_build.py)"
+   "asOf": "2026-10-07",
+   "source": "FMP economics/treasury-rates (5 sessions through 7 Oct); Fed decision via WebSearch, unchanged (no FOMC in window)"
   },
   "catalysts": {
-   "asOf": "2026-10-06",
+   "asOf": "2026-10-07",
    "source": "WebSearch (2+ sources each) + FMP company/profile-symbol live quotes"
-  },
-  "nearmiss": {
-   "asOf": "2026-10-06",
-   "source": "scan candidates that failed a selection rule (interactive scan)"
-  },
-  "tracker": {
-   "asOf": "2026-10-02",
-   "source": "pick ledger (data/picks.json)"
   }
  },
  "fetchlog": [
   {
-   "id": "fmp.indexes.index-quote.^GSPC",
+   "id": "fmp.index.^GSPC",
    "ok": true,
-   "note": ""
+   "note": "7801.77, -0.22%, Oct 7 close"
   },
   {
-   "id": "fmp.indexes.index-quote.^DJI",
+   "id": "fmp.index.^DJI",
    "ok": true,
-   "note": ""
+   "note": "51179.87, -0.66%, Oct 7 close"
   },
   {
-   "id": "fmp.indexes.index-quote.^RUT",
+   "id": "fmp.index.^RUT",
    "ok": true,
-   "note": ""
+   "note": "2793.204, -1.31%, Oct 7 close"
   },
   {
-   "id": "fmp.indexes.index-quote.^VIX",
+   "id": "fmp.index.^VIX",
    "ok": true,
-   "note": ""
-  },
-  {
-   "id": "websearch.qqq.price",
-   "ok": false,
-   "note": "3 sources gave $364.70 / $684.23 / $716.06 — did not reconcile, tile omitted"
+   "note": "live quote (15.77) had ts of Oct 8 pre-market, not a close; retried with index-historical-price-eod-full to get the actual Oct 7 close (15.08) and OHLC"
   },
   {
    "id": "fmp.economics.treasury-rates",
    "ok": true,
-   "note": "fetched 2026-09-04 to 2026-10-06 plus explicit 2026-10-05..10-07 range to confirm latest session; used last 5 distinct trading days (30 Sep–6 Oct) for y10hist"
+   "note": "default call omitted 7 Oct; re-ran with explicit from/to date range to retrieve it"
   },
   {
-   "id": "websearch.fomc.schedule",
+   "id": "websearch.qqq.price",
    "ok": true,
-   "note": "confirmed next FOMC meeting is 27-28 Oct 2026; none in the last 7 days, fed block unchanged except yields"
+   "note": "Yahoo Finance 757.73 (-0.25%) vs Macrotrends 757.97 \u2014 reconciled within 0.03%"
   },
   {
-   "id": "websearch.catalyst.candidates.general",
-   "ok": true,
-   "note": "4 broad sweeps for earnings beats / upgrades / contracts / approvals in the last 5 sessions; most hits were stale or mis-dated (logged in rejected)"
-  },
-  {
-   "id": "websearch.catalyst.twlo.sp500add",
-   "ok": true,
-   "note": "S&P Dow Jones Indices press release + Stocktwits agree: TWLO replaces WBD in S&P 500 effective 6 Oct"
-  },
-  {
-   "id": "fmp.company.profile-symbol.TWLO",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "websearch.catalyst.ceg.recheck",
-   "ok": true,
-   "note": "30 Sep Amazon PPA still within 5-session window; original 2 sources unchanged"
-  },
-  {
-   "id": "fmp.company.profile-symbol.CEG",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "websearch.catalyst.mck.recheck",
-   "ok": true,
-   "note": "1 Oct CVS extension still within 5-session window; original 2 sources unchanged"
-  },
-  {
-   "id": "fmp.company.profile-symbol.MCK",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "websearch.catalyst.mrvl",
+   "id": "websearch.catalyst.earnings-beat-raise",
    "ok": false,
-   "note": "could not confirm a single reconciling Oct 6 date across 2 independent sources; dropped"
+   "note": "no dated 1-7 Oct beat+raise story surfaced after 2 search attempts"
   },
   {
-   "id": "fmp.company.profile-symbol.MRVL",
-   "ok": true,
-   "note": "used only to sanity-check price action, not published as a catalyst"
+   "id": "websearch.catalyst.analyst-upgrade",
+   "ok": false,
+   "note": "no corroborated >15%-above-price upgrade surfaced; AMD/DELL candidates found but rejected, see rejected"
   },
   {
-   "id": "websearch.catalyst.mck.citi.upgrade",
-   "ok": true,
-   "note": "Citi PT $860 confirmed but below current price — fails >15% test, rejected"
+   "id": "websearch.catalyst.major-contract",
+   "ok": false,
+   "note": "no new dated 1-7 Oct contract/deal surfaced"
   },
   {
-   "id": "websearch.catalyst.hal.upgrade",
-   "ok": true,
-   "note": "Barclays PT $25 confirmed but below current price — fails >15% test, rejected (recurring)"
+   "id": "websearch.catalyst.fda-approval",
+   "ok": false,
+   "note": "no dated Oct 2026 approval/launch surfaced"
   },
   {
-   "id": "artifact.read.brief",
+   "id": "fmp.profile.MCK",
    "ok": true,
-   "note": "recovered last published page for carry-forward state"
+   "note": "910.33, -1.23%, cap $106.6B"
   },
   {
-   "id": "stockanalysis.industry-lists",
+   "id": "fmp.profile.TWLO",
    "ok": true,
-   "note": "119 names over $5B"
+   "note": "273.00, -2.64%, cap $41.4B"
   },
   {
-   "id": "stockanalysis.ohlc-api",
+   "id": "fmp.profile.AMD",
    "ok": true,
-   "note": "119 tickers, 0 excluded for bad bars"
+   "note": "645.86 \u2014 used to check Citi $800 target gap (23.9% above price, but single-sourced); rejected"
   },
   {
-   "id": "stockanalysis.statistics",
+   "id": "fmp.profile.DELL",
    "ok": true,
-   "note": "SMA200, earnings date, price target, margins for candidates"
-  },
-  {
-   "id": "finviz.groups sector+industry",
-   "ok": true,
-   "note": "read more than once; see sectorSource"
+   "note": "578.96 \u2014 used to check Mizuho $650 target gap (12.3% above price, below 15% threshold); rejected"
   }
  ],
- "sectors": [
-  {
-   "name": "Technology",
-   "pct": 5.53
-  },
-  {
-   "name": "Communication Services",
-   "pct": 2.87
-  },
-  {
-   "name": "Industrials",
-   "pct": -0.76
-  },
-  {
-   "name": "Healthcare",
-   "pct": -0.84
-  },
-  {
-   "name": "Consumer Defensive",
-   "pct": -0.91
-  },
-  {
-   "name": "Energy",
-   "pct": -1.27
-  },
-  {
-   "name": "Consumer Cyclical",
-   "pct": -2.63
-  },
-  {
-   "name": "Utilities",
-   "pct": -4.74
-  },
-  {
-   "name": "Financial",
-   "pct": -5.96
-  },
-  {
-   "name": "Real Estate",
-   "pct": -6.54
-  },
-  {
-   "name": "Basic Materials",
-   "pct": -7.88
-  }
- ],
- "industries": [
-  {
-   "sector": "Technology",
-   "items": [
-    {
-     "name": "Communication Equipment",
-     "pct": 8.14,
-     "n": 45
-    },
-    {
-     "name": "Software - Infrastructure",
-     "pct": 7.8,
-     "n": 180
-    },
-    {
-     "name": "Electronics & Computer Distribution",
-     "pct": 7.73,
-     "n": 8
-    }
-   ]
-  },
-  {
-   "sector": "Communication Services",
-   "items": [
-    {
-     "name": "Internet Content & Information",
-     "pct": 6.37,
-     "n": 69
-    },
-    {
-     "name": "Publishing",
-     "pct": -0.53,
-     "n": 8
-    },
-    {
-     "name": "Electronic Gaming & Multimedia",
-     "pct": -1.79,
-     "n": 21
-    }
-   ]
-  },
-  {
-   "sector": "Industrials",
-   "items": [
-    {
-     "name": "Airlines",
-     "pct": 2.49,
-     "n": 18
-    },
-    {
-     "name": "Marine Shipping",
-     "pct": 2.34,
-     "n": 38
-    },
-    {
-     "name": "Specialty Industrial Machinery",
-     "pct": 1.8,
-     "n": 79
-    }
-   ]
-  }
- ],
- "sectorSource": "Finviz groups · Perf Month · interactive refresh 7 Oct (data to the 6 Oct close); sector table read three times (one summarizer read was garbled and discarded; two agree), industry rows read twice, both agree",
- "picks": [
-  {
-   "tk": "AVT",
-   "name": "Avnet, Inc.",
-   "industry": "Electronics & Computer Distribution",
-   "sector": "Technology",
-   "setup": "2-session base under the 2 Oct high, 2.1% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 108.63,
-   "entryZone": "108.64 – 109.73",
-   "entry": 108.64,
-   "stop": 102.62,
-   "stopNote": "1x ATR14 below the close (last low 105.18)",
-   "target": 119.5,
-   "why": "Readiness 68 (tightness 25, proximity 25, volume dry-up 15, time in base 3). Closed 2.1% under its 2 Oct high after 2 sessions of base. Levels: stop 1x ATR14 below the close (102.62, risk 5.5% of the entry), fixed +10% target, R:R 1.80. Honest caveats: ADX(14) is 27.1, and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 1.42M against the 500K floor. Earnings 28 Oct is 16 sessions away.",
-   "trim": "Round number $110 sits between entry and target — trim 25% there.",
-   "cap": "$8.7B",
-   "avgVol": "1.42M",
-   "sma": [
-    7.67,
-    12.68,
-    38.05
-   ],
-   "rsi": 66.51,
-   "volW": 3.56,
-   "volM": 3.76,
-   "px": 106.37,
-   "pct": 0.17,
-   "closes": [
-    89.39,
-    89.99,
-    90.82,
-    92.06,
-    92.42,
-    91.74,
-    92.97,
-    99.63,
-    92.34,
-    92.64,
-    92.73,
-    93.12,
-    96.12,
-    95.48,
-    98.25,
-    101.15,
-    100.91,
-    103.075,
-    101.45,
-    102.5,
-    99.95,
-    102.24,
-    106.935,
-    106.19,
-    106.37
-   ],
-   "readiness": {
-    "composite": 68,
-    "tightness": 25,
-    "proximity": 25,
-    "volumeDryUp": 15,
-    "timeInBase": 3
-   },
-   "atr14": 3.7453,
-   "adr20Pct": 3.761,
-   "emaCompression": false,
-   "adx14": 27.1,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Technology is #1 of the top 3 sectors; Electronics & Computer Distribution is #3 in it (+7.7% 1M); the stock is +15.5% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Technology",
-      "sectorRank": 1,
-      "industry": "Electronics & Computer Distribution",
-      "industryRank": 3,
-      "industry1M": 7.73,
-      "stock1M": 15.54
-     }
-    },
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "3 of 4 passed: revenue 24.47% (≥15); EPS 45.82% (≥20); op. margin 3.14% vs 2.86% a year ago. Not passed: free cash flow positive",
-     "inputs": {
-      "revGrowthPct": 24.47,
-      "epsGrowthPct": 45.82,
-      "epsNote": null,
-      "opMarginPct": 3.14,
-      "opMarginPriorPct": 2.86,
-      "fcf": -354500000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "revenue",
-       "eps",
-       "margin"
-      ],
-      "unknown": []
-     }
-    }
-   ],
-   "selectionRank": 1,
-   "selectionVersion": "tiered-v3",
-   "tier": "A",
-   "chips": []
-  },
-  {
-   "tk": "ZS",
-   "name": "Zscaler, Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "setup": "8-session base under the 24 Sep high, 2.2% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 216.97,
-   "entryZone": "216.98 – 219.15",
-   "entry": 216.98,
-   "stop": 202.63,
-   "stopNote": "1x ATR14 below the close (last low 205.02)",
-   "target": 238.68,
-   "why": "Readiness 67 (tightness 5, proximity 24, volume dry-up 13, time in base 25). Closed 2.2% under its 24 Sep high after 8 sessions of base. Levels: stop 1x ATR14 below the close (202.63, risk 6.6% of the entry), fixed +10% target, R:R 1.51. Honest caveats: ADX(14) is 18.6 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 3.25M against the 500K floor. Earnings 24 Nov is 35 sessions away (after the 20-session maximum hold).",
-   "trim": "Round number $225 sits between entry and target — trim 25% there.",
-   "cap": "$34.6B",
-   "avgVol": "3.25M",
-   "sma": [
-    8.51,
-    16.89,
-    27.71
-   ],
-   "rsi": 63.64,
-   "volW": 3.68,
-   "volM": 4.96,
-   "px": 212.25,
-   "pct": 5.18,
-   "closes": [
-    178.37,
-    172.73,
-    177.8,
-    169.8,
-    161.94,
-    166.1,
-    163.48,
-    164.54,
-    191.73,
-    193.89,
-    191.58,
-    197.47,
-    197.31,
-    207.13,
-    210.18,
-    214.45,
-    214.64,
-    193.05,
-    199.39,
-    198.355,
-    199.42,
-    198.78,
-    196.6,
-    201.8,
-    212.25
-   ],
-   "readiness": {
-    "composite": 67,
-    "tightness": 5,
-    "proximity": 24,
-    "volumeDryUp": 13,
-    "timeInBase": 25
-   },
-   "atr14": 9.6134,
-   "adr20Pct": 4.958,
-   "emaCompression": false,
-   "adx14": 18.6,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Technology is #1 of the top 3 sectors; Software - Infrastructure is #2 in it (+7.8% 1M); the stock is +25.0% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Technology",
-      "sectorRank": 1,
-      "industry": "Software - Infrastructure",
-      "industryRank": 2,
-      "industry1M": 7.8,
-      "stock1M": 25.0
-     }
-    },
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "3 of 4 passed: revenue 25.42% (≥15); op. margin -3.52% vs -4.57% a year ago; free cash flow positive. No data: eps",
-     "inputs": {
-      "revGrowthPct": 25.42,
-      "epsGrowthPct": null,
-      "epsNote": null,
-      "opMarginPct": -3.52,
-      "opMarginPriorPct": -4.57,
-      "fcf": 852350000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "revenue",
-       "margin",
-       "fcf"
-      ],
-      "unknown": [
-       "eps"
-      ]
-     }
-    }
-   ],
-   "selectionRank": 2,
-   "selectionVersion": "tiered-v3",
-   "tier": "A",
-   "chips": []
-  },
-  {
-   "tk": "ETN",
-   "name": "Eaton Corporation plc",
-   "industry": "Specialty Industrial Machinery",
-   "sector": "Industrials",
-   "setup": "2-session base under the 2 Oct high, 1.5% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 452.0,
-   "entryZone": "452.01 – 456.53",
-   "entry": 452.01,
-   "stop": 429.4,
-   "stopNote": "5% below the entry (last low 434.02)",
-   "target": 497.21,
-   "why": "Readiness 55 (tightness 8, proximity 25, volume dry-up 19, time in base 3). Closed 1.5% under its 2 Oct high after 2 sessions of base. Levels: stop 5% below the entry (429.40, risk 5.0% of the entry), fixed +10% target, R:R 2.00. Honest caveats: ADX(14) is 11.6 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 2.04M against the 500K floor. Earnings 3 Nov is 20 sessions away.",
-   "trim": "Round number $475 sits between entry and target — trim 25% there.",
-   "cap": "$172.9B",
-   "avgVol": "2.04M",
-   "sma": [
-    4.61,
-    5.12,
-    14.04
-   ],
-   "rsi": 59.92,
-   "volW": 2.92,
-   "volM": 2.77,
-   "px": 445.09,
-   "pct": 2.89,
-   "closes": [
-    390.71,
-    390.85,
-    397.12,
-    410.85,
-    422.13,
-    415.22,
-    409.15,
-    425.37,
-    393.16,
-    392.4,
-    397.8,
-    409.46,
-    424.77,
-    435.43,
-    442.49,
-    438.76,
-    440.0,
-    439.98,
-    431.41,
-    433.27,
-    429.71,
-    437.28,
-    436.11,
-    432.6,
-    445.09
-   ],
-   "readiness": {
-    "composite": 55,
-    "tightness": 8,
-    "proximity": 25,
-    "volumeDryUp": 19,
-    "timeInBase": 3
-   },
-   "atr14": 12.9789,
-   "adr20Pct": 2.767,
-   "emaCompression": false,
-   "adx14": 11.6,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Industrials is #3 of the top 3 sectors; Specialty Industrial Machinery is #3 in it (+1.8% 1M); the stock is +8.3% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Industrials",
-      "sectorRank": 3,
-      "industry": "Specialty Industrial Machinery",
-      "industryRank": 3,
-      "industry1M": 1.8,
-      "stock1M": 8.33
-     }
-    }
-   ],
-   "selectionRank": 3,
-   "selectionVersion": "tiered-v3",
-   "tier": "A",
-   "chips": []
-  },
-  {
-   "tk": "META",
-   "name": "Meta Platforms, Inc.",
-   "industry": "Internet Content & Information",
-   "sector": "Communication Services",
-   "setup": "8-session base under the 24 Sep high, 5.2% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 779.819,
-   "entryZone": "779.83 – 787.63",
-   "entry": 779.83,
-   "stop": 710.52,
-   "stopNote": "1x ATR14 below the close (last low 736.69)",
-   "target": 857.81,
-   "why": "Readiness 69 (tightness 17, proximity 10, volume dry-up 17, time in base 25). Closed 5.2% under its 24 Sep high after 8 sessions of base. Levels: stop 1x ATR14 below the close (710.52, risk 8.9% of the entry), fixed +10% target, R:R 1.13. Honest caveats: ADX(14) is 40.0, and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 23.21M against the 500K floor. Earnings 28 Oct is 16 sessions away.",
-   "trim": "Round number $800 sits between entry and target — trim 25% there.",
-   "cap": "$1.88T",
-   "avgVol": "23.21M",
-   "sma": [
-    4.3,
-    17.12,
-    17.42
-   ],
-   "rsi": 63.01,
-   "volW": 2.13,
-   "volM": 3.49,
-   "px": 738.88,
-   "pct": -0.41,
-   "closes": [
-    578.54,
-    592.85,
-    610.68,
-    616.77,
-    613.48,
-    653.69,
-    644.38,
-    648.03,
-    665.6,
-    670.24,
-    673.31,
-    682.31,
-    665.75,
-    741.245,
-    736.595,
-    744.1,
-    777.59,
-    751.66,
-    715.62,
-    738.79,
-    725.18,
-    725.93,
-    728.08,
-    741.9,
-    738.88
-   ],
-   "readiness": {
-    "composite": 69,
-    "tightness": 17,
-    "proximity": 10,
-    "volumeDryUp": 17,
-    "timeInBase": 25
-   },
-   "atr14": 28.3576,
-   "adr20Pct": 3.487,
-   "emaCompression": false,
-   "adx14": 40.0,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Communication Services is #2 of the top 3 sectors; Internet Content & Information is #1 in it (+6.4% 1M); the stock is +19.8% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Communication Services",
-      "sectorRank": 2,
-      "industry": "Internet Content & Information",
-      "industryRank": 1,
-      "industry1M": 6.37,
-      "stock1M": 19.8
-     }
-    }
-   ],
-   "selectionRank": 4,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "far-from-pivot",
-     "label": "far from pivot (5.2%)",
-     "tone": "warn"
-    },
-    {
-     "key": "wide-stop",
-     "label": "wide stop (8.9%)",
-     "tone": "warn"
-    },
-    {
-     "key": "rr",
-     "label": "R:R 1.13",
-     "tone": "warn"
-    }
-   ]
-  },
-  {
-   "tk": "GDDY",
-   "name": "GoDaddy Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "setup": "8-session base under the 24 Sep high, 11.0% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 110.35,
-   "entryZone": "110.36 – 111.46",
-   "entry": 110.36,
-   "stop": 93.25,
-   "stopNote": "1x ATR14 below the close (last low 97.20)",
-   "target": 121.4,
-   "why": "Readiness 67 (tightness 23, proximity 0, volume dry-up 19, time in base 25). Closed 11.0% under its 24 Sep high after 8 sessions of base. Levels: stop 1x ATR14 below the close (93.25, risk 15.5% of the entry), fixed +10% target, R:R 0.65. Honest caveats: ADX(14) is 19.6 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 2.61M against the 500K floor. Earnings 29 Oct is 17 sessions away.",
-   "trim": "Round number $120 sits between entry and target — trim 25% there.",
-   "cap": "$12.4B",
-   "avgVol": "2.61M",
-   "sma": [
-    0.07,
-    1.39,
-    5.39
-   ],
-   "rsi": 50.99,
-   "volW": 2.91,
-   "volM": 4.58,
-   "px": 98.18,
-   "pct": -1.56,
-   "closes": [
-    100.55,
-    101.87,
-    103.63,
-    101.31,
-    92.88,
-    93.6,
-    96.37,
-    98.07,
-    104.47,
-    102.38,
-    99.09,
-    98.15,
-    97.46,
-    104.77,
-    98.24,
-    96.38,
-    100.81,
-    97.14,
-    93.71,
-    94.06,
-    95.51,
-    96.98,
-    97.21,
-    99.74,
-    98.18
-   ],
-   "readiness": {
-    "composite": 67,
-    "tightness": 23,
-    "proximity": 0,
-    "volumeDryUp": 19,
-    "timeInBase": 25
-   },
-   "atr14": 4.9254,
-   "adr20Pct": 4.581,
-   "emaCompression": false,
-   "adx14": 19.6,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "3 of 4 passed: EPS 20.31% (≥20); op. margin 25.2% vs 21.79% a year ago; free cash flow positive. Not passed: revenue 7.41% (≥15)",
-     "inputs": {
-      "revGrowthPct": 7.41,
-      "epsGrowthPct": 20.31,
-      "epsNote": null,
-      "opMarginPct": 25.2,
-      "opMarginPriorPct": 21.79,
-      "fcf": 1700000000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "eps",
-       "margin",
-       "fcf"
-      ],
-      "unknown": []
-     }
-    }
-   ],
-   "selectionRank": 5,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "far-from-pivot",
-     "label": "far from pivot (11.0%)",
-     "tone": "warn"
-    },
-    {
-     "key": "wide-stop",
-     "label": "wide stop (15.5%)",
-     "tone": "warn"
-    },
-    {
-     "key": "rr",
-     "label": "R:R 0.65",
-     "tone": "bad"
-    }
-   ]
-  },
-  {
-   "tk": "ITT",
-   "name": "ITT Inc.",
-   "industry": "Specialty Industrial Machinery",
-   "sector": "Industrials",
-   "setup": "7-session base under the 25 Sep high, 4.4% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 216.95,
-   "entryZone": "216.96 – 219.13",
-   "entry": 216.96,
-   "stop": 201.21,
-   "stopNote": "1x ATR14 below the close (last low 204.56)",
-   "target": 238.66,
-   "why": "Readiness 58 (tightness 10, proximity 13, volume dry-up 11, time in base 25). Closed 4.4% under its 25 Sep high after 7 sessions of base. Levels: stop 1x ATR14 below the close (201.21, risk 7.3% of the entry), fixed +10% target, R:R 1.38. Honest caveats: ADX(14) is 11.6 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 897K against the 500K floor. Earnings 28 Oct is 16 sessions away.",
-   "trim": "Round number $225 sits between entry and target — trim 25% there.",
-   "cap": "$18.5B",
-   "avgVol": "897K",
-   "sma": [
-    1.63,
-    0.84,
-    5.04
-   ],
-   "rsi": 53.39,
-   "volW": 2.84,
-   "volM": 2.87,
-   "px": 207.31,
-   "pct": 0.54,
-   "closes": [
-    194.26,
-    201.0,
-    203.48,
-    204.33,
-    201.52,
-    198.26,
-    196.23,
-    204.14,
-    199.5,
-    197.99,
-    194.5,
-    202.81,
-    204.47,
-    205.68,
-    208.63,
-    211.94,
-    213.97,
-    206.26,
-    207.18,
-    204.54,
-    201.82,
-    202.13,
-    206.17,
-    206.2,
-    207.31
-   ],
-   "readiness": {
-    "composite": 58,
-    "tightness": 10,
-    "proximity": 13,
-    "volumeDryUp": 11,
-    "timeInBase": 25
-   },
-   "atr14": 6.0944,
-   "adr20Pct": 2.871,
-   "emaCompression": false,
-   "adx14": 11.6,
-   "scoringVersion": "v2",
-   "flags": [],
-   "selectionRank": 6,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "rr",
-     "label": "R:R 1.38",
-     "tone": "warn"
-    }
-   ]
-  },
-  {
-   "tk": "VRSN",
-   "name": "VeriSign, Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "setup": "10-session base under the 22 Sep high, 5.5% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 310.0,
-   "entryZone": "310.01 – 313.11",
-   "entry": 310.01,
-   "stop": 285.86,
-   "stopNote": "1x ATR14 below the close (last low 290.45)",
-   "target": 341.01,
-   "why": "Readiness 54 (tightness 11, proximity 9, volume dry-up 9, time in base 25). Closed 5.5% under its 22 Sep high after 10 sessions of base. Levels: stop 1x ATR14 below the close (285.86, risk 7.8% of the entry), fixed +10% target, R:R 1.28. Honest caveats: ADX(14) is 14.1 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 775K against the 500K floor. Earnings 22 Oct is 12 sessions away.",
-   "trim": "Round number $325 sits between entry and target — trim 25% there.",
-   "cap": "$26.5B",
-   "avgVol": "775K",
-   "sma": [
-    0.16,
-    1.11,
-    10.03
-   ],
-   "rsi": 53.23,
-   "volW": 2.12,
-   "volM": 2.3,
-   "px": 293.1,
-   "pct": 0.29,
-   "closes": [
-    288.37,
-    289.96,
-    293.35,
-    292.08,
-    282.2,
-    286.94,
-    288.85,
-    292.71,
-    298.6,
-    297.26,
-    298.46,
-    302.05,
-    303.12,
-    308.18,
-    299.42,
-    293.28,
-    291.88,
-    287.25,
-    282.07,
-    279.84,
-    282.01,
-    286.9,
-    288.32,
-    292.26,
-    293.1
-   ],
-   "readiness": {
-    "composite": 54,
-    "tightness": 11,
-    "proximity": 9,
-    "volumeDryUp": 9,
-    "timeInBase": 25
-   },
-   "atr14": 7.2322,
-   "adr20Pct": 2.305,
-   "emaCompression": false,
-   "adx14": 14.1,
-   "scoringVersion": "v2",
-   "flags": [],
-   "selectionRank": 7,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "readiness",
-     "label": "readiness 54 (< 55)",
-     "tone": "warn"
-    },
-    {
-     "key": "far-from-pivot",
-     "label": "far from pivot (5.5%)",
-     "tone": "warn"
-    },
-    {
-     "key": "rr",
-     "label": "R:R 1.28",
-     "tone": "warn"
-    }
-   ]
-  },
-  {
-   "tk": "PLTR",
-   "name": "Palantir Technologies Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "setup": "2-session base under the 2 Oct high, 1.4% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 194.78,
-   "entryZone": "194.79 – 196.74",
-   "entry": 194.79,
-   "stop": 185.05,
-   "stopNote": "5% below the entry (last low 190.22)",
-   "target": 214.27,
-   "why": "Readiness 53 (tightness 9, proximity 25, volume dry-up 16, time in base 3). Closed 1.4% under its 2 Oct high after 2 sessions of base. Levels: stop 5% below the entry (185.05, risk 5.0% of the entry), fixed +10% target, R:R 2.00. Honest caveats: ADX(14) is 28.9, and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 21.86M against the 500K floor. Earnings 2 Nov is 19 sessions away.",
-   "trim": "Round number $200 sits between entry and target — trim 25% there.",
-   "cap": "$461.6B",
-   "avgVol": "21.86M",
-   "sma": [
-    5.52,
-    11.46,
-    26.2
-   ],
-   "rsi": 64.32,
-   "volW": 2.67,
-   "volM": 3.05,
-   "px": 192.07,
-   "pct": 1.41,
-   "closes": [
-    179.92,
-    169.46,
-    182.53,
-    174.33,
-    170.3,
-    169.53,
-    165.86,
-    167.23,
-    173.31,
-    172.56,
-    174.34,
-    176.24,
-    177.64,
-    183.09,
-    184.99,
-    191.79,
-    192.59,
-    189.67,
-    187.48,
-    186.97,
-    187.05,
-    190.04,
-    188.75,
-    189.4,
-    192.07
-   ],
-   "readiness": {
-    "composite": 53,
-    "tightness": 9,
-    "proximity": 25,
-    "volumeDryUp": 16,
-    "timeInBase": 3
-   },
-   "atr14": 5.5512,
-   "adr20Pct": 3.045,
-   "emaCompression": false,
-   "adx14": 28.9,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "sector",
-     "label": "Sector",
-     "tip": "Technology is #1 of the top 3 sectors; Software - Infrastructure is #2 in it (+7.8% 1M); the stock is +10.2% 1M, ahead of its industry.",
-     "inputs": {
-      "sector": "Technology",
-      "sectorRank": 1,
-      "industry": "Software - Infrastructure",
-      "industryRank": 2,
-      "industry1M": 7.8,
-      "stock1M": 10.18
-     }
-    },
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "4 of 4 passed: revenue 78.92% (≥15); EPS 287.57% (≥20); op. margin 42.8% vs 16.55% a year ago; free cash flow positive",
-     "inputs": {
-      "revGrowthPct": 78.92,
-      "epsGrowthPct": 287.57,
-      "epsNote": null,
-      "opMarginPct": 42.8,
-      "opMarginPriorPct": 16.55,
-      "fcf": 3360000000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "revenue",
-       "eps",
-       "margin",
-       "fcf"
-      ],
-      "unknown": []
-     }
-    }
-   ],
-   "selectionRank": 8,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "readiness",
-     "label": "readiness 53 (< 55)",
-     "tone": "warn"
-    }
-   ]
-  },
-  {
-   "tk": "GOOGL",
-   "name": "Alphabet Inc.",
-   "industry": "Internet Content & Information",
-   "sector": "Communication Services",
-   "setup": "10-session base under the 22 Sep high, 4.5% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 364.17,
-   "entryZone": "364.18 – 367.82",
-   "entry": 364.18,
-   "stop": 338.81,
-   "stopNote": "1x ATR14 below the close (last low 344.68)",
-   "target": 400.6,
-   "why": "Readiness 52 (tightness 7, proximity 12, volume dry-up 8, time in base 25). Closed 4.5% under its 22 Sep high after 10 sessions of base. Levels: stop 1x ATR14 below the close (338.81, risk 7.0% of the entry), fixed +10% target, R:R 1.44. Honest caveats: ADX(14) is 13.3 (below the 20 the full scan asks for), and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 27.28M against the 500K floor. Earnings 28 Oct is 16 sessions away.",
-   "trim": "Round number $400 sits between entry and target — trim 25% there.",
-   "cap": "$4.25T",
-   "avgVol": "27.28M",
-   "sma": [
-    1.22,
-    0.68,
-    2.45
-   ],
-   "rsi": 53.39,
-   "volW": 2.6,
-   "volM": 2.29,
-   "px": 347.68,
-   "pct": 0.35,
-   "closes": [
-    335.02,
-    337.12,
-    342.48,
-    338.46,
-    338.36,
-    330.65,
-    332.6,
-    338.5,
-    349.39,
-    344.98,
-    342.87,
-    347.33,
-    349.54,
-    354.97,
-    351.16,
-    337.83,
-    342.36,
-    343.92,
-    342.75,
-    340.92,
-    344.08,
-    338.24,
-    343.5,
-    346.47,
-    347.68
-   ],
-   "readiness": {
-    "composite": 52,
-    "tightness": 7,
-    "proximity": 12,
-    "volumeDryUp": 8,
-    "timeInBase": 25
-   },
-   "atr14": 8.8642,
-   "adr20Pct": 2.286,
-   "emaCompression": false,
-   "adx14": 13.3,
-   "scoringVersion": "v2",
-   "flags": [
-    {
-     "key": "financials",
-     "label": "Financials",
-     "tip": "4 of 4 passed: revenue 20.05% (≥15); EPS 112.48% (≥20); op. margin 33.11% vs 32.68% a year ago; free cash flow positive",
-     "inputs": {
-      "revGrowthPct": 20.05,
-      "epsGrowthPct": 112.48,
-      "epsNote": null,
-      "opMarginPct": 33.11,
-      "opMarginPriorPct": 32.68,
-      "fcf": 53270000000.0,
-      "source": "stockanalysis.com TTM income statement",
-      "passed": [
-       "revenue",
-       "eps",
-       "margin",
-       "fcf"
-      ],
-      "unknown": []
-     }
-    }
-   ],
-   "selectionRank": 9,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "readiness",
-     "label": "readiness 52 (< 55)",
-     "tone": "warn"
-    },
-    {
-     "key": "rr",
-     "label": "R:R 1.44",
-     "tone": "warn"
-    }
-   ]
-  },
-  {
-   "tk": "SNAP",
-   "name": "Snap Inc.",
-   "industry": "Internet Content & Information",
-   "sector": "Communication Services",
-   "setup": "15-session base under the 15 Sep high, 4.8% below it",
-   "tags": "above SMA20/50/200 (stockanalysis)",
-   "pivot": 6.07,
-   "entryZone": "6.08 – 6.14",
-   "entry": 6.08,
-   "stop": 5.51,
-   "stopNote": "1x ATR14 below the close (last low 5.61)",
-   "target": 6.69,
-   "why": "Readiness 50 (tightness 10, proximity 11, volume dry-up 4, time in base 25). Closed 4.8% under its 15 Sep high after 15 sessions of base. Levels: stop 1x ATR14 below the close (5.51, risk 9.4% of the entry), fixed +10% target, R:R 1.07. Honest caveats: ADX(14) is 22.7, and price is above EMA9 (not in the EMA9 > price > EMA21 zone); 20-day average volume 33.08M against the 500K floor. Earnings 4 Nov is 21 sessions away (after the 20-session maximum hold).",
-   "trim": "Trim 25% at the first resistance on the way to the target.",
-   "cap": "$9.8B",
-   "avgVol": "33.08M",
-   "sma": [
-    4.03,
-    6.97,
-    3.03
-   ],
-   "rsi": 57.92,
-   "volW": 5.14,
-   "volM": 4.8,
-   "px": 5.78,
-   "pct": 3.03,
-   "closes": [
-    5.35,
-    5.59,
-    5.7,
-    5.47,
-    5.43,
-    5.31,
-    5.52,
-    5.68,
-    5.84,
-    5.83,
-    5.72,
-    5.65,
-    5.53,
-    5.7,
-    5.62,
-    5.29,
-    5.43,
-    5.42,
-    5.22,
-    5.34,
-    5.4,
-    5.65,
-    5.58,
-    5.61,
-    5.78
-   ],
-   "readiness": {
-    "composite": 50,
-    "tightness": 10,
-    "proximity": 11,
-    "volumeDryUp": 4,
-    "timeInBase": 25
-   },
-   "atr14": 0.264,
-   "adr20Pct": 4.796,
-   "emaCompression": false,
-   "adx14": 22.7,
-   "scoringVersion": "v2",
-   "flags": [],
-   "selectionRank": 10,
-   "selectionVersion": "tiered-v3",
-   "tier": "B",
-   "chips": [
-    {
-     "key": "readiness",
-     "label": "readiness 50 (< 55)",
-     "tone": "warn"
-    },
-    {
-     "key": "wide-stop",
-     "label": "wide stop (9.4%)",
-     "tone": "warn"
-    },
-    {
-     "key": "rr",
-     "label": "R:R 1.07",
-     "tone": "warn"
-    }
-   ]
-  }
- ],
- "pickWindow": "25 trading days to 6 Oct 2026, stockanalysis.com daily data",
- "selection": {
-  "version": "tiered-v3",
-  "scored": 44,
-  "qualified": 3,
-  "cut": 0,
-  "tierA": 3,
-  "tierB": 7,
-  "config": {
-   "minReadiness": 55,
-   "maxPicks": 10,
-   "minSessionsSincePivot": 2,
-   "maxBelowPivotPct": 5.0,
-   "stopMinAdr": 0.5,
-   "stopMinAtr": 1.0,
-   "maxRiskPct": 8.0,
-   "minRR": 1.5,
-   "targetPct": 10.0,
-   "earningsBlackoutSessions": 3,
-   "tierBMinReadiness": 45
-  },
-  "thresholds": {
-   "passing": {
-    "45": 5,
-    "55": 3,
-    "65": 2
-   },
-   "scores": [
-    69,
-    68,
-    67,
-    67,
-    58,
-    55,
-    54,
-    53,
-    52,
-    50,
-    46
-   ]
-  },
-  "headline": "3 of 44 scored names qualified (readiness ≥ 55)",
-  "universe": {
-   "considered": 119,
-   "passedFilters": 46,
-   "emaZone": 1,
-   "adxOver20": 23
-  },
-  "why": {
-   "scored": 44,
-   "byRule": {
-    "readiness": 38,
-    "base": 24,
-    "earnings": 33,
-    "proximity": 11,
-    "risk": 15,
-    "rr": 21
-   },
-   "readinessOk": 6,
-   "minReadiness": 55,
-   "blocked": [
-    {
-     "tk": "META",
-     "readiness": 69,
-     "rules": [
-      "proximity",
-      "risk",
-      "rr"
-     ]
-    },
-    {
-     "tk": "GDDY",
-     "readiness": 67,
-     "rules": [
-      "proximity",
-      "risk",
-      "rr"
-     ]
-    },
-    {
-     "tk": "ITT",
-     "readiness": 58,
-     "rules": [
-      "rr"
-     ]
-    }
-   ],
-   "blockedOnlyLevels": [
-    {
-     "tk": "META",
-     "readiness": 69,
-     "rules": [
-      "proximity",
-      "risk",
-      "rr"
-     ]
-    },
-    {
-     "tk": "GDDY",
-     "readiness": 67,
-     "rules": [
-      "proximity",
-      "risk",
-      "rr"
-     ]
-    },
-    {
-     "tk": "ITT",
-     "readiness": 58,
-     "rules": [
-      "rr"
-     ]
-    }
-   ]
-  },
-  "earningsUnverified": [
-   "AAOI",
-   "ARW",
-   "ASTS",
-   "BB",
-   "CIEN",
-   "CRWV",
-   "CSCO",
-   "EMR",
-   "FFIV",
-   "FTNT",
-   "GEV",
-   "GNRC",
-   "GTES",
-   "GTLB",
-   "HAFN",
-   "IOT",
-   "IR",
-   "LTM",
-   "MSFT",
-   "NBIS",
-   "NET",
-   "NTAP",
-   "NTNX",
-   "ORCL",
-   "PANW",
-   "QLYS",
-   "ROK",
-   "S",
-   "SNX",
-   "TWLO",
-   "VRNS",
-   "ZBRA",
-   "ZETA"
-  ]
- },
- "nearmiss": [
-  {
-   "tk": "NOK",
-   "px": 10.97,
-   "pct": 7.55,
-   "why": "Communication Equipment · readiness 46 · readiness 46 < 55"
-  },
-  {
-   "tk": "GNRC",
-   "px": 223.62,
-   "pct": 3.91,
-   "why": "Specialty Industrial Machinery · readiness 42 · readiness 42 < 55; risk 8.8% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 1.14 at the fixed +10% target (needs 1.5); earnings date unverified"
-  },
-  {
-   "tk": "LTM",
-   "px": 52.23,
-   "pct": 2.84,
-   "why": "Airlines · readiness 37 · readiness 37 < 55; risk 8.1% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 1.24 at the fixed +10% target (needs 1.5); earnings date unverified"
-  },
-  {
-   "tk": "SNX",
-   "px": 278.38,
-   "pct": 0.4,
-   "why": "Electronics & Computer Distribution · readiness 31 · readiness 31 < 55; close is 6.8% below the pivot (max 5%): not set up yet; risk 11.1% of the entry (max 8%) with the stop placed at 1x ATR14 below the close; R:R 0.90 at the fixed +10% target (needs 1.5); earnings date unverified"
-  },
-  {
-   "tk": "NTAP",
-   "px": 228.45,
-   "pct": 2.09,
-   "why": "Software - Infrastructure · readiness 28 · readiness 28 < 55; earnings date unverified"
-  },
-  {
-   "tk": "NTNX",
-   "px": 73.41,
-   "pct": 0.0,
-   "why": "Software - Infrastructure · readiness 27 · readiness 27 < 55; only 1 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  },
-  {
-   "tk": "AAOI",
-   "px": 130.16,
-   "pct": 7.07,
-   "why": "Communication Equipment · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  },
-  {
-   "tk": "BB",
-   "px": 9.58,
-   "pct": 5.51,
-   "why": "Software - Infrastructure · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; R:R 1.33 at the fixed +10% target (needs 1.5); earnings date unverified"
-  },
-  {
-   "tk": "CIEN",
-   "px": 443.65,
-   "pct": 13.85,
-   "why": "Communication Equipment · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  },
-  {
-   "tk": "CSCO",
-   "px": 117.94,
-   "pct": 4.54,
-   "why": "Communication Equipment · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  },
-  {
-   "tk": "FFIV",
-   "px": 469.79,
-   "pct": 2.46,
-   "why": "Software - Infrastructure · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  },
-  {
-   "tk": "FTNT",
-   "px": 191.27,
-   "pct": 3.88,
-   "why": "Software - Infrastructure · readiness 25 · readiness 25 < 55; only 0 session(s) since the pivot (need 2): same-day or too-fresh breakout; earnings date unverified"
-  }
- ],
- "screenNotes": [
-  {
-   "st": "ok",
-   "icon": "✓",
-   "html": "<b>Universe</b> · 119 names over $5B in the 9 industries (stockanalysis.com lists); 46 passed price &gt; $5, 20-day volume &gt; 500K, ADR20 &gt; 2%, above SMA20/50/200 and not &gt; 20% above SMA50."
-  },
-  {
-   "st": "ok",
-   "icon": "✓",
-   "html": "<b>EMA9 / ADX(14)</b> · computed from the daily bars for every candidate, shown on each card, but not gates (the scan has never gated on them): 1 of 46 would pass EMA9 &gt; price &gt; EMA21, 23 would pass ADX &gt; 20."
-  },
-  {
-   "st": "ok",
-   "icon": "✓",
-   "html": "<b>Selection</b> · 3 of 44 scored names qualified (readiness ≥ 55). Names passing at readiness 45 / 55 / 65: 5 / 3 / 2 (every rule applied)."
-  },
-  {
-   "st": "px",
-   "icon": "~",
-   "html": "<b>Earnings dates</b> · stockanalysis.com statistics page; a name with no verifiable date is rejected (\"earnings date unverified\")."
-  }
- ]
+ "meta": {
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-08T20:10:59+08:00",
+  "targetSession": "2026-10-08",
+  "lastSession": "2026-10-07"
+ }
 }
