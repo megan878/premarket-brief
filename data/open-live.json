@@ -1,70 +1,67 @@
 {
-  "asOf": "Wed 07 Oct 2026 · 09:43 ET · 21:43 HK",
-  "note": "Scheduled Market Open Update firing (hybrid, no-WebFetch). FMP for indices + stock quotes, WebSearch for QQQ, overnight news and index futures. QQQ and index futures both dropped this run; WebSearch results for sector/company news were unreliable (stale dates, mismatched figures, or conflicting analyst actions), matching the pattern noted in CLAUDE.md's known issues, so only one well cross-checked market item is published.",
-  "meta": { "schemaVersion": 1, "generatedAt": "2026-10-07T21:43:46+08:00", "targetSession": "2026-10-07", "lastSession": "2026-10-06" },
-  "sections": {
-    "indices": { "asOfUTC": "2026-10-07T13:42:00Z", "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX); QQQ omitted (WebSearch returned a stale ~$676 July 2026 print, wildly inconsistent with the brief's own ~$742 QQQ reference - dropped rather than published)" },
-    "futures": { "asOfUTC": null, "source": "" },
-    "quotes": { "asOfUTC": "2026-10-07T13:44:00Z", "source": "FMP company/profile-symbol" },
-    "news": { "asOfUTC": "2026-10-07T13:44:00Z", "source": "WebSearch" }
-  },
-  "indices": [
-    { "id": "SPX", "name": "S&P 500", "px": 7771.46, "pct": -0.6072, "prev": 7818.93 },
-    { "id": "DJI", "name": "Dow Jones", "px": 51046.82, "pct": -0.9209, "prev": 51521.28 },
-    { "id": "RUT", "name": "Russell 2000", "px": 2798.65723, "pct": -1.118, "prev": 2830.2974 },
-    { "id": "VIX", "name": "Volatility", "px": 15.88, "pct": -0.62578, "prev": 15.98 }
-  ],
-  "futures": {},
-  "quotes": {
-    "AVT": { "px": 105.08, "pct": -1.21275, "change": -1.29, "vol": 23344.3193, "avgVol": 1316339 },
-    "ZS": { "px": 213.375, "pct": 0.53004, "change": 1.125, "vol": 243001.06012, "avgVol": 4001633 },
-    "ETN": { "px": 433.43, "pct": -2.63719, "change": -11.74, "vol": 82527, "avgVol": 2216235 },
-    "META": { "px": 725.636, "pct": -1.79244, "change": -13.244, "vol": 1350859, "avgVol": 19509260 },
-    "GDDY": { "px": 98.165, "pct": -0.01527806, "change": -0.015, "vol": 22181, "avgVol": 2503391 },
-    "ITT": { "px": 204.885, "pct": -1.17928, "change": -2.445, "vol": 10923, "avgVol": 900565 },
-    "VRSN": { "px": 296.045, "pct": 1.00478, "change": 2.945, "vol": 722617.72177, "avgVol": 803839 },
-    "PLTR": { "px": 192.158, "pct": 0.04581911, "change": 0.08800476, "vol": 1909626, "avgVol": 37645336 },
-    "GOOGL": { "px": 343.47, "pct": -1.21088, "change": -4.21, "vol": 2418661, "avgVol": 30348303 },
-    "SNAP": { "px": 5.675, "pct": -1.81661, "change": -0.105, "vol": 900574, "avgVol": 39675030 },
-    "MCK": { "px": 929.16, "pct": 0.81266, "change": 7.49, "vol": 12311, "avgVol": 1000188 },
-    "CEG": { "px": 289.35, "pct": -3.67843, "change": -11.05, "vol": 904520.0903, "avgVol": 3267283 },
-    "TWLO": { "px": 276.56, "pct": -1.30964, "change": -3.67, "vol": 194028, "avgVol": 2780588 },
-    "NOK": { "px": 10.47, "pct": -4.55789, "change": -0.5, "vol": 8962902, "avgVol": 92120886 },
-    "GNRC": { "px": 220.53, "pct": -1.38181, "change": -3.09, "vol": 65047, "avgVol": 1138149 },
-    "LTM": { "px": 50.73, "pct": -2.87191, "change": -1.5, "vol": 15941, "avgVol": 783952 },
-    "SNX": { "px": 276.64, "pct": -0.62504, "change": -1.74, "vol": 18550, "avgVol": 880396 },
-    "NTAP": { "px": 234.06, "pct": 2.45568, "change": 5.61, "vol": 179687, "avgVol": 2954587 },
-    "NTNX": { "px": 74.0727, "pct": 0.90274, "change": 0.6627, "vol": 206302.25611, "avgVol": 3207962 },
-    "AAOI": { "px": 121.81, "pct": -6.41518, "change": -8.35, "vol": 1550716, "avgVol": 10601989 },
-    "BB": { "px": 9.345, "pct": -2.45303, "change": -0.235, "vol": 1328757, "avgVol": 23523477 },
-    "CIEN": { "px": 428.8301, "pct": -3.34045, "change": -14.8199, "vol": 379916, "avgVol": 2774279 },
-    "CSCO": { "px": 117.005, "pct": -0.79278, "change": -0.935, "vol": 1004471, "avgVol": 21623561 },
-    "FFIV": { "px": 468.97, "pct": -0.17455, "change": -0.82, "vol": 16646, "avgVol": 613327 },
-    "FTNT": { "px": 191.2548, "pct": -0.00794688, "change": -0.0152, "vol": 265784.43681, "avgVol": 5294135 }
-  },
-  "notes": {
-    "VIX": "FMP's own previousClose for ^VIX (15.01) does not match the brief's recorded Oct 6 VIX close (15.98), even though SPX/DJI/RUT all rolled forward correctly from the brief's own closes. Retried once - same value both times. The px (15.88) is plausible; the % change above is computed against the brief's own 15.98 reference (down ~0.6%), not FMP's own 15.01 reference (which implies +5.8%) - treat the sign/size of VIX's move with caution this run.",
-    "CEG": "Down 3.7% today per FMP. WebSearch surfaced a Morgan Stanley price-target-cut-and-weak-2026-guidance story, but a second search could not reconcile it: Morgan Stanley actually raised its CEG target in mid-September, and the Oct target cut found elsewhere was from BMO Capital (to $350 from $379, dated 2 Oct, already stale). No fresh, dated, two-source catalyst could be confirmed for today's move - flagging it as unexplained rather than guessing a cause.",
-    "AAOI": "Down 6.4% today per FMP, a sharp reversal after a 205%-YTD run. WebSearch results were all general AI-optics-momentum commentary with no date pinned to today (6-7 Oct) and no specific negative catalyst - dropped as not current enough to explain today's drop.",
-    "NOK": "Down 4.6% today per FMP. WebSearch found only generic valuation/execution-risk commentary ahead of the 22 Oct Q3 earnings date, nothing dated to today - dropped for the same reason as AAOI."
-  },
-  "news": [
-    {
-      "tag": "Macro",
-      "top3": false,
-      "title": "Stocks dip at the open as market awaits today's FOMC minutes",
-      "text": "US stocks opened lower Wednesday (7 Oct), giving back part of Tuesday's record close, with the Dow off ~0.9%, S&P 500 ~0.6% and Russell 2000 ~1.1% in the first 15 minutes - broad-based, not sector-specific. The Fed releases minutes from its 16 Sep meeting at 2:00pm ET today, the first since the 25bp cut; investors are positioning ahead of it rather than reacting to a specific headline.",
-      "names": [],
-      "sources": [
-        { "t": "TheStreet", "u": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-07-2026" },
-        { "t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-7-dow-sp-500-nasdaq-080241833.html" }
-      ]
-    }
-  ],
-  "footnotes": [
-    "QQQ (NDX proxy) omitted again this run: the only WebSearch result returned a ~$676.70 print dated late July 2026 - obviously stale and inconsistent with the brief's own ~$742 QQQ reference - so left out rather than published with a wrong number.",
-    "Index futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned only generic explainer pages and historical examples from other dates, no current premarket quotes for today - FMP has no CME index-futures data on this plan at all (confirmed previously: ACCESS DENIED on both quote and commodity endpoints).",
-    "Overnight/sector news was again hard to pin to today: a Constellation Energy (CEG) price-target/guidance story, an Applied Optoelectronics (AAOI) story and a Nokia (NOK) story were all found but none reconciled to a dated, two-source event for today's session (see per-ticker notes) and were dropped rather than published as unverified causes for today's moves.",
-    "FMP's index-quote and company/profile-symbol endpoints do not accept comma-separated symbol lists on this plan; each of the 4 indices and 25 watchlist tickers was fetched individually."
-  ]
+ "asOf": "Thu 08 Oct 2026 · 09:44 ET · 21:44 HK",
+ "note": "14 minutes after the US open. FMP for indices and all 24 watch-list quotes; WebSearch could not produce a reconcilable QQQ price or any ES/NQ/YM/RTY futures quote for today, so both are omitted rather than guessed. Overnight/sector news repeatedly failed to reconcile to a dated, two-source story for today (same pattern as prior runs) except one macro item, which corroborates against FMP's own index moves.",
+ "meta": {"schemaVersion": 1},
+ "sections": {
+  "indices": {"asOfUTC": "2026-10-08T13:44:53Z", "source": "FMP index-quote (^GSPC, ^DJI, ^RUT, ^VIX); QQQ omitted, no reconcilable WebSearch price for today"},
+  "futures": {"asOfUTC": "2026-10-08T13:40:00Z", "source": "WebSearch only - no current, reconcilable ES/NQ/YM/RTY quote found for today's session; omitted rather than guessed (FMP has no CME index-futures data on this plan)"},
+  "quotes": {"asOfUTC": "2026-10-08T13:45:00Z", "source": "FMP company/profile-symbol, one call per ticker (24 tickers from the brief's watch groups)"},
+  "news": {"asOfUTC": "2026-10-08T13:40:00Z", "source": "WebSearch"}
+ },
+ "indices": [
+  {"id": "SPX", "name": "S&P 500", "px": 7775.14, "pct": -0.34133, "prev": 7801.77},
+  {"id": "DJI", "name": "Dow Jones", "px": 51086.62, "pct": -0.1822, "prev": 51179.87},
+  {"id": "RUT", "name": "Russell 2000", "px": 2775.97774, "pct": -0.61672, "prev": 2793.20391},
+  {"id": "VIX", "name": "Volatility", "px": 15.45, "pct": 2.45358, "prev": 15.08}
+ ],
+ "futures": {},
+ "quotes": {
+  "AVT": {"px": 102.0523, "pct": -0.46591, "change": -0.4777, "vol": 47414.37694, "avgVol": 1309610},
+  "ZS": {"px": 214.145, "pct": 0.27862, "change": 0.595, "vol": 142201, "avgVol": 3316002},
+  "ETN": {"px": 426.23, "pct": -1.18239, "change": -5.1, "vol": 62270, "avgVol": 2208165},
+  "META": {"px": 720.65, "pct": -0.09150019, "change": -0.66, "vol": 2625713, "avgVol": 19462490},
+  "GDDY": {"px": 99.45, "pct": 2.30429, "change": 2.24, "vol": 65919, "avgVol": 2485608},
+  "ITT": {"px": 197.97, "pct": -1.20765, "change": -2.42, "vol": 8851, "avgVol": 898795},
+  "VRSN": {"px": 295.6388, "pct": 0.48222, "change": 1.4188, "vol": 16704.03674, "avgVol": 802863},
+  "PLTR": {"px": 197.73, "pct": 1.85967, "change": 3.61, "vol": 11118500, "avgVol": 37262737},
+  "GOOGL": {"px": 352.22, "pct": 0.49073, "change": 1.72, "vol": 4015251, "avgVol": 30285616},
+  "SNAP": {"px": 5.7901, "pct": -0.34251, "change": -0.0198999, "vol": 940584, "avgVol": 38869708},
+  "MCK": {"px": 910.4, "pct": 0.00768952, "change": 0.07, "vol": 20055, "avgVol": 991637},
+  "TWLO": {"px": 276.0137, "pct": 1.10392, "change": 3.0137, "vol": 77629, "avgVol": 2776307},
+  "NOK": {"px": 10.3899, "pct": -2.16667, "change": -0.2301, "vol": 5514121, "avgVol": 91812137},
+  "GNRC": {"px": 224, "pct": 1.20177, "change": 2.66, "vol": 206104, "avgVol": 1141993},
+  "LTM": {"px": 50.41, "pct": -1.09869, "change": -0.56, "vol": 18914, "avgVol": 779525},
+  "SNX": {"px": 267.96, "pct": -1.31114, "change": -3.56, "vol": 13311, "avgVol": 880396},
+  "NTAP": {"px": 233.75999, "pct": -0.85253, "change": -2.01001, "vol": 95687, "avgVol": 2919105},
+  "NTNX": {"px": 73.552, "pct": 0.17979, "change": 0.132, "vol": 32507.52075, "avgVol": 3154106},
+  "AAOI": {"px": 119.035, "pct": -2.86029, "change": -3.505, "vol": 1763784, "avgVol": 10629842},
+  "BB": {"px": 8.87, "pct": 1.14025, "change": 0.1, "vol": 1667414, "avgVol": 23523862},
+  "CIEN": {"px": 441.05499, "pct": -1.20842, "change": -5.39501, "vol": 230847, "avgVol": 2768846},
+  "CSCO": {"px": 116.67, "pct": -0.61334, "change": -0.72, "vol": 667377.64907, "avgVol": 21628078},
+  "FFIV": {"px": 466.91, "pct": 0.05571628, "change": 0.26, "vol": 8717, "avgVol": 604721},
+  "FTNT": {"px": 189.72, "pct": 0.23246, "change": 0.44, "vol": 129525.03588, "avgVol": 5276778}
+ },
+ "notes": {
+  "MCK": "Flat (+0.01%) 14 minutes into the session; no fresh update to the McKesson/CVS distribution-deal catalyst found today.",
+  "TWLO": "+1.1%, continuing to digest its S&P 500 index-add (effective 6 Oct); no new news found.",
+  "AAOI": "-2.9%, a second day down after yesterday's sharp reversal; no dated catalyst found today, same as the prior run's note.",
+  "NOK": "-2.2% this morning; no dated catalyst found today."
+ },
+ "news": [
+  {
+   "tag": "Macro",
+   "top3": false,
+   "title": "Stocks open lower as oil's rise revives inflation worries",
+   "text": "US stocks opened down Thursday as crude oil climbed on Middle East supply concerns, reviving inflation worries and tempering some earlier earnings optimism; Dow ~-0.2%, S&P 500 ~-0.3%, Russell 2000 ~-0.6% in the opening minutes, broad-based rather than sector-specific. The 10-year Treasury yield was quoted near 5.31% in an early-session snapshot. This matches the magnitude and direction of FMP's own live index quotes used above (SPX -0.34%, DJI -0.18%, RUT -0.62%).",
+   "names": [],
+   "sources": [
+    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-october-8-dow-sp-500-nasdaq-080537884.html"}
+   ]
+  }
+ ],
+ "footnotes": [
+  "QQQ (NDX proxy) omitted: no WebSearch result returned a current, dated October 8 price for QQQ that reconciled against a second source - several queries returned stale 2025/mid-2026 figures or undated snapshot pages.",
+  "Index futures (ES/NQ/YM/RTY) omitted: WebSearch turned up only undated dashboard snapshots and stale (2-6 Oct) morning-preview editions whose figures disagreed with each other - no reconcilable two-source quote for today's session (FMP has no CME index-futures data on this plan at all, confirmed previously).",
+  "Overnight/sector news: repeated targeted searches (technology-sector movers, Communication Services names, individual watch-list tickers AAOI/NOK/CEG-adjacent, oil/Fed-minutes follow-through) found nothing that reconciled to a dated, two-source story for today beyond the one macro item above - most results were undated or from other dates/years. Published that one item rather than guessing at causes for today's moves, same approach as the prior run's notes."
+ ]
 }
