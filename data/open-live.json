@@ -1,67 +1,52 @@
 {
- "asOf": "Thu 08 Oct 2026 · 09:44 ET · 21:44 HK",
- "note": "14 minutes after the US open. FMP for indices and all 24 watch-list quotes; WebSearch could not produce a reconcilable QQQ price or any ES/NQ/YM/RTY futures quote for today, so both are omitted rather than guessed. Overnight/sector news repeatedly failed to reconcile to a dated, two-source story for today (same pattern as prior runs) except one macro item, which corroborates against FMP's own index moves.",
+ "asOf": "placeholder",
+ "note": "11 minutes before the US open. FMP for indices and all 23 watch-list quotes (technical picks + the one current catalyst alert + near-misses). WebSearch could not produce a reconcilable QQQ price, any ES/NQ/YM/RTY futures quote, or a single dated/two-source overnight news item for today (6 targeted searches, including per-ticker searches on the largest movers AVT/CIEN/AAOI/ETN) - all three sections omitted rather than guessed, per the no-invent rule.",
  "meta": {"schemaVersion": 1},
- "sections": {
-  "indices": {"asOfUTC": "2026-10-08T13:44:53Z", "source": "FMP index-quote (^GSPC, ^DJI, ^RUT, ^VIX); QQQ omitted, no reconcilable WebSearch price for today"},
-  "futures": {"asOfUTC": "2026-10-08T13:40:00Z", "source": "WebSearch only - no current, reconcilable ES/NQ/YM/RTY quote found for today's session; omitted rather than guessed (FMP has no CME index-futures data on this plan)"},
-  "quotes": {"asOfUTC": "2026-10-08T13:45:00Z", "source": "FMP company/profile-symbol, one call per ticker (24 tickers from the brief's watch groups)"},
-  "news": {"asOfUTC": "2026-10-08T13:40:00Z", "source": "WebSearch"}
- },
  "indices": [
-  {"id": "SPX", "name": "S&P 500", "px": 7775.14, "pct": -0.34133, "prev": 7801.77},
-  {"id": "DJI", "name": "Dow Jones", "px": 51086.62, "pct": -0.1822, "prev": 51179.87},
-  {"id": "RUT", "name": "Russell 2000", "px": 2775.97774, "pct": -0.61672, "prev": 2793.20391},
-  {"id": "VIX", "name": "Volatility", "px": 15.45, "pct": 2.45358, "prev": 15.08}
+  {"id": "SPX", "name": "S&P 500", "px": 7793.39, "pct": 0.36096, "prev": 7765.36},
+  {"id": "DJI", "name": "Dow Jones", "px": 51356.63, "pct": 0.24397, "prev": 51231.64},
+  {"id": "RUT", "name": "Russell 2000", "px": 2802.20789, "pct": 0.28917, "prev": 2794.12803},
+  {"id": "VIX", "name": "Volatility", "px": 15.07, "pct": -2.20636, "prev": 15.41}
  ],
- "futures": {},
  "quotes": {
-  "AVT": {"px": 102.0523, "pct": -0.46591, "change": -0.4777, "vol": 47414.37694, "avgVol": 1309610},
-  "ZS": {"px": 214.145, "pct": 0.27862, "change": 0.595, "vol": 142201, "avgVol": 3316002},
-  "ETN": {"px": 426.23, "pct": -1.18239, "change": -5.1, "vol": 62270, "avgVol": 2208165},
-  "META": {"px": 720.65, "pct": -0.09150019, "change": -0.66, "vol": 2625713, "avgVol": 19462490},
-  "GDDY": {"px": 99.45, "pct": 2.30429, "change": 2.24, "vol": 65919, "avgVol": 2485608},
-  "ITT": {"px": 197.97, "pct": -1.20765, "change": -2.42, "vol": 8851, "avgVol": 898795},
-  "VRSN": {"px": 295.6388, "pct": 0.48222, "change": 1.4188, "vol": 16704.03674, "avgVol": 802863},
-  "PLTR": {"px": 197.73, "pct": 1.85967, "change": 3.61, "vol": 11118500, "avgVol": 37262737},
-  "GOOGL": {"px": 352.22, "pct": 0.49073, "change": 1.72, "vol": 4015251, "avgVol": 30285616},
-  "SNAP": {"px": 5.7901, "pct": -0.34251, "change": -0.0198999, "vol": 940584, "avgVol": 38869708},
-  "MCK": {"px": 910.4, "pct": 0.00768952, "change": 0.07, "vol": 20055, "avgVol": 991637},
-  "TWLO": {"px": 276.0137, "pct": 1.10392, "change": 3.0137, "vol": 77629, "avgVol": 2776307},
-  "NOK": {"px": 10.3899, "pct": -2.16667, "change": -0.2301, "vol": 5514121, "avgVol": 91812137},
-  "GNRC": {"px": 224, "pct": 1.20177, "change": 2.66, "vol": 206104, "avgVol": 1141993},
-  "LTM": {"px": 50.41, "pct": -1.09869, "change": -0.56, "vol": 18914, "avgVol": 779525},
-  "SNX": {"px": 267.96, "pct": -1.31114, "change": -3.56, "vol": 13311, "avgVol": 880396},
-  "NTAP": {"px": 233.75999, "pct": -0.85253, "change": -2.01001, "vol": 95687, "avgVol": 2919105},
-  "NTNX": {"px": 73.552, "pct": 0.17979, "change": 0.132, "vol": 32507.52075, "avgVol": 3154106},
-  "AAOI": {"px": 119.035, "pct": -2.86029, "change": -3.505, "vol": 1763784, "avgVol": 10629842},
-  "BB": {"px": 8.87, "pct": 1.14025, "change": 0.1, "vol": 1667414, "avgVol": 23523862},
-  "CIEN": {"px": 441.05499, "pct": -1.20842, "change": -5.39501, "vol": 230847, "avgVol": 2768846},
-  "CSCO": {"px": 116.67, "pct": -0.61334, "change": -0.72, "vol": 667377.64907, "avgVol": 21628078},
-  "FFIV": {"px": 466.91, "pct": 0.05571628, "change": 0.26, "vol": 8717, "avgVol": 604721},
-  "FTNT": {"px": 189.72, "pct": 0.23246, "change": 0.44, "vol": 129525.03588, "avgVol": 5276778}
+  "AVT": {"px": 100.2, "pct": 0.64283, "vol": 24178, "avgVol": 1297973, "change": 0.64},
+  "ZS": {"px": 221.635, "pct": 2.22545, "vol": 353635.79351, "avgVol": 3242352, "change": 4.825},
+  "ETN": {"px": 426.425, "pct": 0.45111, "vol": 78142, "avgVol": 2190483, "change": 1.915},
+  "META": {"px": 718.84003, "pct": -0.28437, "vol": 1376910, "avgVol": 19389436, "change": -2.04997},
+  "GDDY": {"px": 103.73, "pct": 0.52331, "vol": 26579, "avgVol": 2306976, "change": 0.54},
+  "ITT": {"px": 198.94, "pct": 0.12079, "vol": 22654, "avgVol": 893500, "change": 0.24},
+  "VRSN": {"px": 301.11, "pct": 1.11488, "vol": 11731.33589, "avgVol": 814338, "change": 3.32},
+  "PLTR": {"px": 200.45, "pct": 0.84012, "vol": 4354263, "avgVol": 36413099, "change": 1.67},
+  "GOOGL": {"px": 351.91, "pct": 1.03936, "vol": 1801752, "avgVol": 30024458, "change": 3.62},
+  "SNAP": {"px": 6.075, "pct": 3.58056, "vol": 3309006, "avgVol": 38758020, "change": 0.21},
+  "TWLO": {"px": 278.36499, "pct": 0.941, "vol": 57067, "avgVol": 2715995, "change": 2.59499},
+  "NOK": {"px": 10.4, "pct": 2.5641, "vol": 10902450, "avgVol": 91373395, "change": 0.26},
+  "GNRC": {"px": 225.57001, "pct": 0.52139, "vol": 73561, "avgVol": 1142758, "change": 1.17001},
+  "LTM": {"px": 49.88, "pct": -1.11023, "vol": 51525, "avgVol": 775547, "change": -0.56},
+  "SNX": {"px": 267.46, "pct": -0.16825, "vol": 12001, "avgVol": 867341, "change": 0},
+  "NTAP": {"px": 232.21, "pct": 0.72876, "vol": 86280, "avgVol": 2775687, "change": 1.68},
+  "NTNX": {"px": 73.365, "pct": 0.34879, "vol": 90877.7741, "avgVol": 3105656, "change": 0.255},
+  "AAOI": {"px": 115.14, "pct": 8.72521, "vol": 3412469, "avgVol": 10616995, "change": 9.24},
+  "BB": {"px": 8.6701, "pct": 0.46466, "vol": 836761, "avgVol": 23240740, "change": 0.0401},
+  "CIEN": {"px": 443.27, "pct": 4.07109, "vol": 184672, "avgVol": 2777849, "change": 17.34},
+  "CSCO": {"px": 116.06, "pct": 1.01837, "vol": 587429, "avgVol": 21351234, "change": 1.17},
+  "FFIV": {"px": 465.5, "pct": 0.83178, "vol": 9573, "avgVol": 591321, "change": 3.84},
+  "FTNT": {"px": 190.94, "pct": 0.97303, "vol": 77081.46544, "avgVol": 5212644, "change": 1.84}
  },
  "notes": {
-  "MCK": "Flat (+0.01%) 14 minutes into the session; no fresh update to the McKesson/CVS distribution-deal catalyst found today.",
-  "TWLO": "+1.1%, continuing to digest its S&P 500 index-add (effective 6 Oct); no new news found.",
-  "AAOI": "-2.9%, a second day down after yesterday's sharp reversal; no dated catalyst found today, same as the prior run's note.",
-  "NOK": "-2.2% this morning; no dated catalyst found today."
+  "AVT": "FMP premarket quote implies a ~5.8% gap below Wed's close (106.37) with no dated news found explaining it (WebSearch on AVT turned up only conflicting/undated prices, an Aug Truist target raise, and a 29 Oct earnings date) - flagged for extra scrutiny.",
+  "ETN": "FMP premarket quote implies a drop from Wed's close (445.09); WebSearch found no October-dated news, only September pullback coverage - flagged for extra scrutiny.",
+  "ITT": "FMP premarket quote implies a drop from Wed's close (207.31); no dated news found today.",
+  "CIEN": "+4.1% in FMP's premarket quote; WebSearch found a 13.8% move on 6 Oct (AI-networking sector enthusiasm, no company-specific news) but nothing dated to today.",
+  "AAOI": "+8.7% in FMP's premarket quote; WebSearch found only an Oct 1 up-205%-YTD piece and an Aug equity-offering story, nothing dated to today."
  },
- "news": [
-  {
-   "tag": "Macro",
-   "top3": false,
-   "title": "Stocks open lower as oil's rise revives inflation worries",
-   "text": "US stocks opened down Thursday as crude oil climbed on Middle East supply concerns, reviving inflation worries and tempering some earlier earnings optimism; Dow ~-0.2%, S&P 500 ~-0.3%, Russell 2000 ~-0.6% in the opening minutes, broad-based rather than sector-specific. The 10-year Treasury yield was quoted near 5.31% in an early-session snapshot. This matches the magnitude and direction of FMP's own live index quotes used above (SPX -0.34%, DJI -0.18%, RUT -0.62%).",
-   "names": [],
-   "sources": [
-    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-october-8-dow-sp-500-nasdaq-080537884.html"}
-   ]
-  }
- ],
  "footnotes": [
-  "QQQ (NDX proxy) omitted: no WebSearch result returned a current, dated October 8 price for QQQ that reconciled against a second source - several queries returned stale 2025/mid-2026 figures or undated snapshot pages.",
-  "Index futures (ES/NQ/YM/RTY) omitted: WebSearch turned up only undated dashboard snapshots and stale (2-6 Oct) morning-preview editions whose figures disagreed with each other - no reconcilable two-source quote for today's session (FMP has no CME index-futures data on this plan at all, confirmed previously).",
-  "Overnight/sector news: repeated targeted searches (technology-sector movers, Communication Services names, individual watch-list tickers AAOI/NOK/CEG-adjacent, oil/Fed-minutes follow-through) found nothing that reconciled to a dated, two-source story for today beyond the one macro item above - most results were undated or from other dates/years. Published that one item rather than guessing at causes for today's moves, same approach as the prior run's notes."
- ]
+  "QQQ (NDX proxy) omitted: 3 WebSearch queries for a current, dated Oct 9 QQQ price returned only stale figures from Jun-Aug 2026, undated snapshots, or mutually conflicting prices - no reconcilable two-source quote for today.",
+  "Index futures (ES/NQ/YM/RTY) omitted: WebSearch turned up only undated live-futures-tool snippets and an Oct 7 morning-preview edition - no reconcilable, dated two-source quote for today's session (FMP has no CME index-futures data on this plan at all, confirmed previously).",
+  "Overnight/sector news omitted: 6 targeted searches (general market, oil/Middle East, and per-ticker on the largest premarket movers AVT/CIEN/AAOI/ETN) found nothing dated to Oct 9 with two independent sources - most results were undated aggregator pages or from earlier October sessions (6-7 Oct). Several FMP quotes (AVT, ETN, ITT down; GDDY, PLTR, CIEN, AAOI up, all several percent) show real premarket moves with no verifiable cause found - published as quotes only, with a note on the largest unexplained movers, rather than guessing at a cause."
+ ],
+ "sections": {
+  "indices": {"asOfUTC": "2026-10-09T13:41:00Z", "source": "FMP indexes/index-quote (^GSPC, ^DJI, ^RUT, ^VIX)"},
+  "quotes": {"asOfUTC": "2026-10-09T13:43:00Z", "source": "FMP company/profile-symbol, one call per ticker (23 tickers from the brief's watch groups: 10 technical picks, 1 catalyst alert, 12 near-misses)"}
+ }
 }
