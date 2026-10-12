@@ -1,272 +1,230 @@
 {
- "source": "FMP + WebSearch (automated) + Finviz groups/stockanalysis.com (interactive refresh)",
- "notices": [
-  "VIX: FMP's live index-quote returned a pre-market print (15.15, timestamp Oct 9 07:49 ET, pre-open) rather than a settled close. Per the closes-only rule, the tile and regime check use Thu 8 Oct's official close (15.41, confirmed via FMP's EOD history endpoint, previousClose field on the live quote agreed exactly) instead of that live print.",
-  "QQQ: Yahoo Finance's live quote (747.58, -1.34%, close 4:00pm ET Oct 8) and Yahoo's own historical-prices table (747.42) reconciled within 0.02%; the implied prior close (757.73) also matches last run's QQQ figure exactly, so the tile is refreshed. Could not locate a second, independent (non-Yahoo) source this run despite several attempts — flagged for extra scrutiny at the next interactive refresh.",
-  "Catalysts: McKesson's 1 Oct CVS distribution-deal extension is now 6 trading sessions back and dropped as stale (same treatment as Constellation Energy on 7 Oct). Twilio (6 Oct) remains inside the last-5-session window and is re-priced below. Searched for new beat-and-raise, contract, upgrade and approval stories dated 2-8 Oct; nothing cleared the two-source / dated-event bar — a Lumentum 'sold out' demand headline and a Humana '2027 star ratings' headline were considered and rejected as unverified (see rejected). No catalyst alerts qualify this run; zero is a valid result — none invented to fill the 3-4 target.",
-  "No FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct); the Fed block is unchanged from 16 Sep with only the Treasury yields refreshed (now 5 sessions through 8 Oct).",
-  "Technical scan, sector ranking and industry drill-down remain pinned from the interactive refresh on Wed 7 Oct (data to the 6 Oct close); this routine has no WebFetch and does not touch them."
- ],
- "rejected": [
-  "<b>McKesson (MCK)</b> · 1 Oct CVS distribution-deal catalyst is now 6 trading sessions back, outside the last-5-session window as of this run. Dropped (stale, not a rejection of the facts).",
-  "<b>Lumentum (LITE)</b> · Premarket-mover coverage (9 Oct) framed a CEO demand comment as optical components \"sold out through 2029\"; deeper search found the underlying comment dated across three different sources to 2027, 2028 and 2029 with no single reconcilable figure, and the 2029 date actually traces to Nvidia's separate purchase-commitment timeline, not the CEO's sell-out remark — rejected as unverified/garbled.",
-  "<b>Humana (HUM)</b> · Premarket-mover coverage (9 Oct) attributed a rally to \"2027 Medicare Advantage star ratings\"; no primary source for a 2027 star-ratings release this week could be found — the dated stories that did surface describe different events (weaker 2026 ratings in Oct 2025; a 2027 payment-rate update in Apr 2026) — rejected as unverified/date mismatch."
- ],
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "q": {
-    "price": 7765.36,
-    "change": -36.41,
-    "pct": -0.46669,
-    "dayLow": 7731.26,
-    "dayHigh": 7797.79,
-    "yearHigh": 7844.52,
-    "yearLow": 6316.91,
-    "ma50": 7680.456,
-    "ma200": 7241.3096
-   }
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones Industrial Average",
-   "q": {
-    "price": 51231.64,
-    "change": 51.77,
-    "pct": 0.10115,
-    "dayLow": 50939,
-    "dayHigh": 51245.28,
-    "yearHigh": 54744.33,
-    "yearLow": 45057.28,
-    "ma50": 52644.598,
-    "ma200": 50340.207
-   }
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "q": {
-    "price": 2794.1282,
-    "change": 0.9242,
-    "pct": 0.03309,
-    "dayLow": 2762.5806,
-    "dayHigh": 2795.38195,
-    "yearHigh": 3069.71,
-    "yearLow": 2303.46,
-    "ma50": 2936.0361,
-    "ma200": 2786.31
-   }
-  },
-  {
-   "id": "VIX",
-   "name": "CBOE Volatility Index",
-   "q": {
-    "price": 15.41,
-    "change": 0.33,
-    "pct": 2.1882,
-    "dayLow": 15.15,
-    "dayHigh": 16.46,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 15.5118,
-    "ma200": 18.06115
-   }
-  },
-  {
-   "id": "QQQ",
-   "name": "Invesco QQQ Trust",
-   "proxyFor": "NDX",
-   "q": {
-    "price": 747.58,
-    "change": -10.15,
-    "pct": -1.34
-   },
-   "src": "WebSearch: Yahoo Finance close 747.58 (-1.34%), cross-checked vs Yahoo's own historical-prices table 747.42 (agree within 0.02%); implied prior close 757.73 matches last run's figure — approximate, search-sourced, single-provider this run"
-  }
- ],
- "macro": {
-  "date": "2026-10-08",
-  "y10": 5.22,
-  "y10prev": 5.28,
-  "y2": 4.75,
-  "y30": 5.6,
-  "y10path": "5.28% on 2 Oct, 5.31% on 5 Oct, 5.27% on 6 Oct, 5.28% on 7 Oct, 5.22% on 8 Oct",
-  "fed": {
-   "range": "3.75–4.00%",
-   "move": "25 bp",
-   "date": "16 Sep",
-   "vote": "12–0",
-   "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
-   "sources": [
+  "indices": [
     {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+      "id": "SPX",
+      "name": "S&P 500",
+      "q": {
+        "price": 7811.54,
+        "change": 46.18,
+        "pct": 0.59469,
+        "dayLow": 7779.34,
+        "dayHigh": 7820.57,
+        "yearHigh": 7844.52,
+        "yearLow": 6316.91,
+        "ma50": 7696.9185,
+        "ma200": 7250.629
+      }
     },
     {
-     "t": "CNN",
-     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+      "id": "DJI",
+      "name": "Dow Jones Industrial Average",
+      "q": {
+        "price": 51654.95,
+        "change": 423.31,
+        "pct": 0.82627,
+        "dayLow": 51258.95,
+        "dayHigh": 51765.11,
+        "yearHigh": 54744.33,
+        "yearLow": 45057.28,
+        "ma50": 52633.535,
+        "ma200": 50356.668
+      }
     },
     {
-     "t": "Advisor Perspectives",
-     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+      "id": "RUT",
+      "name": "Russell 2000",
+      "q": {
+        "price": 2806.9814,
+        "change": 12.8514,
+        "pct": 0.45994,
+        "dayLow": 2795.5413,
+        "dayHigh": 2814.006,
+        "yearHigh": 3069.71,
+        "yearLow": 2303.46,
+        "ma50": 2931.0103,
+        "ma200": 2788.8748
+      }
     },
     {
-     "t": "Schwab",
-     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+      "id": "VIX",
+      "name": "CBOE Volatility Index",
+      "q": {
+        "price": 14.84,
+        "change": -0.57,
+        "pct": -3.6989,
+        "dayLow": 14.77,
+        "dayHigh": 15.34,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 15.4888,
+        "ma200": 18.068
+      }
+    },
+    {
+      "id": "QQQ",
+      "name": "Invesco QQQ Trust",
+      "proxyFor": "NDX",
+      "q": {
+        "price": 751.27,
+        "change": 3.69,
+        "pct": 0.49
+      },
+      "src": "WebSearch: Yahoo Finance close 751.27 (+0.49%, Oct 9), cross-checked vs Investing.com historical data (751.27, open 752.55, range 748.36-752.87) — two independent sources agree exactly; implied prior close 747.58 matches last run's QQQ figure exactly"
     }
-   ]
-  },
-  "y10hist": [
-   {
-    "date": "2026-10-02",
-    "y10": 5.28
-   },
-   {
-    "date": "2026-10-05",
-    "y10": 5.31
-   },
-   {
-    "date": "2026-10-06",
-    "y10": 5.27
-   },
-   {
-    "date": "2026-10-07",
-    "y10": 5.28
-   },
-   {
-    "date": "2026-10-08",
-    "y10": 5.22
-   }
-  ]
- },
- "catalysts": [
-  {
-   "tk": "TWLO",
-   "name": "Twilio Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "ctype": "Index add",
-   "cdate": "6 Oct",
-   "cdateISO": "2026-10-06",
-   "what": "Twilio replaced Warner Bros. Discovery in the S&P 500 effective before the open on 6 Oct (WBD is being removed as Paramount Skydance's acquisition of it nears close); Formfactor moves up to take Twilio's old S&P MidCap 400 slot.",
-   "sources": [
-    {
-     "t": "S&P Dow Jones Indices press release",
-     "u": "https://press.spglobal.com/2026-10-01-Vylor-Added-to-the-S-P-500-Twilio-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"
-    },
-    {
-     "t": "Stocktwits",
-     "u": "https://stocktwits.com/news-articles/markets/equity/vylor-takes-corteva-s-s-and-p-500-seat-twilio-set-to-replace-warner-bros-discovery-both-stocks-rise-after-hours/cZD0kNsRB0K"
-    }
-   ],
-   "cap": "$41.9B",
-   "px": 275.77,
-   "pct": 1.01,
-   "topSector": true
-  }
- ],
- "bg": {
-  "TWLO": {
-   "cap": "$41.9B",
-   "what": "Cloud communications platform providing APIs for voice, messaging, video and email that let developers embed customer-engagement features directly into their own software."
-  }
- },
- "sections": {
-  "indices": {
-   "asOf": "2026-10-08",
-   "source": "FMP index-quote (^GSPC/^DJI/^RUT); VIX via FMP EOD history (live quote was a pre-market print, not the close); QQQ via WebSearch (Yahoo Finance, cross-checked against its own historical-prices table)"
-  },
+  ],
   "macro": {
-   "asOf": "2026-10-08",
-   "source": "FMP economics/treasury-rates (5 sessions through 8 Oct); Fed decision via WebSearch, unchanged (no FOMC in window)"
+    "date": "2026-10-09",
+    "y10": 5.24,
+    "y10prev": 5.22,
+    "y2": 4.8,
+    "y30": 5.6,
+    "y10path": "5.31% on 5 Oct, 5.27% on 6 Oct, 5.28% on 7 Oct, 5.22% on 8 Oct, 5.24% on 9 Oct",
+    "fed": {
+      "range": "3.75–4.00%",
+      "move": "25 bp",
+      "date": "16 Sep",
+      "vote": "12–0",
+      "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
+      "sources": [
+        {
+          "t": "CNBC",
+          "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+        },
+        {
+          "t": "CNN",
+          "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+        },
+        {
+          "t": "Advisor Perspectives",
+          "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+        },
+        {
+          "t": "Schwab",
+          "u": "https://www.schwab.com/learn/story/fomc-meeting"
+        }
+      ]
+    },
+    "y10hist": [
+      { "date": "2026-10-05", "y10": 5.31 },
+      { "date": "2026-10-06", "y10": 5.27 },
+      { "date": "2026-10-07", "y10": 5.28 },
+      { "date": "2026-10-08", "y10": 5.22 },
+      { "date": "2026-10-09", "y10": 5.24 }
+    ]
   },
-  "catalysts": {
-   "asOf": "2026-10-08",
-   "source": "WebSearch (2+ sources each) + FMP company/profile-symbol live quotes"
+  "catalysts": [
+    {
+      "tk": "TWLO",
+      "name": "Twilio Inc.",
+      "industry": "Software - Infrastructure",
+      "sector": "Technology",
+      "ctype": "Index add",
+      "cdate": "6 Oct",
+      "cdateISO": "2026-10-06",
+      "what": "Twilio replaced Warner Bros. Discovery in the S&P 500 effective before the open on 6 Oct (WBD is being removed as Paramount Skydance's acquisition of it nears close); Formfactor moves up to take Twilio's old S&P MidCap 400 slot.",
+      "sources": [
+        {
+          "t": "S&P Dow Jones Indices (press release)",
+          "u": "https://press.spglobal.com/2026-10-01-Vylor-Added-to-the-S-P-500-Twilio-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"
+        },
+        {
+          "t": "Stocktwits",
+          "u": "https://stocktwits.com/news-articles/markets/equity/vylor-takes-corteva-s-s-and-p-500-seat-twilio-set-to-replace-warner-bros-discovery-both-stocks-rise-after-hours/cZD0kNsRB0K"
+        }
+      ],
+      "cap": "$43.9B",
+      "px": 289.47,
+      "pct": 4.97,
+      "topSector": true
+    },
+    {
+      "tk": "HAE",
+      "name": "Haemonetics Corporation",
+      "industry": "Medical - Devices",
+      "sector": "Healthcare",
+      "ctype": "Major contract",
+      "cdate": "8 Oct",
+      "cdateISO": "2026-10-08",
+      "what": "CSL Plasma disclosed in an SEC filing that it expects to put Haemonetics' NexSys PCS devices in all of its current US plasma-collection centers by end-2027, a much larger commitment than the open-ended, partial-scope supply deal disclosed 18 Aug; scope/timing remain subject to change and Haemonetics is not updating FY2027 guidance yet. BTIG raised its price target to $130 from $110 (Buy) on the news — a single broker, not a consensus.",
+      "sources": [
+        {
+          "t": "Investing.com",
+          "u": "https://www.investing.com/news/stock-market-news/haemonetics-stock-surges-17-on-csl-plasma-supply-deal-update-4939046"
+        },
+        {
+          "t": "Yahoo Finance",
+          "u": "https://finance.yahoo.com/markets/stocks/articles/haemonetics-soars-12-csl-plasma-143056728.html"
+        }
+      ],
+      "cap": "$5.4B",
+      "px": 118.69,
+      "pct": -0.65,
+      "topSector": false
+    }
+  ],
+  "bg": {
+    "TWLO": {
+      "cap": "$43.9B",
+      "what": "Cloud communications platform providing APIs for voice, messaging, video and email that let developers embed customer-engagement features directly into their own software."
+    },
+    "HAE": {
+      "cap": "$5.4B",
+      "what": "Medical device company providing plasma-collection (NexSys PCS), blood-center and hospital hemostasis/coagulation-testing systems."
+    }
+  },
+  "notices": [
+    "VIX: FMP's live index-quote returned a pre-market print (15.45, timestamp Mon 12 Oct 07:51 ET) rather than a settled close. Per the closes-only rule, the tile and regime check use Fri 9 Oct's official close (14.84, confirmed via FMP's EOD history endpoint; the live quote's own previousClose field agreed exactly) instead of that live print.",
+    "QQQ: Yahoo Finance's historical close (751.27, +0.49%, Oct 9) and Investing.com's independent historical data agree exactly on price and day range; the implied prior close (747.58) also matches last run's QQQ figure exactly — two genuinely independent sources this run.",
+    "Catalysts: Twilio's 6 Oct S&P 500 addition remains inside the last-5-session window and is re-priced below. New this run: Haemonetics (8 Oct, CSL firming up a much larger NexSys PCS rollout commitment, two sources). Considered and rejected: Penguin Solutions' 7 Oct earnings beat + raised FY27 guidance (cap $3.9B, below the $5B floor), Pacira BioSciences' 8 Oct Viatris acquisition agreement (cap ~$1.65B and not a playbook catalyst type), and Cable One's 2 Oct financing-talks rally (still sub-$1B after an 8-month decline) — see rejected. Big-bank Q3 earnings (JPMorgan/Wells Fargo/Citigroup) have not yet reported; expected 13 Oct, after this run.",
+    "No FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct); the Fed block is unchanged from 16 Sep with only the Treasury yields refreshed (now 5 sessions through 9 Oct).",
+    "Technical scan, sector ranking and industry drill-down remain pinned from the interactive refresh on Wed 7 Oct (data to the 6 Oct close); this routine has no WebFetch and does not touch them."
+  ],
+  "rejected": [
+    "<b>Penguin Solutions (PENG)</b> · 7 Oct fiscal Q4 earnings beat + raised FY2027 outlook (+13%) — market cap $3.9B, below the $5B catalyst-alert floor. Rejected on cap.",
+    "<b>Pacira BioSciences (PCRX)</b> · 8 Oct Viatris acquisition agreement (+44%) — deal valued at ~$1.65B, well under the $5B floor, and an acquisition agreement doesn't fit the playbook catalyst types (earnings beat+raise / major contract / analyst upgrade / approval-launch / index add). Rejected on cap and type.",
+    "<b>Cable One (CABO)</b> · 2 Oct financing-talks rally — still a sub-$1B distressed name after an 8-month, ~57% decline, well under the $5B floor. Rejected on cap.",
+    "<b>JPMorgan / Wells Fargo / Citigroup</b> · Q3 2026 earnings not yet reported (confirmed/expected 13 Oct, after this run) — no beat-and-raise data available yet."
+  ],
+  "sections": {
+    "indices": {
+      "asOf": "2026-10-09",
+      "source": "FMP index-quote (^GSPC/^DJI/^RUT); VIX via FMP EOD history (live quote was a pre-market print, not the close); QQQ via WebSearch (Yahoo Finance, cross-checked against Investing.com historical data)"
+    },
+    "macro": {
+      "asOf": "2026-10-09",
+      "source": "FMP economics/treasury-rates (5 sessions through 9 Oct); Fed decision via WebSearch, unchanged (no FOMC in window)"
+    },
+    "catalysts": {
+      "asOf": "2026-10-09",
+      "source": "WebSearch (2+ sources each) + FMP company/profile-symbol live quotes"
+    }
+  },
+  "fetchlog": [
+    { "id": "fmp.index.^GSPC", "ok": true, "note": "7811.54, +0.59%, Oct 9 close" },
+    { "id": "fmp.index.^DJI", "ok": true, "note": "51654.95, +0.83%, Oct 9 close" },
+    { "id": "fmp.index.^RUT", "ok": true, "note": "2806.98, +0.46%, Oct 9 close" },
+    { "id": "fmp.index.^VIX", "ok": true, "note": "live quote (15.45) had ts of Mon 12 Oct pre-market, not a close; retried with index-historical-price-eod-full/light to get the actual Fri 9 Oct close (14.84) and OHLC" },
+    { "id": "fmp.index.eod.verify", "ok": true, "note": "cross-checked ^GSPC/^DJI/^RUT Oct 9 closes against index-historical-price-eod-light — all three reconciled exactly with the live quote's price field; ^VIX did not and used the EOD close instead" },
+    { "id": "fmp.economics.treasury-rates", "ok": true, "note": "pulled last 8 sessions; kept the 5 distinct trading days 5-9 Oct for y10hist" },
+    { "id": "websearch.qqq.price", "ok": true, "note": "Yahoo Finance 751.27 (+0.49%) and Investing.com historical data 751.27 agree exactly, Oct 9 close" },
+    { "id": "websearch.fomc.decision", "ok": true, "note": "no FOMC meeting in the 7 days before this run; next meeting confirmed 27-28 Oct" },
+    { "id": "websearch.catalyst.earnings-beat-raise", "ok": true, "note": "Penguin Solutions (PENG) +13% on 7 Oct fiscal Q4 beat + raised FY27 outlook — found and rejected, cap $3.9B below the $5B floor" },
+    { "id": "websearch.catalyst.major-contract", "ok": true, "note": "Haemonetics (HAE) +17% on 8 Oct after CSL firmed up a fuller NexSys PCS rollout commitment — two independent sources corroborate, cap $5.4B clears the floor" },
+    { "id": "websearch.catalyst.ma-deal", "ok": true, "note": "Pacira BioSciences (PCRX) +44% on 8 Oct on a Viatris acquisition agreement — found and rejected, deal cap ~$1.65B, well under the $5B floor, and not a playbook catalyst type" },
+    { "id": "websearch.catalyst.cable-one", "ok": true, "note": "Cable One (CABO) rallied 2 Oct on financing-talks news — found and rejected, sub-$1B distressed name after an 8-month decline, well under the $5B floor" },
+    { "id": "websearch.catalyst.analyst-upgrade", "ok": false, "note": "no corroborated >15%-above-price upgrade with a dated event inside the last 5 sessions surfaced" },
+    { "id": "websearch.catalyst.fda-approval", "ok": false, "note": "no dated Oct 2026 approval/launch surfaced" },
+    { "id": "websearch.catalyst.bank-earnings", "ok": true, "note": "JPMorgan/Wells Fargo/Citigroup Q3 2026 earnings not yet reported (confirmed/expected 13 Oct) — too early for a beat+raise catalyst this run" },
+    { "id": "websearch.catalyst.twlo-reprice", "ok": true, "note": "confirmed Twilio's 6 Oct S&P 500 addition is still inside the last-5-session window; re-priced below" },
+    { "id": "fmp.profile.HAE", "ok": true, "note": "118.69, -0.65%, cap $5.39B" },
+    { "id": "fmp.profile.TWLO", "ok": true, "note": "289.47, +4.97%, cap $43.9B" },
+    { "id": "fmp.profile.PENG", "ok": true, "note": "76.28, cap $3.91B — rejected on cap" },
+    { "id": "fmp.profile.PROF", "ok": true, "note": "6.90, cap $0.25B — considered for a guidance-beat candidate, rejected on cap" }
+  ],
+  "meta": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-12T20:13:35+08:00",
+    "targetSession": "2026-10-12",
+    "lastSession": "2026-10-09"
   }
- },
- "fetchlog": [
-  {
-   "id": "fmp.index.^GSPC",
-   "ok": true,
-   "note": "7765.36, -0.47%, Oct 8 close"
-  },
-  {
-   "id": "fmp.index.^DJI",
-   "ok": true,
-   "note": "51231.64, +0.10%, Oct 8 close"
-  },
-  {
-   "id": "fmp.index.^RUT",
-   "ok": true,
-   "note": "2794.13, +0.03%, Oct 8 close"
-  },
-  {
-   "id": "fmp.index.^VIX",
-   "ok": true,
-   "note": "live quote (15.15) had ts of Oct 9 pre-market, not a close; retried with index-historical-price-eod-full to get the actual Oct 8 close (15.41) and OHLC"
-  },
-  {
-   "id": "fmp.index.eod.verify",
-   "ok": true,
-   "note": "cross-checked ^GSPC/^DJI/^RUT/^VIX Oct 8 closes and day ranges against index-historical-price-eod-full/light — all four reconciled exactly"
-  },
-  {
-   "id": "fmp.economics.treasury-rates",
-   "ok": true,
-   "note": "explicit from/to range 2026-09-25..2026-10-09 to retrieve the last 5 distinct sessions through 8 Oct"
-  },
-  {
-   "id": "websearch.qqq.price",
-   "ok": true,
-   "note": "Yahoo Finance quote 747.58 (-1.34%) vs Yahoo historical-prices 747.42 — reconciled within 0.02%; no independent second provider found after 3 attempts"
-  },
-  {
-   "id": "websearch.fomc.decision",
-   "ok": true,
-   "note": "no FOMC meeting in the 7 days before this run; next meeting confirmed 27-28 Oct"
-  },
-  {
-   "id": "websearch.catalyst.earnings-beat-raise",
-   "ok": false,
-   "note": "no dated 2-8 Oct beat+raise story surfaced"
-  },
-  {
-   "id": "websearch.catalyst.major-contract",
-   "ok": false,
-   "note": "no new dated 2-8 Oct contract/deal story surfaced (SpaceX-Grain spectrum deal and Onsemi-Synaptics are not current/not applicable)"
-  },
-  {
-   "id": "websearch.catalyst.analyst-upgrade",
-   "ok": false,
-   "note": "no corroborated >15%-above-price upgrade surfaced"
-  },
-  {
-   "id": "websearch.catalyst.fda-approval",
-   "ok": false,
-   "note": "no dated Oct 2026 approval/launch surfaced"
-  },
-  {
-   "id": "websearch.catalyst.lumentum",
-   "ok": true,
-   "note": "candidate found, rejected — conflicting/garbled sell-out dates across sources, see rejected"
-  },
-  {
-   "id": "websearch.catalyst.humana",
-   "ok": true,
-   "note": "candidate found, rejected — could not verify a 2027 star-ratings event this week, see rejected"
-  },
-  {
-   "id": "fmp.profile.TWLO",
-   "ok": true,
-   "note": "275.77, +1.01%, cap $41.9B"
-  }
- ],
- "meta": {
-  "schemaVersion": 1,
-  "generatedAt": "2026-10-09T20:10:37+08:00",
-  "targetSession": "2026-10-09",
-  "lastSession": "2026-10-08"
- }
 }
