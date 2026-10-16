@@ -184,8 +184,8 @@
       "source": "FMP economics/treasury-rates (5 distinct trading-day rows through 14 Oct); Fed decision via WebSearch, unchanged (no FOMC in window)"
     },
     "catalysts": {
-      "asOf": "2026-10-14",
-      "source": "WebSearch (2+ sources each, except Albemarle which cites Tradingpedia + Finviz) + FMP company/profile-symbol live quotes; UnitedHealth and Biogen re-priced from earlier events, Albemarle newly added, Haemonetics dropped (aged out)"
+      "asOf": "2026-10-15",
+      "source": "WebSearch (2+ sources each, except Albemarle which cites Tradingpedia + Finviz) + FMP company/profile-symbol live quotes (Thu 15 Oct close); UnitedHealth and Biogen re-priced from earlier events, Albemarle newly added, Haemonetics dropped (aged out)"
     }
   },
   "fetchlog": [
