@@ -1,320 +1,336 @@
 {
-  "asOf": "Mon 19 Oct 2026, snapshot 09:44 ET (~14 min after the open)",
-  "note": "FMP covered indices (SPX/DJI/RUT/VIX) and all 25 watch-list quotes (10 technical picks, 3 catalyst alerts, 12 near-misses) cleanly. QQQ omitted this run (no reconcilable two-source premarket/live figure found); the brief's last published QQQ tile stays the reference point, carried stale. Index futures (ES/NQ/YM/RTY) are WebSearch-sourced premarket readings from earlier this morning (taken before the open); ES, NQ and RTY cross-check against a second source, YM has only one reliable source this run (a second source's Dow futures figure conflicted and looked stale, so it was dropped per the reconciliation rule) and is flagged single-sourced. `open` is omitted from every quote (not available from FMP's profile endpoint on the free plan).",
-  "meta": {
-    "schemaVersion": 1
+ "asOf": "Tue 20 Oct 2026 \u00b7 09:45 ET \u00b7 21:45 HK",
+ "note": "Snapshot taken ~15 minutes after the US open. FMP's profile endpoint has no regular-session opening print on the free plan, so `open` is omitted for every quote (the page shows \"open print not available yet\", the correct degraded state). VIX is a live print, not the settled close; the previous close (18.44, from the brief) is used for anything regime-adjacent. QQQ is omitted this run (no two reconcilable live sources found) and stays carried from the brief's last published tile. Futures (ES/NQ/YM/RTY) are WebSearch-only premarket snapshots taken at varying times before the open (FMP has no CME index-futures data on this plan) and may not reflect the live tape; each cross-checks against a second source within 0.2 percentage points.",
+ "meta": {
+  "schemaVersion": 1
+ },
+ "sections": {
+  "indices": {
+   "asOfUTC": "2026-10-20T13:41:42Z",
+   "source": "FMP indexes/index-quote (^GSPC,^DJI,^RUT,^VIX)"
   },
-  "sections": {
-    "indices": {
-      "asOfUTC": "2026-10-19T13:44:00Z",
-      "source": "FMP indexes/index-quote (^GSPC/^DJI/^RUT/^VIX), live print ~09:44 ET"
-    },
-    "futures": {
-      "asOfUTC": "2026-10-19T11:54:00Z",
-      "source": "WebSearch, premarket readings ~4-8am ET, two sources cross-checked per contract (Yahoo Finance + Bloomberg/Gurufocus/Yahoo ticker)"
-    },
-    "quotes": {
-      "asOfUTC": "2026-10-19T13:44:00Z",
-      "source": "FMP company/profile-symbol, live print ~09:44 ET"
-    },
-    "news": {
-      "asOfUTC": "2026-10-19T13:00:00Z",
-      "source": "WebSearch"
-    }
-  },
-  "indices": [
-    {
-      "id": "SPX",
-      "name": "S&P 500",
-      "px": 7699.17,
-      "pct": 0.51871,
-      "prev": 7659.44
-    },
-    {
-      "id": "DJI",
-      "name": "Dow Jones",
-      "px": 51913.81,
-      "pct": -0.17038,
-      "prev": 52002.41
-    },
-    {
-      "id": "RUT",
-      "name": "Russell 2000",
-      "px": 2736.28829,
-      "pct": 0.54819,
-      "prev": 2721.36999
-    },
-    {
-      "id": "VIX",
-      "name": "Volatility",
-      "px": 17.89,
-      "pct": -10.50525,
-      "prev": 19.99
-    }
-  ],
   "futures": {
-    "contract": "Dec-26",
-    "asOf": "~08:00 ET (premarket, before the open)",
-    "rows": [
-      {
-        "id": "ES",
-        "name": "S&P 500 e-mini",
-        "px": 7743.0,
-        "pct": 0.5,
-        "chk": 0.4
-      },
-      {
-        "id": "NQ",
-        "name": "Nasdaq-100 e-mini",
-        "px": 29714.0,
-        "pct": 1.1,
-        "chk": 1.1
-      },
-      {
-        "id": "YM",
-        "name": "Dow e-mini",
-        "px": 52229.0,
-        "pct": 0.1
-      },
-      {
-        "id": "RTY",
-        "name": "Russell 2000 e-mini",
-        "px": 2747.4,
-        "pct": 0.4,
-        "chk": 0.5
-      }
-    ],
-    "sources": [
-      {
-        "t": "Yahoo Finance",
-        "u": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-futures-rise-113805730.html"
-      },
-      {
-        "t": "Bloomberg",
-        "u": "https://www.bloomberg.com/news/articles/2026-10-19/us-stock-futures-today-cleveland-cliffs-disc-nvidia-silgan"
-      },
-      {
-        "t": "GuruFocus",
-        "u": "https://www.gurufocus.com/news/9129486/nasdaq-100-futures-rise-110-ahead-of-monday-market-open-globe-life-gl-surges-853"
-      }
-    ]
+   "asOfUTC": "2026-10-20T13:00:00Z",
+   "source": "WebSearch cross-checked, 2 sources per contract (CNBC/Reuters/Yahoo/CNN, ~07:30-09:00 ET snapshots)"
   },
   "quotes": {
-    "AVT": {
-      "px": 91.77,
-      "pct": 1.93269,
-      "vol": 22545.42147,
-      "avgVol": 1259099,
-      "change": 1.74
-    },
-    "ZS": {
-      "px": 209.48,
-      "pct": 1.01263,
-      "vol": 113946,
-      "avgVol": 3065402,
-      "change": 2.1
-    },
-    "ETN": {
-      "px": 395.035,
-      "pct": 0.96741,
-      "vol": 228547,
-      "avgVol": 2221574,
-      "change": 3.785
-    },
-    "META": {
-      "px": 701.53,
-      "pct": -1.09893,
-      "vol": 2083255.8266,
-      "avgVol": 19073432,
-      "change": -7.795
-    },
-    "GDDY": {
-      "px": 106.65,
-      "pct": 0.65119,
-      "vol": 32299,
-      "avgVol": 2213710,
-      "change": 0.69
-    },
-    "ITT": {
-      "px": 198.82,
-      "pct": 0.20159,
-      "vol": 12717,
-      "avgVol": 897359,
-      "change": 0.4
-    },
-    "VRSN": {
-      "px": 305.05,
-      "pct": 0.89801,
-      "vol": 23542.96495,
-      "avgVol": 818632,
-      "change": 2.715
-    },
-    "PLTR": {
-      "px": 190.97,
-      "pct": 2.65549,
-      "vol": 2622742,
-      "avgVol": 35502730,
-      "change": 4.94
-    },
-    "GOOGL": {
-      "px": 343.01,
-      "pct": 0.71053,
-      "vol": 2867719,
-      "avgVol": 28774847,
-      "change": 2.42
-    },
-    "SNAP": {
-      "px": 6.155,
-      "pct": 0.40783,
-      "vol": 2599899,
-      "avgVol": 38978609,
-      "change": 0.02500021
-    },
-    "ALB": {
-      "px": 96.0701,
-      "pct": 0.61804,
-      "vol": 124949,
-      "avgVol": 2398529,
-      "change": 0.5901
-    },
-    "BIIB": {
-      "px": 234.45,
-      "pct": 0.77369,
-      "vol": 35494.30682,
-      "avgVol": 1136129,
-      "change": 1.8
-    },
-    "UNH": {
-      "px": 404.305,
-      "pct": 0.71619,
-      "vol": 332631,
-      "avgVol": 5484171,
-      "change": 2.875
-    },
-    "NOK": {
-      "px": 9.26,
-      "pct": 1.31291,
-      "vol": 7699023,
-      "avgVol": 85373475,
-      "change": 0.12
-    },
-    "GNRC": {
-      "px": 194.22,
-      "pct": 0.79925,
-      "vol": 27935.39307,
-      "avgVol": 1164068,
-      "change": 1.54
-    },
-    "LTM": {
-      "px": 47.56,
-      "pct": 0.18959,
-      "vol": 40726,
-      "avgVol": 770914,
-      "change": 0.09
-    },
-    "SNX": {
-      "px": 250,
-      "pct": 1.31712,
-      "vol": 22460,
-      "avgVol": 853572,
-      "change": 3.25
-    },
-    "NTAP": {
-      "px": 207.86,
-      "pct": 1.99215,
-      "vol": 69366,
-      "avgVol": 2686838,
-      "change": 4.06
-    },
-    "NTNX": {
-      "px": 67.7806,
-      "pct": 1.25575,
-      "vol": 66179.35505,
-      "avgVol": 2960326,
-      "change": 0.8406
-    },
-    "AAOI": {
-      "px": 77.73,
-      "pct": 2.85828,
-      "vol": 1894074,
-      "avgVol": 10480423,
-      "change": 2.16
-    },
-    "BB": {
-      "px": 8.11,
-      "pct": 0.62035,
-      "vol": 888245,
-      "avgVol": 21436096,
-      "change": 0.05
-    },
-    "CIEN": {
-      "px": 345.53,
-      "pct": 3.84696,
-      "vol": 286294,
-      "avgVol": 2657558,
-      "change": 12.8
-    },
-    "CSCO": {
-      "px": 107.52,
-      "pct": 0.12105,
-      "vol": 1070833.24063,
-      "avgVol": 20472073,
-      "change": 0.13
-    },
-    "FFIV": {
-      "px": 449.0363,
-      "pct": 1.58503,
-      "vol": 26897.31344,
-      "avgVol": 589431,
-      "change": 7.0063
-    },
-    "FTNT": {
-      "px": 170.14,
-      "pct": 0.59717,
-      "vol": 659021.08137,
-      "avgVol": 4954173,
-      "change": 1.01
-    }
+   "asOfUTC": "2026-10-20T13:42:30Z",
+   "source": "FMP company/profile-symbol, 24 of 24 watch-list tickers"
   },
-  "notes": {
-    "VRSN": "Reports earnings Thu 22 Oct \u2014 within 3 trading sessions from today. A live or newly-triggered VRSN position carries binary earnings risk into the print.",
-    "CIEN": "+3.8% premarket/open, part of a broad chip/AI-networking rebound (see news) rather than a company-specific catalyst today.",
-    "AAOI": "+2.9% premarket/open, part of the same semiconductor/networking rebound.",
-    "NOK": "+1.3%, Communication Equipment peer also lifted by the chip-sector bounce."
+  "news": {
+   "asOfUTC": "2026-10-20T13:44:00Z",
+   "source": "WebSearch, 2 sources per item"
+  }
+ },
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "px": 7675.6,
+   "pct": -0.19673,
+   "prev": 7690.73
   },
-  "news": [
-    {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Chip stocks rebound after their worst weekly selloff since 2008",
-      "text": "US semiconductor and AI-networking names bounced in premarket trading Mon 19 Oct after the Philadelphia semiconductor index (SOX) fell 11.4% last week \u2014 its steepest weekly drop since March 2025 \u2014 on AI-spending and rate concerns. Intel rose ~4.2% premarket after a J.P. Morgan upgrade to Neutral; Nvidia, AMD and Micron also gained. The iShares Semiconductor ETF (SOXX) climbed ~3.6% premarket after falling almost 12% last week.",
-      "names": [
-        "NTAP",
-        "NTNX",
-        "AAOI",
-        "BB",
-        "CIEN",
-        "CSCO",
-        "FFIV",
-        "FTNT",
-        "NOK"
-      ],
-      "sources": [
-        {
-          "t": "Benzinga",
-          "u": "https://www.benzinga.com/markets/tech/26/10/62436201/chip-stocks-bounce-longest-losing-streak-since-2008"
-        },
-        {
-          "t": "U.S. News",
-          "u": "https://money.usnews.com/investing/news/articles/2026-10-19/us-chip-stocks-rise-after-steepest-weekly-selloff-in-months"
-        }
-      ]
-    }
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "px": 52240.28,
+   "pct": 0.52775,
+   "prev": 51966.03
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "px": 2739.12041,
+   "pct": 0.39667,
+   "prev": 2728.29801
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "px": 18.67,
+   "pct": 1.24729,
+   "prev": 18.44,
+   "asOfKind": "live",
+   "asOfNote": "live print 20 Oct 13:41 UTC, not a settled close; previous close (18.44) is the brief's reference"
+  }
+ ],
+ "futures": {
+  "asOf": "~07:30-09:00 ET (premarket, before the open)",
+  "contract": "Dec-26",
+  "rows": [
+   {
+    "id": "ES",
+    "name": "S&P 500 e-mini",
+    "px": 7719.75,
+    "pct": -0.19,
+    "chk": -0.09
+   },
+   {
+    "id": "NQ",
+    "name": "Nasdaq-100 e-mini",
+    "px": 29519.75,
+    "pct": -0.68,
+    "chk": -0.5
+   },
+   {
+    "id": "YM",
+    "name": "Dow e-mini",
+    "px": 52318.0,
+    "pct": 0.26,
+    "chk": 0.1
+   },
+   {
+    "id": "RTY",
+    "name": "Russell 2000 e-mini",
+    "px": 2745.3,
+    "pct": 0.11,
+    "chk": 0.0
+   }
   ],
-  "footnotes": [
-    "QQQ (NDX proxy) omitted: WebSearch returned conflicting, mostly undated or stale figures (prior-session closes, wrong-ticker widgets) with no two sources reconciling on a current price for today. The brief's last published QQQ tile stays the reference point, carried stale.",
-    "Index futures (ES/NQ/YM/RTY) are premarket readings from ~4-8am ET sources (before the open) and may no longer reflect the live tape; FMP has no CME index-futures data on this plan. YM (Dow e-mini) is single-sourced this run: a second (CNN) reading of Dow futures conflicted with the primary source (down vs. up) and looked like a stale/different-session snapshot, so it was dropped rather than used as an unreconciled cross-check.",
-    "Overnight/sector news: targeted searches for Industrials-sector news and for company-specific news on META, UNH, PLTR and GOOGL for today's date returned no results dated within the last 12 hours (only older or undated items, e.g. a Meta New Mexico verdict from March 2026 \u2014 dropped as stale). Only the chip-sector rebound story met the two-source, dated bar this run.",
-    "Earnings-within-3-sessions check: VRSN (a technical pick) reports Thu 22 Oct 2026 \u2014 within 3 trading sessions from today; flagged above. No other watch-list name reports within that window per the brief's recorded dates."
+  "sources": [
+   {
+    "t": "CNBC Pre-Markets",
+    "u": "https://www.cnbc.com/markets/pre-markets/"
+   },
+   {
+    "t": "Reuters (via Sunday Guardian)",
+    "u": "https://sundayguardianlive.com/business/us-stock-market-today-dow-futures-gain-022-while-sp-500-nasdaq-futures-fall-as-brent-crude-surges-above-111-nvidia-and-ai-stocks-face-pressure-check-what-investors-should-know-309079/"
+   },
+   {
+    "t": "Yahoo Finance",
+    "u": "https://finance.yahoo.com/markets/stocks/articles/stock-market-p-500-open-063615007.html"
+   },
+   {
+    "t": "CNN Pre-market",
+    "u": "https://edition.cnn.com/markets/premarkets"
+   }
   ]
+ },
+ "quotes": {
+  "AVT": {
+   "px": 89.54,
+   "pct": -2.5468,
+   "vol": 23583,
+   "avgVol": 1263206,
+   "change": -2.34
+  },
+  "ZS": {
+   "px": 209.202,
+   "pct": -1.5659,
+   "vol": 68514.87251,
+   "avgVol": 3065402,
+   "change": -3.328
+  },
+  "ETN": {
+   "px": 376.66,
+   "pct": -3.79055,
+   "vol": 199917,
+   "avgVol": 2217031,
+   "change": -14.84
+  },
+  "META": {
+   "px": 684.72,
+   "pct": -2.93717,
+   "vol": 1697584.76897,
+   "avgVol": 19073432,
+   "change": -20.72
+  },
+  "GDDY": {
+   "px": 107.8,
+   "pct": 1.03093,
+   "vol": 25494,
+   "avgVol": 2213710,
+   "change": 1.1
+  },
+  "ITT": {
+   "px": 195.355,
+   "pct": -1.53974,
+   "vol": 13797,
+   "avgVol": 897359,
+   "change": -3.055
+  },
+  "VRSN": {
+   "px": 306.26999,
+   "pct": -0.06852355,
+   "vol": 13507,
+   "avgVol": 818632,
+   "change": -0.21001
+  },
+  "PLTR": {
+   "px": 190.81,
+   "pct": -1.72032,
+   "vol": 1676880,
+   "avgVol": 35502730,
+   "change": -3.34
+  },
+  "GOOGL": {
+   "px": 341.99,
+   "pct": -0.63629,
+   "vol": 1415048.91497,
+   "avgVol": 28774847,
+   "change": -2.19
+  },
+  "SNAP": {
+   "px": 6.2807,
+   "pct": 0.17066,
+   "vol": 1556577,
+   "avgVol": 38978609,
+   "change": 0.01070021
+  },
+  "ALB": {
+   "px": 94.238,
+   "pct": -0.42477,
+   "vol": 87354,
+   "avgVol": 2395314,
+   "change": -0.402
+  },
+  "UNH": {
+   "px": 415.28,
+   "pct": 2.06449,
+   "vol": 543637,
+   "avgVol": 5467361,
+   "change": 8.4
+  },
+  "NOK": {
+   "px": 8.84,
+   "pct": -2.64317,
+   "vol": 7006699,
+   "avgVol": 85373475,
+   "change": -0.24
+  },
+  "GNRC": {
+   "px": 189.665,
+   "pct": -1.88557,
+   "vol": 41645,
+   "avgVol": 1164068,
+   "change": -3.645
+  },
+  "LTM": {
+   "px": 47.53,
+   "pct": 0.08422826,
+   "vol": 22221,
+   "avgVol": 770914,
+   "change": 0.04
+  },
+  "SNX": {
+   "px": 244.45,
+   "pct": -1.65748,
+   "vol": 24565,
+   "avgVol": 853572,
+   "change": -4.12
+  },
+  "NTAP": {
+   "px": 203.2185,
+   "pct": -2.00198,
+   "vol": 76800.50602,
+   "avgVol": 2686838,
+   "change": -4.1515
+  },
+  "NTNX": {
+   "px": 66.98,
+   "pct": -0.81445,
+   "vol": 29465,
+   "avgVol": 2960326,
+   "change": -0.55
+  },
+  "AAOI": {
+   "px": 73.48,
+   "pct": -6.03581,
+   "vol": 1579219,
+   "avgVol": 10421059,
+   "change": -4.72
+  },
+  "BB": {
+   "px": 8.075,
+   "pct": -1.04167,
+   "vol": 621671,
+   "avgVol": 21436096,
+   "change": -0.085
+  },
+  "CIEN": {
+   "px": 331.1,
+   "pct": -3.80593,
+   "vol": 110348,
+   "avgVol": 2657558,
+   "change": -13.1
+  },
+  "CSCO": {
+   "px": 105.47,
+   "pct": -0.96714,
+   "vol": 486816.76297,
+   "avgVol": 20410333,
+   "change": -1.03
+  },
+  "FFIV": {
+   "px": 443.8656,
+   "pct": -1.53824,
+   "vol": 17231.29554,
+   "avgVol": 590251,
+   "change": -6.9344
+  },
+  "FTNT": {
+   "px": 168.23,
+   "pct": -1.90671,
+   "vol": 167126,
+   "avgVol": 4954173,
+   "change": -3.27
+  }
+ },
+ "notes": {
+  "VRSN": "Reports Thu 22 Oct, after the close \u2014 within 3 trading sessions. A live or newly-triggered VRSN position carries binary earnings risk into the print.",
+  "UNH": "+2.1% this morning, extending the reaction to last week's Q3 beat-and-raise (the brief's catalyst alert); no new news found overnight.",
+  "AAOI": "-6.0% this morning; part of a broad reversal in chip/networking-adjacent names (see news) after Monday's semiconductor rebound.",
+  "CIEN": "-3.8% this morning; same chip/networking reversal as AAOI.",
+  "ETN": "-3.8% this morning with no company-specific headline found; broad weakness across Industrials/Tech names at the open."
+ },
+ "news": [
+  {
+   "tag": "Technology",
+   "top3": true,
+   "title": "Chip stocks give back Monday's rebound",
+   "text": "Semiconductor and networking names fell in premarket/early trading Tuesday, reversing part of Monday's rally that had snapped an 8-session, 15.7% Philadelphia Semiconductor Index losing streak; Micron, Intel and Qualcomm were among the names cited as lower.",
+   "names": [
+    "AAOI",
+    "CIEN",
+    "FTNT",
+    "CSCO"
+   ],
+   "sources": [
+    {
+     "t": "Yahoo Finance",
+     "u": "https://finance.yahoo.com/markets/stocks/articles/why-nasdaq-futures-falling-premarket-085201550.html"
+    },
+    {
+     "t": "CoinCentral",
+     "u": "https://coincentral.com/stock-market-today-chip-stocks-wobble-again-as-wall-street-braces-for-a-big-earnings-week"
+    }
+   ]
+  },
+  {
+   "tag": "Earnings calendar",
+   "top3": false,
+   "title": "VeriSign reports Thursday, inside the 3-session window",
+   "text": "VeriSign (a technical pick) is confirmed to report Q3 2026 results after the close on Thursday 22 Oct 2026 \u2014 within 3 trading sessions from today.",
+   "names": [
+    "VRSN"
+   ],
+   "sources": [
+    {
+     "t": "The Right Trader (earnings calendar)",
+     "u": "https://therighttrader.com/earnings-calendar/vrsn"
+    },
+    {
+     "t": "Next Earnings Date",
+     "u": "https://www.nextearningsdate.com/verisign.html"
+    }
+   ]
+  }
+ ],
+ "footnotes": [
+  "QQQ (NDX proxy) omitted: two WebSearch reads of a current/intraday price disagreed by roughly 1.1% ($713.43 vs $721.39) with unclear or conflicting timestamps, so neither reconciles cleanly. The brief's last published QQQ tile stays the reference point, carried stale.",
+  "Index futures (ES/NQ/YM/RTY) are premarket readings from roughly 07:30-09:00 ET sources (before today's open) and may no longer reflect the now-open cash tape; FMP has no CME index-futures data on this plan. All four cross-check within 0.2 percentage points of a second source.",
+  "Overnight/company-specific news: targeted searches for Eaton, ITT, Alphabet, Snap and Meta company news dated today returned nothing dated within the last 12 hours \u2014 only older, undated or syndicated-wire items. Only the chip-sector reversal and the VeriSign earnings-calendar item met the two-source, dated bar this run.",
+  "Oil (Brent) and the 10Y Treasury yield were searched but no source gave a today-dated, reconcilable figure, so neither is reported here.",
+  "Earnings-within-3-sessions check: VRSN (a technical pick) reports Thu 22 Oct 2026 \u2014 within 3 trading sessions from today; flagged above. No other watch-list name reports within that window per the brief's recorded dates and this run's searches."
+ ]
 }
