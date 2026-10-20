@@ -4,69 +4,95 @@
    "id": "SPX",
    "name": "S&P 500",
    "q": {
-    "price": 7659.44,
-    "change": -84.62,
-    "pct": -1.09271,
-    "dayLow": 7631.77,
-    "dayHigh": 7756.84,
+    "price": 7690.73,
+    "change": 31.29,
+    "pct": 0.40852,
+    "dayLow": 7684.79,
+    "dayHigh": 7731.18,
     "yearHigh": 7844.52,
     "yearLow": 6316.91,
-    "ma50": 7706.416,
-    "ma200": 7271.436
+    "ma50": 7705.078,
+    "ma200": 7275.662
    },
-   "ts": 1792183328,
-   "prev": 7744.06
+   "ts": 1792442654,
+   "prev": 7659.44
+  },
+  {
+   "id": "QQQ",
+   "name": "Nasdaq-100 ETF",
+   "proxyFor": "NDX",
+   "q": {
+    "price": 721.54,
+    "change": 11.71,
+    "pct": 1.7
+   },
+   "src": "WebSearch (Benzinga + Kraken, Mon 19 Oct close, approximate)",
+   "asOfKind": "search",
+   "asOfNote": "19 Oct close, approximate — two sources gave slightly different intraday snapshots (Benzinga $721.54/+1.7%, Kraken prevClose $709.83/range $716.59-724.55); reconciled to the Benzinga print since it implies the same ~1.7% move off Kraken's stated previous close",
+   "inRegime": false
   },
   {
    "id": "DJI",
    "name": "Dow Jones",
    "q": {
-    "price": 52002.41,
-    "change": -175.28,
-    "pct": -0.33593,
-    "dayLow": 51847.94,
-    "dayHigh": 52582.32,
+    "price": 51966.03,
+    "change": -36.38,
+    "pct": -0.0699583,
+    "dayLow": 51863.8,
+    "dayHigh": 52134.58,
     "yearHigh": 54744.33,
     "yearLow": 45057.28,
-    "ma50": 52460.31,
-    "ma200": 50439.71
+    "ma50": 52418.89,
+    "ma200": 50459.227
    },
-   "ts": 1792183329,
-   "prev": 52177.69
+   "ts": 1792442665,
+   "prev": 52002.41
   },
   {
    "id": "RUT",
    "name": "Russell 2000",
    "q": {
-    "price": 2721.37,
-    "change": -45.8993,
-    "pct": -1.65865,
-    "dayLow": 2716.22767,
-    "dayHigh": 2771.7253,
+    "price": 2728.298,
+    "change": 6.928,
+    "pct": 0.25458,
+    "dayLow": 2725.1912,
+    "dayHigh": 2742.4,
     "yearHigh": 3069.71,
     "yearLow": 2303.46,
     "ma50": 2907.5112,
     "ma200": 2794.635
    },
-   "ts": 1792182610,
-   "prev": 2767.2693
+   "ts": 1792441817,
+   "prev": 2721.37
   },
   {
    "id": "VIX",
    "name": "Volatility",
    "q": {
-    "price": 18.81,
-    "change": -1.18,
-    "pct": -5.90295,
-    "dayLow": 18.26,
-    "dayHigh": 18.93,
+    "price": 18.73,
+    "change": 0.29,
+    "pct": 1.57267,
+    "dayLow": 18.37,
+    "dayHigh": 18.88,
     "yearHigh": 35.3,
     "yearLow": 13.38,
-    "ma50": 15.6004,
-    "ma200": 18.12905
+    "ma50": 15.66,
+    "ma200": 18.14675
    },
-   "ts": 1792410781,
-   "prev": 19.99
+   "ts": 1792496791,
+   "prev": 18.44,
+   "asOfKind": "live",
+   "asOfNote": "live print 20 Oct 11:46 UTC, not the 19 Oct close",
+   "regimeQ": {
+    "price": 18.44,
+    "dayLow": 18.37,
+    "dayHigh": 18.88,
+    "yearHigh": 35.3,
+    "yearLow": 13.38,
+    "ma50": 15.66,
+    "ma200": 18.14675
+   },
+   "inRegime": "previous close"
   }
  ],
  "macro": {
@@ -126,253 +152,79 @@
  },
  "catalysts": [
   {
-   "tk": "ALB",
-   "name": "Albemarle Corporation",
-   "industry": "Chemicals - Specialty",
-   "sector": "Basic Materials",
-   "ctype": "Analyst upgrade",
-   "cdate": "14 Oct",
-   "cdateISO": "2026-10-14",
-   "what": "Mizuho upgraded Albemarle to Outperform from Neutral on 14 Oct (analyst John Roberts) and set a $130 price target (implies roughly 36% upside from this run's FMP price), citing accelerating battery energy-storage demand tightening lithium market conditions; Mizuho also raised its Albemarle adjusted-EBITDA estimates to $3.2B (2027) and $2.9B (2028) on firmer Benchmark Minerals lithium-carbonate price forecasts ($22,500/t 2027, $19,500/t 2028). Albemarle reports Q3 2026 results 4 Nov.",
-   "sources": [
-    {
-     "t": "Tradingpedia",
-     "verified": false
-    },
-    {
-     "t": "Finviz",
-     "verified": false
-    }
-   ],
-   "cap": "$11.3B",
-   "px": 95.48,
-   "pct": -2.75005,
-   "topSector": false,
-   "pricedIn": {
-    "score": null,
-    "band": null,
-    "label": "Priced-in: not scored (no inputs)",
-    "n": 0,
-    "partial": true,
-    "components": {
-     "a": null,
-     "b": null,
-     "c": null,
-     "d": null
-    },
-    "inputs": {
-     "price": 95.48
-    }
-   },
-   "flags": []
-  },
-  {
-   "tk": "BIIB",
-   "name": "Biogen Inc.",
-   "industry": "Drug Manufacturers - General",
-   "sector": "Healthcare",
-   "ctype": "Analyst upgrade",
-   "cdate": "12 Oct",
-   "cdateISO": "2026-10-12",
-   "what": "JPMorgan upgraded Biogen to Overweight from Neutral on 12 Oct and raised its price target to $300 from $210 (target horizon Dec 2027; implies roughly 29% upside from this run's FMP price), citing a stronger 2027 pipeline catalyst lineup — felzartamab in antibody-mediated rejection (a market JPMorgan sizes above $2B), litifilimab in cutaneous lupus, and a possible read-through to Leqembi from Lilly's TRAILBLAZER-ALZ-3 Alzheimer's trial. UBS also raised its target the same week, to $270 from $240, but that figure differs from JPMorgan's by more than 5% so only the JPMorgan target is cited. Biogen reports Q3 2026 results 28 Oct.",
-   "sources": [
-    {
-     "t": "Stocktwits",
-     "verified": false
-    },
-    {
-     "t": "Tradingpedia",
-     "verified": false
-    }
-   ],
-   "cap": "$34.4B",
-   "px": 232.65,
-   "pct": -1.14723,
-   "topSector": false,
-   "pricedIn": {
-    "score": null,
-    "band": null,
-    "label": "Priced-in: not scored (no inputs)",
-    "n": 0,
-    "partial": true,
-    "components": {
-     "a": null,
-     "b": null,
-     "c": null,
-     "d": null
-    },
-    "inputs": {
-     "price": 232.65
-    }
-   },
-   "flags": []
-  },
-  {
-   "tk": "UNH",
-   "name": "UnitedHealth Group Incorporated",
-   "industry": "Healthcare Plans",
-   "sector": "Healthcare",
+   "tk": "RTX",
+   "name": "RTX Corporation",
+   "industry": "Aerospace & Defense",
+   "sector": "Industrials",
    "ctype": "Earnings beat + raise",
-   "cdate": "13 Oct",
-   "cdateISO": "2026-10-13",
-   "what": "UnitedHealth's Q3 2026 report (13 Oct) showed adjusted EPS of $4.69 against a roughly $4.10-4.14 pre-report consensus, and the company raised full-year 2026 adjusted EPS guidance to at least $20.50, up from the $19.50–$20.00 range it set in July (reported GAAP EPS was $4.56; the adjusted medical-care ratio improved 150bp to 88.4%, aided by about $610M of favorable reserve development, so part of the beat is not repeatable). Membership fell y/y (50.1M to 48.3M), a caveat on the quarter's quality.",
+   "cdate": "20 Oct",
+   "cdateISO": "2026-10-20",
+   "what": "Q3 2026 results (SEC 8-K, before today's open): sales $25.0B, up 11% y/y (+12% organic); adjusted EPS $2.26, up 33% y/y (includes $0.25 from IEEPA cost recovery); operating cash flow $2.9B, free cash flow $2.1B. RTX raised its FY2026 outlook for adjusted sales, adjusted EPS and free cash flow (new ranges not stated in the filing excerpt). FMP's quote this run shows RTX essentially flat/slightly lower pre-open (-0.9%), which may not yet reflect the premarket reaction other outlets described — recorded as-is per the routine's live-quote rule.",
    "sources": [
     {
-     "t": "SEC (8-K)",
-     "verified": false
+     "t": "SEC EDGAR (RTX Corp 8-K)",
+     "u": "https://www.sec.gov/Archives/edgar/data/0000101829/000010182926000030/a2026-10x208xkerexhibit99.htm"
     },
     {
-     "t": "XTB",
-     "verified": false
+     "t": "AAII",
+     "u": "https://www.aaii.com/investingideas/article/518549-what-you-need-to-know-about-rtx-corporations-q3-earnings"
     }
    ],
-   "cap": "$360.3B",
-   "px": 401.43,
-   "pct": -1.28851,
-   "topSector": false,
-   "pricedIn": {
-    "score": null,
-    "band": null,
-    "label": "Priced-in: not scored (no inputs)",
-    "n": 0,
-    "partial": true,
-    "components": {
-     "a": null,
-     "b": null,
-     "c": null,
-     "d": null
-    },
-    "inputs": {
-     "price": 401.43
-    }
-   },
-   "flags": []
+   "cap": "$258.9B",
+   "px": 192.11,
+   "pct": -0.93337,
+   "topSector": true
   }
  ],
  "bg": {
-  "ALB": {
-   "cap": "$11.3B",
-   "what": "Specialty chemicals producer (lithium, bromine, catalysts) supplying batteries, electronics and industrial markets."
-  },
-  "BIIB": {
-   "cap": "$34.4B",
-   "what": "Biotechnology company focused on treatments for neurological and neurodegenerative diseases (multiple sclerosis, SMA, Alzheimer’s)."
-  },
-  "UNH": {
-   "cap": "$360.3B",
-   "what": "Diversified health-insurance and health-services company spanning UnitedHealthcare and Optum."
+  "RTX": {
+   "cap": "$258.9B",
+   "what": "Aerospace & defense conglomerate (Collins Aerospace, Pratt & Whitney, Raytheon) supplying systems, propulsion and services to commercial airlines, militaries and governments worldwide."
   }
  },
  "notices": [
-  "Fri 16 Oct was a broad risk-off session: S&P 500 −1.09%, Dow −0.34%, Russell 2000 −1.66%; VIX's official close rose to 19.99.",
-  "VIX: FMP's live index-quote returned a pre-market print (18.81, ts Mon 19 Oct ~07:53 ET) rather than a settled close. Per the closes-only rule, the tile flags this as a live print and the regime check uses Fri 16 Oct's official close (19.99) instead.",
-  "QQQ: WebSearch could not find a figure with a reconciling second source this run (results were undated, conflicting, or for a different ticker/fund). The tile is omitted; the page carries the prior run's QQQ tile forward, labelled stale.",
-  "Rates: 10Y yield eased to 5.09% (16 Oct) from 5.24% (09 Oct) over the last 5 distinct trading sessions — the regime score's rates check (#9) passes (down/flat, not a sustained rise).",
-  "Catalysts: Albemarle (14 Oct), Biogen (12 Oct) and UnitedHealth (13 Oct) are re-priced off Fri 16 Oct closes and carried forward — all three still sit inside the 5-session window (12–16 Oct). No new alert qualified this run; three candidates were considered and rejected (Capri Holdings, Halliburton, Target Hospitality — see 'considered and rejected')."
+  "VIX: FMP's index-quote returned a pre-market print (18.73, ts 20 Oct 11:46 UTC) rather than a settled close. Per the closes-only rule, the tile flags this as a live print and the regime check uses 19 Oct's official close (18.44, FMP's previousClose) instead.",
+  "Rates: 10Y yield unchanged from the last run — FMP's treasury-rates feed still has no row newer than 16 Oct (its 5 most recent distinct sessions are 9/13/14/15/16 Oct), so y10/y10prev/y10hist are identical to yesterday's publish. The regime score's rates check (#9) passes (5.09% ≤ 5.10% and ≤ 5.24%, i.e. down/flat over the window).",
+  "QQQ: WebSearch found no clean single same-session print; reconciled Benzinga's Monday-close figure ($721.54, +1.7%) against Kraken's stated previous close ($709.83) — the two imply the same ~1.7% move, so the tile is published as search-sourced/approximate rather than omitted.",
+  "No Fed decision in the 7 days before this run (next FOMC meeting is 27–28 Oct) — macro.fed is carried unchanged from the 16 Sep decision; only the yield figures were refreshed.",
+  "Catalysts: one new alert qualified this run — RTX Corporation (Q3 beat + raised FY2026 outlook, reported before today's open, SEC 8-K + AAII). The three previously-published alerts (Albemarle, Biogen, UnitedHealth) are now outside the 5-trading-session window and have been dropped from this run's list. Four other candidates were considered and rejected — see 'considered and rejected'."
  ],
  "rejected": [
-  "<b>Capri Holdings (CPRI)</b> · a JPMorgan upgrade to Overweight ($30 target) surfaced via WebSearch, but no source confirmed the action fell inside the last 5 trading sessions (12–16 Oct) — rejected: event date unverified.",
-  "<b>Halliburton (HAL)</b> · a Barclays price-target raise to $25 was reported alongside a reference to \"22 Oct\", which is after this run — the cited action has not happened yet inside the window — rejected: not yet occurred.",
-  "<b>Target Hospitality (TH)</b> · a ~$750M multi-year contract headline (+16% one-day move) could not be pinned to a date inside the last 5 sessions; context in the result pointed to Q1 2026 commentary — rejected: stale / unconfirmed date."
+  "<b>GE Aerospace (GE)</b> · beat Q3 2026 estimates and raised its full-year 2026 outlook across all metrics (reported before today's open), but shares fell about 1.4% premarket on the news — rejected: sell-the-news.",
+  "<b>Halliburton (HAL)</b> · reported Q3 2026 results before today's open and premarket coverage describes a beat (shares +3.4%), but no source could confirm a raised full-year guidance from two independent outlets — rejected: doesn't clear the 'beat + raise' bar on the sourcing available this run.",
+  "<b>Cleveland-Cliffs (CLF)</b> · Q3 2026 results beat and shares jumped sharply premarket (FMP quote +16.3%), but the only guidance-raise commentary found was tied to the prior (Q2) report's Q3 EBITDA guide, not a confirmed Q3-results raise from two independent sources — rejected: guidance-raise unverified.",
+  "<b>Cboe Global Markets (CBOE)</b> · Morgan Stanley double-upgrade (Underweight→Overweight, $258→$358 target, +38.7% implied) is well-sourced but dated 9 Oct — outside the last 5 trading sessions (13–19 Oct) as of this run — rejected: stale."
  ],
  "sections": {
   "indices": {
-   "asOf": "2026-10-16",
-   "source": "FMP index-quote (^GSPC/^DJI/^RUT, Fri 16 Oct close); VIX via FMP index-quote (live pre-market print, ts-flagged, previous close used for regime); QQQ omitted (no reconciling second source)"
+   "asOf": "2026-10-19",
+   "source": "FMP index quotes (19 Oct close); QQQ via WebSearch (approximate)"
   },
   "macro": {
    "asOf": "2026-10-16",
-   "source": "FMP economics/treasury-rates (5 distinct trading-day rows through 16 Oct); Fed decision via WebSearch, unchanged (no FOMC in window)"
+   "source": "FMP treasury-rates (latest available session; no newer row yet)"
   },
   "catalysts": {
-   "asOf": "2026-10-16",
-   "source": "WebSearch (2+ sources each, carried from earlier runs) + FMP company/profile-symbol live quotes (Fri 16 Oct close); no new alert qualified this run"
+   "asOf": "2026-10-20",
+   "source": "WebSearch (SEC 8-K, AAII) + FMP company/profile-symbol"
   }
  },
  "fetchlog": [
-  {
-   "id": "fmp.index.^GSPC",
-   "ok": true,
-   "note": "7659.44, -1.09%, Fri 16 Oct close"
-  },
-  {
-   "id": "fmp.index.^DJI",
-   "ok": true,
-   "note": "52002.41, -0.34%, Fri 16 Oct close"
-  },
-  {
-   "id": "fmp.index.^RUT",
-   "ok": true,
-   "note": "2721.37, -1.66%, Fri 16 Oct close"
-  },
-  {
-   "id": "fmp.index.^VIX",
-   "ok": true,
-   "note": "live print 18.81 (ts Mon 19 Oct ~07:53 ET), not a close; previous close 19.99 (Fri 16 Oct) carried as `prev` for the regime score"
-  },
-  {
-   "id": "fmp.economics.treasury-rates",
-   "ok": true,
-   "note": "latest row now 16 Oct (5.09%); captured 5 distinct trading-day rows for y10hist (09/13/14/15/16 Oct; 12 Oct was a bond-market holiday)"
-  },
-  {
-   "id": "websearch.qqq",
-   "ok": false,
-   "note": "no two reconciling sources found for QQQ's current price/%; tile omitted, carried forward as stale"
-  },
-  {
-   "id": "websearch.fomc",
-   "ok": true,
-   "note": "confirmed no FOMC meeting fell in the last 7 days (next meeting 27-28 Oct); macro.fed block kept unchanged per rule"
-  },
-  {
-   "id": "fmp.profile.ALB",
-   "ok": true,
-   "note": "95.48, -2.75%, cap $11.3B"
-  },
-  {
-   "id": "fmp.profile.BIIB",
-   "ok": true,
-   "note": "232.65, -1.15%, cap $34.4B"
-  },
-  {
-   "id": "fmp.profile.UNH",
-   "ok": true,
-   "note": "401.43, -1.29%, cap $360.3B"
-  },
-  {
-   "id": "websearch.catalyst.scan1",
-   "ok": true,
-   "note": "analyst-upgrade sweep: no new, verifiably-dated (12-16 Oct) candidate distinct from ALB/BIIB/UNH and not duplicating picks/near-misses"
-  },
-  {
-   "id": "websearch.catalyst.scan2",
-   "ok": true,
-   "note": "earnings beat+raise sweep: no new, verifiably-dated (12-16 Oct) candidate found"
-  },
-  {
-   "id": "websearch.catalyst.scan3",
-   "ok": true,
-   "note": "FDA approval / product launch sweep: October 2026 PDUFA calendar is light, no confirmed approval-driven mover in the window"
-  },
-  {
-   "id": "websearch.catalyst.scan4",
-   "ok": true,
-   "note": "major-contract/deal sweep: Target Hospitality (TH) found but date unconfirmed inside window — rejected"
-  },
-  {
-   "id": "websearch.catalyst.cpri",
-   "ok": false,
-   "note": "Capri Holdings (CPRI) JPMorgan upgrade found, event date not confirmed inside last 5 sessions — rejected"
-  },
-  {
-   "id": "websearch.catalyst.hal",
-   "ok": false,
-   "note": "Halliburton (HAL) Barclays target raise references 22 Oct (future) — rejected"
-  }
+  {"id": "fmp.index.GSPC", "ok": true, "note": "price 7690.73"},
+  {"id": "fmp.index.DJI", "ok": true, "note": "price 51966.03"},
+  {"id": "fmp.index.RUT", "ok": true, "note": "price 2728.298"},
+  {"id": "fmp.index.VIX", "ok": true, "note": "live print, not settled close"},
+  {"id": "websearch.qqq.quote", "ok": true, "note": "reconciled Benzinga + Kraken, Mon 19 Oct close, approximate"},
+  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row still 2026-10-16, no newer session from provider"},
+  {"id": "websearch.fomc.decision", "ok": true, "note": "next meeting 27-28 Oct, outside 7-day window; no update needed"},
+  {"id": "websearch.catalysts.sweep", "ok": true, "note": "~15 queries across earnings/upgrades/contracts/approvals; 1 qualified (RTX), 4 rejected"},
+  {"id": "fmp.company.profile.RTX", "ok": true, "note": "cap $258.9B, px 192.11"},
+  {"id": "fmp.company.profile.HAL", "ok": true, "note": "used for reject note, cap $27.5B"},
+  {"id": "fmp.company.profile.CLF", "ok": true, "note": "used for reject note, cap $8.0B"}
  ],
  "meta": {
-  "targetSession": "2026-10-19",
-  "lastSession": "2026-10-16"
+  "targetSession": "2026-10-20",
+  "lastSession": "2026-10-19",
+  "generatedAt": "2026-10-20T20:02:00+08:00"
  }
 }
