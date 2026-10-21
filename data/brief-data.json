@@ -1,230 +1,227 @@
 {
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "q": {
-    "price": 7690.73,
-    "change": 31.29,
-    "pct": 0.40852,
-    "dayLow": 7684.79,
-    "dayHigh": 7731.18,
-    "yearHigh": 7844.52,
-    "yearLow": 6316.91,
-    "ma50": 7705.078,
-    "ma200": 7275.662
-   },
-   "ts": 1792442654,
-   "prev": 7659.44
-  },
-  {
-   "id": "QQQ",
-   "name": "Nasdaq-100 ETF",
-   "proxyFor": "NDX",
-   "q": {
-    "price": 721.54,
-    "change": 11.71,
-    "pct": 1.7
-   },
-   "src": "WebSearch (Benzinga + Kraken, Mon 19 Oct close, approximate)",
-   "asOfKind": "search",
-   "asOfNote": "19 Oct close, approximate — two sources gave slightly different intraday snapshots (Benzinga $721.54/+1.7%, Kraken prevClose $709.83/range $716.59-724.55); reconciled to the Benzinga print since it implies the same ~1.7% move off Kraken's stated previous close",
-   "inRegime": false
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "q": {
-    "price": 51966.03,
-    "change": -36.38,
-    "pct": -0.0699583,
-    "dayLow": 51863.8,
-    "dayHigh": 52134.58,
-    "yearHigh": 54744.33,
-    "yearLow": 45057.28,
-    "ma50": 52418.89,
-    "ma200": 50459.227
-   },
-   "ts": 1792442665,
-   "prev": 52002.41
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "q": {
-    "price": 2728.298,
-    "change": 6.928,
-    "pct": 0.25458,
-    "dayLow": 2725.1912,
-    "dayHigh": 2742.4,
-    "yearHigh": 3069.71,
-    "yearLow": 2303.46,
-    "ma50": 2907.5112,
-    "ma200": 2794.635
-   },
-   "ts": 1792441817,
-   "prev": 2721.37
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "q": {
-    "price": 18.73,
-    "change": 0.29,
-    "pct": 1.57267,
-    "dayLow": 18.37,
-    "dayHigh": 18.88,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 15.66,
-    "ma200": 18.14675
-   },
-   "ts": 1792496791,
-   "prev": 18.44,
-   "asOfKind": "live",
-   "asOfNote": "live print 20 Oct 11:46 UTC, not the 19 Oct close",
-   "regimeQ": {
-    "price": 18.44,
-    "dayLow": 18.37,
-    "dayHigh": 18.88,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 15.66,
-    "ma200": 18.14675
-   },
-   "inRegime": "previous close"
-  }
- ],
- "macro": {
-  "date": "2026-10-16",
-  "y10": 5.09,
-  "y10prev": 5.1,
-  "y2": 4.74,
-  "y30": 5.43,
-  "y10path": "5.24% on 9 Oct, 5.21% on 13 Oct, 5.19% on 14 Oct, 5.1% on 15 Oct, 5.09% on 16 Oct",
-  "fed": {
-   "range": "3.75–4.00%",
-   "move": "25 bp",
-   "date": "16 Sep",
-   "vote": "12–0",
-   "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
-   "sources": [
+  "indices": [
     {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+      "id": "SPX",
+      "name": "S&P 500",
+      "q": {
+        "price": 7712.57,
+        "change": 21.84,
+        "pct": 0.28,
+        "dayLow": 7668.03,
+        "dayHigh": 7748.42,
+        "yearHigh": 7844.52,
+        "yearLow": 6316.91,
+        "ma50": 7704.27,
+        "ma200": 7279.93
+      },
+      "ts": 1792526400,
+      "prev": 7690.73
     },
     {
-     "t": "CNN",
-     "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
+      "id": "DJI",
+      "name": "Dow Jones",
+      "q": {
+        "price": 52495.88,
+        "change": 529.85,
+        "pct": 1.02,
+        "dayLow": 51910.92,
+        "dayHigh": 52689.81,
+        "yearHigh": 54744.33,
+        "yearLow": 45057.28,
+        "ma50": 52389.29,
+        "ma200": 50479.79
+      },
+      "ts": 1792529163,
+      "prev": 51966.03
     },
     {
-     "t": "Advisor Perspectives",
-     "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
+      "id": "RUT",
+      "name": "Russell 2000",
+      "q": {
+        "price": 2773.42,
+        "change": 45.12,
+        "pct": 1.65,
+        "dayLow": 2728.56,
+        "dayHigh": 2783.54,
+        "yearHigh": 3069.71,
+        "yearLow": 2303.46,
+        "ma50": 2896.51,
+        "ma200": 2797.19
+      },
+      "ts": 1792528217,
+      "prev": 2728.3
     },
     {
-     "t": "Schwab",
-     "u": "https://www.schwab.com/learn/story/fomc-meeting"
+      "id": "VIX",
+      "name": "Volatility",
+      "q": {
+        "price": 17.35,
+        "change": 0.04,
+        "pct": 0.23,
+        "dayLow": 17.13,
+        "dayHigh": 17.58,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 15.7,
+        "ma200": 18.16
+      },
+      "ts": 1792583191,
+      "prev": 17.31,
+      "asOfKind": "live",
+      "asOfNote": "live print 21 Oct 11:46 UTC (07:46 ET, pre-market), not the 20 Oct close",
+      "regimeQ": {
+        "price": 17.31,
+        "dayLow": 17.13,
+        "dayHigh": 17.58,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 15.7,
+        "ma200": 18.16
+      },
+      "inRegime": "previous close"
     }
-   ]
-  },
-  "y10hist": [
-   {
-    "date": "2026-10-09",
-    "y10": 5.24
-   },
-   {
-    "date": "2026-10-13",
-    "y10": 5.21
-   },
-   {
-    "date": "2026-10-14",
-    "y10": 5.19
-   },
-   {
-    "date": "2026-10-15",
-    "y10": 5.1
-   },
-   {
-    "date": "2026-10-16",
-    "y10": 5.09
-   }
-  ]
- },
- "catalysts": [
-  {
-   "tk": "RTX",
-   "name": "RTX Corporation",
-   "industry": "Aerospace & Defense",
-   "sector": "Industrials",
-   "ctype": "Earnings beat + raise",
-   "cdate": "20 Oct",
-   "cdateISO": "2026-10-20",
-   "what": "Q3 2026 results (SEC 8-K, before today's open): sales $25.0B, up 11% y/y (+12% organic); adjusted EPS $2.26, up 33% y/y (includes $0.25 from IEEPA cost recovery); operating cash flow $2.9B, free cash flow $2.1B. RTX raised its FY2026 outlook for adjusted sales, adjusted EPS and free cash flow (new ranges not stated in the filing excerpt). FMP's quote this run shows RTX essentially flat/slightly lower pre-open (-0.9%), which may not yet reflect the premarket reaction other outlets described — recorded as-is per the routine's live-quote rule.",
-   "sources": [
-    {
-     "t": "SEC EDGAR (RTX Corp 8-K)",
-     "u": "https://www.sec.gov/Archives/edgar/data/0000101829/000010182926000030/a2026-10x208xkerexhibit99.htm"
-    },
-    {
-     "t": "AAII",
-     "u": "https://www.aaii.com/investingideas/article/518549-what-you-need-to-know-about-rtx-corporations-q3-earnings"
-    }
-   ],
-   "cap": "$258.9B",
-   "px": 192.11,
-   "pct": -0.93337,
-   "topSector": true
-  }
- ],
- "bg": {
-  "RTX": {
-   "cap": "$258.9B",
-   "what": "Aerospace & defense conglomerate (Collins Aerospace, Pratt & Whitney, Raytheon) supplying systems, propulsion and services to commercial airlines, militaries and governments worldwide."
-  }
- },
- "notices": [
-  "VIX: FMP's index-quote returned a pre-market print (18.73, ts 20 Oct 11:46 UTC) rather than a settled close. Per the closes-only rule, the tile flags this as a live print and the regime check uses 19 Oct's official close (18.44, FMP's previousClose) instead.",
-  "Rates: 10Y yield unchanged from the last run — FMP's treasury-rates feed still has no row newer than 16 Oct (its 5 most recent distinct sessions are 9/13/14/15/16 Oct), so y10/y10prev/y10hist are identical to yesterday's publish. The regime score's rates check (#9) passes (5.09% ≤ 5.10% and ≤ 5.24%, i.e. down/flat over the window).",
-  "QQQ: WebSearch found no clean single same-session print; reconciled Benzinga's Monday-close figure ($721.54, +1.7%) against Kraken's stated previous close ($709.83) — the two imply the same ~1.7% move, so the tile is published as search-sourced/approximate rather than omitted.",
-  "No Fed decision in the 7 days before this run (next FOMC meeting is 27–28 Oct) — macro.fed is carried unchanged from the 16 Sep decision; only the yield figures were refreshed.",
-  "Catalysts: one new alert qualified this run — RTX Corporation (Q3 beat + raised FY2026 outlook, reported before today's open, SEC 8-K + AAII). The three previously-published alerts (Albemarle, Biogen, UnitedHealth) are now outside the 5-trading-session window and have been dropped from this run's list. Four other candidates were considered and rejected — see 'considered and rejected'."
- ],
- "rejected": [
-  "<b>GE Aerospace (GE)</b> · beat Q3 2026 estimates and raised its full-year 2026 outlook across all metrics (reported before today's open), but shares fell about 1.4% premarket on the news — rejected: sell-the-news.",
-  "<b>Halliburton (HAL)</b> · reported Q3 2026 results before today's open and premarket coverage describes a beat (shares +3.4%), but no source could confirm a raised full-year guidance from two independent outlets — rejected: doesn't clear the 'beat + raise' bar on the sourcing available this run.",
-  "<b>Cleveland-Cliffs (CLF)</b> · Q3 2026 results beat and shares jumped sharply premarket (FMP quote +16.3%), but the only guidance-raise commentary found was tied to the prior (Q2) report's Q3 EBITDA guide, not a confirmed Q3-results raise from two independent sources — rejected: guidance-raise unverified.",
-  "<b>Cboe Global Markets (CBOE)</b> · Morgan Stanley double-upgrade (Underweight→Overweight, $258→$358 target, +38.7% implied) is well-sourced but dated 9 Oct — outside the last 5 trading sessions (13–19 Oct) as of this run — rejected: stale."
- ],
- "sections": {
-  "indices": {
-   "asOf": "2026-10-19",
-   "source": "FMP index quotes (19 Oct close); QQQ via WebSearch (approximate)"
-  },
+  ],
   "macro": {
-   "asOf": "2026-10-16",
-   "source": "FMP treasury-rates (latest available session; no newer row yet)"
+    "date": "2026-10-20",
+    "y10": 5.12,
+    "y10prev": 5.15,
+    "y2": 4.79,
+    "y30": 5.42,
+    "y10path": "5.19% on 14 Oct, 5.10% on 15 Oct, 5.09% on 16 Oct, 5.15% on 19 Oct, 5.12% on 20 Oct",
+    "fed": {
+      "range": "3.75–4.00%",
+      "move": "25 bp",
+      "date": "16 Sep",
+      "vote": "12–0",
+      "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
+      "sources": [
+        { "t": "CNBC", "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html" },
+        { "t": "CNN", "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money" },
+        { "t": "Advisor Perspectives", "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026" },
+        { "t": "Schwab", "u": "https://www.schwab.com/learn/story/fomc-meeting" }
+      ]
+    },
+    "y10hist": [
+      { "date": "2026-10-14", "y10": 5.19 },
+      { "date": "2026-10-15", "y10": 5.1 },
+      { "date": "2026-10-16", "y10": 5.09 },
+      { "date": "2026-10-19", "y10": 5.15 },
+      { "date": "2026-10-20", "y10": 5.12 }
+    ]
   },
-  "catalysts": {
-   "asOf": "2026-10-20",
-   "source": "WebSearch (SEC 8-K, AAII) + FMP company/profile-symbol"
+  "catalysts": [
+    {
+      "tk": "CLF",
+      "name": "Cleveland-Cliffs Inc.",
+      "industry": "Steel",
+      "sector": "Basic Materials",
+      "ctype": "Earnings beat + raise",
+      "cdate": "19 Oct",
+      "cdateISO": "2026-10-19",
+      "what": "Cleveland-Cliffs' Q3 2026 adjusted EBITDA of $612M beat its own prior guidance of $575M, with adjusted EPS of $0.28 vs $0.21 expected; management guided Q4 2026 adjusted EBITDA to ~$715M (up ~$103M on higher steel pricing) and said it expects a major Q4 debt reduction. Shares jumped on the outlook (SEC 8-K, Exhibit 99.1, filed 19 Oct).",
+      "sources": [
+        { "t": "SEC (Cleveland-Cliffs 8-K, Exhibit 99.1)", "u": "https://www.sec.gov/Archives/edgar/data/0000764065/000076406526000112/clf-202609308xkex991.htm" },
+        { "t": "Finviz", "u": "https://finviz.com/news/403791/cleveland-cliffs-shares-rise-over-7-as-third-quarter-earnings-exceed-expectations" }
+      ],
+      "cap": "$7.8B",
+      "px": 13.65,
+      "pct": -3.19,
+      "topSector": false
+    },
+    {
+      "tk": "DDOG",
+      "name": "Datadog, Inc.",
+      "industry": "Software - Application",
+      "sector": "Technology",
+      "ctype": "Analyst upgrade",
+      "cdate": "19 Oct",
+      "cdateISO": "2026-10-19",
+      "what": "Bernstein upgraded Datadog to Outperform from Market Perform on 19 Oct and raised its price target to $350 from $237 (implies roughly 37% upside from this run's FMP price), citing AI token usage growing at least 50% and saying its prior caution (tied to a large 'Born in AI' customer ARR cut) was too conservative. Shares rose on the upgrade after the prior week's broad tech selloff. Datadog reports Q3 2026 results 4 Nov.",
+      "sources": [
+        { "t": "Finviz", "u": "https://finviz.com/news/403797/datadog-shares-rise-36-after-bernstein-upgrade-and-price-target-increase-to-350" },
+        { "t": "TIKR", "u": "https://www.tikr.com/blog/datadog-soars-6-on-bernstein-upgrade-as-ai-token-use-has-grown-at-least-50" }
+      ],
+      "cap": "$92.1B",
+      "px": 256.43,
+      "pct": -1.51,
+      "topSector": true
+    },
+    {
+      "tk": "ALB",
+      "name": "Albemarle Corporation",
+      "industry": "Chemicals - Specialty",
+      "sector": "Basic Materials",
+      "ctype": "Analyst upgrade",
+      "cdate": "14 Oct",
+      "cdateISO": "2026-10-14",
+      "what": "Mizuho upgraded Albemarle to Outperform from Neutral on 14 Oct (analyst John Roberts) and set a $130 price target (implies roughly 36% upside from this run's FMP price), citing accelerating battery energy-storage demand tightening lithium market conditions; Mizuho also raised its Albemarle adjusted-EBITDA estimates to $3.2B (2027) and $2.9B (2028) on firmer Benchmark Minerals lithium-carbonate price forecasts ($22,500/t 2027, $19,500/t 2028). Albemarle reports Q3 2026 results 4 Nov.",
+      "sources": [
+        { "t": "Tradingpedia", "u": "https://www.tradingpedia.com/2026/10/14/mizuho-upgrades-albemarle-to-outperform-on-storage-surge/" },
+        { "t": "Benzinga", "u": "https://www.benzinga.com/node/62350707" }
+      ],
+      "cap": "$11.3B",
+      "px": 95.77,
+      "pct": 1.19,
+      "topSector": false
+    }
+  ],
+  "bg": {
+    "CLF": {
+      "cap": "$7.8B",
+      "what": "North American flat-rolled steel producer, vertically integrated into iron ore mining (five mines in Minnesota/Michigan); serves automotive, infrastructure and manufacturing customers."
+    },
+    "DDOG": {
+      "cap": "$92.1B",
+      "what": "Cloud-based observability and security SaaS platform (infrastructure monitoring, APM, log management) for developers and IT operations teams."
+    },
+    "ALB": {
+      "cap": "$11.3B",
+      "what": "Specialty chemicals producer (lithium, bromine, catalysts) supplying batteries, electronics and industrial markets."
+    }
+  },
+  "notices": [
+    "VIX: FMP's index-quote returned a pre-market print (17.35, ts 21 Oct 11:46 UTC) rather than a settled close. Per the closes-only rule, the tile flags this as a live print and the regime check uses 20 Oct's official close (17.31, FMP's previousClose) instead.",
+    "QQQ: WebSearch (two queries) returned only stale or wrong-share-class (QQQM) results, no reliable same-session QQQ print — the tile is omitted this run rather than publishing an unverified number.",
+    "No FOMC decision in the 7 days before this run (next meeting is 27–28 Oct) — macro.fed is carried unchanged from the 16 Sep decision; only the yield figures were refreshed.",
+    "Catalysts: two new alerts qualified this run — Cleveland-Cliffs (Q3 beat + raised Q4 outlook, 19 Oct, SEC 8-K + Finviz) and Datadog (Bernstein upgrade to Outperform, $350 target, 19 Oct, Finviz + TIKR). Albemarle (14 Oct Mizuho upgrade) is carried forward with a refreshed FMP quote — it is still inside this run's 5-session window (14–20 Oct) but will roll off tomorrow. UnitedHealth (13 Oct) has rolled out of the window and is dropped. Several other candidates were considered and rejected — see 'considered and rejected'."
+  ],
+  "screenNotes": [],
+  "rejected": [
+    "<b>Salesforce/Braze deal (BRZE)</b> · Salesforce agreed to acquire Braze for $47.50/share cash (announced ~19–20 Oct) — rejected: an acquisition isn't one of the playbook catalyst types (earnings beat+raise, major contract, analyst upgrade, approval/launch, index add).",
+    "<b>SCWorx (WORX)</b> · jumped premarket on a four-state healthcare data-management contract — rejected: cap well under $5B (micro-cap, thin volume).",
+    "<b>Super Micro Computer (SMCI)</b> · premarket coverage cites a revenue/margin forecast above Street estimates, but no two independent sources could confirm this was reported inside the last 5 trading sessions — rejected: date unverified.",
+    "<b>Halliburton (HAL), Thermo Fisher (TMO), Nextracker (NXT), McKesson (MCK), HCA Healthcare (HCA)</b> · analyst price-target raises found via WebSearch, but none could be confirmed to a specific date inside the last 5 trading sessions (13–20 Oct) from two independent sources — rejected: stale/date unconfirmed."
+  ],
+  "sections": {
+    "indices": { "asOf": "2026-10-20", "source": "FMP index quotes (20 Oct close); VIX is a 21 Oct pre-market live print (flagged); QQQ omitted (no reliable WebSearch print)" },
+    "macro": { "asOf": "2026-10-20", "source": "FMP treasury-rates" },
+    "catalysts": { "asOf": "2026-10-20", "source": "WebSearch (2+ sources each) + FMP company/profile-symbol live quotes (21 Oct pre-market)" }
+  },
+  "fetchlog": [
+    { "id": "fmp.index.GSPC", "ok": true, "note": "price 7712.57, ts 20 Oct close" },
+    { "id": "fmp.index.DJI", "ok": true, "note": "price 52495.88, ts 20 Oct close" },
+    { "id": "fmp.index.RUT", "ok": true, "note": "price 2773.42, ts 20 Oct close" },
+    { "id": "fmp.index.VIX", "ok": true, "note": "live print (21 Oct 11:46 UTC), not settled close; prev used for regime" },
+    { "id": "fmp.economics.treasury-rates", "ok": true, "note": "2026-10-01 to 2026-10-20, 13 rows; last 5 distinct sessions kept as y10hist" },
+    { "id": "websearch.qqq.quote.1", "ok": false, "note": "no dated same-session QQQ print found" },
+    { "id": "websearch.qqq.quote.2", "ok": false, "note": "retry: still only stale/QQQM results; tile omitted per rule" },
+    { "id": "websearch.fed.fomc-check", "ok": true, "note": "confirmed no FOMC decision in last 7 days; next meeting 27-28 Oct" },
+    { "id": "websearch.catalyst.earnings-sweep", "ok": true, "note": "generic query, mostly stale/undated results" },
+    { "id": "websearch.catalyst.upgrade-sweep", "ok": true, "note": "generic query, mostly stale/undated results" },
+    { "id": "websearch.catalyst.contract-sweep", "ok": true, "note": "generic query, mostly stale/undated results" },
+    { "id": "websearch.catalyst.premarket-movers", "ok": true, "note": "surfaced CLF, DDOG, BRZE, WORX, SMCI candidates" },
+    { "id": "websearch.catalyst.index-add-sweep", "ok": true, "note": "no Oct 2026 S&P 500 ad-hoc addition found" },
+    { "id": "websearch.catalyst.clf-detail", "ok": true, "note": "confirmed Q3 beat + Q4 EBITDA guide raise, 2 sources" },
+    { "id": "websearch.catalyst.ddog-detail", "ok": true, "note": "confirmed Bernstein upgrade + $350 target, 3 sources" },
+    { "id": "websearch.catalyst.fda-sweep", "ok": true, "note": "no named Oct 2026 PDUFA ticker found" },
+    { "id": "fmp.profile.CLF", "ok": true, "note": "cap $7.8B, price 13.65" },
+    { "id": "fmp.profile.DDOG", "ok": true, "note": "cap $92.1B, price 256.43" },
+    { "id": "fmp.profile.ALB", "ok": true, "note": "refreshed cap $11.3B, price 95.77" }
+  ],
+  "meta": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-21T20:01:11+08:00",
+    "targetSession": "2026-10-21",
+    "lastSession": "2026-10-20"
   }
- },
- "fetchlog": [
-  {"id": "fmp.index.GSPC", "ok": true, "note": "price 7690.73"},
-  {"id": "fmp.index.DJI", "ok": true, "note": "price 51966.03"},
-  {"id": "fmp.index.RUT", "ok": true, "note": "price 2728.298"},
-  {"id": "fmp.index.VIX", "ok": true, "note": "live print, not settled close"},
-  {"id": "websearch.qqq.quote", "ok": true, "note": "reconciled Benzinga + Kraken, Mon 19 Oct close, approximate"},
-  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row still 2026-10-16, no newer session from provider"},
-  {"id": "websearch.fomc.decision", "ok": true, "note": "next meeting 27-28 Oct, outside 7-day window; no update needed"},
-  {"id": "websearch.catalysts.sweep", "ok": true, "note": "~15 queries across earnings/upgrades/contracts/approvals; 1 qualified (RTX), 4 rejected"},
-  {"id": "fmp.company.profile.RTX", "ok": true, "note": "cap $258.9B, px 192.11"},
-  {"id": "fmp.company.profile.HAL", "ok": true, "note": "used for reject note, cap $27.5B"},
-  {"id": "fmp.company.profile.CLF", "ok": true, "note": "used for reject note, cap $8.0B"}
- ],
- "meta": {
-  "targetSession": "2026-10-20",
-  "lastSession": "2026-10-19",
-  "generatedAt": "2026-10-20T20:02:00+08:00"
- }
 }
