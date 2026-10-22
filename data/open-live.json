@@ -1,305 +1,56 @@
 {
- "asOf": null,
- "note": "FMP company/profile-symbol quotes read ~11 min after the 9:30 ET open (no regular-session `open` print on this plan, so `open` is omitted everywhere -- the page correctly shows \"open print not available yet\"). Index quotes are live prints, not settled closes. Futures (ES/NQ/YM/RTY) are omitted this run: WebSearch could not return four contracts with two reconcilable sources each (Dow/YM had two converging reads near +0.23%, but S&P/Nasdaq figures conflicted across sources and Russell/RTY had no usable read at all) -- publishing a partial or conflicting set would violate the no-guessing rule, so the whole section is left out rather than guessed. QQQ is omitted for the same reason (WebSearch reads for an intraday QQQ price ranged from $602 to $744 with no reconcilable live source).",
- "meta": {
-  "schemaVersion": 1
- },
- "sections": {
-  "indices": {
-   "asOfUTC": "2026-10-21T13:46:00Z",
-   "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"
+  "note": "FMP indexes/index-quote + company/profile-symbol read ~11-15 min before the 9:30 ET open, 22 Oct 2026. Futures (ES/NQ/YM/RTY), QQQ and overnight news are omitted this run: multiple WebSearch queries (general futures/QQQ quotes, market-selloff coverage, company-specific news for the biggest movers, Fed/yields) returned only stale or undated results -- the freshest dated market coverage found was from 16 Oct 2026, nothing from 21 or 22 Oct. Publishing a guessed or stale-but-undisclosed number would violate the no-invent rule, so those sections are left out rather than filled in.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-10-22T13:42:00Z", "source": "FMP indexes/index-quote"},
+    "quotes": {"asOfUTC": "2026-10-22T13:44:00Z", "source": "FMP company/profile-symbol"}
   },
+  "indices": [
+    {"id": "SPX", "name": "S&P 500", "px": 7691.6, "pct": -0.84528, "prev": 7757.17},
+    {"id": "DJI", "name": "Dow Jones", "px": 52735.87, "pct": -0.22745, "prev": 52856.09},
+    {"id": "RUT", "name": "Russell 2000", "px": 2772.79037, "pct": -0.29595, "prev": 2781.0209},
+    {"id": "VIX", "name": "Volatility", "px": 17.87, "pct": 7.13429, "prev": 16.68, "asOfKind": "live", "asOfNote": "pre-market print ~13:42 UTC, not a settled close"}
+  ],
   "quotes": {
-   "asOfUTC": "2026-10-21T13:46:00Z",
-   "source": "FMP company/profile-symbol"
+    "AVT": {"px": 89.59, "pct": -3.80114, "vol": 32247.02414, "avgVol": 1265153, "change": -3.54},
+    "ZS": {"px": 236.1768, "pct": 2.09519, "vol": 292421.32974, "avgVol": 2990978, "change": 4.8468},
+    "ETN": {"px": 373, "pct": -5.31553, "vol": 140591, "avgVol": 2220933, "change": -20.94},
+    "META": {"px": 649.595, "pct": -6.87077, "vol": 7735055.70455, "avgVol": 19223144, "change": -47.925},
+    "GDDY": {"px": 111.55, "pct": 3.07707, "vol": 75860, "avgVol": 2182305, "change": 3.33},
+    "ITT": {"px": 191.45, "pct": -4.43746, "vol": 8877.15756, "avgVol": 882875, "change": -8.89},
+    "VRSN": {"px": 307.7109, "pct": 0.15001, "vol": 36385.28643, "avgVol": 823124, "change": 0.4609},
+    "PLTR": {"px": 201.77, "pct": 0.02478895, "vol": 1883190, "avgVol": 35290096, "change": 0.05000427},
+    "GOOGL": {"px": 329.9, "pct": -1.45179, "vol": 2705859, "avgVol": 28493340, "change": -4.86},
+    "SNAP": {"px": 6.295, "pct": -0.86614, "vol": 2042857, "avgVol": 39148921, "change": -0.055},
+    "CLF": {"px": 13.49, "pct": -3.8489, "vol": 1844109, "avgVol": 20139105, "change": -0.54},
+    "DDOG": {"px": 271.5388, "pct": -0.56802, "vol": 137170.2132, "avgVol": 4073042, "change": -1.5512},
+    "NOK": {"px": 8.37, "pct": -9.51351, "vol": 29396447, "avgVol": 84097997, "change": -0.88},
+    "GNRC": {"px": 189.56, "pct": -6.68504, "vol": 60925, "avgVol": 1154916, "change": -13.58},
+    "LTM": {"px": 47.83, "pct": -0.54065, "vol": 46026, "avgVol": 770205, "change": -0.26},
+    "SNX": {"px": 242.55, "pct": -3.4204, "vol": 11022, "avgVol": 853941, "change": -8.59},
+    "NTAP": {"px": 213.9008, "pct": -1.5235, "vol": 62652.44037, "avgVol": 2659327, "change": -3.3092},
+    "NTNX": {"px": 70.1317, "pct": 0.03095136, "vol": 39786.92196, "avgVol": 2941226, "change": 0.0217},
+    "AAOI": {"px": 71.17, "pct": -7.95396, "vol": 1607132, "avgVol": 10308003, "change": -6.15},
+    "BB": {"px": 9.0201, "pct": -4.14346, "vol": 1746102, "avgVol": 21436096, "change": -0.3899},
+    "CIEN": {"px": 340.425, "pct": -5.78818, "vol": 258807, "avgVol": 2636898, "change": -20.915},
+    "CSCO": {"px": 105.975, "pct": -1.19802, "vol": 554378, "avgVol": 20181361, "change": -1.285},
+    "FFIV": {"px": 456, "pct": -0.56477, "vol": 9663, "avgVol": 595300, "change": -2.59},
+    "FTNT": {"px": 176.62, "pct": 1.47659, "vol": 233158, "avgVol": 4882918, "change": 2.57}
   },
-  "news": {
-   "asOfUTC": "2026-10-21T13:47:00Z",
-   "source": "WebSearch"
-  }
- },
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "px": 7735.78,
-   "pct": 0.30094,
-   "prev": 7712.57
+  "notes": {
+    "META": "Down 6.9% pre-market on a heavy FMP-implied previous close of ~$697.52 -- far below the brief's pinned reference ($738.88, dated 21 Oct), consistent with the prior open-update's flag that Meta was due to report Q3 2026 after the 21 Oct close. This run's WebSearch could not find any dated coverage of that print or today's reaction to confirm or explain it -- treat the drop as unconfirmed-cause and the brief's recorded 28 Oct earnings date as unreliable until verified.",
+    "VRSN": "Reports today, 22 Oct, after the close -- a live or newly-triggered VRSN position carries same-day binary earnings risk tonight.",
+    "GOOGL": "Down 1.5% pre-market; Alphabet often reports in the same week as Meta, but no dated source confirming an Alphabet print or its timing could be found this run.",
+    "ETN": "Pre-market price implies a previous close (~$393.9) well below the brief's pinned reference ($445.09) -- the brief's technical-pick levels for ETN are PINNED from an earlier interactive refresh (expected under the hybrid design) and look stale against this move; no confirming news found.",
+    "NOK": "Down 9.5% pre-market, the largest mover in the watchlist; no dated company-specific news found this run to explain it.",
+    "AAOI": "Down 8.0% pre-market; no dated company-specific news found this run.",
+    "CIEN": "Down 5.8% pre-market; no dated company-specific news found this run.",
+    "GNRC": "Down 6.7% pre-market; no dated company-specific news found this run."
   },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "px": 52574.54,
-   "pct": 0.14984,
-   "prev": 52495.88
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "px": 2790.24471,
-   "pct": 0.49407,
-   "prev": 2776.52674
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "px": 16.87,
-   "pct": -2.54188,
-   "prev": 17.31,
-   "asOfKind": "live",
-   "asOfNote": "live print 21 Oct 13:4x UTC, not a settled close; previous close (17.31) is the brief's reference"
-  }
- ],
- "quotes": {
-  "AVT": {
-   "px": 91.91,
-   "pct": 0.93345,
-   "vol": 14853,
-   "avgVol": 1261931,
-   "change": 0.85
-  },
-  "ZS": {
-   "px": 222.2,
-   "pct": 3.58491,
-   "vol": 141885.6995,
-   "avgVol": 3013136,
-   "change": 7.69
-  },
-  "ETN": {
-   "px": 391.32,
-   "pct": 2.44515,
-   "vol": 149025,
-   "avgVol": 2219078,
-   "change": 9.34
-  },
-  "META": {
-   "px": 703.8,
-   "pct": 1.37559,
-   "vol": 1869881,
-   "avgVol": 19058076,
-   "change": 9.55
-  },
-  "GDDY": {
-   "px": 110.2,
-   "pct": 1.28676,
-   "vol": 52609,
-   "avgVol": 2198576,
-   "change": 1.4
-  },
-  "ITT": {
-   "px": 198.145,
-   "pct": 1.02738,
-   "vol": 13062,
-   "avgVol": 893336,
-   "change": 2.015
-  },
-  "VRSN": {
-   "px": 306.605,
-   "pct": 0.02446743,
-   "vol": 14563,
-   "avgVol": 817592,
-   "change": 0.075
-  },
-  "PLTR": {
-   "px": 196.85,
-   "pct": 2.20665,
-   "vol": 2306360,
-   "avgVol": 35428532,
-   "change": 4.25
-  },
-  "GOOGL": {
-   "px": 332.85,
-   "pct": -2.18206,
-   "vol": 5744669.32911,
-   "avgVol": 28444068,
-   "change": -7.425
-  },
-  "SNAP": {
-   "px": 6.415,
-   "pct": 0.54859,
-   "vol": 984422,
-   "avgVol": 38977278,
-   "change": 0.03499996
-  },
-  "ALB": {
-   "px": 94.71,
-   "pct": -1.10682,
-   "vol": 135859,
-   "avgVol": 2391513,
-   "change": -1.06
-  },
-  "CLF": {
-   "px": 13.78,
-   "pct": 0.95238,
-   "vol": 858685,
-   "avgVol": 20037271,
-   "change": 0.13
-  },
-  "DDOG": {
-   "px": 266.99,
-   "pct": 4.11808,
-   "vol": 168713.72089,
-   "avgVol": 4104825,
-   "change": 10.56
-  },
-  "NOK": {
-   "px": 9.21,
-   "pct": 2.10643,
-   "vol": 9851479,
-   "avgVol": 84589087,
-   "change": 0.19
-  },
-  "GNRC": {
-   "px": 200,
-   "pct": 2.77492,
-   "vol": 33959,
-   "avgVol": 1151323,
-   "change": 5.4
-  },
-  "LTM": {
-   "px": 48.03,
-   "pct": 0.54427,
-   "vol": 34725,
-   "avgVol": 771837,
-   "change": 0.26
-  },
-  "SNX": {
-   "px": 251.985,
-   "pct": 1.52089,
-   "vol": 11831,
-   "avgVol": 852924,
-   "change": 3.775
-  },
-  "NTAP": {
-   "px": 212,
-   "pct": 0.9668,
-   "vol": 49887.98573,
-   "avgVol": 2670357,
-   "change": 2.03
-  },
-  "NTNX": {
-   "px": 69.5604,
-   "pct": 1.99472,
-   "vol": 49875.80231,
-   "avgVol": 2936575,
-   "change": 1.3604
-  },
-  "AAOI": {
-   "px": 77.715,
-   "pct": 1.27052,
-   "vol": 1343446,
-   "avgVol": 10358292,
-   "change": 0.975
-  },
-  "BB": {
-   "px": 9.285,
-   "pct": 4.67869,
-   "vol": 1941515,
-   "avgVol": 21436096,
-   "change": 0.415
-  },
-  "CIEN": {
-   "px": 352.65,
-   "pct": 3.12911,
-   "vol": 183880,
-   "avgVol": 2648608,
-   "change": 10.7
-  },
-  "CSCO": {
-   "px": 107.61,
-   "pct": 0.84341,
-   "vol": 751866,
-   "avgVol": 20256300,
-   "change": 0.9
-  },
-  "FFIV": {
-   "px": 462.32001,
-   "pct": 1.22835,
-   "vol": 16522,
-   "avgVol": 590162,
-   "change": 5.61001
-  },
-  "FTNT": {
-   "px": 169.01,
-   "pct": -1.12327,
-   "vol": 350040.58116,
-   "avgVol": 4905105,
-   "change": -1.92
-  }
- },
- "notes": {
-  "META": "Reports Q3 2026 after TODAY's close (confirmed on Meta's own IR page, 4:30pm ET call) -- the brief recorded earnings as 28 Oct (16 sessions away); that date is stale. This live technical pick carries same-day binary earnings risk tonight, not the buffer shown on the brief.",
-  "ZS": "Already trading at 222.20, above its entry zone (216.98-219.15) within minutes of the open -- a chased fill if triggered here, not a clean entry at the zone.",
-  "VRSN": "Reports Thu 22 Oct, after the close -- within 3 trading sessions. A live or newly-triggered VRSN position carries binary earnings risk into tomorrow night's print.",
-  "DDOG": "+4.1% this morning, extending Monday's Bernstein upgrade reaction (the brief's catalyst alert); no new DDOG-specific news found overnight.",
-  "CLF": "+1.0% with Q3 results (reported 19 Oct) and FY2027 EBITDA guidance >$4B still the active catalyst thesis; no new overnight news.",
-  "BB": "+4.7% this morning; part of a broad move in small/mid-cap software-infrastructure names -- no company-specific headline found.",
-  "CIEN": "+3.1% this morning; same communication-equipment strength as NOK/AAOI, no ticker-specific headline found dated today."
- },
- "news": [
-  {
-   "tag": "Earnings",
-   "top3": true,
-   "title": "Meta reports Q3 after today's close -- not 28 Oct as the brief recorded",
-   "text": "Meta's own investor-relations page confirms Q3 2026 results post after today's US close (4:30pm ET call), contradicting the brief's recorded earnings date of 28 Oct. META is a live technical pick: this is same-day binary earnings risk, not the 16-session buffer shown on the brief.",
-   "names": [
-    "META"
-   ],
-   "sources": [
-    {
-     "t": "Meta Investor Relations",
-     "u": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-to-Announce-Third-Quarter-2026-Results/default.aspx"
-    },
-    {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-21-dow-sp-500-nasdaq-100000105.html"
-    }
-   ]
-  },
-  {
-   "tag": "Earnings",
-   "top3": false,
-   "title": "Tesla also reports Q3 tonight after the close",
-   "text": "Independent earnings-calendar sources confirm Tesla's Q3 2026 call is today (~5:30pm ET), the same session as Meta -- a heavy earnings night that could swing Tech/Communication Services sentiment into tomorrow's session.",
-   "names": [],
-   "sources": [
-    {
-     "t": "Hudson Labs",
-     "u": "https://www.hudson-labs.com/research/tesla-q3-2026-earnings-preview-tsla-revenue-margins-outlook"
-    }
-   ]
-  },
-  {
-   "tag": "AI trade",
-   "top3": true,
-   "title": "SpaceX Q3 beat lifts AI-trade sentiment into the open",
-   "text": "SpaceX (reported after Tuesday's close) posted Q3 revenue of roughly $14.58B versus roughly $12.7B consensus, with shares +~7.6%, helping lift the Nasdaq and S&P 500 at today's open ahead of tonight's Tesla/Meta reports.",
-   "names": [],
-   "sources": [
-    {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-21-dow-sp-500-nasdaq-100000105.html"
-    }
-   ]
-  },
-  {
-   "tag": "Macro",
-   "top3": false,
-   "title": "Oil and yields stay a valuation headwind",
-   "text": "Brent is back above $110 after Tuesday's spike and the 10-year Treasury yield sits near 5.1%, a headwind cited today for AI-stock valuations as the market heads into a heavy earnings night.",
-   "names": [],
-   "sources": [
-    {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-21-dow-sp-500-nasdaq-100000105.html"
-    }
-   ]
-  }
- ],
- "footnotes": [
-  "Futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned two converging reads for Dow futures (~52,838 vs ~52,848, +0.23%/+0.24%) but S&P 500 and Nasdaq futures figures were internally inconsistent across sources (one page's price level implied a ~0.9% move while the same page's stated percentage said 0.2-0.3%), and no usable Russell 2000 (RTY) futures reading was found at all. Publishing 1 of 4 verified contracts isn't a complete section, so the whole section is omitted per the no-guessing rule rather than publishing a partial or conflicting set.",
-  "QQQ omitted: two WebSearch reads of an intraday QQQ price returned wildly conflicting snapshots ($602-$744, mixing in leveraged/related tickers like QQQX and QLD) with no reconcilable live source -- the brief's last published QQQ tile stays the reference point, carried stale.",
-  "Earnings-within-3-sessions check: META (a live technical pick) reports TONIGHT after the close -- flagged above; this corrects the brief's recorded 28 Oct date. VRSN (also a technical pick) reports Thu 22 Oct, within 3 trading sessions -- flagged on the prior run and still live.",
-  "Targeted searches for Eaton, ITT, Alphabet, Snap, Albemarle, Cleveland-Cliffs and Datadog company-specific news dated within the last 12 hours returned nothing new beyond what's already in the brief's catalyst notes; only the earnings-calendar corrections (Meta, Tesla) and the SpaceX/macro items met the dated, sourced bar this run."
- ]
+  "footnotes": [
+    "Futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned only undated or multi-week-old snapshots for all four contracts, with no two-source same-day reconciliation possible -- publishing any of them would be a guess, which the no-invent rule forbids.",
+    "QQQ omitted: WebSearch returned no dated same-session QQQ price (results were either undated snapshot widgets or weeks old); the brief's last published QQQ tile (19 Oct close, $721.54) stays the reference point, carried stale.",
+    "Overnight news omitted: WebSearch across several phrasings (general market/VIX coverage, sector news, Fed/yields, and news for the largest individual movers -- META, ETN, NOK, AAOI, CIEN, GNRC) returned nothing dated later than 16 Oct 2026. The pre-market moves below are real, cross-checked FMP quotes, but this run could not source what is driving them.",
+    "VIX printed 17.87 pre-market (+7.1% vs the 16.68 prior close) alongside SPX/DJI/RUT all lower pre-market -- a broad risk-off tape this morning, not isolated to the watchlist names, though the specific cause is unverified this run."
+  ]
 }
