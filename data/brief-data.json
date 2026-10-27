@@ -4,84 +4,84 @@
       "id": "SPX",
       "name": "S&P 500",
       "q": {
-        "price": 7623.68,
-        "change": -39.75,
-        "pct": -0.5187,
-        "dayLow": 7612.07,
-        "dayHigh": 7660.15,
+        "price": 7676.77,
+        "change": 53.09,
+        "pct": 0.69638,
+        "dayLow": 7639.7,
+        "dayHigh": 7702.13,
         "yearHigh": 7844.52,
         "yearLow": 6316.91,
-        "ma50": 7699.639,
-        "ma200": 7291.315
+        "ma50": 7697.459,
+        "ma200": 7295.0913
       },
-      "ts": 1792787901,
-      "prev": 7663.43
+      "ts": 1793047423,
+      "prev": 7623.68
     },
     {
       "id": "DJI",
       "name": "Dow Jones",
       "q": {
-        "price": 52215.16,
-        "change": -652.82,
-        "pct": -1.23481,
-        "dayLow": 52055.1,
-        "dayHigh": 52696.7,
+        "price": 52361.58,
+        "change": 146.42,
+        "pct": 0.28042,
+        "dayLow": 52263.25,
+        "dayHigh": 52620.19,
         "yearHigh": 54744.33,
         "yearLow": 45057.28,
-        "ma50": 52320.03,
-        "ma200": 50532.312
+        "ma50": 52292.613,
+        "ma200": 50547.79
       },
-      "ts": 1792788175,
-      "prev": 52867.98
+      "ts": 1793047421,
+      "prev": 52215.16
     },
     {
       "id": "RUT",
       "name": "Russell 2000",
       "q": {
-        "price": 2775.8987,
-        "change": -8.1274,
-        "pct": -0.29193,
-        "dayLow": 2752.627,
-        "dayHigh": 2778.5657,
+        "price": 2786.424,
+        "change": 10.5253,
+        "pct": 0.37917,
+        "dayLow": 2778.165,
+        "dayHigh": 2804.3972,
         "yearHigh": 3069.71,
         "yearLow": 2303.46,
-        "ma50": 2880.8179,
-        "ma200": 2800.3665
+        "ma50": 2875.1777,
+        "ma200": 2801.279
       },
-      "ts": 1792787416,
-      "prev": 2784.0261
+      "ts": 1793046604,
+      "prev": 2775.8987
     },
     {
       "id": "VIX",
       "name": "Volatility",
       "q": {
-        "price": 19.41,
-        "change": -0.04,
-        "pct": -0.20566,
-        "dayLow": 19.17,
-        "dayHigh": 19.84,
+        "price": 17.88,
+        "change": -0.51,
+        "pct": -2.77325,
+        "dayLow": 17.77,
+        "dayHigh": 18.55,
         "yearHigh": 35.3,
         "yearLow": 13.38,
-        "ma50": 15.9352,
-        "ma200": 18.20875
+        "ma50": 15.9992,
+        "ma200": 18.2251
       },
-      "ts": 1793015236,
-      "prev": 19.45
+      "ts": 1793101936,
+      "prev": 18.39
     }
   ],
   "macro": {
-    "date": "2026-10-23",
+    "date": "2026-10-26",
     "y10": 5.0,
-    "y10prev": 4.96,
-    "y2": 4.69,
-    "y30": 5.33,
-    "y10path": "5.15% on 19 Oct, 5.12% on 20 Oct, 5.13% on 21 Oct, 4.96% on 22 Oct, 5.00% on 23 Oct",
+    "y10prev": 5.0,
+    "y2": 4.68,
+    "y30": 5.31,
+    "y10path": "5.12% on 20 Oct, 5.13% on 21 Oct, 4.96% on 22 Oct, 5.00% on 23 Oct, 5.00% on 26 Oct",
     "fed": {
-      "range": "3.75\u20134.00%",
+      "range": "3.75–4.00%",
       "move": "25 bp",
       "date": "16 Sep",
-      "vote": "12\u20130",
-      "note": "first hike since 2023; the committee signaled more to come; no FOMC meeting fell in the 7 days before this run (next meeting 27-28 Oct) so this block is unchanged",
+      "vote": "12–0",
+      "note": "first hike since 2023; the committee signaled more to come; the next FOMC meeting is today/tomorrow (27-28 Oct) and the decision is not due until after this run fires, so this block is unchanged",
       "sources": [
         {
           "t": "CNBC",
@@ -103,10 +103,6 @@
     },
     "y10hist": [
       {
-        "date": "2026-10-19",
-        "y10": 5.15
-      },
-      {
         "date": "2026-10-20",
         "y10": 5.12
       },
@@ -121,94 +117,101 @@
       {
         "date": "2026-10-23",
         "y10": 5.0
+      },
+      {
+        "date": "2026-10-26",
+        "y10": 5.0
       }
     ]
   },
   "catalysts": [
     {
-      "tk": "CLF",
-      "name": "Cleveland-Cliffs Inc.",
-      "industry": "Steel",
-      "sector": "Basic Materials",
+      "tk": "NOC",
+      "name": "Northrop Grumman Corporation",
+      "industry": "Aerospace & Defense",
+      "sector": "Industrials",
       "ctype": "Earnings beat + raise",
-      "cdate": "19 Oct",
-      "cdateISO": "2026-10-19",
-      "what": "Cleveland-Cliffs' Q3 2026 adjusted EBITDA of $612M beat its own prior guidance of $575M, with adjusted EPS of $0.28 vs $0.21 expected; management guided Q4 2026 adjusted EBITDA to ~$715M on higher steel pricing and flagged a major Q4 debt reduction. Today (23 Oct close) is the LAST day this event stays inside the 5-session window (19-23 Oct) \u2014 it drops off tomorrow unless a fresh event qualifies it again. Shares rebounded sharply today (+6.5%) after Friday's broad steel/materials selloff; price/cap refreshed via FMP.",
+      "cdate": "20 Oct",
+      "cdateISO": "2026-10-20",
+      "what": "Q3 2026 diluted EPS of $7.89 beat the ~$7.18 consensus (sales +7% to $11.1B); Northrop raised FY2026 MTM-adjusted EPS guidance to $29.35–$29.75 from $28.60–$29.10, with record backlog of ~$109.6B on a 1.5x book-to-bill.",
       "sources": [
         {
-          "t": "SEC (Cleveland-Cliffs 8-K, Exhibit 99.1)"
+          "t": "FinancialModelingPrep Market News",
+          "u": "https://site.financialmodelingprep.com/market-news/northrop-grumman-q3-2026-earnings-backlog"
         },
         {
-          "t": "Finviz"
+          "t": "Finviz",
+          "u": "https://finviz.com/news/404418/northrop-grumman-shares-rise-over-1-as-q3-earnings-beat-estimates-and-2026-profit-guidance-increases"
         }
       ],
-      "cap": "$7.9B",
-      "px": 13.9,
-      "pct": 6.51341,
-      "topSector": false
+      "cap": "$80.3B",
+      "px": 565.41,
+      "pct": 2.53337,
+      "topSector": true
     },
     {
-      "tk": "DDOG",
-      "name": "Datadog, Inc.",
+      "tk": "ROP",
+      "name": "Roper Technologies, Inc.",
       "industry": "Software - Application",
       "sector": "Technology",
-      "ctype": "Analyst upgrade",
-      "cdate": "19 Oct",
-      "cdateISO": "2026-10-19",
-      "what": "Bernstein upgraded Datadog to Outperform from Market Perform on 19 Oct and raised its price target to $350 from $237, citing AI token usage growing at least 50% and saying its prior caution (tied to a large 'Born in AI' customer ARR cut) was too conservative. Datadog reports Q3 2026 results 4 Nov. Today (23 Oct close) is the LAST day this event stays inside the 5-session window (19-23 Oct) \u2014 it drops off tomorrow unless a fresh event qualifies it again. Shares rebounded (+4.6%) today after last week's broad tech pullback; price/cap refreshed via FMP.",
+      "ctype": "Earnings beat + raise",
+      "cdate": "22 Oct",
+      "cdateISO": "2026-10-22",
+      "what": "Q3 2026 adjusted EPS of $5.89 beat the $5.79 consensus on revenue +8% to $2.17B (7% organic); Roper raised full-year 2026 adjusted EPS guidance to $22.35–$22.40 from $22.15–$22.30 and guided Q4 adjusted EPS to $5.95–$6.00. Shares rose ~9.2% on the day while the Nasdaq-100 fell more than 2%.",
       "sources": [
         {
-          "t": "Finviz"
+          "t": "Finviz",
+          "u": "https://finviz.com/news/406216/roper-technologies-announces-third-quarter-financial-results"
         },
         {
-          "t": "TIKR"
+          "t": "TIKR",
+          "u": "https://www.tikr.com/blog/roper-technologies-soars-9-2-on-earnings-beat-and-guidance-raise-exceeded-our-expectations"
         }
       ],
-      "cap": "$96.8B",
-      "px": 269.65,
-      "pct": 4.61688,
+      "cap": "$43.7B",
+      "px": 441.65,
+      "pct": 0.80111,
       "topSector": true
     }
   ],
   "bg": {
-    "CLF": {
-      "cap": "$7.9B",
-      "what": "North American flat-rolled and specialty steel producer, vertically integrated with its own iron ore mines, serving automotive, infrastructure and manufacturing customers."
+    "NOC": {
+      "cap": "$80.3B",
+      "what": "Aerospace & defense prime building aircraft, missiles, space systems and mission/C4ISR technology for the U.S. military and allies."
     },
-    "DDOG": {
-      "cap": "$96.8B",
-      "what": "Cloud-based monitoring and analytics (observability) platform covering infrastructure, application performance, logs and security across enterprise tech stacks."
+    "ROP": {
+      "cap": "$43.7B",
+      "what": "Diversified technology company combining vertical software platforms with engineered products across industrial, medical and financial end markets."
     }
   },
   "notices": [
-    "VIX: FMP's index-quote returned a pre-market print (19.41, ts 26 Oct 11:47 UTC) rather than a settled close. Per the closes-only rule, the tile flags this as a live print and the regime check uses 23 Oct's official close (19.45, FMP's previousClose) instead.",
-    "QQQ: WebSearch (multiple queries) returned only stale/undated prints (a ~676.70 figure from a 28 Jul session and an unverified ~687.99 forecast-page figure) \u2014 no reliable same-session QQQ number found. The tile is omitted this run rather than publishing an unverified figure.",
-    "No FOMC decision in the 7 days before this run (next meeting is 27-28 Oct) \u2014 macro.fed is carried unchanged from the 16 Sep decision.",
-    "Treasury rates: FMP's treasury-rates feed had posted a full run through 23 Oct at fetch time \u2014 y10/y10prev/y10hist are freshly derived from the 19-23 Oct rows (not carried forward).",
-    "Catalysts: no new alerts qualified this run despite an extensive WebSearch sweep (earnings beats, analyst upgrades/price-target raises, major contracts/deals, FDA approvals). Several candidates (Halliburton, Nextracker, McKesson, Thermo Fisher, Capri/JPMorgan, Dell's Pentagon contract) turned out to be undated, stale (2025 or May 2026), or otherwise unverifiable inside this run's window \u2014 see rejected. Cleveland-Cliffs (19 Oct Q3 beat + raised Q4 guide) and Datadog (19 Oct Bernstein upgrade) are carried forward for their LAST day in the 5-session window (19-23 Oct) with refreshed FMP quotes \u2014 both tickers rebounded sharply today after last week's selloff, which the page notes but does not score (no OHLC tape without WebFetch)."
+    "VIX: FMP's index-quote returned a print timestamped 27 Oct 11:52 UTC — not a settled close. Per the closes-only rule the tile flags this as a live print; the regime check uses 26 Oct's official close (18.39, FMP's previousClose) instead.",
+    "QQQ: WebSearch (3 queries) returned only stale, undated or conflicting prints (a ~28 Jul close near $684–$716, an unrelated tokenized-ETF quote) — no reliable 26 Oct close found. The tile is omitted this run rather than publishing an unverified figure.",
+    "No FOMC decision in the 7 days before this run — the committee's 2-day meeting begins today/tomorrow (27-28 Oct) with the decision not due until after this run fires; macro.fed is carried unchanged from the 16 Sep hike.",
+    "Treasury rates: FMP's treasury-rates feed had posted a full run through 26 Oct (Monday's close) at fetch time — y10/y10prev/y10hist are freshly derived from the 20-26 Oct rows (not carried forward).",
+    "Catalysts: two qualifying alerts this run (NOC, ROP), both Q3 earnings beats with raised full-year guidance; both sit in today's top-3 sectors (Industrials, Technology). Last run's CLF and DDOG (19 Oct events) have aged out of the 5-session window and are dropped. Several other candidates were checked and rejected — see rejected (a contested/mixed Verizon earnings reaction, an unconfirmed Instacart/DoorDash acquisition-talks rumor, a going-private deal for Surgery Partners that is sell-the-news/arb-bound, a stale Boeing Navy contract from 29 Sep, and an unverifiable Texas Instruments analyst-target report)."
   ],
+  "screenNotes": [],
   "rejected": [
-    "<b>Halliburton (HAL)</b> \u00b7 Barclays price target raised to $25 from $20 after an earnings beat \u2014 rejected: related headlines in the same search results are dated 22 Oct 2025, not 2026; no fresh October 2026 Barclays note on HAL could be confirmed.",
-    "<b>Nextracker (NXT)</b> \u00b7 Barclays price target raised to $105 from $92 tied to a fiscal 2026 guidance raise \u2014 rejected: no publication date could be confirmed in this run's search results, so an October 2026 date inside the window could not be verified.",
-    "<b>McKesson (MCK)</b> \u00b7 Citi price target raised to $860 from $820 after an investor day \u2014 rejected: no date inside the last 5 sessions could be confirmed; prior runs traced this note to Sep 2025.",
-    "<b>Thermo Fisher (TMO)</b> \u00b7 JPMorgan price target raised to $650 from $600 \u2014 rejected: framed in available snippets as a cautious Q3 preview rather than a clear beat-and-raise or upgrade, and no date inside the last 5 sessions could be confirmed.",
-    "<b>Capri Holdings (CPRI)</b> \u00b7 JPMorgan upgrade to Overweight, $30 target from $24 \u2014 rejected: no confirmed date inside the window, and the target raise is well under the 15%-above-price bar needed for an upgrade catalyst.",
-    "<b>Dell Technologies (DELL)</b> \u00b7 $9.7B Pentagon contract, shares to an all-time high \u2014 rejected: confirmed dated 27-29 May 2026 (Euronews, Yahoo Finance), stale and well outside the 5-session window.",
-    "No specific October 2026 FDA approval/PDUFA event with a named ticker and a confirmed date inside the window could be found via WebSearch this run.",
-    "No major-contract/partnership/deal announcement with a cap > $5B and a confirmed date inside the last 5 sessions could be found via WebSearch this run.",
+    "<b>Verizon (VZ)</b> · Q3 2026 adjusted EPS beat ($1.31 vs $1.28) and FY26 EPS guidance raised to $5.04–$5.06, but revenue missed ($34.31B vs $34.77B) and sources disagree on the share reaction (some report a ~0.7% premarket gain, others a ~2.4-2.8% premarket decline) — rejected: reaction too contested/negative to call a clean swing-trade catalyst.",
+    "<b>Instacart (CART)</b> · +7% on a WSJ report of acquisition talks with DoorDash — rejected: unconfirmed talks, not a closed deal/contract, and doesn't fit any of the five playbook categories.",
+    "<b>Surgery Partners (SGRY)</b> · agreed to be taken private by a Bon Secours Mercy Health-affiliated buyer for $5.7B (49% premium) — rejected: sell-the-news/arb-bound, no further swing-trade room once a go-private price is set.",
+    "<b>Boeing (BA)</b> · $20B+ Navy F/A-XX contract — rejected: announced 29-30 Sep 2026, well outside the 5-session window.",
+    "<b>Texas Instruments (TXN)</b> · a reported JPMorgan price-target raise to $365 on 22 Oct — rejected: could not confirm this note in this run's WebSearch results; only an older July 2026 $280→$340 JPMorgan move could be verified.",
+    "No October 2026 FDA approval/PDUFA event with a named ticker and a confirmed date inside the window could be found via WebSearch this run.",
     "No October 2026 S&P 500 ad-hoc index addition with a confirmed date inside the window could be found via WebSearch this run."
   ],
   "sections": {
     "indices": {
-      "asOf": "2026-10-23",
+      "asOf": "2026-10-26",
       "source": "FMP index quotes"
     },
     "macro": {
-      "asOf": "2026-10-23",
+      "asOf": "2026-10-26",
       "source": "FMP treasury-rates"
     },
     "catalysts": {
-      "asOf": "2026-10-23",
+      "asOf": "2026-10-26",
       "source": "web search + FMP company/profile-symbol"
     }
   },
@@ -216,52 +219,52 @@
     {
       "id": "fmp.index.GSPC",
       "ok": true,
-      "note": "price 7623.68, close 23 Oct"
+      "note": "price 7676.77, close 26 Oct"
     },
     {
       "id": "fmp.index.DJI",
       "ok": true,
-      "note": "price 52215.16, close 23 Oct"
+      "note": "price 52361.58, close 26 Oct"
     },
     {
       "id": "fmp.index.RUT",
       "ok": true,
-      "note": "price 2775.8987, close 23 Oct"
+      "note": "price 2786.424, close 26 Oct"
     },
     {
       "id": "fmp.index.VIX",
       "ok": true,
-      "note": "price 19.41, ts is a 26 Oct pre-market live print, not a close; previousClose 19.45 used for regime"
+      "note": "price 17.88, ts is a 27 Oct pre-market live print, not a close; previousClose 18.39 used for regime"
     },
     {
       "id": "fmp.economics.treasury-rates",
       "ok": true,
-      "note": "9 rows 13-23 Oct; last 5 distinct trading days used for y10hist"
+      "note": "10 rows 13-26 Oct; last 5 distinct trading days used for y10hist"
     },
     {
       "id": "websearch.qqq-price",
       "ok": false,
-      "note": "no reliable same-session quote found after 2 queries; tile omitted"
+      "note": "no reliable 26 Oct close found after 3 queries; tile omitted"
     },
     {
       "id": "websearch.fomc-check",
       "ok": true,
-      "note": "confirmed next FOMC meeting is 27-28 Oct, not yet decided; macro.fed unchanged"
+      "note": "confirmed FOMC's 2-day meeting is 27-28 Oct, decision not yet out; macro.fed unchanged"
     },
     {
       "id": "websearch.catalyst.earnings",
       "ok": true,
-      "note": "no new qualifying beat+raise found inside window"
+      "note": "NOC (20 Oct) and ROP (22 Oct) qualified; VZ (26 Oct) rejected as contested/mixed"
     },
     {
       "id": "websearch.catalyst.upgrades",
       "ok": true,
-      "note": "candidates found (HAL, NXT, MCK, TMO, CPRI) but all undated-in-window or stale; see rejected"
+      "note": "TXN candidate found but unverifiable in-window; no qualifying upgrade"
     },
     {
       "id": "websearch.catalyst.contracts",
       "ok": true,
-      "note": "Dell $9.7B Pentagon deal found but confirmed stale (May 2026); no in-window contract catalyst"
+      "note": "Boeing F/A-XX found but stale (29 Sep); SGRY go-private found but sell-the-news; no qualifying contract/deal"
     },
     {
       "id": "websearch.catalyst.fda",
@@ -269,20 +272,25 @@
       "note": "no October 2026 approval/launch event found"
     },
     {
-      "id": "fmp.profile.CLF",
+      "id": "websearch.catalyst.indexadd",
       "ok": true,
-      "note": "price 13.90, +6.51%, cap $7.9B"
+      "note": "no October 2026 S&P 500 ad-hoc addition found"
     },
     {
-      "id": "fmp.profile.DDOG",
+      "id": "fmp.profile.NOC",
       "ok": true,
-      "note": "price 269.65, +4.62%, cap $96.8B"
+      "note": "price 565.41, +2.53%, cap $80.3B"
+    },
+    {
+      "id": "fmp.profile.ROP",
+      "ok": true,
+      "note": "price 441.65, +0.80%, cap $43.7B"
     }
   ],
   "meta": {
     "schemaVersion": 1,
-    "generatedAt": "2026-10-26T20:06:56+08:00",
-    "targetSession": "2026-10-26",
-    "lastSession": "2026-10-23"
+    "generatedAt": "2026-10-27T20:12:50+08:00",
+    "targetSession": "2026-10-27",
+    "lastSession": "2026-10-26"
   }
 }
