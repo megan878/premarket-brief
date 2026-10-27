@@ -1,89 +1,86 @@
 {
- "asOf": "Fri 23 Oct 2026 · 09:44 ET · 21:44 HK",
- "note": "Snapshot taken ~14 minutes after the US open via FMP index-quote and company/profile-symbol. Futures (ES/NQ/YM/RTY), QQQ and most overnight news could not be sourced this run: repeated WebSearch queries (general futures/QQQ quotes, live market blogs, sector and VIX-spike coverage) returned only stale, undated or non-reconciling results — the same failure pattern as the prior open-update run. Publishing a guessed number would violate the no-invent rule, so those sections are omitted or left thin rather than filled in.",
- "indices": [
-  {"id": "SPX", "name": "S&P 500", "px": 7627.58, "pct": -0.46781, "prev": 7663.43},
-  {"id": "DJI", "name": "Dow Jones", "px": 52321.54, "pct": -1.03359, "prev": 52867.98},
-  {"id": "RUT", "name": "Russell 2000", "px": 2761.24297, "pct": -0.81835, "prev": 2784.0261},
-  {"id": "VIX", "name": "Volatility", "px": 20.39, "pct": 7.14661, "prev": 19.03, "asOfKind": "live", "asOfNote": "live print 23 Oct 13:42 UTC, not a settled close"}
- ],
- "quotes": {
-  "AVT": {"px": 88.63, "pct": -0.01128, "vol": 15881, "avgVol": 1267568, "change": -0.01},
-  "ZS": {"px": 235.26, "pct": -1.05148, "vol": 170096, "avgVol": 2991063, "change": -2.5},
-  "ETN": {"px": 362.7, "pct": -1.70465, "vol": 243361, "avgVol": 2237784, "change": -6.29},
-  "META": {"px": 641.59003, "pct": -1.1189, "vol": 2296504, "avgVol": 19477786, "change": -7.25997},
-  "GDDY": {"px": 112.75, "pct": -1.72579, "vol": 71045, "avgVol": 2171444, "change": -1.98},
-  "ITT": {"px": 185.185, "pct": -1.63338, "vol": 15248, "avgVol": 877838, "change": -3.075},
-  "VRSN": {"px": 300.08, "pct": -1.48068, "vol": 99423.44911, "avgVol": 829079, "change": -4.51},
-  "PLTR": {"px": 191.8878, "pct": -2.19287, "vol": 2057207.22347, "avgVol": 34924654, "change": -4.3022},
-  "GOOGL": {"px": 321.84, "pct": -0.73407, "vol": 2163312, "avgVol": 28493569, "change": -2.38},
-  "SNAP": {"px": 6.27, "pct": -1.25984, "vol": 1124577, "avgVol": 39203533, "change": -0.08},
-  "CLF": {"px": 13.465, "pct": 3.18008, "vol": 1079622, "avgVol": 20325971, "change": 0.415},
-  "DDOG": {"px": 256.55, "pct": -0.46557, "vol": 204697, "avgVol": 4050808, "change": -1.2},
-  "NOK": {"px": 8.235, "pct": 4.50507, "vol": 19111805, "avgVol": 84945607, "change": 0.355},
-  "GNRC": {"px": 184.47, "pct": -1.8881, "vol": 34249, "avgVol": 1158227, "change": -3.55},
-  "LTM": {"px": 46.28, "pct": -1.99068, "vol": 40760.48454, "avgVol": 762535, "change": -0.94},
-  "SNX": {"px": 243.305, "pct": -1.52785, "vol": 25268, "avgVol": 854498, "change": -3.775},
-  "NTAP": {"px": 213.585, "pct": 0.50586, "vol": 48761.03024, "avgVol": 2638455, "change": 1.075},
-  "NTNX": {"px": 69.37, "pct": -0.25881, "vol": 25243.65232, "avgVol": 2936251, "change": -0.18},
-  "AAOI": {"px": 69.645, "pct": 2.31379, "vol": 1292699, "avgVol": 10302012, "change": 1.575},
-  "BB": {"px": 8.51, "pct": -0.93132, "vol": 898988, "avgVol": 21436096, "change": -0.08},
-  "CIEN": {"px": 320.70001, "pct": -0.60129, "vol": 171678, "avgVol": 2640777, "change": -1.93999},
-  "CSCO": {"px": 105.68, "pct": 0.75317, "vol": 1566281, "avgVol": 20130489, "change": 0.79},
-  "FFIV": {"px": 447.0539, "pct": -0.67235, "vol": 14680.88654, "avgVol": 594737, "change": -3.0261},
-  "FTNT": {"px": 171.6125, "pct": -0.79055, "vol": 170092, "avgVol": 4869080, "change": -1.3675}
- },
- "news": [
-  {
-   "tag": "META",
-   "top3": false,
-   "title": "Meta's Q3 2026 beat on revenue, missed on profit",
-   "text": "Q3 2026 revenue of $64.6B (+26% y/y) beat Meta's own $61-64B guidance and consensus (~$63.3B), but operating income fell 37% y/y to $13.0B, largely on a legal-settlement charge; GAAP EPS rose to $3.83 from a tax-charge-depressed $1.05 a year ago. Reported 21 Oct after the close; shares are extending yesterday's post-earnings drop today.",
-   "names": ["META"],
-   "sources": [
-    {"t": "SEC Form 10-Q (Meta Platforms)", "u": "https://www.sec.gov/Archives/edgar/data/0001326801/000162828026066773/meta-20260930.htm"},
-    {"t": "Meta Investor Relations", "u": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-to-Announce-Third-Quarter-2026-Results/default.aspx"}
-   ]
+  "asOf": "2026-10-27",
+  "note": "Fetched ~12 min before the 27 Oct 2026 US open (FMP + WebSearch only, no WebFetch). Futures (ES/NQ/YM/RTY) omitted this run: WebSearch premarket snapshots from different times/sources disagreed by 0.1-0.5pp per contract and would not reconcile to a single confident number; publishing one would violate the no-invent rule.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-10-27T13:42:20Z", "source": "FMP indexes/index-quote"},
+    "quotes": {"asOfUTC": "2026-10-27T13:45:00Z", "source": "FMP company/profile-symbol"},
+    "news": {"asOfUTC": "2026-10-27T13:45:00Z", "source": "WebSearch"}
   },
-  {
-   "tag": "VRSN",
-   "top3": false,
-   "title": "VeriSign Q3 2026: revenue up, EPS flattish",
-   "text": "Revenue $443M (+5.7% y/y), diluted EPS $2.35 (vs $2.27 a year ago), including a $0.06/share drag from assets held for sale. Reported 22 Oct via SEC 8-K. A secondary aggregator's $2.46 consensus EPS estimate (unconfirmed by a second source) would make this a narrow miss. Shares down modestly today.",
-   "names": ["VRSN"],
-   "sources": [
-    {"t": "SEC Form 8-K (VeriSign)", "u": "https://www.sec.gov/Archives/edgar/data/0001014473/000101447326000038/q32026earningsrelease.htm"}
-   ]
+  "indices": [
+    {"id": "SPX", "name": "S&P 500", "px": 7705.9, "pct": 0.37946, "prev": 7676.77},
+    {"id": "DJI", "name": "Dow Jones", "px": 52372.77, "pct": 0.02137063, "prev": 52361.58},
+    {"id": "RUT", "name": "Russell 2000", "px": 2797.28136, "pct": 0.38965, "prev": 2786.42393},
+    {"id": "VIX", "name": "Volatility", "px": 17.76, "pct": -3.42577, "prev": 18.39, "asOfKind": "live", "asOfNote": "live print 27 Oct 13:42 UTC, not a settled close"},
+    {"id": "QQQ", "name": "Nasdaq-100 ETF", "proxyFor": "NDX", "px": 712.2, "pct": 1.11, "prev": 704.4, "src": "WebSearch (stockanalysis.com + Yahoo Finance agree, 26 Oct close vs 23 Oct close, approximate — not a live premarket print)"}
+  ],
+  "quotes": {
+    "AVT": {"px": 91.435, "pct": 1.99108, "change": 1.785, "vol": 14038.40082, "avgVol": 1274743},
+    "ZS": {"px": 262.05, "pct": 0.61432, "change": 1.6, "vol": 220802.374, "avgVol": 2995716},
+    "ETN": {"px": 377.45, "pct": 1.48688, "change": 5.53, "vol": 83372, "avgVol": 2240363},
+    "META": {"px": 624.29, "pct": -0.99435, "change": -6.27, "vol": 7350849, "avgVol": 19630742},
+    "GDDY": {"px": 107.64, "pct": -1.98507, "change": -2.18, "vol": 33991, "avgVol": 2154964},
+    "ITT": {"px": 191.97, "pct": 0.61848, "change": 1.18, "vol": 16418, "avgVol": 875297},
+    "VRSN": {"px": 302.29, "pct": -2.08279, "change": -6.43, "vol": 14585.51918, "avgVol": 845858},
+    "PLTR": {"px": 198.34, "pct": -0.25146, "change": -0.5, "vol": 1625781, "avgVol": 34606299},
+    "GOOGL": {"px": 319.48, "pct": 0.84596, "change": 2.68, "vol": 3527057, "avgVol": 28404827},
+    "SNAP": {"px": 6.18, "pct": -2.52366, "change": -0.16, "vol": 2420274, "avgVol": 38437970},
+    "NOK": {"px": 8.725, "pct": 1.37923, "change": 0.1187, "vol": 5765426, "avgVol": 84233634},
+    "GNRC": {"px": 192.51, "pct": 1.71184, "change": 3.24, "vol": 31533.1141, "avgVol": 1167043},
+    "LTM": {"px": 44.665, "pct": 2.96219, "change": 1.285, "vol": 44085, "avgVol": 801376},
+    "SNX": {"px": 253.81, "pct": 1.32945, "change": 3.33, "vol": 14077, "avgVol": 856683},
+    "NTAP": {"px": 225.72, "pct": 1.63905, "change": 3.64, "vol": 58205.79623, "avgVol": 2630710},
+    "NTNX": {"px": 73.17, "pct": 0.63265, "change": 0.46, "vol": 93309.37637, "avgVol": 2885864},
+    "AAOI": {"px": 74.17, "pct": 3.09981, "change": 2.23, "vol": 1178766, "avgVol": 10256834},
+    "BB": {"px": 9.4386, "pct": 2.75095, "change": 0.2527, "vol": 1414651, "avgVol": 21436096},
+    "CIEN": {"px": 344.01, "pct": 2.40526, "change": 8.08, "vol": 132989, "avgVol": 2615683},
+    "CSCO": {"px": 110.95, "pct": 0.64405, "change": 0.71, "vol": 1141271.30582, "avgVol": 20118196},
+    "FFIV": {"px": 461.2153, "pct": -0.08225826, "change": -0.3797, "vol": 24847.17481, "avgVol": 596099},
+    "FTNT": {"px": 183.84, "pct": 0.27819, "change": 0.51, "vol": 323429.29687, "avgVol": 4798058},
+    "NOC": {"px": 562.105, "pct": -0.58453, "change": -3.305, "vol": 28259, "avgVol": 930599},
+    "ROP": {"px": 430.8, "pct": -2.4567, "change": -10.85, "vol": 40453.70605, "avgVol": 908114}
   },
-  {
-   "tag": "GOOGL",
-   "top3": false,
-   "title": "Alphabet reports Q3 2026 next Wednesday",
-   "text": "Alphabet is scheduled to report Q3 2026 results Wed 28 Oct after the close - 3 trading sessions from today, and the same week as the Fed's 27-28 Oct meeting. Binary earnings risk for any live or newly-triggered GOOGL position by Wednesday's close.",
-   "names": ["GOOGL"],
-   "sources": [
-    {"t": "InsiderFinance (Alphabet Q3 2026 preview)", "u": "https://www.insiderfinance.io/news/alphabet-q3-2026-earnings-preview"},
-    {"t": "PrimeXBT (Alphabet earnings date)", "u": "https://primexbt.com/for-traders/alphabet-earnings-date/"}
-   ]
-  }
- ],
- "notes": {
-  "META": "Reported Q3 2026 results 21 Oct after the close: revenue $64.6B (+26% y/y) beat its own $61-64B guidance and consensus (~$63.3B), but operating income fell 37% y/y to $13.0B, largely on a legal-settlement charge; GAAP EPS rose to $3.83 from a tax-charge-depressed $1.05 a year ago. Shares are down again today on top of yesterday's post-earnings drop - the brief's pinned $779.83 entry/levels for this pick are now well above the live price and should be treated as stale pending a technical refresh.",
-  "VRSN": "Reported Q3 2026 results 22 Oct (SEC Form 8-K): revenue $443M (+5.7% y/y), diluted EPS $2.35 (vs $2.27 a year ago), including a $0.06/share drag from assets held for sale. One secondary aggregator listed a $2.46 consensus EPS estimate, which would make this a narrow miss, but that figure could not be confirmed from a second source. Down modestly today, consistent with an in-line-to-slightly-soft print.",
-  "GOOGL": "Alphabet is scheduled to report Q3 2026 results Wed 28 Oct after the close (next Wednesday - 3 trading sessions from today), per two preview sources; one cites an investor-relations confirmation from 6 Oct. Same week as the Fed's 27-28 Oct meeting. Binary earnings risk for any live or newly-triggered GOOGL position by Wednesday's close.",
-  "NOK": "Up 4.5% today, the only sizeable gainer in the watchlist outside CLF/AAOI; no dated company-specific news found this run to explain the move - treat as unconfirmed-cause.",
-  "ETN": "Down 1.7% alongside a weak Industrials tape; no dated news found. The brief's pinned ETN levels (entry 452.01) are well above today's $362.70 print and look stale against the stock's broader October decline - flag for a technical refresh."
- },
- "footnotes": [
-  "Futures (ES/NQ/YM/RTY) omitted this run: WebSearch returned only stale (pre-2026 contract months), undated, or single-source overnight snapshots for all four contracts, with no two-source same-day reconciliation possible. One partial hit (a CNBC live-blog excerpt dated 22 Oct citing small overnight futures moves) could not be cross-checked and looked inconsistent with the much larger down moves that showed up in the cash session, so it was dropped rather than published.",
-  "QQQ omitted: WebSearch returned no dated, reconciling same-session QQQ price (results were mostly QQQM, a different fund, or undated). The brief's last published QQQ tile (19 Oct close, $721.54) stays the reference point, carried stale.",
-  "Broad overnight/sector news omitted: WebSearch across many phrasings (market-wide selloff coverage, VIX-spike explainers, chip-sector news, premarket movers, Nokia-specific news) returned nothing dated to this session. The three items above (META, VRSN, GOOGL) are the only overnight/company items this run could source with a dated, verifiable reference (SEC filings and earnings-date previews) - they are not a full sector sweep.",
-  "A broad risk-off tape is visible directly in the FMP quotes (SPX -0.47%, DJI -1.03%, RUT -0.82%, VIX +7.1% vs yesterday's close; 19 of 24 watchlist names lower), but this run could not source what, beyond the META/VRSN earnings reactions above, is driving it."
- ],
- "sections": {
-  "indices": {"asOfUTC": "2026-10-23T13:42:09Z", "source": "FMP indexes/index-quote"},
-  "quotes": {"asOfUTC": "2026-10-23T13:44:00Z", "source": "FMP company/profile-symbol"},
-  "news": {"asOfUTC": "2026-10-23T13:45:00Z", "source": "WebSearch (thin this run - see footnotes)"}
- },
- "meta": {"schemaVersion": 1}
+  "notes": {
+    "GOOGL": "Alphabet (watchlist technical pick) is scheduled to report Q3 2026 results Wed 28 Oct after the close — tomorrow, 1 trading session away — per two dated sources (Nasdaq.com, CoinCentral). Same week as the Fed's 27-28 Oct meeting. Binary earnings risk for any live or newly-triggered GOOGL position by tomorrow's close."
+  },
+  "news": [
+    {
+      "tag": "Macro",
+      "top3": false,
+      "title": "FOMC's two-day meeting begins today; decision due tomorrow 2pm ET",
+      "text": "The Fed's October meeting runs today and tomorrow (27-28 Oct), with the rate decision due Wed 2:00pm ET. Market base case from these sources is a hold at 3.75-4.00% after September's 25bp hike, though one analyst note (UOB) flags a hike as the main alternative.",
+      "names": [],
+      "sources": [
+        {"t": "FedRateCalc FOMC Meeting Schedule", "u": "https://fedratecalc.com/fomc-meeting-schedule/october-2026/"},
+        {"t": "TipRanks — Stock Market Today, Oct. 27", "u": "https://tipranks.com/news/stock-market-today-oct-27-futures-edge-higher-ahead-of-key-earnings-and-the-feds-rate-decision"}
+      ]
+    },
+    {
+      "tag": "Communication Services",
+      "top3": true,
+      "title": "Alphabet (watchlist name) reports Q3 earnings Wed, after the close",
+      "text": "Alphabet is due to report Q3 2026 results Wednesday 28 Oct after the close, with Microsoft the same day — both named as the market's main earnings focus this week alongside the Fed decision.",
+      "names": ["GOOGL"],
+      "sources": [
+        {"t": "Nasdaq.com — META, GOOGL Earnings: Advertising Results Remain Key", "u": "https://www.nasdaq.com/articles/meta-googl-earnings-advertising-results-remain-key"},
+        {"t": "CoinCentral — Alphabet and Microsoft Earnings Loom as Fed Meeting Begins", "u": "https://coincentral.com/todays-market-movers-alphabet-and-microsoft-earnings-loom-as-fed-meeting-begins"}
+      ]
+    },
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "Tech led Monday's gains on AI optimism after Anthropic's IPO filing",
+      "text": "Stocks closed higher Monday (26 Oct) with tech leading on AI-sector excitement following Anthropic's IPO filing; premarket Tuesday futures carried a modest positive tone into the Fed meeting, per multiple same-day snapshots.",
+      "names": [],
+      "sources": [
+        {"t": "CNBC — Stocks close higher as Anthropic IPO filing propels tech sector", "u": "https://www.cnbc.com/2026/10/25/stock-market-today-live-updates.html"},
+        {"t": "FXStreet — Dow Jones Futures gain after Wall Street opens week with gains", "u": "https://fxstreet.com/news/dow-jones-futures-gain-after-wall-street-opens-week-with-gains-202610270821"}
+      ]
+    }
+  ],
+  "footnotes": [
+    "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned several same-morning premarket snapshots (5:30am ET, ~7:25am ET, a later pre-market read, and a European-hours read) that disagreed by 0.1-0.5pp per contract and moved directionally between reads — not a reconciling two-source pair at a single point in time, so no number is published for any of the four contracts.",
+    "General sector/company news sweep (Technology, Industrials, Communication Services, individual watchlist names AVT/ZS/ETN/GDDY/ITT/VRSN/PLTR/SNAP/NOK/GNRC/NOC/ROP, chips/AI, oil/China-US) mostly returned stale, undated, or unrelated results this run — the three items above are what could be sourced with a dated, reconciling reference. Not a full sector sweep.",
+    "QQQ: WebSearch found two agreeing sources (stockanalysis.com, Yahoo Finance) for the 26 Oct close ($712.20, +1.11% vs the 23 Oct close of $704.40) — this replaces the brief's stale carried 19 Oct figure, but it is still a settled prior-day close, not a live premarket print, so it is labelled approximate."
+  ]
 }
