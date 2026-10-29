@@ -1,115 +1,103 @@
 {
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-29T20:05:05+08:00",
+  "targetSession": "2026-10-29",
+  "lastSession": "2026-10-28",
   "indices": [
     {
       "id": "SPX",
       "name": "S&P 500",
       "q": {
-        "price": 7722.6,
-        "change": 45.83,
-        "pct": 0.597,
-        "dayLow": 7677.16,
-        "dayHigh": 7736.24,
+        "price": 7743.98,
+        "change": 21.38,
+        "pct": 0.27685,
+        "dayLow": 7718.37,
+        "dayHigh": 7758.43,
         "yearHigh": 7844.52,
         "yearLow": 6316.91,
-        "ma50": 7697.01,
-        "ma200": 7298.873
+        "ma50": 7698.054,
+        "ma200": 7302.7065
       },
-      "ts": 1793134095,
-      "prev": 7676.77
+      "ts": 1793217600,
+      "prev": 7722.6
     },
     {
       "id": "DJI",
       "name": "Dow Jones",
       "q": {
-        "price": 52377.57,
-        "change": 15.99,
-        "pct": 0.03053766,
-        "dayLow": 52231.84,
-        "dayHigh": 52477.91,
+        "price": 52475.1,
+        "change": 97.53,
+        "pct": 0.18621,
+        "dayLow": 52335.43,
+        "dayHigh": 52634.32,
         "yearHigh": 54744.33,
         "yearLow": 45057.28,
-        "ma50": 52270.97,
-        "ma200": 50562.156
+        "ma50": 52253.605,
+        "ma200": 50576.582
       },
-      "ts": 1793134103,
-      "prev": 52361.58
+      "ts": 1793222332,
+      "prev": 52377.57
     },
     {
       "id": "RUT",
       "name": "Russell 2000",
       "q": {
-        "price": 2818.87,
-        "change": 32.44607,
-        "pct": 1.16443,
-        "dayLow": 2788.591,
-        "dayHigh": 2820.97953,
+        "price": 2830.5093,
+        "change": 11.6393,
+        "pct": 0.41291,
+        "dayLow": 2810.953,
+        "dayHigh": 2830.9045,
         "yearHigh": 3069.71,
         "yearLow": 2303.46,
-        "ma50": 2870.4043,
-        "ma200": 2802.2524
+        "ma50": 2866.6567,
+        "ma200": 2803.2266
       },
-      "ts": 1793133012,
-      "prev": 2786.42393
+      "ts": 1793219404,
+      "prev": 2818.87
     },
     {
       "id": "VIX",
       "name": "Volatility",
       "q": {
-        "price": 17.43,
-        "change": -0.09,
-        "pct": -0.5137,
-        "dayLow": 17.43,
-        "dayHigh": 17.63,
+        "price": 17.09,
+        "change": 0.18,
+        "pct": 1.06446,
+        "dayLow": 16.95,
+        "dayHigh": 17.36,
         "yearHigh": 35.3,
         "yearLow": 13.38,
-        "ma50": 16.0328,
-        "ma200": 18.2328
+        "ma50": 16.0732,
+        "ma200": 18.2336
       },
-      "ts": 1793188036,
-      "prev": 17.52
+      "ts": 1793274616,
+      "prev": 16.91
     }
   ],
   "macro": {
-    "date": "2026-10-26",
-    "y10": 5.0,
-    "y10prev": 5.0,
-    "y2": 4.68,
-    "y30": 5.31,
-    "y10path": "5.12% on 20 Oct, 5.13% on 21 Oct, 4.96% on 22 Oct, 5.00% on 23 Oct, 5.00% on 26 Oct",
+    "date": "2026-10-28",
+    "y10": 5.05,
+    "y10prev": 4.99,
+    "y2": 4.67,
+    "y30": 5.37,
+    "y10path": "4.96% on 22 Oct, 5.00% on 23 Oct, 5.00% on 26 Oct, 4.99% on 27 Oct, 5.05% on 28 Oct",
     "fed": {
       "range": "3.75–4.00%",
-      "move": "25 bp",
-      "date": "16 Sep",
-      "vote": "12–0",
-      "note": "first hike since 2023 (16 Sep); the committee signaled more to come; the Oct FOMC meeting concludes today (28 Oct) with the decision due ~2pm ET / 18:00 UTC, several hours after this run fires, so this block is still unchanged",
+      "move": "hold",
+      "date": "28 Oct",
+      "vote": "10–2",
+      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027.",
       "sources": [
         {
           "t": "CNBC",
-          "u": "https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html"
+          "u": "https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html"
         },
         {
-          "t": "CNN",
-          "u": "https://www.cnn.com/2026/09/16/economy/fed-rate-decision-sept-2026-your-money"
-        },
-        {
-          "t": "Advisor Perspectives",
-          "u": "https://www.advisorperspectives.com/dshort/updates/2026/09/16/feds-interest-rate-decision-september-16-2026"
-        },
-        {
-          "t": "Schwab",
-          "u": "https://www.schwab.com/learn/story/fomc-meeting"
+          "t": "Bloomberg",
+          "u": "https://www.bloomberg.com/news/articles/2026-10-28/key-takeaways-from-fed-decision-to-hold-rates-steady"
         }
       ]
     },
     "y10hist": [
-      {
-        "date": "2026-10-20",
-        "y10": 5.12
-      },
-      {
-        "date": "2026-10-21",
-        "y10": 5.13
-      },
       {
         "date": "2026-10-22",
         "y10": 4.96
@@ -121,6 +109,14 @@
       {
         "date": "2026-10-26",
         "y10": 5.0
+      },
+      {
+        "date": "2026-10-27",
+        "y10": 4.99
+      },
+      {
+        "date": "2026-10-28",
+        "y10": 5.05
       }
     ]
   },
@@ -144,48 +140,72 @@
           "u": "https://www.tikr.com/blog/roper-technologies-soars-9-2-on-earnings-beat-and-guidance-raise-exceeded-our-expectations"
         }
       ],
-      "cap": "$43.0B",
-      "px": 434.48,
-      "pct": -1.62346,
+      "cap": "$43.6B",
+      "px": 440.66,
+      "pct": 1.42239,
+      "topSector": true
+    },
+    {
+      "tk": "VRT",
+      "name": "Vertiv Holdings Co",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "ctype": "Earnings beat + raise",
+      "cdate": "28 Oct",
+      "cdateISO": "2026-10-28",
+      "what": "Q3 2026 adjusted EPS of $2.21 beat the ~$1.82 consensus (revenue $4.31B, +61% y/y, also above the ~$3.75B consensus); Vertiv raised FY2026 guidance to ~$14.65B revenue (from $14.0B) and ~$7.15 adjusted EPS (from $6.65–6.75), citing accelerating AI data-center demand and organic orders more than doubling y/y. Shares rose as much as ~16–20% intraday.",
+      "sources": [
+        {
+          "t": "SEC (8-K exhibit)",
+          "u": "https://www.sec.gov/Archives/edgar/data/0001674101/000162828026067707/q32026exhibit991vrt10282026.htm"
+        },
+        {
+          "t": "GuruFocus",
+          "u": "https://www.gurufocus.com/news/9148863/vertiv-holdings-vrt-shares-surge-16-after-q3-beat-and-raised-guidance"
+        }
+      ],
+      "cap": "$93.5B",
+      "px": 242.94,
+      "pct": 16.48446,
       "topSector": true
     }
   ],
   "bg": {
     "ROP": {
-      "cap": "$43.0B",
+      "cap": "$43.6B",
       "what": "Diversified technology company combining vertical software platforms with engineered products across industrial, medical and financial end markets."
+    },
+    "VRT": {
+      "cap": "$93.5B",
+      "what": "Global provider of power management, thermal control and IT infrastructure systems for data centers and communication networks, serving AI/cloud buildout demand."
     }
   },
   "notices": [
-    "VIX: FMP's index-quote returned a print timestamped 28 Oct 11:47 UTC — not a settled close. Per the closes-only rule the tile flags this as a live print; the regime check uses 27 Oct's official close (17.52, FMP's previousClose) instead.",
-    "QQQ: WebSearch returned only stale/undated/conflicting prints (a ~26 Jul close near $684–$716, an unrelated tokenized-ETF quote, figures as low as $509) — no reliable 27 Oct close found. The tile is omitted this run rather than publishing an unverified figure.",
-    "No FOMC decision in the 7 days before this run — the committee's 2-day meeting concludes today with the decision due ~2pm ET / 18:00 UTC, well after this run fires; macro.fed is carried unchanged from the 16 Sep hike.",
-    "Treasury rates: FMP's treasury-rates feed had not yet posted a row past 26 Oct at fetch time — y10/y10prev/y10hist are identical to the prior run's values (no new session to add).",
-    "Catalysts: one qualifying alert carried and re-priced this run (ROP, 22 Oct event, still inside the 5-session window). Last run's NOC (20 Oct event) has aged out of the window and is dropped. Vertiv (VRT) reported a strong Q3 beat with raised FY2026 guidance before today's open (SEC 8-K + Barron's) and is a strong candidate, but its event date (28 Oct, today) falls outside the 5-session catalyst window computed from the last completed session (27 Oct) — revisit on the next run once today is a completed session. Several other candidates were checked and rejected — see rejected."
+    "VIX: FMP's index-quote returned a print timestamped 29 Oct 11:50 UTC — not a settled close (market has not opened for today's session yet). Per the closes-only rule the tile flags this as a live print; the regime check uses 28 Oct's official close (16.91, FMP's previousClose) instead.",
+    "QQQ: WebSearch returned only stale, undated or conflicting prints (a 3-month-old stockanalysis.com close near $661–$684, an unrelated fund quote near $577, a $718.42 hourly-bar print with an inconsistent $107.64 \"premarket\" tag) — no reliable 28 Oct close found. The tile is omitted this run rather than publishing an unverified figure.",
+    "FOMC: the committee held the federal funds target range at 3.75–4.00% on 28 Oct (10–2 vote, both dissents wanting a hike) — confirmed by CNBC, Bloomberg, Advisor Perspectives and Yahoo Finance. macro.fed is updated; this is a headwind-leaning hold, not an easing move.",
+    "Catalysts: ROP (22 Oct event) is still inside the 5-session window and is re-priced. Vertiv (VRT, Q3 beat + raise, 28 Oct) was flagged as a strong candidate in the prior run but excluded then because its event date fell outside that run's window computed from 27 Oct — 28 Oct is now the last completed session, so VRT is inside the window and added, confirmed via its SEC 8-K exhibit and GuruFocus.",
+    "Context (not a catalyst, no pinned pick affected by this routine): Alphabet's Q3 report missed on search advertising and fell ~10.5% premarket, dragging Nasdaq-100 futures down ~1% and pressuring AI-adjacent names (Nvidia, AMD, Intel) in premarket trading. GOOGL is a pinned technical pick — worth watching at the open, but this routine does not re-level or alter pinned picks."
   ],
   "screenNotes": [],
   "rejected": [
-    "<b>Vertiv (VRT)</b> · Q3 2026 adjusted EPS $2.21 (vs ~$1.82 expected) on net sales +61% to $4.31B; raised FY2026 guidance (SEC 8-K; Barron's via syndication) — not rejected on merit, but excluded this run: event date is 28 Oct (today), outside the 5-session window computed from the last completed session (27 Oct). Revisit next run.",
-    "<b>Dassault Systèmes</b> · Q3 2026 beat and raised guidance, but shares FELL in premarket — rejected: sell-the-news.",
-    "<b>S&amp;P Global (SPGI)</b> · Q3 beat; adjusted EPS/revenue guidance raised but GAAP EPS guidance lowered, and the stock's reaction was muted/slightly negative (-0.4% today) — rejected: not a clean beat-and-raise reaction.",
-    "<b>Meta (META)</b> · Q3 2026 revenue beat ($64.6B vs $63.37B consensus), but sources disagree on the share reaction (one reports a ~2.5% after-hours gain, another a decline) and the stock is currently down 1.6% on the day, well off its post-earnings commentary — rejected: contested/negative reaction.",
-    "<b>General Motors (GM)</b> · Q3 beat, but full-year guidance was narrowed (not raised) and shares fell ~7% — rejected: not a beat-and-raise, negative reaction.",
-    "<b>IBM</b> · Q3 beat on revenue/EPS, but full-year guidance held steady/cautious rather than raised; event (~21-22 Oct) is also at the edge of the window — rejected: doesn't fit the beat-and-raise definition.",
-    "<b>Intel / Kinder Morgan / BlackRock</b> · analyst upgrades with reported upside near/above 15% surfaced in search results, but the firm names, dates and current prices could not be reconciled to this week with confidence — rejected: unverifiable in this run's WebSearch results.",
+    "Several earnings-beat-and-raise leads surfaced in WebSearch (Oracle, HPE, Rubrik, Zoom, Brinker) but none carried a confirmed date inside the last 5 sessions (22–28 Oct) — rejected: stale/undated.",
+    "Analyst-upgrade leads (Citizens Financial to Buy, target $52→$65; Shoals Technologies target $8→$12; Cencora target $350→$400) surfaced but none could be confirmed as dated inside the current window — rejected: unverifiable date.",
     "No October 2026 FDA approval/PDUFA event with a named ticker, cap &gt; $5B and a confirmed date inside the window could be found via WebSearch this run.",
-    "No October 2026 S&amp;P 500 ad-hoc index addition with a confirmed date inside the window could be found via WebSearch this run."
+    "No October 2026 S&amp;P 500 ad-hoc index addition with a confirmed date inside the window could be found via WebSearch this run.",
+    "Alphabet (GOOGL) — Q3 2026 search-ad miss, shares down ~10.5% premarket — rejected: negative reaction (not a beat/raise), and GOOGL is already a pinned technical pick."
   ],
   "sections": {
     "indices": {
-      "asOf": "2026-10-27",
+      "asOf": "2026-10-28",
       "source": "FMP index quotes"
     },
     "macro": {
-      "asOf": "2026-10-26",
+      "asOf": "2026-10-28",
       "source": "FMP treasury-rates"
     },
     "catalysts": {
-      "asOf": "2026-10-27",
+      "asOf": "2026-10-28",
       "source": "web search + FMP company/profile-symbol"
     }
   },
@@ -193,88 +213,72 @@
     {
       "id": "fmp.index.GSPC",
       "ok": true,
-      "note": "price 7722.6, close 27 Oct"
+      "note": "price 7743.98, close 28 Oct"
     },
     {
       "id": "fmp.index.DJI",
       "ok": true,
-      "note": "price 52377.57, close 27 Oct"
+      "note": "price 52475.1, close 28 Oct"
     },
     {
       "id": "fmp.index.RUT",
       "ok": true,
-      "note": "price 2818.87, close 27 Oct"
+      "note": "price 2830.5093, close 28 Oct"
     },
     {
       "id": "fmp.index.VIX",
       "ok": true,
-      "note": "price 17.43, ts is a 28 Oct pre-market live print, not a close; previousClose 17.52 used for regime"
+      "note": "price 17.09, ts is a 29 Oct pre-market live print, not a close; previousClose 16.91 used for regime"
     },
     {
       "id": "fmp.economics.treasury-rates",
       "ok": true,
-      "note": "latest row still 26 Oct at fetch time; y10/y10hist unchanged from prior run"
+      "note": "latest row 28 Oct (y10=5.05); y10hist = 22,23,26,27,28 Oct"
     },
     {
       "id": "websearch.qqq-price",
       "ok": false,
-      "note": "no reliable 27 Oct close found; conflicting/stale prints; tile omitted"
+      "note": "no reliable 28 Oct close found; conflicting/stale/undated prints; tile omitted"
     },
     {
-      "id": "websearch.fomc-check",
+      "id": "websearch.fomc-result",
       "ok": true,
-      "note": "confirmed FOMC's 2-day meeting concludes today, decision due ~2pm ET, not yet out; macro.fed unchanged"
+      "note": "confirmed hold at 3.75-4.00%, 10-2 vote, via CNBC+Bloomberg+Advisor Perspectives+Yahoo Finance"
     },
     {
       "id": "websearch.catalyst.earnings",
       "ok": true,
-      "note": "VRT, Dassault, SPGI, META, GM, IBM reviewed; VRT strong but dated today (outside window); others rejected (sell-the-news/mixed/contested/not-raised)"
+      "note": "ROP re-verified; VRT confirmed (Q3 beat+raise, SEC 8-K + GuruFocus); Oracle/HPE/Rubrik/Zoom/Brinker leads undated, rejected"
+    },
+    {
+      "id": "fmp.company.profile.ROP",
+      "ok": true,
+      "note": "price 440.66, cap $43.6B"
+    },
+    {
+      "id": "fmp.company.profile.VRT",
+      "ok": true,
+      "note": "price 242.94, cap $93.5B, +16.48%"
     },
     {
       "id": "websearch.catalyst.upgrades",
       "ok": true,
-      "note": "Intel/KMI/BLK upgrade reports found but dates/firms/prices unreconcilable; no qualifying upgrade"
-    },
-    {
-      "id": "websearch.catalyst.contracts",
-      "ok": true,
-      "note": "no qualifying major contract/deal found in-window"
+      "note": "Citizens Financial/Shoals/Cencora upgrades found but dates unreconcilable to this window; no qualifying upgrade"
     },
     {
       "id": "websearch.catalyst.fda",
       "ok": true,
-      "note": "no October 2026 approval/launch event found"
+      "note": "no qualifying FDA approval found in-window"
     },
     {
       "id": "websearch.catalyst.indexadd",
       "ok": true,
-      "note": "no October 2026 S&P 500 ad-hoc addition found"
+      "note": "no qualifying S&P 500 ad-hoc addition found in-window"
     },
     {
-      "id": "fmp.profile.ROP",
-      "ok": true,
-      "note": "price 434.48, -1.62%, cap $43.0B"
-    },
-    {
-      "id": "fmp.profile.VRT",
-      "ok": true,
-      "note": "price 208.56, +4.39%, cap $80.3B (not published this run, see rejected)"
-    },
-    {
-      "id": "fmp.profile.SPGI",
-      "ok": true,
-      "note": "price 448.93, -0.38%, cap $132.3B (not published, see rejected)"
-    },
-    {
-      "id": "fmp.profile.META",
-      "ok": true,
-      "note": "price 620.19, -1.64%, cap $1.58T (not published, see rejected)"
+      "id": "websearch.vrt.analysttarget",
+      "ok": false,
+      "note": "post-Q3 consensus target not yet reconciled across 2 sources within 5%; analystTarget omitted for VRT"
     }
-  ],
-  "meta": {
-    "schemaVersion": 1,
-    "generatedAt": "2026-10-28T20:09:40+08:00",
-    "targetSession": "2026-10-28",
-    "lastSession": "2026-10-27"
-  }
+  ]
 }
