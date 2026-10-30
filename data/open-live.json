@@ -1,86 +1,71 @@
 {
-  "asOf": "2026-10-27",
-  "note": "Fetched ~12 min before the 27 Oct 2026 US open (FMP + WebSearch only, no WebFetch). Futures (ES/NQ/YM/RTY) omitted this run: WebSearch premarket snapshots from different times/sources disagreed by 0.1-0.5pp per contract and would not reconcile to a single confident number; publishing one would violate the no-invent rule.",
+  "asOf": "Fri 30 Oct 2026 · 09:41 ET · 21:41 HK",
+  "note": "Snapshot taken ~11 minutes before the US open (FMP + WebSearch only, no WebFetch). Futures and QQQ omitted this run: no two-source, dated, reconciling figure found for either (see footnotes) — publishing one would violate the no-invent rule.",
   "meta": {"schemaVersion": 1},
   "sections": {
-    "indices": {"asOfUTC": "2026-10-27T13:42:20Z", "source": "FMP indexes/index-quote"},
-    "quotes": {"asOfUTC": "2026-10-27T13:45:00Z", "source": "FMP company/profile-symbol"},
-    "news": {"asOfUTC": "2026-10-27T13:45:00Z", "source": "WebSearch"}
+    "indices": {"asOfUTC": "2026-10-30T13:41:46Z", "source": "FMP indexes/index-quote (^GSPC, ^DJI, ^RUT, ^VIX)"},
+    "quotes": {"asOfUTC": "2026-10-30T13:43:00Z", "source": "FMP company/profile-symbol, one call per ticker in the brief's watch block"},
+    "news": {"asOfUTC": "2026-10-30T13:45:00Z", "source": "WebSearch"}
   },
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7705.9, "pct": 0.37946, "prev": 7676.77},
-    {"id": "DJI", "name": "Dow Jones", "px": 52372.77, "pct": 0.02137063, "prev": 52361.58},
-    {"id": "RUT", "name": "Russell 2000", "px": 2797.28136, "pct": 0.38965, "prev": 2786.42393},
-    {"id": "VIX", "name": "Volatility", "px": 17.76, "pct": -3.42577, "prev": 18.39, "asOfKind": "live", "asOfNote": "live print 27 Oct 13:42 UTC, not a settled close"},
-    {"id": "QQQ", "name": "Nasdaq-100 ETF", "proxyFor": "NDX", "px": 712.2, "pct": 1.11, "prev": 704.4, "src": "WebSearch (stockanalysis.com + Yahoo Finance agree, 26 Oct close vs 23 Oct close, approximate — not a live premarket print)"}
+    {"id": "SPX", "name": "S&P 500", "px": 7630.49, "pct": -1.16445, "prev": 7720.39},
+    {"id": "DJI", "name": "Dow Jones", "px": 52168.45, "pct": -0.33264, "prev": 52342.56},
+    {"id": "RUT", "name": "Russell 2000", "px": 2839.99456, "pct": -0.67228, "prev": 2859.21656},
+    {"id": "VIX", "name": "Volatility", "px": 18.74, "pct": 8.95349, "prev": 17.2}
   ],
   "quotes": {
-    "AVT": {"px": 91.435, "pct": 1.99108, "change": 1.785, "vol": 14038.40082, "avgVol": 1274743},
-    "ZS": {"px": 262.05, "pct": 0.61432, "change": 1.6, "vol": 220802.374, "avgVol": 2995716},
-    "ETN": {"px": 377.45, "pct": 1.48688, "change": 5.53, "vol": 83372, "avgVol": 2240363},
-    "META": {"px": 624.29, "pct": -0.99435, "change": -6.27, "vol": 7350849, "avgVol": 19630742},
-    "GDDY": {"px": 107.64, "pct": -1.98507, "change": -2.18, "vol": 33991, "avgVol": 2154964},
-    "ITT": {"px": 191.97, "pct": 0.61848, "change": 1.18, "vol": 16418, "avgVol": 875297},
-    "VRSN": {"px": 302.29, "pct": -2.08279, "change": -6.43, "vol": 14585.51918, "avgVol": 845858},
-    "PLTR": {"px": 198.34, "pct": -0.25146, "change": -0.5, "vol": 1625781, "avgVol": 34606299},
-    "GOOGL": {"px": 319.48, "pct": 0.84596, "change": 2.68, "vol": 3527057, "avgVol": 28404827},
-    "SNAP": {"px": 6.18, "pct": -2.52366, "change": -0.16, "vol": 2420274, "avgVol": 38437970},
-    "NOK": {"px": 8.725, "pct": 1.37923, "change": 0.1187, "vol": 5765426, "avgVol": 84233634},
-    "GNRC": {"px": 192.51, "pct": 1.71184, "change": 3.24, "vol": 31533.1141, "avgVol": 1167043},
-    "LTM": {"px": 44.665, "pct": 2.96219, "change": 1.285, "vol": 44085, "avgVol": 801376},
-    "SNX": {"px": 253.81, "pct": 1.32945, "change": 3.33, "vol": 14077, "avgVol": 856683},
-    "NTAP": {"px": 225.72, "pct": 1.63905, "change": 3.64, "vol": 58205.79623, "avgVol": 2630710},
-    "NTNX": {"px": 73.17, "pct": 0.63265, "change": 0.46, "vol": 93309.37637, "avgVol": 2885864},
-    "AAOI": {"px": 74.17, "pct": 3.09981, "change": 2.23, "vol": 1178766, "avgVol": 10256834},
-    "BB": {"px": 9.4386, "pct": 2.75095, "change": 0.2527, "vol": 1414651, "avgVol": 21436096},
-    "CIEN": {"px": 344.01, "pct": 2.40526, "change": 8.08, "vol": 132989, "avgVol": 2615683},
-    "CSCO": {"px": 110.95, "pct": 0.64405, "change": 0.71, "vol": 1141271.30582, "avgVol": 20118196},
-    "FFIV": {"px": 461.2153, "pct": -0.08225826, "change": -0.3797, "vol": 24847.17481, "avgVol": 596099},
-    "FTNT": {"px": 183.84, "pct": 0.27819, "change": 0.51, "vol": 323429.29687, "avgVol": 4798058},
-    "NOC": {"px": 562.105, "pct": -0.58453, "change": -3.305, "vol": 28259, "avgVol": 930599},
-    "ROP": {"px": 430.8, "pct": -2.4567, "change": -10.85, "vol": 40453.70605, "avgVol": 908114}
+    "AVT": {"px": 89.67, "pct": -2.98604, "change": -2.76, "vol": 24841.47963, "avgVol": 1239645},
+    "ZS": {"px": 244.53, "pct": -1.32758, "change": -3.29, "vol": 160381.12143, "avgVol": 2827316},
+    "ETN": {"px": 380.63, "pct": -3.3247, "change": -13.09, "vol": 175449, "avgVol": 2230955},
+    "META": {"px": 614.66, "pct": -1.57881, "change": -9.86, "vol": 1988964, "avgVol": 20101090},
+    "GDDY": {"px": 109.39, "pct": 3.30532, "change": 3.5, "vol": 128126, "avgVol": 2069474},
+    "ITT": {"px": 201.62, "pct": -0.46406, "change": -0.94, "vol": 18609, "avgVol": 856417},
+    "VRSN": {"px": 308.71, "pct": 0.90211, "change": 2.76, "vol": 25853.7658, "avgVol": 822755},
+    "PLTR": {"px": 189.36, "pct": -3.59434, "change": -7.06, "vol": 3014654, "avgVol": 33811478},
+    "GOOGL": {"px": 281.46, "pct": -0.83151, "change": -2.36, "vol": 9363316, "avgVol": 29519454},
+    "SNAP": {"px": 5.28, "pct": -7.04225, "change": -0.4, "vol": 4311540, "avgVol": 37718916},
+    "SOFI": {"px": 17.165, "pct": -2.52697, "change": -0.445, "vol": 6482656, "avgVol": 60092266},
+    "VRT": {"px": 239.15, "pct": -2.75293, "change": -6.77, "vol": 795214, "avgVol": 5915907},
+    "NOK": {"px": 8.615, "pct": -7.46509, "change": -0.695, "vol": 9724241, "avgVol": 83102207},
+    "GNRC": {"px": 201.285, "pct": -1.02036, "change": -2.075, "vol": 61421, "avgVol": 1178395},
+    "LTM": {"px": 43.16, "pct": -1.81984, "change": -0.8, "vol": 16221, "avgVol": 798890},
+    "SNX": {"px": 249.69, "pct": -2.10922, "change": -5.38, "vol": 11284, "avgVol": 839385},
+    "NTAP": {"px": 207.12, "pct": -5.17352, "change": -11.3, "vol": 118581, "avgVol": 2528883},
+    "NTNX": {"px": 69.1283, "pct": -2.23688, "change": -1.5817, "vol": 57931.58326, "avgVol": 2817251},
+    "AAOI": {"px": 72.28, "pct": -8.72585, "change": -6.91, "vol": 1350022, "avgVol": 10163021},
+    "BB": {"px": 8.85, "pct": -3.69967, "change": -0.34, "vol": 1320441, "avgVol": 21436096},
+    "CIEN": {"px": 326.685, "pct": -6.51452, "change": -22.765, "vol": 145963, "avgVol": 2574156},
+    "CSCO": {"px": 106.2, "pct": -2.20094, "change": -2.39, "vol": 1670192.85064, "avgVol": 19603396},
+    "FFIV": {"px": 348.04, "pct": -4.24256, "change": -15.42, "vol": 69932.5665, "avgVol": 644040},
+    "FTNT": {"px": 136.63, "pct": -1.7757, "change": -2.47, "vol": 811911, "avgVol": 4821241}
   },
   "notes": {
-    "GOOGL": "Alphabet (watchlist technical pick) is scheduled to report Q3 2026 results Wed 28 Oct after the close — tomorrow, 1 trading session away — per two dated sources (Nasdaq.com, CoinCentral). Same week as the Fed's 27-28 Oct meeting. Binary earnings risk for any live or newly-triggered GOOGL position by tomorrow's close."
+    "GOOGL": "FMP live price ($281.46) sits well below the pinned pick's pivot/entry zone (~$364) from the last interactive scan refresh — flagged, not corrected; could reflect real moves since that scan or a stale pin.",
+    "PLTR": "Down with the broader tech rout (Amazon/Intel earnings-driven) rather than its own news.",
+    "SNAP": "Down sharply (-7.0%) alongside NOK, AAOI, CIEN in the same rout; no SNAP-specific dated news found this run.",
+    "NTAP": "Down -5.2% with no NTAP-specific dated news found; moving with the broader tech rout.",
+    "CIEN": "Down -6.5% with no CIEN-specific dated news found; moving with the broader tech rout.",
+    "AAOI": "Down -8.7%, the largest mover on the watchlist; no AAOI-specific dated news found this run.",
+    "VRSN": "One of the few watchlist names green today (+0.9%), bucking the broader tech rout.",
+    "GDDY": "Also green (+3.3%) against the broader tech rout; no GDDY-specific dated news found this run."
   },
   "news": [
     {
-      "tag": "Macro",
-      "top3": false,
-      "title": "FOMC's two-day meeting begins today; decision due tomorrow 2pm ET",
-      "text": "The Fed's October meeting runs today and tomorrow (27-28 Oct), with the rate decision due Wed 2:00pm ET. Market base case from these sources is a hold at 3.75-4.00% after September's 25bp hike, though one analyst note (UOB) flags a hike as the main alternative.",
-      "names": [],
-      "sources": [
-        {"t": "FedRateCalc FOMC Meeting Schedule", "u": "https://fedratecalc.com/fomc-meeting-schedule/october-2026/"},
-        {"t": "TipRanks — Stock Market Today, Oct. 27", "u": "https://tipranks.com/news/stock-market-today-oct-27-futures-edge-higher-ahead-of-key-earnings-and-the-feds-rate-decision"}
-      ]
-    },
-    {
-      "tag": "Communication Services",
-      "top3": true,
-      "title": "Alphabet (watchlist name) reports Q3 earnings Wed, after the close",
-      "text": "Alphabet is due to report Q3 2026 results Wednesday 28 Oct after the close, with Microsoft the same day — both named as the market's main earnings focus this week alongside the Fed decision.",
-      "names": ["GOOGL"],
-      "sources": [
-        {"t": "Nasdaq.com — META, GOOGL Earnings: Advertising Results Remain Key", "u": "https://www.nasdaq.com/articles/meta-googl-earnings-advertising-results-remain-key"},
-        {"t": "CoinCentral — Alphabet and Microsoft Earnings Loom as Fed Meeting Begins", "u": "https://coincentral.com/todays-market-movers-alphabet-and-microsoft-earnings-loom-as-fed-meeting-begins"}
-      ]
-    },
-    {
       "tag": "Technology",
       "top3": true,
-      "title": "Tech led Monday's gains on AI optimism after Anthropic's IPO filing",
-      "text": "Stocks closed higher Monday (26 Oct) with tech leading on AI-sector excitement following Anthropic's IPO filing; premarket Tuesday futures carried a modest positive tone into the Fed meeting, per multiple same-day snapshots.",
-      "names": [],
+      "title": "Amazon and Intel Q3 earnings fuel a broad tech rout into the open",
+      "text": "Amazon and Intel both reported Q3 2026 results after Thursday's close; both are sliding premarket and dragging the Nasdaq down roughly 2-2.5% while the S&P 500 is off about 1.2% and the Dow roughly flat to slightly down, per live market blogs just ahead of the open. Many of today's watchlist movers (PLTR, SNAP, NTAP, CIEN, AAOI, FFIV) are down in sympathy with the broader tech/AI-sentiment pullback rather than on their own news.",
+      "names": ["PLTR", "SNAP", "NTAP", "CIEN", "AAOI", "FFIV"],
       "sources": [
-        {"t": "CNBC — Stocks close higher as Anthropic IPO filing propels tech sector", "u": "https://www.cnbc.com/2026/10/25/stock-market-today-live-updates.html"},
-        {"t": "FXStreet — Dow Jones Futures gain after Wall Street opens week with gains", "u": "https://fxstreet.com/news/dow-jones-futures-gain-after-wall-street-opens-week-with-gains-202610270821"}
+        {"t": "Yahoo Finance — Stock market today: Nasdaq dives, S&P 500 and Dow fall as Amazon, Intel earnings fuel tech rout", "u": "https://finance.yahoo.com/markets/live/stock-market-today-friday-october-30-dow-sp-500-nasdaq-083236552.html"},
+        {"t": "Benzinga — Stock Market Today: Dow Jones, S&P 500 Futures Trade Mixed as AMZN, INTC Slide After Q3 Earnings", "u": "https://www.benzinga.com/markets/equities/26/10/62729872/stock-market-today-dow-jones-sp-500-futures-trade-mixed-as-amzn-intc-slide-after-q3-earnings-dell-lly-azn-in-focus"}
       ]
     }
   ],
   "footnotes": [
-    "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned several same-morning premarket snapshots (5:30am ET, ~7:25am ET, a later pre-market read, and a European-hours read) that disagreed by 0.1-0.5pp per contract and moved directionally between reads — not a reconciling two-source pair at a single point in time, so no number is published for any of the four contracts.",
-    "General sector/company news sweep (Technology, Industrials, Communication Services, individual watchlist names AVT/ZS/ETN/GDDY/ITT/VRSN/PLTR/SNAP/NOK/GNRC/NOC/ROP, chips/AI, oil/China-US) mostly returned stale, undated, or unrelated results this run — the three items above are what could be sourced with a dated, reconciling reference. Not a full sector sweep.",
-    "QQQ: WebSearch found two agreeing sources (stockanalysis.com, Yahoo Finance) for the 26 Oct close ($712.20, +1.11% vs the 23 Oct close of $704.40) — this replaces the brief's stale carried 19 Oct figure, but it is still a settled prior-day close, not a live premarket print, so it is labelled approximate."
+    "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned only a single, un-reconciled premarket snapshot (an Investrade preview implying Nasdaq futures down ~2.3%) with no matching second source for exact points on any of the four contracts — no number is published for any contract this run.",
+    "QQQ omitted: WebSearch returned only stale or undated figures ($521-$750 range, none dated to this week) that could not be reconciled to a single confident number — no QQQ figure is published this run, including no carried-forward approximation.",
+    "VIX: FMP's implied previous close (17.20, from price 18.74 minus change 1.54) does not match the brief's recorded 29 Oct close (18.62) — flagged for the builder; the live price/pct are passed through as FMP reported them.",
+    "General sector/company news sweep (Technology, Communication Services, Industrials top-3 sectors; oil/energy; China-US; individual watchlist names) mostly returned stale, undated, or unrelated results beyond the Amazon/Intel-driven tech rout covered above — not a full sector sweep."
   ]
 }
