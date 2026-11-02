@@ -1,192 +1,204 @@
 {
-  "schemaVersion": 1,
-  "generatedAt": "2026-10-30T20:06:01+08:00",
-  "targetSession": "2026-10-30",
-  "lastSession": "2026-10-29",
-  "notices": [
-    "QQQ (NDX proxy) omitted today: two WebSearch attempts for a current, dated QQQ quote returned only stale (2025) or undated figures that disagreed widely ($546–$750); no reliable number found, so the tile is left out rather than carried forward with a guess.",
-    "Catalyst alerts: FMP's live price/%/cap, not a verified tape reaction — reading the OHLC tape needs WebFetch, which this automated routine does not have.",
-    "Treasury-rates feed had not yet posted a new trading day beyond 28 Oct at fetch time; macro yields/y10hist are therefore unchanged from yesterday's run (same underlying FMP data, re-verified)."
-  ],
-  "rejected": [
-    "<b>3M (MMM)</b> · Q3 2026 beat + raised FY adjusted EPS guidance ($9.10–$9.15), but reported 20 Oct — outside the last 5 trading sessions (23–29 Oct).",
-    "<b>Bloom Energy (BE)</b> · Q3 2026 revenue +138% y/y and FY guidance raised a third time, but shares fell (reported ~8–11% down the next session per Benzinga/Yonhap) — sell-the-news, not a qualifying reaction.",
-    "<b>Norwegian Cruise Line (NCLH)</b> · a reported 13% post-earnings jump could not be confirmed; available sources only show a ~2% pre-announcement move in late September tied to in-line FY26 guidance — dropped for insufficient/conflicting sourcing.",
-    "<b>Analyst upgrades / contract deals searched</b> · no dated (23–29 Oct), two-source-confirmed candidate surfaced this run."
-  ],
-  "indices": [
-    {
-      "id": "SPX",
-      "name": "S&P 500",
-      "q": {
-        "price": 7720.39,
-        "change": -23.59,
-        "pct": -0.30462,
-        "dayLow": 7690.94,
-        "dayHigh": 7732.21,
-        "yearHigh": 7844.52,
-        "yearLow": 6316.91,
-        "ma50": 7698.3027,
-        "ma200": 7306.4897
-      }
-    },
-    {
-      "id": "DJI",
-      "name": "Dow Jones",
-      "q": {
-        "price": 52342.56,
-        "change": -132.54,
-        "pct": -0.25258,
-        "dayLow": 52086.13,
-        "dayHigh": 52405.88,
-        "yearHigh": 54744.33,
-        "yearLow": 45057.28,
-        "ma50": 52231.195,
-        "ma200": 50592.336
-      }
-    },
-    {
-      "id": "RUT",
-      "name": "Russell 2000",
-      "q": {
-        "price": 2859.2166,
-        "change": 28.7066,
-        "pct": 1.01418,
-        "dayLow": 2841.431,
-        "dayHigh": 2868.3733,
-        "yearHigh": 3069.71,
-        "yearLow": 2303.46,
-        "ma50": 2863.1824,
-        "ma200": 2804.357
-      }
-    },
-    {
-      "id": "VIX",
-      "name": "Volatility",
-      "q": {
-        "price": 18.62,
-        "change": 1.42,
-        "pct": 8.25581,
-        "dayLow": 18.03,
-        "dayHigh": 18.65,
-        "yearHigh": 35.3,
-        "yearLow": 13.38,
-        "ma50": 16.097,
-        "ma200": 18.2404
-      }
-    }
-  ],
-  "macro": {
-    "date": "2026-10-28",
-    "y10": 5.05,
-    "y10prev": 4.99,
-    "y2": 4.67,
-    "y30": 5.37,
-    "y10path": "4.96% on 22 Oct, 5.00% on 23 Oct, 5.00% on 26 Oct, 4.99% on 27 Oct, 5.05% on 28 Oct",
-    "fed": {
-      "range": "3.75–4.00%",
-      "move": "hold",
-      "date": "28 Oct",
-      "vote": "10–2",
-      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027.",
-      "sources": [
-        {
-          "t": "InvestingLive",
-          "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
-        },
-        {
-          "t": "Admiral Markets",
-          "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
-        }
-      ]
-    },
-    "y10hist": [
-      {"date": "2026-10-22", "y10": 4.96},
-      {"date": "2026-10-23", "y10": 5.00},
-      {"date": "2026-10-26", "y10": 5.00},
-      {"date": "2026-10-27", "y10": 4.99},
-      {"date": "2026-10-28", "y10": 5.05}
-    ]
+ "source": "FMP + WebSearch",
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "q": {
+    "price": 7580.07,
+    "change": -140.32,
+    "pct": -1.81752,
+    "dayLow": 7527.56,
+    "dayHigh": 7637.48,
+    "yearHigh": 7844.52,
+    "yearLow": 6316.91,
+    "ma50": 7697.0806,
+    "ma200": 7309.7573
+   },
+   "ts": 1793393263
   },
-  "catalysts": [
-    {
-      "tk": "SOFI",
-      "name": "SoFi Technologies, Inc.",
-      "industry": "Financial - Credit Services",
-      "sector": "Financial Services",
-      "ctype": "Earnings beat + raise",
-      "cdate": "27 Oct",
-      "cdateISO": "2026-10-27",
-      "what": "Q3 2026: record adjusted net revenue of $1.37–1.4B (beat ~$1.26B consensus) and adjusted EPS $0.18 vs $0.17 consensus, adjusted EBITDA +70% y/y, 17.1M members. Raised FY2026 guidance to ~$5.04B adjusted net revenue / ~$1.66B adjusted EBITDA and introduced a 2027 outlook. Shares closed up ~13.4%, the biggest one-day gain since April 2025.",
-      "sources": [
-        {"t": "SEC (8-K exhibit)", "u": "https://www.sec.gov/Archives/edgar/data/0001818874/000181887426000065/a2026q3earningsrelease.htm"},
-        {"t": "TIKR", "u": "https://www.tikr.com/blog/sofi-stock-surges-q3-2026-earnings-beat-raised-guidance"}
-      ],
-      "cap": "$22.7B",
-      "px": 17.61,
-      "pct": 2.74212,
-      "topSector": false
-    },
-    {
-      "tk": "VRT",
-      "name": "Vertiv Holdings Co",
-      "industry": "Electrical Equipment & Parts",
-      "sector": "Industrials",
-      "ctype": "Earnings beat + raise",
-      "cdate": "28 Oct",
-      "cdateISO": "2026-10-28",
-      "what": "Q3 2026 net sales $4,312.8M (+61% y/y) vs ~$3.75B consensus; diluted EPS +91% to $1.95, adjusted diluted EPS +78% to $2.21. Raised FY2026 guidance to $14,450–14,850M net sales (from ~$14.0B) and $7.10–$7.20 adjusted diluted EPS (from $6.65–6.75), citing accelerating AI data-center demand and organic orders more than doubling y/y.",
-      "sources": [
-        {"t": "SEC (8-K exhibit)", "u": "https://www.sec.gov/Archives/edgar/data/0001674101/000162828026067707/q32026exhibit991vrt10282026.htm"},
-        {"t": "Vertiv Investor Relations", "u": "https://investors.vertiv.com/news/news-details/2026/Vertiv-Reports-Strong-Third-Quarter-2026-with-Net-Sales-Growth-of-61-Organic-Orders-Growth-over-100-and-Diluted-EPS-Growth-of-91-Adjusted-Diluted-EPS-Growth-of-78-Raises-Full-Year-2026-Guidance-Across-All-Key-Metrics/"}
-      ],
-      "cap": "$94.7B",
-      "px": 245.92,
-      "pct": 1.22664,
-      "topSector": false
-    }
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "q": {
+    "price": 51770.31,
+    "change": -572.25,
+    "pct": -1.09328,
+    "dayLow": 51563.76,
+    "dayHigh": 52383.9,
+    "yearHigh": 54744.33,
+    "yearLow": 45057.28,
+    "ma50": 52211.418,
+    "ma200": 50605.438
+   },
+   "ts": 1793393273
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "q": {
+    "price": 2811.8442,
+    "change": -47.37236,
+    "pct": -1.65683,
+    "dayLow": 2787.1216,
+    "dayHigh": 2842.9998,
+    "yearHigh": 3069.71,
+    "yearLow": 2303.46,
+    "ma50": 2859.5706,
+    "ma200": 2805.158
+   },
+   "ts": 1793392205
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "q": {
+    "price": 19.03,
+    "change": -0.39,
+    "pct": -2.00824,
+    "dayLow": 18.76,
+    "dayHigh": 19.19,
+    "yearHigh": 35.3,
+    "yearLow": 13.38,
+    "ma50": 16.1828,
+    "ma200": 18.2582
+   },
+   "ts": 1793619976,
+   "prev": 19.42
+  }
+ ],
+ "macro": {
+  "y10": 4.94,
+  "y10prev": 4.98,
+  "y2": 4.56,
+  "y30": 5.31,
+  "y10path": "5.00% on 26 Oct, 4.99% on 27 Oct, 5.05% on 28 Oct, 4.98% on 29 Oct, 4.94% on 30 Oct",
+  "y10hist": [
+   {"date": "2026-10-26", "y10": 5.00},
+   {"date": "2026-10-27", "y10": 4.99},
+   {"date": "2026-10-28", "y10": 5.05},
+   {"date": "2026-10-29", "y10": 4.98},
+   {"date": "2026-10-30", "y10": 4.94}
   ],
-  "bg": {
-    "SOFI": {
-      "cap": "$22.7B",
-      "what": "Consumer fintech (SoFi Bank): student/personal/home lending, investing and cash management, plus the Galileo and Technisys banking-infrastructure platforms."
-    },
-    "VRT": {
-      "cap": "$94.7B",
-      "what": "Digital-infrastructure supplier (Liebert, NetSure, Geist): power management, thermal control and rack/IT systems for AI data centers, communications networks and industrial customers."
-    }
+  "fed": {
+   "range": "3.75–4.00%",
+   "move": "hold",
+   "date": "28 Oct",
+   "vote": "10–2",
+   "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027.",
+   "sources": [
+    {"t": "InvestingLive", "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"},
+    {"t": "Admiral Markets", "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"}
+   ]
+  }
+ },
+ "catalysts": [
+  {
+   "tk": "SOFI",
+   "name": "SoFi Technologies, Inc.",
+   "industry": "Financial - Credit Services",
+   "sector": "Financial Services",
+   "ctype": "Earnings beat + raise",
+   "cdate": "27 Oct",
+   "cdateISO": "2026-10-27",
+   "what": "Q3 2026: record adjusted net revenue of $1.37–1.4B (beat ~$1.26B consensus) and adjusted EPS $0.18 vs $0.17 consensus, adjusted EBITDA +70% y/y, 17.1M members. Raised FY2026 guidance to ~$5.04B adjusted net revenue / ~$1.66B adjusted EBITDA and introduced a 2027 outlook. Shares closed up ~13.4% on the day, the biggest one-day gain since April 2025.",
+   "sources": [
+    {"t": "SEC (8-K exhibit)"},
+    {"t": "TIKR"}
+   ],
+   "cap": "$21.6B",
+   "px": 16.76,
+   "pct": -4.8268,
+   "topSector": false
   },
-  "sections": {
-    "indices": {
-      "asOf": "2026-10-29",
-      "source": "FMP index-quote"
-    },
-    "macro": {
-      "asOf": "2026-10-28",
-      "source": "FMP treasury-rates + Fed decision (news, re-verified)"
-    },
-    "catalysts": {
-      "asOf": "2026-10-29",
-      "source": "WebSearch + FMP company/profile-symbol"
-    }
+  {
+   "tk": "VRT",
+   "name": "Vertiv Holdings Co",
+   "industry": "Electrical Equipment & Parts",
+   "sector": "Industrials",
+   "ctype": "Earnings beat + raise",
+   "cdate": "28 Oct",
+   "cdateISO": "2026-10-28",
+   "what": "Q3 2026 net sales $4,312.8M (+61% y/y) vs ~$3.75B consensus; diluted EPS +91% to $1.95, adjusted diluted EPS +78% to $2.21. Raised FY2026 guidance to $14,450–14,850M net sales (from ~$14.0B) and $7.10–$7.20 adjusted diluted EPS (from $6.65–6.75), citing accelerating AI data-center demand and organic orders more than doubling y/y.",
+   "sources": [
+    {"t": "SEC (8-K exhibit)"},
+    {"t": "Vertiv Investor Relations"}
+   ],
+   "cap": "$89.5B",
+   "px": 232.5,
+   "pct": -5.45706,
+   "topSector": true
   },
-  "fetchlog": [
-    {"id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": ""},
-    {"id": "fmp.indexes.index-quote.^DJI", "ok": true, "note": ""},
-    {"id": "fmp.indexes.index-quote.^RUT", "ok": true, "note": ""},
-    {"id": "fmp.indexes.index-quote.^VIX", "ok": true, "note": ""},
-    {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row still 2026-10-28; feed not yet updated for 10-29"},
-    {"id": "websearch.qqq.quote.try1", "ok": false, "note": "no dated reliable quote found"},
-    {"id": "websearch.qqq.quote.try2", "ok": false, "note": "retry: stale/conflicting figures ($546-$750), omitted tile per fallback rule"},
-    {"id": "websearch.fomc.decision", "ok": true, "note": "confirmed hold, 10-2 vote, unchanged from prior run"},
-    {"id": "websearch.catalyst.sofi", "ok": true, "note": "SEC 8-K + TIKR agree"},
-    {"id": "websearch.catalyst.vrt", "ok": true, "note": "SEC 8-K + Vertiv IR agree"},
-    {"id": "websearch.catalyst.3m", "ok": true, "note": "confirmed but stale (20 Oct), rejected"},
-    {"id": "websearch.catalyst.bloomenergy", "ok": true, "note": "confirmed beat+raise but stock fell, rejected sell-the-news"},
-    {"id": "websearch.catalyst.nclh", "ok": false, "note": "13% move claim unverifiable, rejected"},
-    {"id": "websearch.catalyst.analystupgrades", "ok": false, "note": "no dated candidate in window"},
-    {"id": "websearch.catalyst.contracts", "ok": false, "note": "no dated candidate in window"},
-    {"id": "fmp.company.profile-symbol.SOFI", "ok": true, "note": ""},
-    {"id": "fmp.company.profile-symbol.VRT", "ok": true, "note": ""}
-  ]
+  {
+   "tk": "REGN",
+   "name": "Regeneron Pharmaceuticals, Inc.",
+   "industry": "Biotechnology",
+   "sector": "Healthcare",
+   "ctype": "Earnings beat + raise",
+   "cdate": "30 Oct",
+   "cdateISO": "2026-10-30",
+   "what": "Q3 2026: revenue $5.1B (+36% y/y, beat ~$4.56B consensus); non-GAAP diluted EPS $20.07 vs ~$16.19 consensus (+70% y/y). Sanofi-reported Dupixent sales +35% y/y to $6.5B (Regeneron now books its full profit share); EYLEA HD US sales +62% y/y to $699M, with FY2026 EYLEA HD sales guided to grow >50% y/y even as original EYLEA faces biosimilar pressure. Expanded Sanofi collaboration adds a $1.0B upfront payment (booked Q4 2026) plus up to $7.0B in milestones. Shares hit a new 52-week high, +11–13% on the day across sources.",
+   "sources": [
+    {"t": "SEC (8-K exhibit)"},
+    {"t": "TIKR"}
+   ],
+   "cap": "$95.5B",
+   "px": 927.89,
+   "pct": 13.32731,
+   "topSector": false
+  }
+ ],
+ "bg": {
+  "SOFI": {
+   "cap": "$21.6B",
+   "what": "Consumer fintech (SoFi Bank): student/personal/home lending, investing and cash management, plus the Galileo and Technisys banking-infrastructure platforms."
+  },
+  "VRT": {
+   "cap": "$89.5B",
+   "what": "Digital-infrastructure supplier (Liebert, NetSure, Geist): power management, thermal control and rack/IT systems for AI data centers, communications networks and industrial customers."
+  },
+  "REGN": {
+   "cap": "$95.5B",
+   "what": "Biopharmaceutical: Eylea/Eylea HD (wet AMD, diabetic eye disease), Dupixent (atopic dermatitis, asthma; profit-shared with Sanofi), plus Libtayo, Praluent and a broadening oncology/rare-disease pipeline."
+  }
+ },
+ "notices": [
+  "QQQ (NDX proxy) omitted today: WebSearch surfaced only one unconfirmed figure (~$690, ≈3.5% lower) for 30 Oct with no second source to cross-check — tile left out rather than carried forward with a guess.",
+  "VIX's FMP quote carries a timestamp from this morning's (2 Nov) pre-market, not Friday's (30 Oct) close — tagged a live print and kept out of the regime score, which uses its previous close (19.42) instead.",
+  "No new FOMC decision since 28 Oct (re-confirmed via WebSearch); macro.fed block carried forward unchanged, only the treasury yields/y10hist were refreshed.",
+  "Catalyst alerts carry FMP's live price/%/cap, not a verified tape reaction — reading the OHLC tape needs WebFetch, which this automated routine does not have."
+ ],
+ "rejected": [
+  "<b>KLA Corp (KLAC)</b> · Q1 FY2027 beat (reported 28 Oct) but the only reaction figure found (+5.45%, single source) conflicts with FMP's current quote (−5.7%) — conflicting/unreliable sourcing, dropped.",
+  "<b>Global Payments (GPN)</b> · up ~13% into the 30 Oct close, but no second source could confirm an earnings report or guidance raise on that date (one source suggests Q3 2026 reports in early Nov and the last guidance update was a cut) — insufficient/conflicting sourcing.",
+  "<b>Bloom Energy (BE)</b> · Q3 2026 beat + raised guidance (27 Oct) but shares fell afterward (down ~8.6% on FMP's latest quote) — sell-the-news, not a qualifying reaction.",
+  "<b>ServiceNow (NOW)</b> · Q3 2026 revenue beat but adjusted EPS missed and shares fell ~15–18% after hours (28 Oct) — sell-the-news/miss, not a qualifying reaction.",
+  "<b>Pentair (PNR)</b> · reported ~12.8% gain on a Q3 beat (27 Oct) per one source only; no second independent source found to confirm — dropped for single-sourcing."
+ ],
+ "sections": {
+  "indices": {"asOf": "2026-10-30", "source": "FMP index-quote"},
+  "macro": {"asOf": "2026-10-30", "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)"},
+  "catalysts": {"asOf": "2026-10-30", "source": "WebSearch + FMP company/profile-symbol"}
+ },
+ "fetchlog": [
+  {"id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": ""},
+  {"id": "fmp.indexes.index-quote.^DJI", "ok": true, "note": ""},
+  {"id": "fmp.indexes.index-quote.^RUT", "ok": true, "note": ""},
+  {"id": "fmp.indexes.index-quote.^VIX", "ok": true, "note": "ts is a live print (2 Nov pre-market), not the 30 Oct close; prev used for regime"},
+  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "2026-10-15..2026-11-02, used last 5 distinct sessions"},
+  {"id": "websearch.qqq.quote", "ok": false, "note": "two searches, only one unconfirmed figure, no second source — tile omitted"},
+  {"id": "websearch.fomc.decision", "ok": true, "note": "confirmed no new decision since 28 Oct; macro.fed carried forward unchanged"},
+  {"id": "websearch.catalysts.earnings_search", "ok": true, "note": "multiple sweeps across earnings beats, upgrades, contracts, FDA approvals for last 5 sessions"},
+  {"id": "fmp.company.profile-symbol.SOFI", "ok": true, "note": "catalyst re-price"},
+  {"id": "fmp.company.profile-symbol.VRT", "ok": true, "note": "catalyst re-price"},
+  {"id": "fmp.company.profile-symbol.REGN", "ok": true, "note": "new catalyst"},
+  {"id": "fmp.company.profile-symbol.KLAC", "ok": true, "note": "rejected: conflicting sourcing"},
+  {"id": "fmp.company.profile-symbol.BE", "ok": true, "note": "rejected: sell-the-news"},
+  {"id": "fmp.company.profile-symbol.GPN", "ok": true, "note": "rejected: unconfirmed event"},
+  {"id": "fmp.company.profile-symbol.PNR", "ok": true, "note": "rejected: single-sourced"},
+  {"id": "websearch.servicenow.earnings", "ok": true, "note": "rejected: miss + selloff"}
+ ],
+ "meta": {
+  "lastSession": "2026-10-30"
+ }
 }
