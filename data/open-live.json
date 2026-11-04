@@ -1,101 +1,53 @@
 {
-  "asOf": "2026-11-03T14:44:00Z",
-  "note": "Snapshot ~14 minutes before the US open (FMP + WebSearch only, no WebFetch). Futures (ES/NQ/YM/RTY) and QQQ omitted this run: WebSearch returned non-reconciling magnitudes for Dow/S&P/Nasdaq futures across sources (e.g. Dow futures reported as -323pts, -359pts/-0.7%, and -0.42% by different dated Nov 3 articles) and no dated, two-source-reconciled QQQ figure -- publishing either would violate the no-invent rule.",
+  "asOf": "Wed 04 Nov 2026, ~12 min after the US open",
+  "note": "FMP + WebSearch only (no WebFetch). Indices and all 24 watch-list quotes (technical picks + catalyst-alert tickers + near-misses) are live FMP prints read ~12 minutes after the 09:30 ET open. Futures (ES/NQ/YM/RTY), QQQ and overnight/session news are omitted this run: WebSearch returned no dated, two-source-reconciled figures or headlines for today (04 Nov 2026) across eight separate queries (general market-today, futures, Fed/jobs, sector and single-name searches) -- the search index appears not to have today's coverage indexed yet. Publishing anything from those stale/undated results would violate the no-invent rule, so this run carries no new entries for those sections; the page keeps whatever it last had.",
   "meta": {"schemaVersion": 1},
   "sections": {
-    "indices": {"asOfUTC": "2026-11-03T14:41:45Z", "source": "FMP indexes/index-quote"},
-    "quotes": {"asOfUTC": "2026-11-03T14:42:30Z", "source": "FMP company/profile-symbol, per ticker"},
-    "news": {"asOfUTC": "2026-11-03T14:44:00Z", "source": "WebSearch, multiple dated 3 Nov 2026 sources"}
+    "indices": {"asOfUTC": "2026-11-04T14:42:46Z", "source": "FMP indexes/index-quote"},
+    "quotes": {"asOfUTC": "2026-11-04T14:43:30Z", "source": "FMP company/profile-symbol, per ticker"}
   },
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7558.9, "pct": 0.23205, "prev": 7541.4},
-    {"id": "DJI", "name": "Dow Jones", "px": 51645.18, "pct": -0.65174, "prev": 51983.98},
-    {"id": "RUT", "name": "Russell 2000", "px": 2819.30428, "pct": 0.47858, "prev": 2805.87584},
-    {"id": "VIX", "name": "Volatility", "px": 20.95, "pct": -0.94563, "prev": 21.15}
+    {"id": "SPX", "name": "S&P 500", "px": 7688.51, "pct": 1.58001, "prev": 7568.92},
+    {"id": "DJI", "name": "Dow Jones", "px": 52998.91, "pct": 2.34074, "prev": 51786.72},
+    {"id": "RUT", "name": "Russell 2000", "px": 2871.89585, "pct": 2.11377, "prev": 2812.44729},
+    {"id": "VIX", "name": "Volatility", "px": 17.23, "pct": -17.28277, "prev": 20.83}
   ],
-  "futures": {},
   "quotes": {
-    "AVT": {"px": 88.59, "pct": 2.72495, "vol": 30534, "avgVol": 1238605, "change": 2.35},
-    "ZS": {"px": 225.16, "pct": 0.61218, "vol": 123802, "avgVol": 2824977, "change": 1.37},
-    "ETN": {"px": 390.10501, "pct": 6.56569, "vol": 278941, "avgVol": 2256225, "change": 24.03501},
-    "META": {"px": 611.09, "pct": 0.71861, "vol": 1086197, "avgVol": 20429689, "change": 4.36},
-    "GDDY": {"px": 112.63, "pct": -3.47103, "vol": 62272, "avgVol": 2056338, "change": -4.05},
-    "ITT": {"px": 207.32, "pct": 2.6362, "vol": 46127, "avgVol": 846644, "change": 5.325},
-    "VRSN": {"px": 306.82, "pct": -0.51232, "vol": 50416, "avgVol": 822427, "change": -1.58},
-    "PLTR": {"px": 171.81, "pct": -3.66155, "vol": 12203772, "avgVol": 33048523, "change": -6.53},
-    "GOOGL": {"px": 279.175, "pct": 0.06631062, "vol": 4116310, "avgVol": 29749429, "change": 0.185},
-    "SNAP": {"px": 5.485, "pct": 0.6422, "vol": 1684456, "avgVol": 37797585, "change": 0.03500013},
-    "REGN": {"px": 968.135, "pct": 0.71521, "vol": 72678, "avgVol": 770722, "change": 6.875},
-    "SOFI": {"px": 16.5684, "pct": -0.19036, "vol": 3584971, "avgVol": 59487866, "change": -0.0316},
-    "VRT": {"px": 237.05, "pct": 5.71263, "vol": 486418, "avgVol": 5933255, "change": 12.81},
-    "NOK": {"px": 8.575, "pct": 3.37553, "vol": 5818636, "avgVol": 83485635, "change": 0.28},
-    "GNRC": {"px": 207.67, "pct": 2.78658, "vol": 23797, "avgVol": 1189801, "change": 5.63},
-    "LTM": {"px": 44.76, "pct": 0.15663, "vol": 34883, "avgVol": 799237, "change": 0.07},
-    "SNX": {"px": 226.85, "pct": 2.08352, "vol": 56567, "avgVol": 835817, "change": 4.63},
-    "NTAP": {"px": 191.63, "pct": 3.43841, "vol": 72464, "avgVol": 2518501, "change": 6.37},
-    "NTNX": {"px": 64.71, "pct": 0.43458, "vol": 79766, "avgVol": 2787002, "change": 0.28},
-    "AAOI": {"px": 65.096, "pct": 4.1536, "vol": 1529975, "avgVol": 10212822, "change": 2.596},
-    "BB": {"px": 8.22, "pct": 2.55771, "vol": 575551, "avgVol": 21436096, "change": 0.205},
-    "CIEN": {"px": 302.58, "pct": 6.41486, "vol": 195439, "avgVol": 2577476, "change": 18.24},
-    "CSCO": {"px": 102.8, "pct": 1.17114, "vol": 801492, "avgVol": 19524985, "change": 1.19},
-    "FFIV": {"px": 327.7156, "pct": 0.97538, "vol": 44777, "avgVol": 665760, "change": 3.1656},
-    "FTNT": {"px": 129.635, "pct": 2.71373, "vol": 348866, "avgVol": 4864972, "change": 3.425}
+    "AVT": {"px": 86.87, "pct": -2.09625, "vol": 180954, "avgVol": 1249859, "change": -1.86},
+    "ZS": {"px": 222.22, "pct": -1.27505, "vol": 121994, "avgVol": 2801549, "change": -2.87},
+    "ETN": {"px": 368.36, "pct": -5.95864, "vol": 401913, "avgVol": 2234362, "change": -23.34},
+    "META": {"px": 631.59, "pct": 1.7004, "vol": 5105122, "avgVol": 20400705, "change": 10.56},
+    "GDDY": {"px": 118.305, "pct": 4.27942, "vol": 51055, "avgVol": 2034867, "change": 4.855},
+    "ITT": {"px": 203.25, "pct": -0.90683, "vol": 18218, "avgVol": 840700, "change": -1.86},
+    "VRSN": {"px": 317.08, "pct": 1.0195, "vol": 48731, "avgVol": 823156, "change": 3.2},
+    "PLTR": {"px": 170.95, "pct": -2.53706, "vol": 6378719, "avgVol": 32956323, "change": -4.45},
+    "GOOGL": {"px": 289.19, "pct": 3.27108, "vol": 8501102, "avgVol": 29793292, "change": 9.15999},
+    "SNAP": {"px": 5.825, "pct": 4.20394, "vol": 3145021, "avgVol": 37583091, "change": 0.235},
+    "REGN": {"px": 975.8965, "pct": 0.26059, "vol": 82821, "avgVol": 770549, "change": 2.5365},
+    "VRT": {"px": 215.68, "pct": -8.59855, "vol": 1692504, "avgVol": 5931063, "change": -20.29},
+    "NOK": {"px": 8.47, "pct": -0.11792, "vol": 9780026, "avgVol": 83305447, "change": -0.00999973},
+    "GNRC": {"px": 195.92, "pct": -6.38379, "vol": 142428, "avgVol": 1184887, "change": -13.36},
+    "LTM": {"px": 46.68, "pct": 5.87435, "vol": 96711, "avgVol": 795741, "change": 2.59},
+    "SNX": {"px": 228.375, "pct": 0.1469, "vol": 30512, "avgVol": 829959, "change": 0.335},
+    "NTAP": {"px": 189.1093, "pct": -0.87572, "vol": 56307, "avgVol": 2500953, "change": -1.6707},
+    "NTNX": {"px": 64.2188, "pct": -0.71305, "vol": 37523, "avgVol": 2734011, "change": -0.4612},
+    "AAOI": {"px": 63.1, "pct": -1.36001, "vol": 2694243, "avgVol": 10115788, "change": -0.87},
+    "BB": {"px": 8.135, "pct": -0.67155, "vol": 828506, "avgVol": 21436096, "change": -0.055},
+    "CIEN": {"px": 292.68, "pct": -2.46601, "vol": 186314, "avgVol": 2586388, "change": -7.4},
+    "CSCO": {"px": 103.732, "pct": 0.74002, "vol": 2062914, "avgVol": 19175005, "change": 0.762},
+    "FFIV": {"px": 330.5728, "pct": -0.1743, "vol": 26516, "avgVol": 679026, "change": -0.5772},
+    "FTNT": {"px": 127.28, "pct": -0.64788, "vol": 413892, "avgVol": 4924710, "change": -0.83}
   },
   "notes": {
-    "ETN": "Reported record Q3 2026 results this morning: adjusted EPS $3.68 (beat ~$3.54 consensus), sales $8.9-8.95B (+28% y/y, record), raised Q4 and FY2026 EPS guidance. Pre-market pop (+6.6%) is a dated, sourced earnings reaction, not unexplained.",
-    "GDDY": "Giving back part of yesterday's (2 Nov) +10.7% unexplained rally; no new GDDY-specific dated news found this run.",
-    "PLTR": "Continuing to fade after its 2 Nov Q3 beat was treated as a sell-the-news event (already noted in the brief's rejected list); no new PLTR-specific news this run.",
-    "AVT": "No AVT-specific dated news found this run; move is broadly in line with the Technology-sector pre-open tone (Apple margin concerns, chip-stock rebound pulling in different directions across names)."
+    "ETN": "FMP's implied previous close from price-minus-change (~391.70) does not reconcile with the brief's pinned reference close (445.09 on 2 Nov) -- the pick card's levels were set from an older interactive scan; treat today's -6% print as versus FMP's own prior session, not the stale pinned close. WebSearch found no dated 4 Nov news explaining the move (two queries tried, no reconciled result).",
+    "AVT": "Live price (86.87) is well below the pick's pinned entry zone (108.64-109.73) and stop (102.62) -- the pinned reference price/levels are from an earlier interactive refresh, not today's tape. WebSearch found no dated 4 Nov news explaining the drop (two queries tried, no reconciled result).",
+    "VRT": "Catalyst-alert ticker down 8.6% on FMP's live print versus its own prior close; no dated 4 Nov news found via WebSearch to explain it -- shown as a live quote only, no computed level applies to catalyst tickers."
   },
-  "news": [
-    {
-      "tag": "Macro",
-      "top3": false,
-      "title": "Apple's post-earnings margin concerns weigh on the Dow; Nasdaq-100 futures lead on a chip-stock rebound",
-      "text": "Apple shares are under pressure after its 2 Nov report flagged rising memory-chip costs pressuring gross margin, dragging the price-weighted Dow. Nasdaq-100 futures are the relative outperformer as chip names rebound, even with the index still reported >10% below its all-time closing high (confirms yesterday's brief notice).",
-      "names": [],
-      "sources": [
-        {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/03/stock-market-today-dow-futures-plunge-323-points-apple-sinks-and-iran-strikes-send-oil-soaring/"},
-        {"t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-3-2026"}
-      ]
-    },
-    {
-      "tag": "Industrials",
-      "top3": true,
-      "title": "Eaton (ETN, our own technical pick) beats with record Q3 2026 results, raises guidance",
-      "text": "Adjusted EPS $3.68 vs ~$3.54 consensus; sales $8.9-8.95B, +28% y/y, a record; segment margins a record 25.3%. Raised Q4 EPS guide to $4.05-4.15 and FY2026 to $13.70-13.80. Stock up ~6.6% pre-market off a depressed base -- still well below its own entry zone (452.01-456.53) and stop (429.40).",
-      "names": ["ETN"],
-      "sources": [
-        {"t": "AP via WTOP", "u": "https://wtop.com/national/2026/11/eaton-q3-earnings-snapshot"},
-        {"t": "SEC 8-K (Eaton Corp plc)", "u": "https://www.sec.gov/Archives/edgar/data/0001551182/000155118226000037/etn09302026exhibit99.htm"}
-      ]
-    },
-    {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Midterm election day and AMD's after-the-close earnings are today's two swing factors for tech sentiment",
-      "text": "Markets are described as wavering into midterm election results; AMD reports fiscal Q3 2026 results after today's close (consensus EPS ~$1.64 vs $0.97 a year ago) -- a read on AI data-center demand that could move chip-adjacent names (none of today's watchlist, but relevant to the Technology sector backdrop).",
-      "names": [],
-      "sources": [
-        {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-3-dow-sp-500-nasdaq-midterms-amd-090846378.html"},
-        {"t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-3-2026"}
-      ]
-    },
-    {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Apple's gross-margin guidance is the specific overhang behind this week's broad tech/industrial weakness",
-      "text": "Coverage of Apple's 2 Nov report centers on memory-chip cost pressure on gross margin guidance for the December quarter, cited as a contributor to the broader post-earnings risk-off tone affecting several watchlist names (AVT, ETN, SNX, NTAP, CIEN before today's ETN-specific reversal).",
-      "names": [],
-      "sources": [
-        {"t": "GuruFocus", "u": "https://gurufocus.com/news/8690709/apple-aapl-faces-margin-challenges-amid-rising-memory-costs"}
-      ]
-    }
-  ],
   "footnotes": [
-    "Futures (ES/NQ/YM/RTY) omitted: WebSearch found multiple dated 3 Nov 2026 articles that disagree on magnitude for Dow futures (-323pts vs -359pts/-0.7% vs -0.42%) and give only loose ranges for S&P/Nasdaq futures -- no number is published for any contract this run, same as the prior firing.",
-    "QQQ omitted: no dated, reconciled November 2026 QQQ figure was found this run; the page will carry the last confirmed QQQ close (19 Oct) forward instead.",
-    "Oil/Iran: a headline referencing fresh Iran strikes and an oil surge dated 3 Nov 2026 appeared in one search result, but no second source could be found to confirm the date or magnitude -- dropped rather than published unreconciled, per the no-invent rule.",
-    "Indices (SPX/DJI/RUT/VIX): FMP's index-quote is a live pre-open print (~14 minutes before the 09:30 ET open), not a completed session -- open/high/low will move once trading starts."
+    "Futures (ES/NQ/YM/RTY) omitted: eight WebSearch queries this run (general market-today, futures-specific, Fed/jobs, sector, and single-name searches) returned no coverage dated 4 Nov 2026 -- results were consistently from 2025 or earlier 2026 months. No futures figure is published this run; the page carries forward whatever it last had.",
+    "QQQ omitted for the same reason: no dated, reconciled 4 Nov 2026 QQQ quote was found. The page carries forward its last confirmed QQQ close.",
+    "Overnight/session news omitted: no dated, two-source-reconciled 4 Nov 2026 headlines were found for the top-3 sectors (Technology, Communication Services, Industrials) or any watchlist name, despite targeted queries including Eaton, Avnet, Palantir/Alphabet/Meta, and macro/Fed searches. Today's large index moves (SPX +1.58%, DJI +2.34%, VIX -17.3% on FMP's live quotes) and large single-name moves (ETN -5.96%, VRT -8.6%, AVT -2.1% vs its own prior close, GDDY +4.28%) are therefore unexplained in this snapshot -- read as live prices only, not confirmed-reaction moves.",
+    "Indices (SPX/DJI/RUT/VIX): FMP's index-quote is a live print taken ~12 minutes after the 09:30 ET open (dayLow/dayHigh/open already reflect the session so far), not a completed session.",
+    "AVT and ETN (and several other pinned technical picks) show FMP live prices far below their brief-card's pinned reference price -- the pinned picks/levels are from an earlier interactive scan (CLAUDE.md hybrid design); see the per-ticker notes above. This is expected under the hybrid design (PINNED levels), not a fetch error."
   ]
 }
