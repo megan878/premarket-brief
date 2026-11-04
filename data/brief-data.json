@@ -1,205 +1,204 @@
 {
- "source": "FMP + WebSearch",
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "q": {
-    "price": 7541.4,
-    "change": -38.67,
-    "pct": -0.51015,
-    "dayLow": 7539.38,
-    "dayHigh": 7662.23,
-    "yearHigh": 7844.52,
-    "yearLow": 6316.91,
-    "ma50": 7697.0806,
-    "ma200": 7309.7573
-   },
-   "ts": 1793656259
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "q": {
-    "price": 51983.98,
-    "change": 213.67,
-    "pct": 0.41273,
-    "dayLow": 51981.66,
-    "dayHigh": 52424.91,
-    "yearHigh": 54744.33,
-    "yearLow": 45057.28,
-    "ma50": 52211.418,
-    "ma200": 50605.438
-   },
-   "ts": 1793656257
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "q": {
-    "price": 2805.876,
-    "change": -5.96843,
-    "pct": -0.21226,
-    "dayLow": 2805.10955,
-    "dayHigh": 2846.0251,
-    "yearHigh": 3069.71,
-    "yearLow": 2303.46,
-    "ma50": 2859.5706,
-    "ma200": 2805.158
-   },
-   "ts": 1793655004
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "q": {
-    "price": 21.43,
-    "change": 0.28,
-    "pct": 1.32388,
-    "dayLow": 21.21,
-    "dayHigh": 21.91,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 16.2888,
-    "ma200": 18.2635
-   },
-   "ts": 1793706376,
-   "prev": 21.15
-  }
- ],
- "macro": {
-  "y10": 4.91,
-  "y10prev": 4.94,
-  "y2": 4.59,
-  "y30": 5.28,
-  "y10path": "4.99% on 27 Oct, 5.05% on 28 Oct, 4.98% on 29 Oct, 4.94% on 30 Oct, 4.91% on 2 Nov",
-  "y10hist": [
-   {"date": "2026-10-27", "y10": 4.99},
-   {"date": "2026-10-28", "y10": 5.05},
-   {"date": "2026-10-29", "y10": 4.98},
-   {"date": "2026-10-30", "y10": 4.94},
-   {"date": "2026-11-02", "y10": 4.91}
+  "indices": [
+    {
+      "id": "SPX",
+      "name": "S&P 500",
+      "q": {
+        "price": 7568.92,
+        "change": 27.52,
+        "pct": 0.36492,
+        "dayLow": 7545.39,
+        "dayHigh": 7594.61,
+        "yearHigh": 7844.52,
+        "yearLow": 6316.91,
+        "ma50": 7694.4214,
+        "ma200": 7312.7417
+      },
+      "ts": 1793739600
+    },
+    {
+      "id": "QQQ",
+      "name": "Nasdaq-100 ETF",
+      "proxyFor": "NDX",
+      "q": {
+        "price": 685.28,
+        "change": 4.19,
+        "pct": 0.6152
+      },
+      "src": "WebSearch (stockanalysis.com + Finviz, agree on 3 Nov close, approximate)"
+    },
+    {
+      "id": "DJI",
+      "name": "Dow Jones",
+      "q": {
+        "price": 51786.72,
+        "change": -197.26,
+        "pct": -0.37946,
+        "dayLow": 51593.16,
+        "dayHigh": 51932.63,
+        "yearHigh": 54744.33,
+        "yearLow": 45057.28,
+        "ma50": 52152.945,
+        "ma200": 50630.28
+      },
+      "ts": 1793741696
+    },
+    {
+      "id": "RUT",
+      "name": "Russell 2000",
+      "q": {
+        "price": 2812.4473,
+        "change": 6.5713,
+        "pct": 0.2342,
+        "dayLow": 2810.68315,
+        "dayHigh": 2836.8015,
+        "yearHigh": 3069.71,
+        "yearLow": 2303.46,
+        "ma50": 2855.3308,
+        "ma200": 2805.8147
+      },
+      "ts": 1793741404
+    },
+    {
+      "id": "VIX",
+      "name": "Volatility",
+      "q": {
+        "price": 18.19,
+        "change": -2.64,
+        "pct": -12.67403,
+        "dayLow": 18.06,
+        "dayHigh": 19.22,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 16.3964,
+        "ma200": 18.28315
+      },
+      "ts": 1793792776,
+      "prev": 20.83,
+      "asOfKind": "live",
+      "asOfNote": "live print 04 Nov 11:46 UTC, not the 03 Nov close",
+      "regimeQ": {
+        "price": 20.83,
+        "dayLow": 18.06,
+        "dayHigh": 19.22,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 16.3964,
+        "ma200": 18.28315
+      },
+      "inRegime": "previous close"
+    }
   ],
-  "fed": {
-   "range": "3.75–4.00%",
-   "move": "hold",
-   "date": "28 Oct",
-   "vote": "10–2",
-   "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); re-confirmed via WebSearch this run.",
-   "sources": [
-    {"t": "InvestingLive", "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"},
-    {"t": "Admiral Markets", "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"}
-   ]
+  "macro": {
+    "y10": 4.95,
+    "y10prev": 4.91,
+    "y2": 4.61,
+    "y30": 5.32,
+    "y10path": "5.05% on 28 Oct, 4.98% on 29 Oct, 4.94% on 30 Oct, 4.91% on 2 Nov, 4.95% on 3 Nov",
+    "y10hist": [
+      { "date": "2026-10-28", "y10": 5.05 },
+      { "date": "2026-10-29", "y10": 4.98 },
+      { "date": "2026-10-30", "y10": 4.94 },
+      { "date": "2026-11-02", "y10": 4.91 },
+      { "date": "2026-11-03", "y10": 4.95 }
+    ],
+    "fed": {
+      "range": "3.75–4.00%",
+      "move": "hold",
+      "date": "28 Oct",
+      "vote": "10–2",
+      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); re-confirmed via WebSearch this run.",
+      "sources": [
+        { "t": "InvestingLive", "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/" },
+        { "t": "Admiral Markets", "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates" }
+      ]
+    }
+  },
+  "catalysts": [
+    {
+      "tk": "VRT",
+      "name": "Vertiv Holdings Co",
+      "industry": "Electrical Equipment & Parts",
+      "sector": "Industrials",
+      "ctype": "Earnings beat + raise",
+      "cdate": "28 Oct",
+      "cdateISO": "2026-10-28",
+      "what": "Q3 2026 net sales $4,312.8M (+61% y/y) vs ~$3.75B consensus; diluted EPS +91% to $1.95, adjusted diluted EPS +78% to $2.21. Raised FY2026 guidance to $14,450–14,850M net sales (from ~$14.0B) and $7.10–$7.20 adjusted diluted EPS (from $6.65–6.75), citing accelerating AI data-center demand and organic orders more than doubling y/y.",
+      "sources": [
+        { "t": "SEC (8-K exhibit)" },
+        { "t": "Vertiv Investor Relations" }
+      ],
+      "cap": "$90.9B",
+      "px": 235.97,
+      "pct": 5.231,
+      "topSector": false
+    },
+    {
+      "tk": "REGN",
+      "name": "Regeneron Pharmaceuticals, Inc.",
+      "industry": "Biotechnology",
+      "sector": "Healthcare",
+      "ctype": "Earnings beat + raise",
+      "cdate": "30 Oct",
+      "cdateISO": "2026-10-30",
+      "what": "Q3 2026: revenue $5.1B (+36% y/y, beat ~$4.56B consensus); non-GAAP diluted EPS $20.07 vs ~$16.19 consensus (+70% y/y). Sanofi-reported Dupixent sales +35% y/y to $6.5B (Regeneron now books its full profit share); EYLEA HD US sales +62% y/y to $699M, with FY2026 EYLEA HD sales guided to grow >50% y/y even as original EYLEA faces biosimilar pressure. Expanded Sanofi collaboration adds a $1.0B upfront payment (booked Q4 2026) plus up to $7.0B in milestones. Shares hit a new 52-week high, +11–13% on the day across sources.",
+      "sources": [
+        { "t": "SEC (8-K exhibit)" },
+        { "t": "TIKR" }
+      ],
+      "cap": "$100.2B",
+      "px": 973.36,
+      "pct": 1.25876,
+      "topSector": false
+    }
+  ],
+  "bg": {
+    "VRT": { "cap": "$90.9B", "what": "Digital-infrastructure supplier (Liebert, NetSure, Geist): power management, thermal control and rack/IT systems for AI data centers, communications networks and industrial customers." },
+    "REGN": { "cap": "$100.2B", "what": "Biopharmaceutical: Eylea/Eylea HD (wet AMD, diabetic eye disease), Dupixent (atopic dermatitis, asthma; profit-shared with Sanofi), plus Libtayo, Praluent and a broadening oncology/rare-disease pipeline." }
+  },
+  "notices": [
+    "No new catalyst alerts qualified this run. VRT (28 Oct) and REGN (30 Oct) are carried over and re-priced, still inside the rolling 5-session window (28 Oct–3 Nov). SOFI (27 Oct) dropped out of that window today and was removed as stale, not rejected on the merits.",
+    "Checked four fresh candidates and none cleared the bar — see rejected: AMD and Super Micro Computer's 3 Nov earnings had confirmed beats, but their guidance-raise figures didn't reconcile across sources; Bloom Energy's reported analyst rating action was contradicted between two sources; Exelixis's raised target implies only ~8% upside, below the 15% threshold.",
+    "VIX's FMP quote carries a timestamp from this morning's (4 Nov) pre-market, not Tuesday's (3 Nov) close — tagged a live print and kept out of the regime score, which uses its previous close (20.83) instead.",
+    "No new FOMC decision since 28 Oct (next meeting 9 Dec, re-confirmed via WebSearch today); macro.fed block carried forward unchanged, only the treasury yields/y10hist were refreshed.",
+    "QQQ (NDX proxy): WebSearch found two independent sources (stockanalysis.com, Finviz) agreeing on Tuesday's (3 Nov) close of $685.28, +0.62% — used as an approximate, search-sourced quote."
+  ],
+  "rejected": [
+    "<b>AMD</b> · Q3 2026 results reported 3 Nov: revenue and EPS beat confirmed across sources (revenue in the $13–13.4B area, Data Center +97% y/y), but the specific claim of a Q4 guide ~$770M above consensus could not be reconciled — one secondary aggregator cited that figure while SEC-adjacent coverage only gave the raw Q4 guide (~$17B) with no comparable consensus to confirm a beat. Dropped for insufficient two-source reconciliation on the guidance-raise claim.",
+    "<b>Super Micro Computer (SMCI)</b> · fiscal Q1 FY2027 results/call held 3 Nov. The company's sharply raised preliminary figures were pre-announced 20 Oct, outside this run's 5-session catalyst window, and no reconcilable second source confirmed a fresh guidance raise specific to the 3 Nov print itself. Dropped pending clearer, dated sourcing.",
+    "<b>Bloom Energy (BE)</b> · one source described a Barclays upgrade to Overweight (target $289, cut from $316); a second, more detailed source said Barclays kept Equal Weight and simply raised its target to $316 from $308 — the two accounts contradict each other on the rating action itself. Dropped per the cross-check rule.",
+    "<b>Exelixis (EXEL)</b> · HC Wainwright raised its target to $78 from $56 (Buy maintained) after the stock hit a new 52-week high, but the implied upside versus the live FMP price (~$72.31) is only ~8%, below the >15% threshold required for an analyst-upgrade catalyst. Dropped.",
+    "<b>SoFi (SOFI)</b> · previously published Earnings beat + raise alert (27 Oct) is now outside the rolling last-5-trading-session window (28 Oct–3 Nov). Removed as stale, not a market-outcome rejection."
+  ],
+  "sections": {
+    "indices": { "asOf": "2026-11-03", "source": "FMP index-quote" },
+    "macro": { "asOf": "2026-11-03", "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)" },
+    "catalysts": { "asOf": "2026-11-03", "source": "WebSearch + FMP company/profile-symbol (VRT/REGN re-priced; SOFI dropped, outside window; no new alerts cleared the bar)" }
+  },
+  "fetchlog": [
+    { "id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": "" },
+    { "id": "fmp.indexes.index-quote.^DJI", "ok": true, "note": "" },
+    { "id": "fmp.indexes.index-quote.^RUT", "ok": true, "note": "" },
+    { "id": "fmp.indexes.index-quote.^VIX", "ok": true, "note": "ts is a live print (4 Nov pre-market), not the 3 Nov close; prev used for regime" },
+    { "id": "fmp.economics.treasury-rates", "ok": true, "note": "default window excluded 3 Nov; retried with explicit from/to dates" },
+    { "id": "fmp.economics.treasury-rates.2026-10-28_2026-11-04", "ok": true, "note": "used for last 5 distinct trading-day y10hist rows" },
+    { "id": "websearch.qqq.quote.try1", "ok": false, "note": "no reliable dated current price found" },
+    { "id": "websearch.qqq.quote.try2", "ok": true, "note": "stockanalysis.com + Finviz agree: 3 Nov close $685.28 +0.62%" },
+    { "id": "websearch.catalysts.earnings_raise_sweep", "ok": true, "note": "surfaced AMD, SMCI, Fiserv, Qnity as candidates" },
+    { "id": "websearch.catalysts.analyst_upgrade_sweep", "ok": true, "note": "surfaced Bloom Energy, Exelixis, Tempus AI, SoFi, EverQuote as candidates" },
+    { "id": "websearch.amd.guidance_verify", "ok": false, "note": "two follow-up searches could not reconcile a Q4 guide-vs-consensus beat figure; rejected" },
+    { "id": "websearch.smci.guidance_verify", "ok": false, "note": "two follow-up searches found only the 20 Oct preliminary raise (outside window), no confirmed fresh raise on the 3 Nov print; rejected" },
+    { "id": "websearch.be.analyst_verify", "ok": false, "note": "two sources disagree on whether Barclays upgraded the rating; rejected" },
+    { "id": "fmp.company.profile-symbol.AMD", "ok": true, "note": "rejected: guidance-raise claim unverified" },
+    { "id": "fmp.company.profile-symbol.SMCI", "ok": true, "note": "rejected: guidance-raise claim unverified / outside window" },
+    { "id": "fmp.company.profile-symbol.BE", "ok": true, "note": "rejected: contradictory sources on rating action" },
+    { "id": "fmp.company.profile-symbol.EXEL", "ok": true, "note": "rejected: upside ~8%, below 15% threshold" },
+    { "id": "fmp.company.profile-symbol.REGN", "ok": true, "note": "catalyst re-price" },
+    { "id": "fmp.company.profile-symbol.VRT", "ok": true, "note": "catalyst re-price" },
+    { "id": "websearch.fomc.decision", "ok": true, "note": "confirmed no new decision since 28 Oct via 2 sources; next meeting 8-9 Dec" }
+  ],
+  "meta": {
+    "targetSession": "2026-11-04",
+    "lastSession": "2026-11-03"
   }
- },
- "catalysts": [
-  {
-   "tk": "SOFI",
-   "name": "SoFi Technologies, Inc.",
-   "industry": "Financial - Credit Services",
-   "sector": "Financial Services",
-   "ctype": "Earnings beat + raise",
-   "cdate": "27 Oct",
-   "cdateISO": "2026-10-27",
-   "what": "Q3 2026: record adjusted net revenue of $1.37–1.4B (beat ~$1.26B consensus) and adjusted EPS $0.18 vs $0.17 consensus, adjusted EBITDA +70% y/y, 17.1M members. Raised FY2026 guidance to ~$5.04B adjusted net revenue / ~$1.66B adjusted EBITDA and introduced a 2027 outlook. Shares closed up ~13.4% on the day, the biggest one-day gain since April 2025.",
-   "sources": [
-    {"t": "SEC (8-K exhibit)"},
-    {"t": "TIKR"}
-   ],
-   "cap": "$21.4B",
-   "px": 16.6,
-   "pct": -0.95465,
-   "topSector": false
-  },
-  {
-   "tk": "VRT",
-   "name": "Vertiv Holdings Co",
-   "industry": "Electrical Equipment & Parts",
-   "sector": "Industrials",
-   "ctype": "Earnings beat + raise",
-   "cdate": "28 Oct",
-   "cdateISO": "2026-10-28",
-   "what": "Q3 2026 net sales $4,312.8M (+61% y/y) vs ~$3.75B consensus; diluted EPS +91% to $1.95, adjusted diluted EPS +78% to $2.21. Raised FY2026 guidance to $14,450–14,850M net sales (from ~$14.0B) and $7.10–$7.20 adjusted diluted EPS (from $6.65–6.75), citing accelerating AI data-center demand and organic orders more than doubling y/y.",
-   "sources": [
-    {"t": "SEC (8-K exhibit)"},
-    {"t": "Vertiv Investor Relations"}
-   ],
-   "cap": "$86.3B",
-   "px": 224.24,
-   "pct": -3.55269,
-   "topSector": false
-  },
-  {
-   "tk": "REGN",
-   "name": "Regeneron Pharmaceuticals, Inc.",
-   "industry": "Biotechnology",
-   "sector": "Healthcare",
-   "ctype": "Earnings beat + raise",
-   "cdate": "30 Oct",
-   "cdateISO": "2026-10-30",
-   "what": "Q3 2026: revenue $5.1B (+36% y/y, beat ~$4.56B consensus); non-GAAP diluted EPS $20.07 vs ~$16.19 consensus (+70% y/y). Sanofi-reported Dupixent sales +35% y/y to $6.5B (Regeneron now books its full profit share); EYLEA HD US sales +62% y/y to $699M, with FY2026 EYLEA HD sales guided to grow >50% y/y even as original EYLEA faces biosimilar pressure. Expanded Sanofi collaboration adds a $1.0B upfront payment (booked Q4 2026) plus up to $7.0B in milestones. Shares hit a new 52-week high, +11–13% on the day across sources.",
-   "sources": [
-    {"t": "SEC (8-K exhibit)"},
-    {"t": "TIKR"}
-   ],
-   "cap": "$99.0B",
-   "px": 961.26,
-   "pct": 3.59633,
-   "topSector": false
-  }
- ],
- "bg": {
-  "SOFI": {
-   "cap": "$21.4B",
-   "what": "Consumer fintech (SoFi Bank): student/personal/home lending, investing and cash management, plus the Galileo and Technisys banking-infrastructure platforms."
-  },
-  "VRT": {
-   "cap": "$86.3B",
-   "what": "Digital-infrastructure supplier (Liebert, NetSure, Geist): power management, thermal control and rack/IT systems for AI data centers, communications networks and industrial customers."
-  },
-  "REGN": {
-   "cap": "$99.0B",
-   "what": "Biopharmaceutical: Eylea/Eylea HD (wet AMD, diabetic eye disease), Dupixent (atopic dermatitis, asthma; profit-shared with Sanofi), plus Libtayo, Praluent and a broadening oncology/rare-disease pipeline."
-  }
- },
- "notices": [
-  "No new catalyst alerts qualified this run (SOFI/VRT/REGN carried over from 30 Oct, re-priced, still inside their 5-session window): this week's biggest fresh post-earnings reactions (Apple, Palantir) were both lower despite beats — sell-the-news — and Okta's confirmed S&P 500 addition (effective 4 Nov) came alongside an unexplained ~11% intraday drop with no verifiable cause found, so it was dropped pending a clear explanation. See rejected.",
-  "VIX's FMP quote carries a timestamp from this morning's (3 Nov) pre-market, not Monday's (2 Nov) close — tagged a live print and kept out of the regime score, which uses its previous close (21.15) instead.",
-  "QQQ (NDX proxy) omitted today: WebSearch could not surface a reliable, dated current price for QQQ (results were undated, conflicting, or clearly stale) — tile left out rather than carried forward with a guess; the page will carry the last confirmed QQQ close forward instead.",
-  "No new FOMC decision since 28 Oct (re-confirmed via two WebSearch sources today); macro.fed block carried forward unchanged, only the treasury yields/y10hist were refreshed.",
-  "Nasdaq-100 reportedly closed Monday more than 10% below its all-time closing high (per Reuters), i.e. in a correction — context for today's broadly negative earnings reactions."
- ],
- "rejected": [
-  "<b>Apple (AAPL)</b> · fiscal Q4 2026 results reported after the close 2 Nov, widely reported as a beat, but shares were lower in early trading (FMP live quote −1.83%; Reuters cites a sharper premarket drop on rising memory-chip cost warnings) — sell-the-news, not a qualifying reaction.",
-  "<b>Palantir (PLTR)</b> · Q3 2026 beat (revenue $2.313B, +96% y/y; adjusted EPS $0.44 vs ~$0.42 consensus) reported 2 Nov, but shares fell (FMP live quote −3.13%; one source cites −6.3%) — sell-the-news, not a qualifying reaction. Also already a pinned technical pick (duplicate).",
-  "<b>Okta (OKTA)</b> · confirmed addition to the S&P 500 effective 4 Nov (replacing Kenvue; S&P Dow Jones Indices release, 30 Oct — two independent sources agree), but FMP's live quote shows the stock down ~11% today and no WebSearch result could explain why — price action flatly contradicts the catalyst thesis, so dropped pending a clear cause.",
-  "No qualifying major-contract, analyst-upgrade (target >15% above price) or approval/launch catalysts surfaced this run: several candidates found (Micron, Nova/NVMI price-target raises; various FDA approvals) all dated to earlier 2025/2026 periods, not the last 5 trading sessions (27 Oct – 2 Nov)."
- ],
- "sections": {
-  "indices": {"asOf": "2026-11-02", "source": "FMP index-quote"},
-  "macro": {"asOf": "2026-11-02", "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)"},
-  "catalysts": {"asOf": "2026-11-02", "source": "WebSearch + FMP company/profile-symbol (SOFI/VRT/REGN re-priced from 30 Oct; no new alerts cleared the bar)"}
- },
- "fetchlog": [
-  {"id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": ""},
-  {"id": "fmp.indexes.index-quote.^DJI", "ok": true, "note": ""},
-  {"id": "fmp.indexes.index-quote.^RUT", "ok": true, "note": ""},
-  {"id": "fmp.indexes.index-quote.^VIX", "ok": true, "note": "ts is a live print (3 Nov pre-market), not the 2 Nov close; prev used for regime"},
-  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "2026-10-20..2026-11-02, used last 5 distinct sessions"},
-  {"id": "websearch.qqq.quote", "ok": false, "note": "two searches, no reliable dated current price found — tile omitted"},
-  {"id": "websearch.fomc.decision", "ok": true, "note": "confirmed no new decision since 28 Oct via 2 sources (tradingeconomics.com, admiralmarkets.com); macro.fed carried forward unchanged"},
-  {"id": "websearch.catalysts.earnings_sweep", "ok": true, "note": "multiple sweeps: earnings beats/raises, contracts, upgrades, FDA approvals, index adds, last 5 sessions"},
-  {"id": "fmp.company.profile-symbol.AAPL", "ok": true, "note": "rejected: sell-the-news"},
-  {"id": "fmp.company.profile-symbol.PLTR", "ok": true, "note": "rejected: sell-the-news + duplicate pinned pick"},
-  {"id": "fmp.company.profile-symbol.OKTA", "ok": true, "note": "rejected: unexplained ~11% drop contradicts catalyst thesis"},
-  {"id": "websearch.okta.sp500-addition", "ok": true, "note": "confirmed via spglobal.com release + goldesel.de/econotimes.com; rejected on price action"},
-  {"id": "websearch.okta.price-drop-cause", "ok": false, "note": "no dated explanation found for today's ~11% decline"},
-  {"id": "fmp.company.profile-symbol.SOFI", "ok": true, "note": "catalyst re-price"},
-  {"id": "fmp.company.profile-symbol.VRT", "ok": true, "note": "catalyst re-price"},
-  {"id": "fmp.company.profile-symbol.REGN", "ok": true, "note": "catalyst re-price"}
- ],
- "meta": {
-  "targetSession": "2026-11-03",
-  "lastSession": "2026-11-02"
- }
 }
