@@ -1,253 +1,66 @@
 {
- "note": "FMP + WebSearch only (no WebFetch). Indices and all 23 watch-list quotes (technical picks + catalyst-alert ticker + near-misses) are live FMP prints read ~11-14 minutes after the 09:30 ET open. QQQ and futures (ES/NQ/YM/RTY) are omitted this run: WebSearch returned no reliably dated Nov 5 2026 figures for either after several attempts (QQQ results kept returning QQQM or undated/stale QQQ pages; futures pages were undated or from other sessions) -- publishing an unconfirmed number would violate the no-invent rule, so the page carries forward whatever it last had for those two. One broad-market news item cleared the sourcing bar (two independently dated outlets, Yahoo Finance and 24/7 Wall St., both posted today): a rotation out of AI/semiconductor names is dragging the Nasdaq while the Dow holds up better. No company-specific driver was found for today's largest single-name decliners (SNAP, CIEN, AAOI, ZS, PLTR, NTNX) after targeted searches -- read their moves as part of the broad rotation, not a confirmed specific catalyst.",
- "notes": {},
- "footnotes": [
-  "QQQ omitted: WebSearch found only QQQM (a different share class) or undated/stale QQQ pages across three attempts -- no reliably dated Nov 5 2026 QQQ quote was found. The page carries forward its last confirmed QQQ close (03 Nov).",
-  "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned only undated premarket trackers or pages from other sessions across two attempts -- no dated, cross-checked Nov 5 2026 figure was found for any of the four contracts.",
-  "Indices (SPX/DJI/RUT/VIX): FMP's index-quote is a live print taken ~11-16 minutes after the 09:30 ET open (dayLow/dayHigh/open already reflect the session so far), not a completed session.",
-  "VIX's live print (18.24, +9.81%) is versus Wednesday's close (16.61); treat it as a live level, not a confirmed close."
- ],
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "px": 7611.92,
-   "pct": -0.99758,
-   "prev": 7688.62
+  "asOf": "2026-11-06",
+  "note": "FMP + WebSearch only (no WebFetch). Indices and all 24 watch-list quotes (technical picks + 2 catalyst-alert tickers + near-misses) are live FMP prints read ~12 minutes after the 09:30 ET open. QQQ and futures (ES/NQ/YM/RTY) are omitted this run: WebSearch returned no reliably dated, cross-checkable 6 Nov 2026 figures for either after repeated attempts (QQQ results kept returning QQQM or undated/stale QQQ pages; futures pages were undated or from other months/years) - publishing an unconfirmed number would violate the no-invent rule, so the page carries forward whatever it last had for those two. One broad-market item cleared the sourcing bar (CNBC and Bloomberg, both dated today): dip buyers are testing whether Thursday's historic AI/chip-led selloff (Nasdaq into correction, -10% off its record close) is over, with chip names leading a premarket/early bounce.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-11-06T14:42:10Z", "source": "FMP indexes/index-quote"},
+    "futures": {"asOfUTC": null, "source": ""},
+    "quotes": {"asOfUTC": "2026-11-06T14:42:10Z", "source": "FMP company/profile-symbol"},
+    "news": {"asOfUTC": "2026-11-06T14:45:00Z", "source": "WebSearch (CNBC + Bloomberg, cross-checked)"}
   },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "px": 53372.74,
-   "pct": 0.03115,
-   "prev": 53356.12
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "px": 2839.70506,
-   "pct": -0.6036,
-   "prev": 2856.94958
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "px": 18.24,
-   "pct": 9.81337,
-   "prev": 16.61
-  }
- ],
- "futures": {},
- "quotes": {
-  "AVT": {
-   "px": 84.9297,
-   "pct": -0.8757,
-   "vol": 50746.04926,
-   "avgVol": 1270832,
-   "change": -0.7503
-  },
-  "ZS": {
-   "px": 204.78,
-   "pct": -8.75958,
-   "vol": 232111,
-   "avgVol": 2801721,
-   "change": -19.66
-  },
-  "ETN": {
-   "px": 343.74,
-   "pct": -2.64529,
-   "vol": 349511,
-   "avgVol": 2277012,
-   "change": -9.34
-  },
-  "META": {
-   "px": 622.49,
-   "pct": -1.19206,
-   "vol": 1941977,
-   "avgVol": 20594377,
-   "change": -7.51
-  },
-  "GDDY": {
-   "px": 119.5,
-   "pct": 0.9973,
-   "vol": 61416,
-   "avgVol": 2034867,
-   "change": 1.18
-  },
-  "ITT": {
-   "px": 211.715,
-   "pct": 5.31513,
-   "vol": 58486,
-   "avgVol": 839831,
-   "change": 10.685
-  },
-  "VRSN": {
-   "px": 320.24,
-   "pct": 0.69491,
-   "vol": 32251.43855,
-   "avgVol": 848405,
-   "change": 2.21001
-  },
-  "PLTR": {
-   "px": 158.7,
-   "pct": -7.57135,
-   "vol": 5109646,
-   "avgVol": 32845513,
-   "change": -13.0
-  },
-  "GOOGL": {
-   "px": 289.54,
-   "pct": 0.21112,
-   "vol": 5596591,
-   "avgVol": 28907383,
-   "change": 0.61
-  },
-  "SNAP": {
-   "px": 5.2591,
-   "pct": -11.16385,
-   "vol": 9813729,
-   "avgVol": 37775273,
-   "change": -0.6609
-  },
-  "REGN": {
-   "px": 940.11,
-   "pct": 1.01432,
-   "vol": 87092,
-   "avgVol": 777781,
-   "change": 9.44
-  },
-  "NOK": {
-   "px": 7.81,
-   "pct": -5.44794,
-   "vol": 11566897,
-   "avgVol": 81912766,
-   "change": -0.45
-  },
-  "GNRC": {
-   "px": 182.755,
-   "pct": -3.46767,
-   "vol": 71513,
-   "avgVol": 1181590,
-   "change": -6.565
-  },
-  "LTM": {
-   "px": 47.67,
-   "pct": -0.23022,
-   "vol": 27545,
-   "avgVol": 810946,
-   "change": -0.11
-  },
-  "SNX": {
-   "px": 226.48,
-   "pct": -1.69712,
-   "vol": 42667,
-   "avgVol": 819367,
-   "change": -3.91
-  },
-  "NTAP": {
-   "px": 178.845,
-   "pct": -4.7024,
-   "vol": 96511.11438,
-   "avgVol": 2502733,
-   "change": -8.825
-  },
-  "NTNX": {
-   "px": 60.39,
-   "pct": -5.19623,
-   "vol": 108857,
-   "avgVol": 2705774,
-   "change": -3.31
-  },
-  "AAOI": {
-   "px": 53.05,
-   "pct": -10.49435,
-   "vol": 2540686,
-   "avgVol": 10176997,
-   "change": -6.22
-  },
-  "BB": {
-   "px": 8.215,
-   "pct": -6.22146,
-   "vol": 1675043,
-   "avgVol": 16262758,
-   "change": -0.545
-  },
-  "CIEN": {
-   "px": 248.01,
-   "pct": -8.90024,
-   "vol": 347443,
-   "avgVol": 2524666,
-   "change": -24.23
-  },
-  "CSCO": {
-   "px": 101.115,
-   "pct": -2.40807,
-   "vol": 2588607,
-   "avgVol": 19250017,
-   "change": -2.495
-  },
-  "FFIV": {
-   "px": 319.56,
-   "pct": -3.0814,
-   "vol": 43459.3361,
-   "avgVol": 681304,
-   "change": -10.16
-  },
-  "FTNT": {
-   "px": 124.037,
-   "pct": -4.1371,
-   "vol": 395163.2936,
-   "avgVol": 4888875,
-   "change": -5.353
-  }
- },
- "news": [
-  {
-   "tag": "Technology",
-   "top3": true,
-   "title": "AI-trade rotation drags Nasdaq while Dow holds up post-election gains",
-   "text": "Wednesday's post-midterm rally is fading Thursday: Yahoo Finance's live markets blog and 24/7 Wall St. both report the Dow holding roughly flat to higher while the S&P 500 and the tech-heavy Nasdaq slip as money rotates out of AI/semiconductor names. 24/7 Wall St. frames it as Big Tech dragging the Nasdaq toward its worst open in weeks even as Dow components post earnings beats.",
-   "names": [
-    "ZS",
-    "PLTR",
-    "META",
-    "CIEN",
-    "AAOI",
-    "NTNX",
-    "FTNT",
-    "CSCO",
-    "NTAP",
-    "BB",
-    "FFIV"
-   ],
-   "sources": [
-    {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-oil-falls-090519607.html"
-    },
-    {
-     "t": "24/7 Wall St.",
-     "u": "https://247wallst.com/investing/2026/11/05/stock-market-today-dow-sp-500-and-nasdaq-in-focus-at-the-opening-bell-2/"
-    }
-   ]
-  }
- ],
- "sections": {
-  "indices": {
-   "asOfUTC": "2026-11-05T14:44:00Z",
-   "source": "FMP indexes/index-quote"
-  },
-  "futures": {
-   "asOfUTC": null,
-   "source": ""
-  },
+  "indices": [
+    {"id": "SPX", "name": "S&P 500", "px": 7410.53, "pct": 0.7724, "prev": 7353.73},
+    {"id": "DJI", "name": "Dow Jones", "px": 51259.08, "pct": -0.51235, "prev": 51523.06},
+    {"id": "RUT", "name": "Russell 2000", "px": 2732.66009, "pct": 0.10159, "prev": 2729.88685},
+    {"id": "VIX", "name": "Volatility", "px": 24.81, "pct": -11.95884, "prev": 28.18}
+  ],
+  "futures": {},
   "quotes": {
-   "asOfUTC": "2026-11-05T14:44:00Z",
-   "source": "FMP company/profile-symbol"
+    "AVT": {"px": 79.78, "pct": 4.11066, "vol": 36031, "avgVol": 1283919, "change": 3.15},
+    "ZS": {"px": 207.97, "pct": 2.00608, "vol": 221827.47581, "avgVol": 2783066, "change": 4.09},
+    "ETN": {"px": 342.29, "pct": 4.66944, "vol": 337932, "avgVol": 2322120, "change": 15.27},
+    "META": {"px": 621.1301, "pct": 2.65256, "vol": 1922681.1918, "avgVol": 20708506, "change": 16.0501},
+    "GDDY": {"px": 117.49, "pct": -2.18948, "vol": 29918, "avgVol": 2031021, "change": -2.63},
+    "ITT": {"px": 200.62, "pct": 2.39894, "vol": 37946, "avgVol": 854745, "change": 4.7},
+    "VRSN": {"px": 307.7765, "pct": -1.37265, "vol": 15436.97782, "avgVol": 855092, "change": -4.2835},
+    "PLTR": {"px": 160.8598, "pct": 3.78721, "vol": 3235592.61924, "avgVol": 32972778, "change": 5.8698},
+    "GOOGL": {"px": 289.55, "pct": 2.47018, "vol": 6493239.79728, "avgVol": 29100010, "change": 6.98},
+    "SNAP": {"px": 5.02, "pct": -1.37525, "vol": 3730326, "avgVol": 38267086, "change": -0.07000002},
+    "IDXX": {"px": 657.7, "pct": -1.93974, "vol": 24603.49189, "avgVol": 597943, "change": -13.01},
+    "REGN": {"px": 896.42, "pct": -0.71769, "vol": 38940, "avgVol": 777916, "change": -6.48},
+    "NOK": {"px": 7.715, "pct": 3.41823, "vol": 8732586, "avgVol": 82376050, "change": 0.255},
+    "GNRC": {"px": 179.4086, "pct": 4.10758, "vol": 53394, "avgVol": 1193478, "change": 7.0786},
+    "LTM": {"px": 47.94, "pct": 1.84831, "vol": 44523, "avgVol": 823350, "change": 0.87},
+    "SNX": {"px": 220.19, "pct": 2.23801, "vol": 15875, "avgVol": 818006, "change": 4.82},
+    "NTAP": {"px": 175.1555, "pct": 3.40979, "vol": 62232.66842, "avgVol": 2501744, "change": 5.7755},
+    "NTNX": {"px": 59.16, "pct": 1.04184, "vol": 64346.30731, "avgVol": 2695282, "change": 0.61},
+    "AAOI": {"px": 49.045, "pct": 4.59586, "vol": 4820878, "avgVol": 10427228, "change": 2.155},
+    "BB": {"px": 8.73, "pct": 4.30108, "vol": 1402888, "avgVol": 15848764, "change": 0.36},
+    "CIEN": {"px": 252.83, "pct": 9.54031, "vol": 467808, "avgVol": 2522522, "change": 22.02},
+    "CSCO": {"px": 96.86, "pct": 1.19097, "vol": 2033744, "avgVol": 19306139, "change": 1.14},
+    "FFIV": {"px": 315.03, "pct": 1.05537, "vol": 26153, "avgVol": 684287, "change": 3.29},
+    "FTNT": {"px": 123.73, "pct": 0.99584, "vol": 421820, "avgVol": 4877765, "change": 1.22}
   },
-  "news": {
-   "asOfUTC": "2026-11-05T14:44:00Z",
-   "source": "WebSearch (Yahoo Finance + 24/7 Wall St., cross-checked)"
-  }
- }
+  "notes": {},
+  "news": [
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "Dip buyers test whether Thursday's historic AI/chip selloff is over",
+      "text": "Bloomberg and CNBC both report dip buyers stepping back into AI-linked names Friday after Thursday wiped out roughly $2.3T in market value and sent the Nasdaq into correction territory (-10% off its record close) on data-center buildout worries. CNBC's morning note flags Nasdaq futures clawing back some of the tech wreck; Bloomberg says chipmakers led the early bounce but investors are still weighing whether the rout is actually over.",
+      "names": ["META", "PLTR", "ZS", "GOOGL", "SNAP", "CIEN", "NTNX", "FTNT", "CSCO", "NTAP", "BB", "FFIV", "AAOI", "NOK"],
+      "sources": [
+        {"t": "CNBC", "u": "https://www.cnbc.com/2026/11/06/morning-squawk-blue-wave-stocks.html"},
+        {"t": "Bloomberg", "u": "https://www.bloomberg.com/news/articles/2026-11-06/ai-stocks-rebound-as-investors-weigh-whether-selloff-is-over"}
+      ]
+    }
+  ],
+  "footnotes": [
+    "QQQ omitted: WebSearch returned only QQQM (a different share class) or undated/stale QQQ pages across repeated attempts - no reliably dated 6 Nov 2026 QQQ quote was found. The page carries forward its last confirmed QQQ close (03 Nov, per the brief).",
+    "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned only undated premarket trackers or pages from other months across repeated attempts - no dated, cross-checked 6 Nov 2026 figure was found for any of the four contracts. One Bloomberg/CNBC mention of 'Nasdaq 100 futures up ~1.3% premarket' was directional color only, not a precise, two-source-checked level, so it was not written to the futures rows.",
+    "Indices (SPX/DJI/RUT/VIX): FMP's index-quote is a live print taken ~12 minutes after the 09:30 ET open (dayLow/dayHigh/open already reflect the session so far), not a completed session.",
+    "VIX's live print (24.81, -11.96%) is versus Thursday 5 Nov's close (28.18); treat it as a live level, not a confirmed close.",
+    "No company-specific driver was found for individual watch-list movers (CIEN +9.5%, GNRC +4.1%, AVT +4.1%, AAOI +4.6%, NOK +3.4%, NTAP +3.4%, PLTR +3.8% among the gainers; GDDY -2.2%, VRSN -1.4%, IDXX -1.9%, SNAP -1.4% among the decliners) after targeted searches - read these as part of the broad post-selloff rebound/rotation, not confirmed single-name catalysts.",
+    "Palantir (PLTR) reported earnings on 2 Nov 2026 (per public earnings trackers), so it is not inside an earnings blackout window today."
+  ]
 }
