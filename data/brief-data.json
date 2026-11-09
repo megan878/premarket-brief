@@ -1,115 +1,79 @@
 {
- "source": "FMP (MCP) + WebSearch - automated routine, no WebFetch",
+ "source": "FMP + WebSearch (automated routine, no WebFetch)",
  "indices": [
   {
    "id": "SPX",
    "name": "S&P 500",
    "q": {
-    "price": 7353.73,
-    "change": -334.89,
-    "pct": -4.35566,
-    "dayLow": 7350.35,
-    "dayHigh": 7681.29,
+    "price": 7376.86,
+    "change": 23.13,
+    "pct": 0.31453,
+    "dayLow": 7369.55,
+    "dayHigh": 7444.2,
     "yearHigh": 7844.52,
     "yearLow": 6316.91,
-    "ma50": 7692.969,
-    "ma200": 7320.345
+    "ma50": 7679.4473,
+    "ma200": 7325.053
    },
-   "ts": 1793912400,
-   "prev": 7688.62
+   "ts": 1794001029
   },
   {
    "id": "DJI",
    "name": "Dow Jones",
    "q": {
-    "price": 51523.06,
-    "change": -1833.06,
-    "pct": -3.43552,
-    "dayLow": 51486.82,
-    "dayHigh": 53710.61,
+    "price": 51285.73,
+    "change": -237.33,
+    "pct": -0.46063,
+    "dayLow": 50992.61,
+    "dayHigh": 51662.26,
     "yearHigh": 54744.33,
     "yearLow": 45057.28,
-    "ma50": 52109.703,
-    "ma200": 50666.85
+    "ma50": 52064.03,
+    "ma200": 50676.36
    },
-   "ts": 1793914551,
-   "prev": 53356.12
+   "ts": 1794001033
   },
   {
    "id": "RUT",
    "name": "Russell 2000",
    "q": {
-    "price": 2729.8867,
-    "change": -127.063,
-    "pct": -4.44751,
-    "dayLow": 2723.93342,
-    "dayHigh": 2855.2478,
+    "price": 2754.1055,
+    "change": 24.21865,
+    "pct": 0.88717,
+    "dayLow": 2720.9954,
+    "dayHigh": 2761.57649,
     "yearHigh": 3069.71,
     "yearLow": 2303.46,
-    "ma50": 2848.6167,
-    "ma200": 2807.5461
+    "ma50": 2837.892,
+    "ma200": 2807.8813
    },
-   "ts": 1793914203,
-   "prev": 2856.9497
+   "ts": 1794000603
   },
   {
    "id": "VIX",
    "name": "Volatility",
    "q": {
-    "price": 26.5,
-    "change": -1.68,
-    "pct": -5.96167,
-    "dayLow": 25.38,
-    "dayHigh": 27.68,
+    "price": 23.37,
+    "change": -2.27,
+    "pct": -8.85335,
+    "dayLow": 23.07,
+    "dayHigh": 25.08,
     "yearHigh": 35.3,
     "yearLow": 13.38,
-    "ma50": 16.6978,
-    "ma200": 18.34845
+    "ma50": 16.922,
+    "ma200": 18.3959
    },
-   "ts": 1793965591,
-   "prev": 28.18,
-   "asOfKind": "live",
-   "asOfNote": "live print 06 Nov 11:46 UTC, not the 05 Nov close",
-   "regimeQ": {
-    "price": 28.18,
-    "dayLow": 25.38,
-    "dayHigh": 27.68,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 16.6978,
-    "ma200": 18.34845
-   },
-   "inRegime": "previous close"
+   "ts": 1794224776,
+   "prev": 25.64
   }
  ],
  "macro": {
-  "y10": 4.84,
-  "y10prev": 4.9,
-  "y2": 4.46,
-  "y30": 5.25,
-  "y10path": "4.94% on 30 Oct, 4.91% on 2 Nov, 4.95% on 3 Nov, 4.90% on 4 Nov, 4.84% on 5 Nov",
-  "y10hist": [
-   {
-    "date": "2026-10-30",
-    "y10": 4.94
-   },
-   {
-    "date": "2026-11-02",
-    "y10": 4.91
-   },
-   {
-    "date": "2026-11-03",
-    "y10": 4.95
-   },
-   {
-    "date": "2026-11-04",
-    "y10": 4.9
-   },
-   {
-    "date": "2026-11-05",
-    "y10": 4.84
-   }
-  ],
+  "date": "2026-11-06",
+  "y10": 4.86,
+  "y10prev": 4.84,
+  "y2": 4.51,
+  "y30": 5.26,
+  "y10path": "4.91% on 2 Nov, 4.95% on 3 Nov, 4.90% on 4 Nov, 4.84% on 5 Nov, 4.86% on 6 Nov",
   "fed": {
    "range": "3.75-4.00%",
    "move": "hold",
@@ -126,207 +90,151 @@
      "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
     }
    ]
-  }
+  },
+  "y10hist": [
+   {
+    "date": "2026-11-02",
+    "y10": 4.91
+   },
+   {
+    "date": "2026-11-03",
+    "y10": 4.95
+   },
+   {
+    "date": "2026-11-04",
+    "y10": 4.9
+   },
+   {
+    "date": "2026-11-05",
+    "y10": 4.84
+   },
+   {
+    "date": "2026-11-06",
+    "y10": 4.86
+   }
+  ]
  },
  "catalysts": [
   {
-   "tk": "REGN",
-   "name": "Regeneron Pharmaceuticals, Inc.",
-   "industry": "Biotechnology",
-   "sector": "Healthcare",
+   "tk": "Q",
+   "name": "Qnity Electronics, Inc.",
+   "industry": "Semiconductors",
+   "sector": "Technology",
    "ctype": "Earnings beat + raise",
-   "cdate": "30 Oct",
-   "cdateISO": "2026-10-30",
-   "what": "Q3 2026: revenue $5.1B (+36% y/y, beat ~$4.56B consensus); non-GAAP diluted EPS $20.07 vs ~$16.19 consensus (+70% y/y). Sanofi-reported Dupixent sales +35% y/y to $6.5B; EYLEA HD US sales +62% y/y to $699M, FY2026 EYLEA HD sales guided to grow >50% y/y. Expanded Sanofi collaboration adds a $1.0B upfront payment plus up to $7.0B in milestones. Last session inside the rolling 5-day catalyst window (rolls off tomorrow). Stock has given back its post-earnings pop in the broad 5-6 Nov AI/chip-driven market selloff (-3.0% today) - no fresh company-specific news found.",
+   "cdate": "4 Nov",
+   "cdateISO": "2026-11-04",
+   "what": "Q3 2026: adjusted EPS $1.46 and revenue $1.56B, both above consensus (sources differ slightly on the exact beat size, roughly 21-24%). Raised FY2026 guidance: adjusted EPS to $4.95-5.05 (from $4.40-4.60), revenue to $5.77-5.83B, adjusted EBITDA to $1.785-1.805B. Spun off from DuPont in Oct 2025; first full post-spin quarter to beat and raise.",
    "sources": [
-    {
-     "t": "SEC (8-K exhibit)"
-    },
-    {
-     "t": "TIKR"
-    }
+    {"t": "247wallst"},
+    {"t": "Zacks"}
    ],
-   "cap": "$93.4B",
-   "px": 902.9,
-   "pct": -2.98387,
+   "cap": "$24.5B",
+   "px": 117.0,
+   "pct": 6.32497,
+   "topSector": true
+  },
+  {
+   "tk": "SN",
+   "name": "SharkNinja, Inc.",
+   "industry": "Furnishings, Fixtures & Appliances",
+   "sector": "Consumer Cyclical",
+   "ctype": "Earnings beat + raise",
+   "cdate": "4 Nov",
+   "cdateISO": "2026-11-04",
+   "what": "Q3 2026: revenue $1.976B, beat the ~$1.864B consensus; adjusted EPS $2.34 (+56% y/y), with part of the margin gain coming from IEEPA tariff-refund timing (sources note this may not repeat). Raised FY2026 guidance: net sales growth to 18-19% (from 16-17%), adjusted diluted EPS to $6.65-6.75 (from $6.45-6.55).",
+   "sources": [
+    {"t": "247wallst"},
+    {"t": "Finviz"}
+   ],
+   "cap": "$31.4B",
+   "px": 222.95,
+   "pct": 2.68042,
    "topSector": false
   },
   {
-   "tk": "IDXX",
-   "name": "IDEXX Laboratories, Inc.",
-   "industry": "Medical - Diagnostics & Research",
+   "tk": "ELAN",
+   "name": "Elanco Animal Health Incorporated",
+   "industry": "Drug Manufacturers - Specialty & Generic",
    "sector": "Healthcare",
    "ctype": "Earnings beat + raise",
-   "cdate": "2 Nov",
-   "cdateISO": "2026-11-02",
-   "what": "Q3 2026 beat and raise: adjusted EPS ~$3.96-4.01 (sources differ on the exact figure) vs ~$3.72 consensus; revenue $1.21B (+10% y/y) vs ~$1.19B consensus, pet-diagnostics segment +15% y/y. Raised FY2026 guidance: revenue to $4.74-4.77B (from $4.70-4.75B) and adjusted EPS to $14.96-15.16 (from $14.69-14.94), above the ~$14.88 consensus. Shares popped as much as ~20% intraday on Monday 2 Nov before fading with the broader tape; now -4.0% on the day, caught in the 5-6 Nov market-wide selloff.",
+   "cdate": "6 Nov",
+   "cdateISO": "2026-11-06",
+   "what": "Q3 2026: revenue ~$1.27B (+11% y/y, sources differ slightly between $1.26-1.27B) and adjusted EPS $0.27, above the ~$0.20-0.25 consensus. Raised FY2026 guidance: adjusted EPS to $1.17-1.20 (from $1.10-1.16) and revenue to $5.16-5.18B (from $5.09-5.14B). Shares +~7.6-8.7% on the print.",
    "sources": [
-    {
-     "t": "RTTNews"
-    },
-    {
-     "t": "Finviz"
-    }
+    {"t": "Finviz"},
+    {"t": "247wallst"}
    ],
-   "cap": "$52.8B",
-   "px": 670.71,
-   "pct": -3.9854,
+   "cap": "$12.9B",
+   "px": 25.74,
+   "pct": 8.69932,
    "topSector": false
   }
  ],
  "bg": {
-  "REGN": {
-   "cap": "$93.4B",
-   "what": "Global biopharmaceutical company behind EYLEA (ophthalmic injections) and Dupixent (atopic dermatitis/asthma, marketed with Sanofi), with a broad immunology, oncology and rare-disease pipeline."
+  "Q": {
+   "cap": "$24.5B",
+   "what": "Supplies electronic materials and specialty chemicals used in semiconductor chip manufacturing; spun off from DuPont in October 2025."
   },
-  "IDXX": {
-   "cap": "$52.8B",
-   "what": "Veterinary diagnostics leader making point-of-care instruments, reference-lab testing, practice-management software and water-quality testing products."
+  "SN": {
+   "cap": "$31.4B",
+   "what": "Designs and sells small home appliances (vacuums, kitchen and outdoor cooking products, air purifiers) under the Shark and Ninja brands."
+  },
+  "ELAN": {
+   "cap": "$12.9B",
+   "what": "Animal-health company making parasiticides, vaccines and therapeutics for pets and livestock, including the Seresto, Advantage and Rumensin brands."
   }
  },
  "notices": [
-  "US stocks had their worst session since April 2025 on Thu 5 Nov: S&P 500 -4.36% to 7,353.73, Dow -3.44% (-1,833 pts) to 51,523.06, Nasdaq Composite -5.52% to 24,315 (into correction, -10% off its record close) - led by a chip/AI-infrastructure selloff (semis -12.3%, NVDA -9.3%) on post-midterm worries that data-center buildout could slow. This followed Wed 4 Nov's historic post-election rally (Dow +1,569, Nasdaq +1.44%). All eleven sectors fell Thursday. VIX closed 5 Nov at 28.18 (vs a 16.70 50-day average) before easing to ~26.5 in Fri 6 Nov pre-market - the regime score's VIX checks (both below 20, both below the 50-day average) now fail; see the Regime read card.",
-  "VIX's FMP quote carries a live pre-market print (06 Nov 11:46 UTC), not Thursday's (05 Nov) close - tagged a live print and kept out of the regime score, which uses its previous close (28.18) instead.",
-  "No FOMC decision fell in the last 7 days (last was 28 Oct, next is 9 Dec) - macro.fed block carried forward unchanged; only the treasury yields/y10hist were refreshed.",
-  "QQQ (NDX proxy): WebSearch could not surface a reliably dated current price for 5 Nov after repeated attempts - omitted this run rather than publish a stale or unconfirmed number.",
-  "Two catalyst alerts cleared the bar this run: REGN (30 Oct, re-priced - this is its last day inside the rolling 5-session window, it rolls off tomorrow) and IDXX (2 Nov, new). Five other candidates were checked and rejected this run - see rejected."
+  "QQQ (NDX proxy): two WebSearch passes returned conflicting, undated prices (roughly $608-$718 across sources) with no reconciled figure - the tile is omitted this run and carries forward the last confirmed quote, dated.",
+  "VIX's FMP quote is a live pre-market print (06:46 ET Monday 9 Nov), not Friday 6 Nov's close - the tile is labelled a live print and the regime score uses the prior close (25.64) instead of the live price.",
+  "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged; only the treasury yields and y10hist were refreshed.",
+  "Sector ranking, industry drill-down and the technical scan are pinned to the last interactive refresh - this automated routine has no WebFetch and never touches those sections."
  ],
  "rejected": [
-  "<b>Cloudflare (NET)</b> - Q3 2026 revenue of $782.5M beat its own guidance (confirmed via SEC 8-K) and management called it their best quarter ever, but the stock fell ~8.0% today in the broad 5-6 Nov AI/chip-driven selloff - can't cleanly separate a catalyst-specific reaction from the macro rout. Dropped as unclear / possible sell-the-news.",
-  "<b>Block (XYZ)</b> - sources disagree on whether Q3 2026 results were even reported yet (3 Nov vs 5 Nov dates given, no actual results figures found, only pre-report consensus). Dropped as unverified.",
-  "<b>Elanco Animal Health (ELAN)</b> - sources disagree on the Q3 2026 report date and conflict on whether FY guidance was raised or lowered; couldn't reconcile with two agreeing sources. Dropped as unverified.",
-  "<b>CareTrust REIT (CTRE)</b> - reported Q3 2026 on 5 Nov (normalized FFO $0.54/share) but the only consensus figure found (~$0.52) is on a different metric basis, and no guidance raise was found. Cap ($8.8B) clears the bar but this isn't a clean, verifiable beat+raise. Dropped.",
-  "<b>PACS Group</b> - cap ($8.0B) clears the bar but no dated, two-source-verifiable catalyst event was found for the last 5 sessions. Dropped.",
-  "No FDA-approval/launch or analyst-upgrade-with-&gt;15%-upside candidates surfaced a clean, dated, two-source story this run."
+  "<b>Braze (BRZE)</b> - reported a Q3 beat and raised FY26 guidance, cap $5.2B, but a second independent source could not confirm the report date, so the event is unverified.",
+  "<b>Block (XYZ)</b> - one search result described a Nov 4 beat-and-raise with a guidance increase, but a follow-up search could not find any coverage of a November 2026 Block earnings report; dropped as unverified.",
+  "<b>Johnson &amp; Johnson (JNJ)</b> - FDA accelerated approval for Rybrevant Faspro (head and neck cancer) reported 6 Nov, but only one roundup source was found; no independent second source confirmed it.",
+  "<b>No qualifying analyst upgrade</b> (target &gt;15% above price) found dated to the last 5 sessions.",
+  "<b>IDXX / REGN</b> (last run's catalysts) - not re-verified this run. REGN's event (30 Oct) has aged out of the 5-session window; IDXX's (2 Nov) was not re-confirmed as still-live news today, so neither is carried forward."
  ],
  "sections": {
   "indices": {
-   "asOf": "2026-11-05",
-   "source": "FMP index-quote"
+   "asOf": "2026-11-06",
+   "source": "FMP index-quote (VIX is a live print, see notices)"
   },
   "macro": {
-   "asOf": "2026-11-05",
+   "asOf": "2026-11-06",
    "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)"
   },
   "catalysts": {
-   "asOf": "2026-11-05",
-   "source": "WebSearch + FMP company/profile-symbol (REGN re-priced; IDXX new; 5 candidates checked and rejected)"
+   "asOf": "2026-11-06",
+   "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 5 candidates checked and rejected"
   }
  },
  "fetchlog": [
-  {
-   "id": "fmp.indexes.index-quote.^GSPC",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^DJI",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^RUT",
-   "ok": true,
-   "note": ""
-  },
-  {
-   "id": "fmp.indexes.index-quote.^VIX",
-   "ok": true,
-   "note": "ts is a live print (06 Nov pre-market), not the 05 Nov close; prev used for regime"
-  },
-  {
-   "id": "fmp.economics.treasury-rates.2026-10-20_2026-11-06",
-   "ok": true,
-   "note": "used for y10/y10prev and the last 5 distinct trading-day y10hist rows"
-  },
-  {
-   "id": "websearch.qqq.price",
-   "ok": false,
-   "note": "no reliably dated current QQQ price found after 2 attempts; tile omitted"
-  },
-  {
-   "id": "websearch.fomc.decision-check",
-   "ok": true,
-   "note": "confirmed no FOMC decision in the last 7 days (last 28 Oct, next 9 Dec)"
-  },
-  {
-   "id": "websearch.market-context.selloff",
-   "ok": true,
-   "note": "5 Nov broad AI/chip selloff confirmed via CNBC/Yahoo Finance/CNN headlines"
-  },
-  {
-   "id": "fmp.company.profile-symbol.REGN",
-   "ok": true,
-   "note": "re-price for carried catalyst"
-  },
-  {
-   "id": "fmp.company.profile-symbol.NET",
-   "ok": true,
-   "note": "catalyst candidate, rejected"
-  },
-  {
-   "id": "fmp.company.profile-symbol.IDXX",
-   "ok": true,
-   "note": "catalyst candidate, accepted"
-  },
-  {
-   "id": "fmp.company.profile-symbol.XYZ",
-   "ok": true,
-   "note": "catalyst candidate, rejected (unverified)"
-  },
-  {
-   "id": "fmp.company.profile-symbol.CTRE",
-   "ok": true,
-   "note": "catalyst candidate, rejected"
-  },
-  {
-   "id": "fmp.company.profile-symbol.ELAN",
-   "ok": true,
-   "note": "catalyst candidate, rejected (unverified)"
-  },
-  {
-   "id": "fmp.company.profile-symbol.PACS",
-   "ok": true,
-   "note": "catalyst candidate, rejected (no verifiable event)"
-  },
-  {
-   "id": "websearch.catalysts.cloudflare",
-   "ok": true,
-   "note": "Q3 beat confirmed via SEC 8-K; rejected on price action"
-  },
-  {
-   "id": "websearch.catalysts.block",
-   "ok": true,
-   "note": "could not confirm actual results; rejected"
-  },
-  {
-   "id": "websearch.catalysts.idexx",
-   "ok": true,
-   "note": "two sources agree on beat+raise; accepted"
-  },
-  {
-   "id": "websearch.catalysts.elanco",
-   "ok": true,
-   "note": "conflicting reports; rejected"
-  },
-  {
-   "id": "websearch.catalysts.caretrust",
-   "ok": true,
-   "note": "ambiguous comparison basis; rejected"
-  },
-  {
-   "id": "websearch.catalysts.fda-approvals",
-   "ok": true,
-   "note": "no Nov 2026 dated results found"
-  },
-  {
-   "id": "websearch.catalysts.analyst-upgrades",
-   "ok": true,
-   "note": "no Nov 2026 dated results found"
-  }
+  {"id": "fmp.index.^GSPC", "ok": true, "note": "close 6 Nov"},
+  {"id": "fmp.index.^DJI", "ok": true, "note": "close 6 Nov"},
+  {"id": "fmp.index.^RUT", "ok": true, "note": "close 6 Nov"},
+  {"id": "fmp.index.^VIX", "ok": true, "note": "live print 9 Nov 11:46 UTC, not a close; prev=25.64 used for regime"},
+  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "last 8 sessions pulled; y10hist = 5 sessions 2-6 Nov"},
+  {"id": "websearch.qqq.price", "ok": false, "note": "two searches returned conflicting, undated prices ($608-$718); omitted"},
+  {"id": "websearch.fomc.november", "ok": true, "note": "no FOMC meeting in the last 7 days (last 27-28 Oct hold; next 9 Dec); fed block carried forward"},
+  {"id": "websearch.catalysts.earnings-beat-raise", "ok": true, "note": "found ELAN, Qnity(Q), SharkNinja(SN), Block(XYZ, unconfirmed), Braze(BRZE, unconfirmed)"},
+  {"id": "websearch.catalysts.fda-contract", "ok": true, "note": "J&J Rybrevant approval found, single-source only, rejected"},
+  {"id": "websearch.catalysts.analyst-upgrade", "ok": false, "note": "no qualifying >15%-target upgrade found in the last 5 sessions"},
+  {"id": "websearch.elan.verify", "ok": true, "note": "second source confirmed 6 Nov Q3 beat+raise"},
+  {"id": "websearch.q.verify", "ok": true, "note": "second source confirmed 4 Nov Q3 beat+raise"},
+  {"id": "websearch.sn.verify", "ok": true, "note": "second source confirmed 4 Nov Q3 beat+raise"},
+  {"id": "websearch.block.verify", "ok": false, "note": "second search could not confirm a Nov 2026 report date; rejected"},
+  {"id": "fmp.profile.ELAN", "ok": true, "note": "cap $12.9B, price 25.74"},
+  {"id": "fmp.profile.Q", "ok": true, "note": "cap $24.5B, price 117.00"},
+  {"id": "fmp.profile.SN", "ok": true, "note": "cap $31.4B, price 222.95"},
+  {"id": "fmp.profile.BRZE", "ok": true, "note": "cap $5.2B; rejected - event date unconfirmed"}
  ],
  "meta": {
-  "targetSession": "2026-11-06",
-  "lastSession": "2026-11-05"
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-09T20:07:08+08:00",
+  "targetSession": "2026-11-09",
+  "lastSession": "2026-11-06"
  }
 }
