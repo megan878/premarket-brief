@@ -1,240 +1,222 @@
 {
- "source": "FMP + WebSearch (automated routine, no WebFetch)",
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "q": {
-    "price": 7376.86,
-    "change": 23.13,
-    "pct": 0.31453,
-    "dayLow": 7369.55,
-    "dayHigh": 7444.2,
-    "yearHigh": 7844.52,
-    "yearLow": 6316.91,
-    "ma50": 7679.4473,
-    "ma200": 7325.053
-   },
-   "ts": 1794001029
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "q": {
-    "price": 51285.73,
-    "change": -237.33,
-    "pct": -0.46063,
-    "dayLow": 50992.61,
-    "dayHigh": 51662.26,
-    "yearHigh": 54744.33,
-    "yearLow": 45057.28,
-    "ma50": 52064.03,
-    "ma200": 50676.36
-   },
-   "ts": 1794001033
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "q": {
-    "price": 2754.1055,
-    "change": 24.21865,
-    "pct": 0.88717,
-    "dayLow": 2720.9954,
-    "dayHigh": 2761.57649,
-    "yearHigh": 3069.71,
-    "yearLow": 2303.46,
-    "ma50": 2837.892,
-    "ma200": 2807.8813
-   },
-   "ts": 1794000603
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "q": {
-    "price": 23.37,
-    "change": -2.27,
-    "pct": -8.85335,
-    "dayLow": 23.07,
-    "dayHigh": 25.08,
-    "yearHigh": 35.3,
-    "yearLow": 13.38,
-    "ma50": 16.922,
-    "ma200": 18.3959
-   },
-   "ts": 1794224776,
-   "prev": 25.64
-  }
- ],
- "macro": {
-  "date": "2026-11-06",
-  "y10": 4.86,
-  "y10prev": 4.84,
-  "y2": 4.51,
-  "y30": 5.26,
-  "y10path": "4.91% on 2 Nov, 4.95% on 3 Nov, 4.90% on 4 Nov, 4.84% on 5 Nov, 4.86% on 6 Nov",
-  "fed": {
-   "range": "3.75-4.00%",
-   "move": "hold",
-   "date": "28 Oct",
-   "vote": "10-2",
-   "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); no FOMC meeting fell in the last 7 days so this block is carried forward unchanged - only the treasury yields/y10hist were refreshed this run.",
-   "sources": [
+  "indices": [
     {
-     "t": "InvestingLive",
-     "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
+      "id": "SPX",
+      "name": "S&P 500",
+      "q": {
+        "price": 7549.94,
+        "change": 173.08,
+        "pct": 2.34626,
+        "dayLow": 7422.24,
+        "dayHigh": 7577.39,
+        "yearHigh": 7844.52,
+        "yearLow": 6316.91,
+        "ma50": 7679.4473,
+        "ma200": 7325.053
+      },
+      "ts": 1794262370
     },
     {
-     "t": "Admiral Markets",
-     "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
+      "id": "DJI",
+      "name": "Dow Jones",
+      "q": {
+        "price": 52389.75,
+        "change": 1104.02,
+        "pct": 2.15268,
+        "dayLow": 51643.01,
+        "dayHigh": 52574.34,
+        "yearHigh": 54744.33,
+        "yearLow": 45057.28,
+        "ma50": 52064.03,
+        "ma200": 50676.36
+      },
+      "ts": 1794262374
+    },
+    {
+      "id": "RUT",
+      "name": "Russell 2000",
+      "q": {
+        "price": 2840.8123,
+        "change": 86.70677,
+        "pct": 3.14827,
+        "dayLow": 2784.0405,
+        "dayHigh": 2852.6846,
+        "yearHigh": 3069.71,
+        "yearLow": 2303.46,
+        "ma50": 2837.892,
+        "ma200": 2807.8813
+      },
+      "ts": 1794259805
+    },
+    {
+      "id": "VIX",
+      "name": "Volatility",
+      "q": {
+        "price": 20.08,
+        "change": 0.16,
+        "pct": 0.80321,
+        "dayLow": 19.62,
+        "dayHigh": 20.32,
+        "yearHigh": 35.3,
+        "yearLow": 13.38,
+        "ma50": 17.022,
+        "ma200": 18.41375
+      },
+      "ts": 1794311176,
+      "prev": 19.92
     }
-   ]
-  },
-  "y10hist": [
-   {
-    "date": "2026-11-02",
-    "y10": 4.91
-   },
-   {
-    "date": "2026-11-03",
-    "y10": 4.95
-   },
-   {
-    "date": "2026-11-04",
-    "y10": 4.9
-   },
-   {
-    "date": "2026-11-05",
-    "y10": 4.84
-   },
-   {
-    "date": "2026-11-06",
-    "y10": 4.86
-   }
-  ]
- },
- "catalysts": [
-  {
-   "tk": "Q",
-   "name": "Qnity Electronics, Inc.",
-   "industry": "Semiconductors",
-   "sector": "Technology",
-   "ctype": "Earnings beat + raise",
-   "cdate": "4 Nov",
-   "cdateISO": "2026-11-04",
-   "what": "Q3 2026: adjusted EPS $1.46 and revenue $1.56B, both above consensus (sources differ slightly on the exact beat size, roughly 21-24%). Raised FY2026 guidance: adjusted EPS to $4.95-5.05 (from $4.40-4.60), revenue to $5.77-5.83B, adjusted EBITDA to $1.785-1.805B. Spun off from DuPont in Oct 2025; first full post-spin quarter to beat and raise.",
-   "sources": [
-    {"t": "247wallst"},
-    {"t": "Zacks"}
-   ],
-   "cap": "$24.5B",
-   "px": 117.0,
-   "pct": 6.32497,
-   "topSector": true
-  },
-  {
-   "tk": "SN",
-   "name": "SharkNinja, Inc.",
-   "industry": "Furnishings, Fixtures & Appliances",
-   "sector": "Consumer Cyclical",
-   "ctype": "Earnings beat + raise",
-   "cdate": "4 Nov",
-   "cdateISO": "2026-11-04",
-   "what": "Q3 2026: revenue $1.976B, beat the ~$1.864B consensus; adjusted EPS $2.34 (+56% y/y), with part of the margin gain coming from IEEPA tariff-refund timing (sources note this may not repeat). Raised FY2026 guidance: net sales growth to 18-19% (from 16-17%), adjusted diluted EPS to $6.65-6.75 (from $6.45-6.55).",
-   "sources": [
-    {"t": "247wallst"},
-    {"t": "Finviz"}
-   ],
-   "cap": "$31.4B",
-   "px": 222.95,
-   "pct": 2.68042,
-   "topSector": false
-  },
-  {
-   "tk": "ELAN",
-   "name": "Elanco Animal Health Incorporated",
-   "industry": "Drug Manufacturers - Specialty & Generic",
-   "sector": "Healthcare",
-   "ctype": "Earnings beat + raise",
-   "cdate": "6 Nov",
-   "cdateISO": "2026-11-06",
-   "what": "Q3 2026: revenue ~$1.27B (+11% y/y, sources differ slightly between $1.26-1.27B) and adjusted EPS $0.27, above the ~$0.20-0.25 consensus. Raised FY2026 guidance: adjusted EPS to $1.17-1.20 (from $1.10-1.16) and revenue to $5.16-5.18B (from $5.09-5.14B). Shares +~7.6-8.7% on the print.",
-   "sources": [
-    {"t": "Finviz"},
-    {"t": "247wallst"}
-   ],
-   "cap": "$12.9B",
-   "px": 25.74,
-   "pct": 8.69932,
-   "topSector": false
-  }
- ],
- "bg": {
-  "Q": {
-   "cap": "$24.5B",
-   "what": "Supplies electronic materials and specialty chemicals used in semiconductor chip manufacturing; spun off from DuPont in October 2025."
-  },
-  "SN": {
-   "cap": "$31.4B",
-   "what": "Designs and sells small home appliances (vacuums, kitchen and outdoor cooking products, air purifiers) under the Shark and Ninja brands."
-  },
-  "ELAN": {
-   "cap": "$12.9B",
-   "what": "Animal-health company making parasiticides, vaccines and therapeutics for pets and livestock, including the Seresto, Advantage and Rumensin brands."
-  }
- },
- "notices": [
-  "QQQ (NDX proxy): two WebSearch passes returned conflicting, undated prices (roughly $608-$718 across sources) with no reconciled figure - the tile is omitted this run and carries forward the last confirmed quote, dated.",
-  "VIX's FMP quote is a live pre-market print (06:46 ET Monday 9 Nov), not Friday 6 Nov's close - the tile is labelled a live print and the regime score uses the prior close (25.64) instead of the live price.",
-  "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged; only the treasury yields and y10hist were refreshed.",
-  "Sector ranking, industry drill-down and the technical scan are pinned to the last interactive refresh - this automated routine has no WebFetch and never touches those sections."
- ],
- "rejected": [
-  "<b>Braze (BRZE)</b> - reported a Q3 beat and raised FY26 guidance, cap $5.2B, but a second independent source could not confirm the report date, so the event is unverified.",
-  "<b>Block (XYZ)</b> - one search result described a Nov 4 beat-and-raise with a guidance increase, but a follow-up search could not find any coverage of a November 2026 Block earnings report; dropped as unverified.",
-  "<b>Johnson &amp; Johnson (JNJ)</b> - FDA accelerated approval for Rybrevant Faspro (head and neck cancer) reported 6 Nov, but only one roundup source was found; no independent second source confirmed it.",
-  "<b>No qualifying analyst upgrade</b> (target &gt;15% above price) found dated to the last 5 sessions.",
-  "<b>IDXX / REGN</b> (last run's catalysts) - not re-verified this run. REGN's event (30 Oct) has aged out of the 5-session window; IDXX's (2 Nov) was not re-confirmed as still-live news today, so neither is carried forward."
- ],
- "sections": {
-  "indices": {
-   "asOf": "2026-11-06",
-   "source": "FMP index-quote (VIX is a live print, see notices)"
-  },
+  ],
   "macro": {
-   "asOf": "2026-11-06",
-   "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)"
+    "date": "2026-11-06",
+    "y10": 4.86,
+    "y10prev": 4.84,
+    "y2": 4.51,
+    "y30": 5.26,
+    "y10path": "4.91% on 2 Nov, 4.95% on 3 Nov, 4.90% on 4 Nov, 4.84% on 5 Nov, 4.86% on 6 Nov",
+    "fed": {
+      "range": "3.75-4.00%",
+      "move": "hold",
+      "date": "28 Oct",
+      "vote": "10-2",
+      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); no FOMC meeting fell in the last 7 days so this block is carried forward unchanged - only treasury yields were re-fetched, and FMP's feed still had not posted a session past 6 Nov as of this run.",
+      "sources": [
+        {
+          "t": "InvestingLive",
+          "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
+        },
+        {
+          "t": "Admiral Markets",
+          "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
+        }
+      ]
+    },
+    "y10hist": [
+      {"date": "2026-11-02", "y10": 4.91},
+      {"date": "2026-11-03", "y10": 4.95},
+      {"date": "2026-11-04", "y10": 4.9},
+      {"date": "2026-11-05", "y10": 4.84},
+      {"date": "2026-11-06", "y10": 4.86}
+    ]
   },
-  "catalysts": {
-   "asOf": "2026-11-06",
-   "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 5 candidates checked and rejected"
+  "catalysts": [
+    {
+      "tk": "Q",
+      "name": "Qnity Electronics, Inc.",
+      "industry": "Semiconductors",
+      "sector": "Technology",
+      "ctype": "Earnings beat + raise",
+      "cdate": "4 Nov",
+      "cdateISO": "2026-11-04",
+      "what": "Q3 2026: adjusted EPS $1.46 and revenue $1.56B, both above consensus (sources differ slightly on the exact beat size, roughly 21-24%). Raised FY2026 guidance: adjusted EPS to $4.95-5.05 (from $4.40-4.60), revenue to $5.77-5.83B, adjusted EBITDA to $1.785-1.805B. Spun off from DuPont in Oct 2025; first full post-spin quarter to beat and raise. Still inside the 5-session window; re-priced this run, event unchanged.",
+      "sources": [
+        {"t": "247wallst"},
+        {"t": "Zacks"}
+      ],
+      "cap": "$26.2B",
+      "px": 125.04,
+      "pct": 6.87179,
+      "topSector": true
+    },
+    {
+      "tk": "SN",
+      "name": "SharkNinja, Inc.",
+      "industry": "Furnishings, Fixtures & Appliances",
+      "sector": "Consumer Cyclical",
+      "ctype": "Earnings beat + raise",
+      "cdate": "4 Nov",
+      "cdateISO": "2026-11-04",
+      "what": "Q3 2026: revenue $1.976B, beat the ~$1.864B consensus; adjusted EPS $2.34 (+56% y/y), with part of the margin gain coming from IEEPA tariff-refund timing (sources note this may not repeat). Raised FY2026 guidance: net sales growth to 18-19% (from 16-17%), adjusted diluted EPS to $6.65-6.75 (from $6.45-6.55). Still inside the 5-session window; re-priced this run, event unchanged.",
+      "sources": [
+        {"t": "247wallst"},
+        {"t": "Finviz"}
+      ],
+      "cap": "$32.3B",
+      "px": 229.51,
+      "pct": 2.94236,
+      "topSector": false
+    },
+    {
+      "tk": "ELAN",
+      "name": "Elanco Animal Health Incorporated",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "sector": "Healthcare",
+      "ctype": "Earnings beat + raise",
+      "cdate": "6 Nov",
+      "cdateISO": "2026-11-06",
+      "what": "Q3 2026: revenue ~$1.27B (+11% y/y, sources differ slightly between $1.26-1.27B) and adjusted EPS $0.27, above the ~$0.20-0.25 consensus. Raised FY2026 guidance: adjusted EPS to $1.17-1.20 (from $1.10-1.16) and revenue to $5.16-5.18B (from $5.09-5.14B). Still inside the 5-session window; re-priced this run, event unchanged.",
+      "sources": [
+        {"t": "Finviz"},
+        {"t": "247wallst"}
+      ],
+      "cap": "$13.4B",
+      "px": 26.84,
+      "pct": 4.2735,
+      "topSector": false
+    }
+  ],
+  "bg": {
+    "Q": {
+      "cap": "$26.2B",
+      "what": "Supplies electronic materials and specialty chemicals used in semiconductor chip manufacturing; spun off from DuPont in October 2025."
+    },
+    "SN": {
+      "cap": "$32.3B",
+      "what": "Designs and sells small home appliances (vacuums, kitchen and outdoor cooking products, air purifiers) under the Shark and Ninja brands."
+    },
+    "ELAN": {
+      "cap": "$13.4B",
+      "what": "Animal-health company making parasiticides, vaccines and therapeutics for pets and livestock, including the Seresto, Advantage and Rumensin brands."
+    }
+  },
+  "notices": [
+    "QQQ (NDX proxy): WebSearch returned conflicting figures for QQQ (a $647.05 close on 5 Nov from one source, a $706.32 undated quote from another, and a Fox Business page whose change figure contradicts its own close) - no reconciled current number, so the tile is omitted this run and carries forward the last confirmed quote, dated.",
+    "VIX's FMP quote is a live pre-market print (06:46 ET Tuesday 10 Nov), not Monday 9 Nov's close - the tile is labelled a live print and the regime score uses the prior close (19.92) instead of the live price.",
+    "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged; the treasury-rates feed itself still had not posted a session past 6 Nov as of this run, so y10/y10prev/y10hist are unchanged from the last run too.",
+    "Catalyst alerts: ELAN (6 Nov), Q (4 Nov) and SN (4 Nov) are still inside the last-5-session window, so they are kept and re-priced rather than dropped; no new qualifying catalyst was confirmed this run (candidates checked: Curtiss-Wright and Astera Labs, both rejected - see 'rejected').",
+    "Sector ranking, industry drill-down and the technical scan are pinned to the last interactive refresh - this automated routine has no WebFetch and never touches those sections."
+  ],
+  "screenNotes": [],
+  "rejected": [
+    "<b>Curtiss-Wright (CW)</b> - 247wallst/earningswhispers describe a Q3 beat-and-raise (adj. EPS vs. consensus conflicting between $3.94 and $3.77 across sources), but no source gave a confirmed November price reaction; one account even described a sharp post-earnings decline from an earlier (August) report. Rejected: event date and price reaction did not reconcile across sources.",
+    "<b>Astera Labs (ALAB)</b> - sources disagree on which quarter and figures are being described (Q2 reported Aug vs. a 'early November' Q3 beat with EPS $1.32 vs. $1.19 expected), and 247wallst specifically says shares slipped after the release, not rallied. Rejected: no reconciled date/reaction, and a slip is not a qualifying catalyst reaction.",
+    "<b>No qualifying analyst upgrade</b> (target &gt;15% above price) found dated to the last 5 sessions.",
+    "<b>No qualifying FDA approval / major contract</b> found dated to the last 5 sessions with two independent sources; November FDA PDUFA-calendar searches returned only forward-looking decision dates (14-30 Nov), not events that have already happened."
+  ],
+  "sections": {
+    "indices": {
+      "asOf": "2026-11-09",
+      "source": "FMP index-quote (VIX is a live print, see notices)"
+    },
+    "macro": {
+      "asOf": "2026-11-06",
+      "source": "FMP treasury-rates (feed has not posted a session past 6 Nov yet); Fed decision carried forward (no new FOMC since 28 Oct)"
+    },
+    "catalysts": {
+      "asOf": "2026-11-09",
+      "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 2 candidates checked and rejected this run, 3 carried-forward alerts re-priced"
+    }
+  },
+  "fetchlog": [
+    {"id": "fmp.index.^GSPC", "ok": true, "note": "close 9 Nov, +2.35%"},
+    {"id": "fmp.index.^DJI", "ok": true, "note": "close 9 Nov, +2.15%"},
+    {"id": "fmp.index.^RUT", "ok": true, "note": "close 9 Nov, +3.15%"},
+    {"id": "fmp.index.^VIX", "ok": true, "note": "live print 10 Nov 11:46 UTC, not a close; prev=19.92 used for regime"},
+    {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row still 6 Nov (feed lag) - identical to last run's y10hist, no new session available"},
+    {"id": "websearch.qqq.price", "ok": false, "note": "two searches returned conflicting/undated prices ($647.05 5-Nov close, $706.32 undated, a Fox Business page with an internally inconsistent change figure); omitted"},
+    {"id": "websearch.fomc.november", "ok": true, "note": "no FOMC meeting in the last 7 days (last 27-28 Oct hold; next 9 Dec); fed block carried forward"},
+    {"id": "websearch.catalysts.earnings-beat-raise", "ok": true, "note": "re-confirmed ELAN/Q/SN still within window; new candidates found: Curtiss-Wright (CW), Astera Labs (ALAB), both rejected on verification"},
+    {"id": "websearch.cw.verify", "ok": false, "note": "second search found conflicting EPS figures and no confirmed November price reaction; rejected"},
+    {"id": "websearch.alab.verify", "ok": false, "note": "sources disagree on quarter/date and describe shares slipping, not rallying; rejected"},
+    {"id": "websearch.catalysts.fda-contract", "ok": false, "note": "only forward-looking PDUFA calendar dates found (14-30 Nov), no completed approval/contract event with two sources"},
+    {"id": "websearch.catalysts.analyst-upgrade", "ok": false, "note": "no qualifying >15%-target upgrade found in the last 5 sessions"},
+    {"id": "fmp.profile.Q", "ok": true, "note": "cap $26.2B, price 125.04"},
+    {"id": "fmp.profile.SN", "ok": true, "note": "cap $32.3B, price 229.51"},
+    {"id": "fmp.profile.ELAN", "ok": true, "note": "cap $13.4B, price 26.84"},
+    {"id": "fmp.profile.CW", "ok": true, "note": "cap $17.8B; candidate rejected, see 'rejected'"},
+    {"id": "fmp.profile.ALAB", "ok": true, "note": "cap $37.6B; candidate rejected, see 'rejected'"}
+  ],
+  "meta": {
+    "targetSession": "2026-11-09",
+    "lastSession": "2026-11-09"
   }
- },
- "fetchlog": [
-  {"id": "fmp.index.^GSPC", "ok": true, "note": "close 6 Nov"},
-  {"id": "fmp.index.^DJI", "ok": true, "note": "close 6 Nov"},
-  {"id": "fmp.index.^RUT", "ok": true, "note": "close 6 Nov"},
-  {"id": "fmp.index.^VIX", "ok": true, "note": "live print 9 Nov 11:46 UTC, not a close; prev=25.64 used for regime"},
-  {"id": "fmp.economics.treasury-rates", "ok": true, "note": "last 8 sessions pulled; y10hist = 5 sessions 2-6 Nov"},
-  {"id": "websearch.qqq.price", "ok": false, "note": "two searches returned conflicting, undated prices ($608-$718); omitted"},
-  {"id": "websearch.fomc.november", "ok": true, "note": "no FOMC meeting in the last 7 days (last 27-28 Oct hold; next 9 Dec); fed block carried forward"},
-  {"id": "websearch.catalysts.earnings-beat-raise", "ok": true, "note": "found ELAN, Qnity(Q), SharkNinja(SN), Block(XYZ, unconfirmed), Braze(BRZE, unconfirmed)"},
-  {"id": "websearch.catalysts.fda-contract", "ok": true, "note": "J&J Rybrevant approval found, single-source only, rejected"},
-  {"id": "websearch.catalysts.analyst-upgrade", "ok": false, "note": "no qualifying >15%-target upgrade found in the last 5 sessions"},
-  {"id": "websearch.elan.verify", "ok": true, "note": "second source confirmed 6 Nov Q3 beat+raise"},
-  {"id": "websearch.q.verify", "ok": true, "note": "second source confirmed 4 Nov Q3 beat+raise"},
-  {"id": "websearch.sn.verify", "ok": true, "note": "second source confirmed 4 Nov Q3 beat+raise"},
-  {"id": "websearch.block.verify", "ok": false, "note": "second search could not confirm a Nov 2026 report date; rejected"},
-  {"id": "fmp.profile.ELAN", "ok": true, "note": "cap $12.9B, price 25.74"},
-  {"id": "fmp.profile.Q", "ok": true, "note": "cap $24.5B, price 117.00"},
-  {"id": "fmp.profile.SN", "ok": true, "note": "cap $31.4B, price 222.95"},
-  {"id": "fmp.profile.BRZE", "ok": true, "note": "cap $5.2B; rejected - event date unconfirmed"}
- ],
- "meta": {
-  "schemaVersion": 1,
-  "generatedAt": "2026-11-09T20:07:08+08:00",
-  "targetSession": "2026-11-09",
-  "lastSession": "2026-11-06"
- }
 }
