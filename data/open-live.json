@@ -1,254 +1,77 @@
 {
- "asOf": "placeholder-overwritten-by-builder",
- "note": "FMP + WebSearch only (no WebFetch). Indices and all 25 watch-list quotes (10 technical picks + 3 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~12-14 minutes after the 09:30 ET open. QQQ and futures (ES/NQ/YM/RTY) are omitted this run: no reconciled WebSearch figures cleared the no-invent bar.",
- "meta": {
-  "schemaVersion": 1
- },
- "sections": {
-  "indices": {
-   "asOfUTC": "2026-11-10T14:44:00Z",
-   "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"
+  "asOf": "2026-11-11",
+  "note": "FMP + WebSearch only (no WebFetch). Indices and all 26 watch-list quotes (10 technical picks + 4 catalyst-alert tickers + 12 near-misses) are live FMP pre-market prints read ~11 minutes before the 09:30 ET open. QQQ and all four index futures (ES/NQ/YM/RTY) are omitted this run: no reconciled, dated-today WebSearch figures cleared the no-invent bar for all four contracts together.",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-11-11T14:41:55Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"},
+    "futures": {"asOfUTC": null, "source": ""},
+    "quotes": {"asOfUTC": "2026-11-11T14:45:00Z", "source": "FMP company/profile-symbol, per ticker"},
+    "news": {"asOfUTC": "2026-11-11T14:45:00Z", "source": "WebSearch"}
   },
+  "indices": [
+    {"id": "SPX", "name": "S&P 500", "px": 7583.42, "pct": 0.83088, "prev": 7520.93},
+    {"id": "DJI", "name": "Dow Jones", "px": 52182.38, "pct": -0.09479, "prev": 52231.89},
+    {"id": "RUT", "name": "Russell 2000", "px": 2835.39874, "pct": 0.49704, "prev": 2821.37528},
+    {"id": "VIX", "name": "Volatility", "px": 18.59, "pct": -4.47071, "prev": 19.46}
+  ],
   "quotes": {
-   "asOfUTC": "2026-11-10T14:44:00Z",
-   "source": "FMP company/profile-symbol, per ticker"
+    "AVT": {"px": 87.115, "pct": 2.3678, "vol": 25982.15528, "avgVol": 1302967, "change": 2.015},
+    "ZS": {"px": 199.485, "pct": 2.34199, "vol": 111584.14549, "avgVol": 2771432, "change": 4.565},
+    "ETN": {"px": 361.57999, "pct": 2.0778, "vol": 392324, "avgVol": 2356492, "change": 7.35999},
+    "META": {"px": 641.95, "pct": 0.08731266, "vol": 1801510, "avgVol": 20351345, "change": 0.56001},
+    "GDDY": {"px": 112.09, "pct": -0.9193, "vol": 14346, "avgVol": 2013861, "change": -1.04},
+    "ITT": {"px": 216.445, "pct": 0.03466285, "vol": 51237, "avgVol": 867378, "change": 0.075},
+    "VRSN": {"px": 313.65, "pct": 0.81481, "vol": 24340, "avgVol": 860868, "change": 2.535},
+    "PLTR": {"px": 173.45, "pct": 2.74257, "vol": 2242576, "avgVol": 32187580, "change": 4.63},
+    "GOOGL": {"px": 290.26, "pct": 1.00216, "vol": 3019476, "avgVol": 29541840, "change": 2.88},
+    "SNAP": {"px": 5.09, "pct": 1.8, "vol": 2169277, "avgVol": 38314122, "change": 0.09},
+    "AMD": {"px": 527, "pct": 2.28839, "vol": 6259549.51526, "avgVol": 24590342, "change": 11.79},
+    "AVAV": {"px": 124.61, "pct": 0.89879, "vol": 108931.4023, "avgVol": 1615273, "change": 1.11},
+    "ELAN": {"px": 26.52, "pct": -0.89686, "vol": 110052, "avgVol": 5919651, "change": -0.24},
+    "OKTA": {"px": 186.67, "pct": 4.65912, "vol": 111964.82454, "avgVol": 3842933, "change": 8.31},
+    "NOK": {"px": 8.435, "pct": 2.24242, "vol": 9518264, "avgVol": 82052248, "change": 0.185},
+    "GNRC": {"px": 186.98, "pct": 2.8606, "vol": 46983, "avgVol": 1230729, "change": 5.2},
+    "LTM": {"px": 49.34, "pct": -1.28051, "vol": 15776, "avgVol": 842482, "change": -0.64},
+    "SNX": {"px": 239.4, "pct": 2.96774, "vol": 29187, "avgVol": 813890, "change": 6.9},
+    "NTAP": {"px": 183.47, "pct": 4.25024, "vol": 70618, "avgVol": 2479601, "change": 7.48},
+    "NTNX": {"px": 59.9, "pct": 1.02884, "vol": 49606, "avgVol": 2657278, "change": 0.61},
+    "AAOI": {"px": 53.48, "pct": 10.67881, "vol": 2427525, "avgVol": 10649833, "change": 5.16},
+    "BB": {"px": 9.575, "pct": 4.7593, "vol": 2199016, "avgVol": 15011445, "change": 0.435},
+    "CIEN": {"px": 290.3, "pct": 6.68872, "vol": 509456, "avgVol": 2617511, "change": 18.2},
+    "CSCO": {"px": 100.46, "pct": 2.35354, "vol": 1819385, "avgVol": 19166711, "change": 2.31},
+    "FFIV": {"px": 325.21, "pct": 2.48968, "vol": 22436.41666, "avgVol": 698182, "change": 7.9},
+    "FTNT": {"px": 128.16, "pct": 3.71449, "vol": 1410560, "avgVol": 4937952, "change": 4.59}
   },
-  "news": {
-   "asOfUTC": "2026-11-10T14:46:00Z",
-   "source": "WebSearch (TheStreet, Yahoo Finance)"
-  }
- },
- "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "px": 7502.89,
-   "pct": -0.62318,
-   "prev": 7549.94
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "px": 52181.65,
-   "pct": -0.39722,
-   "prev": 52389.75
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "px": 2811.41071,
-   "pct": -1.03496,
-   "prev": 2840.81208
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "px": 20.98,
-   "pct": 5.32129,
-   "prev": 19.92
-  }
- ],
- "quotes": {
-  "AVT": {
-   "px": 84.845,
-   "pct": 0.06486614,
-   "vol": 19184.42934,
-   "avgVol": 1291653,
-   "change": 0.055
-  },
-  "ZS": {
-   "px": 196.18,
-   "pct": -1.4369,
-   "vol": 134644.74625,
-   "avgVol": 2775596,
-   "change": -2.86
-  },
-  "ETN": {
-   "px": 353.79,
-   "pct": -1.23116,
-   "vol": 171338,
-   "avgVol": 2345952,
-   "change": -4.41
-  },
-  "META": {
-   "px": 639.875,
-   "pct": -0.23309,
-   "vol": 1168350.8743,
-   "avgVol": 20380314,
-   "change": -1.495
-  },
-  "GDDY": {
-   "px": 112.43,
-   "pct": 0.72568,
-   "vol": 76734,
-   "avgVol": 2026573,
-   "change": 0.81
-  },
-  "ITT": {
-   "px": 217.23,
-   "pct": -0.51522,
-   "vol": 17280.58304,
-   "avgVol": 859704,
-   "change": -1.125
-  },
-  "VRSN": {
-   "px": 303.95,
-   "pct": -0.61797,
-   "vol": 17749.27106,
-   "avgVol": 859367,
-   "change": -1.89
-  },
-  "PLTR": {
-   "px": 168.2,
-   "pct": -0.59102,
-   "vol": 2104809,
-   "avgVol": 32597941,
-   "change": -1.0
-  },
-  "GOOGL": {
-   "px": 289.84,
-   "pct": 0.5865,
-   "vol": 3155637,
-   "avgVol": 29525384,
-   "change": 1.69
-  },
-  "SNAP": {
-   "px": 4.965,
-   "pct": -1.58573,
-   "vol": 3504888,
-   "avgVol": 38244165,
-   "change": -0.08
-  },
-  "ELAN": {
-   "px": 26.7,
-   "pct": -0.52161,
-   "vol": 98041,
-   "avgVol": 5908854,
-   "change": -0.14
-  },
-  "Q": {
-   "px": 123.87,
-   "pct": -0.94362,
-   "vol": 43374,
-   "avgVol": 1806493,
-   "change": -1.18
-  },
-  "SN": {
-   "px": 227.655,
-   "pct": -0.80176,
-   "vol": 53358,
-   "avgVol": 1682283,
-   "change": -1.84
-  },
-  "NOK": {
-   "px": 8.245,
-   "pct": 0.73305,
-   "vol": 10215409,
-   "avgVol": 82312567,
-   "change": 0.05999989
-  },
-  "GNRC": {
-   "px": 180.26,
-   "pct": -4.53847,
-   "vol": 109077,
-   "avgVol": 1217926,
-   "change": -8.57
-  },
-  "LTM": {
-   "px": 50.55,
-   "pct": -0.07906852,
-   "vol": 88320,
-   "avgVol": 833053,
-   "change": -0.04000076
-  },
-  "SNX": {
-   "px": 229.474,
-   "pct": 0.47023,
-   "vol": 17830,
-   "avgVol": 813827,
-   "change": 1.074
-  },
-  "NTAP": {
-   "px": 174.65,
-   "pct": -0.8065,
-   "vol": 53872.11593,
-   "avgVol": 2481033,
-   "change": -1.42
-  },
-  "NTNX": {
-   "px": 59.288,
-   "pct": -0.33955,
-   "vol": 144130.10767,
-   "avgVol": 2672645,
-   "change": -0.202
-  },
-  "AAOI": {
-   "px": 49.15,
-   "pct": -5.66219,
-   "vol": 1971701,
-   "avgVol": 10588649,
-   "change": -2.95
-  },
-  "BB": {
-   "px": 9.0,
-   "pct": -2.43902,
-   "vol": 827714,
-   "avgVol": 15112030,
-   "change": -0.225
-  },
-  "CIEN": {
-   "px": 269.72,
-   "pct": 0.09277516,
-   "vol": 115203,
-   "avgVol": 2601561,
-   "change": 0.25
-  },
-  "CSCO": {
-   "px": 96.9806,
-   "pct": -1.69225,
-   "vol": 1090149.40733,
-   "avgVol": 19210034,
-   "change": -1.6694
-  },
-  "FFIV": {
-   "px": 317.16,
-   "pct": -0.18568,
-   "vol": 13859.64704,
-   "avgVol": 695632,
-   "change": -0.59
-  },
-  "FTNT": {
-   "px": 121.5,
-   "pct": -0.79203,
-   "vol": 520345,
-   "avgVol": 4933109,
-   "change": -0.97
-  }
- },
- "notes": {},
- "news": [
-  {
-   "tag": "Macro",
-   "top3": false,
-   "title": "Hotter-than-expected October CPI knocks Nasdaq lower after Monday's rebound",
-   "text": "October CPI rose 0.4% m/m headline and 0.3% m/m core - cooler than September on a y/y basis but above consensus - pressuring tech-heavy indices at the open after Monday's 2%+ rally. Yahoo Finance reports the Nasdaq Composite down about 0.8% at the open as the data firmed bets the Fed holds a less dovish line into the 9 Dec FOMC meeting. FMP's own live reads at ~09:42 ET: S&P 500 -0.62%, Dow -0.40%, Russell 2000 -1.03%, VIX +5.3% (prior close basis).",
-   "names": [],
-   "sources": [
+  "news": [
     {
-     "t": "TheStreet",
-     "u": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-nov-10-2026"
+      "tag": "Technology",
+      "top3": true,
+      "title": "Chip and AI stocks rally premarket as Nvidia recovers, CoreWeave beats",
+      "text": "Nasdaq-100 futures were indicated up roughly 1.6-1.9% and S&P 500 futures up about 0.7-1.0% ahead of the open, led by chip and AI names. CoreWeave's results reassured investors on AI infrastructure demand, and Nvidia extended a recovery from its prior two sessions' losses tied to the board's probe into CEO Jensen Huang over an alleged foreign-intelligence contact. Micron and AMD were also indicated higher premarket.",
+      "names": ["AMD"],
+      "sources": [
+        {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-11-dow-sp-500-nasdaq-nvidia-treasurys-123445799.html"},
+        {"t": "Upstox", "u": "https://upstox.com/news/market-news/us-stocks/dow-jones-s-and-p-500-nasdaq-futures-hint-positive-opening-on-nov-11-core-weave-tech-stocks-in-focus/article-203309/"}
+      ]
     },
     {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-10-dow-sp-500-nasdaq-inflation-data-cpi-090627830.html"
+      "tag": "Macro",
+      "top3": false,
+      "title": "Nvidia board's Jensen Huang probe still an overhang into today's session",
+      "text": "Nvidia's board opened an internal investigation on 9 Nov into CEO Jensen Huang over reports tying him to a contact U.S. intelligence identified as a foreign agent; the board says it has found no sign national security or trade secrets were compromised. Shares fell as much as 8% intraday on the news before paring the loss, and remain down sharply from the early-October peak - today's premarket bounce is a partial recovery, not a resolution; the review is ongoing.",
+      "names": [],
+      "sources": [
+        {"t": "BNN Bloomberg", "u": "https://www.bnnbloomberg.ca/business/company-news/2026/11/09/internal-probe-into-ceo-jensen-huang-and-foreign-intelligence-weighs-on-high-flying-nvidia-shares/"},
+        {"t": "AP via NY1", "u": "https://ny1.com/nyc/all-boroughs/ap-top-news/2026/11/09/nvidia-shares-drop-after-co-investigates-whether-ceo-was-target-of-a-foreign-intelligence-effort"}
+      ]
     }
-   ]
-  }
- ],
- "footnotes": [
-  "QQQ omitted: WebSearch returned no reconciled, dated-today quote (results ranged from stale Nov 5 figures near $647 to undated ~$706 prints) - the no-invent rule means the page carries forward the brief's last confirmed QQQ close rather than publish an unreconciled number.",
-  "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned no dated-today, two-source-matched levels for any of the four contracts despite repeated targeted queries - every result was either from November 2025, an earlier November 2026 session, or undated. Publishing a figure here would violate the no-invent rule.",
-  "Indices (SPX/DJI/RUT/VIX): FMP index-quote live prints read ~12 minutes after the 09:30 ET open (open/dayLow/dayHigh already reflect the session so far), not a completed session.",
-  "Only one news item cleared the two-independent-https-source bar after targeted searches for sector-specific (Technology, Communication Services, Industrials) and watchlist-name (GOOGL, META, PLTR, ITT, ETN, CIEN, GNRC) drivers returned only stale, undated, or single-sourced results - those watch-list movers should be read as part of the broad CPI-day market reaction, not as confirmed individual catalysts."
- ]
+  ],
+  "footnotes": [
+    "QQQ omitted: WebSearch returned only stale (early Sept, early Nov 5) or undated premarket prints ($707, $699, $625, $717 across sources, mutually inconsistent) - no reconciled, dated-today quote cleared the no-invent bar. The page carries forward the brief's last confirmed QQQ close.",
+    "Futures (ES/NQ/YM/RTY) omitted: WebSearch found no same-time, two-source-matched level for any of the four contracts - NQ was reported anywhere from +1.6% to +1.9% and ES from +0.7% to +1.0% across different snapshot times from the same morning, Dow futures were reported both roughly flat and up slightly, and RTY (Russell 2000 futures) had no November 2026 coverage at all. Publishing point figures under those conditions would violate the no-invent rule; the live FMP index quotes above (SPX/DJI/RUT/VIX) stand in as the best available same-day read.",
+    "Indices (SPX/DJI/RUT/VIX): FMP index-quote live prints read ~11 minutes before the 09:30 ET open (pre-market), not a completed session - dayLow/dayHigh reflect only pre-market trading so far.",
+    "Stock quotes: FMP company/profile-symbol live pre-market prints for all 26 watch-list tickers (10 technical picks, 4 catalyst-alert tickers, 12 near-misses), read ~15 minutes before the open. For the 10 technical-pick tickers the implied previous close from FMP's own change field differs sharply from the brief's own last recorded price - this is expected, not a data error: those picks are PINNED to a technical scan last refreshed over a month ago (sectorSource: interactive refresh 7 Oct), so the brief's reference price is weeks stale and is not a safe stand-in for yesterday's close for those names specifically. Catalyst and near-miss tickers, which are refreshed automatically, show much smaller, consistent gaps.",
+    "Overnight/premarket news: only one cluster of items cleared the two-independent-https-source, dated-today bar after targeted searches on today's top-3 sectors (Technology, Communication Services, Industrials) and watchlist names (GOOGL, META, PLTR, ITT, ETN, AVAV, GNRC, CIEN) - all came back stale (late-Oct earnings reactions), undated, or single-sourced. Today's session context is dominated by the broad chip/AI-stock premarket bounce and the still-open Nvidia CEO investigation; no stock-specific, dated-today driver was found for the individual watchlist names beyond that broad move.",
+    "Today (11 Nov 2026) is Veterans Day in the US: equities trade a full regular session; the Treasury/bond market is closed, so no fresh 10Y yield print exists for today - CLAUDE.md's rates check and macro block are unaffected since those are the brief's job, not this routine's."
+  ]
 }
