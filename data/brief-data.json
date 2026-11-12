@@ -4,81 +4,84 @@
       "id": "SPX",
       "name": "S&P 500",
       "q": {
-        "price": 7520.93,
-        "change": -29.01,
-        "pct": -0.38424,
-        "dayLow": 7470.43,
-        "dayHigh": 7543.92,
+        "price": 7619.38,
+        "change": 98.45,
+        "pct": 1.30901,
+        "dayLow": 7571.88,
+        "dayHigh": 7647.2,
         "yearHigh": 7844.52,
         "yearLow": 6316.91,
         "ma50": 7672.9067,
         "ma200": 7331.0786
       },
-      "ts": 1794348031
+      "ts": 1794433323,
+      "prev": 7520.93
     },
     {
       "id": "DJI",
       "name": "Dow Jones",
       "q": {
-        "price": 52231.89,
-        "change": -157.86,
-        "pct": -0.30132,
-        "dayLow": 51977.08,
-        "dayHigh": 52316.89,
+        "price": 52486.49,
+        "change": 254.59,
+        "pct": 0.48742,
+        "dayLow": 52486.49,
+        "dayHigh": 52486.49,
         "yearHigh": 54744.33,
-        "yearLow": 41853.62,
-        "ma50": 52021.547,
-        "ma200": 50706.91
+        "yearLow": 45057.28,
+        "ma50": 52015.938,
+        "ma200": 50724.33
       },
-      "ts": 1794348040
+      "ts": 1794433438,
+      "prev": 52231.9
     },
     {
       "id": "RUT",
       "name": "Russell 2000",
       "q": {
-        "price": 2821.3755,
-        "change": -19.43658,
-        "pct": -0.68419,
-        "dayLow": 2799.2512,
-        "dayHigh": 2826.5376,
+        "price": 2846.2625,
+        "change": 24.88722,
+        "pct": 0.8821,
+        "dayLow": 2832.42,
+        "dayHigh": 2852.1362,
         "yearHigh": 3069.71,
         "yearLow": 2303.46,
         "ma50": 2832.5593,
         "ma200": 2809.548
       },
-      "ts": 1794346204
+      "ts": 1794432605,
+      "prev": 2821.37528
     },
     {
       "id": "VIX",
       "name": "Volatility",
       "q": {
-        "price": 18.61,
-        "change": -0.85,
-        "pct": -4.36793,
-        "dayLow": 18.53,
-        "dayHigh": 18.96,
+        "price": 18.29,
+        "change": 0.8,
+        "pct": 4.57404,
+        "dayLow": 18.16,
+        "dayHigh": 18.47,
         "yearHigh": 35.3,
         "yearLow": 13.38,
-        "ma50": 17.0844,
-        "ma200": 18.4293
+        "ma50": 17.1302,
+        "ma200": 18.43235
       },
-      "ts": 1794397606,
-      "prev": 19.46
+      "ts": 1794483976,
+      "prev": 17.49
     }
   ],
   "macro": {
-    "date": "2026-11-09",
-    "y10": 4.88,
-    "y10prev": 4.86,
-    "y2": 4.56,
-    "y30": 5.26,
-    "y10path": "4.95% on 3 Nov, 4.90% on 4 Nov, 4.84% on 5 Nov, 4.86% on 6 Nov, 4.88% on 9 Nov",
+    "date": "2026-11-10",
+    "y10": 4.98,
+    "y10prev": 4.88,
+    "y2": 4.73,
+    "y30": 5.35,
+    "y10path": "4.90% on 4 Nov, 4.84% on 5 Nov, 4.86% on 6 Nov, 4.88% on 9 Nov, 4.98% on 10 Nov",
     "fed": {
       "range": "3.75-4.00%",
       "move": "hold",
       "date": "28 Oct",
       "vote": "10-2",
-      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); no FOMC meeting fell in the last 7 days so this block is carried forward unchanged - only treasury yields were re-fetched. The treasury-rates feed has now posted through 9 Nov (one session behind the 10 Nov last completed session).",
+      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); no FOMC meeting fell in the last 7 days so this block is carried forward unchanged - only treasury yields were re-fetched. The treasury-rates feed has now posted through 10 Nov.",
       "sources": [
         {
           "t": "InvestingLive",
@@ -91,32 +94,29 @@
       ]
     },
     "y10hist": [
-      {"date": "2026-11-03", "y10": 4.95},
-      {"date": "2026-11-04", "y10": 4.9},
-      {"date": "2026-11-05", "y10": 4.84},
-      {"date": "2026-11-06", "y10": 4.86},
-      {"date": "2026-11-09", "y10": 4.88}
+      {
+        "date": "2026-11-04",
+        "y10": 4.9
+      },
+      {
+        "date": "2026-11-05",
+        "y10": 4.84
+      },
+      {
+        "date": "2026-11-06",
+        "y10": 4.86
+      },
+      {
+        "date": "2026-11-09",
+        "y10": 4.88
+      },
+      {
+        "date": "2026-11-10",
+        "y10": 4.98
+      }
     ]
   },
   "catalysts": [
-    {
-      "tk": "AVAV",
-      "name": "AeroVironment, Inc.",
-      "industry": "Aerospace & Defense",
-      "sector": "Industrials",
-      "ctype": "Major contract",
-      "cdate": "9 Nov",
-      "cdateISO": "2026-11-09",
-      "what": "AeroVironment announced a multiyear IDIQ contract with a $940M ceiling for an undisclosed U.S. government customer (OPSEC restriction on naming the agency), including a ~$315M initial award for product deliveries and support under its AxS segment. The $940M is a maximum ceiling, not guaranteed order volume; no confirmed day-of price reaction found (no OHLC tape available to this routine).",
-      "sources": [
-        {"t": "Finviz", "u": "https://finviz.com/news/419203/av-secures-approximately-315-million-award-under-940-million-idiq-contract"},
-        {"t": "GreenStockNews", "u": "https://greenstocknews.com/news/nasdaq/avav/av-secures-approximately-315-million-award-under-940-million-idiq-contract"}
-      ],
-      "cap": "$6.3B",
-      "px": 123.5,
-      "pct": -2.72527,
-      "topSector": true
-    },
     {
       "tk": "AMD",
       "name": "Advanced Micro Devices, Inc.",
@@ -125,32 +125,40 @@
       "ctype": "Analyst upgrade",
       "cdate": "9 Nov",
       "cdateISO": "2026-11-09",
-      "what": "Oppenheimer's Rick Schafer upgraded AMD to Outperform from Perform with a $600 price target - about 16% above the $515.21 FMP quote - citing 'undeniable' data-center/server share gains and a forecast of 135% data-center revenue growth in 2027. Several other desks (DA Davidson $600, StoneX $685, TD Cowen $675) reiterated bullish targets the same week; shares were reported up over 12% on the day.",
+      "what": "Oppenheimer's Rick Schafer upgraded AMD to Outperform from Perform with a $600 price target - about 16% above the $515.21 price at the time - citing 'undeniable' data-center/server share gains and a forecast of 135% data-center revenue growth in 2027. Several other desks (DA Davidson $600, StoneX $685, TD Cowen $675) reiterated bullish targets the same week; shares were reported up over 12% on the day. Re-priced this run (now $552.90, still inside the 5-session window), event unchanged.",
       "sources": [
-        {"t": "Tikr", "u": "https://www.tikr.com/blog/amd-soars-12-on-undeniable-data-center-success-per-oppenheimer-upgrade"},
-        {"t": "CryptoBriefing", "u": "https://cryptobriefing.com/oppenheimer-upgrades-amd-outperform-600-target/"}
+        {
+          "t": "Tikr"
+        },
+        {
+          "t": "CryptoBriefing"
+        }
       ],
-      "cap": "$845.0B",
-      "px": 515.21,
-      "pct": 1.30363,
+      "cap": "$906.8B",
+      "px": 552.9,
+      "pct": 7.31546,
       "topSector": true
     },
     {
-      "tk": "OKTA",
-      "name": "Okta, Inc.",
-      "industry": "Software - Infrastructure",
-      "sector": "Technology",
-      "ctype": "Index add",
-      "cdate": "4 Nov",
-      "cdateISO": "2026-11-04",
-      "what": "S&P Dow Jones Indices announced 30 Oct that Okta would join the S&P 500 effective before the open on 4 Nov, replacing Kenvue (being acquired by Kimberly-Clark); Okta moves up from the S&P MidCap 400. A follow-up report noted shares advancing ~2.5% in pre-market trading ahead of the addition on passive-demand expectations.",
+      "tk": "AVAV",
+      "name": "AeroVironment, Inc.",
+      "industry": "Aerospace & Defense",
+      "sector": "Industrials",
+      "ctype": "Major contract",
+      "cdate": "9 Nov",
+      "cdateISO": "2026-11-09",
+      "what": "AeroVironment announced a multiyear IDIQ contract with a $940M ceiling for an undisclosed U.S. government customer (OPSEC restriction on naming the agency), including a ~$315M initial award for product deliveries and support under its AxS segment. The $940M is a maximum ceiling, not guaranteed order volume; no confirmed day-of price reaction found (no OHLC tape available to this routine). Re-priced this run, event unchanged.",
       "sources": [
-        {"t": "S&P Global", "u": "https://press.spglobal.com/2026-10-30-Okta-Set-to-Join-S-P-500-Others-to-Join-S-P-MidCap-400-and-S-P-SmallCap-600"},
-        {"t": "Finviz", "u": "https://finviz.com/news/412877/okta-set-to-join-sp-500-others-to-join-sp-midcap-400-and-sp-smallcap-600"}
+        {
+          "t": "Finviz"
+        },
+        {
+          "t": "GreenStockNews"
+        }
       ],
-      "cap": "$29.8B",
-      "px": 178.36,
-      "pct": 0.44489,
+      "cap": "$6.3B",
+      "px": 124.4,
+      "pct": 0.72874,
       "topSector": true
     },
     {
@@ -161,86 +169,131 @@
       "ctype": "Earnings beat + raise",
       "cdate": "6 Nov",
       "cdateISO": "2026-11-06",
-      "what": "Q3 2026: revenue ~$1.27B (+11% y/y, sources differ slightly between $1.26-1.27B) and adjusted EPS $0.27, above the ~$0.20-0.25 consensus. Raised FY2026 guidance: adjusted EPS to $1.17-1.20 (from $1.10-1.16) and revenue to $5.16-5.18B (from $5.09-5.14B). Still inside the 5-session window (day 4 of 5); re-priced this run, event unchanged.",
+      "what": "Q3 2026: revenue ~$1.27B (+11% y/y, sources differ slightly between $1.26-1.27B) and adjusted EPS $0.27, above the ~$0.20-0.25 consensus. Raised FY2026 guidance: adjusted EPS to $1.17-1.20 (from $1.10-1.16) and revenue to $5.16-5.18B (from $5.09-5.14B). Last day inside the 5-session window; re-priced this run, event unchanged.",
       "sources": [
-        {"t": "Finviz"},
-        {"t": "247wallst"}
+        {
+          "t": "Finviz"
+        },
+        {
+          "t": "247wallst"
+        }
       ],
-      "cap": "$13.4B",
-      "px": 26.76,
-      "pct": -0.29806,
+      "cap": "$13.2B",
+      "px": 26.48,
+      "pct": -1.04634,
       "topSector": false
     }
   ],
   "bg": {
+    "AMD": {
+      "cap": "$906.8B",
+      "what": "Semiconductor maker of x86 CPUs, GPUs and data-center accelerators (EPYC, Instinct) competing with Intel and Nvidia."
+    },
     "AVAV": {
       "cap": "$6.3B",
       "what": "Designs and makes small unmanned aircraft, loitering munitions and related tactical systems mainly for the U.S. Department of Defense and allied militaries."
     },
-    "AMD": {
-      "cap": "$845.0B",
-      "what": "Semiconductor maker of x86 CPUs, GPUs and data-center accelerators (EPYC, Instinct) competing with Intel and Nvidia."
-    },
-    "OKTA": {
-      "cap": "$29.8B",
-      "what": "Cloud identity and access-management platform (single sign-on, MFA, Auth0) for enterprise, government and education customers."
-    },
     "ELAN": {
-      "cap": "$13.4B",
+      "cap": "$13.2B",
       "what": "Animal-health company making parasiticides, vaccines and therapeutics for pets and livestock, including the Seresto, Advantage and Rumensin brands."
     }
   },
   "notices": [
-    "QQQ (NDX proxy): WebSearch again returned mismatched figures for QQQ (a 5 Nov close of $647.05 widely cited, a 6 Nov close of $656.10 per one source, a 9 Nov figure of $674.94 of unclear status, and a Fox Business page with an internally inconsistent change figure) - no reconciled 10 Nov close found, so the tile is omitted this run and carries forward the last confirmed quote, dated.",
-    "VIX's FMP quote is a live pre-market print (11:46 UTC Wed 11 Nov), not Tuesday 10 Nov's close - the tile is labelled a live print and the regime score uses the prior close (19.46) instead of the live price.",
-    "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged. The treasury-rates feed has caught up to 9 Nov (one session behind the 10 Nov last completed session); y10/y10prev/y10hist refreshed accordingly.",
-    "Catalyst alerts rotated to 4 (the 3-4 cap): kept ELAN (6 Nov, Earnings beat + raise, re-priced) and added three fresh, diversified catalysts this run - AVAV (9 Nov, Major contract), AMD (9 Nov, Analyst upgrade >15% above price) and OKTA (4 Nov, Index add) - the first qualifying names found in those three categories since this routine started tracking them. Q and SN (both 4 Nov, Earnings beat + raise, same type as ELAN) were still technically inside the 5-session window but were dropped to make room, not rejected for cause; see 'rejected' for this run's declined candidates (BDX, Oracle, Boeing, IonQ).",
+    "QQQ (NDX proxy): WebSearch returned no reconciled close for 11 Nov - sources either disagreed (a 647.05 close attributed to both 5 Nov and 6 Nov by different outlets, with conflicting change signs) or lacked a clear date. The tile is omitted this run; the builder carries the last confirmed quote forward, dated.",
+    "VIX's FMP quote is a live pre-market print (11:46 UTC Thu 12 Nov), not Wednesday 11 Nov's close - the tile is labelled a live print and the regime score uses the prior close (17.49) instead of the live price.",
+    "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged. The treasury-rates feed has caught up to 10 Nov; y10/y10prev/y10hist refreshed accordingly. Note the 10bp jump in the 10Y (4.88% to 4.98%) between 9 and 10 Nov per FMP's feed.",
+    "Catalyst alerts: kept all 3 still-valid carried alerts, re-priced - AMD (9 Nov, Analyst upgrade), AVAV (9 Nov, Major contract) and ELAN (6 Nov, Earnings beat + raise). OKTA (4 Nov, Index add) aged out of the 5-session window and was dropped. No new qualifying candidates found for 10-11 Nov after searching earnings/upgrade/contract/approval news for both sessions; see 'rejected' for declined candidates checked this run.",
     "Sector ranking, industry drill-down and the technical scan are pinned to the last interactive refresh - this automated routine has no WebFetch and never touches those sections."
   ],
-  "screenNotes": [],
   "rejected": [
-    "<b>Becton Dickinson (BDX)</b> - Wells Fargo upgraded to Overweight (6 Nov) and raised its target to $242 from $170, but $242 is only ~13.8% above the $212.61 FMP price - below the 15%-above-price bar for an analyst-upgrade catalyst. Rejected on the threshold.",
-    "<b>Oracle (ORCL) $7B DoD software deal</b> - confirmed across multiple outlets, but the announcement date is 23 Jul 2026, well outside the last-5-trading-session window. Rejected: stale.",
-    "<b>Boeing (BA) $7B+ Pentagon contracts</b> - the only dated coverage found places this award on 25 Nov 2025, not November 2026. Rejected: wrong year / stale.",
-    "<b>IonQ (IONQ)</b> Q3 beat + raised FY2026 revenue guidance (5 Nov) - sources disagree sharply on the stock's reaction (one reports +18% intraday, another reports a ~10% decline the same day), so the event's reaction could not be reconciled and a sell-the-news outcome could not be ruled out. Rejected on unverifiable reaction."
+    "<b>NovoCure (NVCR) FDA approval for Optune Pax (pancreatic cancer)</b> - confirmed across multiple outlets, but the approval date is 11 Feb 2026, well outside the last-5-trading-session window. Rejected: stale.",
+    "<b>OKTA S&P 500 index add (4 Nov)</b> - still a real event but the add date is now 6 trading sessions back (outside the 5-session window as of 11 Nov). Rejected: aged out, not dropped for cause."
   ],
   "sections": {
     "indices": {
-      "asOf": "2026-11-10",
+      "asOf": "2026-11-11",
       "source": "FMP index-quote (VIX is a live print, see notices)"
     },
     "macro": {
-      "asOf": "2026-11-09",
-      "source": "FMP treasury-rates (feed now posted through 9 Nov, one session behind the 10 Nov last completed session); Fed decision carried forward (no new FOMC since 28 Oct)"
+      "asOf": "2026-11-10",
+      "source": "FMP treasury-rates (feed now through 10 Nov); Fed decision carried forward (no new FOMC since 28 Oct)"
     },
     "catalysts": {
-      "asOf": "2026-11-10",
-      "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 4 candidates checked and rejected this run, 1 carried-forward alert re-priced, 3 new alerts added"
+      "asOf": "2026-11-11",
+      "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 3 carried alerts re-priced, 1 (OKTA) expired out of window, 0 new candidates found this run, 2 candidates checked and rejected"
     }
   },
   "fetchlog": [
-    {"id": "fmp.index.^GSPC", "ok": true, "note": "close 10 Nov, -0.38%"},
-    {"id": "fmp.index.^DJI", "ok": true, "note": "close 10 Nov, -0.30%"},
-    {"id": "fmp.index.^RUT", "ok": true, "note": "close 10 Nov, -0.68%"},
-    {"id": "fmp.index.^VIX", "ok": true, "note": "live print 11 Nov 11:46 UTC, not a close; prev=19.46 used for regime"},
-    {"id": "fmp.economics.treasury-rates", "ok": true, "note": "latest row now 9 Nov (feed caught up from 6 Nov); y10hist = 3-9 Nov"},
-    {"id": "websearch.qqq.price", "ok": false, "note": "mismatched closes across sources ($647.05 / $656.10 / $674.94, undated/unclear status); omitted"},
-    {"id": "websearch.fomc.november", "ok": true, "note": "no FOMC meeting in the last 7 days; fed block carried forward"},
-    {"id": "websearch.catalysts.major-contract", "ok": true, "note": "AVAV $940M IDIQ (9 Nov) confirmed, two sources"},
-    {"id": "websearch.catalysts.analyst-upgrade", "ok": true, "note": "AMD Oppenheimer upgrade to $600 (9 Nov) confirmed, ~16% above price"},
-    {"id": "websearch.catalysts.index-add", "ok": true, "note": "OKTA S&P 500 addition effective 4 Nov confirmed via S&P Global + Finviz"},
-    {"id": "websearch.bdx.verify", "ok": false, "note": "Wells Fargo target $242 vs price $212.61 is only ~13.8% above price (<15% threshold); rejected"},
-    {"id": "websearch.oracle.verify", "ok": false, "note": "contract dated 23 Jul 2026, outside the 5-session window; rejected"},
-    {"id": "websearch.boeing.verify", "ok": false, "note": "contract dated 25 Nov 2025, not November 2026; rejected"},
-    {"id": "websearch.ionq.verify", "ok": false, "note": "sources disagree on stock reaction (+18% vs -10%); rejected"},
-    {"id": "fmp.profile.AVAV", "ok": true, "note": "cap $6.3B, price 123.50"},
-    {"id": "fmp.profile.AMD", "ok": true, "note": "cap $845.0B, price 515.21"},
-    {"id": "fmp.profile.OKTA", "ok": true, "note": "cap $29.8B, price 178.36"},
-    {"id": "fmp.profile.ELAN", "ok": true, "note": "cap $13.4B, price 26.76 (re-priced)"},
-    {"id": "fmp.profile.BDX", "ok": true, "note": "cap $57.9B; candidate rejected, see 'rejected'"}
+    {
+      "id": "fmp.index-quote.^GSPC",
+      "ok": true,
+      "note": "close 2026-11-11, 7619.38"
+    },
+    {
+      "id": "fmp.index-quote.^DJI",
+      "ok": true,
+      "note": "close 2026-11-11, 52486.49"
+    },
+    {
+      "id": "fmp.index-quote.^RUT",
+      "ok": true,
+      "note": "close 2026-11-11, 2846.2625"
+    },
+    {
+      "id": "fmp.index-quote.^VIX",
+      "ok": true,
+      "note": "live print 2026-11-12 11:46 UTC, 18.29 (prev close 17.49)"
+    },
+    {
+      "id": "websearch.qqq.quote",
+      "ok": false,
+      "note": "no reconciled 11 Nov close across sources; tile omitted, carried forward"
+    },
+    {
+      "id": "fmp.treasury-rates",
+      "ok": true,
+      "note": "8 sessions pulled through 10 Nov, kept last 5 distinct for y10hist"
+    },
+    {
+      "id": "websearch.fomc.decision",
+      "ok": true,
+      "note": "confirmed no FOMC meeting in last 7 days (last 28 Oct, next 9 Dec); fed block carried forward"
+    },
+    {
+      "id": "websearch.catalysts.sweep.10nov",
+      "ok": true,
+      "note": "no new qualifying candidates found"
+    },
+    {
+      "id": "websearch.catalysts.sweep.11nov",
+      "ok": true,
+      "note": "no new qualifying candidates found"
+    },
+    {
+      "id": "websearch.catalysts.novocure",
+      "ok": true,
+      "note": "found but event dated 11 Feb 2026, rejected as stale"
+    },
+    {
+      "id": "fmp.profile-symbol.AMD",
+      "ok": true,
+      "note": "price 552.90, cap $906.8B"
+    },
+    {
+      "id": "fmp.profile-symbol.AVAV",
+      "ok": true,
+      "note": "price 124.40, cap $6.3B"
+    },
+    {
+      "id": "fmp.profile-symbol.ELAN",
+      "ok": true,
+      "note": "price 26.48, cap $13.2B"
+    }
   ],
   "meta": {
-    "targetSession": "2026-11-10",
-    "lastSession": "2026-11-10"
+    "schemaVersion": 1,
+    "generatedAt": "2026-11-12T20:05:18+08:00",
+    "targetSession": "2026-11-12",
+    "lastSession": "2026-11-11"
   }
 }
