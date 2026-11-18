@@ -1,75 +1,273 @@
 {
-  "note": "FMP + WebSearch only (no WebFetch). Indices and all 24 watch-list quotes (10 technical picks + 2 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~11 minutes after the 09:30 ET open. QQQ and all four index futures (ES/NQ/YM/RTY) are omitted this run: WebSearch returned only a single-sourced, uncorroborated live print for each, not two independent sources agreeing on today's figure.",
-  "meta": {"schemaVersion": 1},
-  "sections": {
-    "indices": {"asOfUTC": "2026-11-17T14:41:40Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"},
-    "futures": {"asOfUTC": null, "source": ""},
-    "quotes": {"asOfUTC": "2026-11-17T14:42:00Z", "source": "FMP company/profile-symbol, same read"},
-    "news": {"asOfUTC": "2026-11-17T14:44:00Z", "source": "WebSearch (Yahoo Finance, Manila Times/AP, w.media, ground.news)"}
+ "note": "FMP + WebSearch only (no WebFetch). Indices and all 25 watch-list quotes (10 technical picks + 3 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~11-16 minutes after the 09:30 ET open. QQQ and Russell 2000 (RTY) futures are omitted this run (see footnotes); ES/NQ/YM pre-open futures reads are folded into the Overnight news section instead.",
+ "meta": {
+  "schemaVersion": 1
+ },
+ "sections": {
+  "indices": {
+   "asOfUTC": "2026-11-18T14:41:00Z",
+   "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX)"
   },
-  "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7406.27, "pct": -0.13915, "prev": 7416.59},
-    {"id": "DJI", "name": "Dow Jones", "px": 51307.05, "pct": -0.58347, "prev": 51608.17},
-    {"id": "RUT", "name": "Russell 2000", "px": 2738.89586, "pct": -0.14749, "prev": 2742.94134},
-    {"id": "VIX", "name": "Volatility", "px": 22.77, "pct": -0.61109, "prev": 22.91}
-  ],
-  "futures": {},
   "quotes": {
-    "AVT": {"px": 81.825, "pct": 0.70769, "vol": 23695.90197, "avgVol": 1308775, "change": 0.575},
-    "ZS": {"px": 189.74, "pct": -0.5764, "vol": 133800, "avgVol": 2728807, "change": -1.1},
-    "ETN": {"px": 344.51999, "pct": 2.26787, "vol": 103205, "avgVol": 2392414, "change": 7.63999},
-    "META": {"px": 623.0805, "pct": -0.53151, "vol": 1733946, "avgVol": 19781343, "change": -3.32942},
-    "GDDY": {"px": 108.6, "pct": -3.22581, "vol": 54215, "avgVol": 1981407, "change": -3.62},
-    "ITT": {"px": 208.3, "pct": 0.39522, "vol": 18437, "avgVol": 857608, "change": 0.82},
-    "VRSN": {"px": 304.02, "pct": -1.17028, "vol": 21240, "avgVol": 862422, "change": -3.6},
-    "PLTR": {"px": 160.91, "pct": 0.32421, "vol": 1308768.82466, "avgVol": 30898899, "change": 0.52},
-    "GOOGL": {"px": 282.11, "pct": -0.56746, "vol": 2500063, "avgVol": 29781611, "change": -1.61},
-    "SNAP": {"px": 5.3212, "pct": 4.54224, "vol": 3611612, "avgVol": 38377052, "change": 0.2312},
-    "NIQ": {"px": 18.53, "pct": -1.3312, "vol": 21990, "avgVol": 1425120, "change": -0.25},
-    "RS": {"px": 423.68, "pct": 0.61985, "vol": 8622, "avgVol": 319347, "change": 2.61},
-    "NOK": {"px": 7.755, "pct": 0.84525, "vol": 10018824, "avgVol": 81672260, "change": 0.065},
-    "GNRC": {"px": 190.0, "pct": 2.35966, "vol": 21182, "avgVol": 1223004, "change": 4.38},
-    "LTM": {"px": 46.695, "pct": -0.64894, "vol": 46824, "avgVol": 834243, "change": -0.305},
-    "SNX": {"px": 238.67999, "pct": 1.37614, "vol": 15899, "avgVol": 782196, "change": 3.23999},
-    "NTAP": {"px": 178.94, "pct": 0.61288, "vol": 33115.29279, "avgVol": 2376505, "change": 1.09},
-    "NTNX": {"px": 58.268, "pct": -1.14014, "vol": 85675.76939, "avgVol": 2481169, "change": -0.672},
-    "AAOI": {"px": 47.44, "pct": 5.04872, "vol": 3325319, "avgVol": 10787994, "change": 2.28},
-    "BB": {"px": 8.735, "pct": -0.39909, "vol": 359573, "avgVol": 14522341, "change": -0.035},
-    "CIEN": {"px": 264.44, "pct": 2.67122, "vol": 141433, "avgVol": 2643575, "change": 6.88},
-    "CSCO": {"px": 96.07, "pct": 1.63986, "vol": 1135734.46704, "avgVol": 19227181, "change": 1.55},
-    "FFIV": {"px": 304.205, "pct": -0.1559, "vol": 16634.97749, "avgVol": 709943, "change": -0.475},
-    "FTNT": {"px": 123.32, "pct": 0.04056, "vol": 181793.06169, "avgVol": 4902884, "change": 0.05}
+   "asOfUTC": "2026-11-18T14:41:00Z",
+   "source": "FMP company/profile-symbol, per ticker"
   },
-  "notes": {},
-  "news": [
+  "news": {
+   "asOfUTC": "2026-11-18T14:46:00Z",
+   "source": "WebSearch (CNBC, Yahoo Finance, Stocktwits)"
+  }
+ },
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "px": 7320.44,
+   "pct": -0.27369,
+   "prev": 7340.53
+  },
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "px": 50421.25,
+   "pct": -0.66622,
+   "prev": 50759.42
+  },
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "px": 2705.50138,
+   "pct": 0.13437,
+   "prev": 2701.87075
+  },
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "px": 25.2,
+   "pct": -1.02121,
+   "prev": 25.46
+  }
+ ],
+ "quotes": {
+  "AVT": {
+   "px": 80.3815,
+   "pct": -0.46867,
+   "vol": 26168.25013,
+   "avgVol": 1308511,
+   "change": -0.3785
+  },
+  "ZS": {
+   "px": 185.89,
+   "pct": 0.37799,
+   "vol": 65870,
+   "avgVol": 2707269,
+   "change": 0.7
+  },
+  "ETN": {
+   "px": 333.26501,
+   "pct": -1.14057,
+   "vol": 138914,
+   "avgVol": 2411988,
+   "change": -3.84499
+  },
+  "META": {
+   "px": 615.95,
+   "pct": -0.47183,
+   "vol": 1003071,
+   "avgVol": 19705023,
+   "change": -2.92002
+  },
+  "GDDY": {
+   "px": 106.59,
+   "pct": -0.11245,
+   "vol": 33208,
+   "avgVol": 1980078,
+   "change": -0.12
+  },
+  "ITT": {
+   "px": 205.88,
+   "pct": -0.28576,
+   "vol": 22862,
+   "avgVol": 859114,
+   "change": -0.59
+  },
+  "VRSN": {
+   "px": 305.94,
+   "pct": 0.07850834,
+   "vol": 16587,
+   "avgVol": 867105,
+   "change": 0.24
+  },
+  "PLTR": {
+   "px": 155.565,
+   "pct": -0.63554,
+   "vol": 1038458,
+   "avgVol": 30650705,
+   "change": -0.995
+  },
+  "GOOGL": {
+   "px": 281.94,
+   "pct": 0.62099,
+   "vol": 2315097,
+   "avgVol": 29966067,
+   "change": 1.74
+  },
+  "SNAP": {
+   "px": 5.505,
+   "pct": 0.18198,
+   "vol": 5970513,
+   "avgVol": 38659337,
+   "change": 0.01
+  },
+  "ECL": {
+   "px": 300.23999,
+   "pct": -0.77663,
+   "vol": 64202,
+   "avgVol": 1372416,
+   "change": -2.35001
+  },
+  "NIQ": {
+   "px": 18.4225,
+   "pct": 0.50464,
+   "vol": 14613,
+   "avgVol": 1417944,
+   "change": 0.09250061
+  },
+  "RS": {
+   "px": 418.49,
+   "pct": -0.43538,
+   "vol": 15509,
+   "avgVol": 320652,
+   "change": -1.83
+  },
+  "NOK": {
+   "px": 7.485,
+   "pct": -1.3834,
+   "vol": 7418781,
+   "avgVol": 81453616,
+   "change": -0.105
+  },
+  "GNRC": {
+   "px": 188.11,
+   "pct": 0.59358,
+   "vol": 35002,
+   "avgVol": 1223210,
+   "change": 1.11
+  },
+  "LTM": {
+   "px": 47.05,
+   "pct": 0.66324,
+   "vol": 9461,
+   "avgVol": 830919,
+   "change": 0.31
+  },
+  "SNX": {
+   "px": 232.55,
+   "pct": -0.33856,
+   "vol": 15214,
+   "avgVol": 789663,
+   "change": -0.79
+  },
+  "NTAP": {
+   "px": 171.125,
+   "pct": -1.10668,
+   "vol": 46842.16282,
+   "avgVol": 2362715,
+   "change": -1.915
+  },
+  "NTNX": {
+   "px": 56.4188,
+   "pct": -0.17905,
+   "vol": 32956.53277,
+   "avgVol": 2495551,
+   "change": -0.1012
+  },
+  "AAOI": {
+   "px": 38.24,
+   "pct": -15.43565,
+   "vol": 4528993.0714,
+   "avgVol": 10826468,
+   "change": -6.98
+  },
+  "BB": {
+   "px": 8.185,
+   "pct": 0.30638,
+   "vol": 739474,
+   "avgVol": 14417810,
+   "change": 0.02500042
+  },
+  "CIEN": {
+   "px": 259.86,
+   "pct": -1.87297,
+   "vol": 101378,
+   "avgVol": 2667191,
+   "change": -4.96
+  },
+  "CSCO": {
+   "px": 94.32,
+   "pct": -0.83062,
+   "vol": 827677,
+   "avgVol": 19266409,
+   "change": -0.79
+  },
+  "FFIV": {
+   "px": 305.479,
+   "pct": 0.10782,
+   "vol": 17123.28068,
+   "avgVol": 713131,
+   "change": 0.329
+  },
+  "FTNT": {
+   "px": 125.52,
+   "pct": 0.81928,
+   "vol": 169097,
+   "avgVol": 4913143,
+   "change": 1.02
+  }
+ },
+ "notes": {
+  "AAOI": "down sharply (-15.4%) today; no verified same-day catalyst found via WebSearch (no two-source confirmation) so no reason is stated."
+ },
+ "news": [
+  {
+   "tag": "Technology",
+   "top3": true,
+   "title": "Nvidia beats on first earnings since CEO Huang's resignation; board won't reinstate him",
+   "text": "Q3 FY27 revenue $115.8B (+103% y/y), EPS $2.70 vs $2.47 est., data-center revenue $107.6B; Q4 guide ~$130B +/-3% (spread over an extra week). First report since Jensen Huang resigned as CEO on 12 Nov; interim CEO Colette Kress (also CFO) stays in the role while the board searches for a permanent successor.",
+   "names": [],
+   "sources": [
     {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Wall Street on edge ahead of Nvidia's earnings tonight",
-      "text": "Nvidia reports its first results since CEO Jensen Huang's departure after the close today (~4:20pm ET); tech stocks that led Monday's rout remain under pressure into the print, with the Nasdaq still digesting its steepest one-day drop in weeks.",
-      "names": [],
-      "sources": [
-        {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-17-dow-sp-500-nasdaq-nvidia-earnings-091546152.html"},
-        {"t": "Manila Times (AP)", "u": "https://www.manilatimes.net/2026/11/17/business/foreign-business/stocks-tumble-on-wall-street-as-nvidia-leads-another-sell-off-in-technology-companies/2471596"}
-      ]
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/11/17/nvidia-nvda-earnings-report-q3-2027.html"
     },
     {
-      "tag": "Technology",
-      "top3": true,
-      "title": "US weighs tighter curbs on China's remote access to AI chips",
-      "text": "Reports say Washington is readying a rule to block China-linked firms from renting advanced Nvidia/AMD chips via data centers in third countries (Singapore, Malaysia and others); not yet finalized, but adding to chip-sector headline risk ahead of tonight's Nvidia print.",
-      "names": [],
-      "sources": [
-        {"t": "W.Media", "u": "https://w.media/?p=45300"},
-        {"t": "Ground News", "u": "https://ground.news/article/us-takes-step-to-halt-nvidia-ai-chip-shipments-to-chinese-firms-outside-china"}
-      ]
+     "t": "Yahoo Finance",
+     "u": "https://finance.yahoo.com/technology/live/nvidia-earnings-live-nvidia-posts-q3-beat-board-says-it-will-not-reinstate-jensen-huang-as-ceo-221428433.html"
     }
-  ],
-  "footnotes": [
-    "QQQ omitted: WebSearch found a 2-source-reconciled Nov 16 close ($661.75, CNBC + stockanalysis.com) but only a single, uncorroborated live Nov 17 print (StockTitan, $664.26 at 9:02am ET) - that does not clear the 2-source bar for today's figure, so the tile stays omitted rather than publish an unverified number.",
-    "Futures (ES/NQ/YM/RTY) omitted: WebSearch returned only narrative, non-reconciled descriptions of futures direction (one source even had Dow futures and Nasdaq futures moving in opposite directions from another source's framing) - no two sources agreed on point/percentage figures for any of the four contracts, so the section is dropped rather than risk inventing numbers.",
-    "Dropped as unreconciled/unconfirmed: a single-source report (FourWeekMBA, explicitly flagged by the search itself as uncorroborated) claimed Nvidia CEO Jensen Huang resigned on 12 Nov with CFO Colette Kress as interim CEO. A second, independent source confirming this specific claim could not be found in the time available, so it is left out of the news section entirely per the 2-source sourcing bar - only the externally-corroborated 'earnings tonight, market on edge' framing is published.",
-    "Quotes read ~1h22m after the 09:30 ET open; FMP's company/profile-symbol endpoint does not expose today's opening print, so `open` is omitted for every ticker per SCHEMA.md - the page correctly shows \"open print not available yet\".",
-    "Every technical pick (AVT, ZS, ETN, META, GDDY, ITT, VRSN, PLTR, GOOGL, SNAP) is trading well below its brief entry zone this run - most (AVT, ZS, ETN, META, PLTR, GOOGL, SNAP) are already below their stop. These levels are PINNED from the last interactive scan refresh, not re-priced since; the brief's own notices confirm the sector ranking/technical scan have not been touched by any automated run. The gap reflects real price action (a tech-wide selloff into tonight's Nvidia print, per the news above), not a data error - the open-update's job is exactly to surface this gap against stale pinned levels."
-  ]
+   ]
+  },
+  {
+   "tag": "Technology",
+   "top3": true,
+   "title": "Futures pop on the Nvidia beat fades by the cash open",
+   "text": "Nasdaq-100 futures were indicated up ~1.4%, S&P 500 futures ~+0.8%, Dow futures ~+0.3% pre-open on the Nvidia beat (two sources agree). By the open the gains had reversed: S&P 500 and Dow are each slightly negative on the session and VIX is only modestly lower; Russell 2000 is just marginally positive.",
+   "names": [],
+   "sources": [
+    {
+     "t": "CNBC",
+     "u": "https://www.cnbc.com/2026/11/17/stock-market-today-live-updates.html"
+    },
+    {
+     "t": "Stocktwits",
+     "u": "https://stocktwits.com/news-articles/markets/equity/s-and-p-500-dow-nasdaq-futures-power-ahead-on-nvidia-outlook-beat-nvda-tsla-ant-in-focus/cNbXjOsR9hh"
+    }
+   ]
+  }
+ ],
+ "footnotes": [
+  "QQQ omitted: WebSearch could not return a reliable, two-source-reconciled price for today (18 Nov) - only a stale 16 Nov close ($661.75, Schwab) was found, so the tile stays omitted rather than publish an unverified number.",
+  "Futures omitted: ES/NQ/YM pre-open reads from CNBC and Stocktwits roughly agree (see the news item above), but no RTY (Russell 2000) futures figure could be found from any source for today, so the whole futures section is dropped rather than publish 3 of 4 contracts with one invented. The pre-open ES/NQ/YM read is folded into the Overnight news item instead, since it is now stale (superseded by the live indices above).",
+  "Quotes read ~11-16 minutes after the 09:30 ET open (14:41-14:46 UTC); FMP's company/profile-symbol endpoint does not expose today's opening print, so `open` is omitted for every ticker per SCHEMA.md - the page correctly shows \"open print not available yet\".",
+  "AAOI (near-miss) is down 15.4% today; WebSearch found no same-day, two-source-confirmed catalyst, so no reason is given - only the live price/% is shown.",
+  "Nvidia's CEO-resignation claim (Jensen Huang resigned 12 Nov; CFO Colette Kress is interim CEO) is now corroborated by multiple independent outlets including Nvidia's own 8-K and NVIDIA's earnings-day coverage - unlike the prior run, which could not clear the 2-source bar for it yet."
+ ]
 }
