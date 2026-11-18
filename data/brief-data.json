@@ -4,116 +4,119 @@
       "id": "SPX",
       "name": "S&P 500",
       "q": {
-        "price": 7416.59,
-        "change": -145.08,
-        "pct": -1.91862,
-        "dayLow": 7400.15,
-        "dayHigh": 7515.6,
+        "price": 7340.53,
+        "change": -76.06,
+        "pct": -1.02554,
+        "dayLow": 7288.34,
+        "dayHigh": 7415.37,
         "yearHigh": 7844.52,
         "yearLow": 6316.91,
-        "ma50": 7667.46,
-        "ma200": 7340.3174
+        "ma50": 7661.42,
+        "ma200": 7342.705
       },
-      "ts": 1794867730,
-      "prev": 7561.67
+      "ts": 1794951732,
+      "prev": 7416.59
     },
     {
       "id": "DJI",
       "name": "Dow Jones",
       "q": {
-        "price": 51608.17,
-        "change": -739.38,
-        "pct": -1.41244,
-        "dayLow": 51511.56,
-        "dayHigh": 52324,
+        "price": 50759.42,
+        "change": -848.75,
+        "pct": -1.6446,
+        "dayLow": 50566.98,
+        "dayHigh": 51463.53,
         "yearHigh": 54744.33,
         "yearLow": 45057.28,
         "ma50": 51937.746,
         "ma200": 50770.69
       },
-      "ts": 1794868090,
-      "prev": 52347.55
+      "ts": 1794951738,
+      "prev": 51608.17
     },
     {
       "id": "RUT",
       "name": "Russell 2000",
       "q": {
-        "price": 2742.9412,
-        "change": -47.54813,
-        "pct": -1.70394,
-        "dayLow": 2736.4695,
-        "dayHigh": 2777.40502,
+        "price": 2701.8706,
+        "change": -41.0706,
+        "pct": -1.49732,
+        "dayLow": 2696.2598,
+        "dayHigh": 2741.1128,
         "yearHigh": 3069.71,
         "yearLow": 2303.46,
-        "ma50": 2824.444,
-        "ma200": 2811.852
+        "ma50": 2819.79,
+        "ma200": 2812.498
       },
-      "ts": 1794864612,
-      "prev": 2790.48934
+      "ts": 1794951012,
+      "prev": 2742.9412
     },
     {
       "id": "VIX",
       "name": "Volatility",
       "q": {
-        "price": 22.62,
-        "change": -0.29,
-        "pct": -1.26582,
-        "dayLow": 22.42,
-        "dayHigh": 24.19,
+        "price": 24.2,
+        "change": -1.26,
+        "pct": -4.94894,
+        "dayLow": 23.47,
+        "dayHigh": 24.26,
         "yearHigh": 35.3,
         "yearLow": 13.38,
-        "ma50": 17.4654,
-        "ma200": 18.478
+        "ma50": 17.6602,
+        "ma200": 18.5121
       },
-      "ts": 1794915991,
-      "prev": 22.91
+      "ts": 1795002466,
+      "prev": 25.46
     }
   ],
   "macro": {
-    "date": "2026-11-13",
-    "y10": 5.15,
-    "y10prev": 5.1,
-    "y2": 4.88,
-    "y30": 5.47,
-    "y10path": "4.86% on 6 Nov, 4.88% on 9 Nov, 4.98% on 10 Nov, 5.1% on 12 Nov, 5.15% on 13 Nov",
-    "y10hist": [
-      {"date": "2026-11-06", "y10": 4.86},
-      {"date": "2026-11-09", "y10": 4.88},
-      {"date": "2026-11-10", "y10": 4.98},
-      {"date": "2026-11-12", "y10": 5.1},
-      {"date": "2026-11-13", "y10": 5.15}
-    ],
+    "date": "2026-11-16",
+    "y10": 5.12,
+    "y10prev": 5.15,
+    "y2": 4.83,
+    "y30": 5.46,
+    "y10path": "4.88% on 9 Nov, 4.98% on 10 Nov, 5.10% on 12 Nov, 5.15% on 13 Nov, 5.12% on 16 Nov",
     "fed": {
       "range": "3.75-4.00%",
       "move": "hold",
       "date": "28 Oct",
       "vote": "10-2",
-      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9 Dec); no FOMC meeting fell in the last 7 days so this block is carried forward unchanged. Treasury yields have moved up materially since the last publish (10Y 4.98% on 10 Nov to 5.15% on 13 Nov).",
+      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9-10 Dec); minutes from the 27-28 Oct meeting are due 18 Nov at 2pm ET, after this run. No FOMC meeting fell in the last 7 days, so this block is carried forward unchanged. The 10Y eased slightly to 5.12% on 16 Nov from 5.15% on 13 Nov, after rising sharply earlier in November.",
       "sources": [
-        {"t": "InvestingLive", "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"},
-        {"t": "Admiral Markets", "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"}
+        {
+          "t": "InvestingLive",
+          "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
+        },
+        {
+          "t": "Admiral Markets",
+          "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
+        }
       ]
-    }
+    },
+    "y10hist": [
+      {
+        "date": "2026-11-09",
+        "y10": 4.88
+      },
+      {
+        "date": "2026-11-10",
+        "y10": 4.98
+      },
+      {
+        "date": "2026-11-12",
+        "y10": 5.1
+      },
+      {
+        "date": "2026-11-13",
+        "y10": 5.15
+      },
+      {
+        "date": "2026-11-16",
+        "y10": 5.12
+      }
+    ]
   },
   "catalysts": [
-    {
-      "tk": "RS",
-      "name": "Reliance, Inc.",
-      "industry": "Steel",
-      "sector": "Basic Materials",
-      "ctype": "Analyst upgrade",
-      "cdate": "12 Nov",
-      "cdateISO": "2026-11-12",
-      "what": "Barclays upgraded Reliance (metals distributor) to Overweight from Equal Weight and raised its price target to $507 from $445 - about 17.8% above the ~$430 price at the time. Shares have since drifted down to $421.07 (-1.5% today) alongside a broad market selloff (S&P 500 -1.9% today), not a reversal of the catalyst itself. Consensus elsewhere is more mixed (Hold rating, ~$415 average target), so this is one bullish desk, not a reconciled consensus upgrade.",
-      "sources": [
-        {"t": "MarketBeat", "u": "https://www.marketbeat.com/instant-alerts/analyst-reliance-nyse-rs-upgraded-at-barclays-2026-11-12/"},
-        {"t": "goldesel.de", "u": "https://goldesel.de/aktien/news/reliance-aktie-barclays-stuft-auf-overweight-hoch-und-hebt-kursziel-auf-507-dollar"}
-      ],
-      "cap": "$21.5B",
-      "px": 421.07,
-      "pct": -1.46491,
-      "topSector": false
-    },
     {
       "tk": "NIQ",
       "name": "NIQ Global Intelligence Plc",
@@ -122,70 +125,210 @@
       "ctype": "Earnings beat + raise",
       "cdate": "12 Nov",
       "cdateISO": "2026-11-12",
-      "what": "NIQ beat Q3 2026 estimates (adjusted EPS $0.30 vs $0.23 consensus; revenue $1.12B, +6.3% y/y, vs ~$1.11B expected) and raised full-year 2026 adjusted EPS guidance to $1.16-$1.20 from $1.08-$1.12, its first GAAP-profitable quarter since its July 2025 IPO. Shares rose modestly in the premarket on the print; some commentary flags that the stock had already run up sharply (+54% since August) into the report, a risk to watch. No confirmed day-of closing reaction found (no OHLC tape available to this routine).",
+      "what": "NIQ beat Q3 2026 estimates (adjusted EPS $0.30 vs $0.23 consensus; revenue $1.12B, +6.3% y/y, vs ~$1.11B expected) and raised full-year 2026 adjusted EPS guidance to $1.16-$1.20 from $1.08-$1.12, its first GAAP-profitable quarter since its July 2025 IPO. The stock had already run up sharply (+54% since August) into the print, a risk flagged at the time; shares are now $18.33 (-2.4% today), down further amid the broad market selloff. No confirmed day-of closing-tape reaction is available to this routine (no OHLC access).",
       "sources": [
-        {"t": "Finviz", "u": "https://finviz.com/news/421690/niq-global-raises-fy2026-guidance-as-third-quarter-revenue-grows-63-to-112-billion"},
-        {"t": "Panabee", "u": "https://www.panabee.com/news/niq-earnings-q3-2026"}
+        {
+          "t": "Finviz"
+        },
+        {
+          "t": "Panabee"
+        }
       ],
-      "cap": "$5.5B",
-      "px": 18.78,
-      "pct": -2.99587,
+      "cap": "$5.4B",
+      "px": 18.33,
+      "pct": -2.39617,
       "topSector": true
+    },
+    {
+      "tk": "RS",
+      "name": "Reliance Steel & Aluminum Co.",
+      "industry": "Steel",
+      "sector": "Basic Materials",
+      "ctype": "Analyst upgrade",
+      "cdate": "12 Nov",
+      "cdateISO": "2026-11-12",
+      "what": "Barclays upgraded Reliance Steel & Aluminum (metals distributor) to Overweight from Equal Weight and raised its price target to $507 from $445 - about 17.8% above the ~$430 price at the time. Shares are now $420.32 (-0.2% today), little changed, as the broad market selloff (S&P 500 -1.0% today) continues - not a reversal of the catalyst itself. Consensus elsewhere is more mixed (Hold rating, ~$415 average target), so this is one bullish desk, not a reconciled consensus upgrade.",
+      "sources": [
+        {
+          "t": "MarketBeat"
+        },
+        {
+          "t": "goldesel.de"
+        }
+      ],
+      "cap": "$21.4B",
+      "px": 420.32,
+      "pct": -0.17812,
+      "topSector": false
+    },
+    {
+      "tk": "ECL",
+      "name": "Ecolab Inc.",
+      "industry": "Chemicals - Specialty",
+      "sector": "Basic Materials",
+      "ctype": "Analyst upgrade",
+      "cdate": "13 Nov",
+      "cdateISO": "2026-11-13",
+      "what": "Wells Fargo (analyst Jason Haas) upgraded Ecolab to Overweight from Equal Weight and raised its price target to $380 from $315 on 13 Nov, about 25% above the $302.84 price - citing AI data-center build-outs driving Ecolab's high-tech water/hygiene business and pricing surcharges persisting into FY2027. Street consensus is more measured (Moderate Buy, ~$332-333 average target per one report, vs earlier October targets of UBS $357 / JPM $310 / Citi $345 / BofA $355), so this is one bullish desk's target, not a reconciled consensus. Shares are down 1.8% today with the broader market.",
+      "sources": [
+        {
+          "t": "CryptoBriefing",
+          "u": "https://cryptobriefing.com/ecolab-upgraded-wells-fargo-380-target/"
+        },
+        {
+          "t": "goldesel.de",
+          "u": "https://goldesel.de/aktien/news/ecolab-aktie-wells-fargo-stuft-auf-overweight-hoch-und-hebt-kursziel-auf-380-dollar"
+        }
+      ],
+      "cap": "$84.9B",
+      "px": 302.84,
+      "pct": -1.80604,
+      "topSector": false
     }
   ],
   "bg": {
+    "NIQ": {
+      "cap": "$5.4B",
+      "what": "Consumer-insights firm that tracks retail sales and shopper behavior worldwide to help brands and retailers make strategic decisions."
+    },
     "RS": {
-      "cap": "$21.5B",
+      "cap": "$21.4B",
       "what": "Metals distributor: buys, processes and resells steel, aluminum and other metals for manufacturers, construction and aerospace customers."
     },
-    "NIQ": {
-      "cap": "$5.5B",
-      "what": "Consumer-insights firm that tracks retail sales and shopper behavior worldwide to help brands and retailers make strategic decisions."
+    "ECL": {
+      "cap": "$84.9B",
+      "what": "Specialty chemicals company providing water treatment, hygiene and infection-prevention solutions to industrial, food-service and life-sciences customers worldwide."
     }
   },
   "notices": [
-    "VIX's FMP quote is a live print (11:46 UTC Tue 17 Nov), not the 16 Nov close - the tile is labelled a live print and the regime score uses the prior close (22.91) instead of the live price (22.62).",
-    "QQQ (NDX proxy): WebSearch returned no reliable, dated price/percent figure for 17 Nov across sources (stale and conflicting snapshots from July-Nov). The tile stays omitted; the builder carries the last confirmed quote forward, dated.",
-    "No FOMC meeting fell in the last 7 days (last was the 27-28 Oct hold; next is 9 Dec) - the Fed decision block is carried forward unchanged. Treasury yields kept climbing: 10Y 4.86% (6 Nov) to 5.15% (13 Nov), so the regime score's rates check is expected to fail this run (rising yields, a headwind).",
-    "Catalyst alerts: AMD (9 Nov, Analyst upgrade) and AVAV (9 Nov, Major contract) both aged out of the 5-session window as of this 17 Nov basis and are dropped. Searched for new earnings-beat/contract/upgrade/approval/index-add candidates dated 10-16 Nov; two reconciled on two independent sources each and cleared the cap/date bar - RS (analyst upgrade) and NIQ (earnings beat + raise). See `rejected` for candidates that did not clear the bar.",
-    "Sector ranking, industry drill-down and the technical scan are pinned to the last interactive refresh - this automated routine has no WebFetch and never touches those sections."
+    "QQQ/NDX tile omitted this run: WebSearch could not return a reliable, dated current price for 18 Nov (only a stale 16 Nov close was found); the automated routine has no other source for it.",
+    "VIX quote (24.20, -4.9%) is a live pre-market print (11:47 UTC / 06:47 ET, about 2h45m before the open), not the 17 Nov close - the tile and regime score use the previous close (25.46) instead.",
+    "No FOMC decision fell in the last 7 days (next meeting 9-10 Dec; minutes from the 27-28 Oct meeting are due 18 Nov at 2pm ET, after this run) - the Fed block is carried forward unchanged except for the refreshed Treasury yields.",
+    "Sector ranking, industry drill-down and technical picks are pinned (interactive scan, WebFetch) and unchanged this automated run."
   ],
   "rejected": [
-    "AMD (9 Nov, Analyst upgrade) - aged out of the 5-session window as of this 17 Nov basis; dropped.",
-    "AVAV (9 Nov, Major contract) - aged out of the 5-session window; searched for a newer AVAV contract but found none dated inside the 10-16 Nov window (the only fresh AVAV contract headline found dates to Oct 2025).",
-    "CRWV (10 Nov, Q3 beat + raised 2026 revenue guidance) - rejected: sources disagree on the reaction (after-hours gain reported by some outlets, 'guidance cut'/sell-off reported by others), and the stock is down sharply since the print (-6.1% today, 52-week range $40.58-$138.25). Does not reconcile as a clean beat-and-raise reaction - looks like sell-the-news.",
-    "BDX (6 Nov, Wells Fargo upgrade to Overweight, $242 target) - rejected: event date is outside the 5-session window.",
-    "FLY (6 Nov, ~$1.3B AST SpaceMobile engine contract) - rejected: event date outside the 5-session window; cap ~$3.9B is also below the $5B floor.",
-    "RSG (11-12 Nov, JPMorgan $295 target vs Argus $275 target) - rejected: the two targets disagree by more than 5%, and the reconciled average ($285) is only ~11.5% above price - short of the 15% upside bar."
+    "AAPL (11 Nov, claimed China Renaissance upgrade to Buy, $425 target) - rejected: could not independently verify the rating change or target figure from a second source; the only mention found was in a secondary analyst-upgrade roundup and a direct search for the call turned up nothing.",
+    "COLD / Americold Realty Trust (13 Nov, Piper Sandler upgrade to Overweight, $19 target, ~17% upside) - rejected: market cap ~$4.6B, below the $5B floor.",
+    "DPZ / Domino's Pizza (13 Nov, Baird target raised to $400) - rejected: upside only ~14.3% from the $349.86 price, short of the 15% bar."
   ],
   "sections": {
-    "indices": {"asOf": "2026-11-16", "source": "FMP index-quote (VIX is a live print, see notices)"},
-    "macro": {"asOf": "2026-11-13", "source": "FMP treasury-rates; Fed decision carried forward (no new FOMC since 28 Oct)"},
-    "catalysts": {"asOf": "2026-11-16", "source": "WebSearch (cross-checked, 2 sources per alert) + FMP company/profile-symbol; 2 carried alerts aged out, 2 new candidates qualified this run (RS, NIQ)"}
+    "indices": {
+      "asOf": "2026-11-17",
+      "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 17 Nov close"
+    },
+    "macro": {
+      "asOf": "2026-11-16",
+      "source": "FMP economics/treasury-rates (latest row 16 Nov)"
+    },
+    "catalysts": {
+      "asOf": "2026-11-17",
+      "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"
+    }
   },
   "fetchlog": [
-    {"id": "fmp.index-quote.^GSPC", "ok": true, "note": "price 7416.59, prev close 7561.67"},
-    {"id": "fmp.index-quote.^DJI", "ok": true, "note": "price 51608.17, prev close 52347.55"},
-    {"id": "fmp.index-quote.^RUT", "ok": true, "note": "price 2742.9412, prev close 2790.48934"},
-    {"id": "fmp.index-quote.^VIX", "ok": true, "note": "live print 2026-11-17 11:46 UTC, 22.62 (prev close 22.91)"},
-    {"id": "fmp.treasury-rates", "ok": true, "note": "10Y 5.15% on 13 Nov, up from 4.98% on 10 Nov; kept last 5 distinct for y10hist"},
-    {"id": "websearch.qqq.quote", "ok": false, "note": "no reconciled 17 Nov price/pct across sources; tile omitted, carried forward"},
-    {"id": "websearch.fomc.decision", "ok": true, "note": "confirmed no FOMC meeting in last 7 days (last 28 Oct, next 9 Dec); fed block carried forward"},
-    {"id": "websearch.catalysts.sweep.earnings-upgrade", "ok": true, "note": "found NIQ (12 Nov beat+raise) and RS (12 Nov analyst upgrade), both reconciled on 2 sources"},
-    {"id": "websearch.catalysts.sweep.contract-deal", "ok": true, "note": "no new dated, 2-source candidate found for 10-16 Nov"},
-    {"id": "websearch.catalysts.sweep.fda-approval", "ok": true, "note": "no new dated, 2-source candidate found for 10-16 Nov"},
-    {"id": "websearch.catalysts.sweep.index-add", "ok": true, "note": "Chime->MidCap 400 and Ingram Micro->SmallCap 600 are not S&P 500 adds; no qualifying index-add found"},
-    {"id": "fmp.profile-symbol.RS", "ok": true, "note": "price 421.07, cap $21.5B"},
-    {"id": "fmp.profile-symbol.NIQ", "ok": true, "note": "price 18.78, cap $5.5B"},
-    {"id": "fmp.profile-symbol.RSG", "ok": true, "note": "price 255.56, cap $77.9B; rejected, see rejected list"},
-    {"id": "fmp.profile-symbol.BDX", "ok": true, "note": "price 216.47, cap $59.0B; rejected (stale date)"},
-    {"id": "fmp.profile-symbol.FLY", "ok": true, "note": "price 22.48, cap $3.9B; rejected (stale date, cap too small)"},
-    {"id": "fmp.profile-symbol.CRWV", "ok": true, "note": "price 49.88, cap $27.4B; rejected (sell-the-news, conflicting reports)"}
+    {
+      "id": "fmp.index.GSPC",
+      "ok": true,
+      "note": "close 17 Nov"
+    },
+    {
+      "id": "fmp.index.DJI",
+      "ok": true,
+      "note": "close 17 Nov"
+    },
+    {
+      "id": "fmp.index.RUT",
+      "ok": true,
+      "note": "close 17 Nov"
+    },
+    {
+      "id": "fmp.index.VIX",
+      "ok": true,
+      "note": "live pre-market print 18 Nov 11:47 UTC, not a close"
+    },
+    {
+      "id": "fmp.economics.treasury-rates",
+      "ok": true,
+      "note": "latest row 16 Nov; kept last 5 distinct sessions for y10hist"
+    },
+    {
+      "id": "websearch.qqq.quote",
+      "ok": false,
+      "note": "no reliable current (18 Nov) print found; only a stale 16 Nov close; tile omitted"
+    },
+    {
+      "id": "websearch.fomc.check",
+      "ok": true,
+      "note": "confirmed no FOMC decision in last 7 days; next meeting 9-10 Dec"
+    },
+    {
+      "id": "websearch.catalyst.earnings-beat-raise",
+      "ok": true,
+      "note": "no new candidate inside the 5-session window beyond already-tracked NIQ"
+    },
+    {
+      "id": "websearch.catalyst.analyst-upgrades",
+      "ok": true,
+      "note": "found COLD/ECL/DPZ/AAPL candidates"
+    },
+    {
+      "id": "websearch.catalyst.contract-deal",
+      "ok": true,
+      "note": "no candidate dated inside the 5-session window"
+    },
+    {
+      "id": "websearch.catalyst.fda-approval",
+      "ok": true,
+      "note": "no confirmed approval dated inside the 5-session window"
+    },
+    {
+      "id": "websearch.catalyst.sp500-index-add",
+      "ok": true,
+      "note": "no S&P 500 addition announced in Nov 2026 (only MidCap/SmallCap changes)"
+    },
+    {
+      "id": "websearch.verify.ecl-upgrade",
+      "ok": true,
+      "note": "two independent outlets agree (CryptoBriefing, goldesel.de)"
+    },
+    {
+      "id": "websearch.verify.aapl-upgrade",
+      "ok": false,
+      "note": "could not confirm China Renaissance $425 target claim from a second source"
+    },
+    {
+      "id": "fmp.profile.COLD",
+      "ok": true,
+      "note": "cap $4.64B - below floor"
+    },
+    {
+      "id": "fmp.profile.ECL",
+      "ok": true,
+      "note": "price/cap for catalyst"
+    },
+    {
+      "id": "fmp.profile.DPZ",
+      "ok": true,
+      "note": "upside 14.3% - below 15% bar"
+    },
+    {
+      "id": "fmp.profile.AAPL",
+      "ok": true,
+      "note": "price for upside check; rejected on sourcing"
+    },
+    {
+      "id": "fmp.profile.NIQ",
+      "ok": true,
+      "note": "refreshed price/cap for carried catalyst"
+    },
+    {
+      "id": "fmp.profile.RS",
+      "ok": true,
+      "note": "refreshed price/cap for carried catalyst"
+    }
   ],
   "meta": {
-    "schemaVersion": 1,
-    "generatedAt": "2026-11-17T20:08:03+08:00",
-    "targetSession": "2026-11-17",
-    "lastSession": "2026-11-16"
+    "targetSession": "2026-11-18",
+    "lastSession": "2026-11-17"
   }
 }
