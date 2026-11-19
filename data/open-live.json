@@ -1,273 +1,92 @@
 {
- "note": "FMP + WebSearch only (no WebFetch). Indices and all 25 watch-list quotes (10 technical picks + 3 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~11-16 minutes after the 09:30 ET open. QQQ and Russell 2000 (RTY) futures are omitted this run (see footnotes); ES/NQ/YM pre-open futures reads are folded into the Overnight news section instead.",
- "meta": {
-  "schemaVersion": 1
- },
+ "note": "FMP + WebSearch only (no WebFetch). Indices and all 25 watch-list quotes (10 technical picks + 3 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~12 minutes after the 09:30 ET open. QQQ and ES/NQ/YM/RTY futures are omitted this run (see footnotes); the most-cited premarket futures read is folded into the Overnight news section instead.",
+ "meta": {"schemaVersion": 1},
  "sections": {
-  "indices": {
-   "asOfUTC": "2026-11-18T14:41:00Z",
-   "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX)"
-  },
-  "quotes": {
-   "asOfUTC": "2026-11-18T14:41:00Z",
-   "source": "FMP company/profile-symbol, per ticker"
-  },
-  "news": {
-   "asOfUTC": "2026-11-18T14:46:00Z",
-   "source": "WebSearch (CNBC, Yahoo Finance, Stocktwits)"
-  }
+  "indices": {"asOfUTC": "2026-11-19T14:42:00Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"},
+  "quotes": {"asOfUTC": "2026-11-19T14:42:00Z", "source": "FMP company/profile-symbol, all 25 watch-list tickers"},
+  "news": {"asOfUTC": "2026-11-19T14:46:00Z", "source": "WebSearch (Yahoo Finance, 24/7 Wall St., The Star/Reuters factbox, FourWeekMBA, HDFC Sky)"}
  },
  "indices": [
-  {
-   "id": "SPX",
-   "name": "S&P 500",
-   "px": 7320.44,
-   "pct": -0.27369,
-   "prev": 7340.53
-  },
-  {
-   "id": "DJI",
-   "name": "Dow Jones",
-   "px": 50421.25,
-   "pct": -0.66622,
-   "prev": 50759.42
-  },
-  {
-   "id": "RUT",
-   "name": "Russell 2000",
-   "px": 2705.50138,
-   "pct": 0.13437,
-   "prev": 2701.87075
-  },
-  {
-   "id": "VIX",
-   "name": "Volatility",
-   "px": 25.2,
-   "pct": -1.02121,
-   "prev": 25.46
-  }
+  {"id": "SPX", "name": "S&P 500", "px": 7394.81, "pct": 0.97192, "prev": 7323.63},
+  {"id": "DJI", "name": "Dow Jones", "px": 50232.58, "pct": 0.06854832, "prev": 50198.17},
+  {"id": "RUT", "name": "Russell 2000", "px": 2716.39679, "pct": 0.07703594, "prev": 2714.3058},
+  {"id": "VIX", "name": "Volatility", "px": 22.69, "pct": -7.61401, "prev": 24.56}
  ],
  "quotes": {
-  "AVT": {
-   "px": 80.3815,
-   "pct": -0.46867,
-   "vol": 26168.25013,
-   "avgVol": 1308511,
-   "change": -0.3785
-  },
-  "ZS": {
-   "px": 185.89,
-   "pct": 0.37799,
-   "vol": 65870,
-   "avgVol": 2707269,
-   "change": 0.7
-  },
-  "ETN": {
-   "px": 333.26501,
-   "pct": -1.14057,
-   "vol": 138914,
-   "avgVol": 2411988,
-   "change": -3.84499
-  },
-  "META": {
-   "px": 615.95,
-   "pct": -0.47183,
-   "vol": 1003071,
-   "avgVol": 19705023,
-   "change": -2.92002
-  },
-  "GDDY": {
-   "px": 106.59,
-   "pct": -0.11245,
-   "vol": 33208,
-   "avgVol": 1980078,
-   "change": -0.12
-  },
-  "ITT": {
-   "px": 205.88,
-   "pct": -0.28576,
-   "vol": 22862,
-   "avgVol": 859114,
-   "change": -0.59
-  },
-  "VRSN": {
-   "px": 305.94,
-   "pct": 0.07850834,
-   "vol": 16587,
-   "avgVol": 867105,
-   "change": 0.24
-  },
-  "PLTR": {
-   "px": 155.565,
-   "pct": -0.63554,
-   "vol": 1038458,
-   "avgVol": 30650705,
-   "change": -0.995
-  },
-  "GOOGL": {
-   "px": 281.94,
-   "pct": 0.62099,
-   "vol": 2315097,
-   "avgVol": 29966067,
-   "change": 1.74
-  },
-  "SNAP": {
-   "px": 5.505,
-   "pct": 0.18198,
-   "vol": 5970513,
-   "avgVol": 38659337,
-   "change": 0.01
-  },
-  "ECL": {
-   "px": 300.23999,
-   "pct": -0.77663,
-   "vol": 64202,
-   "avgVol": 1372416,
-   "change": -2.35001
-  },
-  "NIQ": {
-   "px": 18.4225,
-   "pct": 0.50464,
-   "vol": 14613,
-   "avgVol": 1417944,
-   "change": 0.09250061
-  },
-  "RS": {
-   "px": 418.49,
-   "pct": -0.43538,
-   "vol": 15509,
-   "avgVol": 320652,
-   "change": -1.83
-  },
-  "NOK": {
-   "px": 7.485,
-   "pct": -1.3834,
-   "vol": 7418781,
-   "avgVol": 81453616,
-   "change": -0.105
-  },
-  "GNRC": {
-   "px": 188.11,
-   "pct": 0.59358,
-   "vol": 35002,
-   "avgVol": 1223210,
-   "change": 1.11
-  },
-  "LTM": {
-   "px": 47.05,
-   "pct": 0.66324,
-   "vol": 9461,
-   "avgVol": 830919,
-   "change": 0.31
-  },
-  "SNX": {
-   "px": 232.55,
-   "pct": -0.33856,
-   "vol": 15214,
-   "avgVol": 789663,
-   "change": -0.79
-  },
-  "NTAP": {
-   "px": 171.125,
-   "pct": -1.10668,
-   "vol": 46842.16282,
-   "avgVol": 2362715,
-   "change": -1.915
-  },
-  "NTNX": {
-   "px": 56.4188,
-   "pct": -0.17905,
-   "vol": 32956.53277,
-   "avgVol": 2495551,
-   "change": -0.1012
-  },
-  "AAOI": {
-   "px": 38.24,
-   "pct": -15.43565,
-   "vol": 4528993.0714,
-   "avgVol": 10826468,
-   "change": -6.98
-  },
-  "BB": {
-   "px": 8.185,
-   "pct": 0.30638,
-   "vol": 739474,
-   "avgVol": 14417810,
-   "change": 0.02500042
-  },
-  "CIEN": {
-   "px": 259.86,
-   "pct": -1.87297,
-   "vol": 101378,
-   "avgVol": 2667191,
-   "change": -4.96
-  },
-  "CSCO": {
-   "px": 94.32,
-   "pct": -0.83062,
-   "vol": 827677,
-   "avgVol": 19266409,
-   "change": -0.79
-  },
-  "FFIV": {
-   "px": 305.479,
-   "pct": 0.10782,
-   "vol": 17123.28068,
-   "avgVol": 713131,
-   "change": 0.329
-  },
-  "FTNT": {
-   "px": 125.52,
-   "pct": 0.81928,
-   "vol": 169097,
-   "avgVol": 4913143,
-   "change": 1.02
-  }
+  "AVT": {"px": 81.78, "pct": 1.75439, "vol": 14466, "avgVol": 1313326, "change": 1.41},
+  "ZS": {"px": 215.19, "pct": 8.77521, "vol": 417824.53353, "avgVol": 2713888, "change": 17.36},
+  "ETN": {"px": 342.83, "pct": 1.32707, "vol": 147186, "avgVol": 2411988, "change": 4.49},
+  "META": {"px": 624.29749, "pct": 1.28451, "vol": 1409178, "avgVol": 19705023, "change": 7.91749},
+  "GDDY": {"px": 103.505, "pct": 0.4123, "vol": 27885, "avgVol": 1984137, "change": 0.425},
+  "ITT": {"px": 209.685, "pct": 0.36617, "vol": 13031, "avgVol": 859664, "change": 0.765},
+  "VRSN": {"px": 305.26, "pct": -0.60563, "vol": 144683.57944, "avgVol": 867301, "change": -1.86},
+  "PLTR": {"px": 165.765, "pct": 5.8052, "vol": 2427074, "avgVol": 30653856, "change": 9.095},
+  "GOOGL": {"px": 291.05, "pct": 3.04844, "vol": 5403091, "avgVol": 30248473, "change": 8.61},
+  "SNAP": {"px": 5.4899, "pct": 0.91728, "vol": 1484360, "avgVol": 39534397, "change": 0.04990011},
+  "ECL": {"px": 298.42001, "pct": -0.75163, "vol": 74332, "avgVol": 1388928, "change": -2.25999},
+  "NIQ": {"px": 17.49, "pct": 0.63291, "vol": 46972, "avgVol": 1417947, "change": 0.11},
+  "RS": {"px": 417.5, "pct": -0.53366, "vol": 7228, "avgVol": 320652, "change": -2.24},
+  "NOK": {"px": 7.76, "pct": 2.23979, "vol": 6144661, "avgVol": 81453616, "change": 0.17},
+  "GNRC": {"px": 212.755, "pct": 3.55561, "vol": 76390, "avgVol": 1224663, "change": 7.305},
+  "LTM": {"px": 45.84, "pct": -0.41277, "vol": 22748, "avgVol": 826244, "change": -0.19},
+  "SNX": {"px": 237.03, "pct": 2.19453, "vol": 15354, "avgVol": 787385, "change": 5.09},
+  "NTAP": {"px": 178.43, "pct": 3.6239, "vol": 44834, "avgVol": 2362715, "change": 6.24},
+  "NTNX": {"px": 59.56, "pct": 3.83543, "vol": 54750.65856, "avgVol": 2495551, "change": 2.2},
+  "AAOI": {"px": 42.54, "pct": 4.29027, "vol": 1750149.22286, "avgVol": 11067504, "change": 1.75},
+  "BB": {"px": 8.765, "pct": 2.39486, "vol": 907098, "avgVol": 14153506, "change": 0.205},
+  "CIEN": {"px": 281.2145, "pct": 5.49764, "vol": 181871, "avgVol": 2680835, "change": 14.6545},
+  "CSCO": {"px": 98.68, "pct": 1.54353, "vol": 1116762, "avgVol": 19267605, "change": 1.5},
+  "FFIV": {"px": 328.35, "pct": 2.27697, "vol": 20544.5646, "avgVol": 716015, "change": 7.31},
+  "FTNT": {"px": 137.685, "pct": 4.45717, "vol": 474645.67235, "avgVol": 4917282, "change": 5.875}
  },
  "notes": {
-  "AAOI": "down sharply (-15.4%) today; no verified same-day catalyst found via WebSearch (no two-source confirmation) so no reason is stated."
+  "AAOI": "Up 4.3% today, a partial rebound after yesterday's -15.4% drop; WebSearch found no same-day, two-source-confirmed, ticker-specific catalyst, so no reason is given beyond the broad AI/tech rally context below."
  },
  "news": [
   {
-   "tag": "Technology",
-   "top3": true,
-   "title": "Nvidia beats on first earnings since CEO Huang's resignation; board won't reinstate him",
-   "text": "Q3 FY27 revenue $115.8B (+103% y/y), EPS $2.70 vs $2.47 est., data-center revenue $107.6B; Q4 guide ~$130B +/-3% (spread over an extra week). First report since Jensen Huang resigned as CEO on 12 Nov; interim CEO Colette Kress (also CFO) stays in the role while the board searches for a permanent successor.",
+   "tag": "Technology", "top3": true,
+   "title": "Anthropic prices IPO at $83, debuts on Nasdaq today under ANT",
+   "text": "Anthropic priced its IPO at $83/share, above the marketed $70-78 range, and began trading on the Nasdaq Global Select Market today under ticker ANT - the largest IPO on record. Nasdaq-100 futures were indicated up roughly 2% premarket on the news, a bounce after Wednesday's hawkish-Fed-minutes selloff.",
    "names": [],
    "sources": [
-    {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/11/17/nvidia-nvda-earnings-report-q3-2027.html"
-    },
-    {
-     "t": "Yahoo Finance",
-     "u": "https://finance.yahoo.com/technology/live/nvidia-earnings-live-nvidia-posts-q3-beat-board-says-it-will-not-reinstate-jensen-huang-as-ceo-221428433.html"
-    }
+    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"},
+    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/stock-market-today-anthropic-ipo-revives-the-ai-trade-but-fear-is-growing/"}
    ]
   },
   {
-   "tag": "Technology",
-   "top3": true,
-   "title": "Futures pop on the Nvidia beat fades by the cash open",
-   "text": "Nasdaq-100 futures were indicated up ~1.4%, S&P 500 futures ~+0.8%, Dow futures ~+0.3% pre-open on the Nvidia beat (two sources agree). By the open the gains had reversed: S&P 500 and Dow are each slightly negative on the session and VIX is only modestly lower; Russell 2000 is just marginally positive.",
+   "tag": "Technology", "top3": true,
+   "title": "Chip and memory stocks rally on Anthropic-fueled AI-trade optimism",
+   "text": "Nvidia, AMD, Micron, SanDisk and Western Digital all rose this morning (Micron/SanDisk roughly +4%, Western Digital +5%, Nvidia +1.5%, AMD +2.9% per one source) as Anthropic's above-range IPO pricing revived risk appetite in AI-linked names after this week's selloff.",
    "names": [],
    "sources": [
-    {
-     "t": "CNBC",
-     "u": "https://www.cnbc.com/2026/11/17/stock-market-today-live-updates.html"
-    },
-    {
-     "t": "Stocktwits",
-     "u": "https://stocktwits.com/news-articles/markets/equity/s-and-p-500-dow-nasdaq-futures-power-ahead-on-nvidia-outlook-beat-nvda-tsla-ant-in-focus/cNbXjOsR9hh"
-    }
+    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/stocks/articles/premarket-movers-palo-alto-soars-130941709.html"},
+    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/sandisk-and-micron-rise-4-as-anthropics-record-ipo-revives-the-ai-trade-western-digital-gains-5/"}
+   ]
+  },
+  {
+   "tag": "Communication Services", "top3": true,
+   "title": "Alphabet's pre-IPO Anthropic stake re-rates higher as ANT prices above expectations",
+   "text": "Reuters estimated Alphabet's roughly 14% Anthropic stake (about $33B invested) would be worth close to $139B if ANT priced at $78; today's $83 print implies an even larger mark-up. GOOGL is +3.0% in early trading, among the stronger watch-list movers today.",
+   "names": ["GOOGL"],
+   "sources": [
+    {"t": "The Star / Reuters factbox", "u": "https://www.thestar.com.my/tech/tech-news/2026/11/10/factbox-amazon-google-set-for-big-windfall-from-anthropic-ipo"},
+    {"t": "FourWeekMBA", "u": "https://fourweekmba.com/ai-googles-anthropic-stake-33b-in-132b-at-the-ipo-midpoint/"}
+   ]
+  },
+  {
+   "tag": "Macro", "top3": false,
+   "title": "Hawkish October Fed minutes drove Wednesday's selloff; VIX still elevated",
+   "text": "Minutes from the Fed's 28 Oct meeting, released this week, showed most officials see rates needing to rise further - a hawkish surprise that helped send the Dow down 561pts (-1.11%) and the S&P 500 down 0.23% on Wednesday. VIX eased to 22.69 today (FMP) from Wednesday's 24.56 close, still above its 50-day average of 17.82.",
+   "names": [],
+   "sources": [
+    {"t": "HDFC Sky", "u": "https://hdfcsky.com/news/dow-jones-sinks-561-points-as-hawkish-fed-minutes-and-unitedhealth-collapse-november-19-2026"},
+    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/stock-market-today-anthropic-ipo-revives-the-ai-trade-but-fear-is-growing/"}
    ]
   }
  ],
  "footnotes": [
-  "QQQ omitted: WebSearch could not return a reliable, two-source-reconciled price for today (18 Nov) - only a stale 16 Nov close ($661.75, Schwab) was found, so the tile stays omitted rather than publish an unverified number.",
-  "Futures omitted: ES/NQ/YM pre-open reads from CNBC and Stocktwits roughly agree (see the news item above), but no RTY (Russell 2000) futures figure could be found from any source for today, so the whole futures section is dropped rather than publish 3 of 4 contracts with one invented. The pre-open ES/NQ/YM read is folded into the Overnight news item instead, since it is now stale (superseded by the live indices above).",
-  "Quotes read ~11-16 minutes after the 09:30 ET open (14:41-14:46 UTC); FMP's company/profile-symbol endpoint does not expose today's opening print, so `open` is omitted for every ticker per SCHEMA.md - the page correctly shows \"open print not available yet\".",
-  "AAOI (near-miss) is down 15.4% today; WebSearch found no same-day, two-source-confirmed catalyst, so no reason is given - only the live price/% is shown.",
-  "Nvidia's CEO-resignation claim (Jensen Huang resigned 12 Nov; CFO Colette Kress is interim CEO) is now corroborated by multiple independent outlets including Nvidia's own 8-K and NVIDIA's earnings-day coverage - unlike the prior run, which could not clear the 2-source bar for it yet."
+  "QQQ omitted: WebSearch could not reconcile a live 19 Nov price - the clearest dated figure found was Wednesday 18 Nov's close ($656.25, stockanalysis.com), not today's print, so the tile stays omitted rather than publish a stale or unverified number.",
+  "Futures omitted: ES/NQ/YM/RTY WebSearch reads were conflicting and mostly undated; the one well-cited, dated figure (Nasdaq-100 futures ~+2% premarket, two sources) is folded into the Overnight news section instead of a formal futures block, and no RTY (Russell 2000 futures) figure could be confirmed for today at all.",
+  "Quotes read ~12 minutes after the 09:30 ET open (14:42 UTC); FMP's company/profile-symbol endpoint does not expose today's opening print, so `open` is omitted for every ticker per SCHEMA.md - the page correctly shows \"open print not available yet\"."
  ]
 }
