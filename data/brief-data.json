@@ -186,9 +186,9 @@
     "No qualifying major-contract or FDA-approval catalysts surfaced dated 12-18 Nov; S&P 500 changes this window (Chime, Ingram Micro) were MidCap/SmallCap moves, not S&P 500 adds."
   ],
   "sections": {
-    "indices": {"asOfUTC": "2026-11-19T12:05:32Z", "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 18 Nov close"},
-    "macro": {"asOfUTC": "2026-11-19T12:05:32Z", "source": "FMP economics/treasury-rates (latest row 17 Nov)"},
-    "catalysts": {"asOfUTC": "2026-11-19T12:05:32Z", "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"}
+    "indices": {"asOf": "2026-11-18", "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 18 Nov close"},
+    "macro": {"asOf": "2026-11-17", "source": "FMP economics/treasury-rates (latest row 17 Nov)"},
+    "catalysts": {"asOf": "2026-11-18", "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"}
   },
   "fetchlog": [
     {"id": "fmp.indexes.index-quote.^GSPC", "ok": true, "note": "price 7323.63"},
