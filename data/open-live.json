@@ -1,92 +1,79 @@
 {
- "note": "FMP + WebSearch only (no WebFetch). Indices and all 25 watch-list quotes (10 technical picks + 3 catalyst-alert tickers + 12 near-misses) are live FMP prints read ~12 minutes after the 09:30 ET open. QQQ and ES/NQ/YM/RTY futures are omitted this run (see footnotes); the most-cited premarket futures read is folded into the Overnight news section instead.",
- "meta": {"schemaVersion": 1},
- "sections": {
-  "indices": {"asOfUTC": "2026-11-19T14:42:00Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX)"},
-  "quotes": {"asOfUTC": "2026-11-19T14:42:00Z", "source": "FMP company/profile-symbol, all 25 watch-list tickers"},
-  "news": {"asOfUTC": "2026-11-19T14:46:00Z", "source": "WebSearch (Yahoo Finance, 24/7 Wall St., The Star/Reuters factbox, FourWeekMBA, HDFC Sky)"}
- },
- "indices": [
-  {"id": "SPX", "name": "S&P 500", "px": 7394.81, "pct": 0.97192, "prev": 7323.63},
-  {"id": "DJI", "name": "Dow Jones", "px": 50232.58, "pct": 0.06854832, "prev": 50198.17},
-  {"id": "RUT", "name": "Russell 2000", "px": 2716.39679, "pct": 0.07703594, "prev": 2714.3058},
-  {"id": "VIX", "name": "Volatility", "px": 22.69, "pct": -7.61401, "prev": 24.56}
- ],
- "quotes": {
-  "AVT": {"px": 81.78, "pct": 1.75439, "vol": 14466, "avgVol": 1313326, "change": 1.41},
-  "ZS": {"px": 215.19, "pct": 8.77521, "vol": 417824.53353, "avgVol": 2713888, "change": 17.36},
-  "ETN": {"px": 342.83, "pct": 1.32707, "vol": 147186, "avgVol": 2411988, "change": 4.49},
-  "META": {"px": 624.29749, "pct": 1.28451, "vol": 1409178, "avgVol": 19705023, "change": 7.91749},
-  "GDDY": {"px": 103.505, "pct": 0.4123, "vol": 27885, "avgVol": 1984137, "change": 0.425},
-  "ITT": {"px": 209.685, "pct": 0.36617, "vol": 13031, "avgVol": 859664, "change": 0.765},
-  "VRSN": {"px": 305.26, "pct": -0.60563, "vol": 144683.57944, "avgVol": 867301, "change": -1.86},
-  "PLTR": {"px": 165.765, "pct": 5.8052, "vol": 2427074, "avgVol": 30653856, "change": 9.095},
-  "GOOGL": {"px": 291.05, "pct": 3.04844, "vol": 5403091, "avgVol": 30248473, "change": 8.61},
-  "SNAP": {"px": 5.4899, "pct": 0.91728, "vol": 1484360, "avgVol": 39534397, "change": 0.04990011},
-  "ECL": {"px": 298.42001, "pct": -0.75163, "vol": 74332, "avgVol": 1388928, "change": -2.25999},
-  "NIQ": {"px": 17.49, "pct": 0.63291, "vol": 46972, "avgVol": 1417947, "change": 0.11},
-  "RS": {"px": 417.5, "pct": -0.53366, "vol": 7228, "avgVol": 320652, "change": -2.24},
-  "NOK": {"px": 7.76, "pct": 2.23979, "vol": 6144661, "avgVol": 81453616, "change": 0.17},
-  "GNRC": {"px": 212.755, "pct": 3.55561, "vol": 76390, "avgVol": 1224663, "change": 7.305},
-  "LTM": {"px": 45.84, "pct": -0.41277, "vol": 22748, "avgVol": 826244, "change": -0.19},
-  "SNX": {"px": 237.03, "pct": 2.19453, "vol": 15354, "avgVol": 787385, "change": 5.09},
-  "NTAP": {"px": 178.43, "pct": 3.6239, "vol": 44834, "avgVol": 2362715, "change": 6.24},
-  "NTNX": {"px": 59.56, "pct": 3.83543, "vol": 54750.65856, "avgVol": 2495551, "change": 2.2},
-  "AAOI": {"px": 42.54, "pct": 4.29027, "vol": 1750149.22286, "avgVol": 11067504, "change": 1.75},
-  "BB": {"px": 8.765, "pct": 2.39486, "vol": 907098, "avgVol": 14153506, "change": 0.205},
-  "CIEN": {"px": 281.2145, "pct": 5.49764, "vol": 181871, "avgVol": 2680835, "change": 14.6545},
-  "CSCO": {"px": 98.68, "pct": 1.54353, "vol": 1116762, "avgVol": 19267605, "change": 1.5},
-  "FFIV": {"px": 328.35, "pct": 2.27697, "vol": 20544.5646, "avgVol": 716015, "change": 7.31},
-  "FTNT": {"px": 137.685, "pct": 4.45717, "vol": 474645.67235, "avgVol": 4917282, "change": 5.875}
- },
- "notes": {
-  "AAOI": "Up 4.3% today, a partial rebound after yesterday's -15.4% drop; WebSearch found no same-day, two-source-confirmed, ticker-specific catalyst, so no reason is given beyond the broad AI/tech rally context below."
- },
- "news": [
-  {
-   "tag": "Technology", "top3": true,
-   "title": "Anthropic prices IPO at $83, debuts on Nasdaq today under ANT",
-   "text": "Anthropic priced its IPO at $83/share, above the marketed $70-78 range, and began trading on the Nasdaq Global Select Market today under ticker ANT - the largest IPO on record. Nasdaq-100 futures were indicated up roughly 2% premarket on the news, a bounce after Wednesday's hawkish-Fed-minutes selloff.",
-   "names": [],
-   "sources": [
-    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html"},
-    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/stock-market-today-anthropic-ipo-revives-the-ai-trade-but-fear-is-growing/"}
-   ]
+  "asOf": "Fri 20 Nov 2026 · 09:41 ET · 22:41 HK",
+  "note": "Snapshot taken ~11 minutes after the US open. FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: all WebSearch reads found were pre-open premarket figures from conflicting timestamps (undated or minutes apart), and the cash open has already happened by the time of this snapshot — a stale premarket futures print would be misleading rather than useful, so the AI-selloff context they described is folded into Overnight news instead.",
+  "indices": [
+    { "id": "SPX", "name": "S&P 500", "px": 7143.97, "pct": -0.44399, "prev": 7175.83 },
+    { "id": "DJI", "name": "Dow Jones", "px": 49348.06, "pct": 0.51123, "prev": 49097.06 },
+    { "id": "RUT", "name": "Russell 2000", "px": 2649.0455, "pct": -0.22823, "prev": 2655.10517 },
+    { "id": "VIX", "name": "Volatility", "px": 28.65, "pct": 0.7384, "prev": 28.44 }
+  ],
+  "futures": {},
+  "quotes": {
+    "AVT": { "px": 76.4205, "pct": -2.40038, "vol": 43426.53153, "avgVol": 1309858, "change": -1.8795 },
+    "ZS": { "px": 199.395, "pct": -3.06986, "vol": 172248.31233, "avgVol": 2700359, "change": -6.315 },
+    "ETN": { "px": 321.01001, "pct": -2.89197, "vol": 297128, "avgVol": 2434270, "change": -9.55999 },
+    "META": { "px": 582.98, "pct": -2.22066, "vol": 2975859, "avgVol": 19592923, "change": -13.24 },
+    "GDDY": { "px": 104.15, "pct": 1.95791, "vol": 44282.21639, "avgVol": 1988674, "change": 2 },
+    "ITT": { "px": 204.53, "pct": -0.83875, "vol": 17101, "avgVol": 870348, "change": -1.73 },
+    "VRSN": { "px": 312.2608, "pct": 1.89617, "vol": 41719.38058, "avgVol": 869580, "change": 5.8108 },
+    "PLTR": { "px": 148.64, "pct": -3.27954, "vol": 3927593, "avgVol": 30264509, "change": -5.04 },
+    "GOOGL": { "px": 277.669, "pct": 1.83709, "vol": 6583922, "avgVol": 30486629, "change": 5.009 },
+    "SNAP": { "px": 5.105, "pct": -0.29297, "vol": 2313992, "avgVol": 39641819, "change": -0.01499998 },
+    "ECL": { "px": 300.04999, "pct": 0.9182, "vol": 86900, "avgVol": 1393457, "change": 2.72999 },
+    "PANW": { "px": 353.1148, "pct": -2.38167, "vol": 1075434, "avgVol": 6342039, "change": -8.6152 },
+    "NOK": { "px": 7.15, "pct": -4.66667, "vol": 10065782, "avgVol": 80324986, "change": -0.35 },
+    "GNRC": { "px": 201.49, "pct": -1.75533, "vol": 79348, "avgVol": 1236668, "change": -3.6 },
+    "LTM": { "px": 45.39, "pct": 0.46481, "vol": 16330, "avgVol": 828875, "change": 0.21 },
+    "SNX": { "px": 222.25, "pct": -2.58175, "vol": 31644, "avgVol": 783942, "change": -5.89 },
+    "NTAP": { "px": 164.87, "pct": -3.12023, "vol": 121645.70074, "avgVol": 2328693, "change": -5.31 },
+    "NTNX": { "px": 56.02, "pct": -2.13138, "vol": 104490.79402, "avgVol": 2490808, "change": -1.22 },
+    "AAOI": { "px": 35.8505, "pct": -9.14724, "vol": 2170861.72417, "avgVol": 11077557, "change": -3.6095 },
+    "BB": { "px": 8.055, "pct": -3.1851, "vol": 1080856, "avgVol": 13997620, "change": -0.265 },
+    "CIEN": { "px": 242.61, "pct": -7.67211, "vol": 165639, "avgVol": 2689589, "change": -20.16 },
+    "CSCO": { "px": 93.8099, "pct": -0.93992, "vol": 2071523.12536, "avgVol": 19258876, "change": -0.8901 },
+    "FFIV": { "px": 310.677, "pct": -2.33047, "vol": 26896.7954, "avgVol": 718880, "change": -7.413 },
+    "FTNT": { "px": 129.18, "pct": -1.73437, "vol": 431315.9516, "avgVol": 4920110, "change": -2.28 }
   },
-  {
-   "tag": "Technology", "top3": true,
-   "title": "Chip and memory stocks rally on Anthropic-fueled AI-trade optimism",
-   "text": "Nvidia, AMD, Micron, SanDisk and Western Digital all rose this morning (Micron/SanDisk roughly +4%, Western Digital +5%, Nvidia +1.5%, AMD +2.9% per one source) as Anthropic's above-range IPO pricing revived risk appetite in AI-linked names after this week's selloff.",
-   "names": [],
-   "sources": [
-    {"t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/stocks/articles/premarket-movers-palo-alto-soars-130941709.html"},
-    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/sandisk-and-micron-rise-4-as-anthropics-record-ipo-revives-the-ai-trade-western-digital-gains-5/"}
-   ]
+  "notes": {
+    "AAOI": "Down 9.1% today, by far the hardest-hit name on the watchlist — part of the global chip-stock rout (Nikkei -5% overnight, chip names down worldwide into the US open per Overnight news).",
+    "CIEN": "Down 7.7% today, caught in the same overnight global chip selloff as AAOI; no ticker-specific catalyst found on a second source beyond the broad move.",
+    "PANW": "Catalyst alert (analyst upgrade, see the brief) down 2.4% today, tracking the broad AI/tech selloff rather than reversing on its own catalyst.",
+    "ECL": "Catalyst alert (analyst upgrade, see the brief) +0.9% today, one of the few names green amid the broad selloff."
   },
-  {
-   "tag": "Communication Services", "top3": true,
-   "title": "Alphabet's pre-IPO Anthropic stake re-rates higher as ANT prices above expectations",
-   "text": "Reuters estimated Alphabet's roughly 14% Anthropic stake (about $33B invested) would be worth close to $139B if ANT priced at $78; today's $83 print implies an even larger mark-up. GOOGL is +3.0% in early trading, among the stronger watch-list movers today.",
-   "names": ["GOOGL"],
-   "sources": [
-    {"t": "The Star / Reuters factbox", "u": "https://www.thestar.com.my/tech/tech-news/2026/11/10/factbox-amazon-google-set-for-big-windfall-from-anthropic-ipo"},
-    {"t": "FourWeekMBA", "u": "https://fourweekmba.com/ai-googles-anthropic-stake-33b-in-132b-at-the-ipo-midpoint/"}
-   ]
+  "news": [
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "Global chip-stock rout deepens into the US open; Nikkei sinks 5%",
+      "text": "Chip and AI-linked names fell across Asia and Europe overnight and US futures were sharply lower pre-open, extending Thursday's selloff. Japan's Nikkei 225 dropped about 5%. On the watchlist, AAOI (-9.1%) and CIEN (-7.7%) are the hardest hit at the open; PANW, ZS, META, PLTR and NTAP are all down 2-3%+.",
+      "names": ["AAOI", "CIEN", "PANW", "ZS", "PLTR"],
+      "sources": [
+        { "t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026" },
+        { "t": "Journal Arta", "u": "https://journalarta.com/en/2026/11/20/stock-market-today-nasdaq-sp-500-futures-slide-as-ai-selloff-deepens/" }
+      ]
+    },
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "Anthropic (ANT) gives back part of its IPO-day pop on day two",
+      "text": "Anthropic priced its IPO at $83 (above the $70-78 marketed range, ~$1.5T valuation) and opened Thu 19 Nov up as much as 34% before closing about 17% higher in the largest IPO on record. Shares fell further pre-open today, pressuring broader AI-stock sentiment and contributing to the Nasdaq-100 futures slide noted above.",
+      "names": [],
+      "sources": [
+        { "t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html" },
+        { "t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026" }
+      ]
+    }
+  ],
+  "footnotes": [
+    "QQQ omitted: WebSearch could not reconcile a reliable, dated 20 Nov price — results returned undated or clearly stale figures (a 10 Nov QQQM close, an undated 16 Nov-dated close). The automated routine has no other source for it.",
+    "Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a pre-open premarket figure, and several conflicted across sources taken minutes apart (e.g. Nasdaq-100 futures reported anywhere from -1.4% to -1.9% to -1.5% in different snapshots). Since the cash market has already opened by this snapshot, a stale premarket futures print would mislead rather than help; the AI-selloff backdrop they all pointed to is covered in Overnight news instead, sourced and dated.",
+    "Quotes read via FMP company/profile-symbol at 09:41 ET (14:41 UTC), about 11 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker — the page correctly shows \"open print not available yet\"."
+  ],
+  "sections": {
+    "indices": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "FMP index-quote; QQQ omitted (see footnotes)" },
+    "futures": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "omitted — see footnotes" },
+    "quotes": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "FMP company/profile-symbol" },
+    "news": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "WebSearch" }
   },
-  {
-   "tag": "Macro", "top3": false,
-   "title": "Hawkish October Fed minutes drove Wednesday's selloff; VIX still elevated",
-   "text": "Minutes from the Fed's 28 Oct meeting, released this week, showed most officials see rates needing to rise further - a hawkish surprise that helped send the Dow down 561pts (-1.11%) and the S&P 500 down 0.23% on Wednesday. VIX eased to 22.69 today (FMP) from Wednesday's 24.56 close, still above its 50-day average of 17.82.",
-   "names": [],
-   "sources": [
-    {"t": "HDFC Sky", "u": "https://hdfcsky.com/news/dow-jones-sinks-561-points-as-hawkish-fed-minutes-and-unitedhealth-collapse-november-19-2026"},
-    {"t": "24/7 Wall St.", "u": "https://247wallst.com/investing/2026/11/19/stock-market-today-anthropic-ipo-revives-the-ai-trade-but-fear-is-growing/"}
-   ]
-  }
- ],
- "footnotes": [
-  "QQQ omitted: WebSearch could not reconcile a live 19 Nov price - the clearest dated figure found was Wednesday 18 Nov's close ($656.25, stockanalysis.com), not today's print, so the tile stays omitted rather than publish a stale or unverified number.",
-  "Futures omitted: ES/NQ/YM/RTY WebSearch reads were conflicting and mostly undated; the one well-cited, dated figure (Nasdaq-100 futures ~+2% premarket, two sources) is folded into the Overnight news section instead of a formal futures block, and no RTY (Russell 2000 futures) figure could be confirmed for today at all.",
-  "Quotes read ~12 minutes after the 09:30 ET open (14:42 UTC); FMP's company/profile-symbol endpoint does not expose today's opening print, so `open` is omitted for every ticker per SCHEMA.md - the page correctly shows \"open print not available yet\"."
- ]
+  "meta": { "schemaVersion": 1 }
 }
