@@ -1,79 +1,93 @@
 {
-  "asOf": "Fri 20 Nov 2026 · 09:41 ET · 22:41 HK",
-  "note": "Snapshot taken ~11 minutes after the US open. FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: all WebSearch reads found were pre-open premarket figures from conflicting timestamps (undated or minutes apart), and the cash open has already happened by the time of this snapshot — a stale premarket futures print would be misleading rather than useful, so the AI-selloff context they described is folded into Overnight news instead.",
+  "asOf": "2026-11-23",
+  "note": "Snapshot taken ~15 minutes after the US open (09:45 ET / 14:45 UTC). FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a stale or conflicting pre-open figure and the cash market has already opened by this snapshot, so a futures print would mislead rather than help. QQQ omitted: WebSearch could not return a reliable, dated 23 Nov price (only a stale 10 Nov close near $674.76 turned up).",
+  "meta": {"schemaVersion": 1},
+  "sections": {
+    "indices": {"asOfUTC": "2026-11-23T14:41:46Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX), live intraday print ~15 min after the open"},
+    "quotes": {"asOfUTC": "2026-11-23T14:43:00Z", "source": "FMP company/profile-symbol, one call per ticker in the brief's watch block (technical picks + catalyst-alert tickers + near-misses)"},
+    "news": {"asOfUTC": "2026-11-23T14:45:00Z", "source": "WebSearch, cross-checked across at least two outlets per item where possible"}
+  },
   "indices": [
-    { "id": "SPX", "name": "S&P 500", "px": 7143.97, "pct": -0.44399, "prev": 7175.83 },
-    { "id": "DJI", "name": "Dow Jones", "px": 49348.06, "pct": 0.51123, "prev": 49097.06 },
-    { "id": "RUT", "name": "Russell 2000", "px": 2649.0455, "pct": -0.22823, "prev": 2655.10517 },
-    { "id": "VIX", "name": "Volatility", "px": 28.65, "pct": 0.7384, "prev": 28.44 }
+    {"id": "SPX", "name": "S&P 500", "px": 7163.65, "pct": 3.66492, "prev": 6910.39},
+    {"id": "DJI", "name": "Dow Jones", "px": 49064.66, "pct": 1.90526, "prev": 48147.33},
+    {"id": "RUT", "name": "Russell 2000", "px": 2653.67753, "pct": 2.78443, "prev": 2581.78935},
+    {"id": "VIX", "name": "Volatility", "px": 27.13, "pct": -24.40791, "prev": 35.89}
   ],
   "futures": {},
   "quotes": {
-    "AVT": { "px": 76.4205, "pct": -2.40038, "vol": 43426.53153, "avgVol": 1309858, "change": -1.8795 },
-    "ZS": { "px": 199.395, "pct": -3.06986, "vol": 172248.31233, "avgVol": 2700359, "change": -6.315 },
-    "ETN": { "px": 321.01001, "pct": -2.89197, "vol": 297128, "avgVol": 2434270, "change": -9.55999 },
-    "META": { "px": 582.98, "pct": -2.22066, "vol": 2975859, "avgVol": 19592923, "change": -13.24 },
-    "GDDY": { "px": 104.15, "pct": 1.95791, "vol": 44282.21639, "avgVol": 1988674, "change": 2 },
-    "ITT": { "px": 204.53, "pct": -0.83875, "vol": 17101, "avgVol": 870348, "change": -1.73 },
-    "VRSN": { "px": 312.2608, "pct": 1.89617, "vol": 41719.38058, "avgVol": 869580, "change": 5.8108 },
-    "PLTR": { "px": 148.64, "pct": -3.27954, "vol": 3927593, "avgVol": 30264509, "change": -5.04 },
-    "GOOGL": { "px": 277.669, "pct": 1.83709, "vol": 6583922, "avgVol": 30486629, "change": 5.009 },
-    "SNAP": { "px": 5.105, "pct": -0.29297, "vol": 2313992, "avgVol": 39641819, "change": -0.01499998 },
-    "ECL": { "px": 300.04999, "pct": 0.9182, "vol": 86900, "avgVol": 1393457, "change": 2.72999 },
-    "PANW": { "px": 353.1148, "pct": -2.38167, "vol": 1075434, "avgVol": 6342039, "change": -8.6152 },
-    "NOK": { "px": 7.15, "pct": -4.66667, "vol": 10065782, "avgVol": 80324986, "change": -0.35 },
-    "GNRC": { "px": 201.49, "pct": -1.75533, "vol": 79348, "avgVol": 1236668, "change": -3.6 },
-    "LTM": { "px": 45.39, "pct": 0.46481, "vol": 16330, "avgVol": 828875, "change": 0.21 },
-    "SNX": { "px": 222.25, "pct": -2.58175, "vol": 31644, "avgVol": 783942, "change": -5.89 },
-    "NTAP": { "px": 164.87, "pct": -3.12023, "vol": 121645.70074, "avgVol": 2328693, "change": -5.31 },
-    "NTNX": { "px": 56.02, "pct": -2.13138, "vol": 104490.79402, "avgVol": 2490808, "change": -1.22 },
-    "AAOI": { "px": 35.8505, "pct": -9.14724, "vol": 2170861.72417, "avgVol": 11077557, "change": -3.6095 },
-    "BB": { "px": 8.055, "pct": -3.1851, "vol": 1080856, "avgVol": 13997620, "change": -0.265 },
-    "CIEN": { "px": 242.61, "pct": -7.67211, "vol": 165639, "avgVol": 2689589, "change": -20.16 },
-    "CSCO": { "px": 93.8099, "pct": -0.93992, "vol": 2071523.12536, "avgVol": 19258876, "change": -0.8901 },
-    "FFIV": { "px": 310.677, "pct": -2.33047, "vol": 26896.7954, "avgVol": 718880, "change": -7.413 },
-    "FTNT": { "px": 129.18, "pct": -1.73437, "vol": 431315.9516, "avgVol": 4920110, "change": -2.28 }
+    "AVT": {"px": 78.19, "pct": 6.45337, "vol": 47172.38068, "avgVol": 1313047, "change": 4.74},
+    "ZS": {"px": 230.2, "pct": 18.16035, "vol": 3829020, "avgVol": 2734380, "change": 35.38},
+    "ETN": {"px": 333.42001, "pct": 7.09537, "vol": 243768, "avgVol": 2451440, "change": 22.09001},
+    "META": {"px": 580.79498, "pct": 3.55805, "vol": 2441956, "avgVol": 19703987, "change": 19.95498},
+    "GDDY": {"px": 100.08, "pct": 0.5526, "vol": 42889, "avgVol": 1985446, "change": 0.55},
+    "ITT": {"px": 207.395, "pct": 3.13541, "vol": 17245, "avgVol": 872978, "change": 6.305},
+    "VRSN": {"px": 308.705, "pct": 0.59797, "vol": 24363.45583, "avgVol": 882366, "change": 1.835},
+    "PLTR": {"px": 157.0, "pct": 9.41529, "vol": 4673707, "avgVol": 30297804, "change": 13.51},
+    "GOOGL": {"px": 276.33, "pct": 4.16148, "vol": 6680789.33804, "avgVol": 30677430, "change": 11.04},
+    "SNAP": {"px": 4.685, "pct": 3.08031, "vol": 5955313, "avgVol": 39864658, "change": 0.14},
+    "MDT": {"px": 99.485, "pct": -0.45527, "vol": 368848, "avgVol": 13774951, "change": -0.455},
+    "PANW": {"px": 355.11499, "pct": 3.43557, "vol": 1508659, "avgVol": 6415947, "change": 11.79499},
+    "TGT": {"px": 164.33, "pct": -0.90454, "vol": 227333, "avgVol": 4107783, "change": -1.5},
+    "NOK": {"px": 7.5555, "pct": 9.81831, "vol": 13260118, "avgVol": 79702252, "change": 0.6755},
+    "GNRC": {"px": 206.25999, "pct": 6.74878, "vol": 58528, "avgVol": 1249220, "change": 13.03999},
+    "LTM": {"px": 46.11, "pct": 3.89815, "vol": 28586.96203, "avgVol": 830220, "change": 1.73},
+    "SNX": {"px": 230.33, "pct": 6.26038, "vol": 20917, "avgVol": 785046, "change": 13.57},
+    "NTAP": {"px": 169.965, "pct": 7.81161, "vol": 95844, "avgVol": 2327307, "change": 12.315},
+    "NTNX": {"px": 57.405, "pct": 5.87422, "vol": 110664, "avgVol": 2494981, "change": 3.185},
+    "AAOI": {"px": 40.42, "pct": 22.74521, "vol": 3578102, "avgVol": 11176063, "change": 7.49},
+    "BB": {"px": 8.28, "pct": 6.56371, "vol": 1363329, "avgVol": 13854825, "change": 0.51},
+    "CIEN": {"px": 266.65, "pct": 13.77309, "vol": 240894, "avgVol": 2712439, "change": 32.28},
+    "CSCO": {"px": 95.17, "pct": 4.99779, "vol": 1747668, "avgVol": 19278484, "change": 4.53},
+    "FFIV": {"px": 317.51, "pct": 4.44751, "vol": 24629, "avgVol": 726445, "change": 13.52},
+    "FTNT": {"px": 129.61, "pct": 4.05427, "vol": 304755, "avgVol": 4969620, "change": 5.05}
   },
   "notes": {
-    "AAOI": "Down 9.1% today, by far the hardest-hit name on the watchlist — part of the global chip-stock rout (Nikkei -5% overnight, chip names down worldwide into the US open per Overnight news).",
-    "CIEN": "Down 7.7% today, caught in the same overnight global chip selloff as AAOI; no ticker-specific catalyst found on a second source beyond the broad move.",
-    "PANW": "Catalyst alert (analyst upgrade, see the brief) down 2.4% today, tracking the broad AI/tech selloff rather than reversing on its own catalyst.",
-    "ECL": "Catalyst alert (analyst upgrade, see the brief) +0.9% today, one of the few names green amid the broad selloff."
+    "AAOI": "Up 22.7% today, the biggest mover on the watchlist by far - part of a broad chip/communication-equipment rebound (see Overnight news); no ticker-specific catalyst found on a second source beyond the sector-wide move.",
+    "CIEN": "Up 13.8% today, sharing in the same communication-equipment rebound as AAOI and NOK; no company-specific news confirmed.",
+    "ZS": "Up 18.2% today, among the largest gainers on the technical-picks list as software/security names lead the broad risk-on reversal.",
+    "PANW": "Catalyst alert (earnings beat + raise, see the brief) up 3.4% today, extending its post-earnings strength as the broad market also rallies.",
+    "TGT": "Catalyst alert (see the brief) down 0.9% today, one of the few red names on the watchlist against an otherwise broad rally.",
+    "MDT": "Catalyst alert (see the brief) down 0.5% today, roughly flat against the broad rally."
   },
   "news": [
     {
       "tag": "Technology",
       "top3": true,
-      "title": "Global chip-stock rout deepens into the US open; Nikkei sinks 5%",
-      "text": "Chip and AI-linked names fell across Asia and Europe overnight and US futures were sharply lower pre-open, extending Thursday's selloff. Japan's Nikkei 225 dropped about 5%. On the watchlist, AAOI (-9.1%) and CIEN (-7.7%) are the hardest hit at the open; PANW, ZS, META, PLTR and NTAP are all down 2-3%+.",
-      "names": ["AAOI", "CIEN", "PANW", "ZS", "PLTR"],
+      "title": "Broad risk-on reversal snaps Friday's selloff; AI/chip names lead",
+      "text": "Major indices are sharply higher Monday, reversing Friday's steep AI/tech-stock-led selloff (S&P 500 -3.7% Fri, VIX closed 35.89). The VIX has pulled back to the high-20s intraday. Chip and software names are among the biggest gainers on the watchlist (ZS, AAOI, CIEN, NOK, PLTR). A PCE inflation report due Wednesday is being flagged as the next test of whether the bounce holds.",
+      "names": ["ZS", "PLTR", "AAOI", "CIEN", "NOK"],
       "sources": [
-        { "t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026" },
-        { "t": "Journal Arta", "u": "https://journalarta.com/en/2026/11/20/stock-market-today-nasdaq-sp-500-futures-slide-as-ai-selloff-deepens/" }
+        {"t": "24/7 Wall St", "u": "https://247wallst.com/investing/2026/11/23/stock-market-today-dow-sp-500-and-nasdaq-surge-as-nvidia-leads-a-major-ai-rebound/"},
+        {"t": "Journal Arta", "u": "https://journalarta.com/en/2026/11/23/stock-market-today-dow-sp-500-futures-surge-after-tech-rout-as-oil-slides/"}
       ]
     },
     {
       "tag": "Technology",
       "top3": true,
-      "title": "Anthropic (ANT) gives back part of its IPO-day pop on day two",
-      "text": "Anthropic priced its IPO at $83 (above the $70-78 marketed range, ~$1.5T valuation) and opened Thu 19 Nov up as much as 34% before closing about 17% higher in the largest IPO on record. Shares fell further pre-open today, pressuring broader AI-stock sentiment and contributing to the Nasdaq-100 futures slide noted above.",
+      "title": "Caution: unverified \"Huang reinstated at Nvidia\" headlines contradict Nvidia's own board",
+      "text": "Several search results today describe today's rally as driven by Nvidia \"reinstating\" Jensen Huang as CEO. That claim does not reconcile: Nvidia's own investor-relations page confirms Huang resigned as CEO, President and a board member on 12 Nov, with CFO Colette Kress as interim CEO, and a separate report quotes new board chair Harvey Jones saying the board \"does not intend to reinstate Jensen as CEO.\" Dropped from this page per the cross-check rule - flagging here since the claim is circulating.",
       "names": [],
       "sources": [
-        { "t": "Yahoo Finance", "u": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-19-dow-sp-500-nasdaq-anthropic-ipo-live-141306032.html" },
-        { "t": "StockTitan", "u": "https://www.stocktitan.net/articles/stock-market-today-live-november-20-2026" }
+        {"t": "SCMP", "u": "https://www.scmp.com/tech/article/3374812/nvidia-board-says-it-has-no-plans-reinstate-jensen-huang-ceo"},
+        {"t": "NVIDIA Investor Relations", "u": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/"}
+      ]
+    },
+    {
+      "tag": "Communication Services",
+      "top3": true,
+      "title": "Anthropic (ANT) still finding its footing after Thursday's blockbuster IPO debut",
+      "text": "Anthropic priced its IPO at $83 and opened at $111.50 on 19 Nov before fading to close day one up 17% at $97.17; data providers showed conflicting quotes near $95-99 on 20 Nov, underscoring thin, volatile price discovery in the first days of trading. Relevant context for Communication Services/Tech sentiment (GOOGL, META on the watchlist) even though ANT itself is not a pick.",
+      "names": ["GOOGL", "META"],
+      "sources": [
+        {"t": "Al Jazeera", "u": "https://www.aljazeera.com/economy/2026/11/19/anthropic-starts-trading-in-the-us-after-blockbuster-ipo"},
+        {"t": "FourWeekMBA", "u": "https://fourweekmba.com/ai-anthropic-closes-day-one-at-97-17-up-17-from-83-ipo/"}
       ]
     }
   ],
   "footnotes": [
-    "QQQ omitted: WebSearch could not reconcile a reliable, dated 20 Nov price — results returned undated or clearly stale figures (a 10 Nov QQQM close, an undated 16 Nov-dated close). The automated routine has no other source for it.",
-    "Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a pre-open premarket figure, and several conflicted across sources taken minutes apart (e.g. Nasdaq-100 futures reported anywhere from -1.4% to -1.9% to -1.5% in different snapshots). Since the cash market has already opened by this snapshot, a stale premarket futures print would mislead rather than help; the AI-selloff backdrop they all pointed to is covered in Overnight news instead, sourced and dated.",
-    "Quotes read via FMP company/profile-symbol at 09:41 ET (14:41 UTC), about 11 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker — the page correctly shows \"open print not available yet\"."
-  ],
-  "sections": {
-    "indices": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "FMP index-quote; QQQ omitted (see footnotes)" },
-    "futures": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "omitted — see footnotes" },
-    "quotes": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "FMP company/profile-symbol" },
-    "news": { "asOfUTC": "2026-11-20T14:41:00Z", "source": "WebSearch" }
-  },
-  "meta": { "schemaVersion": 1 }
+    "Only 3 overnight/today news items found that met the two-source, dated bar (vs. the usual 4-6) - repeated WebSearch queries for watchlist-specific news (PANW, TGT, MDT, GOOGL, PLTR individually; semiconductor-sector news) returned only undated or wrong-year results, which were dropped rather than guessed at.",
+    "Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a stale or internally conflicting pre-open figure, and the cash market has already opened by this snapshot (~15 min in) - a futures print at this point would mislead rather than help.",
+    "QQQ omitted: WebSearch could not return a reliable, dated 23 Nov price (only a stale 10 Nov close near $674.76 turned up, repeating the prior run's gap).",
+    "Quotes read via FMP company/profile-symbol at approximately 14:43 UTC (09:43 ET), about 13 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker - the page correctly shows \"open print not available yet\"."
+  ]
 }
