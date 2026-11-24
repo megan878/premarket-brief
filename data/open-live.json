@@ -1,93 +1,300 @@
 {
-  "asOf": "2026-11-23",
-  "note": "Snapshot taken ~15 minutes after the US open (09:45 ET / 14:45 UTC). FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a stale or conflicting pre-open figure and the cash market has already opened by this snapshot, so a futures print would mislead rather than help. QQQ omitted: WebSearch could not return a reliable, dated 23 Nov price (only a stale 10 Nov close near $674.76 turned up).",
-  "meta": {"schemaVersion": 1},
+  "note": "Snapshot taken shortly after the US open (~09:41 ET / 14:45 UTC, about 11 min post-open). FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: the cash market has already opened by this snapshot and WebSearch could not return a reliable, cross-checked pre-open figure for today anyway, so a futures print would mislead rather than help. QQQ omitted: WebSearch returned only stale or undated prices for 24 Nov.",
   "sections": {
-    "indices": {"asOfUTC": "2026-11-23T14:41:46Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX), live intraday print ~15 min after the open"},
-    "quotes": {"asOfUTC": "2026-11-23T14:43:00Z", "source": "FMP company/profile-symbol, one call per ticker in the brief's watch block (technical picks + catalyst-alert tickers + near-misses)"},
-    "news": {"asOfUTC": "2026-11-23T14:45:00Z", "source": "WebSearch, cross-checked across at least two outlets per item where possible"}
+    "indices": {
+      "asOfUTC": "2026-11-24T14:45:00Z",
+      "source": "FMP indexes/index-quote"
+    },
+    "quotes": {
+      "asOfUTC": "2026-11-24T14:45:00Z",
+      "source": "FMP company/profile-symbol"
+    },
+    "news": {
+      "asOfUTC": "2026-11-24T14:45:00Z",
+      "source": "WebSearch"
+    }
   },
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 7163.65, "pct": 3.66492, "prev": 6910.39},
-    {"id": "DJI", "name": "Dow Jones", "px": 49064.66, "pct": 1.90526, "prev": 48147.33},
-    {"id": "RUT", "name": "Russell 2000", "px": 2653.67753, "pct": 2.78443, "prev": 2581.78935},
-    {"id": "VIX", "name": "Volatility", "px": 27.13, "pct": -24.40791, "prev": 35.89}
+    {
+      "id": "SPX",
+      "name": "S&P 500",
+      "px": 7177.31,
+      "pct": -0.82712,
+      "prev": 7237.17
+    },
+    {
+      "id": "DJI",
+      "name": "Dow Jones",
+      "px": 49632.7,
+      "pct": 0.07539019,
+      "prev": 49595.31
+    },
+    {
+      "id": "RUT",
+      "name": "Russell 2000",
+      "px": 2672.21422,
+      "pct": 0.0958625,
+      "prev": 2669.65502
+    },
+    {
+      "id": "VIX",
+      "name": "Volatility",
+      "px": 28.71,
+      "pct": 7.85124,
+      "prev": 26.62
+    }
   ],
   "futures": {},
   "quotes": {
-    "AVT": {"px": 78.19, "pct": 6.45337, "vol": 47172.38068, "avgVol": 1313047, "change": 4.74},
-    "ZS": {"px": 230.2, "pct": 18.16035, "vol": 3829020, "avgVol": 2734380, "change": 35.38},
-    "ETN": {"px": 333.42001, "pct": 7.09537, "vol": 243768, "avgVol": 2451440, "change": 22.09001},
-    "META": {"px": 580.79498, "pct": 3.55805, "vol": 2441956, "avgVol": 19703987, "change": 19.95498},
-    "GDDY": {"px": 100.08, "pct": 0.5526, "vol": 42889, "avgVol": 1985446, "change": 0.55},
-    "ITT": {"px": 207.395, "pct": 3.13541, "vol": 17245, "avgVol": 872978, "change": 6.305},
-    "VRSN": {"px": 308.705, "pct": 0.59797, "vol": 24363.45583, "avgVol": 882366, "change": 1.835},
-    "PLTR": {"px": 157.0, "pct": 9.41529, "vol": 4673707, "avgVol": 30297804, "change": 13.51},
-    "GOOGL": {"px": 276.33, "pct": 4.16148, "vol": 6680789.33804, "avgVol": 30677430, "change": 11.04},
-    "SNAP": {"px": 4.685, "pct": 3.08031, "vol": 5955313, "avgVol": 39864658, "change": 0.14},
-    "MDT": {"px": 99.485, "pct": -0.45527, "vol": 368848, "avgVol": 13774951, "change": -0.455},
-    "PANW": {"px": 355.11499, "pct": 3.43557, "vol": 1508659, "avgVol": 6415947, "change": 11.79499},
-    "TGT": {"px": 164.33, "pct": -0.90454, "vol": 227333, "avgVol": 4107783, "change": -1.5},
-    "NOK": {"px": 7.5555, "pct": 9.81831, "vol": 13260118, "avgVol": 79702252, "change": 0.6755},
-    "GNRC": {"px": 206.25999, "pct": 6.74878, "vol": 58528, "avgVol": 1249220, "change": 13.03999},
-    "LTM": {"px": 46.11, "pct": 3.89815, "vol": 28586.96203, "avgVol": 830220, "change": 1.73},
-    "SNX": {"px": 230.33, "pct": 6.26038, "vol": 20917, "avgVol": 785046, "change": 13.57},
-    "NTAP": {"px": 169.965, "pct": 7.81161, "vol": 95844, "avgVol": 2327307, "change": 12.315},
-    "NTNX": {"px": 57.405, "pct": 5.87422, "vol": 110664, "avgVol": 2494981, "change": 3.185},
-    "AAOI": {"px": 40.42, "pct": 22.74521, "vol": 3578102, "avgVol": 11176063, "change": 7.49},
-    "BB": {"px": 8.28, "pct": 6.56371, "vol": 1363329, "avgVol": 13854825, "change": 0.51},
-    "CIEN": {"px": 266.65, "pct": 13.77309, "vol": 240894, "avgVol": 2712439, "change": 32.28},
-    "CSCO": {"px": 95.17, "pct": 4.99779, "vol": 1747668, "avgVol": 19278484, "change": 4.53},
-    "FFIV": {"px": 317.51, "pct": 4.44751, "vol": 24629, "avgVol": 726445, "change": 13.52},
-    "FTNT": {"px": 129.61, "pct": 4.05427, "vol": 304755, "avgVol": 4969620, "change": 5.05}
+    "AVT": {
+      "px": 75.4765,
+      "pct": -3.42099,
+      "vol": 20650.18244,
+      "avgVol": 1314241,
+      "change": -2.6735
+    },
+    "ZS": {
+      "px": 231.81,
+      "pct": 1.1211,
+      "vol": 744457.12344,
+      "avgVol": 2920326,
+      "change": 2.57
+    },
+    "ETN": {
+      "px": 324.65,
+      "pct": -3.47565,
+      "vol": 136765,
+      "avgVol": 2451440,
+      "change": -11.69
+    },
+    "META": {
+      "px": 597.27,
+      "pct": -0.05522088,
+      "vol": 1025979.57243,
+      "avgVol": 19703987,
+      "change": -0.33
+    },
+    "GDDY": {
+      "px": 104.03,
+      "pct": 2.21065,
+      "vol": 25714,
+      "avgVol": 1985446,
+      "change": 2.25
+    },
+    "ITT": {
+      "px": 212.3,
+      "pct": -1.59907,
+      "vol": 31880,
+      "avgVol": 868975,
+      "change": -3.45
+    },
+    "VRSN": {
+      "px": 314.9612,
+      "pct": 0.32209,
+      "vol": 16855.6496,
+      "avgVol": 882366,
+      "change": 1.0112
+    },
+    "PLTR": {
+      "px": 161.45,
+      "pct": 1.31149,
+      "vol": 2047362,
+      "avgVol": 30297804,
+      "change": 2.09
+    },
+    "GOOGL": {
+      "px": 278.41,
+      "pct": -1.30805,
+      "vol": 3695179,
+      "avgVol": 30837611,
+      "change": -3.69
+    },
+    "SNAP": {
+      "px": 5.0699,
+      "pct": 3.04675,
+      "vol": 1538620,
+      "avgVol": 39872501,
+      "change": 0.1499
+    },
+    "MDT": {
+      "px": 100.09,
+      "pct": -0.6255,
+      "vol": 1988107,
+      "avgVol": 13777680,
+      "change": -0.63
+    },
+    "PANW": {
+      "px": 348.605,
+      "pct": -1.36519,
+      "vol": 443427.56327,
+      "avgVol": 6442325,
+      "change": -4.825
+    },
+    "TGT": {
+      "px": 174.22,
+      "pct": 3.58523,
+      "vol": 373606,
+      "avgVol": 4099118,
+      "change": 6.03
+    },
+    "NOK": {
+      "px": 7.34,
+      "pct": -2.78146,
+      "vol": 6296925,
+      "avgVol": 79258346,
+      "change": -0.21
+    },
+    "GNRC": {
+      "px": 199.05,
+      "pct": -2.78388,
+      "vol": 67703,
+      "avgVol": 1249220,
+      "change": -5.7
+    },
+    "LTM": {
+      "px": 46.92,
+      "pct": -1.532,
+      "vol": 28560,
+      "avgVol": 827683,
+      "change": -0.73
+    },
+    "SNX": {
+      "px": 224.45,
+      "pct": -3.06629,
+      "vol": 23997,
+      "avgVol": 782189,
+      "change": -7.1
+    },
+    "NTAP": {
+      "px": 163.495,
+      "pct": -4.7454,
+      "vol": 81068,
+      "avgVol": 2327307,
+      "change": -8.145
+    },
+    "NTNX": {
+      "px": 57.793,
+      "pct": 0.40479,
+      "vol": 104117,
+      "avgVol": 2506480,
+      "change": 0.233
+    },
+    "AAOI": {
+      "px": 40.33,
+      "pct": 4.21189,
+      "vol": 4444862,
+      "avgVol": 11226879,
+      "change": 1.63
+    },
+    "BB": {
+      "px": 8.28,
+      "pct": -1.07527,
+      "vol": 631934,
+      "avgVol": 13704581,
+      "change": -0.09000027
+    },
+    "CIEN": {
+      "px": 245.93,
+      "pct": -7.10158,
+      "vol": 167093,
+      "avgVol": 2712439,
+      "change": -18.8
+    },
+    "CSCO": {
+      "px": 94.73,
+      "pct": -2.13843,
+      "vol": 1481177,
+      "avgVol": 19278484,
+      "change": -2.07
+    },
+    "FFIV": {
+      "px": 316.1546,
+      "pct": -1.59071,
+      "vol": 9862.52133,
+      "avgVol": 726445,
+      "change": -5.1104
+    },
+    "FTNT": {
+      "px": 131.22688,
+      "pct": 0.09678108,
+      "vol": 195104.22646,
+      "avgVol": 4969620,
+      "change": 0.12688
+    }
   },
   "notes": {
-    "AAOI": "Up 22.7% today, the biggest mover on the watchlist by far - part of a broad chip/communication-equipment rebound (see Overnight news); no ticker-specific catalyst found on a second source beyond the sector-wide move.",
-    "CIEN": "Up 13.8% today, sharing in the same communication-equipment rebound as AAOI and NOK; no company-specific news confirmed.",
-    "ZS": "Up 18.2% today, among the largest gainers on the technical-picks list as software/security names lead the broad risk-on reversal.",
-    "PANW": "Catalyst alert (earnings beat + raise, see the brief) up 3.4% today, extending its post-earnings strength as the broad market also rallies.",
-    "TGT": "Catalyst alert (see the brief) down 0.9% today, one of the few red names on the watchlist against an otherwise broad rally.",
-    "MDT": "Catalyst alert (see the brief) down 0.5% today, roughly flat against the broad rally."
+    "CIEN": "Down 7.1% today, the sharpest reversal on the watchlist - giving back a chunk of yesterday's 13.8% rebound as chip/comm-equipment names turned cautious ahead of Analog Devices' earnings (see Overnight news).",
+    "NTAP": "Down 4.7% today after a 2.1% gain yesterday - no ticker-specific news found; moving with the broader semiconductor/hardware pullback.",
+    "SNX": "Down 3.1% today; Technology Distributors peer AVT also down sharply (-3.4%) - sector-wide pullback, no company-specific news confirmed.",
+    "ETN": "Down 3.5% today despite no company-specific news found; Industrials giving back part of Monday's broad rally.",
+    "GNRC": "Down 2.8% today; Specialty Industrial Machinery giving back part of Monday's rally, no company-specific news confirmed.",
+    "TGT": "Catalyst alert (see the brief) up 3.6% today - the best performer on the watchlist, extending its post-earnings strength.",
+    "PANW": "Catalyst alert (earnings beat + raise, see the brief) down 1.4% today, in line with the broader software/security pullback; Analog Devices reports fiscal Q4 results before today's open (see Overnight news).",
+    "MDT": "Catalyst alert (see the brief) down 0.6% today, roughly flat against a mixed broad market."
   },
+  "footnotes": [
+    "Only 3 overnight/today news items met the two-source-or-better, dated bar this run (vs. the usual 4-6) - repeated WebSearch queries for watchlist-specific news (GOOGL, META, PLTR, PANW, TGT, MDT individually; comm-equipment-sector follow-through) returned only stale, undated or conflicting results, which were dropped rather than guessed at.",
+    "Futures (ES/NQ/YM/RTY) omitted: by this snapshot (~11 min after the 09:30 ET open) the cash market has already opened, and this run's WebSearch reads of overnight futures were themselves stale/conflicting pre-open figures (readings for the same contract 90 minutes apart differed by more than the 0.25-point cross-check tolerance) - a futures print at this point would mislead rather than help.",
+    "QQQ omitted: WebSearch could not return a reliable, dated 24 Nov price (results ranged from $521 to $721 with no clearly-dated current figure), repeating the prior run's gap.",
+    "Quotes read via FMP company/profile-symbol at approximately 14:43 UTC (09:43 ET), about 13 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker - the page correctly shows \"open print not available yet\"."
+  ],
   "news": [
     {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Broad risk-on reversal snaps Friday's selloff; AI/chip names lead",
-      "text": "Major indices are sharply higher Monday, reversing Friday's steep AI/tech-stock-led selloff (S&P 500 -3.7% Fri, VIX closed 35.89). The VIX has pulled back to the high-20s intraday. Chip and software names are among the biggest gainers on the watchlist (ZS, AAOI, CIEN, NOK, PLTR). A PCE inflation report due Wednesday is being flagged as the next test of whether the bounce holds.",
-      "names": ["ZS", "PLTR", "AAOI", "CIEN", "NOK"],
-      "sources": [
-        {"t": "24/7 Wall St", "u": "https://247wallst.com/investing/2026/11/23/stock-market-today-dow-sp-500-and-nasdaq-surge-as-nvidia-leads-a-major-ai-rebound/"},
-        {"t": "Journal Arta", "u": "https://journalarta.com/en/2026/11/23/stock-market-today-dow-sp-500-futures-surge-after-tech-rout-as-oil-slides/"}
-      ]
-    },
-    {
-      "tag": "Technology",
-      "top3": true,
-      "title": "Caution: unverified \"Huang reinstated at Nvidia\" headlines contradict Nvidia's own board",
-      "text": "Several search results today describe today's rally as driven by Nvidia \"reinstating\" Jensen Huang as CEO. That claim does not reconcile: Nvidia's own investor-relations page confirms Huang resigned as CEO, President and a board member on 12 Nov, with CFO Colette Kress as interim CEO, and a separate report quotes new board chair Harvey Jones saying the board \"does not intend to reinstate Jensen as CEO.\" Dropped from this page per the cross-check rule - flagging here since the claim is circulating.",
+      "tag": "Macro",
+      "top3": false,
+      "title": "US futures ease after Monday's historic rally",
+      "text": "Index futures pulled back Tuesday morning after Monday's S&P 500 (+4.73%) and Nasdaq posted their best days since April 2025. A premarket digest put S&P futures down roughly 0.3-0.8% and Nasdaq-100 futures down 0.8-1.7% in early trade, giving back a slice of the gains.",
       "names": [],
       "sources": [
-        {"t": "SCMP", "u": "https://www.scmp.com/tech/article/3374812/nvidia-board-says-it-has-no-plans-reinstate-jensen-huang-ceo"},
-        {"t": "NVIDIA Investor Relations", "u": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/"}
+        {
+          "t": "StockInvest.us premarket digest",
+          "u": "https://stockinvest.us/digest/digest-us-premarket-2026-11-24"
+        }
       ]
     },
     {
-      "tag": "Communication Services",
+      "tag": "Technology",
       "top3": true,
-      "title": "Anthropic (ANT) still finding its footing after Thursday's blockbuster IPO debut",
-      "text": "Anthropic priced its IPO at $83 and opened at $111.50 on 19 Nov before fading to close day one up 17% at $97.17; data providers showed conflicting quotes near $95-99 on 20 Nov, underscoring thin, volatile price discovery in the first days of trading. Relevant context for Communication Services/Tech sentiment (GOOGL, META on the watchlist) even though ANT itself is not a pick.",
-      "names": ["GOOGL", "META"],
+      "title": "Analog Devices reports before today's open; chip names cautious",
+      "text": "ADI released fiscal Q4 FY2026 results at 7:00am ET today per its scheduled release. Broader semiconductor and AI-linked names, including several comm-equipment names on the watchlist, traded cautiously in early Tuesday action as investors weighed the report against last week's volatility.",
+      "names": [
+        "NOK",
+        "CIEN",
+        "AAOI",
+        "CSCO",
+        "FFIV",
+        "FTNT",
+        "NTAP",
+        "NTNX",
+        "BB"
+      ],
       "sources": [
-        {"t": "Al Jazeera", "u": "https://www.aljazeera.com/economy/2026/11/19/anthropic-starts-trading-in-the-us-after-blockbuster-ipo"},
-        {"t": "FourWeekMBA", "u": "https://fourweekmba.com/ai-anthropic-closes-day-one-at-97-17-up-17-from-83-ipo/"}
+        {
+          "t": "Analog Devices (investor press release)",
+          "u": "https://www.analog.com/en/newsroom/press-releases/2026/10-22-2026-adi-report-4q-fy2026-financial-results.html"
+        },
+        {
+          "t": "StockInvest.us premarket digest",
+          "u": "https://stockinvest.us/digest/digest-us-premarket-2026-11-24"
+        }
+      ]
+    },
+    {
+      "tag": "Technology",
+      "top3": true,
+      "title": "HPE slides premarket despite beating estimates, on cash-flow concerns",
+      "text": "Hewlett Packard Enterprise topped profit expectations but shares fell sharply premarket after a report flagged unpaid supplier bills growing to $9.4B against $6.6B of operating cash flow, reviving scrutiny of cash-flow quality.",
+      "names": [],
+      "sources": [
+        {
+          "t": "Quackonomist pre-market note",
+          "u": "https://quackonomist.substack.com/p/quackonomist-pre-market-24-nov-2026"
+        },
+        {
+          "t": "StockInvest.us premarket digest",
+          "u": "https://stockinvest.us/digest/digest-us-premarket-2026-11-24"
+        }
       ]
     }
-  ],
-  "footnotes": [
-    "Only 3 overnight/today news items found that met the two-source, dated bar (vs. the usual 4-6) - repeated WebSearch queries for watchlist-specific news (PANW, TGT, MDT, GOOGL, PLTR individually; semiconductor-sector news) returned only undated or wrong-year results, which were dropped rather than guessed at.",
-    "Futures (ES/NQ/YM/RTY) omitted: every WebSearch read was a stale or internally conflicting pre-open figure, and the cash market has already opened by this snapshot (~15 min in) - a futures print at this point would mislead rather than help.",
-    "QQQ omitted: WebSearch could not return a reliable, dated 23 Nov price (only a stale 10 Nov close near $674.76 turned up, repeating the prior run's gap).",
-    "Quotes read via FMP company/profile-symbol at approximately 14:43 UTC (09:43 ET), about 13 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker - the page correctly shows \"open print not available yet\"."
   ]
 }
