@@ -1,218 +1,263 @@
 {
-  "indices": [
-    {
-      "id": "SPX",
-      "name": "S&P 500",
-      "ts": 1795470153,
-      "prev": 6910.39,
-      "q": {
-        "price": 7237.17,
-        "change": 326.78,
-        "pct": 4.72882,
-        "dayLow": 7152.66,
-        "dayHigh": 7295.6,
-        "yearHigh": 7844.52,
-        "yearLow": 6316.91,
-        "ma50": 7625.2563,
-        "ma200": 7348.58
-      }
-    },
-    {
-      "id": "DJI",
-      "name": "Dow Jones",
-      "ts": 1795470159,
-      "prev": 48147.33,
-      "q": {
-        "price": 49595.31,
-        "change": 1447.98,
-        "pct": 3.00739,
-        "dayLow": 49033.31,
-        "dayHigh": 49810.26,
-        "yearHigh": 54744.33,
-        "yearLow": 45057.28,
-        "ma50": 51705.707,
-        "ma200": 50776.41
-      }
-    },
-    {
-      "id": "RUT",
-      "name": "Russell 2000",
-      "ts": 1795469412,
-      "prev": 2581.7896,
-      "q": {
-        "price": 2669.655,
-        "change": 87.8654,
-        "pct": 3.40327,
-        "dayLow": 2631.59,
-        "dayHigh": 2671.7644,
-        "yearHigh": 3069.71,
-        "yearLow": 2372.34,
-        "ma50": 2799.325,
-        "ma200": 2813.3086
-      }
-    },
-    {
-      "id": "VIX",
-      "name": "Volatility",
-      "ts": 1795520791,
-      "prev": 26.62,
-      "q": {
-        "price": 28.35,
-        "change": 1.73,
-        "pct": 6.49887,
-        "dayLow": 26.26,
-        "dayHigh": 29.22,
-        "yearHigh": 40.03,
-        "yearLow": 13.38,
-        "ma50": 18.6256,
-        "ma200": 18.7032
-      }
-    }
-  ],
-  "macro": {
-    "date": "2026-11-20",
-    "y10": 4.92,
-    "y10prev": 5.04,
-    "y2": 4.63,
-    "y30": 5.31,
-    "y10path": "5.12% on 16 Nov, 5.10% on 17 Nov, 5.07% on 18 Nov, 5.04% on 19 Nov, 4.92% on 20 Nov",
-    "fed": {
-      "range": "3.75-4.00%",
-      "move": "hold",
-      "date": "28 Oct",
-      "vote": "10-2",
-      "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9-10 Dec). No FOMC meeting fell in the last 7 days, so this block is carried forward unchanged. The 10Y eased to 4.92% on 20 Nov from 5.04% on 19 Nov, extending the pullback from the 5.15% high on 13 Nov.",
-      "sources": [
-        {
-          "t": "InvestingLive",
-          "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
-        },
-        {
-          "t": "Admiral Markets",
-          "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
-        }
-      ]
-    },
-    "y10hist": [
-      {"date": "2026-11-16", "y10": 5.12},
-      {"date": "2026-11-17", "y10": 5.1},
-      {"date": "2026-11-18", "y10": 5.07},
-      {"date": "2026-11-19", "y10": 5.04},
-      {"date": "2026-11-20", "y10": 4.92}
-    ]
+ "indices": [
+  {
+   "id": "SPX",
+   "name": "S&P 500",
+   "ts": 1795554000,
+   "prev": 7237.17,
+   "q": {
+    "price": 7201.09,
+    "change": -36.08,
+    "pct": -0.49854,
+    "dayLow": 7138.93,
+    "dayHigh": 7223.95,
+    "yearHigh": 7844.52,
+    "yearLow": 6316.91,
+    "ma50": 7617.6,
+    "ma200": 7350.1045
+   }
   },
-  "catalysts": [
-    {
-      "tk": "PANW",
-      "name": "Palo Alto Networks, Inc.",
-      "industry": "Software - Infrastructure",
-      "sector": "Technology",
-      "ctype": "Earnings beat + raise",
-      "cdate": "18 Nov",
-      "cdateISO": "2026-11-18",
-      "what": "Palo Alto Networks reported fiscal Q1 2027 results on 18 Nov: non-GAAP EPS $1.05 vs about $0.97 consensus, revenue $3.445B vs $3.31B expected (+39.2% y/y), Next-Gen Security ARR +66% to $9.73B. The company raised FY2027 guidance - revenue to $14.52-$14.57B (from $14.10-$14.20B) and non-GAAP EPS to $4.26-$4.30 (from $4.16-$4.19) - and announced a $4.5B all-stock deal for Applied Compute. Shares are up 2.9% today to $353.43, extending the recovery from the post-earnings pullback as the broad market rallied hard (S&P +4.7%).",
-      "sources": [
-        {"t": "Palo Alto Networks (press release)", "verified": false},
-        {"t": "24/7 Wall St.", "verified": false}
-      ],
-      "cap": "$290.2B",
-      "px": 353.43,
-      "pct": 2.94477,
-      "topSector": true
-    },
-    {
-      "tk": "TGT",
-      "name": "Target Corporation",
-      "industry": "Discount Stores",
-      "sector": "Consumer Defensive",
-      "ctype": "Earnings beat + raise",
-      "cdate": "18 Nov",
-      "cdateISO": "2026-11-18",
-      "what": "Target reported fiscal Q3 2026 results on 18 Nov: adjusted EPS $2.65 vs $2.07 consensus (helped by about $0.50/share of one-time tariff-refund benefits; ex-refund EPS was still roughly $2.15, above the $2.07 Street number), revenue $27.07B vs $26.38B expected (+2.6%). The company raised full-year adjusted EPS guidance to $10.65-$11.40 and lifted net-sales-growth guidance to about 6%. Shares are up 1.4% today to $168.20, participating in the broad market rally (S&P +4.7%).",
-      "sources": [
-        {"t": "Target Corp. (press release)", "verified": false},
-        {"t": "Stocktwits", "verified": false}
-      ],
-      "cap": "$76.2B",
-      "px": 168.2,
-      "pct": 1.42917,
-      "topSector": false
-    },
-    {
-      "tk": "MDT",
-      "name": "Medtronic Plc",
-      "industry": "Medical - Devices",
-      "sector": "Healthcare",
-      "ctype": "Analyst upgrade",
-      "cdate": "17 Nov",
-      "cdateISO": "2026-11-17",
-      "what": "Piper Sandler analyst Matt O'Brien upgraded Medtronic to Overweight from Neutral and raised the price target to $120 from $85 on 17 Nov, about 19% above today's $100.72 price (16.6% above the $102.88 price when the call was made) - citing cardiac-ablation and renal-denervation growth driving revenue above Street estimates through 2030, ahead of Medtronic's 11 Dec investor meeting. Shares are up 0.8% today to $100.72, a muted move in a broadly strong session (S&P +4.7%).",
-      "sources": [
-        {"t": "Investing.com", "verified": false},
-        {"t": "QuantisNow", "verified": false}
-      ],
-      "cap": "$128.8B",
-      "px": 100.72,
-      "pct": 0.78047,
-      "topSector": false
-    }
-  ],
-  "bg": {
-    "PANW": {
-      "cap": "$290.2B",
-      "what": "Cybersecurity platform provider offering next-generation firewalls, cloud security (Prisma) and AI-driven threat detection (Cortex) for enterprises and government agencies worldwide."
-    },
-    "TGT": {
-      "cap": "$76.2B",
-      "what": "Large-format general merchandise and grocery retailer operating roughly 1,980 Target stores plus digital and same-day fulfillment across the US."
-    },
-    "MDT": {
-      "cap": "$128.8B",
-      "what": "Global medical-device maker selling cardiac, surgical, neuroscience and diabetes-management therapies including pacemakers, defibrillators, surgical robotics and insulin pumps."
-    }
+  {
+   "id": "DJI",
+   "name": "Dow Jones",
+   "ts": 1795557265,
+   "prev": 49595.31,
+   "q": {
+    "price": 50018.7,
+    "change": 423.39,
+    "pct": 0.85369,
+    "dayLow": 49294.49,
+    "dayHigh": 50075.12,
+    "yearHigh": 54744.33,
+    "yearLow": 45057.28,
+    "ma50": 51649.188,
+    "ma200": 50773.81
+   }
   },
-  "notices": [
-    "Sharp reversal Monday 23 Nov: S&P 500 +4.73% to 7237.17, Dow +3.01% to 49595.31, Russell 2000 +3.40% to 2669.655 - a broad bounce after Friday 20 Nov's risk-off selloff.",
-    "VIX quote (28.35, +6.5% vs Monday's close) is a live pre-market print (24 Nov 11:46 UTC / 06:46 ET, about 2h44m before the open), not Monday's close - the tile and regime score use the previous close (26.62) instead.",
-    "10Y Treasury yield: FMP's treasury-rates feed still has not posted a row newer than Friday 20 Nov (4.92%, down from 5.04% on 19 Nov and 5.12% five sessions ago) - now 2 sessions behind lastSession (23 Nov); the regime score's rates check uses this same unchanged 16-20 Nov window and passes (yields down over the last 5 sessions).",
-    "QQQ/NDX tile omitted again this run: WebSearch returned only inconsistent, mostly undated figures (roughly $521-$721) for 24 Nov, with the most recent clearly dated close a stale 10 Nov print near $674.76; the automated routine has no other source for it.",
-    "No FOMC decision fell in the last 7 days (next meeting 9-10 Dec); the Fed block is carried forward unchanged except for the refreshed Treasury yields.",
-    "No new catalyst candidates with two independent https sources and a confirmed event date inside 17-23 Nov were found this run; Palo Alto Networks (PANW, 18 Nov), Target (TGT, 18 Nov) and Medtronic (MDT, 17 Nov) remain inside the 5-session window and are re-priced with fresh FMP quotes, not re-verified facts.",
-    "Sector ranking, industry drill-down and technical picks remain pinned from the 7 Oct interactive scan (now well over a month old) - due for a fresh interactive refresh."
-  ],
-  "rejected": [
-    "<b>QQQ/NDX</b> · WebSearch returned conflicting, mostly undated prices (roughly $521-$721) for 24 Nov; no reliable dated number found, omitted this run.",
-    "<b>New catalyst search (17-23 Nov window)</b> · search results were dominated by 2025 articles and 2026 items outside the window (e.g. Constellation Energy's beat was 9 Nov); nothing found this run that cleared the two-independent-source and 5-session-window bar."
-  ],
-  "sections": {
-    "indices": {
-      "asOf": "2026-11-23",
-      "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 23 Nov close"
-    },
-    "macro": {
-      "asOf": "2026-11-20",
-      "source": "FMP economics/treasury-rates (latest row 20 Nov)"
-    },
-    "catalysts": {
-      "asOf": "2026-11-23",
-      "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"
-    }
+  {
+   "id": "RUT",
+   "name": "Russell 2000",
+   "ts": 1795555811,
+   "prev": 2669.65502,
+   "q": {
+    "price": 2684.942,
+    "change": 15.28698,
+    "pct": 0.57262,
+    "dayLow": 2655.3188,
+    "dayHigh": 2695.2417,
+    "yearHigh": 3069.71,
+    "yearLow": 2404.99,
+    "ma50": 2794.8733,
+    "ma200": 2813.3052
+   }
   },
-  "fetchlog": [
-    {"id": "artifact.read.BRIEF", "ok": true, "note": "recovered last published page for carry-forward state"},
-    {"id": "fmp.index.SPX", "ok": true, "note": "7237.17, +4.73% (23 Nov close)"},
-    {"id": "fmp.index.DJI", "ok": true, "note": "49595.31, +3.01% (23 Nov close)"},
-    {"id": "fmp.index.RUT", "ok": true, "note": "2669.655, +3.40% (23 Nov close)"},
-    {"id": "fmp.index.VIX", "ok": true, "note": "28.35 live print 24 Nov 11:46 UTC; prev close 26.62 used for regime"},
-    {"id": "websearch.qqq", "ok": false, "note": "no reliable dated quote found for 24 Nov across sources; omitted"},
-    {"id": "fmp.economics.treasuryRates", "ok": true, "note": "latest row 20 Nov, y10 4.92%; no newer row posted"},
-    {"id": "websearch.catalysts", "ok": true, "note": "searched for new 17-23 Nov catalysts; nothing cleared the two-source/window bar"},
-    {"id": "fmp.profile.PANW", "ok": true, "note": "$353.43, +2.94%, cap $290.2B"},
-    {"id": "fmp.profile.TGT", "ok": true, "note": "$168.20, +1.43%, cap $76.2B"},
-    {"id": "fmp.profile.MDT", "ok": true, "note": "$100.72, +0.78%, cap $128.8B"}
-  ],
-  "meta": {
-    "targetSession": "2026-11-24",
-    "lastSession": "2026-11-23"
+  {
+   "id": "VIX",
+   "name": "Volatility",
+   "ts": 1795607176,
+   "prev": 26.36,
+   "q": {
+    "price": 30.29,
+    "change": 3.93,
+    "pct": 14.90895,
+    "dayLow": 27.63,
+    "dayHigh": 30.57,
+    "yearHigh": 40.03,
+    "yearLow": 13.38,
+    "ma50": 18.8088,
+    "ma200": 18.74675
+   }
   }
+ ],
+ "macro": {
+  "date": "2026-11-23",
+  "y10": 4.92,
+  "y10prev": 4.92,
+  "y2": 4.63,
+  "y30": 5.29,
+  "y10path": "5.10% on 17 Nov, 5.07% on 18 Nov, 5.04% on 19 Nov, 4.92% on 20 Nov, 4.92% on 23 Nov",
+  "fed": {
+   "range": "3.75-4.00%",
+   "move": "hold",
+   "date": "28 Oct",
+   "vote": "10-2",
+   "note": "FOMC held the target range steady; dissenters Lisa Cook and Beth Hammack both wanted a 25bp hike. Chair Warsh called inflation \"elevated\" and said the Fed will cut the number of rate-setting meetings starting 2027. No new decision since (next meeting 9-10 Dec). No FOMC meeting fell in the last 7 days, so this block is carried forward unchanged. The 10Y eased to 4.92% on 20 Nov from 5.04% on 19 Nov, extending the pullback from the 5.15% high on 13 Nov.",
+   "sources": [
+    {
+     "t": "InvestingLive",
+     "u": "https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/"
+    },
+    {
+     "t": "Admiral Markets",
+     "u": "https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates"
+    }
+   ]
+  },
+  "y10hist": [
+   {
+    "date": "2026-11-17",
+    "y10": 5.1
+   },
+   {
+    "date": "2026-11-18",
+    "y10": 5.07
+   },
+   {
+    "date": "2026-11-19",
+    "y10": 5.04
+   },
+   {
+    "date": "2026-11-20",
+    "y10": 4.92
+   },
+   {
+    "date": "2026-11-23",
+    "y10": 4.92
+   }
+  ]
+ },
+ "catalysts": [
+  {
+   "tk": "PANW",
+   "name": "Palo Alto Networks, Inc.",
+   "industry": "Software - Infrastructure",
+   "sector": "Technology",
+   "ctype": "Earnings beat + raise",
+   "cdate": "18 Nov",
+   "cdateISO": "2026-11-18",
+   "what": "Palo Alto Networks reported fiscal Q1 2027 results on 18 Nov: non-GAAP EPS $1.05 vs about $0.97 consensus, revenue $3.445B vs $3.31B expected (+39.2% y/y), Next-Gen Security ARR +66% to $9.73B. The company raised FY2027 guidance - revenue to $14.52-$14.57B (from $14.10-$14.20B) and non-GAAP EPS to $4.26-$4.30 (from $4.16-$4.19) - and announced a $4.5B all-stock deal for Applied Compute. Shares are down 0.1% today to $352.99, pausing after the post-earnings rally amid a broad risk-off tone in the market.",
+   "sources": [
+    {
+     "t": "Palo Alto Networks (press release)",
+     "verified": false
+    },
+    {
+     "t": "24/7 Wall St.",
+     "verified": false
+    }
+   ],
+   "cap": "$289.8B",
+   "px": 352.99,
+   "pct": -0.12449,
+   "topSector": true
+  },
+  {
+   "tk": "TGT",
+   "name": "Target Corporation",
+   "industry": "Discount Stores",
+   "sector": "Consumer Defensive",
+   "ctype": "Earnings beat + raise",
+   "cdate": "18 Nov",
+   "cdateISO": "2026-11-18",
+   "what": "Target reported fiscal Q3 2026 results on 18 Nov: adjusted EPS $2.65 vs $2.07 consensus (helped by about $0.50/share of one-time tariff-refund benefits; ex-refund EPS was still roughly $2.15, above the $2.07 Street number), revenue $27.07B vs $26.38B expected (+2.6%). The company raised full-year adjusted EPS guidance to $10.65-$11.40 and lifted net-sales-growth guidance to about 6%. Shares are up 4.7% today to $176.06, extending the post-earnings move.",
+   "sources": [
+    {
+     "t": "Target Corp. (press release)",
+     "verified": false
+    },
+    {
+     "t": "Stocktwits",
+     "verified": false
+    }
+   ],
+   "cap": "$79.7B",
+   "px": 176.06,
+   "pct": 4.67923,
+   "topSector": false
+  }
+ ],
+ "bg": {
+  "PANW": {
+   "cap": "$289.8B",
+   "what": "Cybersecurity platform provider offering next-generation firewalls, cloud security (Prisma) and AI-driven threat detection (Cortex) for enterprises and government agencies worldwide."
+  },
+  "TGT": {
+   "cap": "$79.7B",
+   "what": "Large-format general merchandise and grocery retailer operating roughly 1,980 Target stores plus digital and same-day fulfillment across the US."
+  }
+ },
+ "notices": [
+  "Risk-off reversal Tuesday 24 Nov: S&P 500 -0.50% to 7201.09 (below both its 50d and 200d average), while the Dow +0.85% to 50018.70 and Russell 2000 +0.57% to 2684.94 both rose - a split session, megacap/tech weakness dragging the S&P while the broader market firmed.",
+  "VIX quote (30.29, +14.9% vs Monday's close) is a live pre-market print (25 Nov 11:46 UTC / 06:46 ET, well before the open), not Tuesday's close - the tile and regime score use the previous close (26.36) instead; even at that previous close VIX remains above 20 and above its own 50-day average, so both VIX regime checks fail.",
+  "10Y Treasury yield: FMP's treasury-rates feed's latest row is 23 Nov (4.92%), flat vs 20 Nov (4.92%) and down from 5.10% five sessions ago (17 Nov); the regime score's rates check passes (yields down/flat over the last 5 sessions) - the only one of 9 checks that passes this run, since all three indices sit below both their 50- and 200-day averages and VIX is elevated.",
+  "QQQ/NDX tile omitted again this run: WebSearch returned no reliable, clearly-dated quote for 25 Nov; the automated routine has no other source for it.",
+  "No FOMC decision fell in the last 7 days (next meeting 9-10 Dec); the Fed block is carried forward unchanged except for the refreshed Treasury yields.",
+  "Catalysts: Medtronic (MDT, upgrade dated 17 Nov) has dropped out of the 5-session window (18-24 Nov) and is removed. Palo Alto Networks (PANW, 18 Nov) and Target (TGT, 18 Nov) remain inside the window and are re-priced with fresh FMP quotes, not re-verified facts. TJX's 18 Nov Q3 report was considered and rejected (EPS essentially in-line, not a clear beat, and shares reportedly fell despite the guidance raise - sell-the-news). No other new candidate cleared the two-independent-source and 5-session-window bar this run.",
+  "Sector ranking, industry drill-down and technical picks remain pinned from the 6 Oct interactive scan (now about 7 weeks old) - due for a fresh interactive refresh."
+ ],
+ "rejected": [
+  "<b>QQQ/NDX</b> \u00b7 WebSearch returned no reliable, clearly-dated quote for 25 Nov; omitted this run.",
+  "<b>MDT</b> \u00b7 Piper Sandler upgrade (17 Nov) is now outside the 5-session catalyst window (18-24 Nov); dropped.",
+  "<b>TJX</b> \u00b7 fiscal Q3 (18 Nov): adjusted EPS $1.34 was in-line with consensus (not a clear beat); full-year GAAP EPS guidance raised only at the low end while Q4 guidance came in below expectations, and shares were reported down on the day - sell-the-news, rejected."
+ ],
+ "sections": {
+  "indices": {
+   "asOf": "2026-11-24",
+   "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 24 Nov close"
+  },
+  "macro": {
+   "asOf": "2026-11-23",
+   "source": "FMP economics/treasury-rates (latest row 23 Nov)"
+  },
+  "catalysts": {
+   "asOf": "2026-11-24",
+   "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"
+  }
+ },
+ "fetchlog": [
+  {
+   "id": "artifact.read.BRIEF",
+   "ok": true,
+   "note": "recovered last published page for carry-forward state"
+  },
+  {
+   "id": "fmp.index.SPX",
+   "ok": true,
+   "note": "7201.09, -0.50% (24 Nov close)"
+  },
+  {
+   "id": "fmp.index.DJI",
+   "ok": true,
+   "note": "50018.70, +0.85% (24 Nov close)"
+  },
+  {
+   "id": "fmp.index.RUT",
+   "ok": true,
+   "note": "2684.94, +0.57% (24 Nov close)"
+  },
+  {
+   "id": "fmp.index.VIX",
+   "ok": true,
+   "note": "30.29 live print 25 Nov 11:46 UTC; prev close 26.36 used for regime"
+  },
+  {
+   "id": "websearch.qqq",
+   "ok": false,
+   "note": "no reliable dated quote found for 25 Nov across sources; omitted"
+  },
+  {
+   "id": "fmp.economics.treasuryRates",
+   "ok": true,
+   "note": "latest row 23 Nov, y10 4.92%, flat vs 20 Nov"
+  },
+  {
+   "id": "websearch.catalysts",
+   "ok": true,
+   "note": "searched for new 18-24 Nov catalysts; TJX (18 Nov) found but rejected as sell-the-news; nothing else cleared the two-source/window bar"
+  },
+  {
+   "id": "fmp.profile.PANW",
+   "ok": true,
+   "note": "$352.99, -0.12%, cap $289.8B"
+  },
+  {
+   "id": "fmp.profile.TGT",
+   "ok": true,
+   "note": "$176.06, +4.68%, cap $79.7B"
+  }
+ ],
+ "meta": {
+  "targetSession": "2026-11-25",
+  "lastSession": "2026-11-24"
+ }
 }
