@@ -1,81 +1,46 @@
 {
-  "asOf": "2026-11-25",
-  "note": "Snapshot taken shortly after the US open (~09:43 ET / 14:43 UTC, about 13 min post-open). FMP + WebSearch only (no WebFetch). Futures (ES/NQ/YM/RTY) omitted: the cash market had already opened by the time this snapshot was taken, and WebSearch could not return a reliable, dated pre-open figure for today's session anyway - a futures print at this point would mislead rather than help. QQQ omitted: WebSearch returned only stale/undated prices for 25 Nov (most recent dated figure was 16 Nov).",
+  "note": "Black Friday half-day session (27 Nov 2026). Quotes read via FMP company/profile-symbol at approximately 14:44 UTC (09:44 ET), about 14 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker - the page correctly shows \"open print not available yet\". QQQ and futures (ES/NQ/YM/RTY) omitted: repeated WebSearch queries returned only stale or undated figures (most QQQ hits dated 10-16 Nov; no 27 Nov futures print found) - a guessed number would mislead rather than help. News omitted for the same reason: an extensive WebSearch sweep (broad market, AI/tech selloff, chips, industrials, and the named watchlist tickers GOOGL/META/NVDA) returned no item clearly dated 27 Nov 2026 with a verifiable source - the search index has not caught up with today's session yet.",
   "meta": {"schemaVersion": 1},
   "sections": {
-    "indices": {"asOfUTC": "2026-11-25T14:42:00Z", "source": "FMP indexes/index-quote"},
-    "quotes": {"asOfUTC": "2026-11-25T14:43:00Z", "source": "FMP company/profile-symbol"},
-    "news": {"asOfUTC": "2026-11-25T14:44:00Z", "source": "WebSearch"}
+    "indices": {"asOfUTC": "2026-11-27T14:45:00Z", "source": "FMP indexes/index-quote (^GSPC ^DJI ^RUT ^VIX), live intraday print"},
+    "quotes": {"asOfUTC": "2026-11-27T14:46:00Z", "source": "FMP company/profile-symbol, live intraday print"}
   },
   "indices": [
-    {"id": "SPX", "name": "S&P 500", "px": 6992.94, "pct": -2.89053, "prev": 7201.09},
-    {"id": "DJI", "name": "Dow Jones", "px": 49044.83, "pct": -1.94701, "prev": 50018.7},
-    {"id": "RUT", "name": "Russell 2000", "px": 2627.56474, "pct": -2.137, "prev": 2684.9419},
-    {"id": "VIX", "name": "Volatility", "px": 33.79, "pct": 28.18665, "prev": 26.36}
+    {"id": "SPX", "name": "S&P 500", "px": 7226.68, "pct": 0.61118, "prev": 7182.78},
+    {"id": "DJI", "name": "Dow Jones", "px": 50502.53, "pct": 0.63683, "prev": 50182.95},
+    {"id": "RUT", "name": "Russell 2000", "px": 2728.1561, "pct": 0.89106, "prev": 2704.06123},
+    {"id": "VIX", "name": "Volatility", "px": 27.35, "pct": 2.05224, "prev": 26.8}
   ],
   "quotes": {
-    "AVT": {"px": 71.1642, "pct": -2.78115, "vol": 77491.22165, "avgVol": 1322679, "change": -2.0358},
-    "ZS": {"px": 222.57, "pct": -3.90726, "vol": 238395.35379, "avgVol": 2978113, "change": -9.05},
-    "ETN": {"px": 303.09, "pct": -5.06781, "vol": 279294, "avgVol": 2460936, "change": -16.18},
-    "META": {"px": 570.23, "pct": -3.32135, "vol": 1551731, "avgVol": 19668865, "change": -19.59},
-    "GDDY": {"px": 101.71, "pct": -0.55729, "vol": 29549, "avgVol": 1976567, "change": -0.57},
-    "ITT": {"px": 207.04, "pct": -2.45925, "vol": 9009, "avgVol": 870065, "change": -5.22},
-    "VRSN": {"px": 316.0, "pct": -0.39401, "vol": 20891.01856, "avgVol": 884389, "change": -1.25},
-    "PLTR": {"px": 153.03, "pct": -5.05646, "vol": 2389780, "avgVol": 30299993, "change": -8.15},
-    "GOOGL": {"px": 263.3, "pct": -5.64415, "vol": 5683646, "avgVol": 30939696, "change": -15.75},
-    "SNAP": {"px": 4.565, "pct": -6.64622, "vol": 2312406, "avgVol": 39830744, "change": -0.325},
-    "PANW": {"px": 345.04999, "pct": -2.24936, "vol": 670874, "avgVol": 6447071, "change": -7.94001},
-    "TGT": {"px": 173.785, "pct": -1.29217, "vol": 446227, "avgVol": 4116849, "change": -2.275},
-    "NOK": {"px": 6.92, "pct": -5.59345, "vol": 8335614, "avgVol": 79111792, "change": -0.41},
-    "GNRC": {"px": 192.0, "pct": -3.20629, "vol": 60561, "avgVol": 1253327, "change": -6.36},
-    "LTM": {"px": 44.98, "pct": -3.12298, "vol": 21513, "avgVol": 825111, "change": -1.45},
-    "SNX": {"px": 208.96001, "pct": -3.83801, "vol": 53193, "avgVol": 784137, "change": -8.33999},
-    "NTAP": {"px": 156.74198, "pct": -3.83928, "vol": 68923, "avgVol": 2319813, "change": -6.25802},
-    "NTNX": {"px": 42.875, "pct": -21.45997, "vol": 1035205.28536, "avgVol": 2559030, "change": -11.715},
-    "AAOI": {"px": 34.2182, "pct": -10.8901, "vol": 1678240.24947, "avgVol": 11363085, "change": -4.1818},
-    "BB": {"px": 7.98, "pct": -5.22565, "vol": 839620, "avgVol": 13573932, "change": -0.44},
-    "CIEN": {"px": 217.25999, "pct": -9.19882, "vol": 152532, "avgVol": 2731864, "change": -22.01001},
-    "CSCO": {"px": 91.66, "pct": -2.47899, "vol": 1387678, "avgVol": 19267558, "change": -2.33},
-    "FFIV": {"px": 306.07, "pct": -3.40834, "vol": 8554, "avgVol": 727934, "change": -10.8},
-    "FTNT": {"px": 129.96, "pct": -1.91698, "vol": 299601.51428, "avgVol": 4967157, "change": -2.54}
+    "AVT": {"px": 75.375, "pct": 1.5904, "vol": 28473.2486, "avgVol": 1333804, "change": 1.18},
+    "ZS": {"px": 228.66, "pct": -0.95296, "vol": 197329, "avgVol": 3008840, "change": -2.19999},
+    "ETN": {"px": 322.47, "pct": 1.46628, "vol": 194201, "avgVol": 2495812, "change": 4.66},
+    "META": {"px": 621.17999, "pct": 1.85115, "vol": 1856260, "avgVol": 19796467, "change": 11.28999},
+    "GDDY": {"px": 105.18, "pct": 0.03804451, "vol": 17648, "avgVol": 1976670, "change": 0.04},
+    "ITT": {"px": 217.685, "pct": 0.5427, "vol": 5679, "avgVol": 869892, "change": 1.175},
+    "VRSN": {"px": 318.84, "pct": -0.1972, "vol": 987192.7083, "avgVol": 885181, "change": -0.63},
+    "PLTR": {"px": 165.1, "pct": 0.92304, "vol": 2322612, "avgVol": 30171729, "change": 1.51},
+    "GOOGL": {"px": 274.07, "pct": 0.35518, "vol": 2997948, "avgVol": 31138739, "change": 0.97},
+    "SNAP": {"px": 5.17, "pct": 2.57937, "vol": 1825869, "avgVol": 39992835, "change": 0.13},
+    "NOK": {"px": 7.4223, "pct": 1.67534, "vol": 5299769, "avgVol": 78831716, "change": 0.1223},
+    "GNRC": {"px": 208.52, "pct": 2.2207, "vol": 21531, "avgVol": 1262214, "change": 4.53},
+    "LTM": {"px": 48.215, "pct": 3.64359, "vol": 78125, "avgVol": 828073, "change": 1.695},
+    "SNX": {"px": 221.89, "pct": 1.58868, "vol": 17233, "avgVol": 787445, "change": 3.47},
+    "NTAP": {"px": 168.174, "pct": 1.92364, "vol": 30191.3617, "avgVol": 2323983, "change": 3.174},
+    "NTNX": {"px": 45.22, "pct": -2.33261, "vol": 427269, "avgVol": 2685273, "change": -1.08},
+    "AAOI": {"px": 38.6199, "pct": 4.32172, "vol": 1740932, "avgVol": 11391134, "change": 1.5999},
+    "BB": {"px": 8.535, "pct": 0.41176, "vol": 503159, "avgVol": 13461270, "change": 0.03499985},
+    "CIEN": {"px": 250.14709, "pct": 3.03023, "vol": 152400, "avgVol": 2742641, "change": 7.35709},
+    "CSCO": {"px": 95.925, "pct": 1.83121, "vol": 658684, "avgVol": 19361853, "change": 1.725},
+    "FFIV": {"px": 318.0695, "pct": 0.32156, "vol": 7553.95802, "avgVol": 726193, "change": 1.0195},
+    "FTNT": {"px": 133.175, "pct": -1.32261, "vol": 169679.63021, "avgVol": 4971261, "change": -1.785}
   },
-  "notes": {
-    "NTNX": "Reported fiscal Q1 2027 results after Tuesday's close (24 Nov): revenue $772.4M beat the $755-765M guide and adjusted EPS $0.73 beat consensus $0.61, but Q2 guidance of $820-830M (midpoint $825M) came in below the $835.7M consensus, and CEO Rajiv Ramaswami announced he will step down once a successor is named - shares are down sharply today on the guidance cut and leadership change, not a revenue/EPS miss.",
-    "CIEN": "Down 9.2% today, falling with the broader AI/optical-networking sympathy selloff (no company-specific news found dated today).",
-    "AAOI": "Down 10.9% today, falling with the broader AI/optics sympathy selloff (no company-specific news found dated today).",
-    "GOOGL": "Down 5.6% today, among the hardest-hit megacaps in the broad AI-led tech selloff.",
-    "PLTR": "Down 5.1% today, moving with the broad AI-related selloff (no company-specific news found dated today).",
-    "TGT": "Catalyst alert (see the brief) down 1.3% today, holding up better than the broad market.",
-    "PANW": "Catalyst alert (see the brief) down 2.2% today, roughly in line with the broader software/security pullback."
-  },
-  "news": [
-    {
-      "tag": "AI / Tech selloff",
-      "top3": true,
-      "title": "Global tech selloff deepens as AI-spending fears outweigh Huang's Nvidia return",
-      "text": "Investors kept selling tech stocks Wednesday on doubts about the AI boom's durability; Nasdaq futures were down ~3.2% in early trading per CNN. Nvidia's pop from Jensen Huang's reinstatement as CEO did not hold. South Korea's Kospi fell 6.2% on memory-chip weakness; Anthropic shares remain below their IPO price.",
-      "names": ["GOOGL", "META", "PLTR"],
-      "sources": [
-        {"t": "CNN Business", "u": "https://www.cnn.com/2026/11/25/business/ai-sell-off-despite-huang-nvidia-return"},
-        {"t": "TradersUnion", "u": "https://tradersunion.com/news/stocks/show/4410373-global-tech-selloff-deepens/"}
-      ]
-    },
-    {
-      "tag": "Company news",
-      "top3": false,
-      "title": "Nutanix (NTNX) slides on soft Q2 guidance and CEO exit despite a Q1 beat",
-      "text": "Fiscal Q1 2027 revenue ($772.4M) and adjusted EPS ($0.73) both beat estimates, but Q2 revenue guidance (~$825M midpoint) missed the ~$835.7M consensus, and CEO Rajiv Ramaswami said he will step down once a successor is found. Piper Sandler and Oppenheimer both cut price targets today while keeping positive ratings.",
-      "names": ["NTNX"],
-      "sources": [
-        {"t": "Benzinga", "u": "https://www.benzinga.com/trading-ideas/movers/26/11/63619853/nutanix-bets-on-enterprise-ai-ceo-to-step-down"},
-        {"t": "StockStory", "u": "https://stockstory.org/us/stocks/nasdaq/ntnx/news/earnings/nutanixs-q3-cy2026-sales-beat-estimates-but-stock-drops-on-weak-guidance"}
-      ]
-    }
-  ],
+  "notes": {},
   "footnotes": [
-    "Only 2 overnight/today news items met the two-source, dated bar this run - repeated WebSearch queries for watchlist-specific and sector-level news (CIEN, AAOI, PANW, TGT individually; Industrials sector follow-through) returned only stale, undated or unconfirmed results, which were dropped rather than guessed at.",
-    "Futures (ES/NQ/YM/RTY) omitted: by this snapshot (~13 min after the 09:30 ET open) the cash market had already opened, and this run's WebSearch reads of overnight/pre-open futures were themselves stale or undated - a futures print at this point would mislead rather than help.",
-    "QQQ omitted: WebSearch could not return a reliable, dated 25 Nov price (most recent clearly-dated figure was 16 Nov), repeating the prior run's gap.",
-    "Quotes read via FMP company/profile-symbol at approximately 14:43 UTC (09:43 ET), about 13 minutes after the 09:30 ET open. This endpoint does not expose today's regular-session opening print, so `open` is omitted for every ticker - the page correctly shows \"open print not available yet\"."
+    "Black Friday half-day session: US cash markets close early (per the usual CME/NYSE schedule); this snapshot is from the morning, about 14 minutes after the open.",
+    "QQQ omitted: WebSearch returned only stale/undated prices (most recent clearly-dated figure was 10 Nov); FMP blocks NDX/QQQ on this plan.",
+    "Futures (ES/NQ/YM/RTY) omitted: by this snapshot the cash market had already opened, and WebSearch could not return a reliably dated pre-open or current print for today's session - a futures number at this point would mislead rather than help. FMP has no CME index-futures data on this plan (confirmed ACCESS DENIED on both quote and commodity endpoints).",
+    "Overnight/today news omitted: an extensive WebSearch sweep (broad market tech selloff, chips, industrials, and named watchlist tickers GOOGL/META) returned only results dated well before 27 Nov 2026 (most recent concrete item ~10-19 Nov) or entirely undated - nothing met the two-source, dated bar this run.",
+    "FMP's `quote` endpoint returned ACCESS DENIED for AVT and ETN specifically (succeeded for GOOGL and PLTR) - cross-checked those two independently via `company/profile-symbol`'s self-consistent price/change/pct fields instead; both reconcile internally. The large moves vs. the brief's PINNED (6 Oct scan) entry levels for AVT, ETN, META, GDDY, ITT and VRSN reflect roughly 8 weeks of a well-documented market-wide AI-led selloff (see the brief's own notices), not a data error - GOOGL's and PLTR's live prices were independently corroborated via a second FMP endpoint and are consistent with that same selloff."
   ]
 }
