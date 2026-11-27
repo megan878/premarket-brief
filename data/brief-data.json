@@ -3,79 +3,79 @@
   {
    "id": "SPX",
    "name": "S&P 500",
-   "ts": 1795554000,
-   "prev": 7237.17,
+   "ts": 1795642326,
+   "prev": 7201.09,
    "q": {
-    "price": 7201.09,
-    "change": -36.08,
-    "pct": -0.49854,
-    "dayLow": 7138.93,
-    "dayHigh": 7223.95,
+    "price": 7182.78,
+    "change": -18.31,
+    "pct": -0.25427,
+    "dayLow": 6970.11,
+    "dayHigh": 7199.31,
     "yearHigh": 7844.52,
     "yearLow": 6316.91,
-    "ma50": 7617.6,
-    "ma200": 7350.1045
+    "ma50": 7602.527,
+    "ma200": 7352.4907
    }
   },
   {
    "id": "DJI",
    "name": "Dow Jones",
-   "ts": 1795557265,
-   "prev": 49595.31,
+   "ts": 1795642337,
+   "prev": 50018.7,
    "q": {
-    "price": 50018.7,
-    "change": 423.39,
-    "pct": 0.85369,
-    "dayLow": 49294.49,
-    "dayHigh": 50075.12,
+    "price": 50182.95,
+    "change": 164.25,
+    "pct": 0.32838,
+    "dayLow": 48913.74,
+    "dayHigh": 50395.24,
     "yearHigh": 54744.33,
     "yearLow": 45057.28,
-    "ma50": 51649.188,
-    "ma200": 50773.81
+    "ma50": 51582.12,
+    "ma200": 50773.195
    }
   },
   {
    "id": "RUT",
    "name": "Russell 2000",
-   "ts": 1795555811,
-   "prev": 2669.65502,
+   "ts": 1795642213,
+   "prev": 2684.942,
    "q": {
-    "price": 2684.942,
-    "change": 15.28698,
-    "pct": 0.57262,
-    "dayLow": 2655.3188,
-    "dayHigh": 2695.2417,
+    "price": 2704.061,
+    "change": 19.119,
+    "pct": 0.71208,
+    "dayLow": 2623.78,
+    "dayHigh": 2710.05,
     "yearHigh": 3069.71,
     "yearLow": 2404.99,
-    "ma50": 2794.8733,
-    "ma200": 2813.3052
+    "ma50": 2788.0713,
+    "ma200": 2813.406
    }
   },
   {
    "id": "VIX",
    "name": "Volatility",
-   "ts": 1795607176,
-   "prev": 26.36,
+   "ts": 1795779946,
+   "prev": 28.29,
    "q": {
-    "price": 30.29,
-    "change": 3.93,
-    "pct": 14.90895,
-    "dayLow": 27.63,
-    "dayHigh": 30.57,
+    "price": 25.34,
+    "change": -2.95,
+    "pct": -10.4276,
+    "dayLow": 24.52,
+    "dayHigh": 25.36,
     "yearHigh": 40.03,
     "yearLow": 13.38,
-    "ma50": 18.8088,
-    "ma200": 18.74675
+    "ma50": 19.2476,
+    "ma200": 18.8151
    }
   }
  ],
  "macro": {
-  "date": "2026-11-23",
-  "y10": 4.92,
-  "y10prev": 4.92,
-  "y2": 4.63,
-  "y30": 5.29,
-  "y10path": "5.10% on 17 Nov, 5.07% on 18 Nov, 5.04% on 19 Nov, 4.92% on 20 Nov, 4.92% on 23 Nov",
+  "date": "2026-11-25",
+  "y10": 4.85,
+  "y10prev": 4.91,
+  "y2": 4.61,
+  "y30": 5.24,
+  "y10path": "5.04% on 19 Nov, 4.92% on 20 Nov, 4.92% on 23 Nov, 4.91% on 24 Nov, 4.85% on 25 Nov",
   "fed": {
    "range": "3.75-4.00%",
    "move": "hold",
@@ -95,14 +95,6 @@
   },
   "y10hist": [
    {
-    "date": "2026-11-17",
-    "y10": 5.1
-   },
-   {
-    "date": "2026-11-18",
-    "y10": 5.07
-   },
-   {
     "date": "2026-11-19",
     "y10": 5.04
    },
@@ -113,95 +105,46 @@
    {
     "date": "2026-11-23",
     "y10": 4.92
+   },
+   {
+    "date": "2026-11-24",
+    "y10": 4.91
+   },
+   {
+    "date": "2026-11-25",
+    "y10": 4.85
    }
   ]
  },
- "catalysts": [
-  {
-   "tk": "PANW",
-   "name": "Palo Alto Networks, Inc.",
-   "industry": "Software - Infrastructure",
-   "sector": "Technology",
-   "ctype": "Earnings beat + raise",
-   "cdate": "18 Nov",
-   "cdateISO": "2026-11-18",
-   "what": "Palo Alto Networks reported fiscal Q1 2027 results on 18 Nov: non-GAAP EPS $1.05 vs about $0.97 consensus, revenue $3.445B vs $3.31B expected (+39.2% y/y), Next-Gen Security ARR +66% to $9.73B. The company raised FY2027 guidance - revenue to $14.52-$14.57B (from $14.10-$14.20B) and non-GAAP EPS to $4.26-$4.30 (from $4.16-$4.19) - and announced a $4.5B all-stock deal for Applied Compute. Shares are down 0.1% today to $352.99, pausing after the post-earnings rally amid a broad risk-off tone in the market.",
-   "sources": [
-    {
-     "t": "Palo Alto Networks (press release)",
-     "verified": false
-    },
-    {
-     "t": "24/7 Wall St.",
-     "verified": false
-    }
-   ],
-   "cap": "$289.8B",
-   "px": 352.99,
-   "pct": -0.12449,
-   "topSector": true
-  },
-  {
-   "tk": "TGT",
-   "name": "Target Corporation",
-   "industry": "Discount Stores",
-   "sector": "Consumer Defensive",
-   "ctype": "Earnings beat + raise",
-   "cdate": "18 Nov",
-   "cdateISO": "2026-11-18",
-   "what": "Target reported fiscal Q3 2026 results on 18 Nov: adjusted EPS $2.65 vs $2.07 consensus (helped by about $0.50/share of one-time tariff-refund benefits; ex-refund EPS was still roughly $2.15, above the $2.07 Street number), revenue $27.07B vs $26.38B expected (+2.6%). The company raised full-year adjusted EPS guidance to $10.65-$11.40 and lifted net-sales-growth guidance to about 6%. Shares are up 4.7% today to $176.06, extending the post-earnings move.",
-   "sources": [
-    {
-     "t": "Target Corp. (press release)",
-     "verified": false
-    },
-    {
-     "t": "Stocktwits",
-     "verified": false
-    }
-   ],
-   "cap": "$79.7B",
-   "px": 176.06,
-   "pct": 4.67923,
-   "topSector": false
-  }
- ],
- "bg": {
-  "PANW": {
-   "cap": "$289.8B",
-   "what": "Cybersecurity platform provider offering next-generation firewalls, cloud security (Prisma) and AI-driven threat detection (Cortex) for enterprises and government agencies worldwide."
-  },
-  "TGT": {
-   "cap": "$79.7B",
-   "what": "Large-format general merchandise and grocery retailer operating roughly 1,980 Target stores plus digital and same-day fulfillment across the US."
-  }
- },
+ "catalysts": [],
+ "bg": {},
  "notices": [
-  "Risk-off reversal Tuesday 24 Nov: S&P 500 -0.50% to 7201.09 (below both its 50d and 200d average), while the Dow +0.85% to 50018.70 and Russell 2000 +0.57% to 2684.94 both rose - a split session, megacap/tech weakness dragging the S&P while the broader market firmed.",
-  "VIX quote (30.29, +14.9% vs Monday's close) is a live pre-market print (25 Nov 11:46 UTC / 06:46 ET, well before the open), not Tuesday's close - the tile and regime score use the previous close (26.36) instead; even at that previous close VIX remains above 20 and above its own 50-day average, so both VIX regime checks fail.",
-  "10Y Treasury yield: FMP's treasury-rates feed's latest row is 23 Nov (4.92%), flat vs 20 Nov (4.92%) and down from 5.10% five sessions ago (17 Nov); the regime score's rates check passes (yields down/flat over the last 5 sessions) - the only one of 9 checks that passes this run, since all three indices sit below both their 50- and 200-day averages and VIX is elevated.",
-  "QQQ/NDX tile omitted again this run: WebSearch returned no reliable, clearly-dated quote for 25 Nov; the automated routine has no other source for it.",
-  "No FOMC decision fell in the last 7 days (next meeting 9-10 Dec); the Fed block is carried forward unchanged except for the refreshed Treasury yields.",
-  "Catalysts: Medtronic (MDT, upgrade dated 17 Nov) has dropped out of the 5-session window (18-24 Nov) and is removed. Palo Alto Networks (PANW, 18 Nov) and Target (TGT, 18 Nov) remain inside the window and are re-priced with fresh FMP quotes, not re-verified facts. TJX's 18 Nov Q3 report was considered and rejected (EPS essentially in-line, not a clear beat, and shares reportedly fell despite the guidance raise - sell-the-news). No other new candidate cleared the two-independent-source and 5-session-window bar this run.",
-  "Sector ranking, industry drill-down and technical picks remain pinned from the 6 Oct interactive scan (now about 7 weeks old) - due for a fresh interactive refresh."
+  "US markets were closed Thursday 26 Nov for Thanksgiving; tonight's session (27 Nov) is a Black Friday half day. Last completed session is Wednesday 25 Nov.",
+  "Regime check: as of the 25 Nov close, the S&P 500 (7182.78), Dow (50182.95) and Russell 2000 (2704.06) are all below their own 50-day AND 200-day averages - 6 of the first 8 regime checks fail.",
+  "VIX closed 25 Nov at 28.29, up from 26.36 on 24 Nov - above 20 and above its own 50-day average (19.25), so both VIX checks fail too (8 of 8 original checks now fail). The live quote at the time of this run (25.34, -10.4% vs the 25 Nov close) is a Black Friday pre-market print (27 Nov 11:45 UTC / 06:45 ET), not a close - the tile and regime score use the 25 Nov close (28.29) instead.",
+  "10Y Treasury yield: FMP's treasury-rates feed's latest row is 25 Nov (4.85%), down from 4.91% on 24 Nov and down from 5.04% five sessions ago (19 Nov) - the regime score's 9th check (rates down/flat over 5 sessions) passes, the only one of 9 checks that passes this run.",
+  "QQQ/NDX tile omitted again this run: WebSearch surfaced one dated figure (633.93, -0.65%, 25 Nov, via stockanalysis.com) but a second independent source could not be found to cross-check it, so it was dropped per the two-source rule.",
+  "Catalysts: Palo Alto Networks (PANW) and Target (TGT), both dated 18 Nov, have aged out of the 5-session window (19-25 Nov) and are removed. An extensive WebSearch sweep this run (earnings beats/raises, contract wins, upgrades >15% upside, approvals/launches, index adds) found nothing new that cleared the bar: Nvidia's 17 Nov beat-and-raise is one session outside the window; Deere's 25 Nov Q4 report beat on EPS/revenue but paired it with a cautious FY2027 outlook and shares fell - a negative reaction, not a qualifying beat+raise. No contract win, upgrade or approval in the window reconciled across two independent, dated sources. No catalyst alerts published this run - a valid result, not a failure.",
+  "Sector ranking, industry drill-down and technical picks remain pinned from the 6 Oct interactive scan (now about 8 weeks old) - due for a fresh interactive refresh."
  ],
  "rejected": [
-  "<b>QQQ/NDX</b> \u00b7 WebSearch returned no reliable, clearly-dated quote for 25 Nov; omitted this run.",
-  "<b>MDT</b> \u00b7 Piper Sandler upgrade (17 Nov) is now outside the 5-session catalyst window (18-24 Nov); dropped.",
-  "<b>TJX</b> \u00b7 fiscal Q3 (18 Nov): adjusted EPS $1.34 was in-line with consensus (not a clear beat); full-year GAAP EPS guidance raised only at the low end while Q4 guidance came in below expectations, and shares were reported down on the day - sell-the-news, rejected."
+  "<b>QQQ/NDX</b> · one dated figure found (633.93, -0.65%, 25 Nov) but no second independent source to cross-check it; omitted this run.",
+  "<b>NVDA</b> · fiscal Q3 2027 beat + raised Q4 guidance, reported 17 Nov - event date is now one session outside the 19-25 Nov catalyst window.",
+  "<b>DE (Deere)</b> · fiscal Q4 2026 report (25 Nov) beat on EPS and revenue but paired it with a cautious FY2027 outlook; shares fell on the print - not a beat+raise reaction, rejected.",
+  "<b>PANW, TGT</b> · 18 Nov events have aged out of the 5-session window (19-25 Nov); dropped (not re-verified, just stale)."
  ],
  "sections": {
   "indices": {
-   "asOf": "2026-11-24",
-   "source": "FMP index-quote (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live pre-market print, not the 24 Nov close"
+   "asOf": "2026-11-25",
+   "source": "FMP index-quote + index-historical-price-eod-full (^GSPC ^DJI ^RUT ^VIX); VIX quote is a live Black-Friday pre-market print, not the 25 Nov close"
   },
   "macro": {
-   "asOf": "2026-11-23",
-   "source": "FMP economics/treasury-rates (latest row 23 Nov)"
+   "asOf": "2026-11-25",
+   "source": "FMP economics/treasury-rates (latest row 25 Nov)"
   },
   "catalysts": {
-   "asOf": "2026-11-24",
-   "source": "WebSearch (earnings/upgrades/contracts/approvals) + FMP company/profile-symbol for price/cap"
+   "asOf": "2026-11-25",
+   "source": "WebSearch (earnings/upgrades/contracts/approvals/index-adds) + FMP company/profile-symbol; no candidate cleared the window/source/reaction bar this run"
   }
  },
  "fetchlog": [
@@ -213,51 +156,41 @@
   {
    "id": "fmp.index.SPX",
    "ok": true,
-   "note": "7201.09, -0.50% (24 Nov close)"
+   "note": "7182.78, -0.25% (25 Nov close)"
   },
   {
    "id": "fmp.index.DJI",
    "ok": true,
-   "note": "50018.70, +0.85% (24 Nov close)"
+   "note": "50182.95, +0.33% (25 Nov close)"
   },
   {
    "id": "fmp.index.RUT",
    "ok": true,
-   "note": "2684.94, +0.57% (24 Nov close)"
+   "note": "2704.06, +0.71% (25 Nov close)"
   },
   {
    "id": "fmp.index.VIX",
    "ok": true,
-   "note": "30.29 live print 25 Nov 11:46 UTC; prev close 26.36 used for regime"
+   "note": "live quote 25.34 (27 Nov 11:45 UTC) mismatched the 25 Nov close; pulled eod-full history and used 28.29 (25 Nov close) for the tile/regime instead"
   },
   {
    "id": "websearch.qqq",
    "ok": false,
-   "note": "no reliable dated quote found for 25 Nov across sources; omitted"
+   "note": "one source (stockanalysis.com, 633.93/-0.65%, 25 Nov) found; no 2nd source reconciled - omitted"
   },
   {
    "id": "fmp.economics.treasuryRates",
    "ok": true,
-   "note": "latest row 23 Nov, y10 4.92%, flat vs 20 Nov"
+   "note": "latest row 25 Nov, y10 4.85%, down from 5.04% five sessions ago"
   },
   {
    "id": "websearch.catalysts",
    "ok": true,
-   "note": "searched for new 18-24 Nov catalysts; TJX (18 Nov) found but rejected as sell-the-news; nothing else cleared the two-source/window bar"
-  },
-  {
-   "id": "fmp.profile.PANW",
-   "ok": true,
-   "note": "$352.99, -0.12%, cap $289.8B"
-  },
-  {
-   "id": "fmp.profile.TGT",
-   "ok": true,
-   "note": "$176.06, +4.68%, cap $79.7B"
+   "note": "~10 targeted searches across earnings/contracts/upgrades/approvals/index-adds for the 19-25 Nov window; NVDA (17 Nov) out of window, Deere (25 Nov) rejected as a miss-reaction, nothing else reconciled across 2 sources in-window - 0 new catalysts published"
   }
  ],
  "meta": {
-  "targetSession": "2026-11-25",
-  "lastSession": "2026-11-24"
+  "targetSession": "2026-11-27",
+  "lastSession": "2026-11-25"
  }
 }
